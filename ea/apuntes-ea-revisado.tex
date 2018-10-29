@@ -1,0 +1,2195 @@
+\documentclass{book}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{thmtools}
+\usepackage{datetime} % para la hora de compilación
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+\usepackage{mathabx} % para \divides
+\usepackage{centernot} % para \centernot\inculdes
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usepackage{subcaption}
+\usepackage{xfrac}
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shapes}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{positioning}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=./tikzbuild/]
+\tikzexternalize % activate!
+
+%\usepackage[a6paper,margin=5mm]{geometry}
+\usepackage[a4paper, top=1.5cm,bottom=1.5cm,left=1cm,right=1cm]{geometry}
+
+% ESTILOS DE DEFINICIONES Y TEOREMAS
+\declaretheoremstyle[
+	bodyfont=\normalfont,
+	shaded={
+		margin=8pt,
+		bgcolor=White,
+		rulecolor=Black,
+		rulewidth=1pt
+}]{mythm}
+
+\declaretheoremstyle[
+	bodyfont=\normalfont,
+	shaded={
+		margin=1em,
+		bgcolor={rgb}{0.9,0.9,0.9}
+}]{mydfn}
+
+\declaretheorem[
+	name=Teorema,
+	refname={teorema,teoremas},
+	Refname={Teorema,Teoremas},
+	style=mythm
+]{thm}
+
+\newtheorem*{cor}{Corolario}
+\newtheorem*{lem}{Lema}
+\newtheorem{pro}{Proposición}
+
+\declaretheorem[
+	name=Definici\'{o}n,
+	refname={definici\'{o}n,definiciones},
+	Refname={Definici\'{o}n,Definiciones},
+	style=mydfn
+]{dfn}
+\theoremstyle{definition}
+\newtheorem{ej}{Ejemplo}
+
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+% COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
+\newcommand{\normsub}{\mathbin{\triangleleft}}
+\newcommand{\uds}[1]{\mathcal{U}(#1)}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\ima}{\text{Im}}
+\newcommand{\isom}{\simeq}
+\newcommand{\autom}[1]{\text{Aut}(#1)}
+
+\newcommand{\hr}{\rule{\textwidth}{.4pt}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ZnZ}{\mathbb{Z}/n\mathbb{Z}}
+\newcommand{\ZmZ}{\mathbb{Z}/m\mathbb{Z}}
+
+
+\renewcommand\qedsymbol{$\clubsuit$}
+
+\title{Apuntes de Estructuras Algebráicas}
+\author{Elias Hernandis}
+
+\begin{document}
+\maketitle
+Revisión del \today $ $ a las \currenttime.
+
+\tableofcontents
+
+\part{Primer parcial - hoja 1}
+
+\chapter{Grupos}
+
+\section{Grupos}
+
+\begin{dfn}[Grupo]
+	Llamamos grupo al par $(G, \ast)$, donde $G$ es un conjunto no vacío y $\ast: G \times G \to G$ es una función que cumple las siguientes propiedades:
+	\begin{enumerate}
+		\item Clausura. $\forall a, b \in G, a \ast b \in G$
+		\item Asociatividad. $\forall a, b, c \in G,\ (a \ast b) \ast c = a \ast (b \ast c)$
+		\item Elemento neutro. $\exists e \in G, \forall a \in G \mid a \ast e = e \ast a = a$
+		\item Elemento inverso. $\forall a \in G, \exists \inv{a} \in G \mid a \ast \inv{a} = \inv{a} \ast a = e$
+	\end{enumerate}
+\end{dfn}
+
+En general, la clausura es muy difícil de probar, por lo que recurrimos a dar un grupo como subgrupo de otro o dar una biyección entre un grupo existente y lo que queremos probar que es grupo.
+
+\paragraph{Notación}
+
+\begin{itemize}
+	\item Aunque técnicamente el grupo es el par $(G, \ast)$, es común referise al grupo como $G$.
+	\item Cuando la operación es la suma, se suele llamar al elemento neutro $e = \mathbf{0}$. Cuando la operación es el producto, se suele llamar al elemento neutro $e = \mathbf{1}$.
+	\item Denotamos por $a^k$:
+	\begin{itemize}
+		\item si $k > 0,\ a^k = \underbrace{a \ast a \ast \dots \ast a}_\text{k veces}$
+		\item si $k = 0,\ a^0 = e$
+		\item si $k < 0,\ a^k = \underbrace{\inv{a} \ast \inv{a} \ast \dots \ast \inv{a}}_\text{-k veces}$
+	\end{itemize}
+	\item Se suele omitir la operación. Sobre todo cuando la operación es el producto. Por ejemplo, en $(G, \cdot)$, $a \cdot b = ab$.
+\end{itemize}
+
+\begin{thm}[Propiedad cancelativa]
+	Sea $G$ un grupo, $a, b, c \in G$.
+	\begin{align}
+		a \ast b = a \ast c \implies b = c \\
+		c \ast a = b \ast a \implies a = b
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	Por la existencia del elemento inverso podemos multiplicar por $\inv{a}$ a la izquierda en la primera expresión y obtenemos $\inv{a} a b = \inv{a} a c \implies e b = e c \implies b = c$. Lo mismo ocurre por la derecha en la segunda expresión.
+\end{proof}
+
+\begin{pro}[Unicidad del elemento neutro]
+	En un grupo $G$ hay exactamente un elemento neutro $e$.
+\end{pro}
+
+\begin{proof}
+	Supongamos existen $e_1, e_2 \in G$ elementos neutros. Por ser $e_1$ elemento neutro se tiene que $e_1 \ast e_2 = e_2$ y por ser elemento neutro $e_2$ se tiene que $e_1 \ast e_2 = e_1$. Por tanto $e_1 = e_2$.
+\end{proof}
+
+\begin{pro}[Unicidad del inverso de un elemento]
+	Sea $G$ un grupo, $g \in G$, entonces $\exists! \inv{g} \mid g \ast \inv{g} = e$. 
+\end{pro}
+
+\begin{proof}
+	Supongamos $a$ tiene inversos $b_1$ y $b_2$. Entonces $a \ast b_1 = a \ast b_2 = e$. Por la propiedad cancelativa $b_1 = b_2$.
+\end{proof}
+
+\begin{dfn}[Orden de un elemento]
+	Sea $(G, \ast)$ un grupo. Decimos que $a \in G$ tiene orden finito si $\exists k \in \mathbb{N}$ tal que $a^k = e$.
+	Si existen tales valores de $k$, llamamos orden del elemento $a$ al mínimo de ellos:
+	\begin{align}
+		o(a) = \min \{k \in \mathbb{N} \mid a^k = e \}
+	\end{align}
+\end{dfn}
+
+\begin{dfn}[Orden o cardinalidad de un grupo]
+	Sea $G = \{a_1, a_2, \dots \}$ un grupo junto con alguna operación. Si $|G| < \infty$ decimos que el orden de $G$, $|G| = |\{a_1, a_2, \dots, a_n\}| = n$.
+\end{dfn}
+
+\begin{dfn}[Grupo abeliano]
+	Sea $(G, \ast)$ un grupo. Diremos que $G$ es abeliano $\iff \forall a,b \in G,\ a \ast b = b \ast a$.
+\end{dfn}
+
+\begin{thm}
+	\label{thm:abelianosdeorden2}
+	Sea $G$ un grupo tal que $\forall g \in G,\ g \ast g = e$. Entonces $G$ es abeliano.
+\end{thm}
+
+\begin{cor}
+	$\forall a \in G,\ o(a) = 2 \implies G$ es abeliano.
+\end{cor}
+
+\begin{proof}
+	Sean $a,b \in G$. Tenemos que probar que $a\ast b = b \ast a$. Consideramos el elemento $(a \ast b) \in G$ por clausura. Por hipótesis tenemos que $(a \ast b) \ast (a \ast b) = e \implies (a \ast b) = \inv{(a \ast b)} = \inv{b} \ast \inv{a} = b \ast a$.
+\end{proof}
+
+\subsection{Ejemplos de grupos}
+
+\begin{ej}[Ejemplos de grupos infinitos]$ $\newline
+	\begin{itemize}
+		\item $(\R, +)$ es un grupo
+		\item $(\R, \cdot)$ no es un grupo porque el $0$ no tiene inverso
+		\item $(\R\setminus\{0\}, \cdot)$ es un grupo
+		\item $(\R > 0, \cdot)$ es un grupo (subgrupo de $\R$)
+		\item $(\R < 0, \cdot)$ no es un subgrupo porque no es cerrado
+		\item $(\Z, +)$ es un grupo
+		\item $n\Z = \{\dots, -2n, -n, 0, n, 2n, \dots\}$ con la suma es un grupo
+		\item $GL_2(\R) = \{A \in R^{2\times 2} \mid \det A \neq 0\}$ las matrices reales $2\times 2$ forman un grupo con el producto
+		\item Por lo anterior, las aplicaciones lineales que tienen inversa forman un grupo con la composición (componer aplicaciones es lo mismo que multiplicar matrices y la inversa existe $\iff \det A \neq 0$)
+	\end{itemize}
+\end{ej}
+
+\begin{ej}[Grupo de las clases módulo $n$]$ $\newline
+	$\ZnZ = \{\overline{0}, \overline{1}, \overline{2}, \dots, \overline{n-1}\}$ con la suma es un grupo
+\end{ej}
+
+\begin{ej}[Grupo de cuaterniones]
+	\label{ej:grupocuaterniones}
+	Llamamos $H$ al subgrupo de $GL_2(\mathbb{C})$ generado por $A$ y $B$: $H = \langle A, B\rangle$ donde 
+	\begin{align*}
+	A = \left(\begin{array}{cc}
+	0 & 1 \\ -1 & 0
+	\end{array}\right),\ B = \left(\begin{array}{cc}
+	0 & i \\ i & 0
+	\end{array}\right)
+	\end{align*}
+	De probar las multiplicaciones de $A$ y de $B$ consigo mismas y entre ellas se obtiene la presentación.
+	\begin{align*}
+	o(A) = o(B) = 4\quad A^2 = B^2 \quad BA = AB^3
+	\end{align*}
+	y queda que $H = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$. Es posible obtener cualquier operación de $A$ y $B$ a partir de la presentación.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{c|cccccccc}
+			elemento & $1$ & $B$ & $B^2$ & $B^3$ & $A$ & $AB$ & $AB^2$ & $AB^3$ \\ \hline
+			 orden   &  1  &  4  &   2   &   4   &  4  &  4   &   4    &   4
+			 % TODO: completar los órdenes
+		\end{tabular}
+		\caption{Órdenes de los elementos de $H$}
+	\end{figure}
+\end{ej}
+
+\begin{ej}[El famoso grupo $D_4$]
+	\label{ej:famosogrupod4}
+	$D_4$ es el grupo formado por las composiciones de rotaciones y simetrías que llevan un cuadrado en un cuadrado ($f(\square) = \square$). También se llama grupo diédrico de órden $4$.
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=0.7]
+		
+		% giro
+		\draw[->] (2.5,1.5) arc (0:90:1cm) node[midway, above] {B};
+		
+		% simetría
+		\draw[dashed] (-3,0) -- (3,0) node[pos=1,right] {A};
+		
+		% cuadrao
+		\draw[thick] (2,2) node[anchor=north east] {1} --
+		(2,-2) node[anchor=south east] {2} --
+		(-2,-2) node[anchor=south west] {3} --
+		(-2, 2) node[anchor= north west] {4} -- cycle;
+		
+		\draw (0,0) node {\scalebox{6}{\textbf{F}}};
+		
+		% las efes
+		% las efes: los giros
+		\begin{scope}[shift={(6,0)}]
+		\draw (0, 1.5) node[label={$1$}] {\huge \textbf{F}};
+		\draw (2, 1.5) node[label={$B$}] {\rotatebox{90}{\huge \textbf{F}}};
+		\draw (4, 1.5) node[label={$B^2$}] {\rotatebox{180}{\huge \textbf{F}}};
+		\draw (6, 1.5) node[label={$B^3$}] {\rotatebox{270}{\huge \textbf{F}}};
+		
+		% las efes: la simetrías de los giros
+		\draw (0, -1.5) node[label={$A$}] {\scalebox{1}[-1]{\huge \textbf{F}}};
+		\draw (2, -1.5) node[label={$AB$}] {\rotatebox{90}{\scalebox{1}[-1]{\huge \textbf{F}}}};
+		\draw (4, -1.5) node[label={$AB^2$}] {\rotatebox{180}{\scalebox{1}[-1]{\huge \textbf{F}}}};
+		\draw (6, -1.5) node[label={$AB^3$}] {\rotatebox{270}{\scalebox{1}[-1]{\huge \textbf{F}}}};
+		\end{scope}
+		\end{tikzpicture}
+		\label{fig:d4geometria}
+		\caption{Simetría $A$ y rotación $B$ que compuestas forman los elementos del grupo $D_4$}
+	\end{figure}
+	
+	Geométricamente,
+	\begin{align*}
+	A = \left(\begin{array}{cc}
+	1 & 0 \\ 0 & -1
+	\end{array}\right), \qquad B = \left(\begin{array}{cc}
+	\cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha
+	\end{array}\right),\quad \alpha = \frac{\pi}{2}
+	\end{align*}
+	pero una vez hemos comprobado que todas las posibles operaciones $A^iB^j$ y $B^iA^j$ quedan dentro del grupo (que es cerrado), que existe el neutro (la identidad) y que cada elemento tiene su inverso, podemos obviar el significado geométrico y pasar a describirlo mediante la presentación del grupo.
+	\begin{align}
+	\label{eq:presentacionD4}
+	D_4 = \langle A, B \rangle \text{ donde } o(A) = 2,\ o(B) = 4, BA = AB^3
+	\end{align}
+	y además queda que $D_4 = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{c|cccccccc}
+			elemento & $1$ & $B$ & $B^2$ & $B^3$ & $A$ & $AB$ & $AB^2$ & $AB^3$ \\ \hline
+			orden   &  1  &  4  &   2   &   4   &  2  &  -   &   -    &   -
+			% TODO: completar los órdenes
+		\end{tabular}
+		\caption{Órdenes de los elementos de $D_4$}
+	\end{figure}
+
+	\textbf{Nota:} lo que hemos hecho con un cuadrado también se puede hacer con un triángulo.
+\end{ej}
+
+\begin{ej}[Grupo de biyecciones $S_3$]
+	Llamamos $S_3$ al grupo de las biyecciones $f:\{1,2,3\} \to \{1,2,3\}$. También podemos pensar en este grupo como el grupo de las permutaciones de 3 elementos. De hecho, utilizamos la siguiente notación para las biyecciones de $S_3$:
+	\begin{itemize}
+		\item $(1)$ indica que $f(1) = 1$. Por defecto, $f(2) = 2$ y $f(3) = 3$.
+		\item $(12)$ indica que $f(1) = 2$ y $f(2) = 1$. Por defecto $f(3) = 3$.
+		\item $(123)$ indica que $f(1) = 2,\ f(2) = 3,\ f(3) = 1$.
+		\item $(13)$ indica que $f(1) = 3,\ f(3) = 1$ y por defecto $f(2) = 2$.
+	\end{itemize}
+
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=0.6]
+		\node (1) at (0,1) {$1$};
+		\node (2) at (0,0) {$2$};
+		\node (3) at (0,-1) {$3$};
+		
+		\node (f1) at (3,1) {$1$};
+		\node (f2) at (3,0) {$2$};
+		\node (f3) at (3,-1) {$3$};
+		
+		\draw (0,0) ellipse (.7 and 2);
+		\draw (3,0) ellipse (.7 and 2);
+		
+		\draw[-{Latex[length=2mm]}] (1) -- (f2);
+		\draw[-{Latex[length=2mm]}] (2) -- (f1);
+		\draw[-{Latex[length=2mm]}] (3) -- (f3);
+		\end{tikzpicture}
+		\caption{Elemento (12) de $S_3$}
+		\label{fig:s3elemento12}
+	\end{figure}
+
+	En este grupo ocurre algo parecido a lo que ocurre en $D_4$. Sea $a = (123), b = (12)$. Podemos presentar el grupo con
+	\begin{align}
+		S_3 = \langle a, b\rangle\text{ donde } o(a) = 3,\ o(b) = 2,\ ba = ab^2
+	\end{align}
+	y por tanto $S_3 = \{1, a, a^2, b, ab, a^2b\} = \{(1), (12), (13), (23), (123), (132)\}$. %TODO comprobar
+\end{ej}
+
+Por último, vemos una manera de generar nuevos grupos a partir de grupos existentes.
+
+\begin{dfn}[Producto directo de grupos]
+	Sean $(G_1, \ast), (G_2, \bullet)$ grupos. Llamamos producto directo de los grupos $G_1$ y $G_2$ al grupo $(G_1\times G_2, \sim)$. Donde $\sim : (G_1 \times G_2) \times (G_1 \times G_2) \to G_1 \times G_2,\ (g_1, g_2) \sim (g_1', g_2') = (g_1\ast g_1', g_2 \bullet g_2')$.
+\end{dfn}
+
+\section{Subgrupos}
+
+\begin{dfn}[Subgrupo]
+	Sea $(G, \ast)$ un grupo, $S \in G, S \neq \emptyset$. Diremos que $(S, \ast)$ es un subgrupo de $(G, \ast)$ y lo denotaremos por $S < G$ si verifica las siguientes condiciones:
+	\begin{enumerate}
+		\item Clausura. $\forall a, b,\ a,b \in S \implies a \ast b \in S$
+		\item Elemento neutro. $e \in S$
+		\item Elemento inverso. $\forall s \in S, \inv{s} \in S$ 
+	\end{enumerate}
+	(La propiedad asociativa siempre se hereda.)
+\end{dfn}
+
+\begin{pro}
+	Si $\{S_i\}_{i \in \mathbb{N}}$ es una familia de subgrupos de $G$, entonces $\bigcap S_i$ también es un subgrupo de $G$.
+\end{pro}
+
+% TODO: demostrar
+
+
+\begin{dfn}[Subgrupo generado varios elementos]
+	\footnote{Este teorema reemplaza al de \textit{grupo generado por dos elementos} dado en clase.}Sea $(G, \ast)$ un grupo, $S \subset G,\ S \neq \emptyset$. El subgrupo generado por $S$ es
+	\begin{align}
+	\langle S \rangle = \{s_1^{\alpha_1} \ast s_2^{\alpha_2} \ast \dots \ast s_n^{\alpha_n} \mid s_1, s_2, \dots, s_n \in S,\ \alpha_1, \alpha_2, \dots, \alpha_n \in \Z \}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	El subgrupo generado por $S$, $\langle S \rangle$ es el más pequeño que contiene a $S$.
+\end{pro}
+
+El siguiente teorema no lo ha dado drácula\footnote{De verdad que quería poner el nombre.} pero no me acuerdo pero viene en \cite{dor96} y simplifica bastante la bida.
+
+\begin{thm}
+	\label{thm:subgrupoxinverso}
+	Sea $G$ un grupo y $H$ un subconjunto de $G$. Entonces $H < G \iff \forall x,y \in H, x\inv{y} \in H$.
+\end{thm}
+
+\begin{proof}
+	De \cite{dor96}.
+	\begin{itemize}
+		\item ($\implies$). Supongamos que $H < G$. Entonces $x,y \in H \implies xy \in H \land y \in H \implies \inv{y} \in H$ y por tanto $x\inv{y} \in H$.
+		\item ($\impliedby$). Supongamos que $x,y \in H \implies x\inv{y} \in H$. Veamos que se cumplen las 3 condiciones para que sea subgrupo:
+		\begin{itemize}
+			\item Elemento neutro. Tomamos $y = x$ y tenemos que $x\inv{x} = e \in H$.
+			\item Elemento inverso. Tomamos ahora $x = e,\ y = x$ y tenemos que $e\inv{x} = \inv{x} \in H$.
+			\item Clausura. Tenemos que si $x,y \in H$ por la propiedad anterior $\inv{y} \in H$ y por tanto $xy = x\inv{(\inv{y})} \in H$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+% TODO: probar que es subgrupo y que es el más pequeño
+
+Normalmente, utilizaremos la definición restringida a un elemento:
+
+\begin{dfn}[Subgrupo generado por un elemento]
+	\label{dfn:subgrupogenerado}
+	Sea $G$ un grupo, $g \in G$. Llamamos subgrupo generado por $g$ a
+	\begin{align}
+		\langle g \rangle = \{g^k \mid k \in \mathbb{Z}\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	El subgrupo generado por $g \in G$ en efecto es un subgrupo.
+\end{pro}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Es cerrado por $\ast$ puesto que $\forall a^k, a^{k'} \in S, a^k \ast a^{k'} = a^{k + k'} \in S$.
+		\item $a^0 = e \in A$
+		\item $\forall a^{k}, a^{-k} \in A$
+	\end{enumerate}
+\end{proof}
+
+\begin{pro}
+	Si $o(g) = n$, entonces $\langle g \rangle$ tiene $n$ elementos (el orden de $\langle g \rangle$ es $n$).
+\end{pro}
+
+\begin{proof}
+	Primero comprobamos que no hay más de $n$ elementos distintos. Consideramos $k \in \Z,\ k = cn + r$ para algunos $c, r \in \Z,\ 0 \leq r < n$ por el algoritmo de la división. Entonces $a^k = a^{cn + r} = a^{cn} a^{r} = a^{r}$ pues $o(a) = n$.
+	
+	Ahora probaremos que no hay menos de $n$ elementos distintos, es decir, que $\langle g \rangle = \{1, g, g^2, \dots, g^{n-1}\}$ Supongamos existen $0 \leq i < j < n$ tales que $a^i = a^j$. Entonces por cancelación $a^{j - i} = e = a^0 \implies j = i$ lo que da una contradicción.
+\end{proof}
+
+\begin{thm}
+	Sea $G$ un grupo, $g \in G$. El menor subgrupo de $G$ que contiene a $g$ es $\langle g \rangle$.
+\end{thm}
+
+\begin{proof}
+	Tenemos que probar que para cualquier $H$ subgrupo de $G$, $g \in H \implies g^k,\ \forall k \in \Z$.
+\end{proof}
+
+\begin{dfn}[Grupo cíclico]
+	Sea $(G, \ast)$ un grupo. Diremos que $G$ es cíclico si $\exists g \in G \mid \langle g \rangle = G$.
+\end{dfn}
+
+\begin{thm}
+	\label{thm:ciclicoimplicaabeliano}
+	Si $G$ es cíclico entonces $G$ es abeliano.
+\end{thm}
+
+\begin{proof}
+	Tenemos que probar que $\forall a,b \in G,\ ab = ba$. Sabemos que $a = g^i, b = g^j$ para algunos $i, j \in \Z \implies ab = a^i a^j = a^{i+j} = a^{j+1} = a^j a^i = ba$.
+\end{proof}
+
+
+\begin{thm}
+	\label{thm:coprimosgeneradosiguales}
+	Sea $g \in G$ tal que $o(g) = n \in \N \geq 1$ y sea $r \in \N$. Si $r$ y $n$ son coprimos, entonces $\langle g \rangle = \langle g^r \rangle$.
+\end{thm}
+
+\begin{cor}
+	Si $r$ y $n = o(g)$ son coprimos entonces $o(g) = o(g^r)$.
+\end{cor}
+
+\begin{proof}
+	Recordamos que $p$ y $q$ son coprimos $\iff\ \exists \alpha, \beta \in \Z \mid \alpha p + \beta n = 1$. Recordamos que $\langle g \rangle = \{1, g, g^2, \dots, g^{n-1}\}$ donde $n = o(g)$. Tenemos que probar la doble inclusión. Fijémonos en que $g^r \in \langle g \rangle \implies \langle g^r\rangle \subset \langle g \rangle$ pues $\langle g \rangle$ contiene a todos los elementos de la forma $g^k,\ k \in \Z$ (ver definición \ref{dfn:subgrupogenerado}). Ahora probaremos que $\langle g \rangle \subset \langle g^r \rangle$. Como $r$ y $n$ son coprimos, $g = g^{\alpha r + \beta n} = (g^r)^\alpha (g^n)^\beta = (g^r)^\alpha \in \langle g^r \rangle \implies \langle g \rangle \subset \langle g^r \rangle$. Concluimos que $\langle g \rangle = \langle g^r \rangle$.
+\end{proof}
+
+\begin{ej}
+	En $\Z/4\Z = \{0, 1, 2, 3\}$ con la suma tomamos $g = 1$ y por tanto $n = o(g) = 4$, y tomamos $r = 3$ y por tanto $mcd(n, r) = 1$. Efectivamente se verifica que $o(1^3) = o(1+1+1) = o(3) = 4 = o(1)$ o lo que es lo mismo, $\langle 1 \rangle = \langle 3 \rangle$.
+\end{ej}
+
+\begin{thm}
+	\label{thm:ordenescoprimos}
+	Sea $g \in G$ tal que $o(g) = n$ y sea $r \in \N$ con $r \divides n$ ($r$ divide a $n$). Entonces $o(g^r) = \frac{n}{r}$.
+\end{thm}
+
+\begin{proof}
+	Sea $n'$ tal que $n = rn'$. Probaremos que $r\divides n \implies o(g^r) = n'$.
+	\begin{align*}
+		\langle g^r \rangle = \{g^r, g^{2r}, g^{3r}, \dots, g^{n'r} = g^n\} \subset \{g, g^2, g^3, \dots, g^n\} = \langle g \rangle
+	\end{align*}
+	$\langle g^r \rangle$ tiene $n'$ elementos distintos porque para cualquier $i = 0,\dots, n'$, $o(g^{ir}) <= o(g) = n$ por lo que no se repite ninguno. Además cualquier $g^{ir}$ está bien definido porque al dividir $r$ a $n$, $ir \in \N$.
+\end{proof}
+
+\begin{thm}[Hoja 1, ejercicio 9]
+	Sea $o(g) = n \in \N$ y sea $N \in \Z$. Entonces $o(g^N) = \frac{o(g)}{mcd(N, o(g))}$.
+\end{thm}
+
+\begin{proof}
+	Afirmamos que $n$ y $N/d$, con $d = mcd(N,n)$ son coprimos. Expresamos $g^N = (g^{N/d})^d$. Por el [corolario del] teorema $\ref{thm:coprimosgeneradosiguales}$ tenemos que $o(g^{N/d}) = o(g) = n$. Por el teorema $\ref{thm:ordenescoprimos}$ tenemos que $o((g^{N/d})^d) = \frac{o(g^{N/d})}{d} = \frac{n}{d}$.
+\end{proof}
+
+\begin{thm}[Hoja 1, ejercicio 7]
+	\label{thm:subconjuntocerrado}
+	Sea $(G, \ast)$ un grupo y $S \subset G,\ S \neq \emptyset$ un subconjunto finito de $G$. Si $S$ es cerrado por la operación $\ast$ entonces $S$ es un subgrupo de $G$.
+\end{thm}
+
+\begin{proof}
+	Se verifican las 3 propiedades
+	\begin{enumerate}
+		\item Clausura. Por hipótesis.
+		\item Elemento neutro. Sea $s \in S$. Si $s = e$ ya hemos terminado. Si $s \neq e$, sabemos que $\{s^1, s^2, \dots\} \subset S$. Pero $S$ es finito $\implies \exists\ 0 < i < j$ tales que $s^i = s^j \implies s^{j - i} = e$. Como $j > i \implies j - i > 0$, hemos obtenido $e$ de operar $s$ consigo mismo, luego $e \in S$.
+		\item Elemento inverso. Tomamos $r = j - i$ de la propiedad anterior. Tenemos $s^r = e \implies s \ast s^{r-1} = e \implies s^{r-1} = s^{-1}$.
+	\end{enumerate}
+\end{proof}
+
+%TODO cambiar la definicion de unidades por la del conjunto de los elementos de orden $m$
+%\begin{dfn}[Conjunto de unidades]
+%	Sea $A$ un anillo donde el elemento identidad respecto del producto es $1$. Entonces
+%	\begin{align}
+%		\uds{A} = \{a \in A \mid \exists b,\ a\cdot b = b\cdot a = 1\}
+%	\end{align}
+%\end{dfn}
+
+%\begin{ej}
+%	Las unidades son interesantes porque (a veces?) generan grupos.
+	
+%	En $\Z/4\Z$ las unidades son $\uds{Z/4\Z} = \{\overline{1}, \overline{3}\}$. Este ejemplo es particularmente interesante porque $(\uds{\Z/4\Z}, \cdot)$ es un grupo. No es un subgrupo porque no hereda la operación de $(\Z/4\Z , +)$.
+%\end{ej}
+
+%\begin{pro}
+%	$\overline{a} \in \ZnZ \iff mcd(a,n) = 1$ en $\Z$.
+%\end{pro}
+%
+%\begin{proof}$ $\newline
+%	\begin{itemize}
+%		\item ($\implies$) $\overline{a} \in \uds{\ZnZ} \iff \exists \overline{b} \in \ZnZ \mid \overline{a}\overline{b} = \overline{ab} = 1 \iff ab = rn + 1 \iff 1 = ab - rn \iff \alpha a + \beta n = 1 \iff mcd(a,n) = 1$
+%		\item ($\impliedby$) $mcd(a,n) = 1 \iff \alpha a + \beta n = 1 \implies \overline{\alpha a + \beta n} = \overline{1} \iff \overline{\alpha}\overline{a} + \overline{\beta}\overline{n} = \overline{1} \iff \overline{\alpha}\overline{a} = 1 \implies \exists \overline{b} \in \Z \mid \overline{a}\overline{b} = 1$ (el $\overline{b}$ es $\overline{\alpha}$).
+%	\end{itemize}
+%\end{proof}
+
+
+\subsection{El teorema de Lagrange}
+
+\begin{dfn}[Clase lateral]
+	Sea $(G, \ast)$ un grupo, $H < G,\ g \in G$. Definimos
+	\begin{itemize}
+		\item $g \ast H = gH = \{g \ast h \mid h \in H\}$ es una clase lateral izquierda de $H$
+		\item $H \ast g = Hg = \{h \ast g \mid h \in H\}$ es una clase lateral derecha de $H$
+	\end{itemize}
+\end{dfn}
+
+\begin{thm}
+	\label{thm:ordencajaslaterales}
+	Si $H < G$ tiene orden $n < \infty$ entonces $|gH| = |Hg| = |H| = n$.
+\end{thm}
+
+\begin{proof}
+	Consideramos la aplicación $f: H \to gH,\ f(h) \to g\ast h$ para un $g \in G$ dado. Es inyectiva: $f(h_1) = f(h_2) \implies h_1 = h_2$ puesto que $xh_1 = xh_2 \implies h_1 = h_2$ por la propiedad cancelativa. Es sobreyectiva porque $\forall h \in H,\ g \ast h = f(h)$. Por tanto $f$ es biyectiva y los órdenes son iguales.
+\end{proof}
+
+\begin{pro}
+	Sea $H < G,\ g \in G$. Las clases laterales $gH$ y $Hg$ cumplen las siguientes propiedades (las cumplen las dos pero damos solo las de la izquierda):
+	\begin{enumerate}
+		\item $g \in H \iff g\ast H = H$
+		\item $g \in g \ast H \implies G = \bigcup_{g \in G} g \ast H$
+		\item $g' \in g \ast H \implies g' \ast H = g \ast H$
+		\item $g_1 \ast H \cap g_2 \ast H \neq \emptyset \implies g_1 \ast H = g_2 \ast H$
+	\end{enumerate}
+\end{pro}
+
+\begin{proof}
+	(solo de la última propiedad)
+	Sabemos que existe $\alpha \in g_1 \ast H \cap g_2 \ast H$ de la forma $\alpha = g_1 \ast h_1 = g_2 \ast h_2,\ h_1, h_2 \in H$. Ahora bien, $g_1 \ast h_1 = g_2 \ast h_2 \iff \inv{g_2} \ast g_1 \ast h_1 = h_2 \iff \inv{g_2}g_1 \in H \implies g_2(\inv{g_2}g_1)H = g_2(\inv{g_2}g_1H) = g_2 H$.
+\end{proof}
+
+De las propiedades anteriores se obtiene que $\{g_i \ast H\}_{g_i \in G}$ es una partición de $G$. Además, por el teorema \ref{thm:ordencajaslaterales}, como $|g \ast H| = |H|$ la partición divide $G$ en cajas iguales (ver cuadro \ref{table:cajasiguales}). Pongamos que $G$ es finito y que hay $r$ cajas, entonces $|G| = r|g_i \ast H| = r|H| \implies |H| \mid |G|$. A continuación veremos otra forma de dar esta relación de equivalencia.
+
+
+Para algún $H < G$, la partición que hemos dado anteriormente es la definida por la relación de equivalencia $g_1 R g_2 \iff g_1 \ast H = g_2 \ast H$. Otra manera de definirla es $g_1 R g_2 \iff \inv{g_2}g_1 \in H$. Se verifica que esta nueva definición es una relación de equivalencia.
+
+\begin{figure}[h]
+	\centering
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$g_1 \ast H$ & $g_2 \ast H$ & $\dots$ \\\hline
+		$\dots$ & $H$ & $\dots$ \\\hline
+		$\dots$ & $g_{r-1} \ast H$ & $g_r \ast H$\\\hline
+	\end{tabular}
+	\caption{Partición de $G$ en $r$ cajas iguales}
+	\label{table:cajasiguales}
+\end{figure}
+
+%TODO: probar que es una relación de equiv
+
+
+\begin{thm}[de Lagrange]
+	\label{thm:lagrange}
+	Sea $G$ un grupo finito y $H < G$. Entonces $|H| \divides |G| $ (el orden de $H$ divide al orden de $G$).
+\end{thm}
+
+\begin{cor}
+	Sea $G$ un grupo y $g \in G$. Entonces $o(g) \divides |G|$ (el orden de un elemento divide al orden del grupo).
+\end{cor}
+
+\begin{cor}
+	Si $G$ es un grupo de orden $p$, con $p$ primo, entonces $G$ es cíclico.
+\end{cor}
+
+\begin{proof}
+	Sea $g \in G,\ g \neq e$. Por el teorema de Lagrange $|\langle g \rangle| \divides |G| = p$. Como $p$ es primo sus únicos divisores son $1$ y $p$ y como $|\langle g \rangle| > 1$ se ha de tener $|\langle g \rangle| = p$. Por tanto $\langle g \rangle = G$ y $G$ es cíclico. 
+\end{proof}
+
+\subsection{Subgrupos normales y grupo cociente}
+
+
+\begin{dfn}[Subgrupo normal]
+	Sea $H < G$. Diremos que $H$ es un subgrupo normal de $G$ y lo denotaremos por $H \normsub G \iff \forall g \in G,\ g\ast H = H \ast g$.  
+\end{dfn}
+
+\begin{pro}
+	Si $G$ es abeliano entonces todos sus subgrupos son normales.
+\end{pro}
+
+
+\begin{dfn}[Conjunto cociente en grupos]
+	Sea $H < G$. Definimos
+	\begin{align}
+	G/H = \{gH \mid g \in G\} = \{\overline{x} \mid \overline{x} = \{g \in G \mid \inv{g}x \in H\}\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	Sea $H \normsub G$. $(G/H, \ast)$ con la operación $\ast: G/H \to G/H, (xH)(yH) \mapsto (xy)H$ es un grupo.
+\end{pro}
+
+\begin{proof}
+	La operación $\ast$ está bien definida. $\forall \overline{x}, \overline{y} \in G/H,\ \overline{x} \ast \overline{y} = xHyH = xyHH = xyH = \overline{x \ast y}$.
+	
+	El elemento neutro es $\overline{e}$ pues $\forall \overline{x} \in G/H,\ \overline{e} \ast \overline{x} = eHxH = exH = xH = \overline{x}$.
+	
+	El elemento inverso está bien definido: $\inv{\overline{x}} = \overline{\inv{x}}$ pues $\forall \overline{x} \in G/H,\ \overline{x}\inv{\overline{x}} = xH \inv{x}H = x\inv{x}H = eH = \overline{e}$.
+\end{proof}
+
+\begin{dfn}[Índice]
+	Sea $H < G$. Definimos el \textbf{índice de $H$ en $G$}, y lo representamos mediante $[G:H]$, como el cardinal del conjunto cociente $G/H$. \cite{dor96}
+\end{dfn}
+
+\begin{thm}
+	\label{thm:indice2normal}
+	De \cite{dor96}\footnote{No lo hemos dado explícitamente pero se utiliza para algunos ejemplos.}
+	Sea $H < G$ con $[G : H] = 2$ (con índice de $H$ en $G$ igual a 2). Entonces $H$ es normal.
+\end{thm}
+
+\chapter{Homomorfismos de grupos}
+
+\section{Homomorfismos de grupos}
+
+\begin{dfn}[Homomorfismo de grupos]
+	Sean $(G_1, \cdot), (G_2, \ast)$ grupos. Decimos que $f: G_1 \to G_2$ es un homomorfismo de grupos si $\forall a,b \in G_1,\ f(a\cdot b) = f(a) \ast f(b)$.
+
+	\begin{itemize}
+		\item si $f$ es inyectiva, $f$ es un monomorfismo
+		\item si $f$ es sobreyectiva, $f$ es un epimorfismo
+		\item si $f$ es biyectiva, $f$ es un isomorfismo
+		\item si $G_2 = G_1$ y $f$ es un isomorfismo, entonces $f$ se llama automorfismo
+	\end{itemize}
+	Si existe un isomorfismo entre dos grupos, decimos que son isomorfos y lo denotamos por $G_1 \isom G_2$.
+\end{dfn}
+
+
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=0.7]
+	\node (a) at (0,1) {$a$};
+	\node (b) at (0,0) {$b$};
+	\node (ab) at (0,-1) {$a\ast b$};
+	
+	\node (fa) at (4,1) {$f(a)$};
+	\node (fb) at (4,0) {$f(b)$};
+	\node (fab) at (4,-1) {$f(a)\ast f(b)$};
+	\draw (0,0) ellipse (.9 and 2);
+	\draw (4,0) ellipse (1.8 and 2);
+	
+	\draw (0, -2) node[anchor=north] {$G_1$};
+	
+	\draw (4, -2) node[anchor=north] {$G_2$};
+	
+	\draw[-{Latex[length=2mm]}] (a) -- (fa);
+	\draw[-{Latex[length=2mm]}] (b) -- (fb);
+	\draw[-{Latex[length=2mm]}] (ab) -- (fab);
+	\end{tikzpicture}
+	\caption{Homomorfismo de grupos}
+	\label{fig:homomorfismo}
+\end{figure}
+
+
+\begin{dfn}[Núcleo de un homomorfismo]
+	Sea $f:G_1 \to G_2$ un homomorfismo. Definimos el núcleo $\ker f = \{x \in G_1 \mid f(x) = e_2 \in G_2\}$ (los que van a parar al neutro).
+\end{dfn}
+
+\begin{dfn}[Imagen de un homomorfismo]
+	Sea $f:G_1 \to G_2$ un homomorfismo. Definimos la imagen $\ima f = \{y \in G_2 \mid \exists x \in G_1, f(x) = y\}$.
+\end{dfn}
+
+\begin{pro}Sea $f: G_1 \to G_2$ un homomorfismo. $\ker f < G_1$.
+\end{pro}
+
+\begin{proof} Probamos las 3 propiedades de los subgrupos
+	\begin{enumerate}
+		\item $a,b \in \ker f \implies a \cdot b \in \ker f$. $f(a \cdot b) = f(a) \ast f(b) = e_2 \ast e_2 = e_2$.
+		\item $a \in \ker f \implies a^{-1} \in \ker f$. $f(a) = e_2,\ f(a^{-1}) = e_2 \implies (f(a))^{-1} = e_2$.
+		\item $e_1 \in \ker f$.
+	\end{enumerate}
+\end{proof}
+
+\begin{thm}
+	Sea $f: G_1 \to G_2$ un homomorfismo. $\ima f < G_2$.
+\end{thm}
+
+\begin{proof} Es análoga a la del $\ker f$.\end{proof}
+
+\begin{thm}
+	Sea $f : G_1 \to G_2$ un homomorfismo. $\ker f \normsub G_1$
+\end{thm}
+
+\begin{proof}
+	Tenemos que probar que $\forall a \in G_1, a (\ker f) a^{-1} \subset \ker f$.
+	
+	Sea $h \in \ker f$. $f(a h a^{-1}) = f(a)\underbrace{f(h)}_{e_2}f(a^{-1}) = f(a)f(a^{-1}) = e_2\subset \ker f$
+\end{proof}
+
+\begin{pro}
+	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. $f$ es inyectiva si y solo si $\ker f = \{e\}$.
+\end{pro}
+
+\begin{proof}$ $ \newline
+	\begin{itemize}
+		\item $(\impliedby$) Suponemos que $f$ es inyectiva. Sabemos que en un homomorfismo $f(e_1) = e_2$ y además $\ker f = {e_1}$ por hipótesis.
+		\item $(\implies)$ Tenemos que probar que dados $a,b \in G_1,\ f(a) = f(b) \implies a = b$. Decir que $f(a) = f(b)$ es lo mismo que decir $e_2 = f(a)^{-1}f(b) = f(a^{-1}) f(b) = f(a^{-1}b) \implies a^{-1}b \in \ker f = \{e_1\} \implies a = b$.
+	\end{itemize}
+\end{proof}
+
+\begin{pro}
+	Sean $G_1, G_2, G_3$ grupos y sean $f:G_1 \to G_2,\ g:G_2 \to G_3$ homomorfismos de grupos. Entonces $g \circ f$ es a su vez un homomorfismo de grupos.
+\end{pro}
+
+\begin{thm}
+	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. Entonces $o(f(g))$ divide a $o(g)$.
+\end{thm}
+
+\begin{thm}
+	Sea $f:G_1 \to G_2$ un isomorfismo de grupos. Entonces $o(g) = o(f(g))$.
+\end{thm}
+
+\begin{proof}
+	Consideramos $f$ y $f^{-1}$ para los que se verifica el teorema anterior. $o(g) \mid o(f(g)) \land o(f(g)) \mid o(f^{-1}(f(g))) = o(g) \implies o(g) = o(f(g))$. 
+\end{proof}
+
+\subsection{Producto libre de grupos}
+
+\begin{dfn}[Producto libre de grupos]
+	\label{dfn:productolibre}
+	Sean $S,T$ subconjuntos del grupo $G$. Definimos $ST = \{s\ast t \mid s \in S \land t \in T\}$.
+\end{dfn}
+
+Observemos que la función $f: S \times T \to ST,\ (s,t) \mapsto st$ no es un homomorfismo de grupos. Esto es porque al operar dos elementos de $S \times T$ no se comporta bien. Sean $s,s'\in S, t,t'\in T$
+\begin{align*}
+(s,t) \mapsto st \\
+(s',t') \mapsto s't' \\
+\end{align*}
+esperamos que 
+\begin{align*}
+	f((s,t)(s',t')) = f(st, s't') \mapsto f(s,t)f(s',t') = sts't'
+\end{align*}
+pero en realidad ocurre que
+\begin{align*}
+f((s,t),(s',t')) \mapsto ss'tt' \neq f(s,t)f(s',t')
+\end{align*}
+
+No obstante, aunque la función que lleva $H_1 \times H_2 \to H_1 H_2$ no sea un homomorfismo, sí podemos saber cuantos elementos tiene $H_1H_2$.
+
+\begin{thm}[Cardinalidad del producto libre]
+	\label{thm:cardinalidadproductolibre}
+	Sean $H_1, H_2 < G$ con $G$ finito. Entonces
+	\begin{align}
+	|H_1H_2| = \frac{|H_1||H_2|}{|H_1 \cap H_2|}
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	Utilizaremos la función $f:H_1 \times H_2 \to H_1 H_2$ que es sobreyectiva por definición de $H_1 H_2$. Para una función sobreyectiva $f: A \to B,\ |A| = \sum_{b \in B} |f^{-1}(b)|$.
+	
+	%TODO argumentar lo del alpha
+	
+	Sean las fibras los conjuntos $f^{-1}(h_1h_2)$ de los pares de elementos que van a parar al mismo $h_1h_2 \in H_1 H_2$. La condición necesaria y suficiente para que $(h_1', h_2')$ esté en la misma fibra que $(h_1, h_2)$ es que $h_1' = h_1 \alpha \land h_2' = h_2 \alpha,\ \alpha \in H_1 \cap H_2$. Entonces $|f^{-1}(h_1, h_2)| = | (h_1 \alpha, h_2\alpha),\ \alpha \in H_1\cap H_2| = |H_1 \cap H_2| \implies |H_1||H_2| = |H_1 H_2| |H_1 \cap H_2|$ 
+\end{proof}
+
+\begin{thm}
+	Sean $H_1, H_2$ subgrupos de $G$, con $G$ finito. Si $H_2 \normsub G$ entonces $H_1 H_2 < G$ (si uno de los subgrupos es normal, entonces el producto es subgrupo).
+\end{thm}
+
+\begin{proof}
+	Observamos que podemos escribir $H_1H_2 = \bigcap_{h \in H_1} h \ast H_2$. Como $H_2 \normsub G,\ h\ast H_2 \cdot h' H_2 = h h' H_2\ \forall h \in H_1$. Si nos fijamos $H_1 H_2$ es cerrado por la operación pues $h h' H_2 \in H_1H_2$ y como $G$ es finito y por tanto $H_1, H_2$ también, $H_1H_2$ es un subgrupo.	
+\end{proof}
+
+\begin{thm}
+	Si $H_1 \normsub G \land H_2 \normsub G \implies H_1 H_2 \normsub G$ (si los dos subgrupos son normales, enotnces el producto también es normal).
+\end{thm}
+
+\begin{proof}
+	$H_1,H_2 < G$ luego $\forall g \in G,\ gH_1H_2g^{-1} = gH_1g^{-1}gHg^{-1}  = H_1 H_2 $.
+\end{proof}
+
+%20180925
+
+\section{Retículo de subgrupos. Teoremas sobre grupos cíclicos.}
+
+\begin{dfn}[Retículo de subgrupos]
+	Dado un grupo $G$, el retículo de subgrupos es un grafo con todos los subgrupos de $G$. Denotamos la relación de inclusión con un vértice entre dos grupos. Es costumbre poner el mayor grupo arriba y denotar la inclusión por las diferencias en altura.
+\end{dfn}
+
+Lo importante de esta sección:
+\begin{itemize}
+	\item Todo subgrupo de un grupo cíclico es cíclico.
+	\item Dado un epimorfismo entre dos grupos existe una correspondencia biyectiva entre los subgrupos del primero y los del segundo.
+	\item En $\ZnZ$ existe un subgrupo por cada divisor de $n$ y esos son todos los subgrupos que hay.
+\end{itemize}
+
+\begin{ej}[Retículo de subgrupos $\Z$]
+	$\Z$ tiene infinitos subgrupos, todos los $k\Z$. En muchas ocasiones nos va a interesar solo dibujar unos pocos, para relacionarlos con subgrupos de otros grupos distintos de $\Z$. A continuación se muestra el retículo de subgrupos de $\Z$ construido a partir de $6\Z$.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\node (z) at (0,1) {$\Z$};
+		\node (2z) at (-1,0) {$2\Z$};
+		\node (3z) at (1,0) {$3\Z$};
+		\node (6z) at (0,-1) {$6\Z$};
+		
+		\draw (z) -- (2z);
+		\draw (z) -- (3z);
+		\draw (2z) -- (6z);
+		\draw (3z) -- (6z);
+		\end{tikzpicture}
+		\caption{Una parte del retículo de subgrupos de $\Z$, en concreto la de los $n\Z$ con $n \divides 6$.}
+	\end{figure}
+
+	Los grupos que contienen a $6\Z$ son los de la forma $k\Z$ donde $k$ divide a $6$, ya que entre los múltiplos de los divisores de $6$ también se encuentran los múltiplos de $6$.
+\end{ej}
+
+\begin{pro}
+	Sea $n = \min_{r \in \N,\\r > 0} \{ r \in H,\ H < \Z\}$. Entonces $nH = \Z$.
+\end{pro}
+\begin{proof}
+	Probamos la doble inclusión. Por hipótesis $n \in H$ y por tanto $\langle n \rangle = n\Z \subset H$. Sea $\alpha \in H$. Por el algoritmo de la división, podemos expresar $\alpha = an + s$ con $0 \leq s < n \implies s = 0 \implies H \subset n\Z$. Luego $H = n\Z$.
+\end{proof}
+
+El siguiente teorema no lo ha dado Orlando explícitamente pero básicamente lo que dice es lo que dijo en las 3 clases sobre correspondencia entre subgrupos pero un poco más ordenado.
+
+\begin{thm}[de correspondencia entre subgrupos mediante homomorfismos]
+	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. Se tiene \cite{dor96}:
+	\begin{enumerate}
+		\item Si $H_1 < G_1$ entonces $f(H_1) < G_2$
+		\item Si $H_2 < G_2$ entonces $f^{-1}(H_2) = \{h_1 \in G_1 \mid f(h_1) \in H_2\} < G_2$
+		\item Si $H_2 \normsub G_2$ entonces $f^{-1}(H_2) \normsub G_1$
+		\item Si $H_1 \normsub G_1$ y $f$ es además sobreyectiva (es un epimorfismo) entonces $f(H_1) \normsub G_2$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Demostramos que se cumplen las 3 propiedades de los grupos. Sabemos que $e_1 \in H_1 \implies e_2 \in f(H_1) = H_2$. Además, sabemos que $\forall x \in H_1,\ \inv{x} \in H_1$ y por ser $f$ un homomorfismo tenemos que $\forall f(x) \in H_2,\ \inv{f(x)} = f(\inv{x}) \in H_2$. Por último, tenemos que $\forall x,y \in H,\ xy \in H_1 \implies \forall f(x),f(y) \in H_2,\ f(x)f(y) = f(xy) \in H_2$.
+		\item Es análoga a la de la primera afirmación.
+		\item Tenemos que probar que para un $g_1 \in G_1,\ \forall h_1 \in f^{-1}(H_2) = H_1,\ g_1 h_1 = h_1 g_1$. Sabemos que $\forall h_1,\ \exists h_2 \in H_2 \mid \inv{f}(h_2) = h_1$. Entonces $g_1h_1 = h_1 g_1 \iff \inv{f}(g_2)\inv{f}(h_2) = \inv{f}(h_2)\inv{f}(g_2) \iff \inv{f}(g_2h_2) = \inv{f}(h_2g_2)$ que es cierto por hipótesis de que $H_2$ es normal.
+		\item Tenemos que probar que para $g_2 \in G_2$ dado, $\forall h_2 \in H_2 = f(H_1),\ g_2h_2 = h_2g_2$. Comenzamos por asegurar que $\exists g_1 \in G_1 \mid f(g_1) = g_2$ por ser $f$ sobreyectiva. Por tanto $g_2h_2 = h_2 g_2 \iff f(g_1)f(h_1) = f(h_1)f(g_1) \iff f(g_1h_1) = f(h_1g_1)$ que es cierto por hipótesis.
+	\end{enumerate}
+\end{proof}
+
+Queremos establecer una relación entre los retículos de subgrupos de dos grupos que son el dominio y la imágen de un epimorfismo $f: G_1 \to G_2$. Los subgrupos de $G_2$ siempre contendrán al elemento neutro $e_2$ por lo que podemos establecer una relación natural entre los subgrupos de $G_1$ que contienen a $\ker f$ con los subgrupos de $G_2$.
+
+\begin{thm}\footnote{Este teorema es un desastre. Las hipótesis no las ha dado y las conclusiones tampoco. Es lo que más o menos he creido que quería decir. Es posible que se corresponda con la proposición 4.4.6 del \cite{dor96} pero en dicha proposición no se exige que $f$ sea sobre.}
+	Sea $f: G_1 \to G_2$ un epimorfismo. Existe una biyección entre el retículo de subgrupos de $G_2$ y subgrupos de $G_1$ que contienen al $\ker f$. Se cumple que $H_2 < G_2 \iff \inv{f}(H_2) \supset \ker f$.
+	
+	En particular, el número de subgrupos de $G_2$ es igual al número de subgrupos de $G_1$ que contienen al núcleo.
+	\begin{align*}
+		|\{H_2 \mid H_2 < G_2\}| = |\{H_1 < G_1 \mid \ker f \in H_1\}|
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	Sabemos que por ser $f$ homomorfismo, $H_1 < G_1 \implies f(H_1) < G_2$.
+	
+	Veamos que la relación entre los subconjuntos de $G_1$ y de $G_2$ se mantiene al aplicar el epimorfismo. Sea $H_2 \subset G_2$. Como $f$ es sobre $f(\inv{f}(H_2)) = H_2$. Ahora sea $H_2' \mid H_2 \subset H_2' \subset G_2$. Ocurre lo de antes y además $\inv{f}(H_2) \subset \inv{f}(H_2') \subset G_1$.
+	
+	Ahora lo extendemos de subconjuntos a subgrupos. Asociamos a cada $H_2 < G_2$ el subgrupo $\inv{f}(H_2) < G$. Es un subgrupo porque al ser $f$ epimorfismo mantiene la operación. En particular, $e_2 \in H_2 \implies \ker f = \inv{f}(e_2) \subset \inv{f}(H_2)$.
+	
+	Por último afirmamos que si $\ker f \subset H_1 < G_1$, entonces $H_1 = \inv{f}(f(H_1))$. Para probar esto probamos la doble inclusión. $H_1 \in \inv{f}(f(H_1))$ es evidente pues $h \in H_1 \implies f(h) \in f(H_1)$. Ahora probamos $\ker f \subset H_1 \implies H \subset \inv{f}(f(H_1))$.
+	\begin{align*}
+		\alpha \in \inv{f}(f(H_1)) \iff& f(\alpha) \in \inv{f}(f(H_1)) \\
+		\iff& \exists h_1 \in f(H_1) \mid f(\alpha) \in f(H_1) \\
+		\iff& \exists h_1 \in H \mid f(\alpha)\inv{(f(h_1))} = e_2 \\
+		\iff& \exists h_1 \in H_1 \mid f(\alpha \inv{h_1}) = e_2 \\
+		\iff& \exists h_1 \in H_1 \mid \alpha \inv{h_1} \in \ker f \\
+		&\alpha \inv{h_1} h_1 \implies \alpha \in H_1
+	\end{align*}
+\end{proof}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\draw (-2,0) ellipse (1.3 and 2);
+		\draw (2, 0) ellipse (1 and 1.5);
+		\draw (-2,-2.5) node {$G_1$};
+		\draw (2, -2) node {$G_2$};
+		
+		\node (ker) at (-2, 0) {$\ker f$};
+		\node (e2) at (2,0) {$e_2$};
+		
+		\draw (ker) ellipse(.5 and .5);
+		\draw (e2) ellipse (.3 and .3);
+		\draw (-2,.5) -- (2,.3);
+		\draw (-2,-.5) -- (2,-.3);
+		
+		% subgrupos de G1
+		\draw (ker) ellipse (.8 and 1.2);
+		\draw (-2,-1.2) node[anchor=north] {$H_1$};
+		
+		% subgrupos de G2
+		\draw (e2) ellipse (.7 and .9);
+		\draw (2, -.9) node[anchor=north] {$H_2$};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{ej}
+	Queremos saber sobre los subgrupos que tiene $\mathbb{Z}/8\mathbb{Z}$ (ver figura \ref{fig:reticulo8z}). El epimorfismo que utilizamos es $f:\Z \to \mathbb{Z}/8\mathbb{Z},\ z \mapsto f(z) = \overline{z}$ el habitual.
+	
+	Para ver los subgrupos de $\mathbb{Z}/8\mathbb{Z}$ miramos qué subgrupos de $\Z$ contienen a $\ker f = \{ z \in \Z \mid f(z) = \overline{0}\} = \{z \in \Z \mid z \mod 8 = 0\} = 8\Z$. Es decir, tenemos que encontrar los subgrupos de $\Z$ que contengan a los múltiplos de  8 ($8\Z$):
+	\begin{align*}
+	\Z \supset 2\Z \supset 4\Z \supset 8\Z
+	\end{align*}
+	En general, en $n\Z$, los subgrupos que contienen al núcleo son los $m\Z$ tales que $m \divides n$ ($m$ divide a $n$). 
+	Luego $\mathbb{Z}/8\mathbb{Z}$ tendrá 4 subgrupos que serán $f(8\Z) = \mathbb{Z}/8\mathbb{Z}, f(4\Z) = \mathbb{Z}/4\mathbb{Z}, f(2\Z) = \mathbb{Z}/2\mathbb{Z}, f(\Z) = \{e\}$. 
+\end{ej}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	% end nZ
+	\node (z) at (-3,2) {$\Z$};
+	\node (2z) at (-3,1) {$2\Z$};
+	\node (4z) at (-3,0) {$4\Z$};
+	\node (8z) at (-3,-1) {$8\Z$};
+	
+	\draw (8z) -- (4z);
+	\draw (4z) -- (2z);
+	\draw (2z) -- (z);
+	
+	% en Z/nZ
+	\node (z8) at (0,2) {$\langle 1 \rangle = \Z/8\Z$};
+	\node (z4) at (0,1) {$\langle 2 \rangle$};
+	\node (z2) at (0,0) {$\langle 4 \rangle$};
+	\node (e) at (0,-1) {$\langle 8 \rangle = \{e\}$};
+	
+	\draw (e) -- (z2);
+	\draw (z2) -- (z4);
+	\draw (z4) -- (z8);
+	
+	% las correspondencias
+	\draw (z) edge[->, blue] (z8);
+	\draw (2z) edge[->, blue] (z4);
+	\draw (4z) edge[->, blue] (z2);
+	\draw (8z) edge[->, blue] (e);
+	\end{tikzpicture}
+	
+	\label{fig:reticulo8z}
+	\caption{Retículo de subgrupos de $\mathbb{Z}/8\mathbb{Z}$}
+\end{figure}
+
+Lo mismo podríamos hacer para obtener el retículo de $\Z/6\Z$ (ver figura \ref{fig:reticulo6z}).
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	% en nZ
+	\node (z) at (-4, 1) {$\Z$};
+	\node (2z) at (-5, 0) {$2\Z$};
+	\node (3z) at (-3, 0) {$3\Z$};
+	\node (6z) at (-4, -1) {$6\Z$};
+	
+	\draw (6z) -- (2z);
+	\draw (6z) -- (3z);
+	\draw (2z) -- (z);
+	\draw (3z) -- (z);
+	
+	% en Z/nZ
+	\node (z6) at (0,1) {$\langle 1 \rangle = \Z/6\Z$};
+	\node (z2) at (-1,0) {$\langle 2 \rangle$};
+	\node (z3) at (1,0) {$\langle 3\rangle$};
+	\node (e) at (0,-1) {$\langle 6 \rangle = \{e\}$};
+	
+	\draw (e) -- (z2);
+	\draw (e) -- (z3);
+	\draw (z2) -- (z6);
+	\draw (z3) -- (z6);
+	
+	% las correspondencias
+	\draw (z) edge[->, bend left, blue] (z6);
+	\draw (2z) edge[->, bend left, blue] (z2);
+	\draw (3z) edge[->, bend right, blue] (z3);
+	\draw (6z) edge[->, bend right, blue] (e);
+	
+	\end{tikzpicture}
+	\label{fig:reticulo6z}
+	\caption{Retículo de subgrupos de $\mathbb{Z}/6\mathbb{Z}$}
+\end{figure}
+
+\begin{thm}
+	Todo subgrupo de $\ZnZ$ es cíclico.
+\end{thm}
+
+\begin{proof}
+	La propiedad de cíclico se hereda de $\Z$ y se prueba igual utilizando el algoritmo de la división. %TODO probarlo
+\end{proof}
+
+\begin{thm}
+	Consideramos $\ZnZ$ Para cada divisor $d$ de $n$, existe un único subgrupo cíclico de orden $d$.
+\end{thm}
+
+\begin{proof}
+	% TODO añadir teoremas de prácticas previos a Lagrange
+	$d \divides n \implies n = dn' \implies n'\Z < n\Z$ Además, por el teorema de prácticas, $|n'\Z| = d$ y por tanto $|f(n'\Z)| = d$ donde $f:n\Z \to \ZnZ$ es la relación de equivalencia habitual.
+\end{proof}
+
+\begin{thm}
+	Sean $\overline{k}, \overline{k'} \in \ZnZ$. Entonces $o(\overline{k}) = o(\overline{k'}) = d \implies \langle \overline{k} \rangle = \langle \overline{k'} \rangle$ 
+\end{thm}
+
+\begin{ej}
+	Dar el retículo de subgrupos de $D_4 = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$, donde $o(A) = 2,\ o(B) = 4,\ BA=AB^3$. En este caso no tenemos más remedio que ir probando a ver qué combinaciones de elementos dan subgrupos. Como conocemos de dónde viene $D_4$ nos es más fácil (ver el ejemplo \ref{ej:famosogrupod4}).
+	
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.25\textwidth]{reticulo-D4}
+		\label{fig:reticuloD4}
+		\caption{Retículo de subgrupos de $D_4$ de \cite{d4sub}}
+	\end{figure}
+
+	Nos ayudamos de la imágen.
+		\begin{itemize}
+			\item Abajo tenemos el subgrupo trivial: $\{1\}$
+			\item En la primera fila tenemos, de izquierda a derecha:
+			\begin{itemize}
+				\item $\{1, AB^2\}$
+				\item $\{1, A\}$
+				\item $\{1, B^2\}$
+				\item $\{1, AB^3\}$
+				\item $\{1, AB\}$
+			\end{itemize}
+			\item En la segunda fila tenemos los subgrupos de 4 elementos, de izquierda a derecha:
+			\begin{itemize}
+				\item $\{1, B^2, A, AB^2\}$
+				\item $\{1, B, B^2, B^3\}$
+				\item $\{1, AB, B^2, AB^3\}$
+			\end{itemize}
+			\item Y por último el grupo completo: $D_4 = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$.
+		\end{itemize}
+\end{ej}
+
+\section{Teoremas random}
+
+\begin{thm}
+	Sean $n, m \in \N$. El grupo producto directo $\ZnZ \times \ZmZ$ es cíclico $\iff mcd(n,m) = 1$.
+\end{thm}
+
+\begin{proof}
+	Para que $\ZnZ \times \ZmZ$ sea cíclico debe haber un elemento $a \in \ZnZ \times \ZmZ \mid o(a) = m\cdot n$. Si $m$ y $n$ no son coprimos entonces el orden de $a$ no puede ser $m\cdot n$. %TODO pensar y explicar
+\end{proof}
+
+\begin{ej}
+Sea $G$ un grupo tal que $|G| = 4$. Afirmamos que
+\begin{itemize}
+	\item o bien $G \isom \Z/4\Z$,
+	\item o bien $G \isom \Z/2\Z \times \Z/2\Z$.
+\end{itemize}
+
+Ocurre lo siguiente
+\begin{itemize}
+	\item si $\exists a \in G \mid o(a) = 4$ entonces $G$ es cíclico y por tanto isomorfo a $\Z/4\Z$.
+	\item si no, entonces todos los elementos tienen orden menor o igual que 2.
+\end{itemize}
+\end{ej}
+
+\subsection{Centro de un grupo y sus propiedades}
+
+\begin{dfn}[Centro de un grupo]
+	Sea $G$ un grupo finito. Definimos el centro de $G$, $Z(G) = \{a \in G \mid \forall g \in G,\ ag = ga\}$.
+\end{dfn}
+
+El centro es útil en grupos finitos no abelianos.
+
+\begin{pro}
+	Sean $a, b \in Z(G)$. Entonces $ab \in Z(G)$.
+\end{pro}
+
+\begin{proof}
+	Tenemos que $ag = ga$ y que $bg = gb$. Ahora tenemos que probar que $g(ab) = (ab)g$. Es trivial manipulando $(ab)g = agb = gab$.
+\end{proof}
+
+\begin{pro}
+	Sea $G$ un grupo. $Z(G)$ es un subgrupo y además es un subgrupo normal.
+\end{pro}
+
+\begin{proof}
+	$\forall g \in G,\ Z(G)g = \{ag \mid a \in G \land \forall b \in G,\ ab = ba\} = \{ga \mid a \in G \land \forall b \in G,\ ab = ba\} = gZ(G)$.
+\end{proof}
+
+\begin{pro}
+	Si $H < Z(G)$ entonces $H$ es abeliano y normal.
+\end{pro}
+
+\begin{pro}
+	Sea $g \in G,\ \phi_g: G \to G$ el isomorfismo definido por $\phi_g(x) = gx\inv{g}$. Entonces
+	\begin{align*}
+		x \in Z(G) &\iff \forall g \in G, gx = xg \iff gx\inv{g} = x \\
+		x \in Z(G) &\iff \forall g \in G,\ \phi_g(x) = x 
+	\end{align*}
+\end{pro}
+
+\begin{pro}
+	$G$ es abeliano $\iff G = Z(G)$
+\end{pro}
+
+Sea $a \in G \land o(a) = n$. Si $a$ es el único elemento de orden $n$ entonces $n = 2 \land a \in Z(G)$. Probamos primero que $n=2$. Si $a$ es el único elemento de orden $n$ entonces tiene que ocurrir que $a$ y $a^{n-1}$ tienen el mismo orden por lo que $1 = n-1 \implies n = 2$.
+
+\begin{pro}
+	\label{pro:triplecentro}
+	Si $G/Z(G)$ es cíclico de orden $n$ entonces $n = 1$. Otra manera de formularlo: Si $G/Z(G)$ es cíclico, entonces $G = Z(G)$. Otra manera más de formularlo: si $G/Z(G)$ es cíclico entonces $G$ es abeliano.
+\end{pro}
+
+\begin{proof}
+	Supongamos que $G/Z(G) \isom \ZnZ$. Vamos a probar que $n$ tiene que ser 1. Supongmos que $G/Z(G) = \{\overline{\alpha_i}, i = 1, \dots, n\}$ donde $\overline{\alpha_i} = \alpha^i Z(G)$. Fijamos $g \in G$ con $g = \alpha^j h,\ h \in Z(G),\ 0 \leq j < n$ y fijamos $f' \in G$ con $g' = {\alpha^j}' h',\ h' \in Z(G),\ 0 \leq j' < n$. Entonces $gg' = \alpha^j h{\alpha^j}' h' = \alpha^{j+j'}hh' = {\alpha^j}' h' \alpha^j h = gg'$ (podemos conmutar las $h$ con cualquier elemento porque $h \in Z(G)$, por el contrario, los $\alpha$ no necesitamos conmutarlos, solo agruparlos cuando están juntos). Es decir, que $\forall g, g' \in G$ tenemos que $gg' = g'g$ por lo que $G$ es abeliano.
+\end{proof}
+
+
+\begin{ej}[Hoja 1, ej 33]
+	Sea $G$ un grupo. Suponed que existe un único $a \in G$ de orden 2. Demostrad que $a \in Z(G)$.
+\end{ej}
+
+\begin{proof}
+	Recordamos que $a \in Z(G) \iff ga = ag,\ \forall g \in G$. Definimos el isomorfismo de conjugación $\phi_g (x) = gx\inv{g}$ para algún $g$. Como $\phi_g$ es isomorfismo lleva elementos de orden $n$ en elementos de orden $n$. Entonces $\phi_g(a) = a$ ya que $a$ es el único elemento de orden 2. Por tanto $ga\inv{g} = a \implies ga = ag \implies a \in Z(G)$.
+\end{proof}
+
+\section{Teoremas de la isomorfía (versión de clase)}
+
+\begin{thm}[O ejemplo]
+	Sea $f: \ZnZ \to \ZnZ$. $f$ es un isomorfismo $\iff f(\overline{1}) = \overline{a} \in \uds{\ZnZ}$
+\end{thm}
+
+\begin{ej}
+	Sea $g \in G$ fijado. Definimos $\phi_g : G \to G$
+	\begin{align*}
+		G \to^{\phi_g} & G \to^{\phi^{-1}_g} & G \\
+		x \mapsto &gx\inv{g} & \\
+		&z \mapsto &\inv{g}x\inv{(\inv{g})}
+	\end{align*}
+	Y $\phi_g \cdot \phi_g^{-1} = Id$.
+\end{ej}
+
+\begin{proof}
+	Para que $f$ sea isomorfismo tiene que ser sobre luego $o(\overline{a}) = n \implies \overline{a} \in \uds{\ZnZ}$.
+\end{proof}
+
+\begin{thm}
+	\label{teorema:preisomorfia1}
+	Sea $f: G_1 \to G_2$ un homomorfismo de grupos, $H \normsub G_1$ con $H \subset \ker f$. Sea $\pi: G_1 \to G_1/H$ el homomorfismo que genera las clases de equivalencia (ver figura \ref{fig:tmisomorfia1}). Entonces se cumple lo siguiente
+	\begin{enumerate}
+		\item existe un homomorfismo de grupos $\overline{f}:G_1/H \to G_2$ tal que $\overline{f} \circ \pi = f$
+		\item $\ker \overline{f} = \ker f / H$
+	\end{enumerate}
+\end{thm}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\node (g1) at (0,0) {$a \in G_1$};
+\node (g2) at (4,0) {$f(a) \in G_2$};
+\node (gh) at (0, -3) {$\overline{a} \in G_1/H$};
+
+\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$f$};
+\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
+\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{f}$};
+\end{tikzpicture}
+\caption{Homomorfismos que intervienen en el teorema \ref{teorema:preisomorfia1}}
+%TODO
+\label{fig:otracosa}
+\end{figure}
+
+\begin{proof} $ $\newline
+	\begin{enumerate}
+		\item Probaremos que si construimos $\overline{f}$ con $\overline{f}(\overline{a}) = f(a)$ entonces $\overline{f}$ está bien definida. Tenemos que ver que $\overline{a} = \overline{a'} \implies f(a) = f(a')$. Partimos de $\overline{a} = \overline{a'} \implies a \inv{(a')} \in H \implies f(a \inv{(a')}) = e_2 \implies f(a) \inv{f(a')} = e_2 \implies f(a) = f(a')$.
+		
+		\item Observemos que $\overline{f}(\overline{a}\overline{b}) = \overline{f}(\overline{ab}) = f(ab) = f(a)f(b)=\overline{f}(\overline{a})\overline{f}(\overline{b})$. Ahora probamos las dos inclusiones a la vez $\overline{a} \in \ker \overline{f} \iff \overline{f}(\overline{a}) = e_2 \iff f(a) = e_2 \iff \overline{a} \in \ker f$.
+	\end{enumerate}
+\end{proof}
+
+\begin{thm}[Primer de la isomorfía]
+	Sea $f:G_1 \to G_2$ un epimorfismo. Existe un isomorfismo $\overline{f}: G_1 / \ker f \to G_2$.
+\end{thm}
+
+\begin{figure}[h]
+	%TODO hacer
+	\centering
+	\begin{tikzpicture}
+	\node (g1) at (0,0) {$G_1$};
+	\node (g2) at (4,0) {$G_2$};
+	\node (gh) at (0, -3) {$G_1/\ker f$};
+	
+	\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$f$};
+	\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
+	\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{f}$};
+	\end{tikzpicture}
+	\caption{Primer teorema de la isomorfía.}
+	\label{fig:tmisomorfia3}
+\end{figure}
+
+\begin{proof}
+	$f = \pi \circ \overline{f}$ y $f$ es sobre, luego $\overline{f}$ también es sobreyectiva.
+	
+	% TODO probar que f barra es inyectiva \implies es isomorfismo
+\end{proof}
+
+\begin{thm}[Segundo teorema de la isomorfía]
+	
+	Sean $H \normsub G,\ K \normsub G$ y $H \subset K$ Entonces
+	\begin{align}
+		(G/H)/(K/H) = G/K
+	\end{align}
+\end{thm}
+
+\begin{figure}[h]
+	%TODO hacer
+	\centering
+	\begin{tikzpicture}
+	\node (g1) at (0,0) {$G$};
+	\node (g2) at (4,0) {$G/K$};
+	\node (gh) at (0, -3) {$G/H$};
+	
+	\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$h$};
+	\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
+	\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{h}$};
+	\end{tikzpicture}
+	\caption{Segundo teorema de la isomorfía.}
+	\label{fig:tmisomorfia2}
+\end{figure}
+
+\begin{proof}
+	$\overline{h}$ es sobreyectiva y $\ker \overline{h} = K/H$
+\end{proof}
+
+% 20180927
+
+\begin{thm}
+	Sea $f:G_1 \to G_2$ un epimorfismo. Si $N \normsub G_1$, entonces $f(N) \normsub G_2$. Como $f$ es epimorfismo cualquier $g \in G_2,\ g_2 = f(g_1)$ para algún $g_1 \in G_1$. Como $N \normsub G_1$, tenemos que $gN\inv{g} \in N$. Que $f(N) \normsub G_2$ quiere decir que $\forall f(g) \in G_2, f(g)f(N)f(\inv{g}) \subset f(N)$. Ahora bien $f(g)f(N)\inv{f(g)}$. Y esto sigue pero lo ha dicho y no lo ha escrito y no me ha dado tiempo.
+\end{thm}
+
+\begin{lem}
+	Sea $h:G_1 \to G_2$ homomorfismo de grupos. Sean $N \normsub G_1$ y $N \subset \ker h$. 
+	\begin{enumerate}
+		\item Entonces existe un homomorfismo de grupos $\overline{f}:G_1/N \to G_2$ que cumple $\overline{f} \circ \pi = f$
+		\item $\ker \overline{f} = \ker f / N$.
+	\end{enumerate}
+\end{lem}
+
+\begin{cor}
+	Si $N = \ker f$ entonces $\ker \overline{f} = \{0\}$ y $\overline{f}$ es un monomorfismo.
+\end{cor}
+
+\begin{cor} % TODO esto es el primer teorema otra vez
+	Si $f$ es además un epimorfismo, entonces $\overline{f}$ es una biyección.
+\end{cor}
+
+% TODO poner aquí la imágen del primer teoremaº
+
+
+
+\begin{proof}
+	Consideramos $f:H \to HK$ que es un homomorfismo porque $H < HK$ (porque $h = he_k,\ \forall h \in H$ y satisface la definción de producto). Y ahora consideramos un epimorfismo $h:HK \to HK/K$ que existe porque $K \normsub HK$. Sea $\pi = f \circ g$. Afirmamos que $\ker \pi = H \cap K$. Faltan cosas.
+	
+	\begin{align*}
+		H/(H\cap K) \isom HK/K
+	\end{align*}
+\end{proof}
+
+\begin{cor}
+	Si $H,K < G$ con $K \normsub G$ entonces existe un epimorfismo $\pi:H\to HK/K$ y $\ker \pi = H \cap K$.
+\end{cor}
+
+\begin{thm}\footnote{Esta vez si que dijo teorema.}
+	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. Entonces $\ima f \isom G_1 / \ker f$.
+\end{thm}
+
+Este teorema viene a decir que dado un homomorfismo $f:G_1 \to G_2$, si lo restringimos a $f:G_1 \to \ima f$ obtenemos un epimorfismo.
+
+%_---------------
+
+\begin{pro}
+	Sea $G$ un grupo con orden $n$. Sea $H < G$ con índice de $H = p \mid mcd(p,n) = 1$. Entonces $H$ es un subgrupo normal.
+\end{pro}
+
+\section{Teoremas de la isomorfía (versión con pies y cabeza)}
+
+\begin{thm}(Primer teorema de la isomorfía)
+	Sea $f:G_1 \to G_2$ un epimorfismo y sea $\pi:G_1 \to G_1/\ker f$. Entonces existe un isomorfismo $\overline{g} : G_1 / \ker f \to G_2$ tal que $f = \pi \circ \overline{f}$.
+\end{thm}
+
+\begin{figure}[h]
+	%TODO hacer
+	\centering
+	\begin{tikzpicture}
+	\node (g1) at (0,0) {$G_1$};
+	\node (g2) at (4,0) {$G_2$};
+	\node (gh) at (0, -3) {$G_1/\ker f$};
+	
+	\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$f$};
+	\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
+	\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{f}$};
+	\end{tikzpicture}
+	\caption{Primer teorema de la isomorfía.}
+	\label{fig:tmisomorfia1}
+\end{figure}
+
+\begin{thm}(Segundo teorema de la isomorfía)
+	Sea $G$ un grupo, $H \normsub G,\ K \normsub G$ y $H < K$. Entonces $K/H$ es un subgrupo normal de $G/H$ y
+	\begin{align}
+		\sfrac{G/H}{K/H} \isom G/K
+	\end{align}
+\end{thm}
+
+\begin{thm}[Tercer teorema de la isomorfía]
+	Sea $G$ un grupo, $H < G,\ K \normsub G$. Entonces $HK < G$, $K \normsub HK$ y $H\cap K \normsub H$. Además,
+	\begin{align}
+		\sfrac{HK}{K} \isom \sfrac{H}{(H \cap K)}
+	\end{align}
+\end{thm}
+
+% 20181001
+
+\section{Construcción de homomorfismos de grupos y de isomorfismos}
+
+Sea $G$ abeliano con $|G| = n = rs$, sea $H < G,\ K < G$ con $|H| = r,\ |K| = s$ y $H\cap K = \{e\}$.
+\begin{itemize}
+	\item Notemos que como $G$ es abeliano, $H$ y $K$ son subgrupos normales.
+	\item Al aplicar el teorema $\ref{thm:cardinalidadproductolibre}$ tenemos que el denominador es $|H\cap K| = 1$ por lo que $|HK| = |H| |K| = rs= n$.
+	\item Como $G$ es abeliano:
+	\begin{enumerate}
+		\item $G = HK$ (porque $HK$ es un subgrupo con el mismo número de elementos que $G$ por el teorema \ref{thm:cardinalidadproductolibre})
+		\item La función $f:H\times K \to G,\ (h, k)\mapsto hk$ es un homomorfismo de grupos (nótese que esto no ocurriría si $G$ no fuese abeliano).
+	\end{enumerate}
+\end{itemize}
+
+Es más, si se cumple todo lo anterior, $f$ es además un isomorfismo $\implies H\times K \isom G$.
+
+\begin{ej}[Homomorfismo trivial]Siempre nos queda el homomorfismo trivial $f:G_1 \to G_2,\ f(g_1) = e_2, \forall g_1 \in G_1$.
+\end{ej}
+
+\begin{ej}
+	\label{ej:nohomoentreproducto}
+	Consideramos $S_3$, que tiene $|S_3| = 6$ y no es abeliano y los subgrupos $H = \langle (12) \rangle$ y $K = \langle (123) \rangle$ con $|H| = 2$ y $|K| = 3$. Podemos construir la función $f:H\times K \to S_3$ pero no es un homomorfismo de grupos. De hecho, al ser $K \normsub S_3$, el producto $HK$ es un subgrupo y la función $f$ es una biyección, pero aún así no es compatible con la estructura de grupo.
+\end{ej}
+
+\begin{ej}
+	Consideramos $D_4$ y un grupo $G$ con $a,b \in G$ donde hemos establecido un homomorfismo que definimos con $f(A) = a$ y $f(B) = b$. Ocurre lo siguiente
+	\begin{itemize}
+		\item El homomorfismo queda totalmente definido ya que todos los elementos de $D_4$ son palabras en $A$ y $B$ y por la estructura de homomorfismo podemos operar tras aplicar la operación a cada letra. Por ejemplo $f(ABA) = aba$.
+		\item Es necesario que $o(a) = 2$ y $o(b) = 4$, de lo contrario no se cumpliría la estructura de homomorfismo entre $D_4$ y $G$.
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Consideramos $\ZnZ = \{0, 1, \dots, n-1\}$ La presentación de este grupo es $o(1) = n$. Queremos construir un homomorfismo $f:\ZnZ \to G'$. Para que $f$ sea un homomorfismo necesitamos que $f(0) = e$. Ahora supongamos que establecemos $f(1) = a$. Naturalmente sigue (para que $f$ sea un homomorfismo) que $f(2) = a\ast a = a^2$. Observamos que la condición necesaria y suficiente para que el homomorfismo definido por $f(1) = a$ es que $a^n = e$, o lo que es lo mismo que $o(a)$ divida a $n$.
+	\begin{align*}
+		f:\ZnZ &\to G' \\
+		0 &\mapsto e \\
+		1 &\mapsto a \\
+		2 &\mapsto a^2\\
+		&\dots \\
+		n = 0 &\mapsto a^n = 0
+	\end{align*}
+\end{ej}
+
+\begin{ej}
+	En $\ZnZ \to \ZnZ$ podemos construir $n$ homomorfismo ya que
+	\begin{itemize}
+		\item cualquier $a \in \ZnZ$ es cumple la condición necesaria para que $f(1) = a$ induzca un homomorfismo
+		\item todo homomorfismo queda determinado por $f(1) = a$ para algún $a \in \ZnZ$.
+	\end{itemize}
+
+	Es decir que $\text{Hom}(\ZnZ, \ZnZ) \isom \ZnZ$.
+\end{ej}
+
+\begin{ej}
+	Si ahora nos preguntamos por los isomorfismos $\text{Isom}(\ZnZ, \ZnZ) \subset \text{Hom}(\ZnZ, \ZnZ)$ nos damos cuenta de que los únicos $a \in \ZnZ$ que nos dan isomorfismos son aquellos que tienen $o(a) = n$.
+	
+	Es decir que $\text{Isom}(\ZnZ, \ZnZ) \isom \uds(\ZnZ)$.
+\end{ej}
+
+\begin{ej}[Isomorfismo conjugación]
+	Fijamos $g \in G$ y definimos $\phi_g:G \to G,\ x \mapsto gx\inv{g}$. Es un homomorfismo de grupos pues $y\mapsto gy\inv{g}$ y $xy \mapsto gxy\inv{g} = gx\inv{g}gy\inv{g}$.
+	
+	Ahora consideramos $\inv{g}$ y $\phi_{\inv{g}}: G \to G,\ x \mapsto \inv{g}xg$ y como antes se verifica que es homomorfismo.
+	
+	Además, $\phi_g \circ \phi_{\inv{g}} = id$ luego $\phi_g$ es un isomorfismo de grupos.
+\end{ej}
+
+
+\begin{ej}
+	Consideramos ahora $N \normsub G$ y por tanto para cualquier $g \in G,\ gN = Ng$. La función $\phi_g(N) \subset N$ es un isomorfismo que además lleva los elementos de $N$ en $N$, por tanto podemos restringirla a $\phi_g:N \to N$ e inducir un isomorfismo.
+
+	Es decir, los subgrupos que no se mueven por ninguna función $\phi_g$ son los subgrupos normales.
+\end{ej}
+
+\begin{ej}
+	Consideramos el grupo $(\Z, +)$ que es cíclico y un grupo $G$ con $a \in G$. Utilizando notación multiplicativa en la que el $\mathbf{1}$ representa el elemento neutro (en este caso $\mathbf{1} = 0$)
+	\begin{align*}
+		\Z &\to G \\
+		\mathbf{1} &\mapsto a \\
+		k &\mapsto a^k \\
+		k + k' &\mapsto a^{k+k'}
+	\end{align*}
+	Es decir, que al seleccionar $\mathbf{1} \mapsto a$ queda determinada la imágen de todos los demás $k \in \Z$ y además la función que obtenemos es un homomorfismo. Por tanto el conjunto de los homomorfismos de $\Z$ en $G$ es TODO $G$: $\text{Hom}(\Z, G) = G$.
+\end{ej}
+
+\begin{ej}[del primer teorema de la isomorfía]
+	Consideramos el grupo $G = \{1, i, -1, -i\}$ con el producto y establecemos la función $f:\Z \to G$ que lleva $1 \mapsto i$. Además $f$ es sobreyectiva y $\ker f = \Z/4\Z$. El primer teorema de la isomorfía nos dice que existe un isomorfismo $\overline{f}: \Z/\ker f \to G$ y este es $\overline{f},\ \overline{f}([a]) \mapsto i^{a}$ (en $\ker f$ no se repiten los elementos por lo que convertimos el epimorfismo $f$ en un homomorfismo $\overline{f}$).
+\end{ej}
+
+En general todos los grupos cíclicos de orden $n$ son isomorfos entre sí, porque todos son isomorfos a $\Z/n\Z$ y los isomorfismos son reversibles y la composición sigue siendo isomorfismo.
+
+Hemos visto que $\text{Hom}(\Z, G) = G$ porque al determinar $f(1) = a$ determinamos el homomorfismo y por tanto tenemos un homomorfismo para cada elemento $a \in G$.
+
+¿Pero qué pasa si tomamos los homomorfismos $f:\ZnZ \to G$ con $a \in G$ definidos por $f(\overline{1}) = a$? Pasa que para que sean homomorfismos necesitamos que $o(a) = o(1) = n$ para que así $\overline{0} = \overline{n} \mapsto a^n = e$.
+
+\begin{ej}
+	Veamos un ejemplo (notamos que $(12)^4 = id$)
+	\begin{align*}
+		f:\Z/4\Z &\to S_3 \\
+		\overline{1} &\mapsto (12) \\
+		\overline{2} &\mapsto id = (1) \\
+		\overline{3} &\mapsto (12) \\
+		\overline{4} = \overline{0} &\mapsto id
+	\end{align*}
+	
+	Observamos que $\text{Hom}(\Z/4\Z, S_3) \subset \text{Hom}(\Z, S_3)$ puesto que al tomar $\Z/4\Z$ no podemos tomar cualquier $a$ sino que tenemos que asegurarnos de que $o(a) = o(1)$ (en este caso $o(a) = 2$ pero sigue funcionando porque lo que importa es que $a^{o(1)} = id$).
+\end{ej}
+
+Queremos analizar los homomorfismos $f:\ZnZ \to \ZnZ$. Ahora no importa el $\overline{a}$ que elijamos para que $f$ sea homomorfismo porque $\ima f = \langle \overline{a} \rangle$. 
+
+Para que $f$ sea epimorfismo, necesitamos que $\ima f = \langle \overline{a} \rangle = \ZnZ$ es decir que $o(a)$ sea coprimo con $n$.
+
+Concluímos que $\text{Aut}(\ZnZ) \subset \text{Hom}(\ZnZ, \ZnZ)$.
+
+
+% 20181002
+
+\chapter{Locuras varias que no sé donde van}
+
+Lo que hemos dado en octubre básciamente.
+
+\begin{thm}
+	\label{thm:noprobado1}
+	Si $G$ es abeliano y $|G| < \infty$ entonces $G$ es un producto de grupos cíclicos finitos.
+\end{thm}
+
+\begin{proof}
+	Dice que no lo vamos a probar, pero veremos algunos resultados.
+\end{proof}
+
+%\begin{thm}
+%		\label{thm:noprobado2}
+%	Si $G$ es abeliano y $|G| < \infty$ entonces $G$ es de orden $p^\alpha$ con $p$ primo y $\alpha \in \N$.
+%\end{thm}
+%
+%\begin{proof}
+%	Este tampoco lo vamos a probar.
+%\end{proof}
+
+Vamos a aplicar el teorema \ref{thm:noprobado1} a grupos abelianos.
+
+\begin{thm}
+	Sea $G$ abeliano con $|G| = p_1^{\alpha_1}p_2^{\alpha_2}\dots p_n^{\alpha_n}$. Entonces
+	\begin{align}
+		G \isom \Z/p_1^{\beta_{11}}\Z \times \Z/p_1^{\beta_{1s_1}}\Z \times \dots \Z/p_n^{\beta_{n1}}\Z \times \Z/p_1^{\beta_{ns_n}}\Z \text{ donde } \alpha_i = \sum_{j = 1\dots s_i} \beta_{ij}
+	\end{align}
+\end{thm}
+
+En particular, se cumple que para grupos cíclicos $G$ de orden $n$, donde $G \isom \ZnZ$.
+
+\begin{thm}
+	\label{thm:znzisomproductodirecto}
+	Sea un número y su factorización en primos: $n = p_1^{\alpha_1}p_2^{\alpha_2}\dots p_n^{\alpha_n}$. Entonces
+	\begin{align}
+	\ZnZ \isom \Z/p_1^{\alpha_1}\Z \times \Z/p_2^{\alpha_2}\Z \times \dots \times \Z/p_n^{\alpha_n}\Z
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	Sea $d$ tal que $d \divides n$ y $n = dn'$. Por tanto $n' = p_2^{\alpha_2}\dots p_n^{\alpha}$ y $d = p_1^{\alpha_1}$. Como $\ZnZ = \{0, 1, 2, \dots, n', \dots, n-1\}$ tenemos que $o(n') = p_1^{\alpha_1}$. Luego $H = \langle n' \rangle$ es el único subgrupo de orden $p_1^{\alpha_1}$ y $N = \langle p_1^{\alpha_1} \rangle$ es el único subgrupo de orden $n'$. Ahora bien, por cómo hemos elegido $n'$ y $d$, $mcd(n', d) = 1$ por lo que $\ZnZ \isom \Z/d\Z \times \Z/n'\Z$. Podemos repetir este procedimiento hasta que descompongamos $n$ en potencias de primos y tendremos que $mcd(p_1^{\alpha_1}, p_2^{\alpha_2}, \dots, p_n^{\alpha_n}) = 1$ y por tanto $\ZnZ \isom \Z/p_1^{\alpha_1}\Z \times \Z/p_2^{\alpha_2}\Z \times \dots \times \Z/p_n^{\alpha_n}\Z$
+\end{proof}
+
+\begin{thm}
+	Sea $G$ abeliano donde $|G| = r\cdot s$ con $mcd(r,s) = 1$ y ean $K < G \land N < G$ donde $|K| = r \land |N| = s$. Entonces $G \isom K \times N$.
+\end{thm}
+
+\begin{proof}
+	Sabemos que $f:K\times N \to G,\ (k, h) \mapsto kh$ es un homomorfismo y por tanto $\ima f < G$. Para probar que $f$ es un isomorfismo probaremos que $\ima f = G$. Como $|K| = r \land |N| = s$ y $r$ y $s$ son coprimos entonces $K \cap N = \{e\}$. Por tanto $|K \cap N| = 1$ y utilizando el teorema \ref{thm:cardinalidadproductolibre} tenemos que $|KN| = \frac{|K||N|}{|K \cap N|} = |K| |N| = rs$ por lo que $f$ es sobreyectiva, y, por tanto, biyectiva, es decir, que $f$ es un isomorfismo.
+\end{proof}
+
+\begin{ej}
+	Podemos afirmar que si $|G| = 6$ y $G$ es abeliano entonces $G \isom \Z/6\Z \isom \Z/2\Z \times \Z/3\Z$.
+\end{ej}
+
+Observemos que la hipótesis de abeliano es fundamental (ver ejemplo \ref{ej:nohomoentreproducto}).
+
+
+\bigskip
+
+
+Sea $|G| = p^2q$ con $p,q$ primos distintos. Entonces o bien $G \isom \Z/p^2\Z \times \Z/q\Z$ o bien $G \isom \Z/p\Z \times \Z/p\Z \times \Z/q\Z$. % TODO esta es una manera para clasificar grupos como abelianos o no abelianos?
+
+\section{Clasificación de grupos finitos}
+\label{gruposfinitosnotables}
+Grupos notables de distintos órdenes finitos
+\begin{itemize}
+	\item $|G| = 3, 5, 7, 11 \dots, p$ donde $p$ es primo:
+	\begin{itemize}
+		\item Abelianos cíclicos: son isomorfos con $\Z/p\Z$.
+		\item Abelianos no cíclicos: no hay, por el corolario del teorema de Lagrange \ref{thm:lagrange}.
+	\end{itemize}
+	\item $|G| = 4$:
+	\begin{itemize}
+		\item Abelianos cíclicos: son isomorfos con $\Z/4\Z$
+		\item Abelianos no cíclicos: son isomorfos con $\Z/2\Z \times \Z/2\Z$.
+		\item No abelianos: no hay.
+	\end{itemize}
+	\item $|G| = 6$:
+	\begin{itemize}
+		\item Abelianos cíclicos: son isomorfos con $\Z/6\Z$.
+		\item Abelianos no cíclicos: no hay porque todo grupo abeliano cuyo orden se puede descomponer en dos primos es cíclico (ver Hoja 1 ejercicio 19).
+		\item No abelianos: todos son isomorfos con $D_3 \isom S_3$ (ver ejemplo \ref{ej:orden6noabisomd3}).
+	\end{itemize}
+	\item $|G| = 8$:
+	\begin{itemize}
+		\item Abelianos cíclicos: son isomorfos con $\Z/8\Z$.
+		\item Abelianos no cíclicos: son isomorfos o bien con $\Z/4\Z \times \Z/2\Z$ o bien con $\Z/2\Z \times \Z/2\Z \times \Z/2\Z$ (depende de los órdenes de los elementos de $G$).
+		\item No abelianos: son isomorfos o bien con el famoso grupo $D_4$ (ver ejemplo \ref{ej:famosogrupod4}) o bien con el grupo de cuaterniones $H$ (ver ejemplo \ref{ej:grupocuaterniones}). Ver ejemplo \ref{ej:orden8noabisom}
+	\end{itemize}
+\end{itemize}
+
+
+\begin{ej}
+	\label{ej:orden6noabisomd3}
+	Sea $G$ no abeliano con $|G| = 6$. Entonces $G \isom D_3$.
+\end{ej}
+
+\begin{proof}
+	\begin{enumerate}
+		\item $G$ no abeliano $\implies G$ no cíclico $\implies \exists g \in G \mid o(g) \neq 6$
+		\item $G$ no abeliano $\implies \exists b \in G \mid o(b) \neq 2 \implies o(b) = 3$ ya que si $b \in G$ entonces $o(b) \divides |G|$ (corolario teorema de Lagrange (\ref{thm:lagrange})).
+		\item Sabemos pues que $\langle b \rangle = \{1, b, b^2\} < G$ y $|\langle b \rangle| = 3 \implies [G:\langle b \rangle] = \frac{|G|}{|\langle b \rangle|} = 2$. Es decir, que hay otra caja disjunta en la partición a la que llamamos $K$
+		\item Por el teorema del cardinal del producto libre (teorema \ref{thm:cardinalidadproductolibre}) tenemos que $6 \geq |HK| = \frac{|H||K|}{|\langle b \rangle \cap K}$. Como $\langle b \rangle \cap K = \{e\}$ por ser las cajas disjuntas tenemos que $|K| = 2$ ya que si fuera $|K| = 3$ tendríamos que $|HK| = 9 \not \leq 6$.
+		\item Definimos $\phi_a(x) : G \to G,\ x \mapsto ax\inv{a}$ (el isomorfismo de conjugación). $\phi_a$ es un isomorfismo, incluso cuando lo restringimos a un subgrupo normal. El subgrupo $\langle b \rangle$ es normal porque tiene índice 2 (ver teorema \ref{thm:indice2normal}).
+		\item Por ello tenemos que si $\phi_a(x) = y$ entonces tiene que ser $o(x) = y$. Por tanto, aplicando $\phi_a$ a $b$ tenemos lo siguiente:
+		\begin{align*}
+			\phi_a(b) = ab\inv{a} = b \implies ab = ba \implies G \text{ abeliano} \\
+			\phi_a(b) = ab\inv{a} = \inv{b} \implies ab = b^2a \implies ba = ab^2
+		\end{align*}
+		\item La primera no puede ser por hipótesis. La segunda nos da el final de la presentación de $D_3$:
+		\begin{align*}
+			D_3 = \langle a, b \rangle \text{ donde } o(a) = 2,\ o(b) = 3,\ ba = ab^2
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\begin{ej}[de aplicación de muchos teoremas]
+	\label{ej:orden8noabisom}
+	Probar que si $G$ es un grupo no abeliano entonces o bien $G \isom D_4$ o bien $G \isom H$ donde $H$ es el grupo de cuaterniones (ver ejemplo \ref{ej:grupocuaterniones}).
+\end{ej}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Tenemos que $G$ no es abeliano. Por el contrarrecíproco del teorema \ref{thm:ciclicoimplicaabeliano} tenemos que no puede ser cíclico por lo que $\not\exists g \in G \mid o(g) = 8$.
+		\item Por el teorema \ref{thm:abelianosdeorden2} sabemos que $\exists b \in G \mid o(b) \neq 2 \implies \mathbf{o(b) = 4}$.
+		\item Por el teorema de Lagrange \ref{thm:lagrange} sabemos que dicho $b$ tiene que tener $o(b) = 4$ ya que $\forall b \in G, o(b) \divides |G|$. Por tanto $\langle b \rangle = \{1, b, b^2, b^3\}$.
+		\item Como $\langle b \rangle$ tiene orden $4$, el índice es $[G: \langle b \rangle] = 2$ por lo que hay otro subgrupo en $G$ disjunto a $\langle b \rangle$. Sea $a$ un elemento de dicho subgrupo.
+		\item Fijado $a$, definimos el isomorfismo de conjugación $\phi_a: G \to G,\ \phi_a(x) = ax\inv{a}$. Este isomorfismo sigue siendo un isomorfismo cuando lo restringimos a un subgrupo normal como es el caso de $\langle b \rangle$ (ver teorema \ref{thm:indice2normal}).
+		\item Para $b \in G$ pueden ocurrir las siguientes, porque $\phi_a$ debe mantener los órdenes por ser isomorfismo:
+		\begin{itemize}
+			\item $\phi_a(b) = ab\inv{a} = b \implies ab = ba \implies G$ abeliano. Descartamos esta opción por hipótesis.
+			\item $\phi_a(b) = ab\inv{a} = \inv{b} \implies \mathbf{ba = a\inv{b} = ab^3}$
+		\end{itemize}
+		\item Ahora consideramos los posibles órdenes de $a$ que pueden ser $2$ o $4$ por el teorema de Lagrange:
+		\begin{itemize}
+			\item Si $\mathbf{o(a) = 2}$ entonces $G \isom D_4\ \qed$
+			\item Si $\mathbf{o(a) = 4}$ entonces $\langle a \rangle = \{1, a, a^2, a^3\}$.
+			\begin{enumerate}
+				\item Miramos $\langle a \rangle \cap \langle b \rangle = \{1, a, a^2, a^3\} \cap \{1, b, b^2, b^3\} = \{1\} \implies |\langle a \rangle \cap \langle b \rangle| = 1$
+				\item Por el teorema del orden del producto libre \ref{thm:cardinalidadproductolibre} tenemos que $|\langle a \rangle \langle b \rangle| = |\langle a \rangle ||\langle b \rangle| = 4 \cdot 4 = 16$, pero esto no puede ocurrir puesto que el orden del producto puede ser como máximo $8$. Es decir, que $\langle a \rangle \cap \langle b \rangle \neq \{e\}$.
+				\item Ahora bien, la intersección de subgrupos debe ser un subgrupo, luego el orden debe ser divisor del orden de los grupos intersecados. El orden de $\langle a \rangle \cap \langle b \rangle$ puede ser 1, 2 o 4.
+				\item Ya hemos visto que no puede ser 1. Tampoco puede ser 4 porque... por qué? Luego $o(\langle a \rangle \cap \langle b \rangle) = 2$ por lo que $\langle a \rangle \cap \langle b \rangle$ tiene 2 elementos.
+				\item Uno de ellos es el neutro ($1$). El otro no puede ser ni $a$, ni $b$ porque al tener estos orden 4 tendría que haber más elementos. Tampoco puede ser ni $a^3$, ni $b^3$ porque también tienen orden 4 por el teorema \ref{thm:coprimosgeneradosiguales}. Luego $\langle a \rangle \cap \langle b \rangle = \{1, a^2\} = \{1, b^2\} \implies \mathbf{a^2 = b^2}$.
+				\item Recopilando $o(a) = 4,\ o(b) = 4,\ a^2 = b^2,\ ba = a\inv{b}$ tenemos que $G \isom H \qedhere$
+			\end{enumerate}
+		\end{itemize}
+	\end{enumerate}
+\end{proof}
+
+
+\section{Otras cosas}
+
+
+
+\begin{dfn}
+	[Grupo de automorfismos]
+	Sea $G$ un grupo. Llamamos grupo de automorfismos al grupo
+	\begin{align}
+		\autom{G} = \{f \mid f: G \to G \text{ isomorfismo}\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	La función $\gamma: G \to \autom{G}$ definida con $\gamma(g) \mapsto \gamma_g$, donde $\gamma_g : G \to G, \gamma_g(x) = gx\inv{g}$, es un homomorfismo.
+\end{pro}
+
+\begin{proof}
+	Verifica la definición: para $g,g' \in G$
+\end{proof}
+
+\begin{dfn}[Elementos conjugados]
+	\label{dfn:elementosconjugados}
+	Sean $a,b \in G$. Decimos que $a$ y $b$ son conjugados $\iff \exists g \in G \mid \gamma_g(a) = b$.
+\end{dfn}
+
+\textbf{Nota:} La relación de conjugación solo merece la pena en grupos no abelianos, porque en un grupo abeliano, cualquier par de elementos es conjugado.
+
+\begin{ej}
+	En $S_3$ afirmamos lo siguiente:
+	\begin{itemize}
+		\item que $1$ solo tiene como conjugado a sí mismo,
+		\item que $\{(12),(13),(23)\}$ son conjugados entre sí,
+		\item y que $\{(123),(132)\}$ también son conjugados entre sí.
+	\end{itemize}
+	Es decir, que la conjugación nos genera una partición con 3 cajas disjuntas.
+\end{ej}
+
+\begin{pro}
+	La relación de conjugación es una relación de equivalencia $aRb \iff a$ y $b$ son conjugados.
+\end{pro}
+
+\begin{proof}
+	Comprobamos que $R$ es una relación de equivalencia:
+	\begin{enumerate}
+		\item Reflexiva: $\forall a \in R, aRa$: tomamos $g = e$ y automáticamente tenemos que $ea\inv{e} = a$.
+		\item Simétrica: $\forall a,b \in R,\ aRb \implies bRa$: $\exists g, g a \inv{g} = b$. Tomamos $\gamma_{\inv{g}}$ y tenemos que $\gamma_{\inv{g}}(b) = a \implies bRa$.
+		\item Transitiva: $\forall a,b,c \in G,\ aRb \land bRc \implies aRc$. Por hipótesis tenemos que $\exists g \in G \mid \gamma_g(a) = b \land \exists g' \in G \mid \gamma_{g'}(b) = c$. Por tanto $\gamma_{gg'}(a) = (\gamma_{g'} \gamma_g)(a) = \gamma_{g'}(b) = c$.
+	\end{enumerate}
+\end{proof}
+
+En esta relación de equivalencia, las clases de equivalencia son de la forma $\overline{a} = \{ga\inv{g} \mid g \in G\}$ (conjuntos de los elementos que son conjugados de $a$). Queremos saber cuántos elementos hay en cada clase de equivalencia.
+
+Fijamos $a \in G$ y definimos
+
+\begin{dfn}[Centralizador de un elemento]
+	\label{dfn:centralizador}
+	Sea $a \in G$. Llamamos centralizador de $a$ al conjunto
+	\begin{align}
+	C(a) = \{g \in G \mid \gamma_g(a) = g a \inv{g} = a\}
+	\end{align}
+	Se tiene que $\forall a \in G,\ e \in C(a)$, es decir que $C(a)$ no es vacío.
+\end{dfn}
+
+\begin{pro}
+	$C(a)$ es un subgrupo de $G$
+\end{pro}
+
+\begin{proof}
+	Por el teorema \ref{thm:subconjuntocerrado} solo necesitamos probar la clausura, es decir, tenemos que probar que $\forall g,g' \in G,\ g \in C(a) \land g' \in C(a) \implies gg' \in C(a)$. Sale solo $(gg')a\inv{gg'} = gg'a\inv{(g')}\inv{g} = ga\inv{g} = a \in C(a)$.
+\end{proof}
+
+\begin{pro}
+	\label{pro:cardinalcajas}
+	$|\{ga\inv{g} \mid g \in G\}| = [G:C(a)] = r$ (el número de elementos de una clase de equivalencia es el índice de un representante)
+\end{pro}
+
+\begin{proof}
+	Fijamos $a \in G$ y definimos $H = C(a) = \{g \in G \mid ga\inv{g} = a\}$.
+\end{proof}
+
+
+
+\section{Teorema de Cauchy}
+
+\begin{thm}[de Cauchy]
+	Sea $G$ un grupo finito con $|G| = n$. Si $p$ es primo y $p\divides n$ entonces $G$ contiene un elemento de orden $p$.
+\end{thm}
+
+\begin{proof}
+	Procedemos por casos:
+	\begin{itemize}
+		\item Si $G$ es abeliano. Descomponemos $|G| = n = p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}$. Por el teorema \ref{thm:noprobado1}, $G \isom \Z/p_1^{\beta_1}\Z \times \Z/p_2^{\beta_2}\Z \times \dots \times \Z/p_s^{\beta_r}\Z$ donde cada $\alpha_i$ es la suma de algunos $\beta_r \qed$.
+		
+		\item Si $G$ no es abeliano. Particionamos $G$ con la relación de equivalencia dada anteriormente (definición \ref{dfn:elementosconjugados}), $aRb \iff \exists g \in G \mid ga\inv{g} = b$. Recordemos que cada clase de equivalencia es de la forma $\overline{c} = \{gc\inv{g} \mid g \in G\}$. Observamos que si partimos de $e$, el elemento neutro, $eRb \implies \exists g \mid ge\inv{g} = b$ pero $\forall g \in G,\ ge\inv{g} = e$ por lo que $\overline{e}$ tiene un único elemento.
+		
+		Tomemos ahora una clase de equivalencia, la que contenga a $a \in G$. La clase es $\overline{a} = \{ga\inv{g} \mid g \in G\}$. Es claro que $a \in \overline{a}$ por la propiedad reflexiva de $R$, luego por lo menos en $\overline{a}$ tiene un elemento.
+		
+		\begin{align*}
+			\overline{a} = \{ga\inv{g} \mid g \in G\} = \{a\} &\iff ga\inv{g} = a,\ \forall g \in G \\
+			&\iff ga = ag,\ \forall g \in G
+		\end{align*}
+		\begin{align*}
+			|\overline{a}| = 1 &\iff \overline{a} = 1 \\
+			&\iff a \in Z(G)
+		\end{align*}
+		
+		Supongamos que la partición está dada por subconjuntos $\overline{a_1}, \overline{a_2}, \dots, \overline{a_s}$. Por ser una partición, cualquier elemento vive en una sola caja, luego para saber cuantos elementos tiene $G$ nos vale con sumar los elementos de cada caja:
+		\begin{align*}
+			|G| = \sum_{i = 1}^{s} |\overline{a_i}| = \sum_{i = 1}^n |\{ga_i\inv{g} \mid g \in G\}|
+		\end{align*}
+		Ahora bien, por la proposición \ref{pro:cardinalcajas} tenemos que $|\overline{a_i}| = [G:C(a_i)]$. Por tanto decir que $|\overline{a_i}| = 1 \implies [G:C(a_i)] = 1 \implies G = C(a_i)$.
+		
+		Ahora vamos a dividir el sumatorio en dos: por un lado las cajas de un solo elemento y luego las cajas de varios elementos:
+		\begin{align}
+			\label{eq:thmcauchy}
+			|G| = |Z(G)| + \sum_{i = r + 1}^{s} [G : C(a_i)] \text{ donde } |Z(G)| = r \text{ y } [G : C(a_i)] \geq 2, \forall i = r+1,\dots, s
+		\end{align}
+		
+		Ahora para probar el teorema de Cauchy procedemos por inducción en $n = |G| = [G:C(a_i)]\cdot |C(a_i)|$.
+		
+		\begin{enumerate}
+			\item Caso $n = 1$. $G = \{e\}$ que es obvio.
+			\item Caso $n \implies n+1$. Pueden pasar dos cosas:
+			\begin{itemize}
+				\item o bien $p \divides |C(a_i)|$ para algún $i = r+1, \dots, s$ entonces, por hipótesis inductiva, $C(a_i)$ contiene algún elemento de orden $p$. Ahora bien, $C(a_i) < G \implies G \implies $ el elemento también está en $G$. Podemos proceder por inducción y todo es genial \qedsymbol
+				
+				\item o bien $p \not\divides |C(a_i)|,\ \forall i = r+1,\dots,s$. No podemos proceder por inducción. En este caso $[G:C(a_i)]\cdot |C(a_i)| = |G| \implies p \divides [G: C(a_i)],\ i = r+1,\dots, s$. No
+				
+				Como $|G| = |Z(G)| + \sum_{i = r + 1}^{s} [G : C(a_i)]$ y por hipótesis $p \divides |G| \land p \divides [G : C(a_i)], \forall i = r+1,\dots,s \implies p \divides |Z(G)| \implies |Z(G)|$ es múltiplo de $p$. Como $Z(G)$ es abeliano, $\exists \alpha \in Z(G) \mid o(\alpha) = p$. Luego se reduce al caso abeliano y ya estaría \qedhere
+			\end{itemize}
+		\end{enumerate}
+	\end{itemize}
+\end{proof}
+
+\begin{ej}
+	Sea $G$ tal que $|G| = pq$. Entonces por le teorema de Cauchy $\exists a,b \in G \mid o(a) = p \land o(b) = q$. Como $p$ y $q$ son primos los ordenes de $\langle a \rangle$ y $\langle b \rangle$ son coprimos y por tanto $\langle a \rangle \cap \langle b \rangle = \{e\}$. Por el teorema del orden de conjunto\footnote{No sabemos si alguno es normal, luego no tenemos garantías de que el producto sea un grupo} producto libre (\ref{thm:cardinalidadproductolibre}), $|\langle a \rangle \langle b \rangle| = pq$. Lo que si que sabemos es que $G = \{a^ib^j \mid 0 \leq i < p -1 \land 0 \leq j < q - 1\} = \langle a, b \rangle$.
+\end{ej}
+
+\begin{ej}
+	Sea $G$ tal que $|G| = 2q$. Análogamente al caso anterior llegamos a que $o(a) = 2$. Como $\langle b \rangle$ tiene índice 2 entonces $\langle b \rangle \normsub G$. Esto nos permite saber como operar con las palabras $a^ib^j$ una vez tenemos un isomorfismo que lleva $a b \inv{a} = b^j$ (tiene que ir a algún $b^j$ porque por ser isomorfismo tiene que llevar elementos de orden $q$ en elementos de orden $q$: los $b \in \langle b \rangle$)
+\end{ej}
+
+Dada la relación de equivalencia de conjugación (definición \ref{dfn:elementosconjugados}), definimos $C$ como el conjunto de los representantes de las clases de equivalencia. Entonces podemos decir
+\begin{align*}
+G = \bigcup_{c_i \in C} \{a \in G \mid a R c_i\}
+\end{align*}
+Observemos que $d \in Z(G) \iff \{a \in G \mid a R d\} = \{gd\inv{g} \mid g \in G\} = \{d\}$. Y por tanto podemos escribir
+\begin{align*}
+C = Z(G) \cup (C\setminus Z(G))
+\end{align*}
+que aunque pareza obvio quiere decir que $C$ se puede expresar como la unión disjunta de las cajas que tienen solo un elemento que se corresponden con elementos que están en el centro y las cajas que tienen más de uno. Y por lo visto en la demostración del teorema de Cauchy tenemos que
+\begin{align*}
+	|G| = \sum_{c_i \in C} | \overline{c_i} | = |Z(G)| + \sum_{i = r + 1}^{s} [G : C(a_i)] \text{ donde } [G : C(a_i)] \geq 2
+\end{align*}
+
+\section{P-grupos}
+
+\begin{dfn}[P-grupo]
+	Sea $p$ primo. Decimos que $G$ es un p-grupo si $|G| = p^r$.
+\end{dfn}
+
+Nos interesan sobre todo los p-grupos no abelianos
+
+\begin{thm}
+	Si $G$ es un p-grupo entonces $Z(G)$ es no trivial (no es el vacío).
+\end{thm}
+
+\begin{proof}
+	Podemos escribir sin distinguir entre cajas de uno o varios elementos
+	\begin{align*}
+		|G| = |C(c_i)||[G:C(c_i)]|
+	\end{align*}
+	es decir que tenemos una factorización de $|G| = p^r$ luego $|C(c_i)|$ y $|[G:C(c_i)]|$ son ambos potencias de $p$. Y aplicando esto a la expresión \ref{eq:thmcauchy} tenemos que
+	\begin{align*}
+		\underbrace{|G|}_{\text{múltiplo de p}} = |Z(G)| + \sum_{i = r + 1}^{s} \underbrace{[G : C(a_i)]}_{\text{múltiplo de p}} \text{ donde } [G : C(a_i)] \geq 2
+	\end{align*}
+	por lo que $|Z(g)|$ tiene que ser múltiplo $p$ por lo que $Z(G)$ no puede ser el trivial.
+\end{proof}
+
+\begin{ej}
+	Tenemos que $Z(D_4) = \{1,B^2\}$ y $Z(H) = \{1, B^2\}$ donde $H$ es el grupo de cuateriones (ejemplo \ref{ej:grupocuaterniones}) y $D_4$ es el famoso grupo (ejemplo \ref{ej:famosogrupod4}). 
+\end{ej}
+
+\begin{thm}
+	Si $p$ es primo y $|G| = p^2$ entonces $G$ es abeliano.
+\end{thm}
+
+\begin{proof}
+	Por el la demostración del teorema anterior tenemos que o bien $|Z(G)| = p$ o bien $|Z(G)| = p^2$. Afirmamos que $|Z(G)| \neq p$ ya que si fuera así $|G/Z(G)| = p \implies G/Z(G)$ cíclico pero hemos probado (proposición \ref{pro:triplecentro}) que $G/Z(G)$ no puede ser cíclico. Por lo tanto $|Z(G)| = p^2 \implies Z(G) = G \implies G$ es abeliano.
+\end{proof}
+
+% ---------------- después del parcial 1
+% 20181009
+
+\hr
+
+Sea $\sim$ una relación de equivalencia definida por $a\sim b \iff \exists g \in G \mid ga\inv{g} = b$ para $a,b \in G$. Esta relación da una partición de $G$ en clases de la forma $cl(a) = \{ga\inv{g} \mid g \in G\}$. En el caso abeliano esta relación es la de igualdad, por lo que no nos merece la pena liar este pifostio para saber que $a\sim b \iff a = b$. 
+
+Es muy importante saber cómo contamos los elementos de una clase, es decir, de cuantas formas podemos \textit{mover} el elemento $a$ con $g \in G$. Para ello definimos el centralizador (definición \ref{dfn:centralizador}) como $C(a) = \{h \in G \mid ha\inv{h} = a\} < G$. Queremos probar que $|cl(a)| = [G:C(a)] = r$.
+
+Lo probamos tomando clases laterales a la izquierda (por ejemplo) y partiendo $G$ en $r$ cajas. Las cajas son de la forma $\alpha_iC(a),\ i = 1, \dots, r$. Esta partición no tiene que ver con la partición anterior. Observemos que para cualquier $g \in \alpha_i C(a), g = \alpha_i h$, tenemos que $g a \inv{g} = \alpha_i h a \inv{h} \inv{\alpha_i} = \alpha_i a \inv{\alpha_i}$ es decir que los $g \in C(a)$ no se mueven fuera de la caja. Es decir, que si $\alpha_i \neq \alpha_j$ para $i\neq j$ entonces hay $r$ maneras de mover a $g$ y por tanto $|cl(a)| = r$.
+
+Probaremos que en efecto los $\alpha_i$ son distintos.
+
+Sean $g_1, g_2 \in G$. $g_1a\inv{g_1} = g_2a\inv{g_2} \iff (\inv{g_2}g_1)a(\inv{g_1}g_2) = a \iff (\inv{g_2}g_1)a\inv{(\inv{g_2}g_1)} \iff C(a) \inv{g_2}g_1 \in C(a) \iff g_1 \in g_2C(a)$.
+
+Si $G/\sim$ tiene $N$ elementos, tomamos $\{c_1, \dots, c_N\}$ como el conjunto de los representantes, donde $c_i$ es un representante de cada conjunto de la partición. Entonces pordemos expresar
+\begin{align*}
+	G = \bigcup_{c_i \in C} = cl(c_i)
+\end{align*}
+donde $|cl(c_i)| = [G:C(c_i)]$. Por tanto decir que $|cl(c_i)| = 1$ es equivalente ($\iff$) a decir que $G = C(c_i) = \{\forall g \in G,\ gc\inv{g} = c\} \iff c \in Z(G)$.
+
+Afirmábamos que
+\begin{align*}
+	|G| = \sum_{c_i \in C} |cl(c_i)| = |Z(G)| + \sum_{c_i \in C\setminus Z(G)} [G:C(c_i)]
+\end{align*}
+descomponiendo la suma en las clases con solo un elemento y las clases con más de dos elementos.
+
+\hr
+
+\begin{ej}
+	Consideramos $D_3$ (ver ejemplo \ref{ej:grupod3}). Nos fijamos en que $B \not\in Z(D_3)$ es decir que en $cl(B)$ hay más de un elemento. En particular por lo visto anteriormente $|cl(B)| = [G:C(B)]$. Ahora bien $C(B) = \{1, B, B^2\}$ luego $|cl(B)| = [G:C(B)] = 2$. La pregunta es ¿quién es el compañero de $B$ en su clase? Es fácil, recordamos que $\phi_g (x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo y que $\{1, B, B^2\}$ es normal, por lo que $o(B) = o(\phi_g(B)) = 2$. Entonces $\phi_g(B) \neq 1$ porque no coinciden los órdenes, de manera que $\phi_g(B) = B^2$ por necesidad. Luego el otro elemento es el $B^2$.
+	
+	¿Qué pasa con el elemento $A$? Pues ocurre que $A \in C(A)$ y $\{1, A\} \in C(A)$. me faltan cosaaaasss
+	
+	Para conlcuir queda que la relación $\sim$ parte $D_3$ en 3 cajas, a saber:
+	\begin{align*}
+		D_3 = \{\underbrace{1}, \underbrace{B, B^2}, \underbrace{A, AB, AB^2}\}
+	\end{align*}
+\end{ej}
+
+
+\begin{ej}
+	\label{ej:clasesd4}
+	El caso del famoso grupo $D_4$ (ver ejemplo \ref{ej:famosogrupod4})es mucho más interesante porque $Z(D_4)$ no es trivial. Elegimos por ejemplo el elemento $B^2$. Probar que $\phi_g(B^2) = gB^2\inv{g} = B^2,\ \forall g \in D_4$ es complicado. Pero fijémonos en que $\phi_B(B^2) = BB^2\inv{B} = B^2$ y que $\phi_A(B^2) = AB^2\inv{A} = B^2$. Entonces cualquier palabra en $A$ y en $B$ no mueve a $B^2$, por ejemplo $AB(B^2)\inv{B}\inv{A} = B^2$. Nos convencemos de que $B^2 \in Z(D_4)$. Con esto ya tenemos que $|Z(D_4)| \geq 2$ (puesto que de momento ya sabemos que $1, B^2 \in Z(G)$. Podría ser entonces $|Z(D_4)| = 4, 8$ (probamos los divisores de $|D_4|$). Como $D_4$ no es abeliano, es claro que $|Z(D_4) \neq 8$. Tampoco puede ser $|Z(D_4) \neq 4$ porque si tuviera 4, el cociente $D_4/Z(G)$ tendría orden $2$ y por tanto sería cíclico. Pero ya hemos probado que $G/Z(G)$ no puede ser cíclico (ver proposición \ref{pro:triplecentro}). Luego ya sabemos que $Z(D_4) = \{1, B^2\}$.
+	
+	Vamos a seguir sacando cajas. Veamos $cl(B)$. Claramente $B \in C(B)$ y por alguna razón que me falta $C(B) = \{1, B, B^2, B^3\}$. Por la fórmula tenemos que $|cl(B)| = [D_4:C(B)] = 2$. Tenemos una vez más que utilizar el isomorfismo de conjugación. Sabemos que $cl(B) = \{ga\inv{g} \mid g \in G\}$. Pero al ser $\phi_g$ isomorfismo y $\langle B \rangle$ normal, tenemos que $\phi_g : \langle b \rangle \to \langle b \rangle$ también es isomorfismo y por tanto lleva elementos de orden $n$ en elementos de orden $n$. Por tanto $\phi_g(B) = gB\inv{g}$ solo puede ser $B^3$ (a parte de $B$). Luego ya tenemos que $cl(B) = \{B, B^3\}$.
+	
+	¿Qué pasa con $A$? Pues es claro que $C(A) \supset \{1, A, B^2, AB^2\}$ ya que $B^2 \in Z(G)$ por lo que está en todos los $C(c_i)$.
+\end{ej}
+
+
+\hr
+
+% 20181011
+
+Vez pasada tomábamos $a \in G$ y teníamos $cl(a) = \{g a \inv{g} \mid g \in G\} = \{a=a_1, a_2, \dots, a_r\}$ y $C(a) = \{g \in G \mid ha\inv{h} = a \}$. Concluíamos que $|cl(a)| = [G:C(a)]$.
+
+Vamos a generalizar al caso $S \subset G,\ S \neq \emptyset$. Consideramos la familia de subconjuntos siguiente:
+\begin{align*}
+	\{gS\inv{g} \mid g \in G\} = \{S = S_1, S_2, \dots, S_r\}
+\end{align*}
+que tiene $r$ subconjuntos distintos.
+
+Recordemos que la conjugación dada $\phi_g(x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo\footnote{A veces tomate frito llama a este isomorfismo $\gamma_g$}, y por tanto una biyección entre subconjuntos $S_i \subset G$. Por tanto $|S| = \phi_g(S)$.
+
+\begin{dfn}[Normalizador de un subgrupo]
+	\label{dfn:normalizador}
+	Fijado $S \subset G$, definimos el normalizador de $S$:
+	\begin{align}
+		N(S) = \{h \in G \mid hS\inv{g} = S\}
+	\end{align} 
+\end{dfn}
+
+Se parece mucho a la definición de centralizador de un elemento (\ref{dfn:centralizador}). En el caso en que $S = \{a\}$ tenemos que $N(S) = \{h \in G \mid ha\inv{h} = a\} = C(a)$.
+
+Ojo, decir que $hS\inv{h} = S$ no significa que $\forall b_i \in S,\ hb_i\inv{h} = b_i$, sino que $hb_i\inv{h} \in S$ (no mandamos cada elemento a él mismo, sino que todos quedan dentro del subconjunto). Es decir que \textit{$N(S)$ es el conjunto de la totalidad de elementos para los que $\phi_g$ manda el subconjunto $S$ en sí mismo.}
+
+\begin{pro}
+	Dado $S \subset G,\ N(S)$ es un subgrupo.
+\end{pro}
+
+\begin{proof}$ $\newline
+	Como $G$ es finito, $N(S)$ es subgrupo $\iff S \neq \emptyset \land N(S)$ es cerrado por la operación.
+	\begin{itemize}
+		\item Es claro que $e \in N(S)$ pues $eS\inv{e} = S$, luego $N(S) \neq \emptyset$.
+		\item Tenemos que probar la clausura. Si $h_1S\inv{h_1} = S \land h_2S\inv{h_2} = S$ tenemos que $\underbrace{(h_2S\inv{h_2})}_{\in S}\inv{h_1} = S \implies h_1h_2 \in N(S)$.
+	\end{itemize}
+\end{proof}
+
+\begin{pro}
+	\label{pro:propiedad2Ns}
+ 	$\{gS\inv{g} \mid g \in G\} = \{S = S_1, S_2, \dots, S_r\}$ son $r$ subconjuntos distintos. Es decir que $r = [G: N(S)]$.
+\end{pro}
+
+\begin{proof}
+	A la izquierda del lector.\footnote{Left to the reader.}
+\end{proof}
+
+Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos que dado $g\in G$, $\phi_g$ es un isomorfismo por tanto manda elementos de un subgrupo en otro subgrupo (si el subgrupo es normal, manda elementos de un subgrupo en sí mismo).
+
+\begin{pro}
+	$H \subset N(H)$
+\end{pro}
+
+\begin{proof}
+	Si tomamos $h \in G$, tenemos que $hH\inv{g} = H$ y también $\inv{h}H\inv{(\inv{h})} = H$ (todo elemento de $H$ tambéin tiene a su inverso en $H$).
+\end{proof}
+
+\begin{thm}
+	Sea $G$ grupo, $H < G$. Entonces $H \normsub N(H)$ y $N(H)$ es el mayor subgrupo de $G$ con esta propiedad, es decir, $H \normsub H' \implies H' < N(H)$.
+\end{thm}
+
+\begin{proof}$ $\newline
+	\begin{itemize}
+		\item Para probar que $N\normsub N(H)$ tiene sentido olivdarse del grupo $G$. Tenemos que $h \in N(H) \iff hH\inv{h} = H, \forall h \in G$. En particular, tenemos que $hH\inv{h} = H,\ \forall h \in N(H) \implies H$ es normal en $N(H)$.
+		
+		\item Para porbar que $N(H)$ es el mayor subgrupo con esta propiedad demostraremos que si $H < H'$ y $H \normsub H'$ entonces $H' \subseteq N(H)$. La demostración es casi una tautología. Tenemos que $\forall h' \in H',\ h'H\inv{h'} = H \implies \forall h' \in H',\ h' \in N(H) \implies H' \subset N(H)$.
+	\end{itemize}
+\end{proof}
+
+\begin{cor}
+	$H \normsub G \iff N(H) = G$
+\end{cor}
+
+\begin{proof}
+	Sabemos que $H\normsub H = \{gH\inv{g} \mid g \in G\}$ y dicho conjunto tiene $[G:N(H)] = 1$ elementos, luego $N(H) = G$. En otras palabras, el normalizador de un subgrupo $H < G$ normal es todo el grupo $G$.
+\end{proof}
+
+\begin{pro}
+	$Z(G) < N(H)$
+\end{pro}
+
+\begin{proof}
+	Por definición de $Z(G)$ tenemos que los elementos $g \in Z(G)$ fijan no solo los elementos dentro de subconjuntos, sino que los fijan uno a uno. Por lo que es claro que $Z(G) < N(H)$. 
+\end{proof}
+
+\begin{ej}
+	Vamos a empezar por $G = S_3$. En $S_3$ tenemos los subgrupos $\langle (12) \rangle, \langle (13) \rangle, \langle (23) \rangle$ de orden 2 y el subgrupo $\langle (123) \rangle = \{(1), (123), (132)\}$ de orden 3. %TODO pintar retículo
+	\begin{itemize}
+		\item En el caso de este último $g\langle (123) \rangle \inv{g} = \langle (123) \rangle$ porque es el único subgrupo de orden 3. Por tanto $\langle (123) \rangle \normsub S_3$ y entonces $N(\langle (123) \rangle) = S_3$.
+		\item Sin encambio en el caso de los subgrupos de orden $2$ es posible que $g\langle (12) \rangle \neq \langle (12) \rangle$, porque hay más de un subgrupo de orden 2. Observemos por ejemplo que $(13)(12)\inv{(13)} = (32) = (23)$, luego $\langle (12) \rangle$ no es normal en $S_3$, ya que hemos encontrado $g = (13) \in G$ que lo mueve. Pero ¿quién es el normalizador $N(\langle (12) \rangle)$? Pues ya sabemos que es un subgrupo propio, porque no puede dar todo $S_3$. Evidentemente $\langle (12) \rangle \subset N(\langle (12) \rangle)$. Luego tiene que ser que $N(\langle (12) \rangle) = \langle (12) \rangle$\footnote{No tiene gracia que $\langle (12) \rangle$ sea normal en sí mismo, lo que tiene gracia es que $\langle (12) \rangle$ es el mayor grupo donde $\langle (12) \rangle$ es normal.} 
+	\end{itemize}
+\end{ej}
+
+%20181011
+
+\begin{ej}
+	Seguimos por el famoso grupo $D_4$ (presentación en el ejemplo \ref{ej:famosogrupod4}). Vimos anteriormente (ejemplo \ref{ej:clasesd4}) que $Z(D_4) = \{1, B^2\}$. Tenemos su retículo en \ref{fig:reticuloD4}. Queremos ver de entre los subgrupos de $D_4$, cuáles son los que conmutan.
+	\begin{itemize}
+		\item Empecemos por $\langle b \rangle = \{1, b, b^3, b^3\}$. Observamos que $\langle b \rangle$ es normal puesto que tiene índice 2, es decir que $\{g\langle B \rangle \inv{g} \mid g \in G\} = \{\langle B \rangle\}$ y tiene sentido que $[G:N(\langle B \rangle)] = 1$. Es decir que como $\langle B \rangle$ es normal tenemos que $N(\langle B \rangle) = D_4$.
+		\item Seguimos por $H = \{1, A, B^2, AB^2\}$. Ocurre lo mismo, luego $N(H) = D_4$.
+		\item Con el caso de $\langle B^2 \rangle$ tenemos también que $N(\langle B^2 \rangle) = D_4$ por ser normal.
+		\item Agotados los subgrupos normales, nos quedan los más difíciles. Consideramos ahora $\langle A \rangle$. Una vez más nos preguntamos quién es el normalizador de $\langle A \rangle$.
+		\begin{enumerate}
+			\item Es claro que $\langle A \rangle$ conjugará con otros subgrupos de orden 2.
+			\item También es claro que $\langle A \rangle \subset N(\langle A \rangle)$ y que $\langle B^2 \rangle \subset N(\langle A \rangle)$. Luego $N(\langle A \rangle)$ tiene al menos 2 elementos.
+			\item También sabemos que $N(\langle A \rangle) \subsetneq G$ puesto que $\langle A \rangle$ no es normal, por lo que no puede tener 8 elementos. Por esto y porque $N(\langle A \rangle) < G$, concluimos que $|N(\langle A \rangle)| = 4$.
+			\item ¿Cuáles mueven al $\langle A \rangle$? Sabemos que no puede haber más de dos, pues el normalizador tiene 4 elementos. Pues mirando la presentación nos damos cuenta de que $BA = A\inv{B} \iff BA\inv{B} = AB^2$. Luego nos damos cuenta de que $A$ se mueve a $AB^2$.
+			\item Análogamente nos damos cuenta de que $AB$ se mueve a $AB^3$.
+			\item Ya tenemos los dos elementos que se mueven.
+		\end{enumerate}
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Vamos ahora con el grupo de cuaterniones $H$ descrito en el ejemplo \ref{ej:grupocuaterniones}.
+	
+	\begin{enumerate}
+		\item Nos dibujamos el retículo.
+		\item Primeramente nos damos cuenta de que $\langle A \rangle \cap \langle b \rangle \supsetneq \{e\}$ porque $H$ tiene 8 elementos y por la fórmula del producto libre \ref{thm:cardinalidadproductolibre} y porque todo producto directo de subgrupos está contenido en el grupo aunque no sea subgrupo.
+		\item Ocurre lo mismo con los demás subgrupos de orden 4 ($\langle A \rangle,\ \langle AB \rangle$). Tiene que tener intersección no vacía. En concreto la intersección es el subgrupo generado $\langle A^2 = B^2 = (AB)^2 \rangle$.
+		\item En $H$ todos los subgrupos son normales, por lo que no tienen "órbitas" de modo que es muy aburrido.
+	\end{enumerate}
+\end{ej}
+
+\begin{ej}
+	Consideramos ahora $D_5$ que funciona como el $D_4$:
+	\begin{align*}
+		D_5 = \{1, B, B^2, B^3, B^4, A, AB, AB^2, AB^3, AB^4\} \\
+		o(B) = 5
+	\end{align*}
+	\begin{itemize}
+		\item Primera observación. Como $o(B) = 5$ que es primo, tenemos que $o(B^k) = 5,\ k = 1, \dots, 4$. Luego cualquier subgrupo generado por $\langle B^k \rangle = \langle B \rangle$. Aquí falta algo.
+		\item Observemos que los subgrupos propios pueden ser de 2 o 5 elementos.
+		\item No puede haber subgrupos generados por dos elementos de $D_5$ (por qué?)
+		\item Los únicos subgrupos son $\langle B \rangle$ y los generados por $A, AB, AB^2, AB^3, AB^4$.
+		\item Afirmamos que $\{gA\inv{g} \mid g \in G\} = \{\langle A \rangle, \langle AB \rangle, \langle AB^2 \rangle, \langle AB^3 \rangle, \langle AB^4 \rangle \}$. Vamos a probarlo.
+		
+		\begin{enumerate}
+			\item Primero nos damos cuenta de que $\{1, A\} \in N(\langle A \rangle)$.
+			\item Además tenemos que no puede haber otro grupo por encima de $\langle A \rangle$ y $D_5$ por lo que tenemos que $N(A) = \langle A \rangle$.
+			\item Por tanto en la órbita de $A$ tenemos $[D_5:\langle A \rangle] = 5$ grupos.
+		\end{enumerate}
+		
+	\end{itemize}
+\end{ej}
+
+\hr
+
+Sea $X$ conjunto. Consideramos
+\begin{align*}
+	Biy(X) = \{f \mid f: X \to X \text{ biyección}\}
+\end{align*}
+En el caso en que $|X| = n$, por ejemplo $X = \{1, 2, 3, \dots, n\}$ tenemos que $Biy(X) = S_n$. Como $f:X \to X$ si $f$ es inyectiva entonces automáticamente es sobre y por tanto biyectiva.
+
+En general, tiene sentido pensar en $Biy(X)$ aunque $|X| = \infty$. Además, en dicho conjunto viven la biyección identidad y la biyección inversa para cada biyección. Por tanto, tiene sentido pensar en $(Biy(X), \circ)$ como un grupo (la composición de biyecciones da una biyección).
+
+Nos concentramos en el caso en el que $|X| = n$ que nos da $Biy(X) = S_n$. Ya hemos visto que $S_2 = \{1, \sigma\} \implies |S_2| = 2$ y para $S_3$ tenemos $|S_3| = 3!$ y en general $|S_n| = n!$.
+
+Fijamos un conjunto $X$ y un homomorfismo de grupos $\alpha: X \to Biy(X)$. A partir de estos datos definimos una relación de equivalencia que nos da una partición de $X$, es decir, vamos a partir $X$ en conjuntos disjuntos.
+
+\begin{ej}
+	Supongamos\footnote{Por qué cojones cambia ahora la letrita?} $G = X,\ |G| = n$ y consideramos $\rho: G \to \autom{G} \subset Biy(X)$. Definimos la relación en $X = G$
+	\begin{align*}
+		aRb \iff \exists g \in G \mid \phi_g(a) = b,\ \phi_g(x) = gx\inv{g}
+	\end{align*}
+	que es la relación de conjugación dada por el isomorfismo de conjugación de toda la vida.
+	
+	Ahora, en lugar de pensar en $G = X$ pensamos en $X = \{H < G\}$ (los subgrupos de $G$). Para cualquier isomorfismo de grupos $\beta: G \to G$, tenemos que si $H < G$ entonces $\beta(H) < G$.
+	
+	Lo que hemos hecho aquí es un caso particular de lo que viene ahora.
+\end{ej}
+
+\begin{pro}
+	Sea $\alpha: G \to Biy(X),\ g \mapsto \alpha(g)$ un homomorfismo de grupos. Definimos la relación de equivalencia
+	\begin{align}
+	aRb \iff \exists g \in G \mid \alpha(g)(a) = b
+	\end{align}
+	Afirmamos que la relación es de equivalencia y que nos divide $G$ en subconjuntos disjuntos (nos particiona $G$).
+\end{pro}
+
+\begin{proof}Probamos las 3 propiedades de las relaciones de equivalencia.
+	\begin{enumerate}
+		\item Reflexiva: $\forall x \in X, a R a$. Por ser $\alpha$ homomorfismo tenemos que $\alpha(e_G) = id_X$ y por tanto $\alpha(e_G)(a) = a$.
+		\item Simétrica: $aRb \implies bRa$. Partimos de que $\exists g \in G \mid \alpha(g)(a) = b$. Tomamos $\inv{g} \in G$ y por ser $\alpha$ homomorfismo de grupos tenemos que $\alpha(\inv{g})(b) = \inv{(\alpha(g))}(b) = a$.
+		\item Transitiva: $aRb \land bRc \implies aRc$. Partimos de que $\exists g, g' \in G \mid \alpha(g)(a) = b \land \alpha(g')(b) = c$. Tomamos $g'g \in C$ y tenemos que $\alpha(g'g)(a) = \alpha(g')(\alpha(g)(a)) = \alpha(g')(b) = c$ por composición de biyecciones.
+	\end{enumerate}
+\end{proof}
+
+¿Cómo son las clases que da la partición?
+
+Pues tenemos que $cl(a) = \{\alpha(g)(a) \mid g \in G\}$ para un $a \in G$. Definimos $H_a = \{g \in G \mid \alpha(g)(a) = a\}$. Tenemos por lo visto anteriormente que $H_a < G \land |cl(a)| = [G:H_a]$. Entonces tenemos lo siguiente:
+\begin{itemize}
+	\item En el caso en que $X = G$ tenemos que $H_a = C(a)$ donde $C(a)$ es el centralizador de $a$ (definición \ref{dfn:centralizador}).
+	\item En el caso en que $X = \{H < G\}$ tenemos que $H_a = N(a)$ donde $N(a)$ es el normalizador de $a$ (definición \ref{dfn:normalizador}).
+\end{itemize}
+Veremos que se pueden dar más casos.
+
+\begin{ej}
+	Fijamos $\sigma \in S_n$ y $G = \langle \sigma \rangle$ subgrupo genereado por $\sigma$ en $S_n$. Entonces $G = \langle \sigma \rangle \to S_n = Biy(X)$ algo pasó. Si $X = \{1, 2, \dots, n\}$ definimos $\sigma(1) = 2,\ \sigma(2) = 1,\ \sigma(i) = i+1, i = 3,\dots, n-2,\sigma(n-1) = 3$. La clase $cl(i) = \{\sigma^k(i) \mid k \in \Z\}$ en particular contiene a la identidad ya que $\sigma^{n!} = id$ y $n! \in \Z$. Nos quedan dos clases
+	% TODO: dibujito de sigma
+	\begin{align*}
+		cl(1) &= \{1, 2\} \\
+		cl(3) &= \{3, 4, 5, \dots, n - 1\}
+	\end{align*}
+\end{ej}
+
+Vemos que si fijamos $\sigma$ se define una partición en $\{1, \dots, n\}$ de subconjuntos disjuntos
+\begin{align*}
+	F_1 \cup F_2 \cup \dots \cup F_n
+\end{align*}
+
+Si $r = |F_i| > 1$, $F_i = \{i_0, i_1, \dots, i_r\}$ tal que $\sigma(i_0) = i_1, \sigma(i_1) = i_2, \dots, \sigma(i_r) = i_0$.
+
+\begin{dfn}[Ciclo]
+	\label{dfn:ciclo}
+	Diremos que $\sigma$ es un ciclo de longitud $r$ si en la partición definida
+	\begin{align*}
+	F_1 \cup F_2 \cup \dots \cup F_n
+	\end{align*}
+	todas las cajas $F_j,\ j < r$ tienen un único elemento y $F_r$ tiene $r$ elementos.
+\end{dfn}
+
+\begin{pro}
+	Toda biyección $\sigma \in S_7$ se puede descomponer como composición de ciclos.
+\end{pro}
+
+\begin{ej}
+	Consideramos\footnote{Utilizamos la notación de biyecciones de \cite{dor96}.}
+	\begin{align*}
+		\sigma = \left(\begin{array}{ccccccc}
+		1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+		2 & 1 & 4 & 5 & 6 & 3 & 7
+		\end{array}\right)
+	\end{align*}
+	que nos divide $X = \{1, 2, 3, 4, 5, 6, 7\}$ en tres subconjuntos disjuntos $\{1, 2\},\ \{3, 4, 5, 6\},\ \{7\}$. Por tanto podemos decir
+	\begin{align*}
+		\sigma = (12)(3456)(7) = (12)(3456) = (3456)(12)
+	\end{align*}
+	(podemos conmutar porque al ser ciclos disjuntos lo que toque uno no lo toca el otro).
+\end{ej}
+
+Proximamente vermos que a partir de la descomposición en ciclos disjuntos es fácil obtener el orden de $\sigma$.
+
+\hr
+
+Falta la semana fatídica de ANAMAT\newline
+%TODO: pos eso
+\hr
+
+\begin{itemize}
+	\item Recordemos que fijado $\sigma \in S_5$ podemos dar una descomposición en ciclos $\sigma = (123)(45)$ que es única aunque los ciclos se escriban diferente (por ejemplo $(123) = (231)$).
+
+	\item Fijado $\tau \in S_5$, $\tau \sigma \inv{\tau} = (\tau(1)\tau(2)\tau(3))(\tau(4)\tau(5))$ la descomposición se mantiene
+
+	\item Si dos permutaciones $\sigma, \sigma'$ tienen descomposiciones del mismo tipo (un 3-ciclo y un 2-ciclo como antes) entonces existe un $\tau$ que hace pasar de una a otra.
+\end{itemize}
+
+\begin{ej}[Posibles descomposiciones en cíclos de $S_4$]
+	\begin{itemize}
+		\item Para $(1234)$
+		\begin{align*}
+			cl((1234)) = \{\tau(1234)\inv{\tau} \mid \tau \in S_4\}
+		\end{align*}
+		\item A la hora de definir $\tau$ tenemos varias posibilidades. En este caso, si empezamos por el $1$, para fijar el segundo elemento solo tenemos 3 posibilidades, para el tercero 2 y para el último una. Por tanto
+		\begin{align*}
+			|cl((1234))| = 4
+		\end{align*}
+		
+		\item Recordemos que el centralizador
+		\begin{align*}
+			C_{S_4}((1234)) = \{\sigma \in S_4 \mid \sigma (1234) \inv{\sigma} = (1234)\} < S_4
+		\end{align*}
+		
+		\item Como $S_4$ tiene $|S_4| = 4! = 24$ y tenemos que $|cl((1234))| = [S_4 : C_{S_4}((1234))] = 6$ necesariamente $|C_{S_4}((1234))| = 4$.
+		
+		\item Nos proponemos calcular el grupo $C((1234))$. Un candidato para $\sigma \in C((1234))$ es $\sigma = (1234)$. En efecto $(1234)(1234)(1234) \in C((1234))$. Siempre ocurre que un elemento conmuta consigo mismo. Además, $\langle (1234) \rangle < C((1234))$ pero como $|\langle (1234) \rangle| = 4 = |C((1234))$ tiene que ocurrir que $\langle (1234) \rangle = C((1234))$. Es decir que de tipo 4 solo tenemos $(1234)$.
+		
+		\item ¿Qué tipos tenemos? Pues tantos como maneras de descomponer 4 en suma de números positivos, a saber
+		\begin{itemize}
+			\item (1234) de tipo 4
+			\item (123) de tipo 3+1
+			\item (12)(34) de tipo 2+2
+			\item (12) de tipo 2+1+1
+			\item $Id$ de tipo 1+1+1+1 (que es la única que tiene descomposición en 4 unos)
+		\end{itemize}
+
+		\item En general no es difícil calcular cuantos hay, por lo que a menudo utilizamos este argumento para calcular el grupo centralizador.
+		
+		\item Lo importante es que estamos descomponiendo $S_4$ de la siguiente manera:
+		\begin{align*}
+			S_4 &= cl((1234)) \cap cl((1223)) \cap cl((12)(34)) \cap cl((12)) \cap cl(Id) \\
+			|S_4| &= |cl((1234))| \cap |cl((1223))| \cap |cl((12)(34))| \cap |cl((12))| \cap |cl(Id)|
+		\end{align*}
+		\item Ahora analizamos la clase $cl((123))$ de los ciclos de tipo 3+1. Lo primero es saber cuantos hay. Pues tenemos que elegir 3 elementos de entre 4 y luego ordenar los dos que nos quedan por tanto
+		\begin{align*}
+			|cl((123))| = \binom{4}{3} \times 2 = 8
+		\end{align*}
+		Por otro lado lo que sabemos es que $(123) \in C((123))$ (porque todos conmutan consigo mismos) y como antes $|C((123))| = 3$ (de la fórmula $|cl((123))| = [S_4:C((123))]$), luego $C((123)) = \langle (123) \rangle$.
+		
+		\item Igual es un poco más interesante la clase de tipo 2+2. \textbf{Pregunta de examen:} halla generadores del subgrupo centralizador del elemento (12)(34).
+		\begin{itemize}
+			\item Sabemos que el conjugado de un elemento de tipo 2 tiene que ser otro de tipo 2, por tanto tenemos que ver qué elementos distintos de tipo 2 tenemos. Pues fijamos el 1 por ejemplo y vemos qué parejas podemos hacer. Nos salen 3, a saber, 1 con 2, 1 con 3 y 1 con 4 de lo que concluímos que $|cl((12)(34))| = 3$.
+			\item De la misma fórmula que antes sacamos que $|C((12)(34))| = 8$. De orden 8 sabemos que hay solo unos pocos grupos (ver la clasificación en \ref{gruposfinitosnotables}). Veamos con cuál de ellos es isomorfo.
+			\item Como siempre sabemos que $(12)(34) \in C((12)(34))$. Tenemos que encontrar los demás $\tau$ que conmutan $\tau \sigma \inv{\tau} = \tau (12)(34) \inv{\tau} = (\tau(1)\tau(2))(\tau(3)\tau(4))$. Probamos con $\tau = (1324)$\footnote{La idea de probar con este viene de decir: pues a ver qué pasa si cambio el 1 con el 3 y el 2 con el 4, que nos daría la permutación (1324). En cualquier caso esto es prueba y error, y parar de probar cuando tengamos un grupo generado de orden 8.}.
+			\begin{align*}
+				(1324)&(12)(34)\inv{(1324)} \\
+					  &(34)(21)
+			\end{align*}
+			Que es el mismo, luego hemos probado que $\tau$ conmuta y por tanto $\tau \in C((12)(34))$. Lástima que no valga porque nos damos cuenta de que $\tau ^2 = (12)(34)$. Vaya. Drácula ha hecho chiste con esto y todo $(X,d)$.\footnote{Aquí se ve claramente que la elección del $\tau$ es casi al azar. Hemos elegido uno que prometía pero hemos tenido la mala suerte de que su cuadrado nos daba un elemento que suponíamos estaba en el grupo ($\tau^2 = (12)(34)$. Podríamos haber descartado este $\tau = (1324)$ pero hemos preferido descartar el elemento (12)(34) que sabíamos que estaba en el grupo. La razón de la sustitución de este último por el (12) es un misterio hasta la fecha.}
+			
+			Lo que hacemos es quitar el $(12)(34)$ y cambiarlo por el $(12)$. Para evitar $\tau^2 \neq (12)$. En resumen, ya tenemos $(12) \in C((12)(34))$ y $\tau = (1324) \in C((12)(34))$. Si vemos sus grupos generados:
+			\begin{align*}
+				\langle (1324)\rangle = \{(1324), (12)(23), (4321), Id\} \\
+				\langle (12) \rangle = \{(12), Id\}
+			\end{align*}
+			La intersección de ambos subgrupos es solo la identidad y por la fórmula del producto libre averiguamos que $|\langle (1324)\rangle \langle (12) \rangle| = 8$ por lo $C((12)(34)) = \langle (1324), (12) \rangle$.
+			
+			Tiene toda la pinta de ser $D_4$ porque está generado por dos elementos, no es abeliano y los órdenes de los generadores son $o((1324)) = 4,\ o((12)) = 2$. Solo nos quedaría probar que se sigue cumpliendo la ecuación de la presentación de $D_4$:
+			\begin{align*}
+				BA = AB^3 \iff (1324)(12) = (12)(1324)^3
+			\end{align*}
+			Lo comprobamos y al final sale.
+		\end{itemize}
+	
+		\item Ahora hacemos lo mismo con $C((12))$. Siguiendo un razonamiento similar, llegamos a que $C((12))$ es isomorfo con el grupo de Klein y por extensión con $\Z/2\Z \times \Z/2\Z$.
+	\end{itemize}
+\end{ej}
+
+
+Falta la semana fatídica de Estadística
+
+% 20181029
+Vez pasada considerabamos $G_1 \times G_2$ y fijado un homomorfismo de grupos $\phi: G_1 \to Aut(G_2)$ hacíamos lo siguiente. En $G_1 \times_{\phi} G_2$ viven los elementos $(a,b) \times_{\phi} (c,d)$ donde la operación cambiaba en la primera coordenada $(a \phi_b(c), bd)$. Probamos la última clase que $G_1 \times_{\phi} G_2$ era un grupo (probar la asociatividad no es trivial).
+
+
+\part{Parcial 2 - hojas 2 y 3}
+
+
+\bibliographystyle{alpha}
+\bibliography{apuntes-ea-revisado}
+
+
+\end{document}
