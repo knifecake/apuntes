@@ -3,3 +3,6 @@
 *.synctex.gz
 *.log
 *.out
+*.bib
+*.toc
+*.auxlock

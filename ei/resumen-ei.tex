@@ -1,0 +1,280 @@
+\documentclass[a4paper,twocolumn]{extarticle}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{extsizes}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{datetime} % para la hora de compilación
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+
+%\usepackage[a6paper,margin=5mm]{geometry}
+\usepackage[a4paper, top=1cm,bottom=1cm,left=0.5cm,right=1cm]{geometry}
+
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+ \setlength{\parskip}{0cm}
+%\setlength{\columnseprule}{0.4pt}
+
+% ESTILOS DE DEFINICIONES Y TEOREMAS
+
+\newtheorem*{thm}{Teorema}
+\newtheorem*{dfn}{Definición}
+\newtheorem*{cor}{Corolario}
+\newtheorem*{lem}{Lema}
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+\newcommand\deq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny d}}}{=}}}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\newcommand{\hr}{\rule{\textwidth}{.4pt}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Xbarra}{\overline{X}}
+\newcommand{\xbarra}{\overline{x}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\cov}{\text{cov}}
+
+\title{Resumen estadística}
+\author{Elias Hernandis}
+
+\begin{document}
+\section{Estadística descriptiva}
+
+$X,Y$ variables con muestras $x_1, \dots, x_n$, e $y_1, \dots, y_n$, respectivamente.
+\begin{itemize}
+	\item La \textbf{media} $\xbarra = \frac{1}{n}\sum_{i=1}^n x_i$
+	\item La \textbf{varianza} $V_x = \frac{1}{n}\sum_{i=1}^n (x_i - \xbarra)^2 = \overline{x^2} - \xbarra^2$ y la desviación típica $\sqrt{V_x}$
+	\item La \textbf{asimetría} $\text{asim}_x = \frac{\frac{1}{n}\sum (x_i - \xbarra)^3}{V_x^{3/2}}$
+	\item La \textbf{covarianza}, cumple $
+	|\cov_{x,y}| < \sqrt{V_x}\sqrt{V_y}$
+	\begin{align*}
+		\cov_{x,y} = \frac{1}{n}\sum_{i=1}^n (x_i - \xbarra)(y_i - \overline{y}) =\overline{xy} - \overline{x}\overline{y}
+	\end{align*}
+	\item El \textbf{coeficiente de correlación} (adimensional, tipificado)
+	\begin{align*}
+		\rho_{x,y} = \frac{\cov_{x,y}}{\sqrt{V_x}\sqrt{V_y}}
+	\end{align*}
+	\item La \textbf{recta de regresión} de $Y$ sobre $X$, $y = \hat{b}x + \hat{a}$, es
+	\begin{align*}
+		\hat{b} = \frac{\cov_{x,y}}{V_x},\quad \hat{a} = -\hat{b}\xbarra + \overline{y}\\
+		\frac{y - \overline{y}}{\sqrt{V_y}} = \rho_{x,y} \frac{x - \xbarra}{\sqrt{V_x}}
+	\end{align*}
+	\begin{itemize}
+		\item La \textbf{bondad del ajuste} $\sqrt{E(a,b)} = \sqrt{V_y}\sqrt{1 - \rho_{x,y}^2}$ donde $\rho_{x,y}^2 = R^2,\ E(a,b) = \frac{1}{n}\sum_{i=1}^n(y_i - (\hat{a}+\hat{b}x_i))^2$
+		\item El ajuste logarítmico $y = B\ln(x) + A$: cambio de variable $Z = \ln(X)$.
+		\item El ajuste exponencial $y = Ce^{Dx}$: cambio de variable $W = \ln(Y)$ y tomar $C = e^{\hat{a}},\ D = \hat{b}$.
+		\item El ajuste potencial $y = CX^H$: cambios de variable $W = \ln(Y)$ y $Z = \ln(X)$.
+	\end{itemize}
+	\item Ajuste por norma euclídea (sin asumir $Y=f(X)$): tomar $E(a,b) = \frac{1}{n}\sum_{i=1}^n\lVert y_i, (\hat{a}+\hat{b}x_i)\rVert^2$
+\end{itemize}
+
+\section{Variables aleatorias}
+
+\begin{itemize}
+	\item $X$ \textbf{variable aleatoria} es una lista de valores $x_1,\dots,x_n$ con sus probabilidades $p_1,\dots, p_n$ con $p_i = P(X = x_i)$.
+	\item \textbf{Función de masa o de densidad} $f_X(x)$ da las probabilidades de cada dato. Cumple $f_X \geq 0$, $\sum_{i=1}^n f_X(x_i) = \int_\R f_X = 1$ en el caso discreto y continuo, resp.
+	\item \textbf{Función de distribución} $F_X(x)$ cumple $0 \leq F_X \leq 1,\ F_X$ creciente, $F_X' = f_X$
+	\begin{align*}
+		F_X(x)= P(X \leq x) = \sum_{j\mid x_j < x} p_j = \int_{-\infty}^{x}f_X(t)dt
+	\end{align*} 
+	\item La \textbf{esperanza} $E(X) = \sum_{i=1}^n x_i P(X = x_i) = \int_\R xf_X(x)dx$
+	\begin{itemize}
+		\item es lineal: $E(aX + b) = a E(X) + b,\ E(X + Y) = E(X) + E(Y)$
+		\item Cauchy-Schwarz: $|E(XY)|^2 \leq E(X^2)E(Y^2)$
+	\end{itemize}
+	\item La \textbf{covarianza} $\cov(X,Y) = E[(X - E(X))(Y - E(Y))] = E(XY) - E(X)E(Y)$ es un producto escalar (\textbf{bilineal!}):
+	\begin{itemize}
+		\item $cov(X_1 + X_2, X_3) = cov(X_1, X_3) + cov(X_2, X_3)$
+		\item $cov(\lambda X_1, X_2) = \lambda cov(X_1, X_2)$
+	\end{itemize}
+	\item el \textbf{coeficiente de correlación} $\rho_{X,Y} = \frac{\cov_{X,Y}}{\sqrt{V(X)}\sqrt{V(Y)}}$
+	\begin{align*}
+	X\indep Y \implies \rho_{X,Y} = 0 \iff \cov_{X,Y} = 0\\ \iff E(XY) = E(X)E(Y)
+	\end{align*}
+	\item La \textbf{varianza} $V(X) = E[(X - E(X))^2] = E(X^2) - E(X)^2$
+	\begin{itemize}
+		\item $V(\lambda X) = \cov(\lambda X, \lambda X) = \lambda^2 V(X)$
+		\item $V(X + Y) = V(X) + V(Y) + 2\text{cov}_{X,Y}$
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Modelos de distribución}
+
+\begin{itemize}
+	\item \textbf{Bernouilli:} $X \sim Ber(p)$: $x_k \in \{0,1\},\ p = P(X = 1)$
+	\begin{align*}
+	E(X) = p\qquad V(X) = p(1-p) \qquad P(X = k) = p^k(1-p)^{1-k}
+	\end{align*}
+	\item \textbf{Binomial:} $X \sim Binom(n,p)$. Repetir una Bernouilli $n$ veces y contar los aciertos. $x_i = k = 0, \dots, n$
+	\begin{align*}P(X = k) = \binom{n}{k}p^k(1-p)^{n-k}\\
+	E(X) = np \qquad V(X) = np(1-p)
+	\end{align*}
+	\item \textbf{Poisson:} $X \sim Poisson(\lambda = np)$. Binomial con $n \to \infty, p \to 0$.
+	\begin{align*}
+	E(X) = \lambda \qquad V(X) = \lambda \qquad P(X = k) = \frac{e^{-k}\lambda^k}{k!}
+	\end{align*}
+	\item \textbf{Exponencial:} $X \sim Exp(\lambda),\ E(X) = \frac{1}{\lambda},\ V(X) = \frac{1}{\lambda^2}$
+	\begin{align*}
+	f_X(x) = \lambda e^{-\lambda x}\mathbf{1}_{[0,\infty)} \qquad F_X(x) = 1 - e^{-\lambda x},\ x \in [0, \infty]
+	\end{align*}
+	\item \textbf{Gamma:} $X \sim Gamma(\lambda, t)$
+	\begin{align*}
+	\text{función gamma } \Gamma(s) = (s-1)\Gamma(s-1) = \int_{0}^{\infty} t^{s-1}e^{-t}dt\\
+	f_X(x) = \frac{1}{\Gamma(t)}\lambda^tx^{t-1}e^{-\lambda x},\qquad E(X^k) = \frac{(t+k-1)!}{\lambda^k(t-1)!} \\
+	\text{y es de utilidad }\int_{0}^{\infty}x^{t-1}e^{-bx}dx = \frac{\Gamma(t)}{b^t}
+	\end{align*}
+	\textit{Propiedad:} $U \sim Gamma(a, b) \indep V \sim Gamma(a, c) \implies U + V \sim Gamma(a, b+c)$
+	\item \textbf{Normal}: $X \sim \normal(\mu, \sigma^2)$
+	\begin{align*}
+	f_X(x) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left\lbrace-\frac{(x-\mu)^2}{2\sigma^2}\right\rbrace, \quad E(X) = \mu,\ V(X) = \sigma^2
+	\end{align*}
+\end{itemize}
+
+
+\subsection{Cambio de variable}
+
+Si $Y = H(X)$ entonces
+\begin{align*}
+	f_Y(H(x))|H'(x)| &= f_X(x)\\
+	f_Y(y) &= f_X(H^{-1}(y))|(H^{-1})'(y)|
+\end{align*}
+
+Si $Z = X+Y$ entonces $f_Z(z) = \int_{-\infty}^{\infty} f_{(X,Y)}(x, z-x) dx$
+
+\section{Vectores aleatorios}
+$X_1, \dots, X_n$ vv. aa., $\mathbb{X} = (X_1, \dots, X_n)^t$ vector aleatorio.
+\begin{itemize}
+	\item La \textbf{función de densidad conjunta} $f_{(X_1, \dots, X_n)}(x_1, \dots x_n)$
+	\item $X_1, \dots, X_n$ \textbf{indep.} $\iff P(X_1 \in A_1, \dots, X_n \in A_n) = P(X_1 \in A_1)\cdot\dots \cdot P(X_n \in A_n)$
+	\item El \textbf{vector de medias} $E(\X) = (E(X_1), \dots, E(X_n))$
+	\item La \textbf{matriz de covarianzas}
+	\begin{align*}
+		V(\X) = \cov(\X) = \left(\begin{array}{ccc}
+		V(X_1) & \dots & \cov_{X_1,X_n} \\
+		\vdots & \ddots & \vdots \\
+		\cov{X_n, X_1} & \dots & V(X_n)
+		\end{array}\right)
+	\end{align*}
+	es simétrica y semidefinida positiva.
+\end{itemize}
+
+\subsection{Vectores normales}
+
+Sea $\vec{m} \in \R^n, V$ matriz simétrica def. positiva de $n\times n$. Entonces $\X \sim \normal(\vec{m}, V) \iff$
+\begin{align*}
+f_{\X}(\vec{x}) = \frac{1}{(\sqrt{2\pi})^n}\frac{1}{\sqrt{\det V}} \exp\left\lbrace -\frac{1}{2}(\vec{x} - \vec{m})^t V^{-1} (\vec{x} - \vec{m})\right\rbrace
+\end{align*}
+$V$ es def. pos $\implies V = UU^t,\ \det U \neq 0$ escribimos
+\begin{align*}
+\X \sim \normal(\vec{m}, V) \iff \X = \vec{m} + U\mathbb{Y} \iff \\
+f_{\X}(\vec{x}) = \frac{1}{(\sqrt{2\pi})^n}\frac{1}{|\det U|} \exp\left\lbrace -\frac{1}{2}\lVert U^{-1} (\vec{x} - \vec{m})\rVert^2\right\rbrace
+\end{align*}
+Además se tiene
+\begin{align*}E(\X) = \vec{m}\qquad \cov(\X) = V \qquad X_j \sim \normal(m_j, V_{jj})
+\end{align*}
+
+\begin{itemize}
+	\item Si $\vec{h} \in \R^n, B \in \R^{n\times n},\ \det B \neq 0,\ \X \sim \normal(\vec{m}, V)$ vector normal, entonces $\Z = h + B\X \sim \normal(\vec{h} + B\vec{m}, BVB^t)$.
+
+	\item Si $\vec{a} \in \R^n$ entonces la combinación lineal $\sum_{i=1}^n a_iX_i = \vec{a}^t \X$ es v.a. y $\sum_{i=1}^n a_iX_i \sim \normal(\vec{a}^t\vec{m}, \vec{a}^t V \vec{a})$.
+\end{itemize}
+
+\subsection{Distr. asociadas a vectores normales}
+\begin{itemize}
+	\item \textbf{Chi-cuadrado} $Z \sim \chi^2_n$ con $n$ grados de libertad. $Z = \lVert \X \rVert^2 = \sum X_i^2,\ X_i \sim \normal(0, 1),\ X_1,\dots, X_n$ indep.
+	\begin{align*}
+	E(Z) = n,\quad E(Z^\alpha) = 2^\alpha \frac{\Gamma(n/2 + \alpha)}{\Gamma(n/2)}, \quad V(Z) = 2n \\
+	X_i^2 \sim Gamma(1/2, 1/2), \qquad Z \sim Gamma(1/2, n/2) \\
+	\end{align*}
+	\item \textbf{F de Fischer} $Z \sim F_{n,m}$. Si $U \sim \chi^2_n,\ V \sim \chi^2_m,\ U \indep V$ entonces
+	\begin{align*}
+	Z = \frac{U/n}{V/m} \sim F_{n,m} \\
+	E(Z) = \frac{m}{m-2},\quad V(Z) = \frac{2m^2(m+n-2)}{n(m-4)(m-2)^2}
+	\end{align*}
+	
+	\item \textbf{t de Student} $Z \sim t_n$. Si $Y \sim \normal(0,1),\ U_n \sim \chi^2_n,\ Y \indep U_n$ entonces
+	\begin{align*}
+	Z = \frac{Y}{\sqrt{\frac{U_n}{n}}} \sim t_n, \qquad
+	E(Z) = 0,\quad V(Z) = \frac{n}{n-2}
+	\end{align*}
+\end{itemize}
+
+\section{Modelo de muestreo aleatorio}
+
+Sea $X$ una v.a. Sean $X_1, \dots, X_n$ clones independientes de $X$ que cumplen
+\begin{itemize}
+	\item $X_i, X_j$ independientes si $i\neq j$
+	\item $X_i \deq X,\ i = 1,\dots, n$ ($X_i$ es igual a $X$ en distribución)
+\end{itemize}
+Un \textbf{estadístico} $T$ es una función $T = H(X_1, \dots, X_n)$ donde $H:\R^n \to \R$.
+
+
+\subsection{Estadístico media muestral}
+
+\begin{align*}
+	\Xbarra = \frac{1}{n}\sum_{i=1}^n X_i\qquad
+	E(\Xbarra) = E(X)\qquad
+	V(\Xbarra) = \frac{1}{n}V(X)
+\end{align*}
+\begin{itemize}
+	\item Si $X \sim Ber(p)$ entonces $n\Xbarra \sim Binom(n,p)$:
+	\begin{align*}
+		P(\Xbarra = \frac{k}{n}) = \binom{n}{k}p^k(1-p)^{n-k}
+	\end{align*}
+	\item Si $X \sim Poisson(\lambda)$
+	\begin{align*}
+		P(\Xbarra = \frac{k}{n}) = P(n\Xbarra = k) = e^{-n\lambda}\frac{(n\lambda)^k}{k!}
+	\end{align*}
+	\item Si $X \sim \normal(\mu, \sigma^2)$ entonces $\Xbarra \sim \normal(\mu, \frac{\sigma^2}{n})$
+	\begin{align*}
+		P(|\Xbarra - E(X)| \geq \lambda) \leq \frac{V(X)}{n\lambda^2} \\
+		\sqrt{n}(\Xbarra - E(X)) \deq_{n\to \infty} \normal(0, V(X))
+	\end{align*}
+\end{itemize}
+
+\subsection{Estadístico cuasivarianza muestral}
+\begin{align*}
+	S^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \Xbarra)^2 \\
+	n(n-1)S^2 = (n-1)\sum_{i=1}^{n} X_j^2 - \sum_{i\neq j} x_i x_j \\
+	E(S^2) = V(X) \\
+	V(S^2) = \frac{1}{n}E((X - E(X))^4) - \frac{n-3}{n(n-1)}V(X)^2
+\end{align*}
+
+Estimación de la dispersión de $S^2$ con Chebyshev:
+\begin{align*}
+	P(|S^2-V(X)| > \lambda) \leq \frac{V(S^2)}{\lambda^2} \leq \frac{1}{\lambda n^2}E((X-E(X))^4)
+\end{align*}
+
+\begin{thm}[de Fischer-Cochran]
+	Si $\mathbf{X \sim \normal(\mu,\sigma^2)}$, $X_1, \dots, X_n$ clones independientes de $X$ y $\Xbarra,\ S^2$ son los estadísticos habituales entonces $\Xbarra$ \textbf{y} $S^2$ \textbf{son independientes}. Además
+	\begin{align*}
+		\Xbarra \sim \normal(\mu, \frac{\sigma^2}{n}),\quad \frac{(n-1)}{\sigma^2}S^2 \sim \chi^2_{n-1}, \quad \frac{\Xbarra}{S/\sqrt{n}} \sim t_{n-1}
+	\end{align*}
+\end{thm}
+
+\subsection{Estadísticos máximo y mínimo}
+
+\begin{align*}
+	Mn = \max\{X_1, \dots X_n\} &\qquad m_n = \min \{X_1, \dots, X_n\} \\
+	F_{M_n}(t) = F_X(t)^n &\qquad F_{m_n}(t) = 1 - (1 - F_X(t))^n
+\end{align*}
+Para $\alpha$ \textbf{mínimo esencial} ($F_X(x < \alpha) = 0 \land F_X(x > \alpha) > 0$ y $\beta$ \textbf{máximo esencial} ($F_X(x < \beta) < 1 \land F_X(x > \beta) = 1$)  de $X$
+
+\begin{align*}
+P(\alpha \leq x \leq r) \xrightarrow{n \to \infty} 1,\ r > \alpha \\
+P(r \leq x \leq \beta) \xrightarrow{n \to \infty} 1,\ r < \beta
+\end{align*}
+\begin{flushright}
+	E. Hernandis et al., \today $ $ a las \currenttime
+\end{flushright}
+
+\end{document}
