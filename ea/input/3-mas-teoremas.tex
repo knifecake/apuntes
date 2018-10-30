@@ -1,0 +1,103 @@
+% !TeX root = ../apuntes-ea.tex
+
+\chapter{Consideraciones adicionales}
+
+Este capítulo incluye más teoría que integra varios conceptos de los capítulos anteriores.
+
+\section{Producto libre de grupos}
+
+\begin{dfn}[Producto libre de grupos]
+	\label{dfn:productolibre}
+	Sean $S,T$ subconjuntos del grupo $G$. Definimos $ST = \{s\ast t \mid s \in S \land t \in T\}$.
+\end{dfn}
+
+Es importante remarcar el \textbf{el producto libre de [sub]grupos no siempre es un grupo. En general solo es un conjunto.} Ver el teorema \ref{thm:condicionproductolibre}
+
+Observemos que la función $f: S \times T \to ST,\ (s,t) \mapsto st$ no es un homomorfismo de grupos. Esto es porque al operar dos elementos de $S \times T$ no se comporta bien. Sean $s,s'\in S, t,t'\in T$
+\begin{align*}
+(s,t) \mapsto st \\
+(s',t') \mapsto s't' \\
+\end{align*}
+esperamos que 
+\begin{align*}
+f((s,t)(s',t')) = f(st, s't') \mapsto f(s,t)f(s',t') = sts't'
+\end{align*}
+pero en realidad ocurre que
+\begin{align*}
+f((s,t),(s',t')) \mapsto ss'tt' \neq f(s,t)f(s',t')
+\end{align*}
+
+No obstante, aunque la función que lleva $H_1 \times H_2 \to H_1 H_2$ no sea un homomorfismo, sí podemos saber cuantos elementos tiene $H_1H_2$.
+
+\begin{thm}[Cardinalidad del producto libre]
+	\label{thm:cardinalidadproductolibre}
+	Sean $H_1, H_2 < G$ con $G$ finito. Entonces
+	\begin{align}
+	|H_1H_2| = \frac{|H_1||H_2|}{|H_1 \cap H_2|}
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	Utilizaremos la función $f:H_1 \times H_2 \to H_1 H_2$ que es sobreyectiva por definición de $H_1 H_2$. Para una función sobreyectiva $f: A \to B,\ |A| = \sum_{b \in B} |f^{-1}(b)|$.
+	
+	%TODO argumentar lo del alpha
+	
+	Sean las fibras los conjuntos $f^{-1}(h_1h_2)$ de los pares de elementos que van a parar al mismo $h_1h_2 \in H_1 H_2$. La condición necesaria y suficiente para que $(h_1', h_2')$ esté en la misma fibra que $(h_1, h_2)$ es que $h_1' = h_1 \alpha \land h_2' = h_2 \alpha,\ \alpha \in H_1 \cap H_2$. Entonces $|f^{-1}(h_1, h_2)| = | (h_1 \alpha, h_2\alpha),\ \alpha \in H_1\cap H_2| = |H_1 \cap H_2| \implies |H_1||H_2| = |H_1 H_2| |H_1 \cap H_2|$ 
+\end{proof}
+
+\begin{thm}
+	\label{thm:condicionproductolibre}
+	Sean $H_1, H_2$ subgrupos de $G$, con $G$ finito. Si $H_2 \normsub G$ entonces $H_1 H_2 < G$ (si uno de los subgrupos es normal, entonces el producto es subgrupo).
+\end{thm}
+
+\begin{proof}
+	Observamos que podemos escribir $H_1H_2 = \bigcap_{h \in H_1} h \ast H_2$. Como $H_2 \normsub G,\ h\ast H_2 \cdot h' H_2 = h h' H_2\ \forall h \in H_1$. Si nos fijamos $H_1 H_2$ es cerrado por la operación pues $h h' H_2 \in H_1H_2$ y como $G$ es finito y por tanto $H_1, H_2$ también, $H_1H_2$ es un subgrupo.	
+\end{proof}
+
+\begin{thm}
+	Si $H_1 \normsub G \land H_2 \normsub G \implies H_1 H_2 \normsub G$ (si los dos subgrupos son normales, enotnces el producto también es normal).
+\end{thm}
+
+\begin{proof}
+	$H_1,H_2 < G$ luego $\forall g \in G,\ gH_1H_2g^{-1} = gH_1g^{-1}gHg^{-1}  = H_1 H_2 $.
+\end{proof}
+
+\section{Grupos cíclicos}
+
+\begin{thm}
+	Todo subgrupo de $\ZnZ$ es cíclico.
+\end{thm}
+
+\begin{proof}
+	La propiedad de cíclico se hereda de $\Z$ y se prueba igual utilizando el algoritmo de la división. %TODO probarlo
+\end{proof}
+
+\begin{thm}
+	Consideramos $\ZnZ$ Para cada divisor $d$ de $n$, existe un único subgrupo cíclico de orden $d$.
+\end{thm}
+
+\begin{proof}
+	% TODO añadir teoremas de prácticas previos a Lagrange
+	$d \divides n \implies n = dn' \implies n'\Z < n\Z$ Además, por el teorema de prácticas, $|n'\Z| = d$ y por tanto $|f(n'\Z)| = d$ donde $f:n\Z \to \ZnZ$ es la relación de equivalencia habitual.
+\end{proof}
+
+\begin{thm}
+	Sean $\overline{k}, \overline{k'} \in \ZnZ$. Entonces $o(\overline{k}) = o(\overline{k'}) = d \implies \langle \overline{k} \rangle = \langle \overline{k'} \rangle$ 
+\end{thm}
+
+\begin{thm}
+	Sean $n, m \in \N$. El grupo producto directo $\ZnZ \times \ZmZ$ es cíclico $\iff mcd(n,m) = 1$.
+\end{thm}
+
+\begin{proof}
+	Para que $\ZnZ \times \ZmZ$ sea cíclico debe haber un elemento $a \in \ZnZ \times \ZmZ \mid o(a) = m\cdot n$. Si $m$ y $n$ no son coprimos entonces el orden de $a$ no puede ser $m\cdot n$. %TODO pensar y explicar
+\end{proof}
+
+\begin{thm}
+	\label{thm:noprobado1}
+	Si $G$ es abeliano y $|G| < \infty$ entonces $G$ es un producto de grupos cíclicos finitos.
+\end{thm}
+
+\begin{proof}
+	Dice que no lo vamos a probar, pero veremos algunos resultados más adelante (en la sección sobre clasificación de grupos finitos \ref{gruposfinitosnotables}).
+\end{proof}

@@ -1,0 +1,395 @@
+\chapter{Grupos}
+
+\section{Grupos}
+
+\begin{dfn}[Grupo]
+	Llamamos grupo al par $(G, \ast)$, donde $G$ es un conjunto no vacío y $\ast: G \times G \to G$ es una función que cumple las siguientes propiedades:
+	\begin{enumerate}
+		\item Clausura. $\forall a, b \in G, a \ast b \in G$
+		\item Asociatividad. $\forall a, b, c \in G,\ (a \ast b) \ast c = a \ast (b \ast c)$
+		\item Elemento neutro. $\exists e \in G, \forall a \in G \mid a \ast e = e \ast a = a$
+		\item Elemento inverso. $\forall a \in G, \exists \inv{a} \in G \mid a \ast \inv{a} = \inv{a} \ast a = e$
+	\end{enumerate}
+\end{dfn}
+
+En general, la clausura es muy difícil de probar, por lo que recurrimos a dar un grupo como subgrupo de otro o dar una biyección entre un grupo existente y lo que queremos probar que es grupo.
+
+\paragraph{Notación}
+
+\begin{itemize}
+	\item Aunque técnicamente el grupo es el par $(G, \ast)$, es común referise al grupo como $G$.
+	\item Cuando la operación es la suma, se suele llamar al elemento neutro $e = \mathbf{0}$. Cuando la operación es el producto, se suele llamar al elemento neutro $e = \mathbf{1}$.
+	\item Denotamos por $a^k$:
+	\begin{itemize}
+		\item si $k > 0,\ a^k = \underbrace{a \ast a \ast \dots \ast a}_\text{k veces}$
+		\item si $k = 0,\ a^0 = e$
+		\item si $k < 0,\ a^k = \underbrace{\inv{a} \ast \inv{a} \ast \dots \ast \inv{a}}_\text{-k veces}$
+	\end{itemize}
+	\item Se suele omitir la operación. Sobre todo cuando la operación es el producto. Por ejemplo, en $(G, \cdot)$, $a \cdot b = ab$.
+\end{itemize}
+
+\begin{thm}[Propiedad cancelativa]
+	Sea $G$ un grupo, $a, b, c \in G$.
+	\begin{align}
+		a \ast b = a \ast c \implies b = c \\
+		c \ast a = b \ast a \implies a = b
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	Por la existencia del elemento inverso podemos multiplicar por $\inv{a}$ a la izquierda en la primera expresión y obtenemos $\inv{a} a b = \inv{a} a c \implies e b = e c \implies b = c$. Lo mismo ocurre por la derecha en la segunda expresión.
+\end{proof}
+
+\begin{pro}[Unicidad del elemento neutro]
+	En un grupo $G$ hay exactamente un elemento neutro $e$.
+\end{pro}
+
+\begin{proof}
+	Supongamos existen $e_1, e_2 \in G$ elementos neutros. Por ser $e_1$ elemento neutro se tiene que $e_1 \ast e_2 = e_2$ y por ser elemento neutro $e_2$ se tiene que $e_1 \ast e_2 = e_1$. Por tanto $e_1 = e_2$.
+\end{proof}
+
+\begin{pro}[Unicidad del inverso de un elemento]
+	Sea $G$ un grupo, $g \in G$, entonces $\exists! \inv{g} \mid g \ast \inv{g} = e$. 
+\end{pro}
+
+\begin{proof}
+	Supongamos $a$ tiene inversos $b_1$ y $b_2$. Entonces $a \ast b_1 = a \ast b_2 = e$. Por la propiedad cancelativa $b_1 = b_2$.
+\end{proof}
+
+\begin{dfn}[Orden de un elemento]
+	Sea $(G, \ast)$ un grupo. Decimos que $a \in G$ tiene orden finito si $\exists k \in \mathbb{N}$ tal que $a^k = e$.
+	Si existen tales valores de $k$, llamamos orden del elemento $a$ al mínimo de ellos:
+	\begin{align}
+		o(a) = \min \{k \in \mathbb{N} \mid a^k = e \}
+	\end{align}
+\end{dfn}
+
+\begin{dfn}[Orden o cardinalidad de un grupo]
+	Sea $G = \{a_1, a_2, \dots \}$ un grupo junto con alguna operación. Si $|G| < \infty$ decimos que el orden de $G$, $|G| = |\{a_1, a_2, \dots, a_n\}| = n$.
+\end{dfn}
+
+\begin{dfn}[Grupo abeliano]
+	Sea $(G, \ast)$ un grupo. Diremos que $G$ es abeliano $\iff \forall a,b \in G,\ a \ast b = b \ast a$.
+\end{dfn}
+
+\begin{thm}
+	\label{thm:abelianosdeorden2}
+	Sea $G$ un grupo tal que $\forall g \in G,\ g \ast g = e$. Entonces $G$ es abeliano.
+\end{thm}
+
+\begin{cor}
+	$\forall a \in G,\ o(a) = 2 \implies G$ es abeliano.
+\end{cor}
+
+\begin{proof}
+	Sean $a,b \in G$. Tenemos que probar que $a\ast b = b \ast a$. Consideramos el elemento $(a \ast b) \in G$ por clausura. Por hipótesis tenemos que $(a \ast b) \ast (a \ast b) = e \implies (a \ast b) = \inv{(a \ast b)} = \inv{b} \ast \inv{a} = b \ast a$.
+\end{proof}
+
+\subsection{Ejemplos de grupos}
+
+
+
+Por último, vemos una manera de generar nuevos grupos a partir de grupos existentes.
+
+\begin{dfn}[Producto directo de grupos]
+	Sean $(G_1, \ast), (G_2, \bullet)$ grupos. Llamamos producto directo de los grupos $G_1$ y $G_2$ al grupo $(G_1\times G_2, \sim)$. Donde $\sim : (G_1 \times G_2) \times (G_1 \times G_2) \to G_1 \times G_2,\ (g_1, g_2) \sim (g_1', g_2') = (g_1\ast g_1', g_2 \bullet g_2')$.
+\end{dfn}
+
+\section{Subgrupos}
+
+\begin{dfn}[Subgrupo]
+	Sea $(G, \ast)$ un grupo, $S \in G, S \neq \emptyset$. Diremos que $(S, \ast)$ es un subgrupo de $(G, \ast)$ y lo denotaremos por $S < G$ si verifica las siguientes condiciones:
+	\begin{enumerate}
+		\item Clausura. $\forall a, b,\ a,b \in S \implies a \ast b \in S$
+		\item Elemento neutro. $e \in S$
+		\item Elemento inverso. $\forall s \in S, \inv{s} \in S$ 
+	\end{enumerate}
+	(La propiedad asociativa siempre se hereda.)
+\end{dfn}
+
+En caso de que el grupo del que elegimos el subgrupo sea finito, la clausura no es tan complicada de probar.
+
+\begin{pro}
+	Si $\{S_i\}_{i \in \mathbb{N}}$ es una familia de subgrupos de $G$, entonces $\bigcap S_i$ también es un subgrupo de $G$.
+\end{pro}
+
+% TODO: demostrar
+
+
+\begin{dfn}[Subgrupo generado varios elementos]
+	\footnote{Este teorema reemplaza al de \textit{grupo generado por dos elementos} dado en clase.}Sea $(G, \ast)$ un grupo, $S \subset G,\ S \neq \emptyset$. El subgrupo generado por $S$ es
+	\begin{align}
+	\langle S \rangle = \{s_1^{\alpha_1} \ast s_2^{\alpha_2} \ast \dots \ast s_n^{\alpha_n} \mid s_1, s_2, \dots, s_n \in S,\ \alpha_1, \alpha_2, \dots, \alpha_n \in \Z \}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	El subgrupo generado por $S$, $\langle S \rangle$ es el más pequeño que contiene a $S$.
+\end{pro}
+
+El siguiente teorema no lo ha dado drácula\footnote{De verdad que quería poner el nombre.} pero no me acuerdo pero viene en \cite{dor96} y simplifica bastante la bida.
+
+\begin{thm}
+	\label{thm:subgrupoxinverso}
+	Sea $G$ un grupo y $H$ un subconjunto de $G$. Entonces $H < G \iff \forall x,y \in H, x\inv{y} \in H$.
+\end{thm}
+
+\begin{proof}
+	De \cite{dor96}.
+	\begin{itemize}
+		\item ($\implies$). Supongamos que $H < G$. Entonces $x,y \in H \implies xy \in H \land y \in H \implies \inv{y} \in H$ y por tanto $x\inv{y} \in H$.
+		\item ($\impliedby$). Supongamos que $x,y \in H \implies x\inv{y} \in H$. Veamos que se cumplen las 3 condiciones para que sea subgrupo:
+		\begin{itemize}
+			\item Elemento neutro. Tomamos $y = x$ y tenemos que $x\inv{x} = e \in H$.
+			\item Elemento inverso. Tomamos ahora $x = e,\ y = x$ y tenemos que $e\inv{x} = \inv{x} \in H$.
+			\item Clausura. Tenemos que si $x,y \in H$ por la propiedad anterior $\inv{y} \in H$ y por tanto $xy = x\inv{(\inv{y})} \in H$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+% TODO: probar que es subgrupo y que es el más pequeño
+
+Normalmente, utilizaremos la definición restringida a un elemento:
+
+\begin{dfn}[Subgrupo generado por un elemento]
+	\label{dfn:subgrupogenerado}
+	Sea $G$ un grupo, $g \in G$. Llamamos subgrupo generado por $g$ a
+	\begin{align}
+		\langle g \rangle = \{g^k \mid k \in \mathbb{Z}\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	El subgrupo generado por $g \in G$ en efecto es un subgrupo.
+\end{pro}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Es cerrado por $\ast$ puesto que $\forall a^k, a^{k'} \in S, a^k \ast a^{k'} = a^{k + k'} \in S$.
+		\item $a^0 = e \in A$
+		\item $\forall a^{k}, a^{-k} \in A$
+	\end{enumerate}
+\end{proof}
+
+\begin{pro}
+	Si $o(g) = n$, entonces $\langle g \rangle$ tiene $n$ elementos (el orden de $\langle g \rangle$ es $n$).
+\end{pro}
+
+\begin{proof}
+	Primero comprobamos que no hay más de $n$ elementos distintos. Consideramos $k \in \Z,\ k = cn + r$ para algunos $c, r \in \Z,\ 0 \leq r < n$ por el algoritmo de la división. Entonces $a^k = a^{cn + r} = a^{cn} a^{r} = a^{r}$ pues $o(a) = n$.
+	
+	Ahora probaremos que no hay menos de $n$ elementos distintos, es decir, que $\langle g \rangle = \{1, g, g^2, \dots, g^{n-1}\}$ Supongamos existen $0 \leq i < j < n$ tales que $a^i = a^j$. Entonces por cancelación $a^{j - i} = e = a^0 \implies j = i$ lo que da una contradicción.
+\end{proof}
+
+\begin{thm}
+	Sea $G$ un grupo, $g \in G$. El menor subgrupo de $G$ que contiene a $g$ es $\langle g \rangle$.
+\end{thm}
+
+\begin{proof}
+	Tenemos que probar que para cualquier $H$ subgrupo de $G$, $g \in H \implies g^k,\ \forall k \in \Z$.
+\end{proof}
+
+\begin{dfn}[Grupo cíclico]
+	Sea $(G, \ast)$ un grupo. Diremos que $G$ es cíclico si $\exists g \in G \mid \langle g \rangle = G$.
+\end{dfn}
+
+\begin{thm}
+	\label{thm:ciclicoimplicaabeliano}
+	Si $G$ es cíclico entonces $G$ es abeliano.
+\end{thm}
+
+\begin{proof}
+	Tenemos que probar que $\forall a,b \in G,\ ab = ba$. Sabemos que $a = g^i, b = g^j$ para algunos $i, j \in \Z \implies ab = a^i a^j = a^{i+j} = a^{j+1} = a^j a^i = ba$.
+\end{proof}
+
+
+\begin{thm}
+	\label{thm:coprimosgeneradosiguales}
+	Sea $g \in G$ tal que $o(g) = n \in \N \geq 1$ y sea $r \in \N$. Si $r$ y $n$ son coprimos, entonces $\langle g \rangle = \langle g^r \rangle$.
+\end{thm}
+
+\begin{cor}
+	Si $r$ y $n = o(g)$ son coprimos entonces $o(g) = o(g^r)$.
+\end{cor}
+
+\begin{proof}
+	Recordamos que $p$ y $q$ son coprimos $\iff\ \exists \alpha, \beta \in \Z \mid \alpha p + \beta n = 1$. Recordamos que $\langle g \rangle = \{1, g, g^2, \dots, g^{n-1}\}$ donde $n = o(g)$. Tenemos que probar la doble inclusión. Fijémonos en que $g^r \in \langle g \rangle \implies \langle g^r\rangle \subset \langle g \rangle$ pues $\langle g \rangle$ contiene a todos los elementos de la forma $g^k,\ k \in \Z$ (ver definición \ref{dfn:subgrupogenerado}). Ahora probaremos que $\langle g \rangle \subset \langle g^r \rangle$. Como $r$ y $n$ son coprimos, $g = g^{\alpha r + \beta n} = (g^r)^\alpha (g^n)^\beta = (g^r)^\alpha \in \langle g^r \rangle \implies \langle g \rangle \subset \langle g^r \rangle$. Concluimos que $\langle g \rangle = \langle g^r \rangle$.
+\end{proof}
+
+\begin{ej}
+	En $\Z/4\Z = \{0, 1, 2, 3\}$ con la suma tomamos $g = 1$ y por tanto $n = o(g) = 4$, y tomamos $r = 3$ y por tanto $mcd(n, r) = 1$. Efectivamente se verifica que $o(1^3) = o(1+1+1) = o(3) = 4 = o(1)$ o lo que es lo mismo, $\langle 1 \rangle = \langle 3 \rangle$.
+\end{ej}
+
+\begin{pro}
+	\label{thm:ordenescoprimos}
+	Sea $g \in G$ tal que $o(g) = n$ y sea $r \in \N$ con $r \divides n$ ($r$ divide a $n$). Entonces $o(g^r) = \frac{n}{r}$.
+\end{pro}
+
+\begin{proof}
+	Sea $n'$ tal que $n = rn'$. Probaremos que $r\divides n \implies o(g^r) = n'$.
+	\begin{align*}
+		\langle g^r \rangle = \{g^r, g^{2r}, g^{3r}, \dots, g^{n'r} = g^n\} \subset \{g, g^2, g^3, \dots, g^n\} = \langle g \rangle
+	\end{align*}
+	$\langle g^r \rangle$ tiene $n'$ elementos distintos porque para cualquier $i = 0,\dots, n'$, $o(g^{ir}) <= o(g) = n$ por lo que no se repite ninguno. Además cualquier $g^{ir}$ está bien definido porque al dividir $r$ a $n$, $ir \in \N$.
+\end{proof}
+
+\begin{thm}[Hoja 1, ejercicio 9]
+	Sea $o(g) = n \in \N$ y sea $N \in \Z$. Entonces $o(g^N) = \frac{o(g)}{mcd(N, o(g))}$.
+\end{thm}
+
+\begin{proof}
+	Afirmamos que $n$ y $N/d$, con $d = mcd(N,n)$ son coprimos. Expresamos $g^N = (g^{N/d})^d$. Por el [corolario del] teorema $\ref{thm:coprimosgeneradosiguales}$ tenemos que $o(g^{N/d}) = o(g) = n$. Por la proposición $\ref{thm:ordenescoprimos}$ tenemos que $o((g^{N/d})^d) = \frac{o(g^{N/d})}{d} = \frac{n}{d}$.
+\end{proof}
+
+\begin{thm}[Hoja 1, ejercicio 7]
+	\label{thm:subconjuntocerrado}
+	Sea $(G, \ast)$ un grupo y $S \subset G,\ S \neq \emptyset$ un subconjunto finito de $G$. Si $S$ es cerrado por la operación $\ast$ entonces $S$ es un subgrupo de $G$.
+\end{thm}
+
+\begin{proof}
+	Se verifican las 3 propiedades
+	\begin{enumerate}
+		\item Clausura. Por hipótesis.
+		\item Elemento neutro. Sea $s \in S$. Si $s = e$ ya hemos terminado. Si $s \neq e$, sabemos que $\{s^1, s^2, \dots\} \subset S$. Pero $S$ es finito $\implies \exists\ 0 < i < j$ tales que $s^i = s^j \implies s^{j - i} = e$. Como $j > i \implies j - i > 0$, hemos obtenido $e$ de operar $s$ consigo mismo, luego $e \in S$.
+		\item Elemento inverso. Tomamos $r = j - i$ de la propiedad anterior. Tenemos $s^r = e \implies s \ast s^{r-1} = e \implies s^{r-1} = s^{-1}$.
+	\end{enumerate}
+\end{proof}
+
+%TODO cambiar la definicion de unidades por la del conjunto de los elementos de orden $m$
+%\begin{dfn}[Conjunto de unidades]
+%	Sea $A$ un anillo donde el elemento identidad respecto del producto es $1$. Entonces
+%	\begin{align}
+%		\uds{A} = \{a \in A \mid \exists b,\ a\cdot b = b\cdot a = 1\}
+%	\end{align}
+%\end{dfn}
+
+%\begin{ej}
+%	Las unidades son interesantes porque (a veces?) generan grupos.
+	
+%	En $\Z/4\Z$ las unidades son $\uds{Z/4\Z} = \{\overline{1}, \overline{3}\}$. Este ejemplo es particularmente interesante porque $(\uds{\Z/4\Z}, \cdot)$ es un grupo. No es un subgrupo porque no hereda la operación de $(\Z/4\Z , +)$.
+%\end{ej}
+
+%\begin{pro}
+%	$\overline{a} \in \ZnZ \iff mcd(a,n) = 1$ en $\Z$.
+%\end{pro}
+%
+%\begin{proof}$ $\newline
+%	\begin{itemize}
+%		\item ($\implies$) $\overline{a} \in \uds{\ZnZ} \iff \exists \overline{b} \in \ZnZ \mid \overline{a}\overline{b} = \overline{ab} = 1 \iff ab = rn + 1 \iff 1 = ab - rn \iff \alpha a + \beta n = 1 \iff mcd(a,n) = 1$
+%		\item ($\impliedby$) $mcd(a,n) = 1 \iff \alpha a + \beta n = 1 \implies \overline{\alpha a + \beta n} = \overline{1} \iff \overline{\alpha}\overline{a} + \overline{\beta}\overline{n} = \overline{1} \iff \overline{\alpha}\overline{a} = 1 \implies \exists \overline{b} \in \Z \mid \overline{a}\overline{b} = 1$ (el $\overline{b}$ es $\overline{\alpha}$).
+%	\end{itemize}
+%\end{proof}
+
+
+\subsection{El teorema de Lagrange}
+
+\begin{dfn}[Clase lateral]
+	Sea $(G, \ast)$ un grupo, $H < G,\ g \in G$. Definimos
+	\begin{itemize}
+		\item $g \ast H = gH = \{g \ast h \mid h \in H\}$ es una clase lateral izquierda de $H$
+		\item $H \ast g = Hg = \{h \ast g \mid h \in H\}$ es una clase lateral derecha de $H$
+	\end{itemize}
+\end{dfn}
+
+\begin{thm}
+	\label{thm:ordencajaslaterales}
+	Si $H < G$ tiene orden $n < \infty$ entonces $|gH| = |Hg| = |H| = n$.
+\end{thm}
+
+\begin{proof}
+	Consideramos la aplicación $f: H \to gH,\ f(h) \to g\ast h$ para un $g \in G$ dado. Es inyectiva: $f(h_1) = f(h_2) \implies h_1 = h_2$ puesto que $xh_1 = xh_2 \implies h_1 = h_2$ por la propiedad cancelativa. Es sobreyectiva porque $\forall h \in H,\ g \ast h = f(h)$. Por tanto $f$ es biyectiva y los órdenes son iguales.
+\end{proof}
+
+\begin{pro}
+	Sea $H < G,\ g \in G$. Las clases laterales $gH$ y $Hg$ cumplen las siguientes propiedades (las cumplen las dos pero damos solo las de la izquierda):
+	\begin{enumerate}
+		\item $g \in H \iff g\ast H = H$
+		\item $g \in g \ast H \implies G = \bigcup_{g \in G} g \ast H$
+		\item $g' \in g \ast H \implies g' \ast H = g \ast H$
+		\item $g_1 \ast H \cap g_2 \ast H \neq \emptyset \implies g_1 \ast H = g_2 \ast H$
+	\end{enumerate}
+\end{pro}
+
+\begin{proof}
+	(solo de la última propiedad)
+	Sabemos que existe $\alpha \in g_1 \ast H \cap g_2 \ast H$ de la forma $\alpha = g_1 \ast h_1 = g_2 \ast h_2,\ h_1, h_2 \in H$. Ahora bien, $g_1 \ast h_1 = g_2 \ast h_2 \iff \inv{g_2} \ast g_1 \ast h_1 = h_2 \iff \inv{g_2}g_1 \in H \implies g_2(\inv{g_2}g_1)H = g_2(\inv{g_2}g_1H) = g_2 H$.
+\end{proof}
+
+De las propiedades anteriores se obtiene que $\{g_i \ast H\}_{g_i \in G}$ es una partición de $G$. Además, por el teorema \ref{thm:ordencajaslaterales}, como $|g \ast H| = |H|$ la partición divide $G$ en cajas iguales (ver cuadro \ref{table:cajasiguales}). Pongamos que $G$ es finito y que hay $r$ cajas, entonces $|G| = r|g_i \ast H| = r|H| \implies |H| \mid |G|$. A continuación veremos otra forma de dar esta relación de equivalencia.
+
+
+Para algún $H < G$, la partición que hemos dado anteriormente es la definida por la relación de equivalencia $g_1 R g_2 \iff g_1 \ast H = g_2 \ast H$. Otra manera de definirla es $g_1 R g_2 \iff \inv{g_2}g_1 \in H$. Se verifica que esta nueva definición es una relación de equivalencia.
+
+\begin{figure}[h]
+	\centering
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$g_1 \ast H$ & $g_2 \ast H$ & $\dots$ \\\hline
+		$\dots$ & $H$ & $\dots$ \\\hline
+		$\dots$ & $g_{r-1} \ast H$ & $g_r \ast H$\\\hline
+	\end{tabular}
+	\caption{Partición de $G$ en $r$ cajas iguales}
+	\label{table:cajasiguales}
+\end{figure}
+
+%TODO: probar que es una relación de equiv
+
+
+\begin{thm}[de Lagrange]
+	\label{thm:lagrange}
+	Sea $G$ un grupo finito y $H < G$. Entonces $|H| \divides |G| $ (el orden de $H$ divide al orden de $G$).
+\end{thm}
+
+\begin{cor}
+	Sea $G$ un grupo y $g \in G$. Entonces $o(g) \divides |G|$ (el orden de un elemento divide al orden del grupo).
+\end{cor}
+
+\begin{cor}
+	Si $G$ es un grupo de orden $p$, con $p$ primo, entonces $G$ es cíclico.
+\end{cor}
+
+\begin{proof}
+	Sea $g \in G,\ g \neq e$. Por el teorema de Lagrange $|\langle g \rangle| \divides |G| = p$. Como $p$ es primo sus únicos divisores son $1$ y $p$ y como $|\langle g \rangle| > 1$ se ha de tener $|\langle g \rangle| = p$. Por tanto $\langle g \rangle = G$ y $G$ es cíclico. 
+\end{proof}
+
+\subsection{Subgrupos normales y grupo cociente}
+
+
+\begin{dfn}[Subgrupo normal]
+	Sea $H < G$. Diremos que $H$ es un subgrupo normal de $G$ y lo denotaremos por $H \normsub G \iff \forall g \in G,\ g\ast H = H \ast g$.  
+\end{dfn}
+
+\begin{pro}
+	Si $G$ es abeliano entonces todos sus subgrupos son normales.
+\end{pro}
+
+
+\begin{dfn}[Conjunto cociente en grupos]
+	Sea $H < G$. Definimos
+	\begin{align}
+	G/H = \{gH \mid g \in G\} = \{\overline{x} \mid \overline{x} = \{g \in G \mid \inv{g}x \in H\}\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	Sea $H \normsub G$. $(G/H, \ast)$ con la operación $\ast: G/H \to G/H, (xH)(yH) \mapsto (xy)H$ es un grupo.
+\end{pro}
+
+\begin{proof}
+	La operación $\ast$ está bien definida. $\forall \overline{x}, \overline{y} \in G/H,\ \overline{x} \ast \overline{y} = xHyH = xyHH = xyH = \overline{x \ast y}$.
+	
+	El elemento neutro es $\overline{e}$ pues $\forall \overline{x} \in G/H,\ \overline{e} \ast \overline{x} = eHxH = exH = xH = \overline{x}$.
+	
+	El elemento inverso está bien definido: $\inv{\overline{x}} = \overline{\inv{x}}$ pues $\forall \overline{x} \in G/H,\ \overline{x}\inv{\overline{x}} = xH \inv{x}H = x\inv{x}H = eH = \overline{e}$.
+\end{proof}
+
+\begin{dfn}[Índice]
+	Sea $H < G$. Definimos el \textbf{índice de $H$ en $G$}, y lo representamos mediante $[G:H]$, como el cardinal del conjunto cociente $G/H$. \cite{dor96}
+\end{dfn}
+
+\begin{thm}
+	\label{thm:indice2normal}
+	De \cite{dor96}\footnote{No lo hemos dado explícitamente pero se utiliza para algunos ejemplos.}
+	Sea $H < G$ con $[G : H] = 2$ (con índice de $H$ en $G$ igual a 2). Entonces $H$ es normal.
+\end{thm}

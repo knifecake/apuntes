@@ -6,3 +6,6 @@
 *.bib
 *.toc
 *.auxlock
+*.bbl
+*.blg
+*.loe
