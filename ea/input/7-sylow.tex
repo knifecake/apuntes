@@ -1,0 +1,58 @@
+% !TeX root = ../apuntes-ea.tex
+
+\chapter{Teoremas de Sylow}
+
+% 20181031
+
+Son muchos teoremas para grupos finitos en los que el orden se puede expresar como
+\begin{align}
+	|G| = p^s m,\ mcd(p, m) = 1, s \geq 1
+\end{align}
+Veremos y discutiremos algunos de ellos.
+
+\begin{thm}
+	[Primero de Sylow]
+	Sea $G$ un grupo tal que $|G| = p^s m,\ mcd(p, m) = 1, s \geq 1$. Entonces existe $H < G$ con $|H| = p^s$.
+\end{thm}
+
+Hemos hecho mucho hincapié en los subgrupos normales y tenemos que si $N \normsub G$ entonces existe $\pi:G \to G/N$ homomorfismo de grupos\footnote{Por teoría de conjuntos tenemos que $\pi$ es una función que existe y está bien definida, pero aquí interesa que además es homomorfismo.}. Además teníamos que $|G| = |G/N| \cdot |N|$.
+
+También establecíamos una biyección entre los submódulos de $G$ que contienen a $N$ y los submódulos de $G/N$. Si $K$ es uno de ellos entonces $N \normsub G \implies N \normsub K$,
+\begin{align*}
+	K/N = \overline{K} \subset K/N \\
+	|K| = |\overline{K}||N|
+\end{align*}
+
+Vamos a discutir el teorema. Recordemos que dado $G$ el centro $Z(G)$ es el conjunto de los elementos que conmutan con todos (ver definición \ref{dfn:centro}). Recordamos además las proposiciones \ref{pro:centronormal} y \ref{pro:subcentronormal} que nos dicen que el centro es normal y que cualquier subgrupo del centro es abeliano y normal. El centro está bien pero tampoco es para tanto: suele ser muy pequeño. WTF.
+
+% TODO restate theorems
+
+Aquí en medio ha desvariado bastante, remontándose hasta el teorema \ref{thm:correspondenciasubgrupos}.
+
+\begin{proof}[Demostración del teorema de Sylow]
+	Procedemos por inducción [fuerte] en $|G|$.
+	\begin{itemize}
+		\item Si $|G| = 1$ no hay mucho que probar porque son grupos muy tontos.
+		\item Suponemos que\footnote{[La clase en silencio]. \textit{Orlando: Se pueden callar por favor.} [El silencio se hace más hueco]. \textit{Orlando: No hagan ruiditos. Me cuesta concentrarme} [agita las manos]. [Sigue la demostración.]} el teorema es válido para $|G| < n$. Distinguimos los siguientes casos:
+		\begin{enumerate}
+			\item $|Z(G)| = 0$
+			\item $|Z(G)| \neq 0$. Entonces $Z(G)$ es un grupo abeliano no trivial. Es decir que $Z(G) \isom \Z/n_1\Z \times \dots \times \Z/n_l\Z$. Como $p$ divide a $|Z(G)|$ podemos suponer que $p$ divide a $n_1$. Entonces $\overline{(n_1/p)} \in \Z/n_1\Z$ y por tanto
+			\begin{align*}
+				(\overline{\left(\frac{n_1}{p}\right)}, \overline{0}, \dots, \overline{0}) \text{ tiene orden } p
+			\end{align*}
+			Es decir que tenemos un $H < Z(G)$ con $|H| = p$.
+			
+			Teníamos de antes que $|G/H| |H| = |G|$. Por inducción existe $\overline{K} < G/H$ de orden $p^{s-1}$. Aplicamos $|K| = |\overline{K}||H|$ y como $|H| = p,\ |\overline{K}| = p^{s-1}$ tenemos que $|H| = p^s$.
+		\end{enumerate}
+	\end{itemize}
+
+	Lo hemos probado para una hipótesis en concreto pero falta algo (no sé el qué). Seguimos con la demostración.
+	\begin{align*}
+		|G| = |Z(G)| + [G:C(a_{s+1})] + \dots  + [G:C(a_r)]
+	\end{align*}
+	$|G|$ es no nulo módulo $p$ y $|Z(G)$ es nulo módulo $p$, por lo que necesariamente tiene que ocurrir que alguno de los $[G:C(a_i)]$ sea no nulo módulo $p$. Supongamos que es el primero, es decir, supongamos que $[G:C(a_{s+1})]$ es no nulo módulo $p$. Además tenemos que
+	\begin{align*}
+		\underbrace{|G|}_{p^sm} = \underbrace{|C(a)|}_{p^sm'}\cdot \underbrace{[G:C(a)]}_{\text{ no divisible por p}}
+	\end{align*}
+	Como $[G:C(a)] \geq 2,\ |C(a)| = p^sm' < |G|$ por inducción el subgrupo $C(a_{s+1})$ tiene un subgrupo de orden $p^s$.
+\end{proof}
