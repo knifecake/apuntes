@@ -160,6 +160,7 @@ Fijamos $a \in G$ y definimos
 \section{Teorema de Cauchy}
 
 \begin{thm}[de Cauchy]
+	\label{thm:cauchy}
 	Sea $G$ un grupo finito con $|G| = n$. Si $p$ es primo y $p\divides n$ entonces $G$ contiene un elemento de orden $p$.
 \end{thm}
 
@@ -168,24 +169,24 @@ Fijamos $a \in G$ y definimos
 	\begin{itemize}
 		\item Si $G$ es abeliano. Descomponemos $|G| = n = p_1^{\alpha_1}p_2^{\alpha_2}\dots p_s^{\alpha_s}$. Por el teorema \ref{thm:noprobado1}, $G \isom \Z/p_1^{\beta_1}\Z \times \Z/p_2^{\beta_2}\Z \times \dots \times \Z/p_s^{\beta_r}\Z$ donde cada $\alpha_i$ es la suma de algunos $\beta_r \qed$.
 		
-		\item Si $G$ no es abeliano. Particionamos $G$ con la relación de equivalencia dada anteriormente (definición \ref{dfn:elementosconjugados}), $aRb \iff \exists g \in G \mid ga\inv{g} = b$. Recordemos que cada clase de equivalencia es de la forma $\overline{c} = \{gc\inv{g} \mid g \in G\}$. Observamos que si partimos de $e$, el elemento neutro, $eRb \implies \exists g \mid ge\inv{g} = b$ pero $\forall g \in G,\ ge\inv{g} = e$ por lo que $\overline{e}$ tiene un único elemento.
+		\item Si $G$ no es abeliano. Particionamos $G$ con la relación de equivalencia dada anteriormente (definición \ref{dfn:elementosconjugados}), $aRb \iff \exists g \in G \mid ga\inv{g} = b$. Recordemos que cada clase de equivalencia es de la forma $\overline{c} = \{gc\inv{g} \mid g \in G\}$. Observamos que si partimos de $e$, el elemento neutro, $eRb \implies \exists g \mid ge\inv{g} = b$ pero $\forall g \in G,\ ge\inv{g} = e$ por lo que $cl(e)$ tiene un único elemento.
 		
-		Tomemos ahora una clase de equivalencia, la que contenga a $a \in G$. La clase es $\overline{a} = \{ga\inv{g} \mid g \in G\}$. Es claro que $a \in \overline{a}$ por la propiedad reflexiva de $R$, luego por lo menos en $\overline{a}$ tiene un elemento.
+		Tomemos ahora una clase de equivalencia, la que contenga a $a \in G$. La clase es $cl(a) = \{ga\inv{g} \mid g \in G\}$. Es claro que $a \in \overline{a}$ por la propiedad reflexiva de $R$, luego por lo menos en $cl(a)$ tiene un elemento.
 		
 		\begin{align*}
-		\overline{a} = \{ga\inv{g} \mid g \in G\} = \{a\} &\iff ga\inv{g} = a,\ \forall g \in G \\
+		cl(a) = \{ga\inv{g} \mid g \in G\} = \{a\} &\iff ga\inv{g} = a,\ \forall g \in G \\
 		&\iff ga = ag,\ \forall g \in G
 		\end{align*}
 		\begin{align*}
-		|\overline{a}| = 1 &\iff \overline{a} = 1 \\
+		|cl(a)| = 1 &\iff \overline{a} = 1 \\
 		&\iff a \in Z(G)
 		\end{align*}
 		
-		Supongamos que la partición está dada por subconjuntos $\overline{a_1}, \overline{a_2}, \dots, \overline{a_s}$. Por ser una partición, cualquier elemento vive en una sola caja, luego para saber cuantos elementos tiene $G$ nos vale con sumar los elementos de cada caja:
+		Supongamos que la partición está dada por subconjuntos $cl(a_1), cl(a_2), \dots, cl(a_s)$. Por ser una partición, cualquier elemento vive en una sola caja, luego para saber cuantos elementos tiene $G$ nos vale con sumar los elementos de cada caja:
 		\begin{align*}
-		|G| = \sum_{i = 1}^{s} |\overline{a_i}| = \sum_{i = 1}^n |\{ga_i\inv{g} \mid g \in G\}|
+		|G| = \sum_{i = 1}^{s} |cl(a_i)| = \sum_{i = 1}^n |\{ga_i\inv{g} \mid g \in G\}|
 		\end{align*}
-		Ahora bien, por la proposición \ref{pro:cardinalcajas} tenemos que $|\overline{a_i}| = [G:C(a_i)]$. Por tanto decir que $|\overline{a_i}| = 1 \implies [G:C(a_i)] = 1 \implies G = C(a_i)$.
+		Ahora bien, por la proposición \ref{pro:cardinalcajas} tenemos que $|cl(a_i)| = [G:C(a_i)]$. Por tanto decir que $|cl(a_i)| = 1 \implies [G:C(a_i)] = 1 \implies G = C(a_i)$.
 		
 		Ahora vamos a dividir el sumatorio en dos: por un lado las cajas de un solo elemento y luego las cajas de varios elementos:
 		\begin{align}
@@ -197,11 +198,12 @@ Fijamos $a \in G$ y definimos
 		
 		\begin{enumerate}
 			\item Caso $n = 1$. $G = \{e\}$ que es obvio.
+			\item Caso $n = 2$. Son grupos cíclicos por lo que $\exists \alpha \in G \mid o(\alpha) = 2$.
 			\item Caso $n \implies n+1$. Pueden pasar dos cosas:
 			\begin{itemize}
-				\item o bien $p \divides |C(a_i)|$ para algún $i = r+1, \dots, s$ entonces, por hipótesis inductiva, $C(a_i)$ contiene algún elemento de orden $p$. Ahora bien, $C(a_i) < G \implies G \implies $ el elemento también está en $G$. Podemos proceder por inducción y todo es genial \qedsymbol
+				\item o bien $p \divides |C(a_i)|$ para algún $i = r+1, \dots, s$ entonces, por hipótesis inductiva, $C(a_i)$ contiene algún elemento de orden $p$. Pues ya está: $C(a_i) < G$ porque $\alpha \in C(a_i) \mid o(\alpha) = p \implies \alpha \in G$ también). \qedsymbol
 				
-				\item o bien $p \not\divides |C(a_i)|,\ \forall i = r+1,\dots,s$. No podemos proceder por inducción. En este caso $[G:C(a_i)]\cdot |C(a_i)| = |G| \implies p \divides [G: C(a_i)],\ i = r+1,\dots, s$. No
+				\item o bien $p \not\divides |C(a_i)|,\ \forall i = r+1,\dots,s$. No podemos proceder por inducción. Por hipótesis $|G| = [G:C(a_i)]\cdot |C(a_i)| \land p \divides |G| \implies p \divides [G: C(a_i)],\ \forall i = r+1,\dots, s$.
 				
 				Como $|G| = |Z(G)| + \sum_{i = r + 1}^{s} [G : C(a_i)]$ y por hipótesis $p \divides |G| \land p \divides [G : C(a_i)], \forall i = r+1,\dots,s \implies p \divides |Z(G)| \implies |Z(G)|$ es múltiplo de $p$. Como $Z(G)$ es abeliano, $\exists \alpha \in Z(G) \mid o(\alpha) = p$. Luego se reduce al caso abeliano y ya estaría \qedhere
 			\end{itemize}
@@ -258,9 +260,10 @@ Nos interesan sobre todo los p-grupos no abelianos
 	Tenemos que $Z(D_4) = \{1,B^2\}$ y $Z(H) = \{1, B^2\}$ donde $H$ es el grupo de cuateriones (ejemplo \ref{ej:grupocuaterniones}) y $D_4$ es el famoso grupo (ejemplo \ref{ej:famosogrupod4}). 
 \end{ej}
 
-\begin{thm}
+\begin{pro}
+	\label{pro:primocuadradoabeliano}
 	Si $p$ es primo y $|G| = p^2$ entonces $G$ es abeliano.
-\end{thm}
+\end{pro}
 
 \begin{proof}
 	Por el la demostración del teorema anterior tenemos que o bien $|Z(G)| = p$ o bien $|Z(G)| = p^2$. Afirmamos que $|Z(G)| \neq p$ ya que si fuera así $|G/Z(G)| = p \implies G/Z(G)$ cíclico pero hemos probado (proposición \ref{pro:triplecentro}) que $G/Z(G)$ no puede ser cíclico. Por lo tanto $|Z(G)| = p^2 \implies Z(G) = G \implies G$ es abeliano.
@@ -298,7 +301,7 @@ descomponiendo la suma en las clases con solo un elemento y las clases con más 
 \begin{ej}
 	Consideramos $D_3$ (ver ejemplo \ref{ej:grupod3}). Nos fijamos en que $B \not\in Z(D_3)$ es decir que en $cl(B)$ hay más de un elemento. En particular por lo visto anteriormente $|cl(B)| = [G:C(B)]$. Ahora bien $C(B) = \{1, B, B^2\}$ luego $|cl(B)| = [G:C(B)] = 2$. La pregunta es ¿quién es el compañero de $B$ en su clase? Es fácil, recordamos que $\phi_g (x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo y que $\{1, B, B^2\}$ es normal, por lo que $o(B) = o(\phi_g(B)) = 2$. Entonces $\phi_g(B) \neq 1$ porque no coinciden los órdenes, de manera que $\phi_g(B) = B^2$ por necesidad. Luego el otro elemento es el $B^2$.
 	
-	¿Qué pasa con el elemento $A$? Pues ocurre que $A \in C(A)$ y $\{1, A\} \in C(A)$. me faltan cosaaaasss
+	¿Qué pasa con el elemento $A$? Pues ocurre que $A \in C(A)$ y $\{1, A\} \in C(A)$ y en realidad no puede haber más porque si hubiese un tercero, $\{1, A\}$ es un subgrupo de orden 2 $\implies o(\{1, A\})$ no divide a 3 $\implies$ si hubiese más, $C(A) = D_3$ y eso no puede ser $\implies C(A) = \{1, A\} \implies |cl(A)| = [D_3:C(A)] = 6/2 = 3$. Como las clases son disjuntas los tres elementos sobrantes forman la última caja.   
 	
 	Para conlcuir queda que la relación $\sim$ parte $D_3$ en 3 cajas, a saber:
 	\begin{align*}
@@ -367,7 +370,7 @@ Ojo, decir que $hS\inv{h} = S$ no significa que $\forall b_i \in S,\ hb_i\inv{h}
 Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos que dado $g\in G$, $\phi_g$ es un isomorfismo por tanto manda elementos de un subgrupo en otro subgrupo (si el subgrupo es normal, manda elementos de un subgrupo en sí mismo).
 
 \begin{pro}
-	$H \subset N(H)$
+	$H < N(H)$
 \end{pro}
 
 \begin{proof}
@@ -432,6 +435,8 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 
 \begin{ej}
 	Vamos ahora con el grupo de cuaterniones $H$ descrito en el ejemplo \ref{ej:grupocuaterniones}.
+	
+	
 	
 	\begin{enumerate}
 		\item Nos dibujamos el retículo.

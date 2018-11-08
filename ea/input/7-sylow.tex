@@ -8,11 +8,28 @@ Son muchos teoremas para grupos finitos en los que el orden se puede expresar co
 \begin{align}
 	|G| = p^s m,\ mcd(p, m) = 1, s \geq 1
 \end{align}
-Veremos y discutiremos algunos de ellos.
+Veremos y discutiremos 3 de ellos. Sirven sobre todo para contar cosas.
+
+\begin{dfn}[P-subgrupo de Sylow]
+	Dado $G$ con $|G| = p^sm$ con $mcd(p,m) = 1,\ s \geq 1$, un p-subgrupo de Sylow de $G$ es un subgrupo $P < G$ con $|P| = p^s$.
+\end{dfn}
 
 \begin{thm}
 	[Primero de Sylow]
-	Sea $G$ un grupo tal que $|G| = p^s m,\ mcd(p, m) = 1, s \geq 1$. Entonces existe $H < G$ con $|H| = p^s$.
+	\label{thm:sylow1}
+	Sea $G$ un grupo tal que $|G| = p^s m,\ mcd(p, m) = 1, s \geq 1,\ p$ primo. Entonces existe un p-subgrupo de Sylow $H_1 < G$ con $|H_1| = p^s$.\footnote{Este teorema es el recíproco de algo que ya sabíamos. Podíamos afirmar que si $P < G$ y $|P| = p^s$ entonces $p^s$ dividía a $|G|$. Lo que dice el primer teorema de Sylow es que el recíproco es cierto.}
+\end{thm}
+
+El teorema de Cauchy (\ref{thm:cauchy}) es una versión más débil de este primer teorema de Sylow.
+
+\begin{thm}[Segundo de Sylow]
+	\label{thm:sylow2}
+	Sea $G$ grupo con $|G| = p^s m, mcd(p, m) = 1, s \geq 1$. Sea $P$ un p-subgrupo de Sylow fijado. Si $Q$ es un p-subgrupo de Sylow de $G$ entonces $\exists g \in G \mid q \subset gP\inv{g}$.
+\end{thm}
+
+\begin{thm}[Tercero de Sylow]
+	\label{thm:sylow3}
+	Sea $F = \{g P \inv{g} \mid g \in G \} = \{P = P_{1}, \dots, P_{n_p}\}$ el conjunto de p-subgrupos de Sylow de $G$. Entonces $n_p$ divide a $m$ y $n_p \equiv 1 \mod p$.
 \end{thm}
 
 Hemos hecho mucho hincapié en los subgrupos normales y tenemos que si $N \normsub G$ entonces existe $\pi:G \to G/N$ homomorfismo de grupos\footnote{Por teoría de conjuntos tenemos que $\pi$ es una función que existe y está bien definida, pero aquí interesa que además es homomorfismo.}. Además teníamos que $|G| = |G/N| \cdot |N|$.
@@ -56,3 +73,201 @@ Aquí en medio ha desvariado bastante, remontándose hasta el teorema \ref{thm:c
 	\end{align*}
 	Como $[G:C(a)] \geq 2,\ |C(a)| = p^sm' < |G|$ por inducción el subgrupo $C(a_{s+1})$ tiene un subgrupo de orden $p^s$.
 \end{proof}
+
+% 20181105
+
+\begin{ej}
+	Supongamos $|G| = 2^2 \cdot 11 \cdot 13$. Por el teorema de Sylow tenemos que existen subgrupos $P_2, P_{11}, P_{13} < G$ con órdenes $|P_2| = 2^2,\ |P_{11}| = 11,\ |P_{13}| = 13$. Sin embargo no podemos garantizar que exista un $Q$ con orden $|Q| = 2^2 \cdot 13$. Si ocurriera esto sería buenísimo porque existiría un $P < G$ con $P \cap Q = \{e\}$ y por tanto $P\cdot Q = G$ y automáticamente $G \isom P \times_{\phi} Q$. Esto no ocurre porque en general no sabemos si $P_2$ y $P_13$ son normales y por tanto no podemos garantizar que $Q = P_2 \cdot P_13$ sea siquiera un grupo.
+	
+	Lo interesante del ejemplo anterior es que si tenemos $G$ descompuesto como producto directo de dos grupos y uno de ellos es normal, entonces tenemos automáticamente un producto semidirecto. Sin embargo, si tenemos $G$ descompuesto en 3 grupos, no basta con que uno sea normal, sino que tienen que ser normales 2. Supongamos $G$ se descompone en $P,Q,R$. Necesitamos que $P$ sea normal para que $P\cdot Q$ sea grupo. Y necesitamos que $R$ sea normal para que $(P\cdot Q) \cdot R$ sea también un grupo y podamos dar un producto semidirecto.
+\end{ej}
+
+
+
+Resultado muy fuerte que hay que saber probar.
+
+\begin{thm}
+	\label{thm:interseccionneutroconmutan}
+	Sea $G$ un grupo, $H_1, H_2 \normsub G \land H_1 \cap H_2 = \{e\}$. Entonces $\forall h_1 \in H_1,\ h_2 \in H_2$ se tiene que $h_1 h_2 = h_2 h_1$.
+\end{thm}
+
+\begin{proof}
+	Probaremos que $h_1 h_2 \inv{h_1} \inv{h_2} = e$. Para ello probaremos que $h_1 h_2 \inv{h_1} = h_2$. Sabemos que por ser $H_2 \normsub G$ tenemos que $h_1 H_2 \inv{h_1} = H_2$. Es decir, que $h_1 h_2 \inv{h_1} \in H_2$. Si multiplicamos a la derecha por $\inv{h_2} \in H_2$ nos sigue quedando un elemento de $H_2$: $h_1 h_2 \inv{h_1} \inv{h_2} \in H_2$. Para $H_1$ tenemos lo mismo: $h_2 h_1 \inv{h_2} \inv{h_1} \in H_1$. Por alguna razón estos dos elementos son el mismo y como pertenece a ambos subgrupos entonces pertenece a la intersección y por tanto $h_1 h_2 \inv{h_1} \inv{h_2} = e$.
+\end{proof}
+
+\begin{ej}
+	Consideramos $D_4$ que es un p-grupo pues $|D_4| = 2^3$. En este caso el centro no es el trivial: $Z(D_4) = \{1, B^2\}$.
+\end{ej}
+
+\begin{ej}
+	Consideramos $H$ (el grupo de cuaterniones, ejemplo \ref{ej:grupocuaterniones}, y su retículo, figura \ref{fig:ig:reticulocuaterniones}) que también es un p-grupo pues $|H| = 2^3$. El retículo de este grupo es extraño y volvemos a tener que $Z(H) = \{1, B^2\}$.
+\end{ej}
+
+\begin{ej}
+	Si $G$ es un p-grupo con $|G| = p^s$ entonces $G$ tiene subgrupos de orden $1, p, p^2, \dots, p^s$.
+\end{ej}
+
+\begin{proof}
+	Procedemos por inducción en $s$. Para $s = 1$ es trivial: el subgrupo es el propio $G$.
+	
+	Supongamos que $|Z(G)| = p^{s'}$ con $s' \leq s$. Sabemos que $Z(G) \normsub G$ y además todo subgrupo de $Z(G)$ es normal en $G$. $\exists \alpha \in Z(G) \mid o(\alpha) = p$. Tenemos que $\langle \alpha \rangle < Z(G)$ y por tanto $\langle \alpha \rangle \normsub G$. Consideramos ahora $G \to G/\langle \alpha \rangle$. Tenemos que $|G/\langle \alpha \rangle| = p^{s-1}$
+\end{proof}
+
+\begin{ej}[de aplicación de los teoremas de Sylow]
+	Sea $G$ con $|G| = 3\cdot 5$.
+	\begin{itemize}
+		\item Tenemos por el primer teorema de Sylow (\ref{thm:sylow1}) que existen $P_3, P_5 < G$ con $|P_3| = 3,\ |P_5| = 5$ (aplicamos el teorema dos veces primero cogiendo $p = 3$ y luego $p = 5$).
+		\item Tenemos también que $P_3 \cap P_5 = \{e\}$ ya que los elementos de $P_3$ tienen orden que divide a 3 y los elementos de $P_5$ orden que divide a 5, por tanto, los elementos de la intersección tienen que tener orden que divida a 3 y a 5 por lo que solo puede ser el neutro.
+		\item Como $P_3 \cap P_5 = \{e\}$ sabemos por el teorema \ref{thm:cardinalidadproductolibre} que $P_3 P_5$ tiene 15 elementos. Si fuéramos capaces de probar que alguno de ellos es normal tendríamos un producto semidirecto.
+		\begin{itemize}
+			\item Aplicamos el tercer teorema de Sylow (\ref{thm:sylow3}) para averiguar quién es $n_3$ (el número de 3-subgrupos de Sylow en $G$). Tomamos $|G| = 3^1 \cdot 5$ (cogemos $p = 3,\ m = 5$). Entonces $n_3 \in \{1, 5\}$ pues $n_3$ tiene que dividir a $m = 5$. Además $n_3 \equiv 1 \mod 3 \implies n_3 \in \{1, 4, 7, \dots\}$. Concluimos que $n_3 = 1$.
+			\item De aquí concluímos que el único conjugado de $P_3$ es $P_3$ (solo hay un 3-subgrupo de Sylow en 3, es decir, $\{g P \inv{g} \mid g \in G\} = \{P\} \implies gP\inv{g} = P,\ \forall g \in G \implies gP = Pg,\ \forall g$) luego $P_3 \normsub G$.\footnote{Orlando: \textit{Esto es buenísimo!} [Se alegra muchísimo de lo que acaba de probar.]}
+			\item Hacemos lo mismo con $n_5$ y obtenemos que $n_5 = 1$ y concluímos que $P_5 \normsub G$.
+		\end{itemize}
+		\item No solo uno de ellos es normal, sino que los dos son normales. Tenemos un producto semidirecto y concluímos que $G \isom \Z/3\Z \times \Z/5\Z$.
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Hacemos lo mismo con un grupo $G$ que tiene $|G| = 2\cdot 7$.
+	\begin{itemize}
+		\item Del primer teorema de Sylow (\ref{thm:sylow1}) tenemos que $\exists P_2, P_7 < G$ con órdenes $|P_2| = 2,\ |P_7| = 7$.
+		\item Es claro que $P_7$ tiene que ser normal (de dibujarlo) pero aún así supongamos que no sabemos contar y somos creyentes de los teoremas de Sylow, veamos que $P_7$ es normal.
+		\begin{itemize}
+			\item Obtenemos $n_7$ del tercer teorema:
+			\begin{align*}
+				\begin{cases}
+				n_7 \text{ divide a } 2 \\
+				n_7 \equiv 1 \mod 7
+				\end{cases} \implies n_7 = 1
+			\end{align*}
+			\item Análogamente obtenemos que $n_2 = 1$.
+		\end{itemize}
+		\item Volvemos a tener dos subgrupos normales y tenemos que $|P_2 \cdot P_7| = 2 \cdot 7$ (con un razonamiento análogo al de antes) de lo que obtenemos un producto semidirecto y por tanto $G \isom \Z/2\Z \times \Z/7\Z$.
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Consideramos el grupo $S_4$ que tiene orden $|S_4| = 4! = 4\cdot 3 \cdot 2 = 2^3 \cdot 3$.
+	\begin{itemize}
+		\item Del primer teorema de Sylow obtenemos que $\exists P_2, P_3 < S_4$ con $|P_2| = 8,\ |P_3| = 3$.
+		\item ¿Será $S_4$ un producto semidirecto? ¿Será $P_2$ o $P_3$ un subgrupo normal?
+		\begin{itemize}
+			\item Veamos quien es $n_3$. Por el tercer teorema de Sylow (\ref{thm:sylow3}) tenemos que $n_3$ divide a $m = 8$ y que $n_3 \equiv 1 \mod p = 3$. Con estas condiciones tenemos que $n_3$ puede ser o bien 1 o bien 4.
+			
+			Recordemos que $\sigma \in S_4 \land o(\sigma) = 3 \iff \sigma$ es un ciclo de longitud 3. Y recordemos que en $S_4$ había 8 ciclos de longitud 3. Entonces tenemos que $n_3$ no puede ser 1 ya que en tal caso $P_3 \normsub S_4$ y por tanto en $S_4$ habría solo 2 ciclos de orden 3 resulta que hay ocho. Concluimos que $n_3 = 4$.\footnote{Efectivamente, de entre los 8 ciclos de longitud 3 que hay en $S_4$ salen 4 parejas que viven cada una en uno de los conjugados de $P_3$.}
+			\item Veamos quien es $n_2 = \{gP_2\inv{g} \mid P\} = \{P_2 = P_2^{(1)}, \dots, P_2^{(n_2)}\}$. Por el tercer teorema de Sylow (\ref{thm:sylow3}) tenemos que $n_2$ divide a $m = 3$ y que $n_2 \equiv 1 \mod p = 2$. Con estas condiciones tenemos que $n_2$ puede ser o bien 1 o bien 3.
+			
+			Para $n_2 = 1$ tendríamos que $P_2 \normsub S_4$ y por tanto todos los elementos de orden par tendrían que vivir en $P_2$. De orden 2 hay 6 elementos y de orden 4 hay otros 6, es decir, que en $P_2$ que es un grupo de orden 8, viven al menos $6 + 6 = 12$ con lo cual llegamos a una contradicción. Por lo que necesariamente $n_2 = 3$.
+		\end{itemize}
+		\item Pues no, ninguno de los p-subgrupos de Sylow que encontramos es normal.
+		\item No hemos conseguido un producto semidirecto, pero vamos a probar que $P_2 \isom D_4$ (y por extensión todos sus conjugados porque tenemos el isomorfismo de conjugación entre ellos). Para eso, haremos una presentación de $P_2$ análoga a la de $D_4$ (ver ejemplo \ref{ej:famosogrupod4}).
+		\begin{itemize}
+			\item Tomamos $A = (13), B = (1234)$. ¿Por qué? Por el contexto geométrico de $D_4$ que se puede ver en el ejemplo \ref{ej:famosogrupod4}. Recordemos que la $A$ es la simetría y $B$ es el giro.
+			\item Vemos que todo funciona y que la presentación queda igual que la de $D_4$.
+		\end{itemize}
+	\end{itemize}
+\end{ej}
+
+
+% 20181106 teoría
+
+
+% 20181107 teoría
+
+Cogemos un grupo de Sylow $|G| = p^sm mcd(m,p) = 1, s \geq 1$. Tenemos para el $F$ del segundo tercer teorema de Sylow que $|F| = |F_1| + |F_2| + \dots + |F_l|$ donde cada $F_j = \{qP_{i_j}\inv{q} \mid q \in Q\}$ y $|F_j| = [Q:N_Q(P_{i_j})]$.
+
+\begin{pro}
+	Si $Q$ es un p-subgrupo de Sylow y $P'$ es un p-subgrupo de Sylow entonces el normalizador de $P'$ en $Q$ es
+	\begin{align*}
+		N_Q(P') = P' \cap Q
+	\end{align*}
+\end{pro}
+
+De aquí obtenemos que $|F_j| = [Q:N_Q(P_{i_j})] = [Q:Q \cap P_{i_j}]$. Como $Q, P_{i_j}$ son p-subgrupos tienen órdenes que son potencias de $p$ por lo que $|F_j$ es cociente de potencias de $p$ y por tanto es potencia de $p$.
+
+\begin{obs}[para la prueba del tercer teorema de Sylow]
+	$n_p \equiv 1 \mod p$
+\end{obs}
+
+\begin{proof}
+	En particular, tomamos $P = Q$. En este caso, la clase de $P$, $F_1 = \{pP\inv{p} \mid p \in Q = P\} = \{P\}$. $|F_2| = [Q:N_Q(P_{i_2})] = [P:P \cap P_{i_2}] = p_{r_2}$ porque $P$ y $P_{i_2}$ no son iguales.
+\end{proof}
+
+\begin{obs}Si $Q$ es un p-subgrupo de Sylow de $G$ entonces $Q \subset gP\inv{g}$ para algún $g \in G$.
+\end{obs}
+
+\begin{proof}
+	Procedemos por refutación: supongamos que $Q \not \subset F$. Recordemos que 
+	\begin{align*}
+		|F| = |F_1| + |F_2| + \dots + |F_s| \qquad |F_k| = [Q:Q\cap P_{i_j}]
+	\end{align*}
+	Si afirmamos que $Q \not \subset Q$ entonces $|F_j|$ tiene que ser un múltiplo de $p$ ya que al hacer la intersección $Q \cap P_{i_j}$ obtenemos un conjunto propio. De este modo, $|F| = \sum |F_j|$ también es un múltiplo de $p$. La contradicción llega con la observación anterior, ya que $|F| \equiv 1 \mod p$.
+\end{proof}
+
+Lo interesante de verdad es el corolario que obtenemos de esta observación:
+
+\begin{cor}
+	$F$ es el conjunto de todos los subgrupos de Sylow de $G$.
+\end{cor}
+
+\begin{obs}
+	Por último probaremos que $n_p \divides m$.
+\end{obs}
+
+\begin{proof}
+	$F = \{g P \inv{g} \mid g \in G\}$ y tenemos que $|F| = [G:N_G(F)] \land |G| = p^s m \land P \subset N(P)$. Además
+	\begin{align*}
+		\underbrace{|G|}_{p^sm} = \underbrace{|P|}_{p^s}\underbrace{[G:P]}_{m}
+	\end{align*}
+	Ahora $P \subset N(P)$ y también $|G| = |N(P)[G:N(P)]$.
+\end{proof}
+
+\begin{ej}
+	Consideramos $|S_5| = 5! = 5\cdot 4!$ tomamos $p = 5, m = 4!, s = 1$.
+	\begin{itemize}
+		\item Por el primer teorema tenemos que existen subgrupos de orden $p^s = 5$. Esto ya lo sabíamos. 
+		\item De hecho hasta sabíamos que había $4! = 24$ ciclos de longitud 5. Como $p = 5$ es un número primo, los subgrupos de orden 5 no tienen elementos en común. Cada subgrupo tendrá 4 elementos y como hay 24 ciclos de orden 5 habrá 6 subgrupos de orden 5.
+	\end{itemize}
+\end{ej}
+
+% 20181108
+
+\begin{ej}
+	\label{ej:clasificacionsylow}
+	Sea $G$ un grupo, $H < G, N < G$ subgrupos. Recordemos que si $H\cap N = \{e\}, HN = G \land N \normsub G$ entonces existe un producto semidirecto para el que $G \isom H \times_\phi N$. Si $|G| = p^a q^b$ con $p \neq q$ primos, entonces existen $P_p, P_q < G$ con $|P_p| = a, |P_q| = b$. Además se tiene que $P_p \cap P_q = \{e\}, |P_pP_q| = |P_p||P_q|$ y por tanto $P_pP_q = G$.
+	
+	Realizamos un estudio sistemático de los grupos dado el orden similar al del teorema \ref{thm:clasificacionfinitos} pero utilizando los teoremas de Sylow
+	\begin{itemize}
+		\item Si $|G| = 1$ no tiene interés estudiarlo.
+		\item Si $|G| = 2, 3$ entonces $G \isom \Z/2\Z$ o $G\isom \Z/3\Z$.
+		\item Si $|G| = 4 = 2^2$ entonces $G$ es abeliano. Lo demostramos en la proposición \ref{pro:primocuadradoabeliano} para todo grupo de orden $p^2$ con $p$ primo.
+		\item Si $|G| = 5$ entonces $G \isom \Z/5\Z$.
+		\item Si $|G| = 6 = 2\cdot 3$ entonces $G \isom \Z/2\Z \times \Z/3\Z$ o $G \isom D_3$. Sabemos por Sylow que existen $P_2, P_3 < G$ con $|P_2| = 2, |P_3| = 3$. Además del tercer teorema de Sylow obtenemos $n_3 = 1$, es decir que en $F_3$ tenemos solo un grupo. Para $n_2$ solo tenemos que $n_2 = 1, 3$. Ahora bien, como $n_3 = 1$ tenemos que $P_3 < G$. Por tanto, existe un producto semidirecto para el que $G \isom P_3 \times_\phi P_2  = \Z/3\Z \times \Z/2\Z$\footnote{Por convención ponemos el normal primero, para poder aplicar directamente la construcción sin liarnos.}.
+		
+		Veamos que de este producto semidirecto nos salen dos estructuras. En primer lugar vemos quiénes son $N$ y $H$. En este caso el grupo normal es $P_3$ por lo que $N = P_3$ y $H = P_2$. Veamos los automorfismos interiores $Int:H \to Aut(\Z/3\Z) = (\{\overline{1}, \overline{2}\}, \cdot) = \uds{Z/3\Z}$. Como $Aut(\Z/3\Z)$ tiene dos elementos, obtenemos dos estructuras
+		\begin{itemize}
+			\item Si tomamos que $e_H \mapsto e_{Aut(Z/3\Z)} = \overline{1}$ entonces encontramos que $G \isom \Z/3\Z \times \Z/2\Z$.
+			\item Si tomamos que $e_H \mapsto \overline{2}$ ocurre que $G \isom D_3$. Vamos a verlo.
+			
+			Supongamos que $P_3 = \langle a \rangle, o(a) = 3$. Si para algún $h\in H$ definimos la conjugación $hx\inv{h}$ para $x \in G$ tenemos que como $P_3 \normsub G$ entonces $hP_3\inv{h} = P_3$. Ahora supongamos que $H = P_2 = \langle b \rangle, o(b) = 2$. Entonces para un $b$, con el automorfismo seleccionado $a \mapsto ba\inv{b} = a^2 \implies ab = ba^2$ y llegamos a la presentación de $D_3$ (con las a's y las b's cambiadas.)
+		\end{itemize}
+		
+		\item Si $|G| = 7$ entonces $G \isom \Z/7\Z$.
+		\item Si $|G| = 8$ Sylow dice poco. Lo vimos en algún sitio %TODO cita requerida
+		\item Si $|G| = 9$ tampoco tenemos mucho que decir
+		\item Si $|G| = 10 = 2\cdot 5$. Como de costumbre sabemos que existen $P_2, P_5 < G$ con los ordenes correspondientes. Por el tercer teorema llegamos a que $n_5 = 1$ y por tanto a que $P_5 \normsub G$. Para $P_2$ no tenemos nada, pero solo por ser $P_5$ normal existe un producto semidirecto para el que $G \isom P_5 \times P_2 \isom \Z/5\Z \times_\phi \Z/2\Z$. Como en el caso de $|G| = 6$ obtendremos dos estructuras.
+		
+		Tomamos $N = P_5, H = P_2$. Tenemos que definir morfismos $Int: \Z/2\Z \to Auto(\Z/5\Z) = (\{\overline{1}, \overline{2}, \overline{3}, \overline{4}\}, \cdot ) = \uds{\Z/5\Z}$. Para ver cuantos morfismos salen veamos el orden de los elementos de $Aut(\Z/5\Z)$: Los elementos $\{\overline{1}, \overline{2}, \overline{3}, \overline{4}\}$ tienen órdenes $1,4,4,2$ respectivamente. En $\Z/2\Z = \{\overline{0}, \overline{1}\}$ tenemos dos posibilidades\footnote{Estamos abusando un poco de la notación de clases, ir con cuidado.} Un automorfismo viene dado por donde enviamos el generador de $\Z/2\Z$ en este caso el $\overline{1}$.
+		\begin{itemize}
+			\item Si $\overline{1} \mapsto \overline{1}$ obtenemos el homomorfismo trivial y por tanto la estructura dada por la presentación $o(a) = 5, o(b) = 2, ba\inv{b} = a \implies G \isom \Z/2\Z \times \Z/5\Z$ abeliano.
+			\item Si $\overline{1} \mapsto \overline{4}$ la estructura que obtenemos es $o(a) = 5, o(b) = 2, ba\inv{b} = a^4 = a^{-1}$. Esta presentación es la del grupo $D_5$.
+		\end{itemize}
+	\item Si $|G| = 11$ pasa la historia de los primos.
+	\item Si $|G| = 12 = 2^2 \cdot 3$. Entonces del tercero de Sylow tenemos $n_3 = 1, 4$ y $n_2 = 1, 3$. Tristeza.\footnote{Orlando: \textit{Sylow nunca dice toda la verdad, se puede hilar más fino.}}
+	
+	Ahora se le ocurre afirmar que no puede ocurrir que $n_2 = 3 \land n_3 = 4$ simultáneamente.
+	
+	Supongamos que $n_3 = 4$ entonces habría 4 subgrupos de orden 3 y por tanto habría $2 \cdot 4$ elementos de orden 3 (el neutro tiene orden 1). Ya tenemos 9 elementos bajo control. Para controlar los 12 nos faltan 3 elementos que llamaremos $a,b,c$ y que podrían formar un grupo con el neutro: $\{e, a, b, c\}$. Efectivamente esto dice Sylow, que hay un subgrupo de orden 4 ($a,b,c$ no pueden tener orden 3 porque si no no podrían pertenecer a un grupo de orden 4). Como ya hemos agotado los elementos, no es posible que haya más subgrupos de orden 4, por lo que necesariamente $n_2 = 1$. 
+	\end{itemize}
+\end{ej}

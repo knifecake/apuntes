@@ -221,6 +221,7 @@ Observemos que la hipótesis de abeliano es fundamental (ver ejemplo \ref{ej:noh
 \label{gruposfinitosnotables}
 
 \begin{thm}[Grupos notables de distintos órdenes finitos.]$ $\newline
+ \label{thm:clasificacionfinitos}
 	
 	\begin{itemize}
 		\item $|G| = 3, 5, 7, 11 \dots, p$ donde $p$ es primo:
@@ -280,7 +281,7 @@ Observemos que la hipótesis de abeliano es fundamental (ver ejemplo \ref{ej:noh
 
 \begin{ej}
 	\label{ej:orden8noabisom}
-	Probar que si $G$ es un grupo no abeliano entonces o bien $G \isom D_4$ o bien $G \isom H$ donde $H$ es el grupo de cuaterniones (ver ejemplo \ref{ej:grupocuaterniones}).
+	Probar que si $G$ es un grupo no abeliano con $|G| = 8$ entonces o bien $G \isom D_4$ o bien $G \isom H$ donde $H$ es el grupo de cuaterniones (ver ejemplo \ref{ej:grupocuaterniones}).
 \end{ej}
 
 \begin{proof}$ $\newline
@@ -397,37 +398,94 @@ Lo mismo podríamos hacer para obtener el retículo de $\Z/6\Z$ (ver figura \ref
 	\caption{Retículo de subgrupos de $\mathbb{Z}/6\mathbb{Z}$}
 \end{figure}
 
-\begin{ej}
+\begin{ej}[Retículo de subgrupos de $D_4$]
 	Dar el retículo de subgrupos de $D_4 = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$, donde $o(A) = 2,\ o(B) = 4,\ BA=AB^3$. En este caso no tenemos más remedio que ir probando a ver qué combinaciones de elementos dan subgrupos. Como conocemos de dónde viene $D_4$ nos es más fácil (ver el ejemplo \ref{ej:famosogrupod4}).
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\node (d4) at (0, 3) {$D_4$};
+		\node (1ab) at (-2, 2) {$\langle 1, AB, A^2, AB^3\rangle$};
+		\node (b) at (0, 2) {$\langle B \rangle$};
+		\node (1ab2) at (2, 2) {$\langle 1, A, B^2, AB^2\rangle$};
+		\node (ab) at (-3, 1) {$\langle AB \rangle$};
+		\node (ab3) at (-1.5, 1) {$\langle AB^3 \rangle$};
+		\node (b2) at (0, 1) {$\langle B^2\rangle$};
+		\node (a) at (1.5, 1) {$\langle A \rangle$};
+		\node (ab2) at (3, 1) {$\langle AB^2 \rangle$};
+		\node (e) at (0,0) {$\{1\}$};
+		
+		
+		\draw (e) -- (ab) -- (1ab) -- (d4);
+		\draw (e) -- (ab3) -- (1ab) -- (d4);
+		\draw (e) -- (b2) -- (b) -- (d4);
+		\draw (e) -- (a) -- (1ab2) -- (d4);
+		\draw (e) -- (ab2) -- (1ab2) -- (d4);
+		\draw (b2) -- (1ab);
+		\draw (b2) -- (1ab2);
+	\end{tikzpicture}
+	\caption{Retículo de subgrupos de $D_4$}
+	\label{fig:reticuloD4}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.25\textwidth]{reticulo-D4}
+	\label{fig:reticuloD4dibujo}
+	\caption{Retículo de subgrupos de $D_4$ de \cite{d4sub}}
+\end{figure}
 	
+	\textit{Nos ayudamos de la imágen para sacarlos. La manera de hacerlo sin tener más información que la presentación del grupo es hacerse todos los subgrupos generados por cada elemento y descartar los que son iguales. Luego hacerse todos los subgrupos generados por dos elementos y descartar los que son iguales. Por alguna razón no hace falta probar con los generados por más de dos elementos. Una vez obtenidos estos grupos establecemos las relaciones de inclusión y creamos el diagrama de Hasse.}
+\end{ej}
+
+\begin{ej}
+	Retículo de subgrupos del grupo de cuaterniones $H$ (figura \ref{fig:reticulocuaterniones})
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.25\textwidth]{reticulo-D4}
-		\label{fig:reticuloD4}
-		\caption{Retículo de subgrupos de $D_4$ de \cite{d4sub}}
+		\begin{tikzpicture}
+		\node (H) at (0,3) {$H$};
+		\node (ab) at (-1.5, 2) {$\langle A, B\rangle$};
+		\node (a) at (0,2) {$\langle A \rangle$};
+		\node (b) at (1.5,2) {$\langle B \rangle$};
+		\node (b2) at (0,1) {$\{A^2 = B^2\}$};
+		\node (e) at (0,0) {$\{e\}$};
+		
+		\draw (e) -- (b2) -- (a) -- (H);
+		\draw (b2) -- (ab) -- (H);
+		\draw (b2)-- (b) -- (H);
+		\end{tikzpicture}
+		\caption{Retículo de subgrupos del grupo de cuaterniones $H$.}
+		\label{fig:reticulocuaterniones}
 	\end{figure}
-	
-	\textit{Nos ayudamos de la imágen para sacarlos. La manera de hacerlo sin tener más información que la presentación del grupo es hacerse todos los subgrupos generados por cada elemento y descartar los que son iguales. Luego hacerse todos los subgrupos generados por dos elementos y descartar los que son iguales. Por alguna razón no hace falta probar con los generados por más de dos elementos. Una vez obtenidos estos grupos establecemos las relaciones de inclusión y creamos el diagrama de Hasse.}
-	\begin{itemize}
-		\item Abajo tenemos el subgrupo trivial: $\{1\}$
-		\item En la primera fila tenemos, de izquierda a derecha:
-		\begin{itemize}
-			\item $\{1, AB^2\}$
-			\item $\{1, A\}$
-			\item $\{1, B^2\}$
-			\item $\{1, AB^3\}$
-			\item $\{1, AB\}$
-		\end{itemize}
-		\item En la segunda fila tenemos los subgrupos de 4 elementos, de izquierda a derecha:
-		\begin{itemize}
-			\item $\{1, B^2, A, AB^2\}$
-			\item $\{1, B, B^2, B^3\}$
-			\item $\{1, AB, B^2, AB^3\}$
-		\end{itemize}
-		\item Y por último el grupo completo: $D_4 = \{1, B, B^2, B^3, A, AB, AB^2, AB^3\}$.
-	\end{itemize}
 \end{ej}
+
+\begin{ej}[Retóculo de subgrupos de $D_5$]
+	\label{ej:reticulod5}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\node (d5) at (0,2) {$D_5$};
+			\node (a) at (-3.75, 1) {$\langle A \rangle$};
+			\node (ab) at (-2.25, 1) {$\langle AB \rangle$};
+			\node (ab2) at (-0.75, 1) {$\langle AB^2 \rangle$};
+			\node (ab3) at (0.75, 1) {$\langle AB^3\rangle$};
+			\node (ab4) at (2.25, 1) {$\langle AB^4\rangle$};
+			\node (b) at (3.75, 1) {$\langle B \rangle$};
+			\node (e) at (0,0) {$\{1\}$};
+			
+			\draw (e) -- (a)   -- (d5);
+			\draw (e) -- (ab)  -- (d5);
+			\draw (e) -- (ab2) -- (d5);
+			\draw (e) -- (ab3) -- (d5);
+			\draw (e) -- (ab4) -- (d5);
+			\draw (e) -- (b)   -- (d5);
+		\end{tikzpicture}
+		\caption{Retículo de subgrupos de $D_5$.}
+	\end{figure}
+\end{ej}
+
+
 
 \section{Construcción de homomorfismos e isomorfismos de grupos}
 
@@ -542,3 +600,4 @@ Queremos analizar los homomorfismos $f:\ZnZ \to \ZnZ$. Ahora no importa el $\ove
 Para que $f$ sea epimorfismo, necesitamos que $\ima f = \langle \overline{a} \rangle = \ZnZ$ es decir que $o(a)$ sea coprimo con $n$.
 
 Concluímos que $\text{Aut}(\ZnZ) \subset \text{Hom}(\ZnZ, \ZnZ)$.
+
