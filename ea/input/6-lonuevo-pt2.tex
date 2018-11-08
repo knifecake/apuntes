@@ -61,7 +61,7 @@ A continuación demostraremos que el grupo alternante $A_n$, es simple para $n\g
 \end{proof}
 \begin{pro}
 	\label{pro:3cicloinsubgralter}
-	Para $n\geq 5$, todo $H \triangleleft A_n$ contiene un 3-ciclo.
+	Para $n\geq 5$, todo $H \normsub A_n$ contiene un 3-ciclo.
 \end{pro}
 \begin{proof}
 	Sea $e \not \eq \sigma \in H$, existen varias posibles estructuras de ciclos para $\sigma$.
@@ -184,7 +184,7 @@ Y podemos probar que $G_1^\ast$ es normal, sean $g_1 \in G_1$ y $g_2 \in G_2$:
 		\item $G_1^\ast \cap G_2^\ast = \{(e_1,e_2)\}$
 		\item $G_1^\ast \cdot G_2^\ast = G_1 \times_\alpha G_2$
 	\end{itemize}
-	Si ahora tomamos $G_1 = N, G_2 = H$ con $N \triangleleft G, H < G$, entonces:
+	Si ahora tomamos $G_1 = N, G_2 = H$ con $N \normsub G, H < G$, entonces:
 	\begin{itemize}
 		\item $H \cap N = \{e\}$
 		\item $H \cdot N = G$
@@ -198,9 +198,9 @@ En particular, podemos definir:
 	h &\longmapsto \gamma_h\mid_N(n) = h\cdot n\cdot h^{-1}
 \end{align*}
 \begin{ej}
-	Sea el grupo diédrico de dimensión 4 $D_4 = \{1,B,B^2,B^3,A,AB,AB^2,AB^3\}$. Tomamos $N = <B> =\{1,B,B^2,B^3\},\ H=<A>=\{1,A\}$. Entonces:
+	Sea el famoso grupo $D_4 = \{1,B,B^2,B^3,A,AB,AB^2,AB^3\}$ (ver ejemplo \ref{ej:famosogrupod4}). Tomamos $N = \langle B \rangle =\{1,B,B^2,B^3\},\ H = \langle A \rangle =\{1,A\}$. Entonces:
 	\begin{align*}
-		\phi: H &\longrightarrow Aut(N)\\
+		\phi: H &\longrightarrow \autom{N}\\
 		A &\longmapsto ABA^{-1} = B^3
 	\end{align*}
 Entonces como hemos visto: $D_4 \cong \{1,A\} \ast_\phi \{1,B,B^2,B^3\}$.
@@ -229,7 +229,7 @@ Sea $(G, \ast)$ un grupo, $C(a)$ el centralizador de $a$ y $cl(a)$ la clase de e
 	\item Si dos permutaciones $\sigma, \sigma'$ tienen descomposiciones del mismo tipo (un 3-ciclo y un 2-ciclo como antes) entonces existe un $\tau$ que hace pasar de una a otra.
 \end{itemize}
 
-\begin{ej}[Posibles descomposiciones en cíclos de $S_4$]
+\begin{ej}[Posibles descomposiciones en cíclos de $S_4$]$ $ \newline
 	\begin{itemize}
 		\item Para $(1234)$
 		\begin{align*}
