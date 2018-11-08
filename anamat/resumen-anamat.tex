@@ -1,0 +1,198 @@
+\documentclass[a4paper,twocolumn]{extarticle}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{extsizes}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{datetime} % para la hora de compilación
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+
+%\usepackage[a6paper,margin=5mm]{geometry}
+\usepackage[a4paper, top=1cm,bottom=1cm,left=0.5cm,right=1cm]{geometry}
+
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+ \setlength{\parskip}{0cm}
+%\setlength{\columnseprule}{0.4pt}
+
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\norma}[1]{\left\lVert#1\right\rVert}
+\newcommand{\dotprod}[1]{\langle #1 \rangle}
+\newcommand{\Int}{\text{ int }}
+\newcommand{\Ext}{\text{ ext }}
+\newcommand{\lacot}[1]{\mathcal{L}(#1)}
+
+\title{Resumen estadística}
+\author{Elias Hernandis}
+
+\begin{document}
+\section{Preliminares}
+\subsection{Normas}
+Sea $V$ un espacio vectorial, $x, y, z \in V, \lambda \in \R$
+
+\begin{itemize}
+	\item Un \textbf{producto escalar} es una función $\dotprod{\cdot, \cdot}: V \times V \to \R$ que cumple:
+	\begin{align*}
+		\dotprod{\lambda x, y} = \lambda\dotprod{x,y} 
+		&\qquad \dotprod{x + y, z} = \dotprod{x, z} + \dotprod{y, z}
+		 \\
+		\dotprod{x, y} = \dotprod{y, x}
+		&\qquad \dotprod{x, x} \geq 0,\ \dotprod{x, x} = 0 \iff x = \vec{0}_V
+	\end{align*}
+	\item Una \textbf{norma} es una función $\norma{\cdot} : V \to R$ que cumple:
+	\begin{align*}
+		\norma{x} \geq 0, \ \norma{x} = 0 \iff x = \vec{0}_V \\
+		\norma{\lambda v} = |\lambda| \norma{v} \qquad 
+		\norma{x + y} \leq \norma{x} + \norma{y}
+	\end{align*}
+	\begin{itemize}
+		\item $\norma{\cdot}$ cumple la \textbf{identidad del paralelogramo}
+		\begin{align*}
+			\norma{\frac{x+y}{2}}^2 + \norma{\frac{x- y}{2}}^2 = \frac{\norma{x}^2 + \norma{y}}{2}
+		\end{align*}
+		si y solo si procede producto escalar dado por la \textbf{identidad de polarización}
+		\begin{align*}
+			4\dotprod{x,y} = \norma{x+y}^2 - \norma{x - y}^2
+		\end{align*}
+		Se dice que esta es una \textbf{norma euclídea}.
+	\end{itemize}
+	\item Un espacio normado es un par $(V, \norma{\cdot}_V)$
+	\item Una \textbf{p-norma} es una norma $\norma{\cdot}_p : \R^n \to R$ definida con
+	\begin{align*}
+		\norma{(x_1, \dots, x_n)}_p = \left[\sum_{j=1}^{n} x_j^p\right]^{\frac{1}{p}}
+	\end{align*}
+	\begin{itemize}
+		\item El \textbf{exponente conjugado} de $p$ es $p'$ y cumple $\frac{1}{p} + \frac{1}{p'} = 1$. Es único y si $p = 1$ entonces $p' = \infty$ y viceversa
+		\item La norma euclidea que procede del producto escalar estándar es la p-norma de orden 2. 2 es el único número que tiene como conjudago a sí mismo
+		\item Las p-normas cumplen las desigualdades de \textbf{Young, Hölder y Minkowski}:
+		\begin{align*}
+			a,b > 0 &\implies \frac{a^p}{p} + \frac{b^{p'}}{p'} \\
+			x,y \in \R^n &\implies \dotprod{x,y} \leq \norma{x}_p \norma{y}_{p'} \\
+			x,y \in \R^n &\implies \norma{x+y}_p \leq \norma{x}_p + \norma{y}_p
+		\end{align*}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Espacios métricos}
+
+Sea $X \neq \emptyset$ conjunto y sean $x, y, z \in X$
+\begin{itemize}
+	\item Un espacio métrico es un par $(X, d)$ donde la función $d:X \times X \to \R$ es una distancia que cumple:
+	\begin{align*}
+		d(x,y) \geq 0,\ d(x,y) = 0 \iff x = y \\
+		d(x,y) = d(y,x) \qquad d(x,z) \leq d(x,y) + d(y,z)
+	\end{align*}
+	\item Si $E \subset X,\ E \neq \emptyset$ entonces la restricción $d_E: E \times E \to \R$ define una distancia
+	\item Si $E \subset \R^n = X$ no vacío, no necesariamente subespacio, entonces $\norma{x - y}_E$ define una distancia en $E$
+\end{itemize}
+
+
+\subsection{Sucesiones}
+\begin{itemize}
+	\item Una \textbf{sucesión} $\{x_n\} \subset X$ es \textbf{de Cauchy} $\iff \forall \varepsilon > 0, \exists N_\varepsilon$ tal que $n, m \geq N_\varepsilon \implies d(x_n, x_m) < \varepsilon$
+	\begin{itemize}
+		\item $(X, d)$ \textbf{completo} $\iff \{x_n\}$ de Cauchy $\implies \{x_n\}$ convergente
+	\end{itemize}
+	\item Una \textbf{sucessión} $\{x_n\} \subset X$ es \textbf{convergente} a $L \in X \iff \forall \varepsilon > 0, \exists N_\varepsilon$ tal que $n \geq N_\varepsilon \implies d(x_n, L) < \varepsilon$
+	\begin{itemize}
+		\item $\{x_n\}$ convergente $\implies \{x_n\}$ de Cauchy
+		\item Si el límite $\lim_{n \to \infty} x_n = L$ existe entonces es único
+	\end{itemize}
+\end{itemize}
+
+\subsection{Topología}
+Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in \R$
+\begin{itemize}
+	\item La \textbf{bola abierta} de radio $r$ y centro $a$ es el conjunto $B_r(a) = B(a; r) = \{x \in X \mid d(x, a) < r\}$
+	\item La \textbf{bola cerrada} de radio $r$ y centro $a$ es el conjunto $\overline{B}_r(a) = \overline{B}(a;r) = \{x \in X \mid d(x, a) \leq r\}$
+	\item $E$ es \textbf{abierto} $\iff \forall e \in E, \exists r > 0 \mid B_r(e) \subset E$
+	\begin{itemize}
+		\item La unión arbitrara de abiertos es un abierto
+		\item La intersección finita de abiertos es un abierto
+		\item Dado $x \in X$, un \textbf{entorno abierto} de $x$ es cualquier abierto $U \mid x \in U$.
+		\item $U$ es abierto $\iff U = \bigcup B_r(x)$
+	\end{itemize}
+	\item $E$ es \textbf{cerrado} si $E^\complement = X \setminus E$ es un abierto
+	\begin{itemize}
+		\item La intersección arbitraria de cerrados es un cerrado
+		\item La unión finita de cerrados es un cerrado
+	\end{itemize}
+	\item $E$ \textbf{abierto relativo} de $Y$ $\iff \exists E' \mid E = Y \cap E'$ y $E'$ es abierto en $X$ (análogo para cerrados)
+	\begin{itemize}
+		\item $E$ abierto relativo en $Y \implies E$ abierto en $(Y, d_Y)$ 
+	\end{itemize}
+	\item El \textbf{interior} $\Int E = \{x \in X \mid \exists r > 0, B_r(x) \subset E\}$
+	\item El \textbf{exterior} $\Ext E = \{x \in X \mid \exists r > 0, B_r(x) \cap E = \emptyset\}$
+	\item El \textbf{cierre, clausura o adherencia} $\overline{E} = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset\}  = \{L \in X \mid \{a_n\} \subset E \text{ converge a } L\}$
+	\begin{itemize}
+		\item $E$ cerrado $\iff E = \overline{E}$
+		\item $E$ \textbf{denso} $\iff \overline{E} = X$
+	\end{itemize}
+	\item La \textbf{frontera} $\partial E = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset \land B_r(x) \cap E^\complement \neq \emptyset\} = \{x \in X \mid x \not\in \Int E \land x \not\in \Ext E\}$
+	\item Los \textbf{puntos de acumulación} $A' = \{x \in X \mid \forall r > 0, B_r(x) \cap E \setminus\{x\} \neq \emptyset \}$
+	\item Un \textbf{punto} $x \in E$ es \textbf{aislado} $\iff \exists r > 0 \mid B_r(x) \cap E = \{x\}$
+	\begin{itemize}
+		\item  si $\forall x,\ x \in E \implies x$ aislado entonces $E$ es \textbf{discreto} y $\{x\}$ abierto relativo de $E$
+	\end{itemize}
+	\item $(X,d)$ de \textbf{Banach} $\iff$ X es e.v. y $d$ es una norma
+	\item $E$ es \textbf{compacto} en $(X,d) \iff$
+	\begin{itemize}
+		\item $\{x_n\} \subset E \implies \exists \{x_{n_k}\} \subset \{x_n\}$ subsucesión convergente con límite en $K$
+		\item Todo recubrimiento $\{U_i\}$ por abiertos de $K$ tiene una subfamilia finita que también recubre a $K$
+	\end{itemize}
+	\item Propiedades de compactos
+	\begin{itemize}
+		\item $E$ compacto $\implies K$ es cerrado y acotado
+		\item en $(X,d)$, $X$ compacto $\implies (X,d)$ completo
+	\end{itemize}
+\end{itemize}
+
+\subsection{Continuidad}
+
+Sean $(X, d_X), (Y, d_Y)$ espacios métricos, $f:X \to Y$ una función
+
+\begin{itemize}
+	\item $f$ es \textbf{continua} en $a \in X \iff \forall \varepsilon > 0, \exists \delta > 0$ tal que $f(B_\delta(a)) \subset B_\varepsilon(f(a))$. Equivalentemente, $f$ continua en $a \iff \forall \varepsilon > 0,\ \exists \delta > 0$ tal que $d_X(x, a) < \delta \implies d_Y(f(x), f(a)) < \varepsilon$.
+	\item $f$ \textbf{continua} en $X \iff$
+	\begin{itemize}
+		\item $f$ continua en $x,\ \forall x \in X$
+		\item $\forall V \subseteq Y,\ V$ abierto de $Y \implies f^{-1}(V)$ abierto de $X$
+		\item $\forall V \subseteq Y,\ V$ cerrado de $Y \implies f^{-1}(V)$ cerrado de $X$
+		\item $\forall \{x_n\} \subset X, \{x_n\} \to x_0 \implies \{f(x_n)\} \to f(x_0)$
+	\end{itemize}
+	
+	\item $f$ \textbf{uniformemente continua} $\iff \forall \varepsilon > 0, \exists \delta > 0$ tal que $d_X(x, x') \leq \delta \implies d_Y(f(x), f(x')) \leq \varepsilon$
+	\begin{itemize}
+		\item Si $(X,d)$ es compacto entonces $f$ continua en $X \implies f$ uniformemente continua
+	\end{itemize}
+\end{itemize}
+
+\subsection{Diferenciabilidad}
+Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$. $f:U \to F$ es \textbf{diferenciable} en $x_0 \iff \exists T \in \lacot{E, F}$ tal que
+\begin{align*}
+	\lim_{h \to \vec{0}_E} \frac{f(x_0 + h) - f(x_0) - Th}{\norma{h}} = \vec{0}_F
+\end{align*}
+
+\begin{itemize}
+	\item $T$ existe $\implies T$ única y la llamamos \textbf{diferencial} de $f$ en $x_0$ y se denota $(df)_{x_0}$
+	\item $f$ diferenciable en $x_0 \implies f$ continua en $x_0$
+	\item toda $T \in \lacot{E,F}$ es diferenciable en todo punto y coincide con sus diferenciales
+	\item $f$ constante $\implies f$ es diferenciable en todo punto y su diferencial $(df)_{x_0}$ es nula
+	\item La \textbf{linealidad:} $(f + g)_{x_0} = (df)_{x_0} + (dg)_{x_0}$
+	\item La \textbf{regla del producto:} $(d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}$
+	\item La \textbf{regla de la cadena:} $(d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}$
+	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \frac{d}{dt}\vert_{t=0}f(x_0 + tv)$
+\end{itemize}
+
+
+\begin{flushright}
+	E. Hernandis, \today $ $ a las \currenttime
+\end{flushright}
+
+\end{document}
