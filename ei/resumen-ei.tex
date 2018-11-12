@@ -41,6 +41,14 @@
 \newcommand{\xbarra}{\overline{x}}
 \newcommand{\normal}{\mathcal{N}}
 \newcommand{\cov}{\text{cov}}
+\newcommand{\vero}{\text{VERO}}
+
+\makeatletter
+\newcommand{\thickhline}{%
+	\noalign {\ifnum 0=`}\fi \hrule height 1pt
+	\futurelet \reserved@a \@xhline
+}
+\makeatother
 
 \title{Resumen estadística}
 \author{Elias Hernandis}
@@ -276,5 +284,103 @@ P(r \leq x \leq \beta) \xrightarrow{n \to \infty} 1,\ r < \beta
 \begin{flushright}
 	E. Hernandis et al., \today $ $ a las \currenttime
 \end{flushright}
+
+\section{Estimación de parámetros}
+
+Sea $X$ v.a. con modelo descrito por $f(x; \theta), \theta \in \Theta$ desconocido. Sea $x_1, \dots, x_n$ una muestra de $X$.
+
+\begin{itemize}
+	\item El \textbf{soporte} $\text{sop}_\theta = \{x \in \R \mid f(x; \theta) > 0\}$
+	\item Un \textbf{estimador} es un estadístico $T = h(x_1, \dots, x_n) \mapsto \widehat{\theta}$ que dados unos datos da una estimación $\widehat{\theta}$
+\end{itemize}
+
+\subsection{Método de momentos}
+El \textbf{estimador por momentos de orden} $n$ se obtiene de
+\begin{align*}
+	\overline{x^n} = E_\theta(X^n)
+\end{align*}
+
+\begin{table}[h]
+	\centering
+	{\renewcommand{\arraystretch}{1.4}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		\textbf{X es} & \textbf{orden 1} & \textbf{orden 2} \\\thickhline
+		$\text{Ber}(p)$ & $M_p = \xbarra$ & - \\\hline
+		$\text{Unif}([0,a])$ & $M_a = 2\xbarra$ & -\\\hline
+		$\text{Exp}(\lambda)$ & $M_\lambda = \frac{1}{\xbarra}$ & - \\\hline
+		$\text{Tri}([-\theta, \theta])$ & - & $M_\theta = \sqrt{6\overline{x^2}}$\\\hline
+		$\normal(\mu, \sigma^2)$ & - & $M_\mu = \xbarra,\ M_{\sigma^2} = V_x$ \\\hline
+	\end{tabular}}
+\end{table}
+\begin{itemize}
+	\item En las distribuciones simétricas, se utilizan momentos de orden par.
+\end{itemize}
+
+\subsection{Método de máxima verosimilitud}
+Sea $X$ una v.a. con distribución $f(x; \theta)$ discreta y finita, $x_1, \dots, x_n$ muestra de $X$
+\begin{itemize}
+	\item La \textbf{función de verosimilitud} $\vero: \Theta \to \R$
+	\begin{align*}
+		\vero(\theta; x_1, \dots, x_n) = \prod_{j=1}^{n} f(x_j; \theta)
+	\end{align*}
+	\item La \textbf{estimación de máxima verosimilitud}, si existe, es el máximo global $\widehat{\theta}$ de $\vero$ en $\Theta$
+	\begin{itemize}
+		\item Para minimizar, es útil tomar $\log \vero$
+	\end{itemize}
+\end{itemize}
+
+\begin{table}[h]
+	\centering
+	{\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{X es} & $\vero(\theta; x_1, \dots, x_n)$ & $\max \vero$ en \\\thickhline
+			$\text{Ber}(p)$ & $p^{n\xbarra}(1-p)^{n(1-\xbarra)}$ & $\widehat{p} = \xbarra$ \\\hline
+			$\text{Unif}([0,a])$ & $\begin{cases}
+			\left(\frac{1}{a}\right)^n &\text{ si } a \geq \max x_j \\
+			0 & \text{ si } a < \max x_j
+			\end{cases}$ & $\widehat{a} = \max x_j$ \\\hline
+			$\text{Exp}(\lambda)$ & $\lambda^ne^{-n\xbarra\lambda}$ & $\widehat{\lambda} = \frac{1}{\xbarra}$ \\\hline
+	\end{tabular}}
+\end{table}
+
+Sean $T, T'$ estimadores
+\begin{itemize}
+	\item El \textbf{sesgo} $\text{sesgo}(T) = |E_\theta(T) - \theta|$
+	\begin{itemize}
+		\item $T$ se dice \textbf{insesgado} $\iff \text{sesgo}(T) = 0 \iff \theta \in \Theta,\ E_\theta(T) = \theta$
+		\item Conocido el sesgo, se puede eliminar: para $X \sim \text{Unif}([0,a])$ se obtiene un esitmador insesgado con $T = \frac{n+1}{n}\max x_j$
+	\end{itemize}
+	\item $T$ es más eficiente que $T' \iff V_\theta(T) < V_\theta(T')$
+\end{itemize}
+
+\subsection{Límites de calidad de estimadores}
+
+\begin{itemize}
+	\item La \textbf{variable de información}
+	\begin{align*}
+		Y = \frac{\partial}{\partial \theta} \log f(x; \theta) = \frac{\partial_\theta f(x; \theta)}{f(x; \theta)}
+	\end{align*}
+	\item La \textbf{cantidad de información} $I_X(\theta) = V_\theta(Y)$
+\end{itemize}
+
+\begin{table}[h]
+	\centering
+	{\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{|l|c|c|}
+			\hline
+			\textbf{X es} & $Y$ & $I_X(\theta)$ \\\thickhline
+			$\text{Ber}(p)$ & $\frac{x-p}{p(1-p)}$ & $\frac{1}{p(1-p)}$ \\\hline
+			$\normal(\mu, \sigma^2)$ & $\frac{(x-\mu_0)^2 - \sigma^2}{\sigma^4}$ para $\mu_0$ fijo & $\frac{1}{2\sigma^4}$ \\\hline
+			$\text{Exp}(\lambda)$ & $\lambda^2x - \lambda$ & $\lambda^2$ \\\hline
+	\end{tabular}}
+\end{table}
+
+\begin{lem}
+	[de Cramer-Rao]
+	Sea $X$ una v.a. con $\theta \in \Theta = (a,b),\ \text{sop}_\theta = \{a_1, \dots, a_M\},\, M < \infty,\ \theta \mapsto f(x; \theta)$ derivable en $\Theta$. Entonces $E_\theta(Y) = 0, \forall \theta \in \Theta$.
+\end{lem}
+
 
 \end{document}

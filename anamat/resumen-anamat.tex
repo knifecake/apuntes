@@ -106,6 +106,23 @@ Sea $X \neq \emptyset$ conjunto y sean $x, y, z \in X$
 	\end{itemize}
 \end{itemize}
 
+\subsection{Aplicaciones lineales. Normas equivalentes.}
+\begin{itemize}
+	\item Una \textbf{aplicación lineal} es \textbf{acotada} $L \in \lacot{E, F}$ si cumple alguna de
+	\begin{itemize}
+		\item $L$ es continua en $\vec{0}_E$
+		\item $L$ es continua $\forall x \in E$
+		\item $\forall x \in E,\ \exists M \mid \norma{x}_E \leq 1 \implies \norma{L(v)}_F \leq M$
+	\end{itemize}
+	\item $\norma{\cdot}_A$ domina a $\norma{\cdot}_B \iff \exists 0 < c < \infty$ tal que $\forall x \in E,\ \norma{x}_B \leq c\norma{x}_A$
+	\item $\norma{\cdot}_A, \norma{\cdot}_B$ son equivalentes $\iff \exists 0 < c, C < \infty$ tales que $\forall x \in E,\ c\norma{x}_A \leq \norma{x}_B \leq C\norma{x}_A$. Entonces,
+	\begin{itemize}
+		\item Definen los mismos abiertos y cerrados.
+		\item En $\R^n$ todas las normas son equivalentes.
+	\end{itemize}
+	
+\end{itemize}
+
 \subsection{Topología}
 Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in \R$
 \begin{itemize}
@@ -171,6 +188,7 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, $f:X \to Y$ una función
 	\begin{itemize}
 		\item Si $(X,d)$ es compacto entonces $f$ continua en $X \implies f$ uniformemente continua
 	\end{itemize}
+	\item Si $f$ es composición de funciones continuas entonces es continuas. Las fórmulas elementales son continuas.
 \end{itemize}
 
 \subsection{Diferenciabilidad}
@@ -188,6 +206,7 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 	\item La \textbf{regla del producto:} $(d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}$
 	\item La \textbf{regla de la cadena:} $(d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}$
 	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \frac{d}{dt}\vert_{t=0}f(x_0 + tv)$
+	\item La composición de funciones diferenciables es diferenciable. Ojo con aplicar las reglas de derivación a cosas que no son números reales (p.e. en matrices no funcionan).
 \end{itemize}
 
 
