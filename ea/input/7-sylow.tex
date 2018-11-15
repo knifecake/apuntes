@@ -24,7 +24,7 @@ El teorema de Cauchy (\ref{thm:cauchy}) es una versión más débil de este prim
 
 \begin{thm}[Segundo de Sylow]
 	\label{thm:sylow2}
-	Sea $G$ grupo con $|G| = p^s m, mcd(p, m) = 1, s \geq 1$. Sea $P$ un p-subgrupo de Sylow fijado. Si $Q$ es un p-subgrupo de Sylow de $G$ entonces $\exists g \in G \mid q \subset gP\inv{g}$.
+	Sea $G$ grupo con $|G| = p^s m, mcd(p, m) = 1, s \geq 1$. Sea $P$ un p-subgrupo de Sylow fijado. Si $Q$ es un p-subgrupo de Sylow de $G$ entonces $\exists g \in G \mid Q \subset gP\inv{g}$.
 \end{thm}
 
 \begin{thm}[Tercero de Sylow]
@@ -243,7 +243,7 @@ Lo interesante de verdad es el corolario que obtenemos de esta observación:
 		\item Si $|G| = 2, 3$ entonces $G \isom \Z/2\Z$ o $G\isom \Z/3\Z$.
 		\item Si $|G| = 4 = 2^2$ entonces $G$ es abeliano. Lo demostramos en la proposición \ref{pro:primocuadradoabeliano} para todo grupo de orden $p^2$ con $p$ primo.
 		\item Si $|G| = 5$ entonces $G \isom \Z/5\Z$.
-		\item Si $|G| = 6 = 2\cdot 3$ entonces $G \isom \Z/2\Z \times \Z/3\Z$ o $G \isom D_3$. Sabemos por Sylow que existen $P_2, P_3 < G$ con $|P_2| = 2, |P_3| = 3$. Además del tercer teorema de Sylow obtenemos $n_3 = 1$, es decir que en $F_3$ tenemos solo un grupo. Para $n_2$ solo tenemos que $n_2 = 1, 3$. Ahora bien, como $n_3 = 1$ tenemos que $P_3 < G$. Por tanto, existe un producto semidirecto para el que $G \isom P_3 \times_\phi P_2  = \Z/3\Z \times \Z/2\Z$\footnote{Por convención ponemos el normal primero, para poder aplicar directamente la construcción sin liarnos.}.
+		\item Si $|G| = 6 = 2\cdot 3$ entonces $G \isom \Z/2\Z \times \Z/3\Z$ o $G \isom D_3$. Sabemos por Sylow que existen $P_2, P_3 \normsub G$ con $|P_2| = 2, |P_3| = 3$. Además del tercer teorema de Sylow obtenemos $n_3 = 1$, es decir que en $F_3$ tenemos solo un grupo. Para $n_2$ solo tenemos que $n_2 = 1, 3$. Ahora bien, como $n_3 = 1$ tenemos que $P_3 < G$. Por tanto, existe un producto semidirecto para el que $G \isom P_3 \times_\phi P_2  =?\ \Z/3\Z \times \Z/2\Z$.\footnote{Por convención ponemos el normal primero, para poder aplicar directamente la construcción sin liarnos.}
 		
 		Veamos que de este producto semidirecto nos salen dos estructuras. En primer lugar vemos quiénes son $N$ y $H$. En este caso el grupo normal es $P_3$ por lo que $N = P_3$ y $H = P_2$. Veamos los automorfismos interiores $Int:H \to Aut(\Z/3\Z) = (\{\overline{1}, \overline{2}\}, \cdot) = \uds{Z/3\Z}$. Como $Aut(\Z/3\Z)$ tiene dos elementos, obtenemos dos estructuras
 		\begin{itemize}
@@ -268,6 +268,100 @@ Lo interesante de verdad es el corolario que obtenemos de esta observación:
 	
 	Ahora se le ocurre afirmar que no puede ocurrir que $n_2 = 3 \land n_3 = 4$ simultáneamente.
 	
-	Supongamos que $n_3 = 4$ entonces habría 4 subgrupos de orden 3 y por tanto habría $2 \cdot 4$ elementos de orden 3 (el neutro tiene orden 1). Ya tenemos 9 elementos bajo control. Para controlar los 12 nos faltan 3 elementos que llamaremos $a,b,c$ y que podrían formar un grupo con el neutro: $\{e, a, b, c\}$. Efectivamente esto dice Sylow, que hay un subgrupo de orden 4 ($a,b,c$ no pueden tener orden 3 porque si no no podrían pertenecer a un grupo de orden 4). Como ya hemos agotado los elementos, no es posible que haya más subgrupos de orden 4, por lo que necesariamente $n_2 = 1$. 
+	Supongamos que $n_3 = 4$ entonces habría 4 subgrupos de orden 3 y por tanto habría $2 \cdot 4$ elementos de orden 3 (el neutro tiene orden 1). Ya tenemos 9 elementos bajo control. Para controlar los 12 nos faltan 3 elementos que llamaremos $a,b,c$ y que podrían formar un grupo con el neutro: $\{e, a, b, c\}$. Efectivamente esto dice Sylow, que hay un subgrupo de orden 4 ($a,b,c$ no pueden tener orden 3 porque si no no podrían pertenecer a un grupo de orden 4). Como ya hemos agotado los elementos, no es posible que haya más subgrupos de orden 4, por lo que necesariamente $n_2 = 1$.
+	\item Así podemos seguir hasta $|G| = 29$ ya que cualquier orden menor que 30 es producto de como máximo dos primos.
 	\end{itemize}
 \end{ej}
+
+\begin{ej}
+	Sea $G$ abeliano y $|G| = 20 = 2^2\cdot 5$.
+	\begin{itemize}
+		\item Por el primer teorema de Sylow tenemos que $\exists P_4 < G, |P_4| = 4$.
+		\item Por el segundo teorema, tenemos que todo subgrupo de orden 4 está en $F_4 = \{gP_4\inv{g} \mid g \in G\}$. Como $G$ es abeliano, $F_4$ solo tiene un elemento luego $P_4$ es el único subgrupo de orden 4.
+		\item Análogamente concluímos que $P_5 < G$ es el único subgrupo de orden 5.
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Estudiamos el grupo $G = \langle a, b \rangle$ con presentación $o(b) = 4,\ o(a) = 3, ba\inv{b} = a^2$.
+	
+	Pendiente, posible ejercicio de examen.
+\end{ej}
+
+
+\begin{ej}
+	Sea $|G| = 30$. Entonces $G$ no es un grupo simple.
+	\begin{proof}
+		Recordemos que $G$ es simple si sus únicos subgrupos normales son $G$ y $\{e\}$ (ver definición \ref{dfn:simple}).
+		
+		Tenemos que $|G| = 30 * 2 \cdot 3 \cdot 5$. Por el primer teorema de Sylow tenemos que $\exists P_5$ con $|P_5| = 5$. Además por el tercer teorema tenemos que $n_5 = 1, 6$. Análogamente tenemos $|P_3| = 3$ y $n_3 = 1, 10$.
+		
+		Supongamos que $n_5 = 6, n_3 = 10$. Sean $S_1, \dots S_6$ los 6 subgrupos de orden 5. Como 5 es primo entonces cada $S_i$ es cíclico de orden 5 y necesariamente $S_i \cap S_j = \{e\}$, porque si $S_i$ y $S_j$ compartieran algún elemento, entonces serían el mismo grupo pero hemos supuesto que había 6 subgrupos de orden 5. Cada $S_i = \{1, a, a^2, a^3, a^4\}$ por ser $5$ primo $\implies S_i$ cíclico, es decir, que tenemos $4 \cdot 6 = 24$ elementos distintos de orden 5 (en cada grupo tenemos el neutro que tiene orden 1 y otros cuatro que deben tener orden 5 por ser $S_i$ cíclico). Sean ahora $H_1, \dots, H_{10}$ los subgrupos de orden 3. Aplicando el mismo argumento, $H_i \cap H_j = \{e\},\ H_i = \{e, b, b^2\} \implies$ hay $2 \cdot 10 = 20$ elementos distintos de orden 3. Con esto llegaríamos a que en $G$ hay al menos $20 + 24 = 44 > 30$ elementos por lo que llegamos a una contradicción. Es decir, que necesariamente tiene que ocurrir que o $n_3 = 1$ o $n_5 = 1$, por lo que existe un subgrupo normal distinto de $G$ o $\{e\} \implies G$ no puede ser simple.
+	\end{proof}
+\end{ej}
+
+\begin{ej}
+	Sea $|G| = 48$. Entonces o bien $G$ tiene un subgrupo de orden 8 o bien $G$ tiene un subgrupo de orden 16.
+	
+	\begin{proof}
+		Tenemos $|G| = 2^4 \cdot 3$. Por el primer teorema de Sylow tenemos que $\exists P_2,\ |P_2| = 2^4$ y por el tercer teorema tenemos que $n_2 = 1, 3$.
+		
+		ESTO TIENE UNAS LAGUNAS...
+		\begin{itemize}
+			\item Supongamos que $n_2 = 3$. Entonces $F_3 = \{gP_3 \inv{g} \mid g \in G\} = \{P_{2_1} = P_2, P_{2_2}, P_{2_3}\}$. Probaremos que algún elemento de $F_3$ tiene un subgrupo normal, es decir, $\exists H \normsub P_{2_i}$ para algún $i = 1, 2, 3$.
+			\begin{itemize}
+				\item Consideramos la intersección $P_{2_2} \cap P_{2_3}$. Tenemos que $|P_{2_2} \cap P_{2_3}| = 1, 2, 4, 8$. Supongamos que $|P_{2_2} \cap P_{2_3}| = 4$. Entonces $|P_{2_2} \cdot P_{2_3}| = \frac{|P_{2_2}||P_{2_3}|}{|P_{2_2} \cap P_{2_3}|} = \frac{16 \cdot 16}{4} = 48 = |G|$. Esto no puede ocurrir, tiene que haber algún elemento de orden $3$ y en $P_{2_i}$ no puede haber ningúno. Por tanto concluímos que $|P_{2_2} \cap P_{2_3}| > 4 \implies |P_{2_2} \cap P_{2_3}| = 8$.\footnote{Ojo aquí, lo que está haciendo es aplicar el teorema \ref{thm:cardinalidadproductolibre} con mucho arte. Podía haber probado con $|P_{2_2} \cap P_{2_3}| = 2$ pero en realidad no le hace falta, ya que $|P_{2_i}| = 16$ es fijo y por tanto la única manera de cambiar $|P_{2_2} \cdot P_{2_3}$ es tocando el denominador. De ahí concluye que $|P_{2_2} \cap P_{2_3}| > 4$.}
+				\item Es claro que $P_{2_2} \cap P_{2_3} < P_{2_2}$. Por alguna razón tenemos que $P_{2_2} \cap P_{2_3} \normsub P_{2_2}$ y $P_{2_2} \cap P_{2_3} \normsub P_{2_3}$. Recordemos que $P_{2_2} \cap P_{2_3} \normsub G \iff N(P_{2_2} \cap P_{2_3}) = G$ y que el normalizador $N(H)$ siempre contiene a $H$ y es el menor grupo en el que $H \normsub N(H)$. Entonces $P_{2_2} \normsub N(P_{2_2} \cap P_{2_3}) \implies \forall g \in G, g(P_{2_2} \cap P_{2_3})\inv{g} = P_{2_2} \cap P_{2_3}$. En particular $\forall g \in P_2,\ g \in N(P_{2_2} \cap P_{2_3}) \land \forall g \in P_{2_3},\ g \in N(P_{2_2} \cap P_{2_3})$.
+			\end{itemize}
+		\end{itemize}
+	\end{proof}
+\end{ej}
+
+\begin{ej}
+	Consideramos $|S_4| = 4! = 2^3 \cdot 3$. Podemos hacer el mismo argumento que antes para los subgrupos de orden 3.
+\end{ej}
+
+\begin{pro}
+	Sea $G$ un grupo, $H \normsub G, K \normsub G$ y $H \cap K = \{e\}$. Entonces $\forall h, k,\ h \in H, k \in K \implies hk = kh$.
+\end{pro}
+
+\begin{thm}
+	Sea $G$ un grupo finito, $H \normsub G$ y $K \normsub G$. Entonces son equivalentes
+	\begin{enumerate}
+		\item $H \cap K = \{e\} \land HK = G$
+		\item la función $H \times K \to G,\ (h, k) \mapsto hk$ es un isomorfismo de grupos
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}$ $\newline
+	\begin{itemize}
+		\item $1 \implies 2$. Lo primero decir que la función $H\times K \to G$ existe por teoría de conjuntos. Tenemos por el teorema \ref{thm:cardinalidadproductolibre} que $|HK| = |H||K|$. Con esto tenemos que la función es sobreyectiva porque $|H||K| = |G|$. Además es claro que la función es inyectiva. Además como $H\cap K = \{e\} \land H \normsub G \land K \normsub G$ tenemos que la función es un homomorfismo de grupos. Concluimos que la función es un isomorfismo de grupos.
+		\item $2 \implies 1$. Sea $H \times e = \{(h, e) \mid h \in H\}$. Es claro que $H < H \times K$: es subgrupo porque es finito y es cerrado. Análogamente sea $e \times K = \{(e, k) \mid k \in K\}$ y $e \times K < H \times K$.
+		
+		Veamos ahora que $H \times e$, y por extensión, $e \times K$ son subgrupos normales en $H \times K$. Tenemos que probar que $\forall (a,b) \in H \times K,\ (a,b)(H \times e)\inv{(a,b)} = (H \times e)$. Sea $h \in H$, entonces
+		\begin{align*}
+			(a,b)(h, e)\inv{(a,b)} = (\underbrace{ah\inv{a}}_{\in H}, \underbrace{be\inv{b}}_{=e}) \in H \times e \implies H \times e \normsub H \times K
+		\end{align*}
+		Análogamente lo tenemos para $e \times K$.
+		
+		Además, es claro que $(H \times e) \cap (e \times K) = \{(e,e)\}$ que es el neutro de $H \times K$ y por el isomorfismo de la hipótesis $(e, e) \mapsto e \implies (H \times e) \cap (e \times K) \mapsto H \cap K = \{e\}$. 
+		
+		Por último tenemos que $(H \times e) \cdot (e \times K) = H \times K \isom G$ por hipótesis. Además, podemos obtener cualquier elemento de $HK$ con el mismo isomorfismo: $\forall h \in H, k \in K, (h, e)\cdot(e, k) \mapsto hk \in HK \implies HK = G$.
+	\end{itemize}
+\end{proof}
+
+\begin{cor}
+	Sea $G$ un grupo finito, $H \normsub G$ y $K \normsub G, N \normsub G$. Entonces son equivalentes
+	\begin{enumerate}
+		\item $H \times K \times N \to G,\ (h,k,n) \mapsto hkn$ es un isomorfismo de grupos.
+		\item $H\cap (KN) = K \cap (HN) = N \cap (HK) = \{e\}$ y $HKN = G$.
+	\end{enumerate}
+\end{cor}
+
+\begin{proof}
+	Es análoga a la del teorema anterior.
+\end{proof}
+
+\begin{cor}
+	Dados $H, K, N$ subgrupos normales de $G$ entonces $\forall g \in G$ existe una única operación para la que $g = hkn$ y dicha operación es el isomorfismo $H\times K \times N \to G$.
+\end{cor}
