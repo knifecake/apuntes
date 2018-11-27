@@ -4,6 +4,8 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
 \usepackage{extsizes}
 
 \usepackage[dvipsnames]{xcolor}
@@ -21,12 +23,17 @@
 \newcommand{\X}{\mathbb{X}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\V}{\mathbb{V}}
 
 \newcommand{\norma}[1]{\left\lVert#1\right\rVert}
 \newcommand{\dotprod}[1]{\langle #1 \rangle}
 \newcommand{\Int}{\text{ int }}
 \newcommand{\Ext}{\text{ ext }}
 \newcommand{\lacot}[1]{\mathcal{L}(#1)}
+\newcommand{\hess}{\text{Hess }}
+\newcommand{\tr}{\text{traza }}
+
+\newtheorem*{thm}{Teorema}
 
 \title{Resumen estadística}
 \author{Elias Hernandis}
@@ -149,15 +156,18 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 	\item El \textbf{cierre, clausura o adherencia} $\overline{E} = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset\}  = \{L \in X \mid \{a_n\} \subset E \text{ converge a } L\}$
 	\begin{itemize}
 		\item $E$ cerrado $\iff E = \overline{E}$
-		\item $E$ \textbf{denso} $\iff \overline{E} = X$
+		\item $E$ \textbf{denso} $\iff \overline{E} = X$. Tanto $\mathbb{Q}$ como $\R \setminus \mathbb{Q}$ son densos en $\R$
 	\end{itemize}
 	\item La \textbf{frontera} $\partial E = \{x \in X \mid \forall r > 0, B_r(x) \cap E \neq \emptyset \land B_r(x) \cap E^\complement \neq \emptyset\} = \{x \in X \mid x \not\in \Int E \land x \not\in \Ext E\}$
-	\item Los \textbf{puntos de acumulación} $A' = \{x \in X \mid \forall r > 0, B_r(x) \cap E \setminus\{x\} \neq \emptyset \}$
+	\item Los \textbf{puntos de acumulación} $E' = \{x \in X \mid \forall r > 0, B_r(x) \cap E \setminus\{x\} \neq \emptyset \}$
+	\begin{itemize}
+		\item $\overline{E} = E \cup E'$
+	\end{itemize}
 	\item Un \textbf{punto} $x \in E$ es \textbf{aislado} $\iff \exists r > 0 \mid B_r(x) \cap E = \{x\}$
 	\begin{itemize}
 		\item  si $\forall x,\ x \in E \implies x$ aislado entonces $E$ es \textbf{discreto} y $\{x\}$ abierto relativo de $E$
 	\end{itemize}
-	\item $(X,d)$ de \textbf{Banach} $\iff$ X es e.v. y $d$ es una norma
+	\item $(X,d)$ de \textbf{Banach} $\iff$ X es e.v., $d$ es una norma y $X$ completo
 	\item $E$ es \textbf{compacto} en $(X,d) \iff$
 	\begin{itemize}
 		\item $\{x_n\} \subset E \implies \exists \{x_{n_k}\} \subset \{x_n\}$ subsucesión convergente con límite en $K$
@@ -168,6 +178,14 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 		\item $E$ compacto $\implies K$ es cerrado y acotado
 		\item en $(X,d)$, $X$ compacto $\implies (X,d)$ completo
 	\end{itemize}
+	\item Un \textbf{camino} es una aplicación continua $\alpha:I \subset \R \to X$ con $I$ un intervalo
+	\item $E$ es \textbf{conexo por caminos} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
+	\item $E$ es \textbf{conexo} (por abiertos) $\iff \nexists A, B \subset X \mid A \cap B = \emptyset \land (E \cap A) \cup (B \cap E) = E$
+	\item $E$ es \textbf{conexo} (por abiertos relativos) $\iff \forall A,B$ abiertos en $E$ con $A \cap B = \emptyset \land A \cup B = E \implies (A = \emptyset \land B = E) \lor B = \emptyset \land A = E)$
+	\begin{itemize}
+		\item Equivalentemente, $E$ conexo $\iff \nexists A,B$ abiertos en $E$ con $A\cap B = \emptyset \land E = A \cup B$
+	\end{itemize}
+	\item $E$ es \textbf{convexo} $\iff \forall x, y \in E \implies [x,y] = \{tx + (1-t)y \mid t \in [0,1]\} \subset E$
 \end{itemize}
 
 \subsection{Continuidad}
@@ -187,11 +205,12 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, $f:X \to Y$ una función
 	\item $f$ \textbf{uniformemente continua} $\iff \forall \varepsilon > 0, \exists \delta > 0$ tal que $d_X(x, x') \leq \delta \implies d_Y(f(x), f(x')) \leq \varepsilon$
 	\begin{itemize}
 		\item Si $(X,d)$ es compacto entonces $f$ continua en $X \implies f$ uniformemente continua
+		\item Si $f$ es uniformemente continua entonces se pueden intercambiar límite y derivada
 	\end{itemize}
 	\item Si $f$ es composición de funciones continuas entonces es continuas. Las fórmulas elementales son continuas.
 \end{itemize}
 
-\subsection{Diferenciabilidad}
+\section{Diferenciabilidad}
 Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$. $f:U \to F$ es \textbf{diferenciable} en $x_0 \iff \exists T \in \lacot{E, F}$ tal que
 \begin{align*}
 	\lim_{h \to \vec{0}_E} \frac{f(x_0 + h) - f(x_0) - Th}{\norma{h}} = \vec{0}_F
@@ -205,9 +224,76 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 	\item La \textbf{linealidad:} $(f + g)_{x_0} = (df)_{x_0} + (dg)_{x_0}$
 	\item La \textbf{regla del producto:} $(d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}$
 	\item La \textbf{regla de la cadena:} $(d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}$
-	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \frac{d}{dt}\vert_{t=0}f(x_0 + tv)$
+	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \left.\frac{d}{dt}\right|_{t=0}f(x_0 + tv)$
+	\begin{itemize}
+		\item Si $\norma{v} = 1$ entonces la derivada se llama direccional
+		\item Si $v = e_j \in \{e_1, \dots, e_n\}$ la base estándar de $\R^n$, entonces $D_{e_j}f(x_0) = \left.\frac{\partial}{\partial x_j}\right|_{x_0}f = D_jf(x_0)$ es la j-ésima \textbf{derivada parcial}
+	\end{itemize}
 	\item La composición de funciones diferenciables es diferenciable. Ojo con aplicar las reglas de derivación a cosas que no son números reales (p.e. en matrices no funcionan).
+	\item \textbf{Condiciones de diferenciabilidad} de $f:\R^n \to \R^m$ en $x_0$:
+	\begin{enumerate}
+		\item Las derivadas parciales $\partial_{x_j}f(x_0)$ existen
+		\item El único candidato posible a diferencial $(df)_{x_0}$ es la aplicación lineal dada por la \textbf{matriz jacobiana} de $m \times n$
+		\begin{align*}
+			Df_{x_0} := \left(\begin{array}{c|c|c}
+				\partial_{x_1}f(x_0) & \dots & \partial_{x_n}f(x_0)
+			\end{array}\right)
+		\end{align*}
+		\item $Df_{x_0}$ cumple la definición de diferenciabilidad
+	\end{enumerate}
+	\item El \textbf{gradiente} $\nabla f$ es el jacobiano de una función escalar ($f: \R^n \to \R$). Es un vector fila.
+	\item El \textbf{Jacobiano} es $\det Df$
+	\item Una función vectorial es diferenciable $\iff$ son diferenciables todas sus funciones componentes
+	
+	\item El \textbf{Hessiano} es la matriz simétrica de las derivadas se segundas
+	\begin{align*}
+		\hess f = \left(\begin{array}{ccc}
+		\frac{\partial^2f}{\partial x_1\partial x_1} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial^2f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2}{\partial x_n \partial x_n}
+		\end{array}\right)
+	\end{align*}
+	\item El \textbf{Laplaciano} $\Delta f = \tr \hess f$
 \end{itemize}
+
+\subsection{Tipos de aplicaciones}
+
+Sean $E,V$ e.v, sea $f: E \to F$
+\begin{itemize}
+	\item $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
+	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$.
+\end{itemize}
+
+Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
+\begin{itemize}
+	\item $f$ es \textbf{de Lipschitz} $\iff \exists K > 0$ tal que
+	\begin{align*}
+		d_Y(f(x), f(x')) \leq K d_X(x,x'),\qquad \forall x,x' \in X
+	\end{align*}
+	\begin{itemize}
+		\item Toda aplicación de Lipschitz es continua.
+	\end{itemize}
+
+	\item $f$ es \textbf{contractiva} $\iff f$ es de Lipschitz con $K < 1 \land$ dominio y codomino coinciden, distancias incluidas ($f:(X, d_X) \to (X, d_X)$)
+	
+	\item $f$ es \textbf{inyectiva} $\iff \forall x,x' \in X, f(x) \neq f(x') \implies x \neq x'$
+	
+	\item $f$ es \textbf{coerciva} $\iff \exists \lambda > 0$ tal que
+	\begin{align*}
+		d_Y(f(x), f(x')) \geq \lambda d_X(x,x'),\qquad \forall x,x' \in X
+	\end{align*}
+	\begin{itemize}
+		\item $f$ coerciva $\implies f$ inyectiva
+	\end{itemize}
+\end{itemize}
+
+\section{Teoremas gordos}
+
+\begin{thm}[de la función inversa]
+	Sea $(\V, \norma{\cdot})$ un espacio de Banach. Sean $U_0 \in \V$ un abierto y $f:U_0 \to V$ una función de clase $C^1$. Si en $x_0 \in U_0$ la diferencial $L = (df)_{x_0}$ es invertible (e.d. $L$ es lineal acototada, biyectiva y con inversa $L^{-1}$ también acotada) entonces existen abiertos $U, V$ con $x_0 \in U, y_0 \in V, f(x_0) = y_0$  tales que $f$ es biyectiva de $U$ a $V$.
+	
+	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
+\end{thm}
 
 
 \begin{flushright}
