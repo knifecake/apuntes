@@ -177,13 +177,21 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 	\begin{itemize}
 		\item $E$ compacto $\implies K$ es cerrado y acotado
 		\item en $(X,d)$, $X$ compacto $\implies (X,d)$ completo
+		\item $E \subset X$ compacto, $f$ continua en $E \implies f$ alcanza máximo y mínimo en $E$
 	\end{itemize}
 	\item Un \textbf{camino} es una aplicación continua $\alpha:I \subset \R \to X$ con $I$ un intervalo
-	\item $E$ es \textbf{conexo por caminos} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
 	\item $E$ es \textbf{conexo} (por abiertos) $\iff \nexists A, B \subset X \mid A \cap B = \emptyset \land (E \cap A) \cup (B \cap E) = E$
 	\item $E$ es \textbf{conexo} (por abiertos relativos) $\iff \forall A,B$ abiertos en $E$ con $A \cap B = \emptyset \land A \cup B = E \implies (A = \emptyset \land B = E) \lor B = \emptyset \land A = E)$
 	\begin{itemize}
 		\item Equivalentemente, $E$ conexo $\iff \nexists A,B$ abiertos en $E$ con $A\cap B = \emptyset \land E = A \cup B$
+		\item $E$ conexo y $p \in \overline{E} \implies E \cup p$ conexo
+		\item $E_1, E_2$ conexos y $E_1 \cap E_2 \neq \emptyset \implies E_1 \cap E_2$ conexo
+	\end{itemize}
+	\item $E$ es \textbf{conexo por caminos} o \textbf{arco-conexo} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
+	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $e$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
+	\begin{itemize}
+		\item La relación de equivalencia $x\sim y \iff \exists C$ conexo con $x,y \in C$ define una partición cuyas clases de equivalencia son las componentes conexas de cada punto.
+		\item Si $A \subset X$ conexo, $A$ está contenido en una única componente conexa.
 	\end{itemize}
 	\item $E$ es \textbf{convexo} $\iff \forall x, y \in E \implies [x,y] = \{tx + (1-t)y \mid t \in [0,1]\} \subset E$
 \end{itemize}
@@ -235,8 +243,18 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 		\item Las derivadas parciales $\partial_{x_j}f(x_0)$ existen
 		\item El único candidato posible a diferencial $(df)_{x_0}$ es la aplicación lineal dada por la \textbf{matriz jacobiana} de $m \times n$
 		\begin{align*}
-			Df_{x_0} := \left(\begin{array}{c|c|c}
+			Df_{x_0} &:= \left(\begin{array}{c|c|c}
 				\partial_{x_1}f(x_0) & \dots & \partial_{x_n}f(x_0)
+			\end{array}\right)\\
+			Df_{x_0} &:= \left(\begin{array}{c}
+			Df_1(x_0) \\\hline
+			\vdots \\\hline
+			Df_m(x_0) 
+			\end{array}\right) \\
+			Df_(x_0) &:= \left(\begin{array}{ccc}
+			\partial_{x_1}f_1(x_0) & \dots & \partial_{x_n}f_1(x_0) \\
+			\vdots & \ddots & \vdots \\
+			\partial_{x_1}f_m(x_0) & \dots & \partial_{x_n}f_m(x_0) \\
 			\end{array}\right)
 		\end{align*}
 		\item $Df_{x_0}$ cumple la definición de diferenciabilidad
@@ -294,6 +312,11 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	
 	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
 \end{thm}
+
+\begin{thm}[de la función inversa de Balodis]
+	Sea $E$ un espacio de Banach, $U \subset E$ un abierto y $f:U \to E$ con $f \in C^1$. Entonces si en $x_0 \in U$ se tiene que $Df(x_0)$ es invertible entonces $f$ es localmente invertible.
+\end{thm}
+
 
 
 \begin{flushright}
