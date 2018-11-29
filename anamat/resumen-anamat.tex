@@ -200,6 +200,9 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 		\item $E_1, E_2$ conexos y $E_1 \cap E_2 \neq \emptyset \implies E_1 \cap E_2$ conexo
 	\end{itemize}
 	\item $E$ es \textbf{conexo por caminos} o \textbf{arco-conexo} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
+	\begin{itemize}
+		\item $E$ conexo $\implies E$ arco-conexo
+	\end{itemize}
 	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $e$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
 	\begin{itemize}
 		\item La relación de equivalencia $x\sim y \iff \exists C$ conexo con $x,y \in C$ define una partición cuyas clases de equivalencia son las componentes conexas de cada punto.
@@ -244,7 +247,7 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 	\item La \textbf{linealidad:} $(f + g)_{x_0} = (df)_{x_0} + (dg)_{x_0}$
 	\item La \textbf{regla del producto:} $(d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}$
 	\item La \textbf{regla de la cadena:} $(d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}$
-	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \left.\frac{d}{dt}\right|_{t=0}f(x_0 + tv)$
+	\item La \textbf{derivada respecto de un vector} $v \in E$ en el punto $x_0 \in E$ es $D_vf(x_0) = \left.\frac{d}{dt}\right|_{t=0}f(x_0 + tv) = \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t}$
 	\begin{itemize}
 		\item Si $\norma{v} = 1$ entonces la derivada se llama direccional
 		\item Si $v = e_j \in \{e_1, \dots, e_n\}$ la base estándar de $\R^n$, entonces $D_{e_j}f(x_0) = \left.\frac{\partial}{\partial x_j}\right|_{x_0}f = D_jf(x_0)$ es la j-ésima \textbf{derivada parcial}
@@ -272,7 +275,7 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 		\item $Df_{x_0}$ cumple la definición de diferenciabilidad
 	\end{enumerate}
 	\item El \textbf{gradiente} $\nabla f$ es el jacobiano de una función escalar ($f: \R^n \to \R$). Es un vector fila.
-	\item El \textbf{Jacobiano} es $\det Df$
+	\item El \textbf{Jacobiano} es $\det(Df)$
 	\item Una función vectorial es diferenciable $\iff$ son diferenciables todas sus funciones componentes
 \end{itemize}
 \subsection{Extremos relativos}
@@ -289,15 +292,15 @@ En funciones escalares $f:E \to \R$
 		\frac{\partial^2f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2}{\partial x_n \partial x_n}
 		\end{array}\right)
 	\end{align*}
+	\item $f \in C^2 \implies \frac{\partial f^2}{\partial x_j\partial x_i} = \frac{\partial f^2}{\partial x_i \partial x_j}$
 	\item Si $Df(x_0) = 0,\ f$ tiene un punto crítico en $x_0$. Además,
 	\begin{itemize}
 		\item $\hess f(x_0)$ definida positiva $\implies f$ tiene un \textbf{mínimo relativo estricto} en $x_0$
 		\item $\hess f(x_0)$ definida negativa $\implies f$ tiene un \textbf{máximo relativo estricto} en $x_0$
-		\item $\hess f(x_0)$ semidefinida positiva $\implies f$ tiene un \textbf{mínimo relativo} en $x_0$
-		\item $\hess f(x_0)$ semidefinida negativa $\implies f$ tiene un \textbf{máximo relativo} en $x_0$
-		\item Puede haber extremos sin que $\hess f(x_0)$ sea definida
+		\item $f$ tiene un \textbf{mínimo relativo} en $x_0 \implies \hess f(x_0)$ es semidefinida positiva
+		\item $f$ tiene un \textbf{máximo relativo} en $x_0 \implies \hess f(x_0)$ es semidefinida negativa
 	\end{itemize}
-	\item El \textbf{Laplaciano} $\Delta f = \tr \hess f$
+	\item El \textbf{Laplaciano} $\Delta f = \tr (\hess f)$
 	\begin{itemize}
 		\item $f$ es armónica en $E \iff \forall x \in E,\ \Delta f(x) = 0$
 	\end{itemize}
@@ -310,6 +313,14 @@ En funciones escalares $f:E \to \R$
 		\item en otro caso $A$ es indefinida (no implica que no haya extremo relativo)
 	\end{itemize}
 \end{itemize}
+
+\subsection{Polinomio de Taylor}
+
+Sea $f:\R^n \to \R$ una funnción de clase $C^2$. El polinomio de Taylor de grado 2 en $x_0$ es
+\begin{multline*}
+	p_{x_0}(x) = f(x_0) + \sum_{i=0}^n \frac{\partial f}{\partial x_i}(x - x_0)\\
+	+ \frac{1}{2!}\sum_{i=0}^n\sum_{j=0}^n \frac{\partial^2 f}{\partial x_i\partial x_j}(x_i - x_{0_i})(x_j - x_{0_j}) + o(\norma{x}^2)
+\end{multline*}
 
 \subsection{Tipos de aplicaciones}
 
