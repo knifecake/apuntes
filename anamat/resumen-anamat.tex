@@ -84,6 +84,18 @@ Sea $V$ un espacio vectorial, $x, y, z \in V, \lambda \in \R$
 			x,y \in \R^n &\implies \norma{x+y}_p \leq \norma{x}_p + \norma{y}_p
 		\end{align*}
 	\end{itemize}
+	\item Dos \textbf{normas} son \textbf{equivalentes} si definen los mismos abiertos
+	\begin{itemize}
+		\item en $V = \R^n$ todas las normas son equivalentes
+	\end{itemize}
+	\item Una norma $\norma{\cdot}$ es \textbf{submultiplicativa} $\iff \forall x, y,\ \norma{xy} \leq \norma{x}\norma{y}$
+	\begin{itemize}
+		\item $\norma{\cdot}$ submultiplicativa $\implies \norma{x^n} \leq \norma{x}^n$
+	\end{itemize}
+	\item La \textbf{norma de Frobenius} para matrices es $\norma{\cdot}_F = \sqrt{\tr A^\ast A}$ donde $A^\ast$ es la traspuesta conjugada de $A$
+	\begin{itemize}
+		\item La norma de Frobenius es submultiplicativa
+	\end{itemize}
 \end{itemize}
 
 \subsection{Espacios métricos}
@@ -262,8 +274,14 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 	\item El \textbf{gradiente} $\nabla f$ es el jacobiano de una función escalar ($f: \R^n \to \R$). Es un vector fila.
 	\item El \textbf{Jacobiano} es $\det Df$
 	\item Una función vectorial es diferenciable $\iff$ son diferenciables todas sus funciones componentes
-	
-	\item El \textbf{Hessiano} es la matriz simétrica de las derivadas se segundas
+\end{itemize}
+\subsection{Extremos relativos}
+En funciones escalares $f:E \to \R$
+\begin{itemize}
+	\item $f$ tiene un \textbf{máximo relativo} en $x_0 \iff \exists U$ entorno de $x_0$ tal que $\forall x \in U \implies f(x) \leq f(x_0)$
+	\item $f$ tiene un \textbf{máximo relativo estricto} en $x_0 \iff \exists U$ entorno de $x_0$ tal que $\forall x \in U \implies f(x) < f(x_0)$
+	\item Análogamente se definen los mínimos
+	\item  el \textbf{Hessiano} es la matriz simétrica de las derivadas segundas
 	\begin{align*}
 		\hess f = \left(\begin{array}{ccc}
 		\frac{\partial^2f}{\partial x_1\partial x_1} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
@@ -271,7 +289,26 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 		\frac{\partial^2f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2}{\partial x_n \partial x_n}
 		\end{array}\right)
 	\end{align*}
+	\item Si $Df(x_0) = 0,\ f$ tiene un punto crítico en $x_0$. Además,
+	\begin{itemize}
+		\item $\hess f(x_0)$ definida positiva $\implies f$ tiene un \textbf{mínimo relativo estricto} en $x_0$
+		\item $\hess f(x_0)$ definida negativa $\implies f$ tiene un \textbf{máximo relativo estricto} en $x_0$
+		\item $\hess f(x_0)$ semidefinida positiva $\implies f$ tiene un \textbf{mínimo relativo} en $x_0$
+		\item $\hess f(x_0)$ semidefinida negativa $\implies f$ tiene un \textbf{máximo relativo} en $x_0$
+		\item Puede haber extremos sin que $\hess f(x_0)$ sea definida
+	\end{itemize}
 	\item El \textbf{Laplaciano} $\Delta f = \tr \hess f$
+	\begin{itemize}
+		\item $f$ es armónica en $E \iff \forall x \in E,\ \Delta f(x) = 0$
+	\end{itemize}
+	\item El \textbf{criterio de Sylvester} para una matriz cuadrada $A$ dice
+	\begin{itemize}
+		\item menores principales $> 0 \iff A$ es \textbf{definida positiva}
+		\item menores principales $\geq 0 \iff A$ es \textbf{semidefinida positiva}
+		\item menores impares $\leq 0$ y menores pares $\geq 0 \iff A$ es \textbf{semidefinida negativa}
+		\item menores impares $< 0$ y menores pares $> 0 \iff A$ \textbf{definida negativa}
+		\item en otro caso $A$ es indefinida (no implica que no haya extremo relativo)
+	\end{itemize}
 \end{itemize}
 
 \subsection{Tipos de aplicaciones}
@@ -279,6 +316,9 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 Sean $E,F$ e.v, sea $f: E \to F$
 \begin{itemize}
 	\item $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
+	\begin{itemize}
+		\item $\forall x \in A, \hess f (x)$ es semidefinida positiva $\iff f$ es convexa en $A$
+	\end{itemize}
 	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$
 	\item $f$ es $\alpha$\textbf{-Hölder continua} $\iff \exists c > 0 \mid \norma{f(x) - f(x')} \leq c \norma{x - x'}^\alpha$
 	\begin{itemize}
