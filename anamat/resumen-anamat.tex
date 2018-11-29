@@ -251,7 +251,7 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 			\vdots \\\hline
 			Df_m(x_0) 
 			\end{array}\right) \\
-			Df_(x_0) &:= \left(\begin{array}{ccc}
+			Df_{x_0} &:= \left(\begin{array}{ccc}
 			\partial_{x_1}f_1(x_0) & \dots & \partial_{x_n}f_1(x_0) \\
 			\vdots & \ddots & \vdots \\
 			\partial_{x_1}f_m(x_0) & \dots & \partial_{x_n}f_m(x_0) \\
@@ -276,10 +276,15 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 
 \subsection{Tipos de aplicaciones}
 
-Sean $E,V$ e.v, sea $f: E \to F$
+Sean $E,F$ e.v, sea $f: E \to F$
 \begin{itemize}
 	\item $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
-	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$.
+	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$
+	\item $f$ es $\alpha$\textbf{-Hölder continua} $\iff \exists c > 0 \mid \norma{f(x) - f(x')} \leq c \norma{x - x'}^\alpha$
+	\begin{itemize}
+		\item Si $\alpha > 1$ entonces $f$ es constante
+		\item Si $\alpha = 1$ entonces $f$ es de Lipschitz
+	\end{itemize}
 \end{itemize}
 
 Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
@@ -289,10 +294,14 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		d_Y(f(x), f(x')) \leq K d_X(x,x'),\qquad \forall x,x' \in X
 	\end{align*}
 	\begin{itemize}
-		\item Toda aplicación de Lipschitz es continua.
+		\item Toda aplicación de Lipschitz es uniformemente continua
+		\item Si $f$ es de Lipschitz entonces $f$ es $\alpha$-Hölder continua.
 	\end{itemize}
 
 	\item $f$ es \textbf{contractiva} $\iff f$ es de Lipschitz con $K < 1 \land$ dominio y codomino coinciden, distancias incluidas ($f:(X, d_X) \to (X, d_X)$)
+	\begin{itemize}
+		\item Si $f$ es contractiva y $X$ es completo entonces $f$ tiene un único punto fijo para el que $f(x) = x$
+	\end{itemize}
 	
 	\item $f$ es \textbf{inyectiva} $\iff \forall x,x' \in X, f(x) \neq f(x') \implies x \neq x'$
 	
@@ -304,6 +313,14 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\item $f$ coerciva $\implies f$ inyectiva
 	\end{itemize}
 \end{itemize}
+\begin{multline}
+\boxed{
+	\begin{array}{c}
+	f \in C^1 \implies f \text{ de Lipschitz }\implies\\
+	\implies f \text{ uniformemente continua }\implies f\text{ continua}
+	\end{array}
+	}
+\end{multline}
 
 \section{Teoremas gordos}
 
@@ -312,12 +329,6 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	
 	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
 \end{thm}
-
-\begin{thm}[de la función inversa de Balodis]
-	Sea $E$ un espacio de Banach, $U \subset E$ un abierto y $f:U \to E$ con $f \in C^1$. Entonces si en $x_0 \in U$ se tiene que $Df(x_0)$ es invertible entonces $f$ es localmente invertible.
-\end{thm}
-
-
 
 \begin{flushright}
 	E. Hernandis, \today $ $ a las \currenttime
