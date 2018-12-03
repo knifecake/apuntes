@@ -365,3 +365,63 @@ Lo interesante de verdad es el corolario que obtenemos de esta observación:
 \begin{cor}
 	Dados $H, K, N$ subgrupos normales de $G$ entonces $\forall g \in G$ existe una única operación para la que $g = hkn$ y dicha operación es el isomorfismo $H\times K \times N \to G$.
 \end{cor}
+
+% falta día 15 de noviembre
+
+\begin{thm}
+	Sea $G$ un grupo abeliano finito. Entonces $G$ es suma directa de sus p-subgrupos de Sylow.
+\end{thm}
+
+\begin{ej}
+	Consideramos $G = \Z/12\Z$ que tiene $|G| = 2^2\cdot 3$. Se tiene que
+	\begin{align*}
+		P_2 = \{\overline{0}, \overline{3}, \overline{6}, \overline{9}\}\qquad P_3 = \{\overline{0}, \overline{4}, \overline{8}\} \qquad \Z/12\Z = P_2 \oplus P_3
+	\end{align*}
+\end{ej}
+
+Sea ahora $G$ un p-grupo abeliano finito, es decir que $G$ es abeliano y que $|G| = p^r$. Es inmediato que $\forall g \in G,\ o(g) = p^s$ con $s \leq r$. Si tomamos $n \in \Z$ y utilizamos notación aditiva ($ng$ significa $g$ operado consigo mismo $n$ veces) tenemos que
+\begin{align*}
+	\alpha_n : G &\to G \\
+	g &\mapsto ng
+\end{align*}
+es un homomorfismo de grupos (cuando $G$ es abeliano). Si ahora tomamos $p \in \Z$ con $p$ primo, tenemos que $\alpha_p(g) \mapsto pg$. Por el teorema de Lagrange (\ref{thm:lagrange}) tenemos que si $|G| = n \land p \divides n$ entonces $\exists \alpha \in G \mid o(\alpha) = p$. Como $|G| = p^r$ entonces $\alpha_p:G \to G$ no es inyectiva y por tanto $\emptyset \subsetneq \ker \alpha_p < G$. Vamos a profundizar en el subgrupo $\ker \alpha_p$. Este subgrupo es
+\begin{align*}
+	\ker \alpha_p = \{g \in G \mid o(g) \divides p\} = \{g \in G \mid o(g) = 1 \lor o(g) = p\}
+\end{align*}
+ya que $p$ es primo.
+
+
+\begin{ej}
+	Consideramos $G = \Z/p^r\Z$.
+	\begin{align*}
+		\Z/p^r\Z \to &\Z/p^r\Z \\
+		\overline{0} \mapsto & \overline{1} \\
+		\vdots & \mapsto \vdots \\
+		\overline{p^{r-1}} & \mapsto \overline{0} \\
+		\overline{p^r-1} &
+	\end{align*}
+\end{ej}
+
+\begin{ej}
+	Consideramos $G = \Z/p^r\Z \oplus \Z/p^s\Z$. Observemos que $G$ nunca va a ser cíclico porque $mcd(p^r, p^s) > 1$ (nunca serán coprimos). Definamos aquí el producto por $p$.
+	\begin{align*}
+		\alpha_p : G &\to G \\
+		(\overline{a}, \overline{b}) \mapsto (p\overline{a}, p \overline{b}) \\
+	\end{align*}
+	
+	En este caso es necesario que $\ker \alpha_p = \{(\overline{a}, \overline{b}) \mid p\overline{a} = \overline{0} \land p \overline{b} = \overline{0}\} = \langle \overline{p^{r-1}}\rangle \oplus \langle \overline{p^{s-1}} \rangle$ donde $\langle \overline{p^{r-1}}\rangle \isom \Z/p^r\Z$ y $\langle \overline{p^{s-1}}\rangle \isom \Z/p^s\Z$. En este caso (en el que el p-grupo no es cíclico) se observa que hay más de 1 subgrupo de orden $p$.
+\end{ej}
+
+¿Será verdad que esta observación caracteriza a los grupos cíclicos?
+
+\begin{thm}[de alguien 1]
+	Sea $G$ un p-subgrupo abeliano. Entonces $G$ es cíclico si y solo si tiene un único subgrupo de orden $p$.
+\end{thm}
+
+\begin{proof}
+	Consideramos $\alpha_p : G \to G$. $\ker \alpha_p$ consiste en $\overline{0}$ y todos los elementos de orden $p$. Sea $N$ el único subgrupo de orden $p$. Por tanto $\ker \alpha_p = N$.
+	
+	La imagen $\ima \alpha_p$ es un subgrupo de $G$ y sabemos (por los teoremas de isomorfía) que $\ima \alpha_p \isom G / N$. Pongamos que $|G| = p^r$, por hipótesis, $\ker \alpha_o = N \land |N| = p$. En particular, tenemos que $\ima \alpha_p$ es un p-grupo abeliano de orden $|\ima \alpha_p \isom G/N| = \frac{p^r}{p} = p^{r-1}$.  Como $p \divides |\ima \alpha_p|$ tiene que existir un elemento de orden $p$ en $\ima \alpha_p$ y por tanto $N < \ima \alpha_p < G$. Es único porque si hubiera dos subgrupos de orden $p$ en $\ima \alpha_g$, también los habría en $G$ y hemos partido de lo contrario. Aplicando inducción podemos suponer que el criterio es válido para $\ima \alpha_p$ y por tanto podemos suponer que $\ima \alpha_p$ es cíclico.
+	
+	Sea $\overline{g} \in \ima \alpha_p$ que genera el subgrupo $\ima \alpha_p$. Entonces $\overline{g} \in G/N \isom \ima \alpha_p$. Fijamos un elemento $g \in G$ cuya imagen en $G / N$ sea $\overline{g}$. Recordemos que hay una correspondencia (\ref{thm:correspondenciasubgrupos}) entre los subgrupos de $G$ que contienen a $N$ y los subgrupos de $G/N$. Por tanto tenemos un elemento $g \in G$ que genera un subgrupo y quisiéramos ver que $\langle g \rangle = G$. Si demostramos que $N < \langle g \rangle$ entonces $\langle g \rangle = G$ por la correspondencia mencionada. Esta última afirmación ($N < \langle g \rangle = G'$) es válida porque $G'$ es un p-grupo $\implies G'$ contiene un elemento de orden $p \implies N < G' = \langle g \rangle$. Luego $\langle g \rangle = G$.
+\end{proof}
