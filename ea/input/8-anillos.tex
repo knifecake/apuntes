@@ -112,3 +112,129 @@ El ideal cero de $A/I$ tiene contraimagen $\inv{\pi}(\{0\}) = I$. Si $\overline{
 \end{align*}
 
 es un homomorfismo de anillos (la composición de homomorfismos de anillos es un homomorfismo de anillos). $\inv{\pi}(\overline{J}) = \ker$ de la composición.
+
+% --------------------
+
+\begin{thm}
+	Sea $\alpha: A \to B$ un homomorfismo de anillos.
+	\begin{itemize}
+		\item $\ker \alpha$ es un ideal
+		\item $\ima \alpha$ es un subanillo
+		\item $\alpha$ es sobreyectivo $\iff \ima \alpha = B$
+		\item $\alpha$ es inyectivo $\iff \ker \alpha = \{0\}$
+	\end{itemize}
+\end{thm}
+
+\begin{dfn}
+	Un homomorfismo de anillos $\alpha: A \to B$ es un isomorfismo cuando es una biyección. En este caso decimos que $A$ y $B$ son isomorfos y lo notamos con $A \isom B$.
+\end{dfn}
+
+\begin{pro}
+	Si $\alpha: A \to B$ es un homomorfismo de anillos y una biyección de conjuntos entonces $\inv{\alpha}:B \to A$ es nuevamente un homomorfismo de anillos.
+\end{pro}
+
+\subsubsection{Homomorfismos de anillos e ideales}
+
+\begin{thm}
+	Sea $\alpha: A \to B$ un homorfismo de anillos. Entonces
+	\begin{enumerate}
+		\item Si $J \subset B$ es un ideal en $B$ entonces $\inv{\alpha}(J)$ es un ideal en $A$.
+		\item Si $\alpha$ es sobreyectiva entonces la imagen $\alpha(I)$ de un ideal $I \subset A$ es un ideal en $B$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\node (A) at (0,0) {$A$};
+		\node (B) at (4,0) {$B$};
+		\node (BJ) at (4, -3) {$B / J$};
+		
+		\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
+		\draw[-{Latex[length=2mm]}] (B) -- (BJ) node[pos=.5, left]{$\pi$};
+		\draw[-{Latex[length=2mm]}] (A) -- (BJ) node[pos=.5, below] {$\pi \circ \alpha$};
+		\end{tikzpicture}
+	\end{figure}
+	\begin{enumerate}
+		\item $\inv{\alpha}(J) = \ker(\pi \circ \alpha)$ y por tanto es un ideal.
+		\item Probamos las propiedades de los ideales:
+		\begin{enumerate}
+			\item $\alpha(0) = 0 \in \alpha(I)$
+			\item Sean $b_1, b_2 \in \alpha(I)$ tenemos que ver que $b_1 + b_2 \in \alpha(I)$. Sean $a_1, a_2 \in I$ tales que $b_1 = \alpha(a_1) \land b_2 = \alpha(a_2)$. Por ser $\alpha$ h. de anillos tenemos que $b_1 + b_2 = \alpha(a_1 + a_2) = \alpha(a_1) + \alpha(a_2)$.
+			\item Sean $b \in B,\ b' \in \alpha(I)$. Tenemos que probar que $bb' \in \alpha(I)$. Sabemos que $b' \in \alpha(I) \iff b' = \alpha(a),\ a \in I$. Como $b \in B$ y $\alpha$ es sobre tiene que existir $d \in I \mid \alpha(d) = b$. Por tanto $\alpha(d\cdot a) = b \cdot b' \implies bb' \in \alpha(I)$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+Fijado $I \subset A$ consideramos $\pi:A \to A/I$ que es un homomorfismo de anillos sobreyectivo.
+
+\begin{enumerate}
+	\item Si $\overline{J} \subset A /I$ es un ideal en $A / I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene a $I$.
+	\item Si $J$ es un ideal en $A$ entonces $\pi(J)$ es un ideal en $A/J$ y $J \subseteq \inv{\pi}(\pi(J))$ (es claro porque si $j \in J$ entonces $\pi(j) \in \pi(J)$).
+	\begin{enumerate}
+		\item Además, si $I \subseteq J$ entonces $J = \inv{\pi}(\pi(J))$.
+		\begin{proof}
+			Si $\delta \in \inv{\pi}(\pi(J)) \implies \delta \in J$. Además, $\delta \in \inv{\pi}(\pi(J)) \iff \pi(\delta) \in \pi(J) \iff \pi(\delta) = \pi(d_1),\ d_1 \in J \iff \delta - d_1 \in \ker \pi = I$. Tomamos
+			\begin{align*}
+				\delta = \underbrace{(\delta - j_i)}_{\in I} + \underbrace{j_i}_{\in J} \in J
+			\end{align*}
+			porque $I \subset J$.
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+
+
+La siguiente proposición nos llevará al primer teorema de la isomorfía.
+\begin{pro}
+	Sea $\varphi: A \to B$ un homomorfismo de anillos con $\ker \varphi$ ideal en $A$. Sea $I$ un ideal en $A$ con $I \subset \ker \varphi$.
+	\begin{itemize}
+		\item Existe un único homomorfismo de anillos $\overline{\varphi}: A / I \to B$ tal que $\varphi = \overline{\varphi} \circ \pi$.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+			\node (A) at (0,0) {$A$};
+			\node (B) at (4,0) {$B$};
+			\node (AI) at (0, -3) {$A / I$};
+			
+			\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\varphi$};
+			\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
+			\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\varphi}$};
+			\end{tikzpicture}
+		\end{figure}
+		\begin{proof}
+			Definimos $\overline{\varphi}(\overline{a}) = \varphi(a)$. Aunque choque (porque el $\overline{a}$ puede venir de muchos $a$) aseguramos que $\overline{\varphi}$ está bien definida. Veamos por qué. Sabemos que $a'$ y $a$ definen el mismo elemento en $A / I \iff a' - a \in I$. Sopongamos que $I \subset \ker \varphi$. Entonces $\varphi(a - a') = 0 \iff \varphi(a) - \varphi(a') = 0 \implies \overline{\varphi}$ está bien definida como función.
+			
+			Veamos ahora que en efecto se cumple que $\overline{\varphi}$ es un homomorfismo de anillos, es decir que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Recordando la definición que hemos dado de $\varphi$ y la propiedad $\overline{a} + \overline{b} = \overline{a + b}$ es claro que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a +b}) = \varphi(a + b) = \varphi(a) + \varphi(b) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Es análogo para el producto ya que $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$.
+		\end{proof}
+		\item $\ker \overline{\varphi} = \ker \varphi / I$
+		\begin{proof}
+			Sea $\overline{a} \in A / I$. Entonces $\overline{a} \in \ker \overline{\varphi} \iff \overline{\varphi}(\overline{a}) = 0 \iff \varphi(a) = 0 \iff a \in \ker \varphi$.
+		\end{proof}
+	\end{itemize}
+\end{pro}
+
+\begin{thm}[Primer teorema de la isomorfía (anillos)]
+	Si $\alpha: A \to B$ es un homomorfismo de anillos sobreyectivo entonces $B \isom A / \ker \alpha$.
+\end{thm}
+
+	\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\node (A) at (0,0) {$A$};
+	\node (B) at (4,0) {$B$};
+	\node (AI) at (0, -3) {$A / \ker \alpha$};
+	
+	\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
+	\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
+	\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\alpha}$};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{proof}
+	Nos apoyamos en la proposición anterior tomando $I = \ker \alpha$. Como $\alpha$ y $\pi$ son sobreyectivas tenemos que $\overline{\alpha}$ es sobreyectiva. Aplicando el segundo resultado de la proposición anterior tenemos que $\ker \overline{\alpha} = \ker \alpha / \ker \alpha = \{ 0\} \implies \overline{\alpha}$ es inyectiva. Concluimos que $\overline{\alpha}$ es un isomorfismo de anillos y por tanto $B \isom A / \ker \alpha$.
+\end{proof}
+
+
+
+
