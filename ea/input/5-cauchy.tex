@@ -59,9 +59,9 @@ Sea $a \in G \land o(a) = n$. Si $a$ es el único elemento de orden $n$ entonces
 \end{proof}
 
 
-\begin{ej}[Hoja 1, ej 33]
+\begin{ex}[H1.33]
 	Sea $G$ un grupo. Suponed que existe un único $a \in G$ de orden 2. Demostrad que $a \in Z(G)$.
-\end{ej}
+\end{ex}
 
 \begin{proof}
 	Recordamos que $a \in Z(G) \iff ga = ag,\ \forall g \in G$. Definimos el isomorfismo de conjugación $\phi_g (x) = gx\inv{g}$ para algún $g$. Como $\phi_g$ es isomorfismo lleva elementos de orden $n$ en elementos de orden $n$. Entonces $\phi_g(a) = a$ ya que $a$ es el único elemento de orden 2. Por tanto $ga\inv{g} = a \implies ga = ag \implies a \in Z(G)$.
@@ -317,6 +317,15 @@ descomponiendo la suma en las clases con solo un elemento y las clases con más 
 	Vamos a seguir sacando cajas. Veamos $cl(B)$. Claramente $B \in C(B)$ y por alguna razón que me falta $C(B) = \{1, B, B^2, B^3\}$. Por la fórmula tenemos que $|cl(B)| = [D_4:C(B)] = 2$. Tenemos una vez más que utilizar el isomorfismo de conjugación. Sabemos que $cl(B) = \{ga\inv{g} \mid g \in G\}$. Pero al ser $\phi_g$ isomorfismo y $\langle B \rangle$ normal, tenemos que $\phi_g : \langle b \rangle \to \langle b \rangle$ también es isomorfismo y por tanto lleva elementos de orden $n$ en elementos de orden $n$. Por tanto $\phi_g(B) = gB\inv{g}$ solo puede ser $B^3$ (a parte de $B$). Luego ya tenemos que $cl(B) = \{B, B^3\}$.
 	
 	¿Qué pasa con $A$? Pues es claro que $C(A) \supset \{1, A, B^2, AB^2\}$ ya que $B^2 \in Z(G)$ por lo que está en todos los $C(c_i)$.
+	
+	
+	Segundo intento.
+	
+	\begin{enumerate}
+		\item Como siempre $cl(e) = \{e\}$
+		\item Veamos $cl(B)$. Queremos ver cuántos elementos tiene. Sabemos que $|cl(B)| = [D_4:C(B)]$. Veamos quién es $C(B)$. En primer lugar $B \in C(B) \implies \gen{B} \in C(B)$. Así ya tenemos que $|C(B)| \geq 4$. ¿Puede haber algún elemento más en $C(B)$? No, porque si hubiera uno más, su orden ya sería $|C(B)| = 8$ pues $C(B) < D_4$. Así concluímos que $|cl(B)| = [D_4:C(B)] = 8 / 4 = 2$. Además sabemos que $[D_4:C(B)] = 2 \implies C(B) \normsub D_4 \iff gC(B)\inv{g} = C(B) \forall g \in D_4 \implies gB\inv{g} \in C(B)$. Además como $gx\inv{g}$ es un isomorfismo que lleva elementos de orden $n$ en elementos de orden $n$ obtenemos que $o(gB\inv{g}) = o(B) = 2$. Sabemos que $B \in cl(B) \land cl(B) = \{gB\inv{g} \mid g \in D_4\} \land gB\inv{g} \in C(B) \implies gB\inv{g} = B^3$. Por tanto $cl(B) = \{B, B^3\}$.
+		\item Veamos $cl(A)$. Queremos ver cuántos elementos tiene. Sabemos que $|cl(A)| = [D_4:C(A)]$. Veamos quién es $C(A)$. En primer lugar $A \in C(A) \implies \gen{A} \subset C(A)$. Si $B \in C(A)$ entonces $C(A) = G$ pues $B$ y $A$ generan. Esto no puede ser porque $C(A) = G \implies A$ conjuga con todos los demás elementos pero sabemos que $AB \neq BA$. Ocurre lo mismo con $B^3$. Probamos con $B^2$. $B^2AB^2 = BBAB^2 = BAB^3B^2 = BAB = AB^3B = A$ luego $B^2 \in C(A)$. Como $C(A) < D_4$ sabemos que es cerrado y por tanto $AB^2 \in C(A)$. Ya no puede haber más elementos porque si hubiera más, entonces $|C(A)| = 8$ y eso no puede ser. Por tanto $|cl(A)| = [D_4:C(A)] = 8 / 4 = 2$. Sabemos que $A \in cl(A)$. ¿Quién es el otro elemento? Como antes, $[D_4:C(A)] = 2 \implies C(A) \normsub D_4 \iff gC(A)\inv{g} = A$. Como $gx\inv{g}$ es un isomorfismo mantiene el orden y por tanto los conjugados de $A$ pueden ser $B^2$ o $AB^2$ (los únicos de orden 2 en $C(A)$
+	\end{enumerate}
 \end{ej}
 
 
@@ -338,13 +347,13 @@ Recordemos que la conjugación dada $\phi_g(x) = gx\inv{g}$ (el isomorfismo conj
 	\label{dfn:normalizador}
 	Fijado $S \subset G$, definimos el normalizador de $S$:
 	\begin{align}
-	N(S) = \{h \in G \mid hS\inv{g} = S\}
+	N(S) = \{g \in G \mid gS\inv{g} = S\}
 	\end{align} 
 \end{dfn}
 
-Se parece mucho a la definición de centralizador de un elemento (\ref{dfn:centralizador}). En el caso en que $S = \{a\}$ tenemos que $N(S) = \{h \in G \mid ha\inv{h} = a\} = C(a)$.
+Se parece mucho a la definición de centralizador de un elemento (\ref{dfn:centralizador}). En el caso en que $S = \{a\}$ tenemos que $N(S) = \{g \in G \mid ga\inv{g} = a\} = C(a)$.
 
-Ojo, decir que $hS\inv{h} = S$ no significa que $\forall b_i \in S,\ hb_i\inv{h} = b_i$, sino que $hb_i\inv{h} \in S$ (no mandamos cada elemento a él mismo, sino que todos quedan dentro del subconjunto). Es decir que \textit{$N(S)$ es el conjunto de la totalidad de elementos para los que $\phi_g$ manda el subconjunto $S$ en sí mismo.}
+Ojo, decir que $gS\inv{g} = S$ no significa que $\forall b_i \in S,\ gb_i\inv{g} = b_i$, sino que $gb_i\inv{g} \in S$ (no mandamos cada elemento a él mismo, sino que todos quedan dentro del subconjunto). Es decir que \textit{$N(S)$ es el conjunto de la totalidad de elementos para los que $\phi_g$ manda el subconjunto $S$ en sí mismo.}
 
 \begin{pro}
 	Dado $S \subset G,\ N(S)$ es un subgrupo.
@@ -374,7 +383,7 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 \end{pro}
 
 \begin{proof}
-	Si tomamos $h \in G$, tenemos que $hH\inv{g} = H$ y también $\inv{h}H\inv{(\inv{h})} = H$ (todo elemento de $H$ tambéin tiene a su inverso en $H$).
+	Si tomamos $h \in G$, tenemos que $hH\inv{h} = H$ y también $\inv{h}H\inv{(\inv{h})} = H$ (todo elemento de $H$ tambéin tiene a su inverso en $H$).
 \end{proof}
 
 \begin{thm}
@@ -416,9 +425,9 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 %20181011
 
 \begin{ej}
-	Seguimos por el famoso grupo $D_4$ (presentación en el ejemplo \ref{ej:famosogrupod4}). Vimos anteriormente (ejemplo \ref{ej:clasesd4}) que $Z(D_4) = \{1, B^2\}$. Tenemos su retículo en \ref{fig:reticuloD4}. Queremos ver de entre los subgrupos de $D_4$, cuáles son los que conmutan.
+	Seguimos por \nameref{ej:famosogrupod4}). Vimos anteriormente (\autoref{ej:clasesd4}) que $Z(D_4) = \{1, B^2\}$. Tenemos su retículo en \autoref{fig:reticuloD4}. Queremos ver de entre los subgrupos de $D_4$, cuáles son los que conmutan.
 	\begin{itemize}
-		\item Empecemos por $\langle b \rangle = \{1, b, b^3, b^3\}$. Observamos que $\langle b \rangle$ es normal puesto que tiene índice 2, es decir que $\{g\langle B \rangle \inv{g} \mid g \in G\} = \{\langle B \rangle\}$ y tiene sentido que $[G:N(\langle B \rangle)] = 1$. Es decir que como $\langle B \rangle$ es normal tenemos que $N(\langle B \rangle) = D_4$.
+		\item Empecemos por $\langle B \rangle = \{1, B, B^2, B^3\}$. Observamos que $\langle b \rangle$ es normal puesto que tiene índice 2, es decir que $\{g\langle B \rangle \inv{g} \mid g \in G\} = \{\langle B \rangle\}$ y tiene sentido que $[G:N(\langle B \rangle)] = 1$. Es decir que como $\langle B \rangle$ es normal tenemos que $N(\langle B \rangle) = D_4$.
 		\item Seguimos por $H = \{1, A, B^2, AB^2\}$. Ocurre lo mismo, luego $N(H) = D_4$.
 		\item Con el caso de $\langle B^2 \rangle$ tenemos también que $N(\langle B^2 \rangle) = D_4$ por ser normal.
 		\item Agotados los subgrupos normales, nos quedan los más difíciles. Consideramos ahora $\langle A \rangle$. Una vez más nos preguntamos quién es el normalizador de $\langle A \rangle$.
@@ -434,13 +443,13 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 \end{ej}
 
 \begin{ej}
-	Vamos ahora con el grupo de cuaterniones $H$ descrito en el ejemplo \ref{ej:grupocuaterniones}.
+	Vamos ahora con el grupo de cuaterniones $H$ descrito en el \autoref{ej:grupocuaterniones}.
 	
 	
 	
 	\begin{enumerate}
 		\item Nos dibujamos el retículo.
-		\item Primeramente nos damos cuenta de que $\langle A \rangle \cap \langle b \rangle \supsetneq \{e\}$ porque $H$ tiene 8 elementos y por la fórmula del producto libre \ref{thm:cardinalidadproductolibre} y porque todo producto directo de subgrupos está contenido en el grupo aunque no sea subgrupo.
+		\item Primeramente nos damos cuenta de que $\langle A \rangle \cap \langle b \rangle \supsetneq \{e\}$ porque $H$ tiene 8 elementos y por la fórmula del producto libre (\autoref{thm:cardinalidadproductolibre}) y porque todo producto directo de subgrupos está contenido en el grupo aunque no sea subgrupo.
 		\item Ocurre lo mismo con los demás subgrupos de orden 4 ($\langle A \rangle,\ \langle AB \rangle$). Tiene que tener intersección no vacía. En concreto la intersección es el subgrupo generado $\langle A^2 = B^2 = (AB)^2 \rangle$.
 		\item En $H$ todos los subgrupos son normales, por lo que no tienen "órbitas" de modo que es muy aburrido.
 	\end{enumerate}

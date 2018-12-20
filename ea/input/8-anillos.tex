@@ -235,6 +235,84 @@ La siguiente proposición nos llevará al primer teorema de la isomorfía.
 	Nos apoyamos en la proposición anterior tomando $I = \ker \alpha$. Como $\alpha$ y $\pi$ son sobreyectivas tenemos que $\overline{\alpha}$ es sobreyectiva. Aplicando el segundo resultado de la proposición anterior tenemos que $\ker \overline{\alpha} = \ker \alpha / \ker \alpha = \{ 0\} \implies \overline{\alpha}$ es inyectiva. Concluimos que $\overline{\alpha}$ es un isomorfismo de anillos y por tanto $B \isom A / \ker \alpha$.
 \end{proof}
 
+% ------- 20181217
 
+\begin{thm}
+	\begin{align*}
+	D \text{ es un dominio de ideales principales (DIP) } \implies D \text{ es un dominio de factorización única (DFU)}
+	\end{align*}
+\end{thm}
 
+El recíproco de este teorema no es cierto en general. Véase por ejemplo el caso de $\Z$ que es un dominio de ideales principales pero no se cumple que $\Z[X]$ es un dominio de factorización única. Si se cumpliera el recíproco entonces el siguiente teorema sería un simple corolario.
+
+\begin{thm}
+	\begin{align*}
+	D \text{ es un dominio de factorización única (DFU) } \implies D[X] \text{ es un dominio de factorización única (DFU)}
+	\end{align*}
+\end{thm}
+
+Este segundo teorema no lo vamos a probar. Probamos el primero.
+
+\begin{dfn}[Asociados]
+	Sea $D$ un domino, $a,a' \in D$. DIremos que $a$ y $a'$ son asociados $\iff \exists u \in \uds{D} \mid a = u a'$.
+\end{dfn}
+
+\begin{proof}
+	Sea $D$ un dominio, $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Sabemos que $a, a' \in D$ son asociados si $\exists u \in \uds{D} \mid a = ua'$. Por ejemplo, los polinomios $3x-2$ y $x - 2/3$ en $\Q[X]$ son asociados.
+	
+	Observemos que si $a$ y $a'$ son asociados entonces $\gen{a} = \gen{a'}$. Si $u \in \uds{a}$ entonces $ua' = a \in \gen{a'}$. Análogamente $\inv{u}a = a' \in \uds{a}$. Luego tenemos $\gen{a} \subset \gen{a'} \land \gen{a'} \subset \gen{a} \implies \gen{a} = \gen{a'}$. Recíprocamente si $0 \neq \gen{a} = \gen{a'} \implies \exists u \in \uds{D} \mid a = ua'$. $a \in \gen{a'} \land a' \in \gen{a} \implies a = a't \land a' = as \implies a' = a'ts \implies 1 = ts \implies t,s \in \uds{D}$.
+	
+	Recordemos las hipótesis iniciales: $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Esto nos da que $0 \neq \gen{a} \land \gen{a} \subsetneq D$. Pensemos en qué significa que un elemento no nulo $a$ no sea una unidad. Supongamos $a = st$. Si $a$ no es una unidad podría ocurrir que $s$ es una unidad (por ejemplo $6 = (-1)(-6),\ -1 \in \uds{\Z}$). Lo que sí que está claro es que no puede ocurrir que a la vez $s$ y $t$ sean unidades. Es decir, tiene que ocurrir que al menos uno de los dos no es una unidad. Por tanto podemos suponer sin pérdida de generalidad que si expresamos $a = a' \cdot s$  entonces $a' \not \in \uds{D}$. Tenemos dos situaciones posibles
+	\begin{enumerate}
+		\item $s \in \uds{D} \implies \gen{a} = \gen{a'}$
+		\item $s \not \in \uds{D} \implies \gen{a} \subsetneq \gen{a'}$ ya que $\gen{a} = \gen{a'} \iff a = a'u$ con $u \in \uds{D}$ pero hemos tomado $s \not\in \uds{D}$
+	\end{enumerate}
+\end{proof}
+
+Aquí para de demostrar y empieza a dar definiciones.
+
+\begin{dfn}
+	Sea $D$ un dominio y $0 \neq a \not\in \uds{D}$. Diremos que $a$ es irreducible en $D \iff \forall a',s \in D,\ a' \not \in \uds{D},\ a = a's \implies s \in \uds{D}$
+\end{dfn}
+
+\begin{obs}
+	Un elemento es irreducible $\iff$ cualquier asociado lo es.
+\end{obs}
+
+\begin{dfn}
+	Sea $D$ un dominio. Diremos que $D$ es un dominio de factorización única (DFU) si se cumplen las siguientes condiciones $\forall a \in D$:
+	\begin{itemize}
+		\item $a \neq 0 \land a \not\in\uds{D} \implies a = p_1p_2\dots p_r$ donde $p_i$ es irreducible en $D$
+		\item $a = p_1p_2\dots p_r,\ p_i$ irreducible y $a = q_1q_2 \dots q_s,\ q_i$ irreducible $\implies r = s$ y además $r_i$ y $q_i$ son asociados para $i = 1, \dots, r$ (la igualdad es un caso particular de el ser asociados).
+	\end{itemize}
+\end{dfn}
+
+\begin{obs}
+	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq ...$ una cadena creaciente de ideales de un anillo $A$. Entonces $\bigcup I_i$ es un ideal.\footnote{Literalmente ha dicho que esto no viene a cuento. Que esto es una digresión de las suyas.}
+\end{obs}
+
+\begin{proof}
+	Probamos las propiedades de los ideales.
+	\begin{enumerate}
+		\item $0 \in \bigcup I_i$
+		\item $s,t \in \bigcup I_i \implies s+t \in \bigcap I_i$
+		\item $s \in \bigcup I_i,\ a \in A \implies as \in \bigcup I_i$.
+	\end{enumerate}
+\end{proof}
+
+\begin{dfn}
+	[Propiedad de cadena creciente]
+	
+	Diremos que un anillo $A$ tiene la propiedad de cadena creciente $\iff$ toda cadena creciente $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ es finita. Es decir, que $\exists n \mid I_n = I_{n+1} = I_{n+2} = \dots$.
+\end{dfn}
+
+\begin{thm}
+	Si $D$ es un DIP entonces $D$ tiene la propiedad de cadena creciente.
+\end{thm}
+
+La demostración es tan ingenua como uno quiera.
+
+\begin{proof}
+	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ una cadena de ideales. Sabemos que en cualquier anillo $\bigcup I_i$ es un ideal. Sea $J = \gen{d}$ para algún $d \in D$. Como $D$ es un DIP ocurre que $d \in \bigcup I_i \implies d \in I_{n_0} \implies \gen{d} \subset I_{n_0} \implies I_{n_0} = I_{n_0 + 1} = \dots$
+\end{proof}
 

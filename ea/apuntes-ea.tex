@@ -77,6 +77,14 @@
 	style=mydfn
 ]{dfn}
 
+\declaretheorem[
+name=Ejercicio,
+refname={ejercicio,ejercicios},
+Refname={Ejercicio,Ejercicios},
+style=thm,
+numbered=no
+]{ex}
+
 \theoremstyle{definition}
 \newtheorem{ej}{Ejemplo}
 
@@ -90,11 +98,13 @@
 \newcommand{\ima}{\text{Im }}
 \newcommand{\isom}{\simeq}
 \newcommand{\autom}[1]{\text{Aut}(#1)}
+\newcommand{\gen}[1]{\langle#1\rangle}
 
 \newcommand{\hr}{\rule{\textwidth}{.4pt}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\ZnZ}{\mathbb{Z}/n\mathbb{Z}}
 \newcommand{\ZmZ}{\mathbb{Z}/m\mathbb{Z}}
 
@@ -135,16 +145,194 @@ Revisión del \today $ $ a las \currenttime.
 
 \part{Apendices}
 
+\chapter{Ejercicios}
+
+\section{Hoja 2}
+
+\begin{ex}[H2.1]
+	\label{ex:h2.1}
+	Se considera el tercer grupo diédrico $D_3$. Se pide hallar lo siguiente:
+	\begin{enumerate}
+		\item Las clases de conjugación de cada uno de sus elementos.
+		\begin{proof}
+			Las clases dan una partición del grupo. Si un elemento pertenece a una clase, entonces la clase de ese elemento también es la clase a la que pertenece.
+			\begin{itemize}
+				\item $cl(e) = \{e\}$
+				\item $cl(B)$? Sabemos que $|cl(B)| = [G:C(B)]$. Sabemos que $\gen{B} =\{1, B, B^2\} \subset C(B)$ luego $|C(B)| \geq 3$. Si hubiera más elementos en $C(B)$ tendríamos que $|C(B)| = 6$ pues $C(B) < D_3$. Esto no ocurre porque sabemos que $B$ no conmuta con todos los demás elementos. Por ejemplo $BA \neq AB$. Por tanto $|C(B)| = 3 \implies |cl(B)| = [D_3:C(B)]= 6/3 = 2$. Es claro que $B \in cl(B)$. Además, como $cl(B)$ contiene elementos transformados por el isomorfismo conjugación sabemos que el otro elemento que hay tiene orden 3. El único elemento que queda de orden 3 es $B^2 \implies cl(B) = \{B, B^2\}$.
+				
+				\item $cl(A)?$ Sabemos que $A$ no conmuta con todos ($A \not\in Z(D_3)$) luego $|C(A)| < 6$. Sabemos que $\gen{A} = \{1, A\} < C(A)$. Además, como $C(A)$ es un (sub)grupo sabemos que no puede haber más elementos porque si los hubiera, $|\gen{A}| \divides |C(A)| \implies C(A) \geq 6$ pero ya hemos visto que no puede ser. Es decir que $|cl(A)| = [D_3:D(A)] = 6 / 2 = 3$. Por tanto $cl(A)$ incluye los 3 elementos que nos quedan: $cl(A) = \{A, AB, AB^2\}$.
+			\end{itemize}
+		\end{proof}
+	
+		\item Los elementos de $\text{Int}(D_3)$.
+		\item Los centralizadores $C_{D_3}(x)$ para cada $x \in D_3$
+		\item Los normalizadores $N(H)$ para cada $H < D_3$.
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H2.2]
+	
+	\begin{proof}
+		Obtenidas las clases en el ejercicio \nameref{ex:h2.1} se verifica que $|D_3| = |cl(e)| + |cl(B)| + |cl(A)| = 1 + 2 + 3 = 6$
+	\end{proof}
+	
+\end{ex}
+
+\begin{ex}[H2.6]
+	Sea $G$ un grupo. ¿Verdadero o falso?
+	\begin{enumerate}
+		\item $H < G$ y $H$ conmutativo implica $H \normsub G$.
+		\item $H < G$ y $|H| = 2$ implica $H \normsub G$.
+		\item Si $\varphi: G \to G_1$ es un homomorfismo de grupos, entonces $\ima \varphi \normsub G$
+		\item Si $H \normsub K$ y $K \normsub G$ entonces $H \normsub G$
+		\item Si $H \normsub G$ y $|H| = m$ entonces $H$ es el único subgrupo de $G$ de orden $m$.
+		\item Si $H \normsub G$ entonces $H < Z(G)$.
+		\begin{proof}[FALSO]
+			Contraejemplo: En $G = D_4$ tomamos $H = \gen{B^2} = \{1, B, B^2, B^3\} \not\subset Z(D_4) = \{1, B^2\}$.
+		\end{proof}
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H2.10]
+	\begin{proof}
+		Fijado $n$ y definida $\alpha_n : G \to G,\ x \mapsto x^n$ tenemos que $\alpha_n$ es un homomorfismo de grupos. Además podemos expresar $H_2 = \ker \alpha_n \implies H_2 \normsub G$. Además también tenemos que $H_1 = \ima \alpha_n < G$. Veamos que $H_1 \normsub G$. Es decir, que $gH_1\inv{g} = H_1,\ \forall g \in G$. Para ello tomamos $x_1^n \in H_1$ y lo conjugamos $gx_1^n\inv{g} = (gx_1\inv{g})^n$ por ser $\alpha$ homomorfismo de grupos. En particular $(gx_1\inv{g})^n \in \ima \alpha \implies (gx_1\inv{g})^n \in H_1 \implies (gx_1\inv{g})^n = x_2^n$ para algún $x_2 \in H_1 \implies H_1 \normsub G$.
+	\end{proof}
+\end{ex}
+
+\begin{ex}[H2.13] Si $A$ es un grupo abeliano con $n$ elementos y $k$ es un entero primo con $n$, demostrad que la aplicación $\varphi : A \to A$ definida por $\varphi(a) = a^k$ es un isomorfismo.
+	\begin{itemize}
+		\item $\varphi$ homomorfismo de grupos.
+		\begin{proof}
+			\begin{align*}
+				\varphi(a)\varphi(b) = a^kb^k = (ab)^k = \varphi(ab)
+			\end{align*}
+		\end{proof}
+		\item $\varphi$ biyectiva $\iff \varphi$ inyectiva ya que dominio y codominio coinciden
+		\begin{proof}
+			$\ker \varphi = \{a \in A \mid \varphi(a) = a^k = 1\}$. Probaremos que $a^k = 1 \iff a = 1$ y por tanto que $\ker \varphi = \{1\} \implies \varphi$ inyectiva. Sabemos que $a^k = 1 \iff o(a^k) = 1$. Sea $t = o(a) \divides n$. Distinguimos dos casos
+			\begin{itemize}
+				\item Si $t = 1$ entonces $a = 1$ y ya está
+				\item Si $t > 1$ entonces $o(a^k) = \frac{t}{mcd(k, t)} = \frac{t}{1} > 1$ contradicción. Luego necesariamente $t = o(a) = 1$.
+			\end{itemize}
+		\end{proof}
+	\end{itemize}
+\end{ex}
+
+\begin{ex}[H2.22]
+	Demostrad que si $G$ es un grupo no conmutativo y tiene orden $p^3$ ($p$ un número primo) entonces $Z(G)$ tiene orden $p$.
+	
+	\begin{proof}
+		Sabemos que $Z(G) < G \implies |Z(G)| \divides |G| \implies |Z(G)| \in \{1, p, p^2, p^3\}$
+		\begin{itemize}
+			\item $|Z(G)| \neq p^3$ porque en tal caso $G$ sería conmutativo
+			\item $|Z(G)| \neq 1$ porque $G$ es un p-grupo y por tanto su centro no es el trivial.
+			\item Si $|Z(G)| = p^2$ entonces $|G/Z(G)| = p \implies G/Z(G)$ es cíclico lo que no es posible si $G$ no es abeliano.
+		\end{itemize}
+	
+		Por descarte concluimos que $|Z(G)| = p$.
+	\end{proof}
+\end{ex}
+
+
+\begin{ex}[H2.25]
+	Sabemos que $\autom{\Z/12\Z} \isom \uds{\Z^\star/12\Z}$ donde $\Z^\star/12\Z$ es el grupo multiplicativo $(\{\overline{1}, \overline{2}, \overline{3}, \dots,  \overline{11}\}, \cdot)$. Queda $\uds{\Z^\star/12\Z} = (\{\overline{1}, \overline{5}, \overline{7}, \overline{11}\}, \cdot )$ y además da la casualidad que $\forall x \in \uds{\Z^\star/12\Z},\ o(x) = 2$ (todos los elementos son su propio inverso) por lo que no tenemos restricciones al definir $f: \Z/2\Z \to \autom{\Z/12\Z}$:
+	\begin{align*}
+		f:\Z/2\Z & \to \autom{\Z/12\Z} \isom \uds{\Z^\star/12\Z} \\
+		e = \overline{0} &\mapsto 1 \\
+		\overline{1} &\mapsto \{\overline{1}, \overline{5}, \overline{7}, \overline{11}\}
+	\end{align*}
+\end{ex}
+
+\begin{ex}[H2.26]
+	Sea $|G_1| = m, |G_2| = n,\ mcd(m, n) = 1$. Si $f:G_1 \to G_2$ es h. de g. sabemos que $o(f(a)) \divides o(a),\ \forall a \in G_1$. Además $o(a) \divides m \land o(f(a)) \divides n$ por el teorema de Lagrange (\ref{thm:lagrange}).
+	\begin{align*}
+		\begin{cases}
+		o(a) \divides m \land o(f(a)) \divides n \\
+		mcd(m, n) = 1 \\
+		o(f(a)) \divides o(a)
+		\end{cases} \implies o(a) = o(f(a)) = 1, \forall a \in G_1
+	\end{align*}
+	Por lo que solo puede haber un homomorfismo entre ellos y además es el trivial $f(a) = e_{G_2}$.
+\end{ex}
+
+\begin{ex}[H2.19]
+	Definimos una función $f:[0, 2\pi] \subset \R \to \mathbb{S}^1, \alpha\mapsto \cos \alpha + i \sin \alpha$. Esta función tiene la propiedad de que $f(\alpha) \cdot f(\alpha') = \cos(\alpha + \alpha') + i\sin(\alpha + \alpha') = f(\alpha + \alpha')$ y por tanto es un h. de g.\footnote{A la izquierda (en $\R$) sumamos pero a la derecha (en $\mathbb{S}^1$) multiplicamos.} entre $R$ y $\mathbb{S}^1$.
+	
+	Un elemento de $\cos \alpha + i \sin \alpha \in \mathbb{S}^1$ es de torsión $\iff \exists n \mid (\cos \alpha + i \sin \alpha )^n = 1$. Ahora bien $(\cos \alpha + i \sin \alpha )^n = \cos n\alpha + i \sin n\alpha = 1 \iff n\alpha = k 2\pi$. 
+\end{ex}
+
+\section{Hoja 4}
+
+\begin{ex}[H4.11] Hallar los subgrupos de Sylow de $S_5$.
+	Sabemos que $|S_5| = 5! = 2^3\cdot3\cdot 5$ y por \nameref{thm:sylow1} tenemos lo siguiente:
+	\begin{itemize}
+		\item $\exists P_2,\ |P_2| = 2^3 = 8$.
+		\item $\exists P_3,\ |P_3| = 3$. Además en $S_5$ hay $\binom{5}{3}2! =20 $ 3-ciclos y en cada $gP_3\inv{g} = \{1, a, a^2 \mid o(a) = 3\}$ hay 2 elementos de orden 3 distintos. Además, $g_1P_3\inv{g_1} \cap g_2P_3\inv{g_2} = \{e\}$ porque si su intersección fuera más grande entonces serían el mismo subgrupo (porque son cíclicos). Es por esto que tenemos que repartir 40 elementos dando 2 a cada 3-grupo con lo que obtenemos $n_3 = 20 / 2 = 10$ 3-subgrupos de Sylow en $S_5$.
+		\item $\exists P_5,\ |P_5| = 5$. Además en $S_5$ hay $4! = 24$ 5-ciclos (elementos de orden 5) y en cada $gP_5\inv{g} = \{1, a, a^2, a^3, a^4 \mid o(a) = 5\}$ tenemos $4$ elementos de orden $5$ distintos. Además, $g_1P_5\inv{g_1} \cap g_2P_5\inv{g_2} = \{e\}$ porque si su intersección fuera más grande entonces serían el mismo. Así, tenemos $24$ 5-ciclos a repartir entre los diferentes $gP_5\inv{g}$ dando 4 5-ciclos a cada 1. Por tanto tenemos $n_5 = 24/4 = 6$ 5-subgrupos de Sylow en $S_5$.
+	\end{itemize}
+\end{ex}
+
+\begin{ex}[H4.18]
+	Demostrar que todo grupo de orden $|G| = 5^3 \cdot 7^3$ tiene un subgrupo normal de orden 125.
+	
+	\begin{proof}
+		\nameref{thm:sylow1} $\implies \exists P_5 < G,\ |P_5| = 125$. \nameref{thm:sylow3} $\implies n_5 \divides 7^3 \land n_5 \equiv 1 \mod 5$ es decir $n_5 \in \{1, 7, 49, 343\} \land n_5 \in \{1, 6, 11, \dots\}$. Como ni $49$ ni $343$ son conguentes con $1$ módulo 5 tenemos que $n_5 = 1 \implies P_5 \normsub G$.
+	\end{proof}
+\end{ex}
+
+\begin{ex}[H4.20] Hallad todos los grupos abelianos de órdenes 36, 64, 96 y 100.
+	\begin{enumerate}
+		\item $|G| = 36 = 2^2\cdot3^2$
+		\begin{proof}
+			\nameref{thm:sylow1} $\implies \exists P_2,\ |P_2| = 4 \land \exists P_3,\ |P_3| = 9$. Además $G$ abeliano $\implies P_2, P_3 \normsub G \implies G \isom P_2 \times P_3$. Estudiamos los grupos de orden 4 y de orden 9
+			\begin{itemize}
+				\item $|P_2| = 4$ entonces $P_2 \isom \Z/2\Z \times \Z/2\Z \lor P_2 \isom \Z/4\Z$
+				\item $|P_3| = 9$ entonces $P_3 \isom \Z/3\Z \times \Z/3\Z \lor P_3 \isom \Z/9\Z$
+			\end{itemize}
+			Como $G \isom P_2 \times P_3$ tenemos 4 posibles grupos abelianos de orden 36.
+		\end{proof}
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H4.22]
+	Hallar todos los grupos abelianos de orden 175.
+	
+	\begin{proof}
+		$|G| = 5^2\cdot 7$. Por el \nameref{thm:sylow1} tenemos que $\exists P_5, P_7 < G$ con $|P_5| = 25,\ |P_7| = 7$ y además por ser $G$ abeliano tenemos que $P_5, P_7 \normsub G \implies G \isom P_5 \times P_7$. Estudiamos los grupos de orden 25 y de orden 7:
+		\begin{itemize}
+			\item $|P_5| = 25 \land P_5$ abeliano $\implies P_5 \isom \Z/25\Z \lor P_5 \isom \Z/5\Z \times \Z/5\Z$. En ambos casos $P_5$ es producto directo de cíclicos pues $\Z/n\Z$ es cíclico.
+			\item $|P_7| = 7 \land P_7$ abeliano $\implies P_7 \isom \Z/7\Z$. Ocurre lo mismo que con $P_5$.
+		\end{itemize}
+		Concluimos que $G \isom \Z/25\Z \times \Z/7\Z \lor G \isom \Z/5\Z \times \Z/5\Z \times \Z/7\Z$. Los dos casos son abelianos por ser producto directo de grupos cíclicos.
+	\end{proof}
+\end{ex}
+
+\begin{ex}[H4.23]
+	¿Cuántos elementos de orden 3 puede tener un grupo abeliano de orden 36?
+	
+	\begin{proof}
+		$|G| = 36 = 2^2 3^2$. \nameref{thm:sylow1} $\implies \exists P_2, P_3 < G,\ |P_2| = 4,\ |P_3| = 9$. Estudiamos los grupos de órdenes 4 y 9:
+		\begin{itemize}
+			\item $|P_3| = 9 \implies P_3 \isom \Z/9\Z \lor P_3 \isom \Z/3\Z \times \Z/3\Z$
+			% TODO: terminar
+		\end{itemize}
+	\end{proof}
+\end{ex}
+
 \chapter{Índices}
 
 \renewcommand{\listtheoremname}{Lista de definiciones}
-\listoftheorems[ignore={thm,ej,pro,cor,obs,lem}]
+\listoftheorems[ignore={thm,ej,pro,cor,obs,lem,ex}]
 
 \renewcommand{\listtheoremname}{Lista de teoremas}
-\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lem}]
+\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lem,ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejemplos}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem}]
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem,ex}]
+
+\renewcommand{\listtheoremname}{Lista de ejercicios}
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem,ej}]
+
 
 \bibliographystyle{alpha}
 \bibliography{apuntes-ea}

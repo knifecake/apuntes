@@ -365,6 +365,12 @@ Sea $X$ una v.a. con distribución $f(x; \theta)$ discreta y finita, $x_1, \dots
 	\end{align*}
 \end{thm}
 
+Si $g'(\alpha) = 0$ entonces aplicamos
+\begin{align*}
+	n(g(Z_n) - g(\alpha)) \xrightarrow[n \to \infty]{d} \frac{g''(\alpha)}{2}\beta \chi_1^2
+\end{align*}
+exigiendo que $g \in C^3(a,b)$ y que $g''(\alpha) \neq 0$
+
 \section{Contraste de hipótesis}
 
 Para una distribución que depende de un parámetro $\theta \in \Theta$ definimos una hipótesis nula $H_0 \equiv \theta \in \Theta_0$
@@ -426,7 +432,7 @@ Dada $H_0 \equiv \theta \in \Theta_0$ sobre un parámetro $\theta \in \Theta$...
 \begin{itemize}
 	\item \textbf{Uniforme:} $X \sim \text{Unif}([0,a])$
 	\begin{align*}
-		f_X(x) = \frac{x}{a}\mathbf{1}_{[0,a]},\qquad E(X) = \frac{a}{2},\qquad V(X) = \frac{a^2}{12}
+		f_X(x) = \frac{1}{a}\mathbf{1}_{[0,a]},\qquad E(X) = \frac{a}{2},\qquad V(X) = \frac{a^2}{12}
 	\end{align*}
 	\item \textbf{Geométrica:} $X \sim \text{Geo}(p)$
 	\begin{align*}
@@ -436,6 +442,14 @@ Dada $H_0 \equiv \theta \in \Theta_0$ sobre un parámetro $\theta \in \Theta$...
 
 \subsection{Las funciones de distribución}
 \begin{itemize}
+	\item Para las \textbf{distribuciones discretas}
+	\begin{align*}
+		F_X(k) = P(X \leq k) = \sum_{j \leq k} f_X(j)
+	\end{align*}
+	\item \textbf{Poisson} $X \sim \text{Poiss}(\lambda = np)$
+	\begin{align*}
+		F_X(k) = e^{-\lambda}\sum_{j=0}^k \frac{\lambda^j}{j!}
+	\end{align*}
 	\item \textbf{Uniforme} $X \sim \text{Unif}([0,a]),\ a > 0$
 	\begin{align*}
 		F_X(x < 0) = 0\qquad F_X(0 \leq x \leq a) = \frac{x}{a} \qquad F_X(a < x) = 1
