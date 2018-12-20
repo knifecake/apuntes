@@ -365,12 +365,60 @@ Sea $X$ una v.a. con distribución $f(x; \theta)$ discreta y finita, $x_1, \dots
 	\end{align*}
 \end{thm}
 
+\section{Contraste de hipótesis}
+
+Para una distribución que depende de un parámetro $\theta \in \Theta$ definimos una hipótesis nula $H_0 \equiv \theta \in \Theta_0$
+
+\begin{itemize}
+	\item $p$\textbf{-valor} es el valor tal que para $\alpha > p$ rechazamos
+	\begin{itemize}
+		\item se calcula forzando igualdad con $\alpha = p$ y despejando el percentil $c_p$
+		\begin{align*}
+		F(c_p) = 1 - p \implies p = 1 - F(c_p)
+		\end{align*}
+		en una normal, la simetría nos da
+		\begin{align*}
+			\Phi(z_{p/2}) = 1 - \frac{p}{2} \implies p = 2(1 - \Phi(z_{p/2}))
+		\end{align*}
+	\end{itemize}
+	\item El \textbf{error de tipo 1} se da cuando se rechaza algo bueno
+	\item El \textbf{error de tipo 2} se da cuando se acepta algo malo
+	\item La \textbf{función de potencia} $\beta(\theta) = P(\text{rechazar})$
+	\item La \textbf{significación} es $\sup_{\theta \in \Theta_0} \beta(\theta)$
+\end{itemize}
+
+\subsection{Test por razón de verosimilitudes}
+
+Dada $H_0 \equiv \theta \in \Theta_0$ sobre un parámetro $\theta \in \Theta$...
+
+\begin{itemize}
+	\item El Test se diseña haciendo que $RV < c$ donde $c \in (0,1)$ es el calibre.
+	\item Pasos a seguir
+	\begin{enumerate}
+		\item Construir $\vero (\theta; x_1,\dots, x_n)$
+		\item Hallar $\sup_{\theta \in \Theta} \vero(\theta)$ y $\sup_{\theta \in \Theta_0} \vero(\theta) $
+		\item Construir $RV = \frac{\sup_{\theta \in \Theta_0} \vero(\theta)}{\sup_{\theta \in \Theta} \vero(\theta)}$
+		\item Definimos el test: Rechazo $H_0 \iff RV < c \in (0,1)$
+		\item Calculamos $\beta(\theta) = P_\theta(\text{rechazar}) = P_\theta(RV < c)$
+		\item Obtenemos la significación de $\sup_{\theta \in \Theta_0} \beta (\theta)$
+	\end{enumerate}
+\end{itemize}
+
 \section{Caramelos}
 
 
 \begin{align*}
 \text{Chebyshev }P(|X - E(X)| > \varepsilon) \leq \frac{V(X)}{\varepsilon^2} \\
 \text{TCL }\sqrt{n}(\Xbarra_n - E(X)) \xrightarrow{n \to \infty} \normal(0, V(X))
+\end{align*}
+
+\subsection{para ladrillitos}
+\begin{itemize}
+	\item Cuasivarianza muestral es $s^2$, cuasidesviación típica muestral es $s$. Son experimentales si son minúsculas, son de modelo teórico de muestreo aleatorio si son mayúsculas.
+\end{itemize}
+\begin{align*}
+	s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_j - \xbarra)^2\\
+	\Phi(z_{\alpha/2}) = 1 - \frac{\alpha}{2}
 \end{align*}
 
 \subsection{Más distribuciones}
@@ -385,6 +433,25 @@ Sea $X$ una v.a. con distribución $f(x; \theta)$ discreta y finita, $x_1, \dots
 		f_X(k) = p(1-p)^{k-1},\qquad E(X) = \frac{1}{p},\qquad V(X) = \frac{1-p}{p^2}
 	\end{align*}
 \end{itemize}
+
+\subsection{Las funciones de distribución}
+\begin{itemize}
+	\item \textbf{Uniforme} $X \sim \text{Unif}([0,a]),\ a > 0$
+	\begin{align*}
+		F_X(x < 0) = 0\qquad F_X(0 \leq x \leq a) = \frac{x}{a} \qquad F_X(a < x) = 1
+	\end{align*}
+	\item \textbf{Exponencial} $X \sim \text{Exp}(\lambda),\ \lambda > 0$
+	\begin{align*}
+		F_X(x < 0) = 0 \qquad F_X(0 \leq x) = 1 - e^{-\lambda x}
+	\end{align*}
+	\item \textbf{Normal} $X \sim \normal(\mu, \sigma^2)$
+	\begin{align*}
+		F_X(x) = F_Y(\frac{x - \mu}{\sigma}) \\
+		F_Y(y < 0) = 1 - \Phi(-y) \qquad F_Y(0 < y) = \Phi(y)
+	\end{align*}
+\end{itemize}
+
+
 
 %\begin{table}[h]
 %	\centering
