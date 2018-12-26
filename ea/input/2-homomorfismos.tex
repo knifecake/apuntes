@@ -5,6 +5,8 @@
 
 \section{Homomorfismos de grupos}
 
+Como en cualquier estructura algebraica, es interesante establecer correspondencias entre grupos. Los homomorfismos son funciones definidas de manera que la operación del grupo se preserva.
+
 \begin{dfn}[Homomorfismo de grupos]
 	Sean $(G_1, \cdot), (G_2, \ast)$ grupos. Decimos que $f: G_1 \to G_2$ es un homomorfismo de grupos si $\forall a,b \in G_1,\ f(a\cdot b) = f(a) \ast f(b)$.
 
@@ -105,53 +107,97 @@
 	Consideramos $f$ y $f^{-1}$ para los que se verifica el teorema anterior. $o(g) \mid o(f(g)) \land o(f(g)) \mid o(f^{-1}(f(g))) = o(g) \implies o(g) = o(f(g))$. 
 \end{proof}
 
+\subsection{Ejemplos de homomorfismos de grupos}
+
+\begin{ej}[Homomorfismo trivial]Siempre nos queda el homomorfismo trivial $f:G_1 \to G_2,\ f(g_1) = e_2, \forall g_1 \in G_1$.
+\end{ej}
+
+\begin{ej}
+	Consideramos $\ZnZ = \{0, 1, \dots, n-1\}$ La presentación de este grupo es $o(1) = n$. Queremos construir un homomorfismo $f:\ZnZ \to G'$. Para que $f$ sea un homomorfismo necesitamos que $f(0) = e$. Ahora supongamos que establecemos $f(1) = a$. Naturalmente sigue (para que $f$ sea un homomorfismo) que $f(2) = a\ast a = a^2$. Observamos que la condición necesaria y suficiente para que el homomorfismo definido por $f(1) = a$ es que $a^n = e$, o lo que es lo mismo que $o(a)$ divida a $n$.
+	\begin{align*}
+	f:\ZnZ &\to G' \\
+	0 &\mapsto e \\
+	1 &\mapsto a \\
+	2 &\mapsto a^2\\
+	&\dots \\
+	n = 0 &\mapsto a^n = 0
+	\end{align*}
+\end{ej}
+
+\begin{ej}
+	En $\ZnZ \to \ZnZ$ podemos construir $n$ homomorfismos ya que
+	\begin{itemize}
+		\item cualquier $a \in \ZnZ$ es cumple la condición necesaria para que $f(1) = a$ induzca un homomorfismo
+		\item todo homomorfismo queda determinado por $f(1) = a$ para algún $a \in \ZnZ$.
+	\end{itemize}
+	
+	Es decir que $\text{Hom}(\ZnZ, \ZnZ) \isom \ZnZ$.
+\end{ej}
+
+\begin{ej}
+	Si ahora nos preguntamos por los isomorfismos $\text{Isom}(\ZnZ, \ZnZ) \subset \text{Hom}(\ZnZ, \ZnZ)$ nos damos cuenta de que los únicos $a \in \ZnZ$ que nos dan isomorfismos son aquellos que tienen $o(a) = n$.
+	
+	Es decir que $\text{Isom}(\ZnZ, \ZnZ) \isom \uds{\ZnZ}$. Profundizamos en esto más adelante al hablar del producto semidirecto.
+\end{ej}
+
+
+\begin{pro}[O ejemplo]
+	Sea $f: \ZnZ \to \ZnZ$. $f$ es un isomorfismo $\iff f(\overline{1}) = \overline{a} \in \uds{\ZnZ}$
+\end{pro}
+
+\begin{ej}[Automorfismo conjugación]
+	Este ejemplo se utiliza tantísimo en lo que viene en el siguiente capítulo que tiene nombre propio.
+	
+	Fijamos $g \in G$ y definimos $\phi_g:G \to G,\ x \mapsto gx\inv{g}$. Es un homomorfismo de grupos pues $y\mapsto gy\inv{g}$ y $xy \mapsto gxy\inv{g} = gx\inv{g}gy\inv{g}$.
+	
+	Ahora consideramos $\inv{g}$ y $\phi_{\inv{g}}: G \to G,\ x \mapsto \inv{g}xg$ y como antes se verifica que es homomorfismo.
+	
+	Además, $\phi_g \circ \phi_{\inv{g}} = id$ luego $\phi_g$ es un automorfismo (e isomorfismo) de grupos.
+	
+	\textbf{Nota:} en ocasiones lo denotamos con $\gamma_g$.
+\end{ej}
+
+
+\begin{ej}
+	Consideramos ahora $N \normsub G$ y por tanto para cualquier $g \in G,\ gN = Ng$. La función $\phi_g(N) \subset N$ es un isomorfismo que además lleva los elementos de $N$ en $N$, por tanto podemos restringirla a $\phi_g:N \to N$ e inducir un isomorfismo.
+	
+	Es decir, los subgrupos que no se mueven por ninguna función $\phi_g$ son los subgrupos normales.
+\end{ej}
+
+\begin{ej}
+	% TODO
+	TODO: esto creo que es mentira.
+	
+	Consideramos el grupo $(\Z, +)$ que es cíclico y un grupo $G$ con $a \in G$. Utilizando notación multiplicativa en la que el $\mathbf{1}$ representa el elemento neutro (en este caso $\mathbf{1} = e$)
+	\begin{align*}
+	\Z &\to G \\
+	\mathbf{1} &\mapsto a \\
+	k &\mapsto a^k \\
+	k + k' &\mapsto a^{k+k'}
+	\end{align*}
+	Es decir, que al seleccionar $\mathbf{1} \mapsto a$ queda determinada la imágen de todos los demás $k \in \Z$ y además la función que obtenemos es un homomorfismo. Por tanto el conjunto de los homomorfismos de $\Z$ en $G$ es TODO $G$: $\text{Hom}(\Z, G) = G$.
+\end{ej}
+
+\begin{ej}[del primer teorema de la isomorfía]
+	Consideramos el grupo $G = \{1, i, -1, -i\}$ con el producto y establecemos la función $f:\Z \to G$ que lleva $1 \mapsto i$. Además $f$ es sobreyectiva y $\ker f = \Z/4\Z$. El primer teorema de la isomorfía nos dice que existe un isomorfismo $\overline{f}: \Z/\ker f \to G$ y este es $\overline{f},\ \overline{f}([a]) \mapsto i^{a}$ (en $\ker f$ no se repiten los elementos por lo que convertimos el epimorfismo $f$ en un homomorfismo $\overline{f}$).
+\end{ej}
+
+En general todos los grupos cíclicos de orden $n$ son isomorfos entre sí, porque todos son isomorfos a $\Z/n\Z$ y los isomorfismos son reversibles y la composición sigue siendo isomorfismo.
+
+Hemos visto que $\text{Hom}(\Z, G) = G$ porque al determinar $f(1) = a$ determinamos el homomorfismo y por tanto tenemos un homomorfismo para cada elemento $a \in G$.
+
+¿Pero qué pasa si tomamos los homomorfismos $f:\ZnZ \to G$ con $a \in G$ definidos por $f(\overline{1}) = a$? Pasa que para que sean homomorfismos necesitamos que $o(a) = o(1) = n$ para que así $\overline{0} = \overline{n} \mapsto a^n = e$.
+
 %20180925
 
 \section{Retículo de subgrupos}
 
-\begin{dfn}[Retículo de subgrupos]
-	Dado un grupo $G$, el retículo de subgrupos es un grafo con todos los subgrupos de $G$. Denotamos la relación de inclusión con un vértice entre dos grupos. Es costumbre poner el mayor grupo arriba y denotar la inclusión por las diferencias en altura.
-\end{dfn}
-
-Lo importante de esta sección:
-\begin{itemize}
-	\item Todo subgrupo de un grupo cíclico es cíclico.
-	\item Dado un epimorfismo entre dos grupos existe una correspondencia biyectiva entre los subgrupos del primero y los del segundo.
-	\item En $\ZnZ$ existe un subgrupo por cada divisor de $n$ y esos son todos los subgrupos que hay.
-\end{itemize}
-
-\begin{ej}[Retículo de subgrupos $\Z$]
-	$\Z$ tiene infinitos subgrupos, todos los $k\Z$. En muchas ocasiones nos va a interesar solo dibujar unos pocos, para relacionarlos con subgrupos de otros grupos distintos de $\Z$. A continuación se muestra el retículo de subgrupos de $\Z$ construido a partir de $6\Z$.
-	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-		\node (z) at (0,1) {$\Z$};
-		\node (2z) at (-1,0) {$2\Z$};
-		\node (3z) at (1,0) {$3\Z$};
-		\node (6z) at (0,-1) {$6\Z$};
-		
-		\draw (z) -- (2z);
-		\draw (z) -- (3z);
-		\draw (2z) -- (6z);
-		\draw (3z) -- (6z);
-		\end{tikzpicture}
-		\caption{Una parte del retículo de subgrupos de $\Z$, en concreto la de los $n\Z$ con $n \divides 6$.}
-	\end{figure}
-
-	Los grupos que contienen a $6\Z$ son los de la forma $k\Z$ donde $k$ divide a $6$, ya que entre los múltiplos de los divisores de $6$ también se encuentran los múltiplos de $6$.
-\end{ej}
-
-\begin{pro}
-	Sea $n = \min_{r \in \N,\\r > 0} \{ r \in H,\ H < \Z\}$. Entonces $nH = \Z$.
-\end{pro}
-\begin{proof}
-	Probamos la doble inclusión. Por hipótesis $n \in H$ y por tanto $\langle n \rangle = n\Z \subset H$. Sea $\alpha \in H$. Por el algoritmo de la división, podemos expresar $\alpha = an + s$ con $0 \leq s < n \implies s = 0 \implies H \subset n\Z$. Luego $H = n\Z$.
-\end{proof}
+Los homomorfismos de grupos pueden ser de gran utilidad para encontrar el retículo de subgrupos.
 
 El siguiente teorema no lo ha dado Orlando explícitamente pero básicamente lo que dice es lo que dijo en las 3 clases sobre correspondencia entre subgrupos pero un poco más ordenado.
 
 \begin{thm}[de correspondencia entre subgrupos mediante homomorfismos]
+	\label{thm:correspondenciasubgruposdor96}
 	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. Se tiene \cite{dor96}:
 	\begin{enumerate}
 		\item Si $H_1 < G_1$ entonces $f(H_1) < G_2$
@@ -225,164 +271,91 @@ Queremos establecer una relación entre los retículos de subgrupos de dos grupo
 	\end{tikzpicture}
 \end{figure}
 
-\section{Teoremas de la isomorfía (versión de clase)}
-
-\begin{pro}[O ejemplo]
-	Sea $f: \ZnZ \to \ZnZ$. $f$ es un isomorfismo $\iff f(\overline{1}) = \overline{a} \in \uds{\ZnZ}$
-\end{pro}
-
-\begin{ej}
-	Sea $g \in G$ fijado. Definimos $\phi_g : G \to G$
+\begin{ej}[Retículo de subgrupos de $\Z/8\Z$]
+	Queremos saber sobre los subgrupos que tiene $\mathbb{Z}/8\mathbb{Z}$ (ver figura \ref{fig:reticulo8z}). El epimorfismo que utilizamos es $f:\Z \to \mathbb{Z}/8\mathbb{Z},\ z \mapsto f(z) = \overline{z}$ el habitual.
+	
+	Para ver los subgrupos de $\mathbb{Z}/8\mathbb{Z}$ miramos qué subgrupos de $\Z$ contienen a $\ker f = \{ z \in \Z \mid f(z) = \overline{0}\} = \{z \in \Z \mid z \mod 8 = 0\} = 8\Z$. Es decir, tenemos que encontrar los subgrupos de $\Z$ que contengan a los múltiplos de  8 ($8\Z$):
 	\begin{align*}
-		G \to^{\phi_g} & G \to^{\phi^{-1}_g} & G \\
-		x \mapsto &gx\inv{g} & \\
-		&z \mapsto &\inv{g}x\inv{(\inv{g})}
+	\Z \supset 2\Z \supset 4\Z \supset 8\Z
 	\end{align*}
-	Y $\phi_g \cdot \phi_g^{-1} = Id$.
+	En general, en $n\Z$, los subgrupos que contienen al núcleo son los $m\Z$ tales que $m \divides n$ ($m$ divide a $n$). 
+	Luego $\mathbb{Z}/8\mathbb{Z}$ tendrá 4 subgrupos que serán $f(8\Z) = \mathbb{Z}/8\mathbb{Z}, f(4\Z) = \mathbb{Z}/4\mathbb{Z}, f(2\Z) = \mathbb{Z}/2\mathbb{Z}, f(\Z) = \{e\}$. 
 \end{ej}
 
-\begin{proof}
-	Para que $f$ sea isomorfismo tiene que ser sobre luego $o(\overline{a}) = n \implies \overline{a} \in \uds{\ZnZ}$.
-\end{proof}
-
-\begin{thm}
-	\label{teorema:preisomorfia1}
-	Sea $f: G_1 \to G_2$ un homomorfismo de grupos, $H \normsub G_1$ con $H \subset \ker f$. Sea $\pi: G_1 \to G_1/H$ el homomorfismo que genera las clases de equivalencia (ver figura \ref{fig:tmisomorfia1}). Entonces se cumple lo siguiente
-	\begin{enumerate}
-		\item existe un homomorfismo de grupos $\overline{f}:G_1/H \to G_2$ tal que $\overline{f} \circ \pi = f$
-		\item $\ker \overline{f} = \ker f / H$
-	\end{enumerate}
-\end{thm}
-
 \begin{figure}[h]
-\centering
-\begin{tikzpicture}
-\node (g1) at (0,0) {$a \in G_1$};
-\node (g2) at (4,0) {$f(a) \in G_2$};
-\node (gh) at (0, -3) {$\overline{a} \in G_1/H$};
-
-\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$f$};
-\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
-\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{f}$};
-\end{tikzpicture}
-\caption{Homomorfismos que intervienen en el teorema \ref{teorema:preisomorfia1}}
-%TODO
-\label{fig:otracosa}
-\end{figure}
-
-\begin{proof} $ $\newline
-	\begin{enumerate}
-		\item Probaremos que si construimos $\overline{f}$ con $\overline{f}(\overline{a}) = f(a)$ entonces $\overline{f}$ está bien definida. Tenemos que ver que $\overline{a} = \overline{a'} \implies f(a) = f(a')$. Partimos de $\overline{a} = \overline{a'} \implies a \inv{(a')} \in H \implies f(a \inv{(a')}) = e_2 \implies f(a) \inv{f(a')} = e_2 \implies f(a) = f(a')$.
-		
-		\item Observemos que $\overline{f}(\overline{a}\overline{b}) = \overline{f}(\overline{ab}) = f(ab) = f(a)f(b)=\overline{f}(\overline{a})\overline{f}(\overline{b})$. Ahora probamos las dos inclusiones a la vez $\overline{a} \in \ker \overline{f} \iff \overline{f}(\overline{a}) = e_2 \iff f(a) = e_2 \iff \overline{a} \in \ker f$.
-	\end{enumerate}
-\end{proof}
-
-\begin{thm}[Primer de la isomorfía]
-	Sea $f:G_1 \to G_2$ un epimorfismo. Existe un isomorfismo $\overline{f}: G_1 / \ker f \to G_2$.
-\end{thm}
-
-\begin{figure}[h]
-	%TODO hacer
 	\centering
 	\begin{tikzpicture}
-	\node (g1) at (0,0) {$G_1$};
-	\node (g2) at (4,0) {$G_2$};
-	\node (gh) at (0, -3) {$G_1/\ker f$};
+	% end nZ
+	\node (z) at (-3,2) {$\Z$};
+	\node (2z) at (-3,1) {$2\Z$};
+	\node (4z) at (-3,0) {$4\Z$};
+	\node (8z) at (-3,-1) {$8\Z$};
 	
-	\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$f$};
-	\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
-	\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{f}$};
+	\draw (8z) -- (4z);
+	\draw (4z) -- (2z);
+	\draw (2z) -- (z);
+	
+	% en Z/nZ
+	\node (z8) at (0,2) {$\langle 1 \rangle = \Z/8\Z$};
+	\node (z4) at (0,1) {$\langle 2 \rangle$};
+	\node (z2) at (0,0) {$\langle 4 \rangle$};
+	\node (e) at (0,-1) {$\langle 8 \rangle = \{e\}$};
+	
+	\draw (e) -- (z2);
+	\draw (z2) -- (z4);
+	\draw (z4) -- (z8);
+	
+	% las correspondencias
+	\draw (z) edge[->, blue] (z8);
+	\draw (2z) edge[->, blue] (z4);
+	\draw (4z) edge[->, blue] (z2);
+	\draw (8z) edge[->, blue] (e);
 	\end{tikzpicture}
-	\caption{Primer teorema de la isomorfía.}
-	\label{fig:tmisomorfia3}
+	
+	\label{fig:reticulo8z}
+	\caption{Retículo de subgrupos de $\mathbb{Z}/8\mathbb{Z}$}
 \end{figure}
 
-\begin{proof}
-	$f = \pi \circ \overline{f}$ y $f$ es sobre, luego $\overline{f}$ también es sobreyectiva.
-	
-	% TODO probar que f barra es inyectiva \implies es isomorfismo
-\end{proof}
-
-\begin{thm}[Segundo teorema de la isomorfía]
-	
-	Sean $H \normsub G,\ K \normsub G$ y $H \subset K$ Entonces
-	\begin{align}
-		(G/H)/(K/H) = G/K
-	\end{align}
-\end{thm}
+Lo mismo podríamos hacer para obtener el retículo de $\Z/6\Z$ (ver figura \ref{fig:reticulo6z}).
 
 \begin{figure}[h]
-	%TODO hacer
 	\centering
 	\begin{tikzpicture}
-	\node (g1) at (0,0) {$G$};
-	\node (g2) at (4,0) {$G/K$};
-	\node (gh) at (0, -3) {$G/H$};
+	% en nZ
+	\node (z) at (-4, 1) {$\Z$};
+	\node (2z) at (-5, 0) {$2\Z$};
+	\node (3z) at (-3, 0) {$3\Z$};
+	\node (6z) at (-4, -1) {$6\Z$};
 	
-	\draw[-{Latex[length=2mm]}] (g1) -- (g2) node[pos=.5, above] {$h$};
-	\draw[-{Latex[length=2mm]}] (g1) -- (gh) node[pos=.5, left]{$\pi$};
-	\draw[-{Latex[length=2mm]}] (gh) -- (g2) node[pos=.5, below] {$\overline{h}$};
+	\draw (6z) -- (2z);
+	\draw (6z) -- (3z);
+	\draw (2z) -- (z);
+	\draw (3z) -- (z);
+	
+	% en Z/nZ
+	\node (z6) at (0,1) {$\langle 1 \rangle = \Z/6\Z$};
+	\node (z2) at (-1,0) {$\langle 2 \rangle$};
+	\node (z3) at (1,0) {$\langle 3\rangle$};
+	\node (e) at (0,-1) {$\langle 6 \rangle = \{e\}$};
+	
+	\draw (e) -- (z2);
+	\draw (e) -- (z3);
+	\draw (z2) -- (z6);
+	\draw (z3) -- (z6);
+	
+	% las correspondencias
+	\draw (z) edge[->, bend left, blue] (z6);
+	\draw (2z) edge[->, bend left, blue] (z2);
+	\draw (3z) edge[->, bend right, blue] (z3);
+	\draw (6z) edge[->, bend right, blue] (e);
+	
 	\end{tikzpicture}
-	\caption{Segundo teorema de la isomorfía.}
-	\label{fig:tmisomorfia2}
+	\label{fig:reticulo6z}
+	\caption{Retículo de subgrupos de $\mathbb{Z}/6\mathbb{Z}$}
 \end{figure}
 
-\begin{proof}
-	$\overline{h}$ es sobreyectiva y $\ker \overline{h} = K/H$
-\end{proof}
 
-% 20180927
-
-\begin{thm}
-	Sea $f:G_1 \to G_2$ un epimorfismo. Si $N \normsub G_1$, entonces $f(N) \normsub G_2$. Como $f$ es epimorfismo cualquier $g \in G_2,\ g_2 = f(g_1)$ para algún $g_1 \in G_1$. Como $N \normsub G_1$, tenemos que $gN\inv{g} \in N$. Que $f(N) \normsub G_2$ quiere decir que $\forall f(g) \in G_2, f(g)f(N)f(\inv{g}) \subset f(N)$. Ahora bien $f(g)f(N)\inv{f(g)}$. Y esto sigue pero lo ha dicho y no lo ha escrito y no me ha dado tiempo.
-\end{thm}
-
-\begin{lem}
-	Sea $h:G_1 \to G_2$ homomorfismo de grupos. Sean $N \normsub G_1$ y $N \subset \ker h$. 
-	\begin{enumerate}
-		\item Entonces existe un homomorfismo de grupos $\overline{f}:G_1/N \to G_2$ que cumple $\overline{f} \circ \pi = f$
-		\item $\ker \overline{f} = \ker f / N$.
-	\end{enumerate}
-\end{lem}
-
-\begin{cor}
-	Si $N = \ker f$ entonces $\ker \overline{f} = \{0\}$ y $\overline{f}$ es un monomorfismo.
-\end{cor}
-
-\begin{cor} % TODO esto es el primer teorema otra vez
-	Si $f$ es además un epimorfismo, entonces $\overline{f}$ es una biyección.
-\end{cor}
-
-% TODO poner aquí la imágen del primer teoremaº
-
-
-
-\begin{proof}
-	Consideramos $f:H \to HK$ que es un homomorfismo porque $H < HK$ (porque $h = he_k,\ \forall h \in H$ y satisface la definción de producto). Y ahora consideramos un epimorfismo $h:HK \to HK/K$ que existe porque $K \normsub HK$. Sea $\pi = f \circ g$. Afirmamos que $\ker \pi = H \cap K$. Faltan cosas.
-	
-	\begin{align*}
-		H/(H\cap K) \isom HK/K
-	\end{align*}
-\end{proof}
-
-\begin{cor}
-	Si $H,K < G$ con $K \normsub G$ entonces existe un epimorfismo $\pi:H\to HK/K$ y $\ker \pi = H \cap K$.
-\end{cor}
-
-\begin{thm}\footnote{Esta vez si que dijo teorema.}
-	Sea $f:G_1 \to G_2$ un homomorfismo de grupos. Entonces $\ima f \isom G_1 / \ker f$.
-\end{thm}
-
-Este teorema viene a decir que dado un homomorfismo $f:G_1 \to G_2$, si lo restringimos a $f:G_1 \to \ima f$ obtenemos un epimorfismo.
-
-%_---------------
-
-\begin{pro}
-	Sea $G$ un grupo con orden $n$. Sea $H < G$ con índice de $H = p \mid mcd(p,n) = 1$. Entonces $H$ es un subgrupo normal.
-\end{pro}
-
-\section{Teoremas de la isomorfía (versión con pies y cabeza)}
+\section{Teoremas de la isomorfía}
 
 \begin{thm}(Primer teorema de la isomorfía)
 	Sea $f:G_1 \to G_2$ un epimorfismo y sea $\pi:G_1 \to G_1/\ker f$. Entonces existe un isomorfismo $\overline{f} : G_1 / \ker f \to G_2$ tal que $f = \pi \circ \overline{f}$.

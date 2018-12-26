@@ -4,91 +4,52 @@
 
 \section{Consideraciones previas}
 
-\subsection{Centro de un grupo}
+\subsection{Conjugación}
 
-\begin{dfn}[Centro de un grupo]
-	\label{dfn:centro}
-	Sea $G$ un grupo finito. Definimos el centro de $G$, $Z(G) = \{a \in G \mid \forall g \in G,\ ag = ga\}$.
+Cuando introdujimos los homomorfismos de grupos hicimos especial hincapié en un automorfismo al que llamábamos $\phi_g$ o $\gamma_g$ y que para un $g \in G$ dado se definía como
+\begin{align*}
+	\phi_g : G &\to G\\
+			x &\mapsto gx\inv{g}
+\end{align*}
+
+Diremos a partir de ahora que dos elementos son conjugados si cumplen la siguiente definición.
+
+\begin{dfn}[Conjugados]
+	\label{dfn:elementosconjugados}
+	Sea $G$ un grupo, $a,b \in G$. Diremos que $b$ es conjugado de $a \iff \exists g \in G \mid b = ga\inv{g}$, es decir, si existe un $g\in G$ para el que el automorfismo conjugación $\phi_g$ cumple $\phi_g(a) = b$.
 \end{dfn}
 
-El centro es útil en grupos finitos no abelianos.
+Observemos que la conjugación es una relación de equivalencia.
 
 \begin{pro}
-	Sean $a, b \in Z(G)$. Entonces $ab \in Z(G)$.
-\end{pro}
-
-\begin{proof}
-	Tenemos que $ag = ga$ y que $bg = gb$. Ahora tenemos que probar que $g(ab) = (ab)g$. Es trivial manipulando $(ab)g = agb = gab$.
-\end{proof}
-
-\begin{pro}
-	\label{pro:centronormal}
-	Sea $G$ un grupo. $Z(G)$ es un subgrupo y además es un subgrupo normal.
-\end{pro}
-
-\begin{proof}
-	$\forall g \in G,\ Z(G)g = \{ag \mid a \in G \land \forall b \in G,\ ab = ba\} = \{ga \mid a \in G \land \forall b \in G,\ ab = ba\} = gZ(G)$.
-\end{proof}
-
-\begin{pro}
-	\label{pro:subcentronormal}
-	Si $H < Z(G)$ entonces $H$ es abeliano y normal.
-\end{pro}
-
-\begin{pro}
-	Sea $g \in G,\ \phi_g: G \to G$ el isomorfismo definido por $\phi_g(x) = gx\inv{g}$. Entonces
+	Sea $R$ una relación de equivalencia definida con
 	\begin{align*}
-	x \in Z(G) &\iff \forall g \in G, gx = xg \iff gx\inv{g} = x \\
-	x \in Z(G) &\iff \forall g \in G,\ \phi_g(x) = x 
+		\forall a,b \in G,\quad aRb \iff \exists g \in G \mid b = ga\inv{g}
 	\end{align*}
 \end{pro}
 
-\begin{pro}
-	$G$ es abeliano $\iff G = Z(G)$
-\end{pro}
-
-Sea $a \in G \land o(a) = n$. Si $a$ es el único elemento de orden $n$ entonces $n = 2 \land a \in Z(G)$. Probamos primero que $n=2$. Si $a$ es el único elemento de orden $n$ entonces tiene que ocurrir que $a$ y $a^{n-1}$ tienen el mismo orden por lo que $1 = n-1 \implies n = 2$.
-
-\begin{pro}
-	\label{pro:triplecentro}
-	Si $G/Z(G)$ es cíclico de orden $n$ entonces $n = 1$. Otra manera de formularlo: Si $G/Z(G)$ es cíclico, entonces $G = Z(G)$. Otra manera más de formularlo: si $G/Z(G)$ es cíclico entonces $G$ es abeliano.
-\end{pro}
-
-\begin{proof}
-	Supongamos que $G/Z(G) \isom \ZnZ$. Vamos a probar que $n$ tiene que ser 1. Supongmos que $G/Z(G) = \{\overline{\alpha_i}, i = 1, \dots, n\}$ donde $\overline{\alpha_i} = \alpha^i Z(G)$. Fijamos $g \in G$ con $g = \alpha^j h,\ h \in Z(G),\ 0 \leq j < n$ y fijamos $f' \in G$ con $g' = {\alpha^j}' h',\ h' \in Z(G),\ 0 \leq j' < n$. Entonces $gg' = \alpha^j h{\alpha^j}' h' = \alpha^{j+j'}hh' = {\alpha^j}' h' \alpha^j h = gg'$ (podemos conmutar las $h$ con cualquier elemento porque $h \in Z(G)$, por el contrario, los $\alpha$ no necesitamos conmutarlos, solo agruparlos cuando están juntos). Es decir, que $\forall g, g' \in G$ tenemos que $gg' = g'g$ por lo que $G$ es abeliano.
-\end{proof}
-
-
-\begin{ex}[H1.33]
-	Sea $G$ un grupo. Suponed que existe un único $a \in G$ de orden 2. Demostrad que $a \in Z(G)$.
-\end{ex}
-
-\begin{proof}
-	Recordamos que $a \in Z(G) \iff ga = ag,\ \forall g \in G$. Definimos el isomorfismo de conjugación $\phi_g (x) = gx\inv{g}$ para algún $g$. Como $\phi_g$ es isomorfismo lleva elementos de orden $n$ en elementos de orden $n$. Entonces $\phi_g(a) = a$ ya que $a$ es el único elemento de orden 2. Por tanto $ga\inv{g} = a \implies ga = ag \implies a \in Z(G)$.
-\end{proof}
-
-\subsection{Centralizador de un elemento}
-
-\begin{dfn}
-	[Grupo de automorfismos]
-	Sea $G$ un grupo. Llamamos grupo de automorfismos al grupo
-	\begin{align}
-	\autom{G} = \{f \mid f: G \to G \text{ isomorfismo}\}
-	\end{align}
-\end{dfn}
-
-\begin{pro}
-	La función $\gamma: G \to \autom{G}$ definida con $\gamma(g) \mapsto \gamma_g$, donde $\gamma_g : G \to G, \gamma_g(x) = gx\inv{g}$, es un homomorfismo.
-\end{pro}
-
-\begin{proof}
-	Verifica la definición: para $g,g' \in G$
-\end{proof}
-
-\begin{dfn}[Elementos conjugados]
-	\label{dfn:elementosconjugados}
-	Sean $a,b \in G$. Decimos que $a$ y $b$ son conjugados $\iff \exists g \in G \mid \gamma_g(a) = b$.
-\end{dfn}
+Probamos las tres propiedades de las relaciones de equivalencia:
+\begin{enumerate}
+	\item Reflexiva: $\forall a \in G,\ aRa$
+	\begin{proof}
+		Tomando $g = e$ se tiene $\forall a, a = ea\inv{e} = eae = a$.
+	\end{proof}
+	\item Simétrica: $\forall a,b \in G,\ aRb \iff bRa$
+	\begin{proof}
+		Se verifica la doble implicación tomando $g' = \inv{g}$ utilizado en el otro lado:
+		\begin{align*}
+			aRb \implies \exists g \mid b = ga\inv{g} \iff \inv{g}bg = a \iff g' = \inv{g} \land a = gb\inv{g} \iff bRa
+		\end{align*}
+		Hacia el otro lado es igual.
+	\end{proof}
+	\item Transitiva: $\forall a,b,c \in G,\ aRb \land bRc \implies aRc$
+	\begin{proof}
+		\begin{align*}
+		aRb \implies \exists g_1 \mid b = g_1a\inv{g_1} \qquad\land \qquad bRc \implies \exists g_2 \mid c = g_2b\inv{g_2} \\
+		c = g_2b\inv{g_2} = g_2g_1a\inv{g_1}\inv{g_2} \implies c = g'a\inv{g'} \text{ con } g' = g_1 g_2 \implies aRc
+		\end{align*}
+	\end{proof}
+\end{enumerate}
 
 \textbf{Nota:} La relación de conjugación solo merece la pena en grupos no abelianos, porque en un grupo abeliano, cualquier par de elementos es conjugado.
 
@@ -102,24 +63,81 @@ Sea $a \in G \land o(a) = n$. Si $a$ es el único elemento de orden $n$ entonces
 	Es decir, que la conjugación nos genera una partición con 3 cajas disjuntas.
 \end{ej}
 
+En esta relación de equivalencia, las clases de equivalencia son de la forma $cl(a) = \{ga\inv{g} \mid g \in G\}$ (conjuntos de los elementos que son conjugados de $a$). Queremos saber cuántos elementos hay en cada clase de equivalencia. Para ello introduciremos la noción de centralizador de un elemento y posteriormente daremos un teorema (\autoref{pro:cardinalcajas}) que relaciona el número de elementos del centralizador de un elemento con el número de elementos de la clase de equivalencia de un elemento.
+
+%TODO: definición de clase de equivalencia por la relación de conjugación?
+
+
+\subsection{Centro de un grupo}
+
+\begin{dfn}[Centro de un grupo]
+	\label{dfn:centro}
+	Sea $G$ un grupo finito. Definimos el centro de $G$, $Z(G) = \{a \in G \mid \forall g \in G,\ ag = ga\}$.
+\end{dfn}
+
+El centro es útil en grupos finitos no abelianos ya que, en grupos abelianos, el centro es todo el grupo como veremos en la 
+\autoref{pro:centroigualabeliano}.
+
 \begin{pro}
-	La relación de conjugación es una relación de equivalencia $aRb \iff a$ y $b$ son conjugados.
+	\label{pro:centrocerrado}
+	Sean $a, b \in Z(G)$. Entonces $ab \in Z(G)$.
 \end{pro}
 
 \begin{proof}
-	Comprobamos que $R$ es una relación de equivalencia:
-	\begin{enumerate}
-		\item Reflexiva: $\forall a \in R, aRa$: tomamos $g = e$ y automáticamente tenemos que $ea\inv{e} = a$.
-		\item Simétrica: $\forall a,b \in R,\ aRb \implies bRa$: $\exists g, g a \inv{g} = b$. Tomamos $\gamma_{\inv{g}}$ y tenemos que $\gamma_{\inv{g}}(b) = a \implies bRa$.
-		\item Transitiva: $\forall a,b,c \in G,\ aRb \land bRc \implies aRc$. Por hipótesis tenemos que $\exists g \in G \mid \gamma_g(a) = b \land \exists g' \in G \mid \gamma_{g'}(b) = c$. Por tanto $\gamma_{gg'}(a) = (\gamma_{g'} \gamma_g)(a) = \gamma_{g'}(b) = c$.
-	\end{enumerate}
+	Tenemos que $ag = ga$ y que $bg = gb$. Ahora tenemos que probar que $g(ab) = (ab)g$. Es trivial manipulando $(ab)g = agb = gab$.
 \end{proof}
 
+\begin{pro}
+	\label{pro:centronormal}
+	Sea $G$ un grupo. $Z(G)$ es un subgrupo y además es un subgrupo normal.
+\end{pro}
 
+\begin{proof}
+	Es un subgrupo porque es cerrado (ver \autoref{pro:centrocerrado}), contiene siempre al neutro (el centro conmuta con todos) y para todo $a \in Z(G)$, se tiene que $\forall b \in G,\ ab = ba \iff ab\inv{a} = b \iff b\inv{a} = \inv{a}b \iff \inv{a} \in Z(G)$.
+	
+	Es normal porque $\forall g \in G,\ Z(G)g = \{ag \mid a \in G \land \forall b \in G,\ ab = ba\} = \{ga \mid a \in G \land \forall b \in G,\ ab = ba\} = gZ(G)$.
+\end{proof}
 
-En esta relación de equivalencia, las clases de equivalencia son de la forma $\overline{a} = \{ga\inv{g} \mid g \in G\}$ (conjuntos de los elementos que son conjugados de $a$). Queremos saber cuántos elementos hay en cada clase de equivalencia.
+\begin{pro}
+	\label{pro:subcentronormal}
+	Si $H < Z(G)$ entonces $H$ es abeliano y normal.
+\end{pro}
 
-Fijamos $a \in G$ y definimos
+\begin{proof}
+	Es abeliano porque $\forall g,g' \in Z(G),\ gg' = g'g$ y en particular esto se cumple para $g,g' \in G < G$.
+	
+	Es normal porque $\forall g \in G, gH = \{ga \mid a \in H \land \forall b \in G,\ gb = bg\} = \{ag \mid a \in G \land \forall b \in G,\ bg = gb\} = Hg$.
+\end{proof}
+
+\begin{pro}
+	Sea $g \in G,\ \phi_g: G \to G$ el isomorfismo definido por $\phi_g(x) = gx\inv{g}$. Entonces
+	\begin{align*}
+	x \in Z(G) &\iff \forall g \in G, gx = xg \iff gx\inv{g} = x \\
+	x \in Z(G) &\iff \forall g \in G,\ \phi_g(x) = x 
+	\end{align*}
+\end{pro}
+
+\begin{pro}
+	\label{pro:centroigualabeliano}
+	$G$ es abeliano $\iff G = Z(G)$
+\end{pro}
+
+\begin{proof}
+	Sea $a \in G \land o(a) = n$. Si $a$ es el único elemento de orden $n$ entonces $n = 2 \land a \in Z(G)$. Probamos primero que $n=2$. Si $a$ es el único elemento de orden $n$ entonces tiene que ocurrir que $a$ y $a^{n-1}$ tienen el mismo orden por lo que $1 = n-1 \implies n = 2$.
+\end{proof}
+
+La siguiente proposición es crucial para sacar conclusiones sobre los grupos sabiendo sobre sus órdenes y su centro.
+
+\begin{pro}
+	\label{pro:triplecentro}
+	Si $G/Z(G)$ es cíclico de orden $n$ entonces $n = 1$. Otra manera de formularlo: Si $G/Z(G)$ es cíclico, entonces $G = Z(G)$. Otra manera más de formularlo: si $G/Z(G)$ es cíclico entonces $G$ es abeliano.
+\end{pro}
+
+\begin{proof}
+	Supongamos que $G/Z(G) \isom \ZnZ$. Vamos a probar que $n$ tiene que ser 1. Supongmos que $G/Z(G) = \{\overline{\alpha_i}, i = 1, \dots, n\}$ donde $\overline{\alpha_i} = \alpha^i Z(G)$. Fijamos $g \in G$ con $g = \alpha^j h,\ h \in Z(G),\ 0 \leq j < n$ y fijamos $f' \in G$ con $g' = {\alpha^j}' h',\ h' \in Z(G),\ 0 \leq j' < n$. Entonces $gg' = \alpha^j h{\alpha^j}' h' = \alpha^{j+j'}hh' = {\alpha^j}' h' \alpha^j h = gg'$ (podemos conmutar las $h$ con cualquier elemento porque $h \in Z(G)$, por el contrario, los $\alpha$ no necesitamos conmutarlos, solo agruparlos cuando están juntos). Es decir, que $\forall g, g' \in G$ tenemos que $gg' = g'g$ por lo que $G$ es abeliano.
+\end{proof}
+
+\subsection{Centralizador de un elemento.}
 
 \begin{dfn}[Centralizador de un elemento]
 	\label{dfn:centralizador}
@@ -148,13 +166,16 @@ Fijamos $a \in G$ y definimos
 
 \begin{pro}
 	\label{pro:cardinalcajas}
-	$|\{ga\inv{g} \mid g \in G\}| = [G:C(a)] = r$ (el número de elementos de una clase de equivalencia es el índice de un representante)
+	$|cl(a)| = |\{ga\inv{g} \mid g \in G\}| = [G:C(a)]$ (el número de elementos de una clase de equivalencia es el índice del centralizador de un representante)
 \end{pro}
 
-\begin{proof}
-	Fijamos $a \in G$ y definimos $H = C(a) = \{g \in G \mid ga\inv{g} = a\}$.
-\end{proof}
+De la proposición anterior se deduce que
 
+\begin{cor}
+	$|C(a)| = [G:cl(a)]$
+\end{cor}
+
+La prueba de la proposición se ve clara después de ver la prueba del teorema de Cauchy, así que la dejamos para después.
 
 
 \section{Teorema de Cauchy}
@@ -212,7 +233,7 @@ Fijamos $a \in G$ y definimos
 \end{proof}
 
 \begin{ej}
-	Sea $G$ tal que $|G| = pq$. Entonces por le teorema de Cauchy $\exists a,b \in G \mid o(a) = p \land o(b) = q$. Como $p$ y $q$ son primos los ordenes de $\langle a \rangle$ y $\langle b \rangle$ son coprimos y por tanto $\langle a \rangle \cap \langle b \rangle = \{e\}$. Por el teorema del orden de conjunto\footnote{No sabemos si alguno es normal, luego no tenemos garantías de que el producto sea un grupo} producto libre (\ref{thm:cardinalidadproductolibre}), $|\langle a \rangle \langle b \rangle| = pq$. Lo que si que sabemos es que $G = \{a^ib^j \mid 0 \leq i < p -1 \land 0 \leq j < q - 1\} = \langle a, b \rangle$.
+	Sea $G$ tal que $|G| = pq$. Entonces por le teorema de Cauchy $\exists a,b \in G \mid o(a) = p \land o(b) = q$. Como $p$ y $q$ son primos los ordenes de $\langle a \rangle$ y $\langle b \rangle$ son coprimos y por tanto $\langle a \rangle \cap \langle b \rangle = \{e\}$. Por el teorema del orden de conjunto producto libre (\ref{thm:cardinalidadproductolibre}), $|\gen{a} \gen{b}| = pq$. No sabemos si se tendrá que $G = \gen{a}\gen{b}$ ya que al no saber si alguno es normal, no podemos afirmar que el producto libre sea un grupo. Lo que si que sabemos es que $G = \{a^ib^j \mid 0 \leq i < p -1 \land 0 \leq j < q - 1\} = \langle a, b \rangle$.
 \end{ej}
 
 \begin{ej}
@@ -232,13 +253,13 @@ que aunque pareza obvio quiere decir que $C$ se puede expresar como la unión di
 |G| = \sum_{c_i \in C} | \overline{c_i} | = |Z(G)| + \sum_{i = r + 1}^{s} [G : C(a_i)] \text{ donde } [G : C(a_i)] \geq 2
 \end{align*}
 
-\section{P-grupos}
+\subsection{P-grupos}
+
+Una aplicación inmediata del teorema de Cauchy es la caracterización de los $p$-grupos.
 
 \begin{dfn}[P-grupo]
 	Sea $p$ primo. Decimos que $G$ es un p-grupo si $|G| = p^r$.
 \end{dfn}
-
-Nos interesan sobre todo los p-grupos no abelianos
 
 \begin{thm}
 	Si $G$ es un p-grupo entonces $Z(G)$ es no trivial (no es el vacío).
@@ -256,6 +277,8 @@ Nos interesan sobre todo los p-grupos no abelianos
 	por lo que $|Z(g)|$ tiene que ser múltiplo $p$ por lo que $Z(G)$ no puede ser el trivial.
 \end{proof}
 
+Véase un ejemplo de aplicación de esta anterior proposición en el ejercicio \nameref{ex:h2.22} y en el ejercicio \nameref{ex:h1.33}
+
 \begin{ej}
 	Tenemos que $Z(D_4) = \{1,B^2\}$ y $Z(H) = \{1, B^2\}$ donde $H$ es el grupo de cuateriones (ejemplo \ref{ej:grupocuaterniones}) y $D_4$ es el famoso grupo (ejemplo \ref{ej:famosogrupod4}). 
 \end{ej}
@@ -269,37 +292,41 @@ Nos interesan sobre todo los p-grupos no abelianos
 	Por el la demostración del teorema anterior tenemos que o bien $|Z(G)| = p$ o bien $|Z(G)| = p^2$. Afirmamos que $|Z(G)| \neq p$ ya que si fuera así $|G/Z(G)| = p \implies G/Z(G)$ cíclico pero hemos probado (proposición \ref{pro:triplecentro}) que $G/Z(G)$ no puede ser cíclico. Por lo tanto $|Z(G)| = p^2 \implies Z(G) = G \implies G$ es abeliano.
 \end{proof}
 
-% ---------------- después del parcial 1
-% 20181009
 
-\hr
+\section{Más sobre la conjugación, el centro y los centralizadores.}
+Antes de introducir el teorema de Cauchy hablábamos de la conjugación que era una relación de equivalencia que partía un grupo $G$ en cajas. Nos gustaría saber cuántos elementos había en la clase de equivalencia de cada uno de los elementos de $G$ y para eso introducíamos el concepto de centralizador de un elemento: $C(a)$ el conjunto de los elementos de $G$ que no mueven a $a$ por conjugación. La \autoref{pro:cardinalcajas} nos aseguraba que $|cl(a)| = [G:C(a)]$ y dijimos que retrasaríamos la prueba hasta ahora. Pues aquí va.
+
+
 
 Sea $\sim$ una relación de equivalencia definida por $a\sim b \iff \exists g \in G \mid ga\inv{g} = b$ para $a,b \in G$. Esta relación da una partición de $G$ en clases de la forma $cl(a) = \{ga\inv{g} \mid g \in G\}$. En el caso abeliano esta relación es la de igualdad, por lo que no nos merece la pena liar este pifostio para saber que $a\sim b \iff a = b$. 
 
 Es muy importante saber cómo contamos los elementos de una clase, es decir, de cuantas formas podemos \textit{mover} el elemento $a$ con $g \in G$. Para ello definimos el centralizador (definición \ref{dfn:centralizador}) como $C(a) = \{h \in G \mid ha\inv{h} = a\} < G$. Queremos probar que $|cl(a)| = [G:C(a)] = r$.
 
-Lo probamos tomando clases laterales a la izquierda (por ejemplo) y partiendo $G$ en $r$ cajas. Las cajas son de la forma $\alpha_iC(a),\ i = 1, \dots, r$. Esta partición no tiene que ver con la partición anterior. Observemos que para cualquier $g \in \alpha_i C(a), g = \alpha_i h$, tenemos que $g a \inv{g} = \alpha_i h a \inv{h} \inv{\alpha_i} = \alpha_i a \inv{\alpha_i}$ es decir que los $g \in C(a)$ no se mueven fuera de la caja. Es decir, que si $\alpha_i \neq \alpha_j$ para $i\neq j$ entonces hay $r$ maneras de mover a $g$ y por tanto $|cl(a)| = r$.
+\begin{proof}[Demostración de la \autoref{pro:cardinalcajas}]
+	
+	Lo probamos tomando clases laterales a la izquierda (por ejemplo) y partiendo $G$ en $r$ cajas. Las cajas son de la forma $\alpha_iC(a),\ i = 1, \dots, r$. Esta partición no tiene que ver con la partición anterior. Observemos que para cualquier $g \in \alpha_i C(a), g = \alpha_i h$, tenemos que $g a \inv{g} = \alpha_i h a \inv{h} \inv{\alpha_i} = \alpha_i a \inv{\alpha_i}$ es decir que los $g \in C(a)$ no se mueven fuera de la caja. Es decir, que si $\alpha_i \neq \alpha_j$ para $i\neq j$ entonces hay $r$ maneras de mover a $g$ y por tanto $|cl(a)| = r$.
+	
+	Probaremos que en efecto los $\alpha_i$ son distintos.
+	
+	Sean $g_1, g_2 \in G$. $g_1a\inv{g_1} = g_2a\inv{g_2} \iff (\inv{g_2}g_1)a(\inv{g_1}g_2) = a \iff (\inv{g_2}g_1)a\inv{(\inv{g_2}g_1)} \iff C(a) \inv{g_2}g_1 \in C(a) \iff g_1 \in g_2C(a)$.
+	
+	Si $G/\sim$ tiene $N$ elementos, tomamos $\{c_1, \dots, c_N\}$ como el conjunto de los representantes, donde $c_i$ es un representante de cada conjunto de la partición. Entonces pordemos expresar
+	\begin{align*}
+	G = \bigcup_{c_i \in C} = cl(c_i)
+	\end{align*}
+	donde $|cl(c_i)| = [G:C(c_i)]$. Por tanto decir que $|cl(c_i)| = 1$ es equivalente ($\iff$) a decir que $G = C(c_i) = \{\forall g \in G,\ gc\inv{g} = c\} \iff c \in Z(G)$.
+	
+	Afirmábamos que
+	\begin{align*}
+	|G| = \sum_{c_i \in C} |cl(c_i)| = |Z(G)| + \sum_{c_i \in C\setminus Z(G)} [G:C(c_i)]
+	\end{align*}
+	descomponiendo la suma en las clases con solo un elemento y las clases con más de dos elementos.
+\end{proof}
 
-Probaremos que en efecto los $\alpha_i$ son distintos.
 
-Sean $g_1, g_2 \in G$. $g_1a\inv{g_1} = g_2a\inv{g_2} \iff (\inv{g_2}g_1)a(\inv{g_1}g_2) = a \iff (\inv{g_2}g_1)a\inv{(\inv{g_2}g_1)} \iff C(a) \inv{g_2}g_1 \in C(a) \iff g_1 \in g_2C(a)$.
-
-Si $G/\sim$ tiene $N$ elementos, tomamos $\{c_1, \dots, c_N\}$ como el conjunto de los representantes, donde $c_i$ es un representante de cada conjunto de la partición. Entonces pordemos expresar
-\begin{align*}
-G = \bigcup_{c_i \in C} = cl(c_i)
-\end{align*}
-donde $|cl(c_i)| = [G:C(c_i)]$. Por tanto decir que $|cl(c_i)| = 1$ es equivalente ($\iff$) a decir que $G = C(c_i) = \{\forall g \in G,\ gc\inv{g} = c\} \iff c \in Z(G)$.
-
-Afirmábamos que
-\begin{align*}
-|G| = \sum_{c_i \in C} |cl(c_i)| = |Z(G)| + \sum_{c_i \in C\setminus Z(G)} [G:C(c_i)]
-\end{align*}
-descomponiendo la suma en las clases con solo un elemento y las clases con más de dos elementos.
-
-\hr
 
 \begin{ej}
-	Consideramos $D_3$ (ver ejemplo \ref{ej:grupod3}). Nos fijamos en que $B \not\in Z(D_3)$ es decir que en $cl(B)$ hay más de un elemento. En particular por lo visto anteriormente $|cl(B)| = [G:C(B)]$. Ahora bien $C(B) = \{1, B, B^2\}$ luego $|cl(B)| = [G:C(B)] = 2$. La pregunta es ¿quién es el compañero de $B$ en su clase? Es fácil, recordamos que $\phi_g (x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo y que $\{1, B, B^2\}$ es normal, por lo que $o(B) = o(\phi_g(B)) = 2$. Entonces $\phi_g(B) \neq 1$ porque no coinciden los órdenes, de manera que $\phi_g(B) = B^2$ por necesidad. Luego el otro elemento es el $B^2$.
+	Consideramos $D_3$ (ver \autoref{ej:diedricosordengenerico}). Nos fijamos en que $B \not\in Z(D_3)$ es decir que en $cl(B)$ hay más de un elemento. En particular por lo visto anteriormente $|cl(B)| = [G:C(B)]$. Ahora bien $C(B) = \{1, B, B^2\}$ luego $|cl(B)| = [G:C(B)] = 2$. La pregunta es ¿quién es el compañero de $B$ en su clase? Es fácil, recordamos que $\phi_g (x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo y que $\{1, B, B^2\}$ es normal, por lo que $o(B) = o(\phi_g(B)) = 2$. Entonces $\phi_g(B) \neq 1$ porque no coinciden los órdenes, de manera que $\phi_g(B) = B^2$ por necesidad. Luego el otro elemento es el $B^2$.
 	
 	¿Qué pasa con el elemento $A$? Pues ocurre que $A \in C(A)$ y $\{1, A\} \in C(A)$ y en realidad no puede haber más porque si hubiese un tercero, $\{1, A\}$ es un subgrupo de orden 2 $\implies o(\{1, A\})$ no divide a 3 $\implies$ si hubiese más, $C(A) = D_3$ y eso no puede ser $\implies C(A) = \{1, A\} \implies |cl(A)| = [D_3:C(A)] = 6/2 = 3$. Como las clases son disjuntas los tres elementos sobrantes forman la última caja.   
 	
@@ -328,10 +355,7 @@ descomponiendo la suma en las clases con solo un elemento y las clases con más 
 	\end{enumerate}
 \end{ej}
 
-
-\hr
-
-% 20181011
+\section{Normalizador de un subconjunto}
 
 Vez pasada tomábamos $a \in G$ y teníamos $cl(a) = \{g a \inv{g} \mid g \in G\} = \{a=a_1, a_2, \dots, a_r\}$ y $C(a) = \{g \in G \mid ha\inv{h} = a \}$. Concluíamos que $|cl(a)| = [G:C(a)]$.
 
@@ -343,7 +367,7 @@ que tiene $r$ subconjuntos distintos.
 
 Recordemos que la conjugación dada $\phi_g(x) = gx\inv{g}$ (el isomorfismo conjugación) es un isomorfismo\footnote{A veces tomate frito llama a este isomorfismo $\gamma_g$}, y por tanto una biyección entre subconjuntos $S_i \subset G$. Por tanto $|S| = \phi_g(S)$.
 
-\begin{dfn}[Normalizador de un subgrupo]
+\begin{dfn}[Normalizador de un subconjunto]
 	\label{dfn:normalizador}
 	Fijado $S \subset G$, definimos el normalizador de $S$:
 	\begin{align}
@@ -351,7 +375,7 @@ Recordemos que la conjugación dada $\phi_g(x) = gx\inv{g}$ (el isomorfismo conj
 	\end{align} 
 \end{dfn}
 
-Se parece mucho a la definición de centralizador de un elemento (\ref{dfn:centralizador}). En el caso en que $S = \{a\}$ tenemos que $N(S) = \{g \in G \mid ga\inv{g} = a\} = C(a)$.
+Se parece mucho a la definición de centralizador de un elemento (\autoref{dfn:centralizador}). En el caso en que $S = \{a\}$ tenemos que $N(S) = \{g \in G \mid ga\inv{g} = a\} = C(a)$.
 
 Ojo, decir que $gS\inv{g} = S$ no significa que $\forall b_i \in S,\ gb_i\inv{g} = b_i$, sino que $gb_i\inv{g} \in S$ (no mandamos cada elemento a él mismo, sino que todos quedan dentro del subconjunto). Es decir que \textit{$N(S)$ es el conjunto de la totalidad de elementos para los que $\phi_g$ manda el subconjunto $S$ en sí mismo.}
 
@@ -359,8 +383,7 @@ Ojo, decir que $gS\inv{g} = S$ no significa que $\forall b_i \in S,\ gb_i\inv{g}
 	Dado $S \subset G,\ N(S)$ es un subgrupo.
 \end{pro}
 
-\begin{proof}$ $\newline
-	Como $G$ es finito, $N(S)$ es subgrupo $\iff S \neq \emptyset \land N(S)$ es cerrado por la operación.
+\begin{proof} Como $G$ es finito, $N(S)$ es subgrupo $\iff S \neq \emptyset \land N(S)$ es cerrado por la operación.
 	\begin{itemize}
 		\item Es claro que $e \in N(S)$ pues $eS\inv{e} = S$, luego $N(S) \neq \emptyset$.
 		\item Tenemos que probar la clausura. Si $h_1S\inv{h_1} = S \land h_2S\inv{h_2} = S$ tenemos que $\underbrace{(h_2S\inv{h_2})}_{\in S}\inv{h_1} = S \implies h_1h_2 \in N(S)$.
@@ -376,15 +399,13 @@ Ojo, decir que $gS\inv{g} = S$ no significa que $\forall b_i \in S,\ gb_i\inv{g}
 	A la izquierda del lector.\footnote{Left to the reader.}
 \end{proof}
 
-Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos que dado $g\in G$, $\phi_g$ es un isomorfismo por tanto manda elementos de un subgrupo en otro subgrupo (si el subgrupo es normal, manda elementos de un subgrupo en sí mismo).
+Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos que dado $g\in G$, $\phi_g$ es un isomorfismo por tanto manda elementos de un subgrupo en otro subgrupo (si el subgrupo es normal, manda elementos de un subgrupo en sí mismo). Es por esto que la afirmación equivalente a la proposición anterior sería:
 
 \begin{pro}
-	$H < N(H)$
+	Sea $S < G$. Entonces $\{gS\inv{g} \mid g \in G\} = \{S = S_1, S_2, \dots, S_r\}$ son $r$ subgrupos distintos.
 \end{pro}
 
-\begin{proof}
-	Si tomamos $h \in G$, tenemos que $hH\inv{h} = H$ y también $\inv{h}H\inv{(\inv{h})} = H$ (todo elemento de $H$ tambéin tiene a su inverso en $H$).
-\end{proof}
+% TODO aquí había un teorema (el 3 de la página 80 de santorum que no hay quien lo entienda)
 
 \begin{thm}
 	Sea $G$ grupo, $H < G$. Entonces $H \normsub N(H)$ y $N(H)$ es el mayor subgrupo de $G$ con esta propiedad, es decir, $H \normsub H' \implies H' < N(H)$.
@@ -407,7 +428,7 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 \end{proof}
 
 \begin{pro}
-	$Z(G) < N(H)$
+	Si $H < G$ entonces\footnote{No sé si la hipotesis aquí es que $H < G$ o que $H \subset G$} $Z(G) < N(H)$
 \end{pro}
 
 \begin{proof}
@@ -415,7 +436,26 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 \end{proof}
 
 \begin{ej}
-	Vamos a empezar por $G = S_3$. En $S_3$ tenemos los subgrupos $\langle (12) \rangle, \langle (13) \rangle, \langle (23) \rangle$ de orden 2 y el subgrupo $\langle (123) \rangle = \{(1), (123), (132)\}$ de orden 3. %TODO pintar retículo
+	Vamos a empezar por $G = S_3$. En $S_3$ tenemos los subgrupos $\langle (12) \rangle, \langle (13) \rangle, \langle (23) \rangle$ de orden 2 y el subgrupo $\langle (123) \rangle = \{(1), (123), (132)\}$ de orden 3.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+			\node (neut) at (0,0) {$\{(1)\}$};
+			\node (12) at (-2,1) {$\gen{(12)}$};
+			\node (13) at (1, 1) {$\gen{(13)}$};
+			\node (23) at (3,1) {$\gen{(23)}$};
+			\node (123) at (-0.5,1.8) {$\gen{(123)}$};
+			\node (s3) at (0,3.5) {$S_3$};
+			
+			\draw (neut) -- (12) -- (s3);
+			\draw (neut) -- (23) -- (s3);
+			\draw (neut) -- (13) -- (s3);
+			\draw (neut) -- (123) -- (s3);
+		\end{tikzpicture}
+		\caption{Retículo de subgrupos de $S_3$}
+		\label{fig:reticulos3}
+	\end{figure}
 	\begin{itemize}
 		\item En el caso de este último $g\langle (123) \rangle \inv{g} = \langle (123) \rangle$ porque es el único subgrupo de orden 3. Por tanto $\langle (123) \rangle \normsub S_3$ y entonces $N(\langle (123) \rangle) = S_3$.
 		\item Sin encambio en el caso de los subgrupos de orden $2$ es posible que $g\langle (12) \rangle \neq \langle (12) \rangle$, porque hay más de un subgrupo de orden 2. Observemos por ejemplo que $(13)(12)\inv{(13)} = (32) = (23)$, luego $\langle (12) \rangle$ no es normal en $S_3$, ya que hemos encontrado $g = (13) \in G$ que lo mueve. Pero ¿quién es el normalizador $N(\langle (12) \rangle)$? Pues ya sabemos que es un subgrupo propio, porque no puede dar todo $S_3$. Evidentemente $\langle (12) \rangle \subset N(\langle (12) \rangle)$. Luego tiene que ser que $N(\langle (12) \rangle) = \langle (12) \rangle$\footnote{No tiene gracia que $\langle (12) \rangle$ sea normal en sí mismo, lo que tiene gracia es que $\langle (12) \rangle$ es el mayor grupo donde $\langle (12) \rangle$ es normal.} 
@@ -448,7 +488,7 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 	
 	
 	\begin{enumerate}
-		\item Nos dibujamos el retículo.
+		\item Nos dibujamos el retículo. Se puede consultar en \autoref{fig:reticulocuaterniones}.
 		\item Primeramente nos damos cuenta de que $\langle A \rangle \cap \langle b \rangle \supsetneq \{e\}$ porque $H$ tiene 8 elementos y por la fórmula del producto libre (\autoref{thm:cardinalidadproductolibre}) y porque todo producto directo de subgrupos está contenido en el grupo aunque no sea subgrupo.
 		\item Ocurre lo mismo con los demás subgrupos de orden 4 ($\langle A \rangle,\ \langle AB \rangle$). Tiene que tener intersección no vacía. En concreto la intersección es el subgrupo generado $\langle A^2 = B^2 = (AB)^2 \rangle$.
 		\item En $H$ todos los subgrupos son normales, por lo que no tienen "órbitas" de modo que es muy aburrido.
@@ -456,13 +496,32 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 \end{ej}
 
 \begin{ej}
-	Consideramos ahora $D_5$ que funciona como el $D_4$:
-	\begin{align*}
-	D_5 = \{1, B, B^2, B^3, B^4, A, AB, AB^2, AB^3, AB^4\} \\
-	o(B) = 5
-	\end{align*}
+	Consideramos ahora $D_5$ que funciona como el $D_4$ (ver \autoref{ej:diedricosordengenerico} para más información sobre los grupos $D_n$).
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\node (d5) at (0,2) {$D_5$};
+		\node (a) at (-3.75, 1) {$\langle A \rangle$};
+		\node (ab) at (-2.25, 1) {$\langle AB \rangle$};
+		\node (ab2) at (-0.75, 1) {$\langle AB^2 \rangle$};
+		\node (ab3) at (0.75, 1) {$\langle AB^3\rangle$};
+		\node (ab4) at (2.25, 1) {$\langle AB^4\rangle$};
+		\node (b) at (3.75, 1) {$\langle B \rangle$};
+		\node (e) at (0,0) {$\{1\}$};
+		
+		\draw (e) -- (a)   -- (d5);
+		\draw (e) -- (ab)  -- (d5);
+		\draw (e) -- (ab2) -- (d5);
+		\draw (e) -- (ab3) -- (d5);
+		\draw (e) -- (ab4) -- (d5);
+		\draw (e) -- (b)   -- (d5);
+		\end{tikzpicture}
+		\caption{Retículo de subgrupos de $D_5$.}
+		\label{ej:reticulod5}
+	\end{figure}
+
 	\begin{itemize}
-		\item Primera observación. Como $o(B) = 5$ que es primo, tenemos que $o(B^k) = 5,\ k = 1, \dots, 4$. Luego cualquier subgrupo generado por $\langle B^k \rangle = \langle B \rangle$. Aquí falta algo.
+		\item Primera observación. Como $o(B) = 5$ que es primo, tenemos que $o(B^k) = 5,\ k = 1, \dots, 4$. Luego cualquier subgrupo generado por $\langle B^k \rangle = \langle B \rangle$. Aquí falta algo. % TODO revisar este ejemplo que está en la página 85 de santorum
 		\item Observemos que los subgrupos propios pueden ser de 2 o 5 elementos.
 		\item No puede haber subgrupos generados por dos elementos de $D_5$ (por qué?)
 		\item Los únicos subgrupos son $\langle B \rangle$ y los generados por $A, AB, AB^2, AB^3, AB^4$.
@@ -476,100 +535,3 @@ Supongamos ahora que en vez de ser $S \subset G$, tomamos $S < G$. Recordemos qu
 		
 	\end{itemize}
 \end{ej}
-
-\hr
-
-Sea $X$ conjunto. Consideramos
-\begin{align*}
-Biy(X) = \{f \mid f: X \to X \text{ biyección}\}
-\end{align*}
-En el caso en que $|X| = n$, por ejemplo $X = \{1, 2, 3, \dots, n\}$ tenemos que $Biy(X) = S_n$. Como $f:X \to X$ si $f$ es inyectiva entonces automáticamente es sobre y por tanto biyectiva.
-
-En general, tiene sentido pensar en $Biy(X)$ aunque $|X| = \infty$. Además, en dicho conjunto viven la biyección identidad y la biyección inversa para cada biyección. Por tanto, tiene sentido pensar en $(Biy(X), \circ)$ como un grupo (la composición de biyecciones da una biyección).
-
-Nos concentramos en el caso en el que $|X| = n$ que nos da $Biy(X) = S_n$. Ya hemos visto que $S_2 = \{1, \sigma\} \implies |S_2| = 2$ y para $S_3$ tenemos $|S_3| = 3!$ y en general $|S_n| = n!$.
-
-Fijamos un conjunto $X$ y un homomorfismo de grupos $\alpha: X \to Biy(X)$. A partir de estos datos definimos una relación de equivalencia que nos da una partición de $X$, es decir, vamos a partir $X$ en conjuntos disjuntos.
-
-\begin{ej}
-	Supongamos\footnote{Por qué cojones cambia ahora la letrita?} $G = X,\ |G| = n$ y consideramos $\rho: G \to \autom{G} \subset Biy(X)$. Definimos la relación en $X = G$
-	\begin{align*}
-	aRb \iff \exists g \in G \mid \phi_g(a) = b,\ \phi_g(x) = gx\inv{g}
-	\end{align*}
-	que es la relación de conjugación dada por el isomorfismo de conjugación de toda la vida.
-	
-	Ahora, en lugar de pensar en $G = X$ pensamos en $X = \{H < G\}$ (los subgrupos de $G$). Para cualquier isomorfismo de grupos $\beta: G \to G$, tenemos que si $H < G$ entonces $\beta(H) < G$.
-	
-	Lo que hemos hecho aquí es un caso particular de lo que viene ahora.
-\end{ej}
-
-\begin{pro}
-	Sea $\alpha: G \to Biy(X),\ g \mapsto \alpha(g)$ un homomorfismo de grupos. Definimos la relación de equivalencia
-	\begin{align}
-	aRb \iff \exists g \in G \mid \alpha(g)(a) = b
-	\end{align}
-	Afirmamos que la relación es de equivalencia y que nos divide $G$ en subconjuntos disjuntos (nos particiona $G$).
-\end{pro}
-
-\begin{proof}Probamos las 3 propiedades de las relaciones de equivalencia.
-	\begin{enumerate}
-		\item Reflexiva: $\forall x \in X, a R a$. Por ser $\alpha$ homomorfismo tenemos que $\alpha(e_G) = id_X$ y por tanto $\alpha(e_G)(a) = a$.
-		\item Simétrica: $aRb \implies bRa$. Partimos de que $\exists g \in G \mid \alpha(g)(a) = b$. Tomamos $\inv{g} \in G$ y por ser $\alpha$ homomorfismo de grupos tenemos que $\alpha(\inv{g})(b) = \inv{(\alpha(g))}(b) = a$.
-		\item Transitiva: $aRb \land bRc \implies aRc$. Partimos de que $\exists g, g' \in G \mid \alpha(g)(a) = b \land \alpha(g')(b) = c$. Tomamos $g'g \in C$ y tenemos que $\alpha(g'g)(a) = \alpha(g')(\alpha(g)(a)) = \alpha(g')(b) = c$ por composición de biyecciones.
-	\end{enumerate}
-\end{proof}
-
-¿Cómo son las clases que da la partición?
-
-Pues tenemos que $cl(a) = \{\alpha(g)(a) \mid g \in G\}$ para un $a \in G$. Definimos $H_a = \{g \in G \mid \alpha(g)(a) = a\}$. Tenemos por lo visto anteriormente que $H_a < G \land |cl(a)| = [G:H_a]$. Entonces tenemos lo siguiente:
-\begin{itemize}
-	\item En el caso en que $X = G$ tenemos que $H_a = C(a)$ donde $C(a)$ es el centralizador de $a$ (definición \ref{dfn:centralizador}).
-	\item En el caso en que $X = \{H < G\}$ tenemos que $H_a = N(a)$ donde $N(a)$ es el normalizador de $a$ (definición \ref{dfn:normalizador}).
-\end{itemize}
-Veremos que se pueden dar más casos.
-
-\begin{ej}
-	Fijamos $\sigma \in S_n$ y $G = \langle \sigma \rangle$ subgrupo genereado por $\sigma$ en $S_n$. Entonces $G = \langle \sigma \rangle \to S_n = Biy(X)$ algo pasó. Si $X = \{1, 2, \dots, n\}$ definimos $\sigma(1) = 2,\ \sigma(2) = 1,\ \sigma(i) = i+1, i = 3,\dots, n-2,\sigma(n-1) = 3$. La clase $cl(i) = \{\sigma^k(i) \mid k \in \Z\}$ en particular contiene a la identidad ya que $\sigma^{n!} = id$ y $n! \in \Z$. Nos quedan dos clases
-	% TODO: dibujito de sigma
-	\begin{align*}
-	cl(1) &= \{1, 2\} \\
-	cl(3) &= \{3, 4, 5, \dots, n - 1\}
-	\end{align*}
-\end{ej}
-
-Vemos que si fijamos $\sigma$ se define una partición en $\{1, \dots, n\}$ de subconjuntos disjuntos
-\begin{align*}
-F_1 \cup F_2 \cup \dots \cup F_n
-\end{align*}
-
-Si $r = |F_i| > 1$, $F_i = \{i_0, i_1, \dots, i_r\}$ tal que $\sigma(i_0) = i_1, \sigma(i_1) = i_2, \dots, \sigma(i_r) = i_0$.
-
-\begin{dfn}[Ciclo]
-	\label{dfn:ciclo}
-	Diremos que $\sigma$ es un ciclo de longitud $r$ si en la partición definida
-	\begin{align*}
-	F_1 \cup F_2 \cup \dots \cup F_n
-	\end{align*}
-	todas las cajas $F_j,\ j < r$ tienen un único elemento y $F_r$ tiene $r$ elementos.
-\end{dfn}
-
-\begin{pro}
-	Toda biyección $\sigma \in S_7$ se puede descomponer como composición de ciclos.
-\end{pro}
-
-\begin{ej}
-	Consideramos\footnote{Utilizamos la notación de biyecciones de \cite{dor96}.}
-	\begin{align*}
-	\sigma = \left(\begin{array}{ccccccc}
-	1 & 2 & 3 & 4 & 5 & 6 & 7 \\
-	2 & 1 & 4 & 5 & 6 & 3 & 7
-	\end{array}\right)
-	\end{align*}
-	que nos divide $X = \{1, 2, 3, 4, 5, 6, 7\}$ en tres subconjuntos disjuntos $\{1, 2\},\ \{3, 4, 5, 6\},\ \{7\}$. Por tanto podemos decir
-	\begin{align*}
-	\sigma = (12)(3456)(7) = (12)(3456) = (3456)(12)
-	\end{align*}
-	(podemos conmutar porque al ser ciclos disjuntos lo que toque uno no lo toca el otro).
-\end{ej}
-
-Proximamente vermos que a partir de la descomposición en ciclos disjuntos es fácil obtener el orden de $\sigma$.
