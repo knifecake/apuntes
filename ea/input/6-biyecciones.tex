@@ -4,7 +4,7 @@
 
 \section{El por qué de la notación cíclica}
 
-\begin{dfn}
+\begin{dfn}[Conjunto de biyecciones]
 	Sea $X$ un conjunto. Definimos
 	\begin{align*}
 		\biy{X} = \{f: X \to X \mid f \text{ es biyección}\}
@@ -318,6 +318,61 @@ Poder averiguar los órdenes de ciclos es una herramienta muy potente. Por ejemp
 	Ver \cite{dor96} página 120.
 \end{proof}
 
+\section{Sobre las conjugaciones de una descomposición en ciclos}
+
+Antes de seguir, vamos a introducir dos proposiciones que nos serán de gran ayuda al calcular conjugados de una permutación, por ejemplo, para cuando queramos calcular centralizadores.
+
+\begin{pro}
+	Sea $\alpha \in S_n$ una permutación con descomposición en ciclos disjuntos
+	\begin{align*}
+	\alpha = \left(i_1^{(1)}\ i_2^{(1)}\ \dots\ i_{s_1}^{(1)}\right)\left(i_1^{(2)}\ i_2^{(2)}\ \dots\ i_{s_2}^{(2)}\right)\dots\left(i_1^{(r)}\ i_2^{(r)}\ \dots\ i_{s_r}^{(r)}\right)
+	\end{align*}
+	y sea $\omega \in S_n$. Entonces el conjugado de $\alpha$ por $\omega$ es $\alpha'$ y se obtiene de
+	\begin{align*}
+	\alpha' = \omega \alpha \inv{\omega} = \left(\omega(i_1^{(1)})\ \omega(i_2^{(1)})\ \dots\ \omega(i_{s_1}^{(1)})\right)\left(\omega(i_1^{(2)})\ \omega(i_2^{(2)})\ \dots\ \omega(i_{s_2}^{(2)})\right)\dots\left(\omega(i_1^{(r)})\ \omega(i_2^{(r)})\ \dots\ \omega(i_{s_r}^{(r)})\right)
+	\end{align*}
+\end{pro}
+
+Se ve mejor con un ejemplo:
+
+\begin{ej}
+	Sea $\alpha = (123)(45) \in S_5$ y sea $\omega \in S_5$ alguna permutación. Entonces
+	\begin{align*}
+	\alpha' = \omega\alpha\inv{\omega} = \omega(123)(45)\inv{\omega}= \left(\omega(1)\ \omega(2)\ \omega(3)\right)\left(\omega(4) \omega(5)\right)
+	\end{align*}
+\end{ej}
+
+También podemos ir en la otra dirección. Es decir, dados $\alpha$ y $\alpha'$ obtener $\omega$:
+
+\begin{pro}
+	Sean $\alpha, \alpha' \in S_n$ dos permutaciones cuyas descomposiciones en ciclos disjuntos son del mismo tipo y se denotan por
+	\begin{align*}
+	\alpha = \left(i_1^{(1)}\ i_2^{(1)}\ \dots\ i_{s_1}^{(1)}\right)\dots\left(i_1^{(r)}\ i_2^{(r)}\ \dots\ i_{s_r}^{(r)}\right) \\
+	\alpha' = \left(j_1^{(1)}\ j_2^{(1)}\ \dots\ j_{s_1}^{(1)}\right)\dots\left(j_1^{(r)}\ j_2^{(r)}\ \dots\ j_{s_r}^{(r)}\right)
+	\end{align*}
+	Entonces $\exists \omega \in S_n$ tal que $\alpha' = \omega \alpha \inv{\omega}$ y $\omega$ se puede construir (en notación no cíclica)
+	\begin{align*}
+	\omega = \left(\begin{array}{ccccccccc}
+	i_1^{(1)}\ &i_2^{(1)}\ &\dots\ &i_{s_1}^{(1)}\ & \dots\ &i_1^{(r)}\ &i_2^{(r)}\ &\dots\ &i_{s_r}^{(r)} \\
+	j_1^{(1)}\ &j_2^{(1)}\ &\dots\ &j_{s_1}^{(1)}\ & \dots\ &j_1^{(r)}\ &j_2^{(r)}\ &\dots\ &j_{s_r}^{(r)}
+	\end{array}\right)
+	\end{align*}
+\end{pro}
+
+\begin{ej}
+	Sean $\sigma, \sigma' \in S_5$. Busco $\tau \in S_5$ tal que $\sigma'$ sea conjugada de $\sigma$ por $\tau$, es decir, $\tau \in S_n \mid \sigma' = \tau\sigma\inv{\tau}$. Pues utilizamos el método
+	\begin{align*}
+	\begin{cases}
+	\sigma 	&= (123)(45) \\
+	\sigma' &= (245)(13)
+	\end{cases} \longrightarrow \omega = \left(\begin{array}{ccccc}
+	1 & 2 & 3 & 4 & 5 \\
+	2 & 4 & 5 & 1 & 3
+	\end{array}\right)
+	\end{align*}
+	o en notación cíclcia: $\omega = (124)(35)$.
+\end{ej}
+
 \section{Trasposiciones}
 
 \begin{dfn}[Trasposición]
@@ -425,12 +480,212 @@ Es muy interesante la manera en la que hemos demostrado el \autoref{thm:paridadp
 
 Si consideramos el homomorfismo desde $S_n$ hasta $(\{-1, 1\}, \cdot)$ nos damos cuenta de que hemos definido un homomorfismo de grupos que además es sobreyectivo.
 
-El núcleo de dicho isomorfismo $\ker \varphi = \{\sigma \in S_n \mid \varphi(\sigma) = 1\}$ es un subgrupo por el teorema de correspondencia entre familias de subgrupos bajo un epimorfismo (ver \autoref{thm:correspondenciasubgruposdor96}). Además este subgrupo es normal y de índice 2. Tan importante es que le damos nombre.
+El núcleo de dicho isomorfismo $\ker \varphi = \{\sigma \in S_n \mid \varphi(\sigma) = 1\}$ es un subgrupo por el teorema de correspondencia entre familias de subgrupos bajo un epimorfismo (ver \autoref{thm:correspondenciasubgruposdor96}). Además este subgrupo es normal y de índice 2. Tan importante es que le daremos nombre en la sección \ref{sec:gruposalternados}.
+
+\section{Clases de equivalencia de permutaciones en $S_n$}
+
+\begin{dfn}[Tipo de una permutación]
+	Sea $\alpha \in S_n$ una permutación que descomponemos en composición de ciclos disjuntos
+	\begin{align*}
+		\alpha = \sigma_1 \circ \sigma_2 \circ \dots \circ \sigma_r\text{ donde } o(\sigma_i) = \lambda_i \text{ y además } \lambda_1  \geq \lambda_2 \geq \dots \geq \lambda_r\geq 1 \land \sum_{i=1}^{r} \lambda_i = n
+	\end{align*}
+	Entonces decimos que $\alpha$ es de tipo o estructura $(\lambda_1, \dots, \lambda_r)$. A veces lo denotamos con $\alpha$ es de tipo $\lambda_1 + \dots + \lambda_r$.
+\end{dfn}
+
+\begin{ej}
+	En $S_8$ la permutación $\alpha = (123)(45)(67)$ tiene tipo $(3,2,2,1)$ o bien $3+2+2+1$.
+\end{ej}
+
+\begin{wrapfigure}{l}{0.3\textwidth}
+	\begin{tikzpicture}
+	\node (1) at (1,1) {$1$};
+	\node (2) at (2,1) {$2$};
+	\node (3) at (3,1) {$3$};
+	\node (4) at (4,1) {$4$};
+	\node (5) at (5,1) {$5$};
+	
+	\node (1p) at (1,-1) {$1$};
+	\node (2p) at (2,-1) {$2$};
+	\node (3p) at (3,-1) {$3$};
+	\node (4p) at (4,-1) {$4$};
+	\node (5p) at (5,-1) {$5$};
+	
+	\node (w1) at (3,-2) {$\omega(1)$};
+	\node (w2) at (4,-2) {$\omega(2)$};
+	\node (w3) at (5,-2) {$\omega(3)$};
+	
+	% flechas de alpha
+	\draw[->] 	(1) edge[bend right] (2)
+	(2) edge[bend right] (3)
+	(3) edge[bend right] (1);
+	
+	% flechas de omega
+	\draw[->,thick] (1) edge (3p)
+	(2) edge (4p)
+	(3) edge (5p)
+	(4.5,0.7) edge (1.5,-0.7);
+	
+	\draw[=] 	(3p) -- (w1)
+	(4p) -- (w2)
+	(5p) -- (w3);
+	
+	\draw[thick] (0.5,1.5) -- (5.5,1.5) -- (5.5,0.5) -- (0.5,0.5) -- cycle;
+	
+	\begin{scope}[shift={(0,-2)}]
+	\draw[thick] (0.5,1.5) -- (5.5,1.5) -- (5.5,0.5) -- (0.5,0.5) -- cycle;
+	\end{scope}
+	
+	% cuadrao del 45		
+	\draw[dashed] (3.7,1.3) -- (5.3,1.3) -- (5.3,0.7) -- (3.7,0.7) -- cycle;
+	
+	
+	% cuadrao del 12
+	\begin{scope}[shift={(-3,-2)}]
+	\draw[dashed] (3.7,1.3) -- (5.3,1.3) -- (5.3,0.7) -- (3.7,0.7) -- cycle;
+	\end{scope}
+	
+	\end{tikzpicture}
+\end{wrapfigure}
+
+¿Por qué es interesante esto? Porque los elementos de $cl(\alpha)$ son todas las permutaciones del mismo tipo que $\alpha$. Lo vemos con un ejemplo.
+
+
+
+\begin{ej}
+	% TODO entender esto
+	Consideramos $\alpha \in S_5,\ \alpha = (123)$. Los elementos de la clase de equivalencia son de la forma $cl(\alpha) = \{\omega (123) \inv{\omega} \mid \omega \in S_5\}$. Es decir que, por ejemplo:
+	\begin{align*}
+		cl((123)(45)) &= \{(i_1\ i_2\ i_3)(i_4\ i_5) \mid \text{totalidad de elementos de tipo } (3,2)\}\\
+		cl((12)) &= \{\text{elementos de clase } (2,1,1,1)\}
+	\end{align*}
+	
+	
+	Observemos que $\omega (123) \inv{\omega} = (\omega(1)\ \omega(2)\ \omega(3))$. Con $\omega = (12345)$ tenemos
+	
+	\begin{align*}
+		\omega(123)\inv{\omega}(\omega(1)) = \omega(123)\inv{\omega}(3) = \omega(123)(\omega(1)) = \omega(2)\\
+		\omega(123)\inv{\omega}(\omega(2)) = \omega(123)\inv{\omega}(2) = \omega(123)(\omega(2)) = \omega(3) \\
+		\omega(123)(54)\inv{\omega} = (234)(15)
+	\end{align*}
+\end{ej}
+
+\begin{ej}¿Cuántos elementos hay en la clase de equivalencia del elemento $(123) \in S_3$?
+	
+\begin{itemize}
+	\item En $S_3$ los posibles tipos son $(3),\ (2,1),\ (1,1,1)$. El elemento $(123)$ que es de tipo $3$. 
+	\item Por lo visto anteriormente sabemos que $cl((123)) = \{\text{totalidad elementos de tipo 3 en } S_3\}$. Por tanto, la pregunta en los grupos de permutaciones es ¿cuántos 3-ciclos hay en $S_3$?
+	\item Recordemos que $|cl((123))| = [S_3: C((123))]$, luego solo necesitamos saber cuántos elementos hay en $C((123))$.
+	\begin{itemize}
+		\item Por el teorema de Lagrange (\autoref{thm:lagrange}) sabemos que los posibles órdenes del subgrupo $C((123))$ son $1,2,3,6$ (los divisores de $|S_3| = 6$).
+		\item Sabemos que siempre $(123) \in C((123))$. Además $C((123))$ es un grupo, luego por clausura es necesario que $\gen{(123)} \subset S_3$. Esto nos dice que $|C((123))| \geq 3$.
+		\item ¿Puede haber algún elemento más? No, porque $C((123))$ es un subgrupo propio. Esto quiere decir que tiene menos elementos que $S_3$ luego $|C((123)) < 6$.
+		\item Entonces, $C((123))$ solo puede tener 3 elementos (y por tanto $C((123)) = \gen{(123)}$).
+	\end{itemize}
+	\item Concluímos que $|cl((123))| = [S_3:C((123))] = \frac{6}{3} = 2$. De hecho, los elementos son $cl(123) = \{(123), (132)\}$.
+\end{itemize}
+\end{ej}
+
+\subsection{Estudio de un caso: descomposición detallada del grupo $S_4$}
+\label{sec:descomposicons4}
+
+A lo largo de los siguientes ejemplos veremos cómo se descompone $S_4$ en clases disjuntas de acuerdo a los tipos de sus permutaciones.
+
+\begin{ej}
+	Consideramos el grupo $S_4$. Queremos ver cómo se descompone $S_4$ en clases de equivalencia según los tipos de sus permutaciones.
+	
+	\begin{itemize}
+		\item Los posibles tipos en $S_3$ son $4, 3+1, 2+2, 2+1+1, 1+1+1+1$. Recordemos que por la demostración del Teorema de Cauchy tenemos que
+		\begin{align*}
+			S_4 = cl((1234)) \cup cl((123)) \cup cl((12)(34)) \cup cl((12)) \cup cl(Id)
+		\end{align*}
+		Aquí, hemos tomado un representante de cada clase para escribirla más cómodamente. Lo que dice la ecuación de arriba es que $S_4$ está formado por todas las permutaciones de cada posible tipo que se puede dar en $S_4$.
+		\item Nos preguntamos, por ejemplo, ¿cuántos elementos hay en $C((1234))$? Para averiguarlo utilizaremos que $[S_4:cl((1234))] = |C((1234))|$. El problema se reduce a averiguar $|cl((1234))|$ puesto que ya sabemos que $|S_4| = 4!$.
+		\begin{itemize}
+			\item En $cl((1234))$ están todos los 4-ciclos. ¿Cuántos hay? Tenemos que ver de cuántas maneras distintas podemos escribir 4 números $(i_1\ i_2\ i_3\ i_4)$ de manera que todas representen 4-ciclos diferentes.
+			\item Como una \textit{rotación} de los números de un ciclo no cambia la permutación que describe (esto es, $(1234) = (2341)$) lo que buscamos es, fijado un número, de cuántas maneras podemos ordenar los demás. Es decir, ¿de cuántas maneras podemos ordenar 3 números distintos? Pues de $3! = 6$ maneras.
+			\item Por último nos queda ver qué valores pueden tomar los 4 números que escribimos en el ciclo. Pues tenemos disponibles 4 números para elegir (del 1 al 4) y tenemos que coger 4, así que solo hay una manera, o lo que es lo mismo, hay $\binom{4}{4}$ maneras.
+			\item Concluimos que en $cl((1234))$ hay $3! \binom{4}{4} = 6 \cdot 1 = 6$ 4-ciclos, y por tanto en $C((1234))$ hay $[S_4:cl((1234))] = \frac{24}{6} = 4$ elementos.
+		\end{itemize}
+		\item Ahora nos preguntamos lo mismo pero para los 3-ciclos, es decir, las permutaciones de tipo $3+1$. Procediendo de la misma manera obtenemos que el número de 3 ciclos es
+		\begin{align*}
+			|cl((123))| = \text{\# elementos a ordenar} \times \text{\# posibles valores } = (3-1)! \times \binom{4}{3} = 2! \cdot \frac{4!}{1!3!} = 8
+		\end{align*}
+		Con lo cual $|C((123))| = [S_4:cl((123))] = \frac{24}{8} = 3$
+	\end{itemize}
+\end{ej}
+
+Podríamos seguir con el ejemplo anterior pero le daremos una vuelta más. En vez de pedir solo el orden del subgrupo $C((12)(34))$ como nos tocaría si siguieramos el orden lógico, pedimos los generados de ese subgrupo.
+
+\begin{ej}
+	Halla los generadores del subgrupo $C((12)(34)) < S_4$.
+	
+	\begin{itemize}
+		\item Una buena manera de empezar, es preguntarse cuántos elementos hay en $C((12)(34))$ y para ello necesitamos saber cuántos elementos hay en $cl((12)(34))$. Esta vez es un poco más complicado.
+		\begin{itemize}
+			\item El número de posibles primeras parejas (primeros 2-ciclos) que podemos poner para obtener un elemento de tipo $2+2$ es $1! \times \binom{4}{2} = 6$.
+			\item Observemos que al elegir la primera pareja queda determinada la segunda (solo hay 4 elementos para elegir).
+			\item Observemos también que al ser ciclos disjuntos, reordenaciones de estas dos parejas no dan permutaciones distintas. Dividimos entre 2.
+			\item Queda que $|cl((12)(34))| = 3$
+			\item Una manera alternativa de pensar este caso es decir: fijo el 1 como primer elemento de la primera pareja. Para elegir el segundo solo me quedan 3 elementos y la segunda pareja me queda determinada en cuanto lo haga. Así que hay 3 permutaciones de tipo $2+2$.
+		\end{itemize}
+		\item Finalmente tenemos que $C((12)(34)) = \frac{24}{3} = 8$. Ya sabíamos que $\gen{(12)(34)} \subset C((12)(34))$ pero $o((12)(34)) = 2$ luego con los elementos de $\gen{(12)(34)}$ no tenemos suficientes para llenar $C((12)(34))$.
+		
+		\item Probamos con otros elementos $\tau$ de $S_4$ a ver si verifican $\tau(12)(34)\inv{\tau} = (12)(34)$:
+		\begin{align*}
+			\tau_1 = (1234)\qquad &\tau_1(12)(34)\inv{\tau_1} = (1234)(12)(34)\inv{(1234)} = (34)(12) = (12)(34)\\
+			\tau_2 = (12)\qquad &\tau_2 (12)(34)\inv{\tau_2} = (12)(12)(34)\inv{(12)} = (34)(12) = (12)(34)
+		\end{align*}
+		De las ecuaciones anteriores tenemos que $(1234) \in C((12)(34)) \land (12) \in C((12)(34))$. Además, por clausura, $\gen{(1234)} = \{(1234), (12)(34), (4321), Id\} \subset C((12)(34)) \land \gen{(12)} = \{(12), Id\} \subset C((12)(34))$.
+		\item Como $|\gen{(1234)}\cap \gen{(12)}| = 1$ tenemos, por el \autoref{thm:cardinalidadproductolibre}, que $|\gen{(1234)}\gen{(12)}| = |\gen{(1234), (12)}| = 4 \cdot 2 = 8 = |C((12)(34))| \implies C((12)(34)) = \gen{(1234), (12)}$ 
+	\end{itemize}
+\end{ej}
+
+\begin{ej}
+	Halla los generadores del subgrupo centralizador del elemento $(12)$ en $S_4$
+	
+	\begin{itemize}
+		\item $|C((12)) = [S_4:cl((12))]$. Obtenemos $cl((12))$ de la manera habitual: número de 2-ciclos = $(2-1)! \times \binom{4}{2} = 6$. Por tanto $|C((12)) = 24/6 = 4$.
+		
+		\item Sabemos que $\gen{(12)} \subset C((12))$ luego necesitamos otros dos elementos para rellenar $C((12))$.
+		\item Pues vamos a probar a ver qué pasa con $(34)$:
+		\begin{align*}
+			(34)(12)\inv{(34)} = (12)(34)\inv{(34)} = (12) \implies (34) \in C((12)) \implies \gen{(34)} \subset C((12))
+		\end{align*}
+		\item Como en el ejemplo anterior aplicamos el \autoref{thm:cardinalidadproductolibre} y obtenemos que $|\gen{(12)}\gen{34}| = |\gen{(12), (34)}| = \frac{|\gen{(12)}||\gen{(34)}|}{|\gen{(12)} \cap \gen{(34)}|} = \frac{2\cdot2}{1} \implies C((12)) = \gen{(12), (34)}$
+	\end{itemize}
+\end{ej}
+
+Recapitulando comprobamos que $S_4$ se descompone en
+\begin{itemize}
+	\item 6 4-ciclos (tipo $4$),
+	\item 8 3-ciclos (tipo $3+1$),
+	\item 3 2-ciclos $+$ 2-ciclos (tipo $2+2$),
+	\item 6 2-ciclos (tipo $2+1+1$), y
+	\item 1 identidad o 1-ciclo (tipo $1+1+1+1$).
+\end{itemize}
+En total suman 24 elementos.
+
+\section{Clases de equivalencia de subgrupos en $S_n$}
+
+Ahora haremos lo mismo que hemos hecho para permutaciones pero con subgrupos. Recordemos que el normalizador es lo mismo que el centralizador pero aplicado a subgrupos: el normalizador de un subgrupo son las permutaciones que mandan a un subgrupo en sí mismo mientras que en el caso del centralizador eran los elementos que mandan un elemento en sí mismo.
+
+Conviene recordad la definición \ref{dfn:normalizador} y la \autoref{pro:centralizadorsubgruponormalizador}.
+
+\begin{ej}
+	Entender y copiar ejemplo pág 100 santorum
+\end{ej}
+
+\section{[Sub]grupos alternados}
+\label{sec:gruposalternados}
+
+Recordemos que existía un homomorfismo de grupos $S_n  \to (\{-1, 1\}, \cdot)$ y que defiamos la paridad de una permutación $\sigma \in S_n$ como par si $\sigma \mapsto 1$ y como impar si $\sigma \mapsto -1$. Esto tenía sentido porque una permutación par se descomponía siempre en un número par de transposiciones y ocurría lo mismo con las permutaciones impares.
+
+Pues resulta que nos interesa mucho el conjunto formado por las trasposiciones de orden par. Esto conjunto es en realidad un subgrupo (recordar que la paridad se mantiene si operamos con trasposicones de la misma paridad) y además veremos que es un subgrupo normal de $S_n$.
 
 \begin{dfn}[Grupo alternado]
 	Sea $\varphi: S_n \to ({-1, 1}, \cdot)$ el homomorfismo de grupos definido arriba. Definimos el grupo alternado $A_n$ como
 	\begin{align*}
-		A_n = \ker \varphi = \{\sigma \in S_n \mid \sigma \text{ es par}\}
+	A_n = \ker \varphi = \{\sigma \in S_n \mid \sigma \text{ es par}\}
 	\end{align*}
 \end{dfn}
 
@@ -443,3 +698,46 @@ Recogemos los resultados que hemos dejado caer antes de la definición:
 \begin{cor}
 	Todo grupo $S_n$ tiene un subgrupo normal de orden $2$.
 \end{cor}
+
+Hay dos resultados más que aún no entiendo para qué sirven:
+
+\begin{pro}
+	\begin{align*}
+		S_n / A_n \isom (\{-1, 1\}, \cdot)
+	\end{align*}
+\end{pro}
+
+\begin{pro}
+	Todo subgrupo normal de $S_n$ se puede expresar como unión de cajas.
+\end{pro}
+
+Pasado esto seguimos con nuestras vidas. Veamos ejemplos.
+
+\begin{ej}
+	Consideramos $|S_5| = 5! = 120$. Haciendo lo mismo que hicimos para $S_4$ en la sección \ref{sec:descomposicons4} obtenemos lo siguiente:
+	\begin{table}[h]
+		\centering
+		{\renewcommand{\arraystretch}{1.3}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			\textbf{tipo $5$}       & $|cl((12345))| = 4! \binom{5}{5} = 24$   & $C((12345)) = \gen{(12345)} \isom \Z/5\Z$       \\ \hline
+			\textbf{tipo $4+1$}     & $|cl((1234))| = 3! \binom{5}{4} = 30$    & $C((1234)) = \gen{(1234)} \isom \Z/4\Z$         \\ \hline
+			\textbf{tipo $3+2$}     & $|cl((123)(45))| = 2! \binom{5}{2} = 20$ & $C((123)(45)) = \gen{(123),(45)} \isom \Z/6\Z$  \\ \hline
+			\textbf{tipo $3+1+1$}   & $|cl((123))| = 2! \binom{5}{2} = 20$     & $C((123)) = \gen{(123),(45)} \isom \Z/6\Z$      \\ \hline
+			\textbf{tipo $2+2+1$}   & $|cl((12)(34))| = 15$                    & $C((12)(34)) = \gen{(1234),(13)} \isom D_4$     \\ \hline
+			\textbf{tipo $2+1+1+1$} & $|cl((12))| = 1! \binom{5}{2} = 10$      & $C((12)) = \gen{(12345)} \isom H \times \Z/2\Z$ \\ \hline
+			\textbf{tipo $1+1+1+1$} & $|cl((1) = Id)| = 1$                     & $C(Id) = S_5$                                   \\ \hline
+		\end{tabular}}
+		\caption{Descomposición de $S_5$ en clases. Nota: aquí $H \isom S_3$ o bien $H = \{\sigma \in S_5 \mid \sigma(1) = 1 \land \sigma(2) = 2\}$}
+		\label{fig:descomposicons5}
+	\end{table}
+
+	¿Cuáles son los tipos que estarían en $A_5$? Pues aquellos que se puedan descomponer en un número par de trasposiciones. A saber: tipo $5$, tipo $3+1+1$, tipo $2+2+1$, tipo $2+1+1+1$. Por tanto en $|A_5| = 24 + 20 + 15 + 1 = 60 \implies [S_5:A_5] = 2 \implies A_5 \normsub S_5$.
+\end{ej}
+
+\begin{obs}
+	En $S_n$ siembre hay un subgrupo isomorfo a $D_n$.
+	
+	Lo construimos buscando un elemento $B \in S_n$ de orden $n$ (pista, el elemento $(123\dots n)$ siempre vale) y otro elemento $A \in S_n$ de orden dos tal que $BA = A\inv{B}$. Con esto llegamos a la presentación de $D_n$. Ver \autoref{ej:diedricosordengenerico} para más detalles sobre esta presentación.
+\end{obs}
+
