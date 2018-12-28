@@ -2,7 +2,164 @@
 
 \chapter{Teoremas de Sylow}
 
+\section{Nuevas estructuras de grupo en el producto directo}
+
+Sean $G_1, G_2$ grupos, queremos definir nuevas estructuras de grupo en el producto $G_1 \times G_2$.
+Para ello comenzaremos definiendo una operación $\ast_\alpha$. Fijamos un homomorfismo de grupos $\alpha:G_2 \longrightarrow Aut(G_1)$, con $Aut(G_1)$ el grupo de automorfismos de $G_1$.\\\\
+Sean $(a,b),(c,d) \in G_1\times G_2$, definimos $\ast_\alpha$ como:
+\[
+(a,b)\ast_\alpha(c,d) = (a\cdot\alpha(b)\cdot c, b\cdot d).
+\]
+Donde $b\in G_2,\ \alpha(b) \in G_1$ y $\alpha(b)\cdot c \in G_1$.\\\\
+Vamos a ver que $(G_1 \times G_2, \ast_\alpha)$ es un grupo.
+\begin{thm}[Grupo producto semidirecto]
+	$(G_1 \times G_2, \ast_\alpha)$ es un grupo.
+\end{thm}
+Vamos a demostrar cada una de las propiedades del grupo:
+\begin{itemize}
+	\item Asociatividad.
+	\begin{proof}
+		\begin{align*}
+		(a\cdot\alpha(b)\cdot c, bd) \ast_\alpha (h,f) &= (a\cdot\alpha(b)\cdot c\cdot \alpha(bd)\cdot h, b\cdot d\cdot h)\\
+		(a,b)\ast_\alpha(c\cdot\alpha(d)\cdot h, df) &= (a\cdot\alpha(b)\cdot c\cdot \alpha(d)\cdot h, b\cdot d\cdot h)
+		\end{align*}
+		Entonces, falta ver que $\alpha(d)\cdot h = \alpha(bd)\cdot h$. Definimos el isomorfismo de grupo:
+		\begin{align*}
+		\alpha(b) : G_1 &\longrightarrow G_1\\
+		c &\longmapsto \alpha(b)\cdot c\\
+		\alpha(d)\cdot h &\longmapsto \alpha(b)\cdot(\alpha(d)\cdot h) = \alpha(bd) \cdot h.
+		\end{align*}
+		Por tanto, son iguales y la operación es asociativa.
+	\end{proof}	
+	\item Existencia del elemento neutro.
+	\begin{proof}
+		Sean $e_1$ y $e_2$ elementos neutros de $G_1$ y $G_2$ respectivamente. Recordamos que por el argumento anterior $\alpha(b)\cdot e_1 = e_1$.
+		\begin{align*}
+		(a,b) \ast_\alpha (e_1, e_2) = (a \cdot \alpha(b) \cdot e_1, b \cdot e_2) = (a,b)
+		\end{align*}
+	\end{proof}
+	\item Existencia del inverso.
+	\begin{proof}
+		Hemos de hallar $(c,d) \mid (a,b)\ast_\alpha(c,d) = (e_1,e_2)$.  Entonces, hemos de hallar $c$ y $d$ tal que:
+		\begin{align*}
+		a \cdot \alpha(b) \cdot c &= e_1\\
+		b \cdot d &= e_2
+		\end{align*}
+		Es fácil ver que $\exists d$ y $d = b^{-1}$. Como $\alpha(b)$ es un isomorfismo $\implies \exists (\alpha(b))^{-1}$, entonces, $c = \alpha(b^{-1}) \cdot a^{-1} = a^{-1}$, por tanto $\exists c$ y $c = a^{-1}$.
+	\end{proof}
+	
+\end{itemize}
+Por tanto, el par $(G_1 \times G_2, \ast_\alpha)$ tiene estructura de grupo.\\
+
+Vamos a ver ahora ciertas relaciones del producto cruz con la operación que acabamos de definir. Para abreviar, al par $(G_1 \times G_2, \ast_\alpha)$ lo denominaremos por $G_1 \times_\alpha G_2$.\\\\
+Sean $G_1, G_2$ grupos finitos, definimos:
+\begin{align*}
+\underline{G_1} &= \{(a, e_2) \mid a \in G_1\}\\
+\underline{G_2} &= \{(e_1, b) \mid a \in G_2\}
+\end{align*}
+Es fácil ver que $\underline{G_1} < G_1 \times_\alpha G_2$ y $\underline{G_2} < G_1 \times_\alpha G_2$. Además,
+\begin{align*}
+|\underline{G_1}\cdot \underline{G_2}| &= \frac{|\underline{G_1}|\cdot |\underline{G_2}|}{|\underline{G_1} \cap \underline{G_2}|} = \frac{|\underline{G_1}|\cdot |\underline{G_2}|}{1} = |G_1|\cdot |G_2| = |G_1 \times_\alpha G_2|\\
+\underline{G_1} \cap \underline{G_2} &= {(e_1, e_2)}
+\end{align*}
+Y podemos probar que $\underline{G_1}$ es normal, sean $g_1 \in G_1$ y $g_2 \in G_2$:
+\begin{align*}
+(g_1, g_2) \ast_\alpha (a, e_2) \ast_\alpha (g_1, g_2)^{-1} = (g_1,g_2)\ast_\alpha(\ldots, e_2\cdot g_2^{-1}) = (\ldots, e_2).
+\end{align*}
+\begin{cor}
+	\label{cor:propiedadesgrupdirecto}
+	Por lo que acabamos de ver:
+	\begin{itemize}
+		\item $\hat{G_1}$ y $\hat{G_2}$ son subgrupos.
+		\item $\hat{G_1}$ es normal.
+		\item $\underline{G_1} \cap \underline{G_2} = \{(e_1,e_2)\}$
+		\item $\underline{G_1} \cdot \underline{G_2} = G_1 \times_\alpha G_2$
+	\end{itemize}
+	Si ahora tomamos $G_1 = N, G_2 = H$ con $N \normsub G, H < G$, entonces:
+	\begin{itemize}
+		\item $H \cap N = \{e\}$
+		\item $H \cdot N = G$
+		\item $\alpha: H \longrightarrow Aut(N)$
+		\item $G \cong H \times_\alpha N$
+	\end{itemize}
+\end{cor}
+En particular, podemos definir:
+\begin{align*}
+\phi : H &\longrightarrow Aut(N)\\
+h &\longmapsto \gamma_h\mid_N(n) = h\cdot n\cdot h^{-1}
+\end{align*}
+\begin{ej}
+	Sea el famoso grupo $D_4 = \{1,B,B^2,B^3,A,AB,AB^2,AB^3\}$ (ver ejemplo \ref{ej:famosogrupod4}). Tomamos $N = \langle B \rangle =\{1,B,B^2,B^3\},\ H = \langle A \rangle =\{1,A\}$. Entonces:
+	\begin{align*}
+	\phi: H &\longrightarrow \autom{N}\\
+	A &\longmapsto ABA^{-1} = B^3
+	\end{align*}
+	Entonces como hemos visto: $D_4 \cong \{1,A\} \ast_\phi \{1,B,B^2,B^3\}$.
+\end{ej}
+
+\section{Producto semidirecto}
+
+% --------------------
+De \cite{dor96}
+
+
+
+% ---------------------
+
+Sea $G$ un grupo. Sea $N \normsub G$, $H < G$, $N \cap H = \{e\}$ y $NH = G$ (recordemos que por ser $N$ normal, $NH$ es grupo). Entonces $G \isom N \times H$.
+
+Veamos quién es ese isomorfismo $\gamma : G \to N \times H$. Recordemos que considerando dos grupos $G_1, G_2$ y su producto directo $G_1 \times G_2$ existe un $\alpha : G_2 \to Aut(G_1)$. Veremos quien es este $\alpha$ para $H$ y $N$, es decir, quién es $\alpha: H \to Aut(N)$.
+
+Construye $\alpha$ a partir de 4 isomorfismos.
+
+\begin{proof}$ $\newline
+	\begin{itemize}
+		\item Comenzamos por definir una función $j: N\times H \to G,\ (n, h) \mapsto nh$. Es función está bien definida por teoría de conjuntos pero no es un homomorfismo de grupos\footnote{Ojo con por qué no es homomorfismo. Si tomamos $(n,h),(n', h') \in N \times H$ tenemos que $j((n,h)(n',h')) = nn'hh'$. Podríamos pensar que como $N$ es normal, podemos conmutarlo y obtener $nn'hh' = nhn'h' = j((n,h))j((n',h'))$. \textbf{Pero esto está mal.} Lo que significa ser normal es que para $h \in H$, se tiene que $nh = hn''$ para algún $n'' \in N$.}\footnote{Si los grupos son abelianos entonces sí es claro que es un homomorfismo. Lo que vamos a hacer es ver que dando una estructura especial, sí que es un homomorfismo de grupos incluso para grupos no abelianos}.
+		\item Recordemos que por el teorema \ref{thm:cardinalidadproductolibre} tenemos que $|G| = |N||H| = |N \times H|$ por ser $N \cap H = \{e\}$.
+		\item Volviendo a lo de la estructura especial. Dar una estructura especial es dar una operación para $N \times H$.
+		\begin{itemize}
+			\item Sea $A$ un conjunto. Es claro que si tenemos una biyección $\phi : A \to G$ podemos dotar a $A$ de alguna estructura para que sea un grupo.
+			\item Para dotar a $A$ de estructura tenemos que definir la operación. Forzamos que para cada $a, a' \in A$ para los que se tiene $\phi(g) = a, \phi(g') = a'$ la operación sea $a a'  = \phi(gg')$.
+			\item En este caso nuestro $A$ es $N \times H$. En lugar de utilizar la operación habitual del producto directo definimos otra operación. Para llegar a ella nos fijamos en $(n,h)(n',h') \mapsto nhn'h' = nhn'\inv{h}hh' = n(hn'\inv{h})hh' = nn'hh'$ (intercalamos el neutro, que es legal).
+			\item Redefinimos la operación en $N \times H$ para que cuadre con este resultado. Llamaremos al nuevo grupo con la nueva operación $N \times_\phi H$: para $(n,h), (n',h')$ definimos $(n,h)\cdot (n',h') = (n(hn'\inv{h}), hh')$.
+			\item Comprobamos que en este caso $j$ es un homomorfismo de grupos:
+			\begin{align*}
+			j : N \times_\phi H &\to G \\
+			(n,h) &\mapsto nh \\
+			(n',h') &\mapsto n'h' \\
+			(n,h)\cdot(n',h') &\mapsto n(hn'\inv{h})hh' = nn'hh'
+			\end{align*}
+		\end{itemize} 
+	\end{itemize}
+\end{proof}
+
+Es muy interesante por que es muy natural llegar a situaciones de esta manera. ¡Y les voy a dar una!\footnote{Sugerencia: leelo con voz de tomatito.}
+
+\begin{ej}
+	Sea $|G| = p \cdot q$ y supongamos $p < q$ primos. Por el teorema de Lagrange (\ref{thm:lagrange}) tenemos que existe un subgrupo $H_p < G$ con $|H_p| = p$ y análogamente $\exists H_q \mid |H_q| = q$. A primera vista podríamos pensar que puede haber varios grupos de orden $q$. Pues no.
+\end{ej}
+
+\begin{proof}
+	Supongamos hay dos grupos $H, H'$ de orden $q$ distintos. La intersección tiene que dar un subgrupo y si los dos grupos tienen un número primo de elementos entonces la intersección solo puede ser el neutro, $H \cap H' = \{e\}$. Entonces por el teorema \ref{thm:cardinalidadproductolibre} tenemos que $|HH'| = q^2 > p\cdot q$ lo que es imposible. Luego sabemos que a lo sumo hay un grupo de orden $q$.
+\end{proof}
+
+(Sigue el ejemplo) Supongamos que ese único grupo de orden $q$ se llama $N$. Entonces $\phi_g(N) = N$ ya que un isomorfismo tiene que mandar un subgrupo de $q$ elementos en otro subgrupo de $q$ elementos y $N$ es el único. Por tanto $N \normsub G$. Aplicando el teorema de antes, tenemos que $G \isom N \times H$.
+
+\begin{ej}
+	Veamos un ejemplo con más pinta de problema. Demostrar que todo grupo de orden $77$ es cíclico.
+\end{ej}
+
+\begin{proof}
+	Comenzamos por observar que $77 = 7 \cdot 11$. Por el teorema de Lagrange (\ref{thm:lagrange}) tenemos que existen $H, N < G \mid |H| = 7,\ |N| = 11$ y por lo visto en el ejemplo anterior, $N \normsub H$. Como antes llegamos a que $H \cap N = \{e\}$ y a que $|H N| = pq$. Para aplicar el teorema anterior vemos qué estructura tiene que tener $N \times_\phi H$, con $\phi:H\longrightarrow Aut(N)$.
+	\\\\
+	Vemos que $Aut(N) = Aut(\mathbb{Z}/11\mathbb{Z}) = \mathcal{U}(\mathbb{Z}/11\mathbb{Z}) = \mathbb{Z}/10\mathbb{Z}$, es decir, un grupo cíclico de 10 elementos.
+	\\\\
+	Entonces, $\phi$ es de la forma: $H = \mathbb{Z}/7\mathbb{Z} \longrightarrow Aut(\mathbb{Z}/11\mathbb{Z})$, por tanto, solo podemos definir el homomorfismo de grupos trivial. Esto hace que $N \times_\phi H$ es igual a $\mathbb{Z}/7\mathbb{Z} \times \mathbb{Z}/11\mathbb{Z}$.\\\\Por el corolario \ref{cor:propiedadesgrupdirecto} sabemos que $G \cong N \times_\phi H \implies G\cong \mathbb{Z}/7\mathbb{Z} \times \mathbb{Z}/11\mathbb{Z}$ que es cíclico por ser producto de cíclicos de órdenes coprimos.
+\end{proof}
+
 % 20181031
+
+\section{Teoremas de Sylow}
 
 Son muchos teoremas para grupos finitos en los que el orden se puede expresar como
 \begin{align}

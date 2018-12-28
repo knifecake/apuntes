@@ -1,0 +1,127 @@
+% !TeX root = ../apuntes-ea.tex
+
+\section{Clase de equivalencia por el grupo de biyecciones}
+\begin{dfn}[Clase de equivalencia por el grupo de biyecciones]
+	Sea $(G, \ast)$ un grupo, $X$ un conjunto, $Biy(X) = \{f\mid f: X\longrightarrow X\ biyeccion\}$, y $\alpha: G \longrightarrow Biy(X)$ es un homomorfismo de grupos. Definimos la siguiente relación de equivalencia:
+	\begin{align*}
+	a\mathcal{R}b\ si\ \exists g \mid \alpha(g)a=b
+	\end{align*}\\
+	Por esta relación, definimos la \textbf{clase} de equivalencia de un elemento $a \in X$ como:  \[cl(a)=\{ \alpha(g)(a)\mid g\in G \} \ni a \]
+\end{dfn}
+Para poder definirlo mejor nos gustaría saber cuantos elementos existen en $cl(a)$. Para ello nos ayudaremos del $centralizador\ de\ a$ (definición \ref{dfn:centralizador}). En nuestro caso particular, el centralizador es:
+\[ C_G(a) \{g\in G \mid \alpha(g)(a) = a \} \]
+Es fácil ver que si $g \in C_G(a)$ y $g' \in C_G(a)$ entonces $g \ast g' = C_G(a)$.
+\begin{thm}[Orden de la clase de equivalencia de un elemento]
+	Sea $(G, \ast)$ un grupo, $C(a)$ el centralizador de $a$ y $cl(a)$ la clase de equivalencia de $a$:
+	\[ |cl(a)| = \left[ G:C(a) \right] \]
+\end{thm}
+%TODO: Demostración
+\begin{itemize}
+	\item Recordemos que fijado $\sigma \in S_5$ podemos dar una descomposición en ciclos $\sigma = (123)(45)$ que es única aunque los ciclos se escriban diferente (por ejemplo $(123) = (231)$).
+	
+	\item Fijado $\tau \in S_5$, $\tau \sigma \inv{\tau} = (\tau(1)\tau(2)\tau(3))(\tau(4)\tau(5))$ la descomposición se mantiene
+	
+	\item Si dos permutaciones $\sigma, \sigma'$ tienen descomposiciones del mismo tipo (un 3-ciclo y un 2-ciclo como antes) entonces existe un $\tau$ que hace pasar de una a otra.
+\end{itemize}
+
+\begin{ej}[Posibles descomposiciones en cíclos de $S_4$]$ $ \newline
+	\begin{itemize}
+		\item Para $(1234)$
+		\begin{align*}
+		cl((1234)) = \{\tau(1234)\inv{\tau} \mid \tau \in S_4\}
+		\end{align*}
+		\item A la hora de definir $\tau$ tenemos varias posibilidades. En este caso, si empezamos por el $1$, para fijar el segundo elemento solo tenemos 3 posibilidades, para el tercero 2 y para el último una. Por tanto
+		\begin{align*}
+		|cl((1234))| = 4
+		\end{align*}
+		
+		\item Recordemos que el centralizador
+		\begin{align*}
+		C_{S_4}((1234)) = \{\sigma \in S_4 \mid \sigma (1234) \inv{\sigma} = (1234)\} < S_4
+		\end{align*}
+		
+		\item Como $S_4$ tiene $|S_4| = 4! = 24$ y tenemos que $|cl((1234))| = [S_4 : C_{S_4}((1234))] = 6$ necesariamente $|C_{S_4}((1234))| = 4$.
+		
+		\item Nos proponemos calcular el grupo $C((1234))$. Un candidato para $\sigma \in C((1234))$ es $\sigma = (1234)$. En efecto $(1234)(1234)(1234) \in C((1234))$. Siempre ocurre que un elemento conmuta consigo mismo. Además, $\langle (1234) \rangle < C((1234))$ pero como $|\langle (1234) \rangle| = 4 = |C((1234))$ tiene que ocurrir que $\langle (1234) \rangle = C((1234))$. Es decir que de tipo 4 solo tenemos $(1234)$.
+		
+		\item ¿Qué tipos tenemos? Pues tantos como maneras de descomponer 4 en suma de números positivos, a saber
+		\begin{itemize}
+			\item (1234) de tipo 4
+			\item (123) de tipo 3+1
+			\item (12)(34) de tipo 2+2
+			\item (12) de tipo 2+1+1
+			\item $Id$ de tipo 1+1+1+1 (que es la única que tiene descomposición en 4 unos)
+		\end{itemize}
+		
+		\item En general no es difícil calcular cuantos hay, por lo que a menudo utilizamos este argumento para calcular el grupo centralizador.
+		
+		\item Lo importante es que estamos descomponiendo $S_4$ de la siguiente manera:
+		\begin{align*}
+		S_4 &= cl((1234)) \cap cl((1223)) \cap cl((12)(34)) \cap cl((12)) \cap cl(Id) \\
+		|S_4| &= |cl((1234))| \cap |cl((1223))| \cap |cl((12)(34))| \cap |cl((12))| \cap |cl(Id)|
+		\end{align*}
+		\item Ahora analizamos la clase $cl((123))$ de los ciclos de tipo 3+1. Lo primero es saber cuantos hay. Pues tenemos que elegir 3 elementos de entre 4 y luego ordenar los dos que nos quedan por tanto
+		\begin{align*}
+		|cl((123))| = \binom{4}{3} \times 2 = 8
+		\end{align*}
+		Por otro lado lo que sabemos es que $(123) \in C((123))$ (porque todos conmutan consigo mismos) y como antes $|C((123))| = 3$ (de la fórmula $|cl((123))| = [S_4:C((123))]$), luego $C((123)) = \langle (123) \rangle$.
+		
+		\item Igual es un poco más interesante la clase de tipo 2+2. \textbf{Pregunta de examen:} halla generadores del subgrupo centralizador del elemento (12)(34).
+		\begin{itemize}
+			\item Sabemos que el conjugado de un elemento de tipo 2 tiene que ser otro de tipo 2, por tanto tenemos que ver qué elementos distintos de tipo 2 tenemos. Pues fijamos el 1 por ejemplo y vemos qué parejas podemos hacer. Nos salen 3, a saber, 1 con 2, 1 con 3 y 1 con 4 de lo que concluímos que $|cl((12)(34))| = 3$.
+			\item De la misma fórmula que antes sacamos que $|C((12)(34))| = 8$. De orden 8 sabemos que hay solo unos pocos grupos (ver la clasificación en \ref{gruposfinitosnotables}). Veamos con cuál de ellos es isomorfo.
+			\item Como siempre sabemos que $(12)(34) \in C((12)(34))$. Tenemos que encontrar los demás $\tau$ que conmutan $\tau \sigma \inv{\tau} = \tau (12)(34) \inv{\tau} = (\tau(1)\tau(2))(\tau(3)\tau(4))$. Probamos con $\tau = (1324)$\footnote{La idea de probar con este viene de decir: pues a ver qué pasa si cambio el 1 con el 3 y el 2 con el 4, que nos daría la permutación (1324). En cualquier caso esto es prueba y error, y parar de probar cuando tengamos un grupo generado de orden 8.}.
+			\begin{align*}
+			(1324)&(12)(34)\inv{(1324)} \\
+			&(34)(21)
+			\end{align*}
+			Que es el mismo, luego hemos probado que $\tau$ conmuta y por tanto $\tau \in C((12)(34))$. Lástima que no valga porque nos damos cuenta de que $\tau ^2 = (12)(34)$. Vaya. Drácula ha hecho chiste con esto y todo $(X,d)$.\footnote{Aquí se ve claramente que la elección del $\tau$ es casi al azar. Hemos elegido uno que prometía pero hemos tenido la mala suerte de que su cuadrado nos daba un elemento que suponíamos estaba en el grupo ($\tau^2 = (12)(34)$. Podríamos haber descartado este $\tau = (1324)$ pero hemos preferido descartar el elemento (12)(34) que sabíamos que estaba en el grupo. La razón de la sustitución de este último por el (12) es un misterio hasta la fecha.}
+			
+			Lo que hacemos es quitar el $(12)(34)$ y cambiarlo por el $(12)$. Para evitar $\tau^2 \neq (12)$. En resumen, ya tenemos $(12) \in C((12)(34))$ y $\tau = (1324) \in C((12)(34))$. Si vemos sus grupos generados:
+			\begin{align*}
+			\langle (1324)\rangle = \{(1324), (12)(23), (4321), Id\} \\
+			\langle (12) \rangle = \{(12), Id\}
+			\end{align*}
+			La intersección de ambos subgrupos es solo la identidad y por la fórmula del producto libre averiguamos que $|\langle (1324)\rangle \langle (12) \rangle| = 8$ por lo $C((12)(34)) = \langle (1324), (12) \rangle$.
+			
+			Tiene toda la pinta de ser $D_4$ porque está generado por dos elementos, no es abeliano y los órdenes de los generadores son $o((1324)) = 4,\ o((12)) = 2$. Solo nos quedaría probar que se sigue cumpliendo la ecuación de la presentación de $D_4$:
+			\begin{align*}
+			BA = AB^3 \iff (1324)(12) = (12)(1324)^3
+			\end{align*}
+			Lo comprobamos y al final sale.
+		\end{itemize}
+		
+		\item Ahora hacemos lo mismo con $C((12))$. Siguiendo un razonamiento similar, llegamos a que $C((12))$ es isomorfo con el grupo de Klein y por extensión con $\Z/2\Z \times \Z/2\Z$.
+	\end{itemize}
+\end{ej}
+
+Falta la semana fatídica de Estadística
+
+% 20181029
+Vez pasada considerabamos $G_1 \times G_2$ y fijado un homomorfismo de grupos $\phi: G_1 \to Aut(G_2)$ hacíamos lo siguiente. En $G_1 \times_{\phi} G_2$ viven los elementos $(a,b) \times_{\phi} (c,d)$ donde la operación cambiaba en la primera coordenada $(a \phi_b(c), bd)$. Probamos la última clase que $G_1 \times_{\phi} G_2$ era un grupo (probar la asociatividad no es trivial).
+
+% 20181030
+
+Observación:
+
+\begin{align*}
+\gamma: G \xrightarrow{Int} Aut(G)
+\end{align*}
+$\gamma$ es un homomorfismo de grupos que lleva cada elemento $g \in G$ al automorfismo conjugación $\gamma_g(x) = gx\inv{g}$. Observamos que si $N \normsub G,\ \forall g \in G, \gamma_g(N) = gN\inv{g} = N$.
+
+\begin{pro}
+	$N$ es normal en $G$ ($N \normsub G$) sí y solo sí al restringir $\phi_g$ a $N$ la imagen es $N$:
+	\begin{align*}
+	G \xrightarrow{\gamma_g} G \\
+	N \xrightarrow{\gamma_g \vert_N} N
+	\end{align*}
+	Es decir, que si $N$ es normal, $\gamma_g\vert_N$ induce un isomorfismo $\gamma_g\vert_N : N \to N$.
+\end{pro}
+
+\begin{proof}
+	Cristalina de la definición de subgrupo normal.
+\end{proof}
+
+En general, al restringir $\gamma_g$ a un subgrupo de $G$ no tenemos esta propiedad.
+
+Además, si $N \normsub G$ tiene sentido restringir $\gamma: G \xrightarrow{Int} Aut(G)$ a $Aut(N)$ y la restricción da un homomorfismo.

@@ -683,7 +683,7 @@ Recordemos que existía un homomorfismo de grupos $S_n  \to (\{-1, 1\}, \cdot)$ 
 Pues resulta que nos interesa mucho el conjunto formado por las trasposiciones de orden par. Esto conjunto es en realidad un subgrupo (recordar que la paridad se mantiene si operamos con trasposicones de la misma paridad) y además veremos que es un subgrupo normal de $S_n$.
 
 \begin{dfn}[Grupo alternado]
-	Sea $\varphi: S_n \to ({-1, 1}, \cdot)$ el homomorfismo de grupos definido arriba. Definimos el grupo alternado $A_n$ como
+	Sea $\varphi: S_n \to ({-1, 1}, \cdot)$ el homomorfismo de grupos definido arriba. Definimos el grupo alternado o alternante $A_n$ como
 	\begin{align*}
 	A_n = \ker \varphi = \{\sigma \in S_n \mid \sigma \text{ es par}\}
 	\end{align*}
@@ -740,4 +740,74 @@ Pasado esto seguimos con nuestras vidas. Veamos ejemplos.
 	
 	Lo construimos buscando un elemento $B \in S_n$ de orden $n$ (pista, el elemento $(123\dots n)$ siempre vale) y otro elemento $A \in S_n$ de orden dos tal que $BA = A\inv{B}$. Con esto llegamos a la presentación de $D_n$. Ver \autoref{ej:diedricosordengenerico} para más detalles sobre esta presentación.
 \end{obs}
+
+\section{Grupos simples}
+
+\begin{dfn}[Grupo simple]
+	\label{dfn:simple}
+	Sea $G$ un grupo, decimos que $G$ es un grupo simple si los únicos grupos normales son $G$ y el grupo neutro $\{e\}.$
+\end{dfn}
+
+A continuación demostraremos que el grupo alternante $A_n$, es simple para $n\geq 5$. La demostración de este resultado requiere distintas proposiciones.
+\begin{pro}
+	Sea $G$ un grupo. Si $G$ es finito y abeliano $\implies\ G$ es simple.
+\end{pro}
+%TODO: demostracion de la proposición.
+\begin{pro}
+	Sea $A_n$ un grupo alternante, $A_n$ es generado por 3-ciclos para $n\geq 3$.
+\end{pro}
+\begin{proof}
+	Sea $\sigma \in A_n$, entonces $\sigma = (i_1^1\ i_2^1)(i_1^2\ i_2^2)\ldots(i_1^{2n}\ i_2^{2n})$ una composición de un número par de composiciones. Vamos a ver que para cualquier par de transposiciones $(i\ j)(k\ l)$ podemos expresarla como un $3-ciclo$.
+	\begin{align*}
+	(i\ j)(k\ l) &= (i\ k\ j)(i\ k\ l)\ &si\ los\ elementos\ son\ diferentes.\\
+	(i\ j)(i\ l) &= (i\ l\ j)\ &si\ tienen\ un\ elemento\ en\ comun.
+	\end{align*}
+	Por tanto, como $\forall \sigma \in A_n$ puede ser expresado como un $3-ciclo$ o una composición de estos, $A_n$ está generado por los ciclos de longitud 3.
+\end{proof}
+\begin{pro}
+	\label{pro:alternante3ciclos}
+	Sea $A_n$ el grupo alternante de un conjunto de $n$ elementos, $A_n$ es generado por 3-ciclos de la forma $(s\ t\ i)$ con $s,t\in \{1\ldots n\}$ fijos e $i\in\{1\ldots n\}\setminus\{s,t\}$
+\end{pro}
+\begin{proof}
+	Cada 3-ciclo es el producto de 3-ciclos del tipo $(s\ t\ i)$ con $s,t$ fijos e $i$ variable, pues:
+	\begin{align*}
+	(s\ a\ t) &= (s\ t\ a)^2\\
+	(s\ a\ b) &= (s\ t\ b)(s\ t\ a)^2\\
+	(t\ a\ b) &= (s\ t\ b)^2(s\ t\ a)\\
+	(a\ b\ c) &= (s\ t\ a)^2(s\ t\ c)(s\ t\ b)^2(s\ t\ a)
+	\end{align*}
+	Entonces, como $A_n$ está generado por 3-ciclos, $A_n$ está generado por ciclos de la forma $(s\ t\ i)$
+\end{proof}
+\begin{thm}[Igualdad entre subgrupos y grupos alternantes]
+	\label{thm:subequalsalternate}
+	Si un subgrupo normal $H$ de $A_n$ contiene un 3-ciclo $\implies H = A_n$
+\end{thm}
+\begin{proof}
+	Supongamos que $H$ es no trivial y contiene un 3-ciclo de la forma $(s\ t\ a)$. Usando la normalidad de $H$ vemos que:
+	\[
+	[(s\ t)(a\ i)](s\ t\ a)^2[(s\ t)(a\ k)]^{-1} = (s\ t\ i)
+	\]
+	está en $H$. Luego, $H$ debe contener todos los ciclos $(s\ t\ i)$ para $1 \geq i \geq n$. Por la \autoref{pro:alternante3ciclos}, estos 3-ciclos generan $A_n$; luego $H = A_n$.
+\end{proof}
+\begin{pro}
+	\label{pro:3cicloinsubgralter}
+	Para $n\geq 5$, todo $H \normsub A_n$ contiene un 3-ciclo.
+\end{pro}
+\begin{proof}
+	Sea $e \not \eq \sigma \in H$, existen varias posibles estructuras de ciclos para $\sigma$.
+	\begin{itemize}
+		\item $\sigma$ es un 3-ciclo.
+		\item $\sigma$ es el producto de ciclos disjuntos, $\sigma = \tau(a_1\ a_2 \cdots a_r)\in H$, con $r\geq 3$.
+		\item $\sigma$ es el producto de ciclos disjuntos, $\sigma = \tau(a_1\ a_2\ a_3)(a_4\ a_5\ a_6)$.
+		\item $\sigma = \tau(a_1\ a_2\ a_3)$, donde $\tau$ es el producto de 2-ciclos disjuntos.
+		\item $\sigma = \tau(a_1\ a_2)(a_3\ a_4)$, donde $\tau$ es el producto de un número par de 2-ciclos disjuntos.
+	\end{itemize}
+	La demostración sigue con el desarrollo de cada uno de los casos, utilizando la normalidad de $H$ para ver que en todos los casos se llega a que $H$ contiene un 3-ciclo.
+\end{proof}
+\begin{thm}[Simplicidad del grupo alternante]
+	Sea $(A_n, \circ)$ el grupo alternante de un conjunto de $n$ elementos. $A_n$ es simple $\forall n \geq 5$.
+\end{thm}
+\begin{proof}
+	Sea $H$ un subgrupo normal no trivial de $A_n$, por la  \autoref{pro:3cicloinsubgralter}, $H$ contiene un 3-ciclo. Por el  \autoref{thm:subequalsalternate}, $H = A_n$; por tanto, $A_n$ no contienen ningún subgrupo normal que sea propio y no trivial para $n\geq 5$.
+\end{proof}
 
