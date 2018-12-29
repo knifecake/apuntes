@@ -2,6 +2,10 @@
 
 \chapter{Anillos}
 
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\1}{\mathbf{1}}
+
+\section{Definición y propiedades básicas}
 
 \begin{dfn}[Anillo]
 	Un anillo es una terna $(A, +, \cdot)$ donde $+$ es una operación a la que llamamos suma, $\cdot$ es otra operación a la que llamamos producto y se verifican las siguientes propiedades
@@ -19,78 +23,243 @@
 Con la operación $+$ tenemos las siguientes propiedades
 \begin{enumerate}
 	\item Asociatividad: $(a+b)+c = a+(b+c)$
-	\item Elemento neutro aditivo: $\exists 0 \in A \mid 0+a = a$
-	\item Elemento inverso aditivo: $\forall a \in A, \exists -a \in A \mid a + (-a) = 0$
+	\item Elemento neutro aditivo: $\exists! \0 \in A \mid \0+a = a$
+	\item Elemento inverso aditivo: $\forall a \in A, \exists -a \in A \mid a + (-a) = \0$
 	\item Conmutatividad aditiva: $\forall a, b \in A,\ a+b = b+a$
 \end{enumerate}
 
 Con la operación $\cdot$ tenemos las siguientes propiedades
 \begin{enumerate}
 	\item Asociatividad: $a\cdot (b \cdot c) = (a \cdot b) \cdot c$
-	\item Elemento neutro multiplicativo: $\exists 1 \in A \mid a\cdot 1 = 1 \cdot a = a$
-	\item No siempre existe inverso multiplicativo: $\inv{a} \mid a\cdot \inv{a} = 1$
+	\item Elemento neutro multiplicativo: $\exists \1 \in A \mid a\cdot 1 = 1 \cdot a = a$
+	\item No siempre existe inverso multiplicativo: $\inv{a} \mid a\cdot \inv{a} = \1$
 	\item No siembre se da la conmutatividad multiplicativa: $a \cdot b = b\cdot a$
 \end{enumerate}
 
-\begin{dfn}[Unidades en anillos]
-	Dado $(A, +, \cdot)$ anillo. El grupo de unidades es
-	\begin{align}
-		\uds{A} = (\{a \in A \mid \exists \inv{a} \in A,\ a\cdot \inv{a} = 1\}, \cdot)
-	\end{align}
-	Los elementos del grupo de unidades se llaman elementos invertibles.
-\end{dfn}
+Además, de la unicidad del $\0$ tenemos
+
+\begin{pro}
+	$\forall a \in A,\ a\cdot \0 = \0$
+\end{pro}
+
+\begin{proof}
+	$a \cdot \0 = a \cdot(\0 + \0) = a\cdot \0 + a\cdot \0 \implies \0 = a\cdot \0$
+\end{proof}
+
+Y por último
+
+\begin{pro}
+	Sea $(A, +, \cdot)$ un anillo con más de un elemento ($|A| > 1$). Entonces $\0 \neq \1$ (el neutro aditivo es distinto del neutro multiplicativo).
+\end{pro}
+
+\begin{proof}
+	Por contradicción. Sea $a \neq \0 \in A$ y $\0 = \1$. Entonces $a = a\cdot \1 = a\cdot 0 = 0 \implies a = \0$ contradicción.
+\end{proof}
+
+Para acabar veamos algunos ejemplos.
 
 \begin{ej}
 	Las matrices cuadradas $2\times 2$ con coeficientes reales: $(M_{2\times 2}(\R), +, \cdot)$ es un anillo. Tiene unidades $\uds{A} = (GL_2(\R), \cdot)$
 \end{ej}
 
 \begin{ej}
-	Los numeros enteros $(\Z, +, \cdot)$ es un anillo y tienen unidades $\uds{\Z} = (\{-1, 1\}, \cdot)$
+	Es cierto que $\Z, \mathbb{Q}, \R, \mathbb{C}$ son anillos con las operaciones suma y producto habituales. Además hay otros como por ejemplo $\Z[i] = \{a+bi \in \mathbb{C} \mid a,b \in \Z\}$.
 \end{ej}
 
-\begin{pro}
-	Sea $-1$ el inverso aditivo del neutro multiplicativo $1$. Entonces $\forall a \in A$ el inverso aditivo es $-a = -1 \cdot a$ y se tiene $-1\cdot a + a = 0$.
-\end{pro}
 
-\begin{pro}
-	Sea $A$ un anillo. El neutro aditivo $0$ verifica $0 \not\in \uds{A}$
-\end{pro}
+\subsection{Unidades en anillos}
 
-\begin{dfn}[Anillo conmutativo]
-	Sea $A$ un anillo. $A$ es un anillo conmutativo $\iff \forall a, b \in A,\ a\cdot b = b \cdot a$.
+Además, para pulir lo de que no siempre existe inverso multiplicativo daremos la definición de Grupo de unidades en el contexto de anillos que da sentido al \autoref{ej:grupounidades} que hemos estado utilizando.
+
+\begin{dfn}[Unidades en anillos]
+	Dado $(A, +, \cdot)$ anillo. El grupo de unidades es
+	\begin{align}
+		\uds{A} = (\{a \in A \mid \exists \inv{a} \in A,\ a\cdot \inv{a} = \1\}, \cdot)
+	\end{align}
+	Los elementos del grupo de unidades se llaman elementos invertibles.
 \end{dfn}
+
+Para que este grupo quede bien definido estaría bien que $\inv{a}$ fuera único.
+
+\begin{pro}
+	El inverso multiplicativo es único.
+\end{pro}
+
+\begin{proof}
+	Sea $a \in A$. Supongamos $a', a'' \in A$ son ambos inversos multiplicativos de $a$:
+	\begin{align*}
+		aa' = \1 \land aa'' = \1\implies \begin{cases}
+		a''(aa') = a'' \\
+		(a''a)a' = a''
+		\end{cases}\implies a' = a''
+	\end{align*}
+\end{proof}
+
+\begin{pro}
+	Sea $-\1$ el inverso aditivo del neutro multiplicativo $\1$. Entonces $\forall a \in A$ el inverso aditivo es $-a = -\1 \cdot a$ y se tiene $-\1\cdot a + a = 0$.
+\end{pro}
+
+\begin{pro}
+	Sea $A$ un anillo. El neutro aditivo $\0$ verifica $\0 \not\in \uds{A}$
+\end{pro}
 
 \begin{pro}[Propiedad cancelativa]
 	Sea $a \in \uds{A}$. Entonces $\forall b,c$ se tiene $b, c \in A \implies a\cdot b = a\cdot c \implies b = c$
 \end{pro}
 
+\begin{ej}
+	Los numeros enteros $(\Z, +, \cdot)$ es un anillo y tienen unidades $\uds{\Z} = (\{-1, 1\}, \cdot)$
+\end{ej}
+
+
+\section{Dominios de integridad. Cuerpos.}
+
 \begin{dfn}[Divisor de 0]
-	Sea $(A, +, \cdot)$ un anillo. Diremos que $a \in A$ es divisor de $0 \iff a \neq 0 \land \exists 0 \neq b \in A \mid a\cdot b = 0$
+	Sea $(A, +, \cdot)$ un anillo. Diremos que $a \in A$ es divisor de $\0 \iff a \neq \0 \land \exists b \neq \0 \in A \mid a\cdot b = \0$
 \end{dfn}
 
 \begin{ej}
-	En $\Z/8\Z$ el elemento $\overline{2}$ tiene dimensión 0.
+	En $\Z/8\Z$ el elemento $\overline{2}$ es un divisor de $\0$:
+	\begin{align*}
+		\overline{2}\cdot\overline{4} = \overline{8} = \0
+	\end{align*}
+	Sin embargo, $\overline{3}$ no lo es ya que
+	\begin{align*}
+		\overline{3}\overline{a} = \0 \implies \inv{\overline{3}}\overline{3}\overline{a} = \inv{\overline{3}}\0 \implies \1 \overline{a} = \0 \implies \overline{a} = 0
+	\end{align*}
 \end{ej}
+
+Otra manera de ver esto es plantear la ecuación $a \cdot b = \0$. El $\0$ siempre es una solución, pero podemos decir que $a$ es un divisor de $\0$ si la ecuación tiene soluciones no triviales.
+
+\begin{ej}$ $\newline
+	\begin{itemize}
+		\item En $\Z$ la ec. $2x = 0$ solo tiene la solución trivial $\implies 2$ no es un divisor de $\0$.
+		\item En $\Z/6\Z$ la ec. $\overline{2}\overline{x} = 0$ tiene la solución $\overline{x} = \overline{3}$ luego $\overline{2}$ sí que es un divisor de $0$.
+	\end{itemize}
+\end{ej}
+
+\begin{pro}
+	Si $a \in \uds{A}$ entonces $a$ no es un divisor de $0$.
+\end{pro}
+
+\begin{proof}
+	Si $a \in \uds{A}$ sabemos que existe $\inv{a} \mid \inv{a}a = \1 \implies ax = \0 \iff \inv{a}ax = \inv{a} \0 \iff \1 x = \0 \iff x = \0$ luego la ecuación solo tiene la solución trivial.
+\end{proof}
 
 \begin{pro}
 	Sea $A$ un anillo. $\forall a \in A$ no divisor de 0 $\implies$ se cumple la propiedad cancelativa.
 \end{pro}
 
 \begin{proof}
-	$ab = ac \implies b = c \iff ab + (-ac) = a(b -c) = 0$
+	$ab = ac \implies b = c \iff ab + (-ac) = a(b -c) = \0$
 \end{proof}
 
 \begin{dfn}[Dominio de integridad]
 	Un anillo que no tiene elementos divisores de 0 se llama dominio de integridad (DI).
 \end{dfn}
 
-\begin{ej}
+% TODO profundizar con la p. 159 de santorum
+\begin{ej}$ $\newline
 	\begin{itemize}
-		\item $\Z$ es un dominio de integridad ya que todo $a \in \Z, a \neq 0$ tiene un inverso multiplicativo $\inv{a}$.
+		\item $\Z$ es un dominio de integridad ya que todo $a \in \Z, a \neq \0$ tiene un inverso multiplicativo $\inv{a}$.
 		\item $\Z/p\Z$ con $p$ primo es un dominio de integridad.
-		\item $\Z/n\Z$ con $n$ no primo no es un dominio de integridad ya que si $\overline n = ab$ con $a \neq n \land b \neq n$ se tiene $\overline{a} \cdot \overline{b} = \overline{n} = \overline{0}$ con $\overline{a} \neq 0 \land \overline{b} \neq 0$.
+		\item $\Z/n\Z$ con $n$ no primo no es un dominio de integridad ya que si $\overline n = ab$ con $a \neq n \land b \neq n$ se tiene $\overline{a} \cdot \overline{b} = \overline{n} = \0$ con $\overline{a} \neq \0 \land \overline{b} \neq \0$.
 	\end{itemize}
 \end{ej}
+
+\begin{pro}
+	$A$ es un DI si el producto de elementos no nulos es no nulo.
+\end{pro}
+
+\begin{dfn}[Anillo conmutativo]
+	Sea $A$ un anillo. $A$ es un anillo conmutativo $\iff \forall a, b \in A,\ a\cdot b = b \cdot a$.
+\end{dfn}
+
+\begin{dfn}[Cuerpo]
+	Diremos que un anillo conmutativo es un cuerpo si $\uds{A} = A \setminus \{\0\}$
+\end{dfn}
+
+\begin{ej}
+	\item $\Z/p\Z$ con $p$ primo es un cuerpo
+	\item $\Z$ o $\Z/6\Z$ no son cuerpos
+\end{ej}
+
+\begin{pro}
+	Si $A$ es un cuerpo entonces $A$ es un DI.
+\end{pro}
+
+
+Hay que buscar una buena definición para esto.
+\begin{dfn}[Estructura de anillos]
+	% TODO: dar una definición de verdad
+	Sea $(A, +, \cdot)$ un anillo. Una estructura de anillos $A[x]$ es una cosa con elementos de la forma $ax$ para $a \in A$.
+\end{dfn}
+
+\begin{pro}
+	$A$ DI $\implies A[x]$ DI
+\end{pro}
+
+\begin{obs}
+	NO se da el recíproco: por ejemplo, $\Q$ es un cuerpo $\implies \Q$ DI $\implies \Q[x]$ dominio, PERO $\Q[x]$ no es un cuerpo.
+\end{obs}
+
+\section{Ideales}
+
+\begin{dfn}[Ideal]
+	Un subconjunto $I \subset A$ es un ideal $\iff$
+	\begin{enumerate}
+		\item $\0 \in I$
+		\item $s,t \in I \implies s+t \in I$
+		\item $s \in I \land a \in A \implies a \cdot s \in I$
+	\end{enumerate}
+\end{dfn}
+
+\begin{pro}
+	Si $I$ es un ideal en $A$ entonces $(I, +) < A$ (es decir, $I$ es un subgrupo aditivo de $A$).
+\end{pro}
+
+\begin{ej}
+	$0\Z,\ 1\Z,\ 2\Z, 3\Z,\ 4\Z$ son todos ideales de $\Z$ (y subgrupos de $(\Z, +)$).
+\end{ej}
+
+\begin{thm}
+	Sea $\{I_j\}_{j \in J}$ una familia de ideales en $A$ ($I_j \subset A$ es un ideal para cada $j \in J$). Entonces $\cap_{j \in J} I_j$ es un ideal en $A$.
+\end{thm}
+
+\begin{ej}
+	En el anillo $\Z$ están los ideales $6\Z$ y $8\Z$. Por la proposición anterior $6\Z \cap 8\Z$ es un ideal (es $mcd(6,8)\Z = 2\Z$).
+\end{ej}
+
+\begin{pro}
+	Sean $I, J \subset A$ ideales. Entonces $I + J = \{i + j \mid i \in I \land j \in J\}$ es un ideal\footnote{Ojo: aquí $I+J$ no tiene nada que ver con la suma directa (el caso particular del producto directo) que había en grupos.} de $A$ que contiene a $I$, a $J$, y además es el mayor ideal con esta propiedad.
+\end{pro}
+
+\begin{pro}
+	Sea $S = \{S_1, \dots, S_r\} \subset A$ y sea $\gen{S} = \{\sum_{i=1}^{r}a_is_i \mid a_i \in A\}$. Entonces
+	\begin{enumerate}
+		\item $\gen{S}$ es un ideal en $A$
+		\item $S \subseteq \gen{S}$
+		\item Si $T$ es un ideal, entonces $S \subset T \iff \gen{S} \subset T$
+	\end{enumerate}
+\end{pro}
+
+\begin{dfn}[Ideal principal]
+	Diremos que un ideal es principal si está generado por un único elemento.
+\end{dfn}
+
+\begin{ej}
+	En $\Z$ consideramos el subconjunto $S = \{6\} \subset \Z$. El conjunto $\gen{S} = \{a6 \mid a \in \Z\} = 6\Z$ es un ideal y como está generado por un único elemento, es un ideal principal.
+\end{ej}
+
+\begin{obs}
+	En $\Z$ todo ideal es principal.
+\end{obs}
+
+\section{Subanillos}
+
+% TODO: me quedo aquí
+
+\section{Por revisar}
 
 % -------------
 
@@ -121,7 +290,7 @@ es un homomorfismo de anillos (la composición de homomorfismos de anillos es un
 		\item $\ker \alpha$ es un ideal
 		\item $\ima \alpha$ es un subanillo
 		\item $\alpha$ es sobreyectivo $\iff \ima \alpha = B$
-		\item $\alpha$ es inyectivo $\iff \ker \alpha = \{0\}$
+		\item $\alpha$ es inyectivo $\iff \ker \alpha = \{\0\}$
 	\end{itemize}
 \end{thm}
 
