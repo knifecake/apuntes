@@ -362,6 +362,19 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	\end{align*}
 	\begin{itemize}
 		\item $f$ coerciva $\implies f$ inyectiva
+		\item Una matriz real $A \in \R^{n\times n}$ es coerciva si existe $\lambda > 0$ tal que
+		\begin{align*}
+			\forall v \in \R^n,\ v^tAv \geq \lambda \norma{v}_2^2
+		\end{align*}
+		A estos $\lambda$ se les llama constantes de coercividad.
+		\begin{itemize}
+			\item $A$ coerciva $\implies A$ invertible
+		\end{itemize}
+	\end{itemize}
+	\item $f$ es \textbf{abierta} si $\forall U \subset X$ abierto, la imagen $f(U)$ es un abierto de $Y$
+	\item $f$ es un \textbf{difeomorfismo} $\iff f: U_1 \to U_2,\ U_1,U_2$ abiertos de $\R^n$ es biyectiva, $f \in C^s$ y $f^{-1} \in C^s$
+	\begin{itemize}
+		\item $f:U_1 \to R^n$ inyectiva, $f \in C^s$ y todas las jacobianas de los puntos en $U_1$ son invertibles $\implies f$ es un difeormorfismo
 	\end{itemize}
 \end{itemize}
 \begin{multline}
@@ -373,13 +386,66 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	}
 \end{multline}
 
+\begin{itemize}
+	\item Un valor regular es un punto $x_0$ tal que para un $U_0$ entorno abierto de $x_0$, la función $f:U_0 \subset \R^n \to \R^m$ es de clase $C^1(U_0)$ y la diferencial $(df)_{x_0}$ tiene rango máximo, que es $\min(n, m)$.
+	\begin{itemize}
+		\item Decimos que $f:\R^n \to \R^m$ es regular si todo punto $x_0 \in \R^n$ es un valor regular.
+	\end{itemize}
+	\item Una inversa local de $f:U_0 \subset \R^n \to R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
+	\item Una variedad en $\R^n$ de dimensión geométrica $k \geq 0$ es un conjunto $X \subseteq \R^n$ tal que $\forall x_0 \in X,\ \exists E, E' \subseteq \R^n$ abiertos con $x_0 \in E$ y un $\exists f:E \to E'$ difeomorfismo tal que
+	\begin{multline*}
+		f(X \cap E) = E' \cap (\R^k \times \{\mathbf{0}^{n-k}\}) =\\= \{y \in E' \mid y_{k+1} = y_{k+2} = \dots = y_{n} = 0\}
+	\end{multline*}
+	\begin{itemize}
+		\item Si $k = 1$ la variedad se llama curva en $\R^n$
+		\item Si $k = 2$ la varidedad se llama superficie en $\R^n$
+		\item Si $k = n-1$ la varidedad se llama hipersuperficie en $\R^n$
+	\end{itemize}
+\end{itemize}
+
 \section{Teoremas gordos}
+
+\begin{thm}[del valor medio]
+	Sea $f: S \subset R^n \to R$ una función diferenciable sobre el conjunto abierto y convexo $S$. Entonces $\forall a, b \in S,\ \exists c \in [a,b] \mid f(a) - f(b) = \nabla f(c)(a - b)$
+\end{thm}
+
+\begin{thm}[fundamental del cálculo]
+	Sea $f$ una función integrable sobre $[a,b] \subset \R$. Definimos $F:[a,b] \to \R$
+	\begin{align*}
+		F(x) = \int_{a}^{x} f(t)dt
+	\end{align*}
+	Si $f$ es continua en $c \in (a,b)$ entonces $F$ es derivable en $c$ y $F'(c) = f(c)$. Además, usando la regla de la cadena queda:
+	\begin{align*}
+		\frac{d}{dx}\int_{a(x)}^{b(x)} f(t)dt = f(b(x))b'(x) - f(a(x))a'(x)
+	\end{align*}
+\end{thm}
 
 \begin{thm}[de la función inversa]
 	Sea $(\V, \norma{\cdot})$ un espacio de Banach. Sean $U_0 \in \V$ un abierto y $f:U_0 \to V$ una función de clase $C^1$. Si en $x_0 \in U_0$ la diferencial $L = (df)_{x_0}$ es invertible (e.d. $L$ es lineal acototada, biyectiva y con inversa $L^{-1}$ también acotada) entonces existen abiertos $U, V$ con $x_0 \in U, y_0 \in V, f(x_0) = y_0$  tales que $f$ es biyectiva de $U$ a $V$.
 	
 	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
 \end{thm}
+
+\begin{thm}[de la función implícita]
+	Sean $x,a \in \R^n,\ y,b \in \R^m$
+	Sea $F: \R^{n+m} \to \R^m$ una función $C^k, k \geq 1$. Sea $(a,b) \in \R^{n+m}$ tal que $F(a,b) = 0$. Si
+	\begin{align*}
+		DF_y(a,b) = \left(\begin{array}{ccc}
+		\frac{\partial F_1}{\partial y_1}(a,b) & \dots & \frac{\partial F_1}{\partial y_m}(a,b) \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial F_m}{\partial y_1}(a,b) & \dots & \frac{\partial F_m}{\partial y_m}
+		\end{array}\right)
+	\end{align*}
+	es invertible entonces $\exists U \subset R^n$ entorno abierto de $a$ y $\exists g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
+	\begin{align*}
+		\frac{\partial g}{\partial x_j}(x) = -\left[DF_y(x, g(x))\right]^{-1}_{m\times m}\left[\frac{\partial F}{\partial x_j}(x, g(x))\right]_{m \times 1}
+	\end{align*}
+	Esto es: las columnas de la jacobiana de $g$, que es una matriz $m \times n$, van dadas por la expresión anterior.
+\end{thm}
+\begin{itemize}
+	\item Si de una ecuación queremos despejar $x$, mandamos todo a un lado y lo que no se puede anular es la matriz de las derivadas de $y$.
+	\item En este enunciado se escribe lo que quieres despejar después, como el $y \in \R^m$ pero a veces se pone antes. Da igual, lo que importa es la regla mnemotécnica de antes.
+\end{itemize}
 
 \begin{flushright}
 	E. Hernandis, \today $ $ a las \currenttime
