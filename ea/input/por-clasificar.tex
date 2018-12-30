@@ -1,0 +1,358 @@
+% !TeX root = ../apuntes-ea.tex
+
+\chapter{Por clasificar}
+
+\section{Clase de equivalencia por el grupo de biyecciones}
+\begin{dfn}[Clase de equivalencia por el grupo de biyecciones]
+	Sea $(G, \ast)$ un grupo, $X$ un conjunto, $Biy(X) = \{f\mid f: X\longrightarrow X\ biyeccion\}$, y $\alpha: G \longrightarrow Biy(X)$ es un homomorfismo de grupos. Definimos la siguiente relación de equivalencia:
+	\begin{align*}
+	a\mathcal{R}b\ si\ \exists g \mid \alpha(g)a=b
+	\end{align*}\\
+	Por esta relación, definimos la \textbf{clase} de equivalencia de un elemento $a \in X$ como:  \[cl(a)=\{ \alpha(g)(a)\mid g\in G \} \ni a \]
+\end{dfn}
+Para poder definirlo mejor nos gustaría saber cuantos elementos existen en $cl(a)$. Para ello nos ayudaremos del $centralizador\ de\ a$ (definición \ref{dfn:centralizador}). En nuestro caso particular, el centralizador es:
+\[ C_G(a) \{g\in G \mid \alpha(g)(a) = a \} \]
+Es fácil ver que si $g \in C_G(a)$ y $g' \in C_G(a)$ entonces $g \ast g' = C_G(a)$.
+\begin{thm}[Orden de la clase de equivalencia de un elemento]
+	Sea $(G, \ast)$ un grupo, $C(a)$ el centralizador de $a$ y $cl(a)$ la clase de equivalencia de $a$:
+	\[ |cl(a)| = \left[ G:C(a) \right] \]
+\end{thm}
+%TODO: Demostración
+\begin{itemize}
+	\item Recordemos que fijado $\sigma \in S_5$ podemos dar una descomposición en ciclos $\sigma = (123)(45)$ que es única aunque los ciclos se escriban diferente (por ejemplo $(123) = (231)$).
+	
+	\item Fijado $\tau \in S_5$, $\tau \sigma \inv{\tau} = (\tau(1)\tau(2)\tau(3))(\tau(4)\tau(5))$ la descomposición se mantiene
+	
+	\item Si dos permutaciones $\sigma, \sigma'$ tienen descomposiciones del mismo tipo (un 3-ciclo y un 2-ciclo como antes) entonces existe un $\tau$ que hace pasar de una a otra.
+\end{itemize}
+
+\begin{ej}[Posibles descomposiciones en cíclos de $S_4$]$ $ \newline
+	\begin{itemize}
+		\item Para $(1234)$
+		\begin{align*}
+		cl((1234)) = \{\tau(1234)\inv{\tau} \mid \tau \in S_4\}
+		\end{align*}
+		\item A la hora de definir $\tau$ tenemos varias posibilidades. En este caso, si empezamos por el $1$, para fijar el segundo elemento solo tenemos 3 posibilidades, para el tercero 2 y para el último una. Por tanto
+		\begin{align*}
+		|cl((1234))| = 4
+		\end{align*}
+		
+		\item Recordemos que el centralizador
+		\begin{align*}
+		C_{S_4}((1234)) = \{\sigma \in S_4 \mid \sigma (1234) \inv{\sigma} = (1234)\} < S_4
+		\end{align*}
+		
+		\item Como $S_4$ tiene $|S_4| = 4! = 24$ y tenemos que $|cl((1234))| = [S_4 : C_{S_4}((1234))] = 6$ necesariamente $|C_{S_4}((1234))| = 4$.
+		
+		\item Nos proponemos calcular el grupo $C((1234))$. Un candidato para $\sigma \in C((1234))$ es $\sigma = (1234)$. En efecto $(1234)(1234)(1234) \in C((1234))$. Siempre ocurre que un elemento conmuta consigo mismo. Además, $\langle (1234) \rangle < C((1234))$ pero como $|\langle (1234) \rangle| = 4 = |C((1234))$ tiene que ocurrir que $\langle (1234) \rangle = C((1234))$. Es decir que de tipo 4 solo tenemos $(1234)$.
+		
+		\item ¿Qué tipos tenemos? Pues tantos como maneras de descomponer 4 en suma de números positivos, a saber
+		\begin{itemize}
+			\item (1234) de tipo 4
+			\item (123) de tipo 3+1
+			\item (12)(34) de tipo 2+2
+			\item (12) de tipo 2+1+1
+			\item $Id$ de tipo 1+1+1+1 (que es la única que tiene descomposición en 4 unos)
+		\end{itemize}
+		
+		\item En general no es difícil calcular cuantos hay, por lo que a menudo utilizamos este argumento para calcular el grupo centralizador.
+		
+		\item Lo importante es que estamos descomponiendo $S_4$ de la siguiente manera:
+		\begin{align*}
+		S_4 &= cl((1234)) \cap cl((1223)) \cap cl((12)(34)) \cap cl((12)) \cap cl(Id) \\
+		|S_4| &= |cl((1234))| \cap |cl((1223))| \cap |cl((12)(34))| \cap |cl((12))| \cap |cl(Id)|
+		\end{align*}
+		\item Ahora analizamos la clase $cl((123))$ de los ciclos de tipo 3+1. Lo primero es saber cuantos hay. Pues tenemos que elegir 3 elementos de entre 4 y luego ordenar los dos que nos quedan por tanto
+		\begin{align*}
+		|cl((123))| = \binom{4}{3} \times 2 = 8
+		\end{align*}
+		Por otro lado lo que sabemos es que $(123) \in C((123))$ (porque todos conmutan consigo mismos) y como antes $|C((123))| = 3$ (de la fórmula $|cl((123))| = [S_4:C((123))]$), luego $C((123)) = \langle (123) \rangle$.
+		
+		\item Igual es un poco más interesante la clase de tipo 2+2. \textbf{Pregunta de examen:} halla generadores del subgrupo centralizador del elemento (12)(34).
+		\begin{itemize}
+			\item Sabemos que el conjugado de un elemento de tipo 2 tiene que ser otro de tipo 2, por tanto tenemos que ver qué elementos distintos de tipo 2 tenemos. Pues fijamos el 1 por ejemplo y vemos qué parejas podemos hacer. Nos salen 3, a saber, 1 con 2, 1 con 3 y 1 con 4 de lo que concluímos que $|cl((12)(34))| = 3$.
+			\item De la misma fórmula que antes sacamos que $|C((12)(34))| = 8$. De orden 8 sabemos que hay solo unos pocos grupos (ver la clasificación en \ref{gruposfinitosnotables}). Veamos con cuál de ellos es isomorfo.
+			\item Como siempre sabemos que $(12)(34) \in C((12)(34))$. Tenemos que encontrar los demás $\tau$ que conmutan $\tau \sigma \inv{\tau} = \tau (12)(34) \inv{\tau} = (\tau(1)\tau(2))(\tau(3)\tau(4))$. Probamos con $\tau = (1324)$\footnote{La idea de probar con este viene de decir: pues a ver qué pasa si cambio el 1 con el 3 y el 2 con el 4, que nos daría la permutación (1324). En cualquier caso esto es prueba y error, y parar de probar cuando tengamos un grupo generado de orden 8.}.
+			\begin{align*}
+			(1324)&(12)(34)\inv{(1324)} \\
+			&(34)(21)
+			\end{align*}
+			Que es el mismo, luego hemos probado que $\tau$ conmuta y por tanto $\tau \in C((12)(34))$. Lástima que no valga porque nos damos cuenta de que $\tau ^2 = (12)(34)$. Vaya. Drácula ha hecho chiste con esto y todo $(X,d)$.\footnote{Aquí se ve claramente que la elección del $\tau$ es casi al azar. Hemos elegido uno que prometía pero hemos tenido la mala suerte de que su cuadrado nos daba un elemento que suponíamos estaba en el grupo ($\tau^2 = (12)(34)$. Podríamos haber descartado este $\tau = (1324)$ pero hemos preferido descartar el elemento (12)(34) que sabíamos que estaba en el grupo. La razón de la sustitución de este último por el (12) es un misterio hasta la fecha.}
+			
+			Lo que hacemos es quitar el $(12)(34)$ y cambiarlo por el $(12)$. Para evitar $\tau^2 \neq (12)$. En resumen, ya tenemos $(12) \in C((12)(34))$ y $\tau = (1324) \in C((12)(34))$. Si vemos sus grupos generados:
+			\begin{align*}
+			\langle (1324)\rangle = \{(1324), (12)(23), (4321), Id\} \\
+			\langle (12) \rangle = \{(12), Id\}
+			\end{align*}
+			La intersección de ambos subgrupos es solo la identidad y por la fórmula del producto libre averiguamos que $|\langle (1324)\rangle \langle (12) \rangle| = 8$ por lo $C((12)(34)) = \langle (1324), (12) \rangle$.
+			
+			Tiene toda la pinta de ser $D_4$ porque está generado por dos elementos, no es abeliano y los órdenes de los generadores son $o((1324)) = 4,\ o((12)) = 2$. Solo nos quedaría probar que se sigue cumpliendo la ecuación de la presentación de $D_4$:
+			\begin{align*}
+			BA = AB^3 \iff (1324)(12) = (12)(1324)^3
+			\end{align*}
+			Lo comprobamos y al final sale.
+		\end{itemize}
+		
+		\item Ahora hacemos lo mismo con $C((12))$. Siguiendo un razonamiento similar, llegamos a que $C((12))$ es isomorfo con el grupo de Klein y por extensión con $\Z/2\Z \times \Z/2\Z$.
+	\end{itemize}
+\end{ej}
+
+Falta la semana fatídica de Estadística
+
+% 20181029
+Vez pasada considerabamos $G_1 \times G_2$ y fijado un homomorfismo de grupos $\phi: G_1 \to Aut(G_2)$ hacíamos lo siguiente. En $G_1 \times_{\phi} G_2$ viven los elementos $(a,b) \times_{\phi} (c,d)$ donde la operación cambiaba en la primera coordenada $(a \phi_b(c), bd)$. Probamos la última clase que $G_1 \times_{\phi} G_2$ era un grupo (probar la asociatividad no es trivial).
+
+% 20181030
+
+Observación:
+
+\begin{align*}
+\gamma: G \xrightarrow{Int} Aut(G)
+\end{align*}
+$\gamma$ es un homomorfismo de grupos que lleva cada elemento $g \in G$ al automorfismo conjugación $\gamma_g(x) = gx\inv{g}$. Observamos que si $N \normsub G,\ \forall g \in G, \gamma_g(N) = gN\inv{g} = N$.
+
+\begin{pro}
+	$N$ es normal en $G$ ($N \normsub G$) sí y solo sí al restringir $\phi_g$ a $N$ la imagen es $N$:
+	\begin{align*}
+	G \xrightarrow{\gamma_g} G \\
+	N \xrightarrow{\gamma_g \vert_N} N
+	\end{align*}
+	Es decir, que si $N$ es normal, $\gamma_g\vert_N$ induce un isomorfismo $\gamma_g\vert_N : N \to N$.
+\end{pro}
+
+\begin{proof}
+	Cristalina de la definición de subgrupo normal.
+\end{proof}
+
+En general, al restringir $\gamma_g$ a un subgrupo de $G$ no tenemos esta propiedad.
+
+Además, si $N \normsub G$ tiene sentido restringir $\gamma: G \xrightarrow{Int} Aut(G)$ a $Aut(N)$ y la restricción da un homomorfismo.
+
+%-------------------------
+%-------------------------
+%-------------------------
+\section{Por revisar}
+
+% -------------
+
+\begin{thm}
+	Dado el anillo $A$ y un ideal propio $I$
+	\begin{align*}
+	\pi: A \to A/I,\qquad I \subset \inv{\pi}(\overline{J}) \subset A,\qquad \overline{0} \in \overline{J} \subset A / I
+	\end{align*}
+	
+	existe una identificación entre el retículo de ideales $A / I$ con el subretículo de ideales de $A$ que contienen a $I$. 
+	
+	Es decir, si $J$ es un ideale en $A/I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene al ideal $I$.
+\end{thm}
+
+
+El ideal cero de $A/I$ tiene contraimagen $\inv{\pi}(\{0\}) = I$. Si $\overline{J}$ es un ideal en $A/I$
+\begin{align*}
+\pi : A \to A/I \to (A/I) / \overline{J}
+\end{align*}
+
+es un homomorfismo de anillos (la composición de homomorfismos de anillos es un homomorfismo de anillos). $\inv{\pi}(\overline{J}) = \ker$ de la composición.
+
+% --------------------
+
+\begin{thm}
+	Sea $\alpha: A \to B$ un homomorfismo de anillos.
+	\begin{itemize}
+		\item $\ker \alpha$ es un ideal
+		\item $\ima \alpha$ es un subanillo
+		\item $\alpha$ es sobreyectivo $\iff \ima \alpha = B$
+		\item $\alpha$ es inyectivo $\iff \ker \alpha = \{\0\}$
+	\end{itemize}
+\end{thm}
+
+\begin{dfn}[Isomorfismo de anillos]
+	Un homomorfismo de anillos $\alpha: A \to B$ es un isomorfismo cuando es una biyección. En este caso decimos que $A$ y $B$ son isomorfos y lo notamos con $A \isom B$.
+\end{dfn}
+
+\begin{pro}
+	Si $\alpha: A \to B$ es un homomorfismo de anillos y una biyección de conjuntos entonces $\inv{\alpha}:B \to A$ es nuevamente un homomorfismo de anillos.
+\end{pro}
+
+\subsubsection{Homomorfismos de anillos e ideales}
+
+\begin{thm}
+	Sea $\alpha: A \to B$ un homorfismo de anillos. Entonces
+	\begin{enumerate}
+		\item Si $J \subset B$ es un ideal en $B$ entonces $\inv{\alpha}(J)$ es un ideal en $A$.
+		\item Si $\alpha$ es sobreyectiva entonces la imagen $\alpha(I)$ de un ideal $I \subset A$ es un ideal en $B$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}
+		\node (A) at (0,0) {$A$};
+		\node (B) at (4,0) {$B$};
+		\node (BJ) at (4, -3) {$B / J$};
+		
+		\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
+		\draw[-{Latex[length=2mm]}] (B) -- (BJ) node[pos=.5, left]{$\pi$};
+		\draw[-{Latex[length=2mm]}] (A) -- (BJ) node[pos=.5, below] {$\pi \circ \alpha$};
+		\end{tikzpicture}
+	\end{figure}
+	\begin{enumerate}
+		\item $\inv{\alpha}(J) = \ker(\pi \circ \alpha)$ y por tanto es un ideal.
+		\item Probamos las propiedades de los ideales:
+		\begin{enumerate}
+			\item $\alpha(0) = 0 \in \alpha(I)$
+			\item Sean $b_1, b_2 \in \alpha(I)$ tenemos que ver que $b_1 + b_2 \in \alpha(I)$. Sean $a_1, a_2 \in I$ tales que $b_1 = \alpha(a_1) \land b_2 = \alpha(a_2)$. Por ser $\alpha$ h. de anillos tenemos que $b_1 + b_2 = \alpha(a_1 + a_2) = \alpha(a_1) + \alpha(a_2)$.
+			\item Sean $b \in B,\ b' \in \alpha(I)$. Tenemos que probar que $bb' \in \alpha(I)$. Sabemos que $b' \in \alpha(I) \iff b' = \alpha(a),\ a \in I$. Como $b \in B$ y $\alpha$ es sobre tiene que existir $d \in I \mid \alpha(d) = b$. Por tanto $\alpha(d\cdot a) = b \cdot b' \implies bb' \in \alpha(I)$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+Fijado $I \subset A$ consideramos $\pi:A \to A/I$ que es un homomorfismo de anillos sobreyectivo.
+
+\begin{enumerate}
+	\item Si $\overline{J} \subset A /I$ es un ideal en $A / I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene a $I$.
+	\item Si $J$ es un ideal en $A$ entonces $\pi(J)$ es un ideal en $A/J$ y $J \subseteq \inv{\pi}(\pi(J))$ (es claro porque si $j \in J$ entonces $\pi(j) \in \pi(J)$).
+	\begin{enumerate}
+		\item Además, si $I \subseteq J$ entonces $J = \inv{\pi}(\pi(J))$.
+		\begin{proof}
+			Si $\delta \in \inv{\pi}(\pi(J)) \implies \delta \in J$. Además, $\delta \in \inv{\pi}(\pi(J)) \iff \pi(\delta) \in \pi(J) \iff \pi(\delta) = \pi(d_1),\ d_1 \in J \iff \delta - d_1 \in \ker \pi = I$. Tomamos
+			\begin{align*}
+			\delta = \underbrace{(\delta - j_i)}_{\in I} + \underbrace{j_i}_{\in J} \in J
+			\end{align*}
+			porque $I \subset J$.
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+
+
+La siguiente proposición nos llevará al primer teorema de la isomorfía.
+\begin{pro}
+	Sea $\varphi: A \to B$ un homomorfismo de anillos con $\ker \varphi$ ideal en $A$. Sea $I$ un ideal en $A$ con $I \subset \ker \varphi$.
+	\begin{itemize}
+		\item Existe un único homomorfismo de anillos $\overline{\varphi}: A / I \to B$ tal que $\varphi = \overline{\varphi} \circ \pi$.
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}
+			\node (A) at (0,0) {$A$};
+			\node (B) at (4,0) {$B$};
+			\node (AI) at (0, -3) {$A / I$};
+			
+			\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\varphi$};
+			\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
+			\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\varphi}$};
+			\end{tikzpicture}
+		\end{figure}
+		\begin{proof}
+			Definimos $\overline{\varphi}(\overline{a}) = \varphi(a)$. Aunque choque (porque el $\overline{a}$ puede venir de muchos $a$) aseguramos que $\overline{\varphi}$ está bien definida. Veamos por qué. Sabemos que $a'$ y $a$ definen el mismo elemento en $A / I \iff a' - a \in I$. Sopongamos que $I \subset \ker \varphi$. Entonces $\varphi(a - a') = 0 \iff \varphi(a) - \varphi(a') = 0 \implies \overline{\varphi}$ está bien definida como función.
+			
+			Veamos ahora que en efecto se cumple que $\overline{\varphi}$ es un homomorfismo de anillos, es decir que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Recordando la definición que hemos dado de $\varphi$ y la propiedad $\overline{a} + \overline{b} = \overline{a + b}$ es claro que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a +b}) = \varphi(a + b) = \varphi(a) + \varphi(b) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Es análogo para el producto ya que $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$.
+		\end{proof}
+		\item $\ker \overline{\varphi} = \ker \varphi / I$
+		\begin{proof}
+			Sea $\overline{a} \in A / I$. Entonces $\overline{a} \in \ker \overline{\varphi} \iff \overline{\varphi}(\overline{a}) = 0 \iff \varphi(a) = 0 \iff a \in \ker \varphi$.
+		\end{proof}
+	\end{itemize}
+\end{pro}
+
+\begin{thm}[Primer teorema de la isomorfía (anillos)]
+	Si $\alpha: A \to B$ es un homomorfismo de anillos sobreyectivo entonces $B \isom A / \ker \alpha$.
+\end{thm}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+	\node (A) at (0,0) {$A$};
+	\node (B) at (4,0) {$B$};
+	\node (AI) at (0, -3) {$A / \ker \alpha$};
+	
+	\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
+	\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
+	\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\alpha}$};
+	\end{tikzpicture}
+\end{figure}
+
+\begin{proof}
+	Nos apoyamos en la proposición anterior tomando $I = \ker \alpha$. Como $\alpha$ y $\pi$ son sobreyectivas tenemos que $\overline{\alpha}$ es sobreyectiva. Aplicando el segundo resultado de la proposición anterior tenemos que $\ker \overline{\alpha} = \ker \alpha / \ker \alpha = \{ 0\} \implies \overline{\alpha}$ es inyectiva. Concluimos que $\overline{\alpha}$ es un isomorfismo de anillos y por tanto $B \isom A / \ker \alpha$.
+\end{proof}
+
+% ------- 20181217
+
+\begin{thm}
+	\begin{align*}
+	D \text{ es un dominio de ideales principales (DIP) } \implies D \text{ es un dominio de factorización única (DFU)}
+	\end{align*}
+\end{thm}
+
+El recíproco de este teorema no es cierto en general. Véase por ejemplo el caso de $\Z$ que es un dominio de ideales principales pero no se cumple que $\Z[X]$ es un dominio de factorización única. Si se cumpliera el recíproco entonces el siguiente teorema sería un simple corolario.
+
+\begin{thm}
+	\begin{align*}
+	D \text{ es un dominio de factorización única (DFU) } \implies D[X] \text{ es un dominio de factorización única (DFU)}
+	\end{align*}
+\end{thm}
+
+Este segundo teorema no lo vamos a probar. Probamos el primero.
+
+\begin{dfn}[Asociados]
+	Sea $D$ un domino, $a,a' \in D$. DIremos que $a$ y $a'$ son asociados $\iff \exists u \in \uds{D} \mid a = u a'$.
+\end{dfn}
+
+\begin{proof}
+	Sea $D$ un dominio, $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Sabemos que $a, a' \in D$ son asociados si $\exists u \in \uds{D} \mid a = ua'$. Por ejemplo, los polinomios $3x-2$ y $x - 2/3$ en $\Q[X]$ son asociados.
+	
+	Observemos que si $a$ y $a'$ son asociados entonces $\gen{a} = \gen{a'}$. Si $u \in \uds{a}$ entonces $ua' = a \in \gen{a'}$. Análogamente $\inv{u}a = a' \in \uds{a}$. Luego tenemos $\gen{a} \subset \gen{a'} \land \gen{a'} \subset \gen{a} \implies \gen{a} = \gen{a'}$. Recíprocamente si $0 \neq \gen{a} = \gen{a'} \implies \exists u \in \uds{D} \mid a = ua'$. $a \in \gen{a'} \land a' \in \gen{a} \implies a = a't \land a' = as \implies a' = a'ts \implies 1 = ts \implies t,s \in \uds{D}$.
+	
+	Recordemos las hipótesis iniciales: $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Esto nos da que $0 \neq \gen{a} \land \gen{a} \subsetneq D$. Pensemos en qué significa que un elemento no nulo $a$ no sea una unidad. Supongamos $a = st$. Si $a$ no es una unidad podría ocurrir que $s$ es una unidad (por ejemplo $6 = (-1)(-6),\ -1 \in \uds{\Z}$). Lo que sí que está claro es que no puede ocurrir que a la vez $s$ y $t$ sean unidades. Es decir, tiene que ocurrir que al menos uno de los dos no es una unidad. Por tanto podemos suponer sin pérdida de generalidad que si expresamos $a = a' \cdot s$  entonces $a' \not \in \uds{D}$. Tenemos dos situaciones posibles
+	\begin{enumerate}
+		\item $s \in \uds{D} \implies \gen{a} = \gen{a'}$
+		\item $s \not \in \uds{D} \implies \gen{a} \subsetneq \gen{a'}$ ya que $\gen{a} = \gen{a'} \iff a = a'u$ con $u \in \uds{D}$ pero hemos tomado $s \not\in \uds{D}$
+	\end{enumerate}
+\end{proof}
+
+Aquí para de demostrar y empieza a dar definiciones.
+
+\begin{dfn}[Irreducible]
+	Sea $D$ un dominio y $0 \neq a \not\in \uds{D}$. Diremos que $a$ es irreducible en $D \iff \forall a',s \in D,\ a' \not \in \uds{D},\ a = a's \implies s \in \uds{D}$
+\end{dfn}
+
+\begin{obs}
+	Un elemento es irreducible $\iff$ cualquier asociado lo es.
+\end{obs}
+
+\begin{dfn}[Dominio de factorización única (DFU)]
+	Sea $D$ un dominio. Diremos que $D$ es un dominio de factorización única (DFU) si se cumplen las siguientes condiciones $\forall a \in D$:
+	\begin{itemize}
+		\item $a \neq 0 \land a \not\in\uds{D} \implies a = p_1p_2\dots p_r$ donde $p_i$ es irreducible en $D$
+		\item $a = p_1p_2\dots p_r,\ p_i$ irreducible y $a = q_1q_2 \dots q_s,\ q_i$ irreducible $\implies r = s$ y además $r_i$ y $q_i$ son asociados para $i = 1, \dots, r$ (la igualdad es un caso particular de el ser asociados).
+	\end{itemize}
+\end{dfn}
+
+\begin{obs}
+	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq ...$ una cadena creaciente de ideales de un anillo $A$. Entonces $\bigcup I_i$ es un ideal.\footnote{Literalmente ha dicho que esto no viene a cuento. Que esto es una digresión de las suyas.}
+\end{obs}
+
+\begin{proof}
+	Probamos las propiedades de los ideales.
+	\begin{enumerate}
+		\item $0 \in \bigcup I_i$
+		\item $s,t \in \bigcup I_i \implies s+t \in \bigcap I_i$
+		\item $s \in \bigcup I_i,\ a \in A \implies as \in \bigcup I_i$.
+	\end{enumerate}
+\end{proof}
+
+\begin{dfn}
+	[Propiedad de cadena creciente]
+	
+	Diremos que un anillo $A$ tiene la propiedad de cadena creciente $\iff$ toda cadena creciente $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ es finita. Es decir, que $\exists n \mid I_n = I_{n+1} = I_{n+2} = \dots$.
+\end{dfn}
+
+\begin{thm}
+	Si $D$ es un DIP entonces $D$ tiene la propiedad de cadena creciente.
+\end{thm}
+
+La demostración es tan ingenua como uno quiera.
+
+\begin{proof}
+	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ una cadena de ideales. Sabemos que en cualquier anillo $\bigcup I_i$ es un ideal. Sea $J = \gen{d}$ para algún $d \in D$. Como $D$ es un DIP ocurre que $d \in \bigcup I_i \implies d \in I_{n_0} \implies \gen{d} \subset I_{n_0} \implies I_{n_0} = I_{n_0 + 1} = \dots$
+\end{proof}

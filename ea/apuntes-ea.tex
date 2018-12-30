@@ -83,6 +83,14 @@ spaceabove=1em,
 	style=myej
 ]{pro}
 
+\declaretheorem[
+name=Lema,
+refname={lema,lemas},
+Refname={Lema, Lemas},
+sharenumber=thm,
+style=myej
+]{lm}
+
 %\newtheorem*{cor}{Corolario}
 \newtheorem*{lem}{Lema}
 
@@ -182,6 +190,8 @@ Revisión del \today $ $ a las \currenttime.
 
 \tableofcontents
 
+\part{Grupos}
+
 \input{input/1-grupos}
 
 \input{input/2-homomorfismos}
@@ -196,9 +206,16 @@ Revisión del \today $ $ a las \currenttime.
 
 \input{input/7-abelianos}
 
+\part{Anillos}
+
 \input{input/8-anillos}
 
-\input{input/9-por-clasificar}
+\input{input/9-homomorfismos-de-anillos}
+
+\input{input/10-anillos-de-polinomios}
+
+
+\input{input/por-clasificar}
 
 \renewcommand{\thechapter}{\Alph{chapter}}
 \setcounter{chapter}{0}
@@ -209,17 +226,18 @@ Revisión del \today $ $ a las \currenttime.
 
 \chapter{Índices}
 
+%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
 \renewcommand{\listtheoremname}{Lista de definiciones}
-\listoftheorems[ignore={thm,ej,pro,cor,obs,lem,ex}]
+\listoftheorems[ignore={thm,ej,pro,cor,obs,lm,ex}]
 
 \renewcommand{\listtheoremname}{Lista de teoremas}
-\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lem,ex}]
+\listoftheorems[onlynamed,ignore={dfn,ej,pro,cor,obs,lm,ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejemplos}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem,ex}]
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ex}]
 
 \renewcommand{\listtheoremname}{Lista de ejercicios}
-\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lem,ej}]
+\listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ej}]
 
 
 \bibliographystyle{alpha}

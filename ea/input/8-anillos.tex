@@ -1,6 +1,6 @@
 % !TeX root = ../apuntes-ea.tex
 
-\chapter{Anillos. Cuerpos}
+\chapter{Anillos (y cuerpos): propiedades básicas}
 
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\1}{\mathbf{1}}
@@ -48,15 +48,16 @@ Con la operación $\cdot$ tenemos las siguientes propiedades
 \end{proof}
 
 \begin{dfn}[Anillo con unidad]
-	Sea $(A, +, \cdot)$ un anillo. Decimos que es un anillo con unidad si $\exists \1 \in A \mid \forall a \in A, \1 a = a \1 = a$.
+	Sea $(A, +, \cdot)$ un anillo. Decimos que es un anillo con unidad si tiene elemento neutro multiplicativo, es decir, si $\exists \1 \in A \mid \forall a \in A, \1 a = a \1 = a$.
 \end{dfn}
 
 \begin{pro}
-	El neutro multiplicativo, $\1$, si existe, es único.
+	El neutro multiplicativo o unidad, $\1$, si existe, es único.
 \end{pro}
 
+
 \begin{dfn}[Anillo conmutativo]
-	Sea $(A, +, \cdot)$ un anillo. $A$ es un anillo conmutativo $\iff \forall a, b \in A,\ a\cdot b = b \cdot a$.
+	Sea $(A, +, \cdot)$ un anillo. $A$ es un anillo conmutativo $\iff \forall a, b \in A,\ a\cdot b = b \cdot a$. Es decir, un anillo es conmutativo $\iff$ el producto también es conmutativo.
 \end{dfn}
 
 \begin{pro}
@@ -67,20 +68,43 @@ Con la operación $\cdot$ tenemos las siguientes propiedades
 	Por contradicción. Sea $a \neq \0 \in A$ y $\0 = \1$. Entonces $a = a\cdot \1 = a\cdot 0 = 0 \implies a = \0$ contradicción.
 \end{proof}
 
-Para acabar veamos algunos ejemplos.
+Para acabar veremos ejemplos de los 4 posibles casos que se pueden dar con las dos definiciones anteriores:
 
-\begin{ej}
-	Las matrices cuadradas $2\times 2$ con coeficientes reales: $(M_{2\times 2}(\R), +, \cdot)$ es un anillo con unidad ($\1 = I$) pero no es conmutativo. Tiene unidades $\uds{A} = (GL_2(\R), \cdot)$
+\begin{ej}[Anillo conmutativo con unidad]
+	El anillo $(\Z, +, \cdot)$ es un anillo con unidad y la unidad es $\1 = 1$.
 \end{ej}
 
-\begin{ej}
-	Es cierto que $\Z, \mathbb{Q}, \R, \mathbb{C}$ son anillos con unidad con las operaciones suma y producto habituales. Además hay otros como por ejemplo $\Z[i] = \{a+bi \in \mathbb{C} \mid a,b \in \Z\}$. Son todos conmutativos porque el producto en estos conjuntos es conmutativo.
+\begin{ej}[Anillo conmutativo sin unidad]
+	El anillo $(2\Z, +, \cdot)$ no tiene unidad ya que $\nexists \1 \in 2\Z \mid \forall a \in 2\Z,\ a\1 = \1a = a$.
 \end{ej}
 
+\begin{ej}[Anillo no conmutativo con unidad]
+	Las matrices cuadradas $2\times 2$ con coeficientes reales: $(M_{2\times 2}(\R), +, \cdot)$ es un anillo con unidad (el neutro multiplicativo es $\1 = I$) pero no es conmutativo.
+\end{ej}
+
+\begin{ej}[Anillo no conmutativo sin unidad]
+	Las matrices cuadradas $2\times 2$ con coeficientes en $2\Z$ es un anillo no conmutativo y además no tiene unidad.
+\end{ej}
+
+El ejemplo menos enrevesado es el primero. También son ejemplos de anillos conmutativos con unidad los conjuntos habituales $\mathbb{Q}, \R, \mathbb{C}$ y los conjuntos de clases $\Z/p\Z$ con $p$ primo (en todos ellos el neutro multiplicativo es lo que te esperas que sea el neutro multiplicativo). Además todos ellos cumplen que el conjunto con el producto es un grupo. Pues como es tan común esta cosa le damos nombre:
+
+\begin{dfn}[Cuerpo (alternativa)]
+	Sea $(A, +, \cdot)$ un anillo conmutativo con unidad. Diremos que $A$ es un cuerpo si $A\setminus \{\0\}$ es cerrado por la segunda operación (el \textit{producto}).
+\end{dfn}
+
+Es decir, que $(A\setminus\{\0\}, \cdot)$ es un grupo. Digo definición alternativa porque la definición que ha dado Orlando es ligeramente diferente (hay que esperar media página para conocerla pero es la \autoref{dfn:cuerporlando}).
+
+\begin{ej}
+	\item $\Z/p\Z$ con $p$ primo es un cuerpo
+	\item $\Z$ o $\Z/6\Z$ no son cuerpos
+	\item $\Q$ es un cuerpo (es el primero que sale al ir añadiendo números a los naturales)
+	\item $\R$ y $\mathbb{C}$ también son cuerpos
+	\item Las matrices $2 \times 2$ invertibles que antes veíamos como un grupo solo con el producto también son un cuerpo si les añadimos la suma: $(GL_2(\R), +, \cdot)$ es un cuerpo.
+\end{ej}
 
 \subsection{Unidades en anillos}
 
-Además, para pulir lo de que no siempre existe inverso multiplicativo daremos la definición de Grupo de unidades en el contexto de anillos que da sentido al \autoref{ej:grupounidades} que hemos estado utilizando.
+Además, para pulir lo de que no siempre existe inverso multiplicativo daremos la definición de Grupo de unidades en el contexto de anillos que da sentido al \autoref{ej:grupounidades} que hemos estado utilizando. Ojo: aquí unidades no se refiere a varios elementos neutros multiplicativos como uno podría pensar.
 
 \begin{dfn}[Unidades en anillos]
 	Dado $(A, +, \cdot)$ anillo. El grupo de unidades es
@@ -131,8 +155,15 @@ Para que este grupo quede bien definido estaría bien que $\inv{a}$ fuera único
 \end{proof}
 
 \begin{ej}
-	Los numeros enteros $(\Z, +, \cdot)$ es un anillo y tienen unidades $\uds{\Z} = (\{-1, 1\}, \cdot)$
+	Los numeros enteros $(\Z, +, \cdot)$ tienen estructura de anillo anillo y tienen unidades $\uds{\Z} = (\{-1, 1\}, \cdot)$
 \end{ej}
+
+Ah! y la definición de Orlando de cuerpo es
+
+\begin{dfn}[Cuerpo]
+	\label{dfn:cuerporlando}
+	Diremos que un anillo con unidad es un cuerpo si $\uds{A} = A \setminus \{\0\}$
+\end{dfn}
 
 \section{Subanillos}
 
@@ -152,9 +183,57 @@ La definición que ha dado Orlando es algo diferente. Es equivalente a la anteri
 	$(\Z, +, \cdot)$ es un subanillo de $(\Q, +, \cdot)$.
 \end{ej}
 
+\section{Producto directo}
+
+Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el producto directo.
+
+\begin{dfn}[Producto directo en anillos]
+	Sean $(A, +_A, \cdot_A), (B, +_B, \cdot_B)$ dos anillos con unidad. Definimos el producto directo $A \times B$ como el anillo $(A \times B, \#, \bullet)$ donde las operaciones se definen:
+	\begin{align*}
+	\# : (A\times B) \times (A\times B) \to A \times B\qquad &(a_1, b_1) \# (a_2, b_2) = (a_1 +_A a_2, b_1 +_B b_2) \\
+	\bullet : (A\times B) \times (A\times B) \to A \times B\qquad &(a_1, b_1) \bullet (a_2, b_2) = (a_1 \cdot_A a_2, b_1 \cdot_B b_2)
+	\end{align*}
+\end{dfn}
+
+\begin{pro}
+	$(A\times B, \#, \bullet)$ en efecto es un anillo.
+\end{pro}
+
+\begin{obs}
+	En el nuevo anillo $(A\times B, \#, \bullet)$ el elemento neutro aditivo es $\0_{A\times B} = (\0_A, \0_B)$ y el elemento neutro multiplicativo es $(\1_A, \1_B)$.
+\end{obs}
+
+\begin{obs}
+	Nos preguntamos ahora: ¿Si $A, B$ son cuerpos, es $A \times B$ un cuerpo? La respuesta es que NO. Contraejemplo:
+	\begin{align*}
+	\underbrace{(\1_A,\0_B)}_{\neq (\0_A, \0_B)} \bullet (a,b) = (\1_A, \1_B) \iff \begin{cases}
+	\1_A \cdot_A a = \1_A \\
+	\0_B \cdot_B b = \1_B \longrightarrow\text{ sin solución }
+	\end{cases}
+	\end{align*}
+	(Aquí lo que falla es que no es cerrado por el producto porque $(\1_A, \0_B)$ no tiene inverso (y no es el neutro aditivo que es el único que se libra de ese requisito).
+\end{obs}
+
+\subsection{Unidades en el producto directo de anillos}
+
+\begin{pro}
+	\label{pro:udsproductodirectoanillos}
+	$(a,b) \in \uds{A \times B} \iff a \in \uds{A} \land b \in \uds{B}$
+\end{pro}
+
+\begin{proof}
+	$(a,b) \in \uds{A \times B} \iff \exists (a',b') \in A\times B \mid (a,b) \bullet (a', b') = (\1_A, \1_B) \iff a\cdot_A a' = \1_A \land b\cdot_B b' = \1_B \iff a \in \uds{A} \land b \in \uds{B}$
+\end{proof}
+
+\begin{ej}
+	Las unidades de $\Z \times \Z$ son
+	\begin{align*}
+	\uds{\Z \times \Z} = (\{(1,1), (1,-1), (-1,1), (-1,-1)\}, \bullet)
+	\end{align*}
+\end{ej}
 
 
-\section{Dominios de integridad.}
+\section{Dominios de integridad}
 
 \begin{dfn}[Divisor de 0]
 	Sea $(A, +, \cdot)$ un anillo. Diremos que $a \in A$ es divisor de $\0 \iff a \neq \0 \land \exists b \neq \0 \in A \mid a\cdot b = \0$
@@ -210,7 +289,7 @@ Otra manera de ver esto es plantear la ecuación $a \cdot b = \0$. El $\0$ siemp
 \end{ej}
 
 
-Es tan memorable la siguiente proposición que a veces la utilizamos como definición de dominio de integridad.
+A veces utilizamos como definición de dominio de integridad la siguiente proposición:
 
 \begin{pro}
 	$A$ es un DI $\iff$ el producto de elementos no nulos es no nulo.
@@ -222,99 +301,38 @@ Es tan memorable la siguiente proposición que a veces la utilizamos como defini
 	$(\implies)$ Sea $a \in A,\ a \neq \0$. $A$ DI $\implies \nexists b \in A \mid a\cdot b = \0 \iff$ el producto de no nulos es no nulo.
 \end{proof}
 
-
-\section{Cuerpos}
-
-\begin{dfn}[Cuerpo]
-	Diremos que un anillo con unidad es un cuerpo si $\uds{A} = A \setminus \{\0\}$
-\end{dfn}
-
-Esto quiere decir que un anillo es un cuerpo si todo elemento a excepción del $\0$ tiene inverso multiplicativo.
-
-\begin{ej}
-	\item $\Z/p\Z$ con $p$ primo es un cuerpo
-	\item $\Z$ o $\Z/6\Z$ no son cuerpos
-	\item $\Q$ es un cuerpo (es el primero que sale al ir añadiendo números a los naturales)
-	\item $\R$ y $\mathbb{C}$ también son cuerpos
-	\item Las matrices $2 \times 2$ invertibles que antes veíamos como un grupo solo con el producto también son un cuerpo si les añadimos la suma: $(GL_2(\R), +, \cdot)$ es un cuerpo.
-\end{ej}
-
 \begin{pro}
-	Sea $(A, +, \cdot)$ un anillo. Son equivalentes:
-	\begin{enumerate}
-		\item $A$ es un cuerpo
-		\item El retículo de ideales es el normal
-	\end{enumerate}
+	Sea $A$ un DI y $C \subset A$ un subanillo. Entonces $C$ es un DI.
 \end{pro}
+
+\begin{proof}
+	Sean $\0 \neq c_1, c_2 \in C$. Como $C \subset A$ y $c_1c_2 \neq \0$ en $A$ tenemos en particular que $c_1 c_2 \neq \0$ en $C \implies C$ es un DI.
+\end{proof}
 
 \begin{pro}
 	Si $A$ es un cuerpo entonces $A$ es un DI.
 \end{pro}
 
-
-Hay que buscar una buena definición para esto.
-\begin{dfn}[Estructura de anillos]
-	% TODO: dar una definición de verdad
-	Sea $(A, +, \cdot)$ un anillo. Una estructura de anillos $A[x]$ es una cosa con elementos de la forma $ax$ para $a \in A$.
-\end{dfn}
-
-\begin{pro}
-	$A$ DI $\implies A[x]$ DI
-\end{pro}
-
-\begin{obs}
-	NO se da el recíproco: por ejemplo, $\Q$ es un cuerpo $\implies \Q$ DI $\implies \Q[x]$ dominio, PERO $\Q[x]$ no es un cuerpo.
-\end{obs}
-
-\section{Homomorfismos de anillos}
-
-Cuando vimos los grupos, esperamos un poco más para hablar de homomorfismos. Aquí no lo haremos ya que solo necesitamos extender la definición.
-
-\begin{dfn}[Homomorfismo de anillos]
-	Sean $(A, +, \cdot), (B, \oplus, \odot)$ anillos y sea $\varphi: A \to B$. Decimos que $\varphi$ es un homomorfismo de anillos si
-	\begin{enumerate}
-		\item $\varphi(a_1+a_2) = \varphi(a_1) \oplus \varphi(a_2)$
-		\item $\varphi(a_1 \cdot a_2) = \varphi(a_1)\odot\varphi(a_2)$
-		\item $\varphi(\1_A) = \1_B$
-	\end{enumerate}
-\end{dfn}
-
-\begin{obs}
-	Dado $\varphi:A \to B$ homomorfismo de anillos, $\ima \varphi \subset B$ siempre es un subanillo de $B$.
-\end{obs}
-
-\begin{pro}[Inyectividad/sobreyectividad en homomorfismos de anillos]
-	Sea $\varphi: A \to B$ un homomorfismo de anillos.
-	\begin{itemize}
-		\item $\varphi$ inyectivo $\iff \ker \varphi = \{\0\}$
-		\item $\varphi$ sobre $\iff \ima \varphi = B$
-	\end{itemize}
-\end{pro}
-
-\begin{pro}
-	El homomorfismo de anillos $\varphi: A \to B$ es una biyección de conjuntos $\iff \ker \varphi = \{\0\} \land \ima \varphi = B$.
-\end{pro}
-
-\begin{obs}
-	Si $\varphi:A \to B$ homomorfismo de anillos es una biyección de conjuntos entonces $\inv{\varphi}:B \to A$ también es un homomorfismo de anilos.
-\end{obs}
-
-\begin{dfn}[Isomorfismo de anillos]
-	Diremos que un homomorfismo de anillos $\varphi:A \to B$ es un isomorfismo de anillos $\iff \exists \inv{\varphi} : B \to A$ tal que
-	\begin{align*}
-	\varphi \circ \inv{\varphi} = Id_B \land \inv{\varphi} \circ \varphi = Id_A
-	\end{align*}
-\end{dfn}
-
-\begin{pro}
-	Sea $\varphi:A \to B$ un homomorfismo de anillos. Entonces $\varphi$ es un isomorfismo de anillos $\iff \ker \varphi = \{\0\} \land \ima \varphi = B$.
-\end{pro}
+Por lo general el recíproco es falso.
 
 \section{Ideales}
+
+% TODO: arreglar esto que no puede ser más feo el pobre
+\begin{center}
+	\fbox{\parbox{0.9\textwidth}{
+			Los ideales son el homólogo de los subgrupos normales en anillos. Se utilizan por ejemplo para definir el anillo cociente.\\
+			
+			En otros sitios, un ideal es en realidad una clase lateral (recordar la \autoref{dfn:claselateral}) y se definen ideales a derecha y a izquierda. El equivalente a un subgrupo normal en anillos sería aquel en el que coinciden las clases laterales a derecha y a izquierda --- lo que otros (\cite{mwideal}) llaman un ideal bilateral (\textit{two-sided ideal}).\\
+			
+			Aquí vamos a dar y a utilizar directamente la definición de ideal bilateral y por tanto un ideal para nosotros ya sería un equivalente de un subgrupo normal.
+	}}
+\end{center}
+
 
 La definición de ideal se puede dar de dos maneras. Así la ha dado Orlando:
 
 \begin{dfn}[Ideal]
+	\label{dfn:idealorlando}
 	Un subconjunto $I \subset A$ es un ideal $\iff$
 	\begin{enumerate}
 		\item $\0 \in I$
@@ -326,11 +344,12 @@ La definición de ideal se puede dar de dos maneras. Así la ha dado Orlando:
 Esta es otra definición alternativa:
 
 \begin{dfn}[Ideal (alternativa)]
+	\label{dfn:idealdorronsoro}
 	Sea $I$ un subanillo de $A$. Decimos que $I$ es un ideal $\iff \forall i \in I, \forall a \in A,\ ai \in I \land ia \in A$.
 \end{dfn}
 
 \begin{pro}
-	Si $I$ es un ideal en $A$ entonces $(I, +) < A$ (es decir, $I$ es un subgrupo aditivo de $A$).
+	Si $I$ es un ideal en $A$ entonces $(I, +) < (A, +)$ (es decir, $I$ es un subgrupo aditivo de $A$).
 \end{pro}
 
 \begin{pro}
@@ -344,7 +363,15 @@ Esta es otra definición alternativa:
 \end{proof}
 
 \begin{ej}
+	En cualquier anillo $A$ son ideales tanto el subgrupo $\{\0\}$ como el mismo anillo $A$ ($A$ es ideal en sí mismo).
+\end{ej}
+
+\begin{ej}
 	$0\Z,\ 1\Z,\ 2\Z, 3\Z,\ 4\Z$ son todos ideales de $\Z$ (y subgrupos de $(\Z, +)$).
+\end{ej}
+
+\begin{ej}
+	Sabemos que en $\Z$ todo $n\Z$ es un ideal. ¿Ocurre lo mismo para $\{(n,n) \mid n \in \Z\} \subset \Z \times \Z$? La respuesta es que NO. Contraejemplo: $(\1,\0) \bullet (3,3) = (3,\0) \notin \{(n,n) \mid n \in \Z\}$ (al no ser cerrado por el producto no es un subanillo y por tanto tampoco es un ideal).
 \end{ej}
 
 \begin{pro}
@@ -362,7 +389,7 @@ Esta es otra definición alternativa:
 A continuación definimos el análogo al subgrupo generado pero para anillos:
 
 \begin{dfn}[Ideal generado por un subconjunto]
-	De \cite{dor96}. Sea $(A, +, \cdot$ un anillo, $S \subset A$. Definimos el ideal generado por $S$ y lo denotamos con $\gen{S}$ como el conjunto de todas las palabras de longitud $n$ en los elementos de $S$, para $n \in \N$. Esto es:
+	De \cite{dor96}. Sea $(A, +, \cdot)$ un anillo conmutativo, $S \subset A$. Definimos el ideal generado por $S$ y lo denotamos con $\gen{S}$ como el conjunto de todas las palabras de longitud $n$ en los elementos de $S$, para $n \in \N$. Esto es:
 	\begin{align*}
 		\gen{S} = \{s_1\cdot a_1 + \dots + s_na_n \mid a_i \in A,\ s_i \in S, n \in \N\} = \{\sum_{i=1}^{n} a_is_i \mid a_i \in A,\ s_i \in S, n \in \N\}
 	\end{align*}
@@ -456,20 +483,18 @@ Como cabe esperar, cumple las mismas propiedades que cumplían los subgrupos gen
 	Un anillo $A$ es un DI $\iff \{\0\}$ es un ideal primo.
 \end{pro}
 
-\subsection{Retículo de ideales. Ideales maximales.}
+Orlando dio la implicación hacia la derecha de este teorema pero \cite{dor96} da la otra.
 
-% TODO
-\begin{dfn}[Retículo de ideales]
-	Estaría bien tener una definición de esto.
-\end{dfn}
+\begin{pro}
+	Sea $P \subsetneq A$ un ideal propio. Entonces $A/P$ dominio de integridad $\iff P$ ideal primo.
+\end{pro}
+
+\begin{proof}Ver \cite[p.~201]{dor96}.
+\end{proof}
 
 
-\begin{ej}
-	En $(\Z/8\Z, +, \cdot)$ el retículo de ideales coincide con los subgrupos de $(\Z/8\Z, +)$:
-	\begin{align*}
-		\{\overline{0}\} \subset \gen{\overline{4}} = \{\overline{0}, \overline{4}\} \subset \gen{\overline{2}} = \{\overline{0}, \overline{2}, \overline{4}, \overline{6}\} \subset \Z/8\Z
-	\end{align*}
-\end{ej}
+
+\subsection{Ideales maximales}
 
 \begin{dfn}[Ideal maximal]
 	Sea $I \subsetneq A$ un ideal propio. Diremos que $I$ es un ideal maximal $\iff \forall J$
@@ -517,496 +542,22 @@ Como cabe esperar, cumple las mismas propiedades que cumplían los subgrupos gen
 	\caption{Diferencia entre un ideal maximal y uno no maximal. Aquí $6\Z$ no es maximal pero $5\Z$ sí que lo es.}
 \end{figure}
 
-\subsection{Relación de equivalencia inducida por los ideales}
-
-\begin{dfn}[Relación de equivalencia por ideales]
-	Sea $I \subset A$ un ideal. Definimos la relación de equivalencia $a_1 R a_2 \iff a_1 - a_2 \in I$.
-\end{dfn}
-
 \begin{pro}
-	$R$ es efectivamente una relación de equivalencia
-\end{pro}
-
-\begin{proof}Probamos las 3 propiedades de las relaciones de equivalencia:
-	\begin{enumerate}
-		\item Reflexiva: $\forall a_1 \in A,\ a_1 - a_1 = \0 \in I \implies a_1Ra_1$
-		\item Simétrica: $\forall a_1, a_2 \in A$ con $a_1 R a_2$ tenemos que $a_2 - a_1 = -(a_1 - a_2) \in I \implies a_2 R a_1$
-		\item Transitiva: $a_1Ra_2 \land a_2Ra_3 \implies (a_1 - a_2) \in I \land (a_2 - a_3) \in I \implies ((a_1 - a_2) - (a_2 - a_3) \in I \implies (a_1 - a_3) \in I \implies a_1 R a_3$
-	\end{enumerate}
-\end{proof}
-
-¿Cómo son las clases de equivalencia que viven en el conjunto cociente $A/I$? Pues son de la forma $\overline{a} = a + I = \{a + i_i \mid i_i \in I\}$. Podemos dotar de estructura de anillo a este conjunto cociente. Las operaciones que definimos son las naturales:
-
-\begin{dfn}[Estructura de anillo del cociente]
-	Sea $(A, +, \cdot)$ un anillo, $I \subset A$ un ideal. La relación de equivalencia $a_1 R a_2 \iff a_1 - a_2 \in I$ define una partición en clases de equivalencia $\overline{a} \in A/I$. Definimos las operaciones $\#$ y $\bullet$
-	
-	\begin{align}
-		\overline{a} \# \overline{b} = a + i_i + b + i_j = a+b + \underbrace{i_i + i_j}_{\in I} = \overline{a+b} \\
-		\overline{a}\bullet\overline{b} = (a+i_i)(b+i_i) = ab + \underbrace{a i_i + b i_j + i_i i_j}_{\in I} = \overline{a \cdot b}
-	\end{align}
-	De este modo $(A/I, \#, \bullet)$ es un anillo y $\pi: A \to A/I$ definido con $a \mapsto \pi(a) = \overline{a}$ es un homomorfismo de anillos.
-\end{dfn}
-
-\begin{pro}
-	Lo que dice la definición es verdad: $(A/I, \#, \bullet)$ es un anillo y $\pi$ un homomorfismo de anillos.
+	Sea $M \subsetneq A$ un ideal maximal de $A$. Entonces $A/M$ es un cuerpo.
 \end{pro}
 
 \begin{pro}
-	La función $\pi: A \to A/I$ que da las clases de equivalencia es un epimorfismo de grupos (es sobreyectivo) y además $\ker \pi = I$.
-\end{pro}
-
-\begin{pro}
-	$P \subset A$ ideal primo $\iff A/P$ es un dominio de integridad
-\end{pro}
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-	% TODO: poner puntitos en los nodos
-	\node (a) at (-0.3,1) {$a$};
-	\node (b) at (0.8,0.9) {$b$};
-	\node (ab) at (1.2, .3) {$ab$};
-	\node (P) at (0,0) {$P$};
-	\node (A) at (0.5,2) {$A$};
-	
-	\draw (P) ellipse (.7 and .6);
-	\draw (0.5,0.3) ellipse (1.5 and 1.3);
-	
-	\begin{scope}[shift={(4,0)}]
-	\node (AP) at (0, 2) {$A/P$};
-	\node (abp) at (-.6, 0) {$\overline{ab} \neq 0$};
-	\node (ap) at (0, .8) {$\overline{a} \neq 0$};
-	\node (bp) at (0.3,-.6) {$\overline{b} \neq 0$};
-	\draw (0,0) ellipse (1.5 and 1.5);
-	\end{scope}
-	\draw[->] (A) -- (AP);
-	\end{tikzpicture}
-\end{figure}
-
-\begin{proof}
-	Sabemos que
-	\begin{align*}
-		a \notin P &\iff \overline{a} \neq \overline{\0} \text{ en } A/P \\
-		b \notin P &\iff \overline{b} \neq \overline{\0} \text{ en } A/P \\
-		a\cdot b \notin P &\iff \overline{a\cdot b} = \overline{a}\cdot \overline{b} \neq \overline{\0} \text{ en } A/P
-	\end{align*}
-	Luego es claro que $P$ ideal primo $\iff$ el producto de elementos no nulos es no nulo en $A/P \iff A/P$ es un DI (dominio de integridad).
-\end{proof}
-
-\subsection{Correspondencia entre ideales}
-
-Ahora damos un teorema análogo al de correspondencia que dimos para subgrupos (\autoref{thm:correspondenciasubgrupos}).
-
-\begin{thm}[de correspondencia entre ideales]
-	Sea $(A, +, \cdot)$ un anillo, $I \subsetneq A$ un ideal propio de $A$. Sea $\pi: A \to A/I$ la función sobreyectiva que da las clases de equivalencia para cada elemento $a \in A \mapsto \overline{a}$ que tiene $\ker \pi = I$. Se tiene
-	\begin{enumerate}
-		\item Si $\overline{J}$ es un ideal en $A/I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene a $I$
-		\item Si $K$ es un ideal en $A$ que contiene a $I$, entonces $K = \inv{\pi(\pi(K))}$, es decir, $K$ es la contraimagen de algún ideal $\pi(K) \subset A/I$.
-	\end{enumerate}
-\end{thm}
-
-\begin{obs}
-	El ideal $\{\overline{\0}\}$ de $A/I$ tiene contraimagen $\inv{\pi}(\{\overline{\0}\}) = I$.
-\end{obs}
-
-\begin{obs}
-	Si $\overline{J}$ es un ideal en $A/I$.
-	
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\node (A) at (0,0) {$A$};
-			\node (AI) at (2,0) {$A/I$};
-			\node (AIJ) at (2,-2) {$\frac{A/I}{\overline{J}}$};
-			
-			\draw[->] (A) -- (AI) node[pos=.5, above] {$\pi$};
-			\draw[->] (AI) -- (AIJ) node[pos=.5,right] {$\pi'$};
-		\end{tikzpicture}
-		\caption{Ejemplo de una doble aplicación del teorema de correspondencia.}
-	\end{figure}
-	La composición $\pi' \circ \pi$ es un homomorfismo de anillos y además $\ker (\pi' \circ \pi) = \inv{\pi}(\overline{J})$
-\end{obs}
-
-\begin{ej}[de aplicación del teorema de correspondencia entre ideales para anillos]
-	
-	Buscamos el retículo de ideales de $\Z/12\Z$. Por alguna razón sabe que el retículo de $\Z/12\Z$ se identifica con el retículo de ideales de $\Z$ que contienen al $6\Z$ así que se define $\pi: \Z \to \Z/12\Z$. Luego afirma que en $\Z/6\Z$ hay exáctamente un ideal por divisor positivo de $6$.
-\end{ej}
-
-\begin{pro}
-	En $\Z/n\Z$ hay un ideal por cada divisor positivo de $n$.
-\end{pro}
-
-\begin{ej}[Retículo de ideales de $(\Z, +, \cdot)$]
-	
-	Sabemos que los ideales de $\Z$ son de la forma $n\Z = 0\Z, 1\Z, 2\Z, 3\Z, 4\Z, \dots$ para $n = 0,1,2,3,\dots$ Observemos que podemos construir el retículo sabiendo que $n\Z \subset m\Z \iff n \in m\Z\iff m \divides n$. Así nos va quedando el retículo:
-	
-	\begin{figure}[h]
-		\centering
-		% TODO sombrear los que contienen al 6
-		\begin{tikzpicture}
-			\node (z) at (0,1) {$\Z$};
-			\node (2z) at (-2,0) {$2\Z$};
-			\node (3z) at (-1,0) {$3\Z$};
-			\node (5z) at (0,0) {$5\Z$};
-			\node (7z) at (1,0) {$7\Z$};
-			\node (dots) at (2,0) {$\dots$};
-			\node[right] (prims) at (3,0) {todos los primos...};
-			
-			\node (mmdots) at (-3.5,-1) {$\dots$};
-			\node (10z) at (-2.5,-1) {$10\Z$};
-			\node (6z) at (-1.5,-1) {$6\Z$};
-			\node (15z) at (-0.5,-1) {$15\Z$};
-			\node (35z) at (0.5,-1) {$35\Z$};
-			\node (21z) at (1.5, -1) {$21\Z$};
-			\node at (2.5, -1) {$\dots$};
-			
-			\node (4z) at (-2,-2) {$4\Z$};
-			\node (9z) at (-1, -2) {$9\Z$};
-			\node (25z) at (0,-2) {$25\Z$};
-			\node (49z) at (1, -2) {$49\Z$};
-			\node at (2,-2) {$\dots$};
-			
-			\draw 	(4z) -- (2z)
-					(2z) -- (z);
-			\draw 	(9z) -- (3z)
-					(3z) -- (z);
-			\draw 	(25z) -- (5z)
-					(5z) -- (z);
-			\draw 	(49z) -- (7z)
-					(7z) -- (z);
-			\draw	(10z) -- (2z)
-					(10z) -- (5z);
-			\draw 	(6z) -- (2z)
-					(6z) -- (3z);
-			\draw	(15z) -- (3z)
-					(3z) -- (z);
-			\draw	(35z) -- (5z)
-					(35z) -- (7z);
-			\draw	(21z) -- (3z)
-					(21z) -- (7z);
-		\end{tikzpicture}
-		\caption{Retículo de ideales de $(\Z, +, \cdot)$.}
-	\end{figure}
-\end{ej}
-
-\section{Producto directo}
-
-\subsection{Producto directo en anillos}
-
-\begin{dfn}[Producto directo en anillos]
-	Sean $(A, +_A, \cdot_A), (B, +_B, \cdot_B)$ dos anillos con unidad. Definimos el producto directo $A \times B$ como el anillo $(A \times B, \#, \bullet)$ donde las operaciones se definen:
-	\begin{align*}
-		\# : (A\times B) \times (A\times B) \to A \times B\qquad &(a_1, b_1) \# (a_2, b_2) = (a_1 +_A a_2, b_1 +_B b_2) \\
-		\bullet : (A\times B) \times (A\times B) \to A \times B\qquad &(a_1, b_1) \bullet (a_2, b_2) = (a_1 \cdot_A a_2, b_1 \cdot_B b_2)
-	\end{align*}
-\end{dfn}
-
-\begin{pro}
-	$(A\times B, \#, \bullet)$ en efecto es un anillo.
-\end{pro}
-
-\begin{obs}
-	En el nuevo anillo $(A\times B, \#, \bullet)$ el elemento neutro aditivo es $\0_{A\times B} = (\0_A, \0_B)$ y el elemento neutro multiplicativo es $(\1_A, \1_B)$.
-\end{obs}
-
-\begin{pro}
-	$(a,b) \in \uds{A \times B} \iff a \in \uds{A} \land b \in \uds{B}$
+	\label{pro:maximalimplicaprimo}
+	Todo ideal maximal es un ideal primo.
 \end{pro}
 
 \begin{proof}
-	$(a,b) \in \uds{A \times B} \iff \exists (a',b') \in A\times B \mid (a,b) \bullet (a', b') = (\1_A, \1_B) \iff a\cdot_A a' = \1_A \land b\cdot_B b' = \1_B \iff a \in \uds{A} \land b \in \uds{B}$
+	$M \subsetneq$ un ideal maximal de $A \implies A/M$ cuerpo $\implies A/M$ DI $\implies M$ ideal primo.
 \end{proof}
 
-\begin{ej}
-	Las unidades de $\Z \times \Z$ son
-	\begin{align*}
-		\uds{\Z \times \Z} = (\{(1,1), (1,-1), (-1,1), (-1,-1)\}, \bullet)
-	\end{align*}
-\end{ej}
-
-\begin{ej}
-	Sea $s \in A,\ s\neq \0$. Fijado $s$, definimos $\alpha_s : A \to A, a \mapsto a\cdot s$. Observemos:
-	\begin{enumerate}
-		\item $\alpha_s$ es un homomorfismo de grupos
-		\item $\alpha_s$ es inyectivo $\iff \ker \alpha_s = \{ \0 \}$
-		\begin{itemize}
-			\item $\ker \alpha_s = \{\0\} \iff s$ no es divisor de $\0$
-			\item $\ker \alpha_s \neq \{\0\} \iff s$ es divisor de $\0$
-		\end{itemize}
-		\item $\ima \alpha_s = \gen{\{s\}}$
-		\begin{itemize}
-			\item $s \in \uds{A} \iff \gen{s}$ (ver \autoref{pro:inunidadesiffgenerado}), por tanto $\alpha_s$ es sobre $\iff \ima \alpha_s = A \iff \gen{s} = A \iff s \in \uds{A}$.
-		\end{itemize}
-		
-	\end{enumerate}
-\end{ej}
-
-Este ejemplo nos permite dar el siguiente teorema:
-
-\begin{thm}
-	Sea $(A, +, \cdot)$ un anillo finito y sea $a \in A \setminus \{\0\}$. Entonces, o bien $a \in \uds{A}$, o bien $a$ es un divisor de $\0$. Por tanto escribimos
-	\begin{align*}
-	A \setminus \{\0\} = \uds{A} \bigcup_{\text{disjunta}} \{a \in A \mid a \text{ divisor de }\0\}
-	\end{align*}
-\end{thm}
-
-\begin{proof}
-	Fijo $s \in A \setminus \{\0\}$. Como $A$ es finito $\alpha_s$ inyectiva $\iff \alpha_s$ sobreyectiva $\iff \alpha_s$ inyectiva. Entonces, fijándonos en el ejemplo anterior, tenemos
-	\begin{itemize}
-		\item Si $s \in \uds{A}$ entonces $\alpha_s$ inyectiva $\implies \ker \alpha_s = \{\0\} \implies s$ no es un divisor de $0$.
-		\item Si $s \notin \uds{A}$ entonces $\alpha$ no es sobre $\implies \alpha_s$ no inyectiva $\implies \ker \alpha_s \neq \{\0\} \implies s$ es un divisor de $\0$.
-	\end{itemize}
-\end{proof}
-
-\begin{ej}
-	Sea $A = \Z/8\Z \times \Z/10\Z$. ¿Cuántos divisores de $\0$ tiene $A$?
-\end{ej}
-
-\begin{proof}
-	Sabemos que $|A| = 80 \implies A \setminus \{\0\}$ tiene 79 elementos. Además sabemos que $\uds{A} = \uds{\Z/8\Z} \times \uds{\Z/10\Z} \implies |\uds{A}| = 4 \times 4 = 16$. Luego hay $79 - 16 = 63$ divisores de $\0$ en $A$.
-\end{proof}
-
-\begin{ej}
-	Sabemos que en $\Z$ todo $n\Z$ es un ideal. ¿Ocurre lo mismo para $\{(n,n) \mid n \in \Z\} \subset \Z \times \Z$? La respuesta es que NO. Contraejemplo: $(\1,\0) \bullet (3,3) = (3,\0) \notin \{(n,n) \mid n \in \Z\}$ (al no ser cerrado por el producto no es un subanillo y por tanto tampoco es un ideal).
-\end{ej}
-
-\subsection{Producto directo en cuerpos}
-
-Nos preguntamos ahora: ¿Si $A, B$ son cuerpos, es $A \times B$ un cuerpo? La respuesta es que NO. Contraejemplo:
-\begin{align*}
-	\underbrace{(\1_A,\0_B)}_{\neq (\0_A, \0_B)} \bullet (a,b) = (\1_A, \1_B) \iff \begin{cases}
-	\1_A \cdot_A a = \1_A \\
-	\0_B \cdot_B b = \1_B \longrightarrow\text{ sin solución }
-	\end{cases}
-\end{align*}
+% TODO dar el ejemplo cuando lleguemos al producto directo
+El recíproco no es verdad en general. Se da un ejemplo cuando se introduce el producto directo.
 
 
-%-------------------------
-%-------------------------
-%-------------------------
-\section{Por revisar}
 
-% -------------
-
-\begin{thm}
-	Dado el anillo $A$ y un ideal propio $I$
-	\begin{align*}
-		\pi: A \to A/I,\qquad I \subset \inv{\pi}(\overline{J}) \subset A,\qquad \overline{0} \in \overline{J} \subset A / I
-	\end{align*}
-	
-	existe una identificación entre el retículo de ideales $A / I$ con el subretículo de ideales de $A$ que contienen a $I$. 
-	
-	Es decir, si $J$ es un ideale en $A/I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene al ideal $I$.
-\end{thm}
-
-
-El ideal cero de $A/I$ tiene contraimagen $\inv{\pi}(\{0\}) = I$. Si $\overline{J}$ es un ideal en $A/I$
-\begin{align*}
-	\pi : A \to A/I \to (A/I) / \overline{J}
-\end{align*}
-
-es un homomorfismo de anillos (la composición de homomorfismos de anillos es un homomorfismo de anillos). $\inv{\pi}(\overline{J}) = \ker$ de la composición.
-
-% --------------------
-
-\begin{thm}
-	Sea $\alpha: A \to B$ un homomorfismo de anillos.
-	\begin{itemize}
-		\item $\ker \alpha$ es un ideal
-		\item $\ima \alpha$ es un subanillo
-		\item $\alpha$ es sobreyectivo $\iff \ima \alpha = B$
-		\item $\alpha$ es inyectivo $\iff \ker \alpha = \{\0\}$
-	\end{itemize}
-\end{thm}
-
-\begin{dfn}[Isomorfismo de anillos]
-	Un homomorfismo de anillos $\alpha: A \to B$ es un isomorfismo cuando es una biyección. En este caso decimos que $A$ y $B$ son isomorfos y lo notamos con $A \isom B$.
-\end{dfn}
-
-\begin{pro}
-	Si $\alpha: A \to B$ es un homomorfismo de anillos y una biyección de conjuntos entonces $\inv{\alpha}:B \to A$ es nuevamente un homomorfismo de anillos.
-\end{pro}
-
-\subsubsection{Homomorfismos de anillos e ideales}
-
-\begin{thm}
-	Sea $\alpha: A \to B$ un homorfismo de anillos. Entonces
-	\begin{enumerate}
-		\item Si $J \subset B$ es un ideal en $B$ entonces $\inv{\alpha}(J)$ es un ideal en $A$.
-		\item Si $\alpha$ es sobreyectiva entonces la imagen $\alpha(I)$ de un ideal $I \subset A$ es un ideal en $B$
-	\end{enumerate}
-\end{thm}
-
-\begin{proof}
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-		\node (A) at (0,0) {$A$};
-		\node (B) at (4,0) {$B$};
-		\node (BJ) at (4, -3) {$B / J$};
-		
-		\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
-		\draw[-{Latex[length=2mm]}] (B) -- (BJ) node[pos=.5, left]{$\pi$};
-		\draw[-{Latex[length=2mm]}] (A) -- (BJ) node[pos=.5, below] {$\pi \circ \alpha$};
-		\end{tikzpicture}
-	\end{figure}
-	\begin{enumerate}
-		\item $\inv{\alpha}(J) = \ker(\pi \circ \alpha)$ y por tanto es un ideal.
-		\item Probamos las propiedades de los ideales:
-		\begin{enumerate}
-			\item $\alpha(0) = 0 \in \alpha(I)$
-			\item Sean $b_1, b_2 \in \alpha(I)$ tenemos que ver que $b_1 + b_2 \in \alpha(I)$. Sean $a_1, a_2 \in I$ tales que $b_1 = \alpha(a_1) \land b_2 = \alpha(a_2)$. Por ser $\alpha$ h. de anillos tenemos que $b_1 + b_2 = \alpha(a_1 + a_2) = \alpha(a_1) + \alpha(a_2)$.
-			\item Sean $b \in B,\ b' \in \alpha(I)$. Tenemos que probar que $bb' \in \alpha(I)$. Sabemos que $b' \in \alpha(I) \iff b' = \alpha(a),\ a \in I$. Como $b \in B$ y $\alpha$ es sobre tiene que existir $d \in I \mid \alpha(d) = b$. Por tanto $\alpha(d\cdot a) = b \cdot b' \implies bb' \in \alpha(I)$.
-		\end{enumerate}
-	\end{enumerate}
-\end{proof}
-
-Fijado $I \subset A$ consideramos $\pi:A \to A/I$ que es un homomorfismo de anillos sobreyectivo.
-
-\begin{enumerate}
-	\item Si $\overline{J} \subset A /I$ es un ideal en $A / I$ entonces $\inv{\pi}(\overline{J})$ es un ideal en $A$ que contiene a $I$.
-	\item Si $J$ es un ideal en $A$ entonces $\pi(J)$ es un ideal en $A/J$ y $J \subseteq \inv{\pi}(\pi(J))$ (es claro porque si $j \in J$ entonces $\pi(j) \in \pi(J)$).
-	\begin{enumerate}
-		\item Además, si $I \subseteq J$ entonces $J = \inv{\pi}(\pi(J))$.
-		\begin{proof}
-			Si $\delta \in \inv{\pi}(\pi(J)) \implies \delta \in J$. Además, $\delta \in \inv{\pi}(\pi(J)) \iff \pi(\delta) \in \pi(J) \iff \pi(\delta) = \pi(d_1),\ d_1 \in J \iff \delta - d_1 \in \ker \pi = I$. Tomamos
-			\begin{align*}
-				\delta = \underbrace{(\delta - j_i)}_{\in I} + \underbrace{j_i}_{\in J} \in J
-			\end{align*}
-			porque $I \subset J$.
-		\end{proof}
-	\end{enumerate}
-\end{enumerate}
-
-
-La siguiente proposición nos llevará al primer teorema de la isomorfía.
-\begin{pro}
-	Sea $\varphi: A \to B$ un homomorfismo de anillos con $\ker \varphi$ ideal en $A$. Sea $I$ un ideal en $A$ con $I \subset \ker \varphi$.
-	\begin{itemize}
-		\item Existe un único homomorfismo de anillos $\overline{\varphi}: A / I \to B$ tal que $\varphi = \overline{\varphi} \circ \pi$.
-		\begin{figure}[h]
-			\centering
-			\begin{tikzpicture}
-			\node (A) at (0,0) {$A$};
-			\node (B) at (4,0) {$B$};
-			\node (AI) at (0, -3) {$A / I$};
-			
-			\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\varphi$};
-			\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
-			\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\varphi}$};
-			\end{tikzpicture}
-		\end{figure}
-		\begin{proof}
-			Definimos $\overline{\varphi}(\overline{a}) = \varphi(a)$. Aunque choque (porque el $\overline{a}$ puede venir de muchos $a$) aseguramos que $\overline{\varphi}$ está bien definida. Veamos por qué. Sabemos que $a'$ y $a$ definen el mismo elemento en $A / I \iff a' - a \in I$. Sopongamos que $I \subset \ker \varphi$. Entonces $\varphi(a - a') = 0 \iff \varphi(a) - \varphi(a') = 0 \implies \overline{\varphi}$ está bien definida como función.
-			
-			Veamos ahora que en efecto se cumple que $\overline{\varphi}$ es un homomorfismo de anillos, es decir que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Recordando la definición que hemos dado de $\varphi$ y la propiedad $\overline{a} + \overline{b} = \overline{a + b}$ es claro que $\overline{\varphi}(\overline{a} + \overline{b}) = \overline{\varphi}(\overline{a +b}) = \varphi(a + b) = \varphi(a) + \varphi(b) = \overline{\varphi}(\overline{a}) + \overline{\varphi}(\overline{b})$. Es análogo para el producto ya que $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$.
-		\end{proof}
-		\item $\ker \overline{\varphi} = \ker \varphi / I$
-		\begin{proof}
-			Sea $\overline{a} \in A / I$. Entonces $\overline{a} \in \ker \overline{\varphi} \iff \overline{\varphi}(\overline{a}) = 0 \iff \varphi(a) = 0 \iff a \in \ker \varphi$.
-		\end{proof}
-	\end{itemize}
-\end{pro}
-
-\begin{thm}[Primer teorema de la isomorfía (anillos)]
-	Si $\alpha: A \to B$ es un homomorfismo de anillos sobreyectivo entonces $B \isom A / \ker \alpha$.
-\end{thm}
-
-	\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-	\node (A) at (0,0) {$A$};
-	\node (B) at (4,0) {$B$};
-	\node (AI) at (0, -3) {$A / \ker \alpha$};
-	
-	\draw[-{Latex[length=2mm]}] (A) -- (B) node[pos=.5, above] {$\alpha$};
-	\draw[-{Latex[length=2mm]}] (A) -- (AI) node[pos=.5, left]{$\pi$};
-	\draw[-{Latex[length=2mm]}] (AI) -- (B) node[pos=.5, below] {$\overline{\alpha}$};
-	\end{tikzpicture}
-\end{figure}
-
-\begin{proof}
-	Nos apoyamos en la proposición anterior tomando $I = \ker \alpha$. Como $\alpha$ y $\pi$ son sobreyectivas tenemos que $\overline{\alpha}$ es sobreyectiva. Aplicando el segundo resultado de la proposición anterior tenemos que $\ker \overline{\alpha} = \ker \alpha / \ker \alpha = \{ 0\} \implies \overline{\alpha}$ es inyectiva. Concluimos que $\overline{\alpha}$ es un isomorfismo de anillos y por tanto $B \isom A / \ker \alpha$.
-\end{proof}
-
-% ------- 20181217
-
-\begin{thm}
-	\begin{align*}
-	D \text{ es un dominio de ideales principales (DIP) } \implies D \text{ es un dominio de factorización única (DFU)}
-	\end{align*}
-\end{thm}
-
-El recíproco de este teorema no es cierto en general. Véase por ejemplo el caso de $\Z$ que es un dominio de ideales principales pero no se cumple que $\Z[X]$ es un dominio de factorización única. Si se cumpliera el recíproco entonces el siguiente teorema sería un simple corolario.
-
-\begin{thm}
-	\begin{align*}
-	D \text{ es un dominio de factorización única (DFU) } \implies D[X] \text{ es un dominio de factorización única (DFU)}
-	\end{align*}
-\end{thm}
-
-Este segundo teorema no lo vamos a probar. Probamos el primero.
-
-\begin{dfn}[Asociados]
-	Sea $D$ un domino, $a,a' \in D$. DIremos que $a$ y $a'$ son asociados $\iff \exists u \in \uds{D} \mid a = u a'$.
-\end{dfn}
-
-\begin{proof}
-	Sea $D$ un dominio, $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Sabemos que $a, a' \in D$ son asociados si $\exists u \in \uds{D} \mid a = ua'$. Por ejemplo, los polinomios $3x-2$ y $x - 2/3$ en $\Q[X]$ son asociados.
-	
-	Observemos que si $a$ y $a'$ son asociados entonces $\gen{a} = \gen{a'}$. Si $u \in \uds{a}$ entonces $ua' = a \in \gen{a'}$. Análogamente $\inv{u}a = a' \in \uds{a}$. Luego tenemos $\gen{a} \subset \gen{a'} \land \gen{a'} \subset \gen{a} \implies \gen{a} = \gen{a'}$. Recíprocamente si $0 \neq \gen{a} = \gen{a'} \implies \exists u \in \uds{D} \mid a = ua'$. $a \in \gen{a'} \land a' \in \gen{a} \implies a = a't \land a' = as \implies a' = a'ts \implies 1 = ts \implies t,s \in \uds{D}$.
-	
-	Recordemos las hipótesis iniciales: $a \in D \mid a \neq 0 \land a \not\in \uds{D}$. Esto nos da que $0 \neq \gen{a} \land \gen{a} \subsetneq D$. Pensemos en qué significa que un elemento no nulo $a$ no sea una unidad. Supongamos $a = st$. Si $a$ no es una unidad podría ocurrir que $s$ es una unidad (por ejemplo $6 = (-1)(-6),\ -1 \in \uds{\Z}$). Lo que sí que está claro es que no puede ocurrir que a la vez $s$ y $t$ sean unidades. Es decir, tiene que ocurrir que al menos uno de los dos no es una unidad. Por tanto podemos suponer sin pérdida de generalidad que si expresamos $a = a' \cdot s$  entonces $a' \not \in \uds{D}$. Tenemos dos situaciones posibles
-	\begin{enumerate}
-		\item $s \in \uds{D} \implies \gen{a} = \gen{a'}$
-		\item $s \not \in \uds{D} \implies \gen{a} \subsetneq \gen{a'}$ ya que $\gen{a} = \gen{a'} \iff a = a'u$ con $u \in \uds{D}$ pero hemos tomado $s \not\in \uds{D}$
-	\end{enumerate}
-\end{proof}
-
-Aquí para de demostrar y empieza a dar definiciones.
-
-\begin{dfn}[Irreducible]
-	Sea $D$ un dominio y $0 \neq a \not\in \uds{D}$. Diremos que $a$ es irreducible en $D \iff \forall a',s \in D,\ a' \not \in \uds{D},\ a = a's \implies s \in \uds{D}$
-\end{dfn}
-
-\begin{obs}
-	Un elemento es irreducible $\iff$ cualquier asociado lo es.
-\end{obs}
-
-\begin{dfn}[Dominio de factorización única (DFU)]
-	Sea $D$ un dominio. Diremos que $D$ es un dominio de factorización única (DFU) si se cumplen las siguientes condiciones $\forall a \in D$:
-	\begin{itemize}
-		\item $a \neq 0 \land a \not\in\uds{D} \implies a = p_1p_2\dots p_r$ donde $p_i$ es irreducible en $D$
-		\item $a = p_1p_2\dots p_r,\ p_i$ irreducible y $a = q_1q_2 \dots q_s,\ q_i$ irreducible $\implies r = s$ y además $r_i$ y $q_i$ son asociados para $i = 1, \dots, r$ (la igualdad es un caso particular de el ser asociados).
-	\end{itemize}
-\end{dfn}
-
-\begin{obs}
-	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq ...$ una cadena creaciente de ideales de un anillo $A$. Entonces $\bigcup I_i$ es un ideal.\footnote{Literalmente ha dicho que esto no viene a cuento. Que esto es una digresión de las suyas.}
-\end{obs}
-
-\begin{proof}
-	Probamos las propiedades de los ideales.
-	\begin{enumerate}
-		\item $0 \in \bigcup I_i$
-		\item $s,t \in \bigcup I_i \implies s+t \in \bigcap I_i$
-		\item $s \in \bigcup I_i,\ a \in A \implies as \in \bigcup I_i$.
-	\end{enumerate}
-\end{proof}
-
-\begin{dfn}
-	[Propiedad de cadena creciente]
-	
-	Diremos que un anillo $A$ tiene la propiedad de cadena creciente $\iff$ toda cadena creciente $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ es finita. Es decir, que $\exists n \mid I_n = I_{n+1} = I_{n+2} = \dots$.
-\end{dfn}
-
-\begin{thm}
-	Si $D$ es un DIP entonces $D$ tiene la propiedad de cadena creciente.
-\end{thm}
-
-La demostración es tan ingenua como uno quiera.
-
-\begin{proof}
-	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ una cadena de ideales. Sabemos que en cualquier anillo $\bigcup I_i$ es un ideal. Sea $J = \gen{d}$ para algún $d \in D$. Como $D$ es un DIP ocurre que $d \in \bigcup I_i \implies d \in I_{n_0} \implies \gen{d} \subset I_{n_0} \implies I_{n_0} = I_{n_0 + 1} = \dots$
-\end{proof}
 
