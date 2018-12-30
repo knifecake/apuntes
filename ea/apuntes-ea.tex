@@ -1,7 +1,6 @@
 \documentclass{book}
 
 \usepackage[utf8]{inputenc}  % para que funcionen las tildes
-\usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -20,6 +19,7 @@
 \usepackage{subcaption}
 \usepackage{xfrac}
 \usepackage{standalone}
+\usepackage{pgfmath}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{shapes}
@@ -34,6 +34,8 @@
 
 %\setlength{\parindent}{0pt}
 \usepackage{parskip}
+
+\usepackage[pdftex,pdfpagelabels,bookmarks,hyperindex,hyperfigures]{hyperref}
 
 % ESTILOS DE DEFINICIONES Y TEOREMAS
 \declaretheoremstyle[
@@ -141,20 +143,50 @@ style=myej
 \author{Elias Hernandis}
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+	\centering
+	\vfill
+	\begin{center}
+		\begin{tikzpicture}
+		\def\N{39}
+		\def\r{7}
+		\def\angle{0};
+		
+		\foreach \n in {1,...,\N}{
+			\node (N-\n) at (90+\n*360/\N:\r) {};
+			%\draw[fill=black] (N-\n) circle (2pt);
+		}
+		
+		\foreach \a in {1,...,\N}{
+			\foreach \b in {\a,...,\N}{
+				\draw (N-\a.center) -- (N-\b.center);
+			}
+		}
+		\end{tikzpicture}
+	\end{center}
+	\vskip2cm
+	{\Large Apuntes de Estructuras Algebraicas}
+	\vskip.5cm
+	E. Hernandis et al. \\
+	Curso 2018-2019 @ UAM
+	\vfill
+\end{titlepage}	
+
+
 Revisión del \today $ $ a las \currenttime.
 
-\tableofcontents
+\begin{center}
+	
+\end{center}
 
-\part{Primer parcial - hoja 1}
+
+\tableofcontents
 
 \input{input/1-grupos}
 
 \input{input/2-homomorfismos}
 
 \input{input/3-clasificacion-peques}
-
-\part{Segundo parcial - hojas 2, 3 y 4}
 
 \input{input/4-cauchy}
 
@@ -168,8 +200,6 @@ Revisión del \today $ $ a las \currenttime.
 
 \input{input/9-por-clasificar}
 
-
-\part{Apendices}
 \renewcommand{\thechapter}{\Alph{chapter}}
 \setcounter{chapter}{0}
 
