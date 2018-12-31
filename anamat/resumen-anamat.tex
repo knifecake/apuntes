@@ -79,7 +79,7 @@ Sea $V$ un espacio vectorial, $x, y, z \in V, \lambda \in \R$
 		\item La norma euclidea que procede del producto escalar estándar es la p-norma de orden 2. 2 es el único número que tiene como conjudago a sí mismo
 		\item Las p-normas cumplen las desigualdades de \textbf{Young, Hölder y Minkowski}:
 		\begin{align*}
-			a,b > 0 &\implies \frac{a^p}{p} + \frac{b^{p'}}{p'} \\
+			a,b > 0 &\implies ab \leq \frac{a^p}{p} + \frac{b^{p'}}{p'} \\
 			x,y \in \R^n &\implies \dotprod{x,y} \leq \norma{x}_p \norma{y}_{p'} \\
 			x,y \in \R^n &\implies \norma{x+y}_p \leq \norma{x}_p + \norma{y}_p
 		\end{align*}
@@ -392,14 +392,32 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\item Decimos que $f:\R^n \to \R^m$ es regular si todo punto $x_0 \in \R^n$ es un valor regular.
 	\end{itemize}
 	\item Una inversa local de $f:U_0 \subset \R^n \to R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
+
+\end{itemize}
+
+
+\section{Variedades}
+\begin{itemize}
 	\item Una variedad en $\R^n$ de dimensión geométrica $k \geq 0$ es un conjunto $X \subseteq \R^n$ tal que $\forall x_0 \in X,\ \exists E, E' \subseteq \R^n$ abiertos con $x_0 \in E$ y un $\exists f:E \to E'$ difeomorfismo tal que
 	\begin{multline*}
 		f(X \cap E) = E' \cap (\R^k \times \{\mathbf{0}^{n-k}\}) =\\= \{y \in E' \mid y_{k+1} = y_{k+2} = \dots = y_{n} = 0\}
 	\end{multline*}
 	\begin{itemize}
 		\item Si $k = 1$ la variedad se llama curva en $\R^n$
-		\item Si $k = 2$ la varidedad se llama superficie en $\R^n$
-		\item Si $k = n-1$ la varidedad se llama hipersuperficie en $\R^n$
+		\item Si $k = 2$ la variedad se llama superficie en $\R^n$
+		\item Si $k = n-1$ la variedad se llama hipersuperficie en $\R^n$
+		\item La dimensión de una variedad es única, si hay dos puntos que tienen dimensión diferente entonces no es una variedad (puede ser unión de variedades).
+	\end{itemize}
+	\item Una \textbf{parametrización} de una variedad $X$ en $\R^n$ es un abierto $W \in \R^k$ y una función $\Phi:W \to \R^n$ que cumple:
+	\begin{enumerate}
+		\item $\Phi \in C^{s \geq 1}(W)$
+		\item $\Phi(W) \subset X$
+		\item $\exists Y \neq \emptyset$ abierto relativo de $X$ tal que $Y \subset \Phi(W)$ 
+	\end{enumerate}
+	Además
+	\begin{itemize}
+		\item $\Phi$ no tiene por qué ser sobre pero $\Phi(W)$ tiene que ser otra variedad (no puede ser insignificante)
+		\item Una parametrización $\Phi$ es de máxima calidad $\iff \Phi$ es inyectiva y regular.
 	\end{itemize}
 \end{itemize}
 
