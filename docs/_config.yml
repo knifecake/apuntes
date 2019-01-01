@@ -1,5 +1,6 @@
 title: Apuntes DGIIM
 email: eliashernandis@gmail.com
+baseurl: apuntes
 description: >-
   Apuntes para el Doble Grado de Ingeniería Informática y Matemáticas.
 # baseurl: "" # the subpath of your site, e.g. /blog
