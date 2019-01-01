@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<nav class="course-nav">
+  {% for course in site.courses %}
+    <a href="#{{ course.uid }}">{{ course.title }}</a> 
+  {% endfor %}
+</nav>
+
+<section>
+{% for course in site.courses %}
+  <article id="{{ course.uid }}">
+    <h2>{{ course.title }}</h2>
+    <p>Profesor: {{ course.professor }}
+      {% if course.professor_email %}
+        <a href="mailto:{{ course.professor_email }}">{{ course.professor_email }}</a> |
+      {% endif %}
+      Curso: {{ course.year }}
+    </p>
+    <ul>
+      {% for resource in course.resources %}
+        <li>{{ resource.title }}
+          {% if resource.author %}
+            – {{ resource.author }}
+          {% endif %}
+
+          {% for link in resource.links %}
+            [<a href="{{ link[1] }}">{{ link[0] }}</a>]
+          {% endfor %}
+
+          {% if resource.description %}
+            <div class="course-description">
+              {{ resource.description | markdownify }}
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </article>
+{% endfor %}
+</section>

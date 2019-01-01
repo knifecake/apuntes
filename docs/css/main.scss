@@ -1,0 +1,42 @@
+---
+---
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+header {
+  text-align:center;
+}
+
+nav.course-nav {
+  padding: 1rem;
+  text-align: center;
+  line-height: 1.5;
+
+  a {
+    margin: 0 .3rem;
+  }
+}
+
+.course-description {
+  font-size: 0.8rem;
+}
+
+section {
+  padding: 1rem;
+}
+
+footer {
+  border-top: 1px solid #eee;
+  margin-top: 1rem;
+  padding-top: .5rem;
+  color: #ccc;
+}
