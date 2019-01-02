@@ -349,6 +349,15 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\item Si $f$ es de Lipschitz entonces $f$ es $\alpha$-Hölder continua.
 	\end{itemize}
 
+	\begin{multline*}
+	\boxed{
+		\begin{array}{c}
+		f \in C^1 \implies f \text{ de Lipschitz }\implies\\
+		\implies f \text{ uniformemente continua }\implies f\text{ continua}
+		\end{array}
+	}
+	\end{multline*}
+
 	\item $f$ es \textbf{contractiva} $\iff f$ es de Lipschitz con $K < 1 \land$ dominio y codomino coinciden, distancias incluidas ($f:(X, d_X) \to (X, d_X)$)
 	\begin{itemize}
 		\item Si $f$ es contractiva y $X$ es completo entonces $f$ tiene un único punto fijo para el que $f(x) = x$
@@ -376,29 +385,23 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	\begin{itemize}
 		\item $f:U_1 \to R^n$ inyectiva, $f \in C^s$ y todas las jacobianas de los puntos en $U_1$ son invertibles $\implies f$ es un difeormorfismo
 	\end{itemize}
-\end{itemize}
-\begin{multline}
-\boxed{
-	\begin{array}{c}
-	f \in C^1 \implies f \text{ de Lipschitz }\implies\\
-	\implies f \text{ uniformemente continua }\implies f\text{ continua}
-	\end{array}
-	}
-\end{multline}
 
-\begin{itemize}
-	\item Un valor regular es un punto $x_0$ tal que para un $U_0$ entorno abierto de $x_0$, la función $f:U_0 \subset \R^n \to \R^m$ es de clase $C^1(U_0)$ y la diferencial $(df)_{x_0}$ tiene rango máximo, que es $\min(n, m)$.
+	\item Decimos que $f:\R^n \to \R^m$ es \textbf{regular} si todo punto $x_0 \in \R^n$ es un valor regular.
 	\begin{itemize}
-		\item Decimos que $f:\R^n \to \R^m$ es regular si todo punto $x_0 \in \R^n$ es un valor regular.
+		\item Un \textbf{valor regular} es un punto $x_0$ tal que para un $U_0$ entorno abierto de $x_0$, la función $f:U_0 \subset \R^n \to \R^m$ es de clase $C^1(U_0)$ y la diferencial $(df)_{x_0}$ tiene rango máximo, que es $\min(n, m)$
+		\item Si $n < m$ entonces $f$ es una \textbf{inmersión}
+		\item Si $n = m$ entonces $f$ es un \textbf{difeomorfismo local}
+		\item Si $n > m$ entonces $f$ es una \textbf{sumbersión}
+		\item Para ladrillitos: si $Df$ es $1\times m$ o $n \times 1$ entonces $\text{rango } Df$ es máximo $\iff \text{rango } Df = 1 \iff Df \neq \mathbf{0}$.
 	\end{itemize}
-	\item Una inversa local de $f:U_0 \subset \R^n \to R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
+	\item Una \textbf{inversa local} de $f:U_0 \subset \R^n \to R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
 
 \end{itemize}
 
 
 \section{Variedades}
 \begin{itemize}
-	\item Una variedad en $\R^n$ de dimensión geométrica $k \geq 0$ es un conjunto $X \subseteq \R^n$ tal que $\forall x_0 \in X,\ \exists E, E' \subseteq \R^n$ abiertos con $x_0 \in E$ y un $\exists f:E \to E'$ difeomorfismo tal que
+	\item Una \textbf{variedad} en $\R^n$ de dimensión geométrica $k \geq 0$ es un conjunto $X \subseteq \R^n$ tal que $\forall x_0 \in X,\ \exists E, E' \subseteq \R^n$ abiertos con $x_0 \in E$ y un $\exists f:E \to E'$ difeomorfismo tal que
 	\begin{multline*}
 		f(X \cap E) = E' \cap (\R^k \times \{\mathbf{0}^{n-k}\}) =\\= \{y \in E' \mid y_{k+1} = y_{k+2} = \dots = y_{n} = 0\}
 	\end{multline*}
@@ -407,6 +410,13 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\item Si $k = 2$ la variedad se llama superficie en $\R^n$
 		\item Si $k = n-1$ la variedad se llama hipersuperficie en $\R^n$
 		\item La dimensión de una variedad es única, si hay dos puntos que tienen dimensión diferente entonces no es una variedad (puede ser unión de variedades).
+		\item El difeomorfismo $f$ se llama \textbf{difeomorfismo planchador}
+		\item Una variedad se dice de clase $C^{s \geq 1} \iff f \in C^{s \geq 1}$.
+	\end{itemize}
+	\item \textbf{Teorema de la preimagen:} Sea $f:U_0 \subset \R^n \to \R^m,\ n > m,\ f\in C^{s \geq 1},\ b \in \R^{m}$. Si $f$ es submersión en $a, \forall a \in f^{-1}(\{b\})$ entonces $f^{-1}(\{b\})$ es o el vacío o una variedad de dimensión $n - m$ y clase $C^s$.
+	\begin{itemize}
+		\item Si $n = m$ entonces $f^{-1}(\{b\})$ es una variedad de dimensión $0$
+		\item Para ladrillitos: $f^{-1}(\{b\})$ es el vacío si $b \notin \text{ Im } f$, caso completamente inútil por lo que nunca elegiremos $f$ y $b$ de tal manera
 	\end{itemize}
 	\item Una \textbf{parametrización} de una variedad $X$ en $\R^n$ es un abierto $W \in \R^k$ y una función $\Phi:W \to \R^n$ que cumple:
 	\begin{enumerate}
