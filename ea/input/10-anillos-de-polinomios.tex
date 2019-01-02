@@ -1,3 +1,50 @@
 % !TeX root = ../apuntes-ea.tex
 
 \chapter{Anillos de polinomios}
+
+
+\begin{dfn}[Primo] %TODO buscar una fuente para esto
+	Sea $A$ un anillo conmutativo. Decimos que $p \in A$ es primo $\iff p \neq \0 \land p \notin \uds{A} \land \forall a,b \in A$
+	\begin{align*}
+	p \divides ab \implies p \divides a \lor p \divides b
+	\end{align*}
+	es decir (sin utilizar la palabra división que no existe)
+	\begin{align*}
+		\exists c \mid ab = pc \implies \exists a' \mid a = pa' \lor \exists b' \mid b = pa',\qquad a',b' \in A
+	\end{align*}
+\end{dfn}
+
+\begin{pro}
+	Sea $A$ un anillo conmutativo. Sea $p \in A, p \neq \0, p \notin \uds{A}$.
+	\begin{align*}
+		p \text{ primo } \iff \gen{p} \text{ es un ideal primo }
+	\end{align*}
+\end{pro}
+
+\begin{ej}
+	En $\Z$ (que tiene $\uds{\Z} = \{-1, 1\}$) todo subanillo $p\Z$ con $p$ primo (en el sentido tradicional de la palabra) es un ideal primo.
+\end{ej}
+
+La definición de primo generaliza para futuras estructuras a la definición de elemento irreducible.
+
+\begin{dfn}[Elemento irreducible]
+	Sea $(A, +, \cdot)$ un \gls{di}. Diremos que $a \in A,\ a \notin \uds{A}$ es irreducible $\iff \forall p,q \in A,\ a = pq\implies p \in \uds{A} \lor q \in \uds{A}$.
+\end{dfn}
+
+Observemos que no puede ocurrir que $p \in \uds{A} \land q \in \uds{A}$ y que además $pq = a \notin \uds{A}$ (las unidades son un grupo $\implies$ clausura).
+
+\begin{pro}
+	Sea $p \in A$.
+	\begin{align*}
+		p \text{ primo } \implies p \text{ irreducible }
+	\end{align*}
+\end{pro}
+
+\begin{dfn}[Dominio de factorización única (DFU)]
+	\label{dfn:dfu}
+	Sea $D$ un \gls{di}. Diremos que $D$ es un dominio de factorización única (\gls{dfu}) si se cumplen las siguientes condiciones $\forall a \in D$:
+	\begin{itemize}
+		\item $a \neq 0 \land a \not\in\uds{D} \implies a = p_1p_2\dots p_r$ donde $p_i$ es irreducible en $D$
+		\item $a = p_1p_2\dots p_r,\ p_i$ irreducible y $a = q_1q_2 \dots q_s,\ q_i$ irreducible $\implies r = s$ y además $r_i$ y $q_i$ son asociados para $i = 1, \dots, r$ (la igualdad es un caso particular de el ser asociados).
+	\end{itemize}
+\end{dfn}

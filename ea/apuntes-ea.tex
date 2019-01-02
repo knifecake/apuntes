@@ -18,6 +18,7 @@
 \usepackage{multicol}
 \usepackage{subcaption}
 \usepackage{xfrac}
+\usepackage{glossaries}
 \usepackage{standalone}
 \usepackage{pgfmath}
 \usepackage{tikz}
@@ -123,6 +124,12 @@ Refname={Observaci\'{o}n,Observaciones},
 style=myej
 ]{obs}
 
+\makeglossaries
+\newglossaryentry{di}{name={DI},description={Dominio de integridad (ver \autoref{dfn:dominiointegridad})}}
+\newglossaryentry{dip}{name={DIP},description={Dominio de ideales principales (ver \autoref{dfn:dominioidealesprincipales})}}
+\newglossaryentry{dfu}{name={DFU},description={Dominio de factorización única (ver \autoref{dfn:dfu})}}
+
+
 % COMANDOS ÚTILES PARA LA TEORÍA DE GRUPOS
 %\newcommand{\normsub}{\mathbin{\triangleleft}}
 \newcommand{\normsub}{\lhd}
@@ -215,12 +222,13 @@ Revisión del \today $ $ a las \currenttime.
 \input{input/10-anillos-de-polinomios}
 
 
+
 \input{input/por-clasificar}
 
+\part{Apéndices}
+\renewcommand{\chaptername}{Apéndice}
 \renewcommand{\thechapter}{\Alph{chapter}}
 \setcounter{chapter}{0}
-
-
 
 \input{input/a-ejercicios}
 
@@ -239,6 +247,7 @@ Revisión del \today $ $ a las \currenttime.
 \renewcommand{\listtheoremname}{Lista de ejercicios}
 \listoftheorems[onlynamed,ignore={dfn,thm,pro,cor,obs,lm,ej}]
 
+\printglossaries
 
 \bibliographystyle{alpha}
 \bibliography{apuntes-ea}

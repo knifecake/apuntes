@@ -1,6 +1,6 @@
 % !TeX root = ../apuntes-ea.tex
 
-\chapter{Anillos (y cuerpos): propiedades básicas}
+\chapter{Anillos (y cuerpos)}
 
 \newcommand{\0}{\mathbf{0}}
 \newcommand{\1}{\mathbf{1}}
@@ -233,10 +233,10 @@ Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el pr
 \end{ej}
 
 
-\section{Dominios de integridad}
+\section{Divisores de $\0$. Dominios de integridad.}
 
 \begin{dfn}[Divisor de 0]
-	Sea $(A, +, \cdot)$ un anillo. Diremos que $a \in A$ es divisor de $\0 \iff a \neq \0 \land \exists b \neq \0 \in A \mid a\cdot b = \0$
+	Sea $(A, +, \cdot)$ un anillo conmutativo\footnote{Si aquí no decimos conmutativo entonces especificaremos si se trata de un divisor de $\0$ por la derecha o por la izquierda. Ver la nota al principio de la sección sobre ideales.}. Diremos que $a \in A$ es divisor de $\0 \iff a \neq \0 \land \exists b \neq \0 \in A \mid a\cdot b = \0$
 \end{dfn}
 
 \begin{ej}
@@ -246,7 +246,7 @@ Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el pr
 	\end{align*}
 	Sin embargo, $\overline{3}$ no lo es ya que
 	\begin{align*}
-		\overline{3}\overline{a} = \0 \implies \inv{\overline{3}}\overline{3}\overline{a} = \inv{\overline{3}}\0 \implies \1 \overline{a} = \0 \implies \overline{a} = 0
+		\overline{3}\overline{a} = \0 \implies \inv{\overline{3}}\overline{3}\overline{a} = \inv{\overline{3}}\0 \implies \1 \overline{a} = \0 \implies \overline{a} = \0
 	\end{align*}
 \end{ej}
 
@@ -254,13 +254,13 @@ Otra manera de ver esto es plantear la ecuación $a \cdot b = \0$. El $\0$ siemp
 
 \begin{ej}$ $\newline
 	\begin{itemize}
-		\item En $\Z$ la ec. $2x = 0$ solo tiene la solución trivial $\implies 2$ no es un divisor de $\0$.
-		\item En $\Z/6\Z$ la ec. $\overline{2}\overline{x} = 0$ tiene la solución $\overline{x} = \overline{3}$ luego $\overline{2}$ sí que es un divisor de $0$.
+		\item En $\Z$ la ec. $2x = \0$ solo tiene la solución trivial $\implies 2$ no es un divisor de $\0$.
+		\item En $\Z/6\Z$ la ec. $\overline{2}\overline{x} = \0$ tiene la solución $\overline{x} = \overline{3}$ luego $\overline{2}$ sí que es un divisor de $\0$.
 	\end{itemize}
 \end{ej}
 
 \begin{pro}
-	Si $a \in \uds{A}$ entonces $a$ no es un divisor de $0$.
+	Si $a \in \uds{A}$ entonces $a$ no es un divisor de $\0$. Equivalentemente, si $a$ es un divisor de $\0$ entonces $a \notin \uds{A}$.
 \end{pro}
 
 \begin{proof}
@@ -276,7 +276,8 @@ Otra manera de ver esto es plantear la ecuación $a \cdot b = \0$. El $\0$ siemp
 \end{proof}
 
 \begin{dfn}[Dominio de integridad]
-	Un anillo que no tiene elementos divisores de 0 se llama dominio de integridad (DI).
+	\label{dfn:dominiointegridad}
+	Un anillo que no tiene elementos divisores de 0 se llama dominio de integridad o \gls{di}.
 \end{dfn}
 
 % TODO profundizar con la p. 159 de santorum
@@ -292,25 +293,25 @@ Otra manera de ver esto es plantear la ecuación $a \cdot b = \0$. El $\0$ siemp
 A veces utilizamos como definición de dominio de integridad la siguiente proposición:
 
 \begin{pro}
-	$A$ es un DI $\iff$ el producto de elementos no nulos es no nulo.
+	$A$ es un \gls{di} $\iff$ el producto de elementos no nulos es no nulo.
 \end{pro}
 
 \begin{proof}
 	$(\impliedby)$ Sean $a,b \in A,\ a,b \neq \0 \implies ab \neq 0 \implies A$ dominio de integridad.
 	
-	$(\implies)$ Sea $a \in A,\ a \neq \0$. $A$ DI $\implies \nexists b \in A \mid a\cdot b = \0 \iff$ el producto de no nulos es no nulo.
+	$(\implies)$ Sea $a \in A,\ a \neq \0$. $A$ \gls{di} $\implies \nexists b \in A \mid a\cdot b = \0 \iff$ el producto de no nulos es no nulo.
 \end{proof}
 
 \begin{pro}
-	Sea $A$ un DI y $C \subset A$ un subanillo. Entonces $C$ es un DI.
+	Sea $A$ un \gls{di} y $C \subset A$ un subanillo. Entonces $C$ es un \gls{di}.
 \end{pro}
 
 \begin{proof}
-	Sean $\0 \neq c_1, c_2 \in C$. Como $C \subset A$ y $c_1c_2 \neq \0$ en $A$ tenemos en particular que $c_1 c_2 \neq \0$ en $C \implies C$ es un DI.
+	Sean $\0 \neq c_1, c_2 \in C$. Como $C \subset A$ y $c_1c_2 \neq \0$ en $A$ tenemos en particular que $c_1 c_2 \neq \0$ en $C \implies C$ es un \gls{di}.
 \end{proof}
 
 \begin{pro}
-	Si $A$ es un cuerpo entonces $A$ es un DI.
+	Si $A$ es un cuerpo entonces $A$ es un \gls{di}.
 \end{pro}
 
 Por lo general el recíproco es falso.
@@ -383,8 +384,10 @@ Esta es otra definición alternativa:
 \end{ej}
 
 \begin{pro}
-	Sean $I, J \subset A$ ideales. Entonces $I + J = \{i + j \mid i \in I \land j \in J\}$ es un ideal\footnote{Ojo: aquí $I+J$ no tiene nada que ver con la suma directa (el caso particular del producto directo) que había en grupos.} de $A$ que contiene a $I$, a $J$, y además es el mayor ideal con esta propiedad.
+	Sean $I, J \subset A$ ideales. Entonces $I + J = \{i + j \mid i \in I \land j \in J\}$ es un ideal\footnote{Ojo: aquí $I+J$ no tiene nada que ver con la suma directa (el caso particular del producto directo) que había en grupos. De hecho se parece más al producto libre, que recordemos que en caso de que $I,J$ fueran subgrupos normales daba un subgrupo normal. El equivalente aquí es que si $I, J$ son ideales entonces su "producto libre" también es un ideal.} de $A$ que contiene a $I$, a $J$, y además es el mayor ideal con esta propiedad.
 \end{pro}
+
+\subsection{Ideales generados. Ideales principales. Dominios de ideales principales.}
 
 A continuación definimos el análogo al subgrupo generado pero para anillos:
 
@@ -426,6 +429,11 @@ Como cabe esperar, cumple las mismas propiedades que cumplían los subgrupos gen
 \begin{ej}
 	En $\Z$ consideramos el subconjunto $S = \{6\} \subset \Z$. El conjunto $\gen{S} = \{a6 \mid a \in \Z\} = 6\Z$ es un ideal y como está generado por un único elemento, es un ideal principal.
 \end{ej}
+
+\begin{dfn}[Dominio de ideales principales (\gls{dip})]
+	\label{dfn:dominioidealesprincipales}
+	Sea $(A, +, \cdot)$ un anillo que además es un \gls{di}. Si todo ideal $I \subset A$ es principal decimos que $A$ es un dominio de ideales principales o \gls{dip}.
+\end{dfn}
 
 \begin{obs}
 	En $\Z$ todo ideal es principal.
