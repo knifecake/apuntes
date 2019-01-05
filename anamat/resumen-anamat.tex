@@ -192,6 +192,7 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 		\item $E \subset X$ compacto, $f$ continua en $E \implies f$ alcanza máximo y mínimo en $E$
 	\end{itemize}
 	\item Un \textbf{camino} es una aplicación continua $\alpha:I \subset \R \to X$ con $I$ un intervalo
+	\item Un \textbf{homeomorfismo} es una aplicación continua y biyectiva con inversa continua
 	\item $E$ es \textbf{conexo} (por abiertos) $\iff \nexists A, B \subset X \mid A \cap B = \emptyset \land (E \cap A) \cup (B \cap E) = E$
 	\item $E$ es \textbf{conexo} (por abiertos relativos) $\iff \forall A,B$ abiertos en $E$ con $A \cap B = \emptyset \land A \cup B = E \implies (A = \emptyset \land B = E) \lor B = \emptyset \land A = E)$
 	\begin{itemize}
@@ -199,9 +200,12 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 		\item $E$ conexo y $p \in \overline{E} \implies E \cup p$ conexo
 		\item $E_1, E_2$ conexos y $E_1 \cap E_2 \neq \emptyset \implies E_1 \cap E_2$ conexo
 	\end{itemize}
-	\item $E$ es \textbf{conexo por caminos} o \textbf{arco-conexo} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
+	\item $E$ es \textbf{conexo por caminos} $\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E$ un camino tal que $\alpha(0) = p \land \alpha(1) = q$
 	\begin{itemize}
-		\item $E$ conexo $\implies E$ arco-conexo
+		\item $E$ es \textbf{arco-conexo} si además $f:[0,1] \to f([0,1])$ es un homeomorfismo
+		\begin{multline*}
+			E \text{ arco-conexo } \\\implies E \text{ conexo por caminos }\\ \implies E \text{ conexo }
+		\end{multline*}
 	\end{itemize}
 	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $e$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
 	\begin{itemize}
@@ -331,7 +335,7 @@ Sean $E,F$ e.v, sea $f: E \to F$
 		\item $\forall x \in A, \hess f (x)$ es semidefinida positiva $\iff f$ es convexa en $A$
 	\end{itemize}
 	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$
-	\item $f$ es $\alpha$\textbf{-Hölder continua} $\iff \exists c > 0 \mid \norma{f(x) - f(x')} \leq c \norma{x - x'}^\alpha$
+	\item $f$ es $\mathbf{\alpha}$\textbf{-Hölder continua} $\iff \exists c > 0 \mid \norma{f(x) - f(x')} \leq c \norma{x - x'}^\alpha$
 	\begin{itemize}
 		\item Si $\alpha > 1$ entonces $f$ es constante
 		\item Si $\alpha = 1$ entonces $f$ es de Lipschitz
@@ -427,7 +431,12 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 	Además
 	\begin{itemize}
 		\item $\Phi$ no tiene por qué ser sobre pero $\Phi(W)$ tiene que ser otra variedad (no puede ser insignificante)
-		\item Una parametrización $\Phi$ es de máxima calidad $\iff \Phi$ es inyectiva y regular.
+		\item Una parametrización $\Phi$ es de máxima calidad o un \textbf{sistema de coordenadas} $\iff \Phi$ es inyectiva y regular. Esto equivale a comprobar
+		\begin{enumerate}
+			\item $\Phi(W) \subseteq M$
+			\item $D\Phi(x)$ tiene rango máximo $\forall x \in W$
+			\item $\Phi$ es inyectiva en $W$
+		\end{enumerate}
 	\end{itemize}
 \end{itemize}
 
