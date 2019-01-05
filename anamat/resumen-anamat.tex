@@ -398,7 +398,7 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\item Si $n > m$ entonces $f$ es una \textbf{sumbersión}
 		\item Para ladrillitos: si $Df$ es $1\times m$ o $n \times 1$ entonces $\text{rango } Df$ es máximo $\iff \text{rango } Df = 1 \iff Df \neq \mathbf{0}$.
 	\end{itemize}
-	\item Una \textbf{inversa local} de $f:U_0 \subset \R^n \to R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
+	\item Una \textbf{inversa local} de $f:U_0 \subset \R^n \to \R^m$ es una función $(f|_U)^{-1} : f(U) \to U$ donde $U \subseteq U_0$ es cualquier abierto tal que $f(U)$ es abierto y $f|_U$ es inyectiva.
 
 \end{itemize}
 
@@ -443,7 +443,7 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 \section{Teoremas gordos}
 
 \begin{thm}[del valor medio]
-	Sea $f: S \subset R^n \to R$ una función diferenciable sobre el conjunto abierto y convexo $S$. Entonces $\forall a, b \in S,\ \exists c \in [a,b] \mid f(a) - f(b) = \nabla f(c)(a - b)$
+	Sea $f: S \subset \R^n \to \R$ una función diferenciable sobre el conjunto abierto y convexo $S$. Entonces $\forall a, b \in S,\ \exists c \in [a,b] \mid f(a) - f(b) = \nabla f(c)(a - b)$
 \end{thm}
 
 \begin{thm}[fundamental del cálculo]
@@ -458,7 +458,7 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 \end{thm}
 
 \begin{thm}[de la función inversa]
-	Sea $(\V, \norma{\cdot})$ un espacio de Banach. Sean $U_0 \in \V$ un abierto y $f:U_0 \to V$ una función de clase $C^1$. Si en $x_0 \in U_0$ la diferencial $L = (df)_{x_0}$ es invertible (e.d. $L$ es lineal acototada, biyectiva y con inversa $L^{-1}$ también acotada) entonces existen abiertos $U, V$ con $x_0 \in U, y_0 \in V, f(x_0) = y_0$  tales que $f$ es biyectiva de $U$ a $V$.
+	Sea $(\V, \norma{\cdot})$ un espacio de Banach. Sean $U_0 \in \V$ un abierto y $f:U_0 \to \V$ una función de clase $C^1$. Si en $x_0 \in U_0$ la diferencial $L = (df)_{x_0}$ es invertible (e.d. $L$ es lineal acototada, biyectiva y con inversa $L^{-1}$ también acotada) entonces existen abiertos $U, V$ con $x_0 \in U,\ f(x_0) = y_0 \in V$  tales que $f$ es biyectiva de $U$ a $V$.
 	
 	Además, en ese caso la inversa $f^{-1}:V \to U$ es diferenciable en $y_0$ y $(df^{-1})_{y_0} = [(df)_{x_0}]^{-1}$.
 \end{thm}
@@ -473,7 +473,7 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		\frac{\partial F_m}{\partial y_1}(a,b) & \dots & \frac{\partial F_m}{\partial y_m}
 		\end{array}\right)
 	\end{align*}
-	es invertible entonces $\exists U \subset R^n$ entorno abierto de $a$ y $\exists g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
+	es invertible entonces $\exists U \subset \R^n$ entorno abierto de $a$ y $\exists g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
 	\begin{align*}
 		\frac{\partial g}{\partial x_j}(x) = -\left[DF_y(x, g(x))\right]^{-1}_{m\times m}\left[\frac{\partial F}{\partial x_j}(x, g(x))\right]_{m \times 1}
 	\end{align*}
