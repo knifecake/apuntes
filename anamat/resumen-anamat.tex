@@ -207,12 +207,15 @@ Sea $(X,d)$ un espacio métrico, $E \subset Y \subset X,\ a, x, y \in X,\ r \in 
 			E \text{ arco-conexo } \\\implies E \text{ conexo por caminos }\\ \implies E \text{ conexo }
 		\end{multline*}
 	\end{itemize}
-	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $e$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
+	\item Dado $x \in E$, la \textbf{componente conexa} que contiene a $x$ es el conjunto $\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}$
 	\begin{itemize}
 		\item La relación de equivalencia $x\sim y \iff \exists C$ conexo con $x,y \in C$ define una partición cuyas clases de equivalencia son las componentes conexas de cada punto.
 		\item Si $A \subset X$ conexo, $A$ está contenido en una única componente conexa.
 	\end{itemize}
 	\item $E$ es \textbf{convexo} $\iff \forall x, y \in E \implies [x,y] = \{tx + (1-t)y \mid t \in [0,1]\} \subset E$
+	\begin{itemize}
+		\item Más en general $x \in \R^n$ es \textbf{combinación convexa} de $v_1, \dots, v_n \iff \exists t_1, \dots, t_n \geq 0 \mid x = \sum_{i=0}^n t_iv_i$ con $\sum_{i=0}^n t_i = 1$
+	\end{itemize}
 \end{itemize}
 
 \subsection{Continuidad}
@@ -244,6 +247,10 @@ Sean $E, F$ espacios normados, $x_0 \in E, U \subset E$ entorno abierto de $x_0$
 \end{align*}
 
 \begin{itemize}
+	\item Alternativamente, $f$ es diferenciable en $x_0 \iff$ podemos escribir
+	\begin{align*}
+		f(x_0 + h) = f(x_0) + Th + o(\norma{h})
+	\end{align*}
 	\item $T$ existe $\implies T$ única y la llamamos \textbf{diferencial} de $f$ en $x_0$ y se denota $(df)_{x_0}$
 	\item $f$ diferenciable en $x_0 \implies f$ continua en $x_0$
 	\item toda $T \in \lacot{E,F}$ es diferenciable en todo punto y coincide con sus diferenciales
@@ -330,8 +337,9 @@ Sea $f:\R^n \to \R$ una funnción de clase $C^2$. El polinomio de Taylor de grad
 
 Sean $E,F$ e.v, sea $f: E \to F$
 \begin{itemize}
-	\item $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
+	\item Si $F = \R$ decimos que $f$ es \textbf{convexa} $\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)$
 	\begin{itemize}
+		\item En general, si $x$ es combinación convexa de $v_1, \dots, v_n$ y $f$ es convexa entonces $f(\sum_{i=0}^n t_i v_i) \leq \sum_{i=0}^nt_if(v_i)$
 		\item $\forall x \in A, \hess f (x)$ es semidefinida positiva $\iff f$ es convexa en $A$
 	\end{itemize}
 	\item Sean $x_1, \dots, x_n$. Un punto $x$ es \textbf{combinación convexa} de $x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n$ con $\sum t_i = 1 \land t_i \geq 0$
@@ -471,17 +479,17 @@ Sean $(X, d_X), (Y, d_Y)$ espacios métricos, sea $f:X \to Y$
 		DF_y(a,b) = \left(\begin{array}{ccc}
 		\frac{\partial F_1}{\partial y_1}(a,b) & \dots & \frac{\partial F_1}{\partial y_m}(a,b) \\
 		\vdots & \ddots & \vdots \\
-		\frac{\partial F_m}{\partial y_1}(a,b) & \dots & \frac{\partial F_m}{\partial y_m}
+		\frac{\partial F_m}{\partial y_1}(a,b) & \dots & \frac{\partial F_m}{\partial y_m}(a,b)
 		\end{array}\right)
 	\end{align*}
-	es invertible entonces $\exists U \subset \R^n$ entorno abierto de $a$ y $\exists g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
+	es invertible entonces $\exists U \subset \R^n$ entorno abierto de $a$ y $\exists! g:U \to \R^m$ tal que $g(a) = b$ y $F(x, g(x)) = 0,\ \forall x \in U$. Es más, $g \in C^k$ y
 	\begin{align*}
 		\frac{\partial g}{\partial x_j}(x) = -\left[DF_y(x, g(x))\right]^{-1}_{m\times m}\left[\frac{\partial F}{\partial x_j}(x, g(x))\right]_{m \times 1}
 	\end{align*}
 	Esto es: las columnas de la jacobiana de $g$, que es una matriz $m \times n$, van dadas por la expresión anterior.
 \end{thm}
 \begin{itemize}
-	\item Si de una ecuación queremos despejar $x$, mandamos todo a un lado y lo que no se puede anular es la matriz de las derivadas de $y$.
+	\item Si de una ecuación queremos despejar $y$, mandamos todo a un lado y lo que no se puede anular es la matriz de las derivadas de $y$.
 	\item En este enunciado se escribe lo que quieres despejar después, como el $y \in \R^m$ pero a veces se pone antes. Da igual, lo que importa es la regla mnemotécnica de antes.
 \end{itemize}
 
