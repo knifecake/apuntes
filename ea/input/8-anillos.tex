@@ -2,9 +2,6 @@
 
 \chapter{Anillos (y cuerpos)}
 
-\newcommand{\0}{\mathbf{0}}
-\newcommand{\1}{\mathbf{1}}
-
 En este capítulo se extiende lo que sabemos de teoría de grupos a las nuevas estructuras algebraicas que introducimos que son los anillos y los cuerpos.
 
 \section{Definición y propiedades básicas}
@@ -47,8 +44,8 @@ Con la operación $\cdot$ tenemos las siguientes propiedades
 	$a \cdot \0 = a \cdot(\0 + \0) = a\cdot \0 + a\cdot \0 \implies \0 = a\cdot \0$
 \end{proof}
 
-\begin{dfn}[Anillo con unidad]
-	Sea $(A, +, \cdot)$ un anillo. Decimos que es un anillo con unidad si tiene elemento neutro multiplicativo, es decir, si $\exists \1 \in A \mid \forall a \in A, \1 a = a \1 = a$.
+\begin{dfn}[Anillo con unidad o anillo unitario]
+	Sea $(A, +, \cdot)$ un anillo. Decimos que es un anillo con unidad o un \underline{anillo unitario} si tiene elemento neutro multiplicativo, es decir, si $\exists \1 \in A \mid \forall a \in A, \1 a = a \1 = a$.
 \end{dfn}
 
 \begin{pro}
@@ -101,6 +98,8 @@ Es decir, que $(A\setminus\{\0\}, \cdot)$ es un grupo. Digo definición alternat
 	\item $\R$ y $\mathbb{C}$ también son cuerpos
 	\item Las matrices $2 \times 2$ invertibles que antes veíamos como un grupo solo con el producto también son un cuerpo si les añadimos la suma: $(GL_2(\R), +, \cdot)$ es un cuerpo.
 \end{ej}
+
+Antes de seguir, siempre vamos a hablar de anillos con unidad o \textbf{anillos unitarios}, aunque alguna vez se me olvide ponerlo.
 
 \subsection{Unidades en anillos}
 
@@ -218,7 +217,7 @@ Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el pr
 
 \begin{pro}
 	\label{pro:udsproductodirectoanillos}
-	$(a,b) \in \uds{A \times B} \iff a \in \uds{A} \land b \in \uds{B}$
+	$(a,b) \in \uds{A \times B} \iff a \in \uds{A} \land b \in \uds{B}$. Es decir, que $\uds{A \times B} \isom \uds{A} \times \uds{B}$.
 \end{pro}
 
 \begin{proof}

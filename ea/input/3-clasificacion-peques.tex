@@ -18,15 +18,7 @@ El producto directo de grupos permite generar otro grupo a partir de otros.
 	donde $\sim: (\varprod_{i=1}^n G_i) \times (\varprod_{i=1}^n G_i) \to \varprod_{i=1}^n G_i$ con $(g_1, \dots, g_n) \sim (g'_1, \dots, g'_n) = (g_1 \ast_1 g'_1, \dots, g_n \ast_n g'_n)$.
 \end{dfn}
 
-Cuando se utiliza la notación aditiva es común llamarlo suma directa.
-
-\begin{dfn}[Suma directa]
-	Sean $(G_1, +), \dots, (G_n, +)$ grupos cuya operación es la suma\footnote{Lo importante es que es la misma operación para todos y que utilizamos la notación aditiva, lo que \textit{suma} signifique en realidad nos importa poco} entonces denotamos por suma directa al producto directo de todos ellos:
-	\begin{align*}
-		\bigoplus_{i=1}^n (G_i, +) = \left(\bigoplus_{i=1}^n G_i, \oplus\right) = (G_1 \times \dots \times G_n, \oplus)
-	\end{align*}
-	donde $\oplus: (\bigoplus_{i=1}^n G_i) \times (\bigoplus_{i=1}^n G_i) \to \bigoplus_{i=1}^n G_i$ se define con $g \oplus g' = (g_1 + g'_1, \dots, g_n + g'_n)$.
-\end{dfn}
+Cuando se utiliza la notación aditiva es común llamarlo suma directa (ver \autoref{dfn:sumadirecta}).
 
 El producto directo se trata con detalle más adelante pero aquí van un par de teoremas.
 
@@ -56,6 +48,8 @@ Este teorema puede ser útil combinado con el resultado anterior (\autoref{thm:c
 	\label{dfn:productolibre}
 	Sean $S,T$ subconjuntos del grupo $G$. Definimos $ST = \{s\ast t \mid s \in S \land t \in T\}$.
 \end{dfn}
+
+A veces, cuando se utiliza notación aditiva es común denotarlo por $S+T$ (ver \autoref{dfn:sumalibra}).
 
 Es importante remarcar el \textbf{el producto libre de [sub]grupos no siempre es un grupo, a diferencia del producto libre que siempre funciona. En general solo es un conjunto.} Ver el teorema \ref{thm:condicionproductolibre}
 
