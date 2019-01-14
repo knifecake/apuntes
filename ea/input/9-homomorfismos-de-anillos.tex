@@ -75,10 +75,10 @@ Este ejemplo nos permite dar el siguiente teorema:
 \end{thm}
 
 \begin{proof}
-	Fijo $s \in A \setminus \{\0\}$. Como $A$ es finito $\alpha_s$ inyectiva $\iff \alpha_s$ sobreyectiva $\iff \alpha_s$ inyectiva. Entonces, fijándonos en el ejemplo anterior, tenemos
+	Fijo $s \in A \setminus \{\0\}$. Como $A$ es finito $\alpha_s$ inyectiva $\iff \alpha_s$ sobreyectiva $\iff \alpha_s$ biyectiva. Entonces, fijándonos en el ejemplo anterior, tenemos
 	\begin{itemize}
-		\item Si $s \in \uds{A}$ entonces $\alpha_s$ inyectiva $\implies \ker \alpha_s = \{\0\} \implies s$ no es un divisor de $0$.
-		\item Si $s \notin \uds{A}$ entonces $\alpha$ no es sobre $\implies \alpha_s$ no inyectiva $\implies \ker \alpha_s \neq \{\0\} \implies s$ es un divisor de $\0$.
+		\item Si $s \in \uds{A}$ entonces $\alpha_s$ inyectiva\footnote{Esto es porque $\forall a,b \in A, \alpha_s(a) = \alpha_s(b) \iff sa = sb \iff \inv{s}sa = \inv{s}sb \iff a = b \implies \alpha_s$ inyectiva. Ver ejercicio \autoref{ex:h5.4} para más detalles en la demostración de este teorema.} $\implies \ker \alpha_s = \{\0\} \implies s$ no es un divisor de $0$.
+		\item Si $s \notin \uds{A}$ entonces $\alpha_s$ no es sobre $\implies \alpha_s$ no inyectiva $\implies \ker \alpha_s \neq \{\0\} \implies s$ es un divisor de $\0$.
 	\end{itemize}
 \end{proof}
 
@@ -482,3 +482,64 @@ Para probarlo nos ayudamos del siguiente Lema:
 	Sea $\varphi:A \to B$ un homomorfismo de anillos sobreyectivo\footnote{Esto no lo pone en la p. 182 de santorum pero hace falta para que se pueda aplicar el teorema.} y $B$ un DI. Por el primer teorema de la isomorfía tenemos que $A / \ker \varphi \isom \ima \varphi$ que es un dominio luego $\ker \varphi$ \textbf{es un ideal primo en} $A$.
 \end{obs}
 
+
+\section{Cuerpo de fracciones de un anillo}
+
+Sean $a,b \in A$ elementos de un anillo $A$ cualquiera. En general $ax = b$ no tiene solución dentro del anillo pero muchas veces las soluciones de esta ecuación son de interés. Por ejemplo, para resolver dichas ecuaciones cuando $A = (\Z, +, \cdot)$ extendemos $\Z$ al cuerpo $(\Q, +, \cdot)$. En esta sección veremos como esta extensión en realidad se puede hacer para cualquier \gls{di} conmutativo y con unidad.
+
+\begin{dfn}[Cuerpo de fracciones de un anillo]
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad y además sea $A$ un \gls{di}. Definimos en $A \times A\setminus\{\0\}$ la relación de equivalencia
+	\begin{align}
+		(a,b) \sim (c,d) \iff ad = bc
+	\end{align}
+	Definimos además el \textbf{cuerpo de fracciones} $C = (A\times A\setminus \{\0\})/ \sim = \{[(a,b)] \mid (a,b) \in A\times A\setminus \0\}$ y dos operaciones sobre las clases de equivalencia
+	\begin{align}
+		[(a,b)]+[(c,d)] &= [(ad+bc, bd)] \\
+		[(a,b)]\cdot[(c,d)] &= [(ac,bd)]
+	\end{align}
+\end{dfn}
+
+Este conjunto $C$ es el conjunto de los pares $[(a,b)]$ tales que $a,b \in A \land b \neq \0$ y lo interpretamos como los números $\frac{a}{b}$ (está siempre bien definido porque $b \neq 0$).
+
+\begin{pro}
+	La relación $\sim$ es efectivamente una relación de equivalencia.
+\end{pro}
+
+\begin{thm}
+	$(C, +, \cdot)$ es un cuerpo y además contiene un subanillo isomorfo a $A$.
+\end{thm}
+
+\begin{proof}
+	Para ver qu $(C, +, \cdot)$ es un cuerpo hay probar que $(C, +, \cdot)$ es un anillo conmutativo con unidad y que no hay divisores de $\0$. Es decir que las operaciones están bien definidas, que $(C,+)$ es un grupo abeliano, que el producto es asociativo y conmutativo (es decir que $(C\setminus \{\0\}, \cdot)$ es un grupo abeliano), y que se cumplen las propiedades distributivas. Ver \cite[p.209]{dor96}.
+	
+	Además afirmanos que $C$ contiene un subanillo isomorfo a $A$. Este subanillo es
+	\begin{align*}
+		\mathcal{A} = \{[(a, 1)] \mid a \in A\}
+	\end{align*}
+	Se comprueba que en efecto es un subanillo (es cerrado por las operaciones y tiene estructura de anillo) y se define $f:A \to \mathcal{A}$ con $f(a) = [(a, 1)]$. Se comprueba que $f$ es en efecto un isomorfismo de anillos.
+\end{proof}
+
+En lo que sigue diremos que $A$ es un subanillo de $C$ aunque esto no es del todo cierto pero abusamos del lenguaje ya que son isomorfos.
+
+\begin{ej}
+	Veamos ejemplos de cuerpos de fracciones de los anillos más importantes:
+	\begin{itemize}
+		\item El cuerpo de fracciones de $\Z$ es $\Q$. Bueno, en realidad es isomorfo a $\Q$ con el isomorfismo $f([(p,q)]) = \frac{p}{q}$.
+		\item El cuerpo de fracciones de $\Z[i]$ es $\Q[i]$. En esta ocasión el isomorfismo es
+		\begin{align*}
+			f([(p+qi, u+vi)]) = \frac{(p+qi)}{(u+vi)} = \frac{(p+qi)(u-vi)}{u^2+v^2} = \frac{pu+vq}{u^2+v^2} + i\frac{qu-pv}{u^2+v^2}
+		\end{align*}
+		\item El cuerpo de fracciones de $\Z[\sqrt{m}]$ es $\Q[\sqrt{m}]$
+		\item Todo cuerpo coincide con su cuerpo de fracciones porque son isomorfos mediante $f(a) = [(a,1)]$.
+	\end{itemize}
+\end{ej}
+
+En ocasiones nos podemos pasar extendiendo un anillo para posibilitar que las ecuaciones $ax=b$ tengan solución. Por ejemplo $ax=b$ para $a,b \in \Z$ tiene solución en $\Q$ pero también en $\R$ y $\C$. Por eso es interesante dar el siguiente resultado:
+
+\begin{pro}
+	Sea $A$ un \gls{di} conmutativo y con unidad. Entonces su cuerpo de fracciones $C$ es el menor cuerpo que \textit{contiene} a $A$. Es decir que  si cualquier otro cuerpo $\tilde{C}$ contiene a $A$ entonces existe un subcuerpo $C' \subset \tilde{C}$ tal que $C$ es isomorfo a $C'$.
+\end{pro}
+
+\begin{proof}
+	Ver \cite[p.210]{dor96}.
+\end{proof}

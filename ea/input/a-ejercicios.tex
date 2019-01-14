@@ -33,10 +33,18 @@
 
 \begin{ex}[H1.3]Hallar los inversos de los siguientes elementos, cada uno en su grupo correspondiente:
 	\begin{enumerate}
-		\item $o(\overline{11})$ en $\uds{\Z^\ast/23\Z}$ es $22$ porque $23 \cdot 22 \equiv 1 \mod 23$
-		\item $o(\overline{5})$ en $\uds{\Z^\ast/31\Z}$ es $3$ porque $5 \cdot 3 \equiv 1 \mod 31$
+		\item $o(\overline{11})$ en $\uds{\Z^\ast/23\Z}$
+		\item $o(\overline{5})$ en $\uds{\Z^\ast/31\Z}$
 	\end{enumerate}
 \end{ex}
+
+\begin{proof}
+	Por el pequeño teorema de Fermat (\cite{flt}) tenemos que $a^{p-1} \equiv 1 \mod p$ para $p$ primo. Entonces
+	\begin{align*}
+		11^22 \equiv 1 \mod 23 &\implies o(\overline{11}) = 22 \implies \inv{\overline{11}} = \overline{11}^{21} \\
+		5^20 \equiv 1 \mod 31 &\implies o(\overline{5}) = 30 \implies \inv{\overline{5}} = \overline{5}^{29}
+	\end{align*}
+\end{proof}
 
 \begin{ex}[H1.33]
 	\label{ex:h1.33}
@@ -45,6 +53,26 @@
 
 \begin{proof}
 	Recordamos que $a \in Z(G) \iff ga = ag,\ \forall g \in G$. Definimos el isomorfismo de conjugación $\phi_g (x) = gx\inv{g}$ para algún $g$. Como $\phi_g$ es isomorfismo lleva elementos de orden $n$ en elementos de orden $n$. Entonces $\phi_g(a) = a$ ya que $a$ es el único elemento de orden 2. Por tanto $ga\inv{g} = a \implies ga = ag \implies a \in Z(G)$.
+\end{proof}
+
+\begin{ex}[H1.31]
+	Sea $G$ un grupo de orden 8. Probad que o bien $G$ es cíclico o $a^4 = 1$, para cada $a \in G$.
+\end{ex}
+
+\begin{proof}
+	Tenemos que probar que $G$ cíclico XOR $\forall a \in G,\ a^4 = 1$. Probamos dos implicaciones:
+	\begin{itemize}
+		\item $G$ cíclcio $\implies \exists a \in G \mid a^4 \neq 1$. Si $G$ es cíclcio entonces $\exists g \in G \mid o(g) = 8 \implies o(g^4) = \frac{o(g)}{mcd(o(g), 4)} = \frac{8}{mcd(8,4)} = 2$.
+		\item Si para todo $a \in G a^4 = 1$ entonces no hay ningún $g \in G \mid o(g) = 8$ luego $G$ no puede estar generado por ningún elemento y por tanto no es cíclico.
+	\end{itemize}
+\end{proof}
+
+\begin{ex}[H1.33]
+	Sea $H$ un grupo. Suponed que existe un único $a\in G$ de orden 2. Demostrad que $a \in Z(G)$.
+\end{ex}
+
+\begin{proof}
+	Sabemos que $Z(G) = \{a \in G\mid ag = ga, \forall g \in G\}$ y además $ag = ga \iff a = ga\inv{g}$. Definimos $\varphi_g(a) = ga\inv{g}$ (el isomorfismo conjugación) que es un isomorfismo $\forall g \in G \implies o(\varphi_g(a)) = o(a),\ \forall g \in G$. Si $a$ es el único elemento de orden 2 entonces necesariamente $\varphi_g(a) = a,\ \forall g\in G \implies a = ga\inv{g} \implies ag = ga \implies a \in Z(G)$.
 \end{proof}
 
 \section{Hoja 2}
@@ -218,4 +246,144 @@
 			% TODO: terminar
 		\end{itemize}
 	\end{proof}
+\end{ex}
+
+\section{Hoja 5}
+
+\begin{ex}[H5.1]
+	Demuestra que el conjunto $(\mathcal{C}([0, 1]), +, ·)$, donde $\mathcal{C}([0, 1]) := \{f : [0, 1] \to R \text{ continua}\}$ con las operaciones
+	\begin{align*}
+		(f+g)(x) = f(x)+g(x)\qquad\qquad (f\cdot g)(x) = f(x)\cdot g(x)
+	\end{align*}
+	es un anillo y di qué tipo de anillo es.
+\end{ex}
+
+\begin{proof}[Solución]
+	Es claro que la suma es asociativa y conmutativa porque se reduce al caso numérico. Además el elemento neutro aditivo es $\0 := f(x) = 0$. El producto también es asociativo y conmutativo porque se reduce al caso numérico (para poder hacer estas reducciones es necesario que $f$ sea continua).
+\end{proof}
+
+\begin{ex}[H5.2]
+	Halla las unidades en los siguientes anillos $\Z[\sqrt{-2}],\ \Z[\sqrt{-5}],\ M_2(\Q),\ M_2(\Z)$.
+\end{ex}
+
+\begin{proof}
+	\begin{itemize}
+		\item $\uds{M_2(\Q)} = \{A \in M_2(\Q) \mid \det A \neq 0\}$.
+		\item $\uds{M_2(\Z)} = \{A \in M_2(\Z) \mid \det A = \pm 1\}$. Esto es porque $A\inv{A} = \1 \implies \det(A\inv{A}) = \1 \implies \det A = \frac{1}{\det \inv{A}}$ pero necesariamente $\det A \in \Z \implies \det A = \pm 1$.
+	\end{itemize}
+\end{proof}
+
+\textbf{En lo que sigue consideramos anillos conmutativos con unidad, y supondremos que} $\1 \neq \0$.
+
+\begin{ex}[H5.3]
+	Demuestra que un cuerpo no tiene divisores de cero.
+\end{ex}
+
+\begin{proof}
+	Supongamos $C$ cuerpo y $a \in C$ divisor de $\0$. Entonces $\exists b \in C \mid ab = \0$. Ahora bien, $ab \in C \implies \exists \inv{(ab)} \in C \mid (ab)\inv{(ab)} = \1$ pero entonces $\0\cdot \inv{(ab)} = \1 \implies \0 = \1$ contradicción.
+\end{proof}
+
+\begin{ex}[H5.4]
+	\label{ex:h5.4}
+	Demuestra que en un anillo finito, todo elemento no nulo es una unidad o bien un divisor de cero. Observa, en particular, que un anillo finito es un dominio si y solo si es un cuerpo.
+\end{ex}
+
+\begin{ex}[H5.6]
+	Demuestra que si $A$ es un dominio conmutativo, entonces $A[X]$ es un dominio conmutativo.
+\end{ex}
+
+\begin{proof}
+	Supongamos $A[X]$ no es un dominio conmutativo, es decir, que hay divisores de $\0$. Entonces $\exists p, q \in A[X] \mid pq = \0 \implies$ al multiplicar los coeficientes dan $\0$ con lo que nos reducimos al caso de $A$ que ya es un dominio.
+\end{proof}
+
+\begin{ex}[H5.7]
+	Demuestra que el producto $R_1 \times R_2$ de anillos es un anillo (con las operaciones componente a componente). Indica cuáles son las unidades. Decide si el producto de dos cuerpos es un cuerpo.
+\end{ex}
+
+Ver \autoref{pro:prodirectodeanillos}.
+
+\begin{ex}[H5.9]
+	Se considera el anillo de los \textit{enteros algebraicos}
+	\begin{align*}
+		\Z^{int} = \{\alpha \in \C : p(\alpha) = 0 \text{ para algún } p \in \Z[X] \text{ mónico}\}
+	\end{align*}
+	Demuestra lo siguiente
+	\begin{enumerate}
+		\item $Z^{int} \cap \Q = \Z$
+		\begin{proof}
+			Veremos que las raíces racionales de $p$ son en realiad enteras. Sean $p, q \in \Z$ coprimos con $q \neq 0$. Si $p(\frac{p}{q}) = 0$ se tiene
+			\begin{align*}
+				p(x) = x^n + \dots a_1x + a_0 = 0 \\
+				p(\frac{p}{q}) = \left(\frac{p}{q}\right)^n + \dots + a_1 \left(\frac{p}{q}\right) + a_0 = 0 \\
+				p^n + \dots + a_n p q^{n-1} + a_0 q^n = 0 \\
+				p^n = q(a_{n-1} + q a_{n-2} + \dots + a_0 q^{n-1}) \\
+				\implies q = 1 \implies \frac{p}{q} \in \Z \implies Z^{int} \cap \Q = \Z
+			\end{align*}
+		\end{proof}
+		\item el elemento 2 de $\Z^{int}$ no es una unidad ni es irreducible
+		\begin{itemize}
+			\item Para que $2$ sea unidad tiene que tener inverso multiplicativo en $\Z^{int}$. No es una unidad ya que su inverso es $\frac{1}{2} \in \Q \implies \frac{1}{2}\notin \Z^{int}$ por el apartado anterior.
+			\item 2 no es irreducible si encontramos dos $a,b \in \Z^{int}$ tales que $ab = 2$ y $a,b \notin \uds{\Z^{int}}$. %TODO
+		\end{itemize}
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H5.10]
+	Demuestra que $\Q[i] = \{a+bi:a,b\in \Q\}$ es un subcuerpo de $\C$.
+\end{ex}
+
+
+\begin{ex}[H5.13]
+	Demuestra que todo subanillo de un cuerpo es un dominio.
+\end{ex}
+
+\begin{proof}
+	En un cuerpo no hay divisores de $\0$ por tanto cualquier subconjunto no los tendrá. Por la \autoref{dfn:dominiointegridad} el subanillo es un DI.
+	%TODO: confirmar con turroduda
+\end{proof}
+
+\begin{ex}[H5.14]
+	Sea $R$ un anillo e $I$ un ideal de $R$. Demuestra que los siguientes subconjuntos de $R$ son ideales de $R$.
+	\begin{enumerate}
+		\item $Rad(I):=\{a\in R:a^n \in I \text{ para algún } n \in \N\}$ (el radical de $I$);
+		\begin{proof}
+			Ver radical de un ideal en Wikipedia.
+		\end{proof}
+		\item $Ann(I):= \{a \in R \mid ax = \0, \text{ para todo } x \in I\}$
+		\begin{proof}$ $ \newline
+			\begin{enumerate}
+				\item $\0 \in Ann(I)$. Sí porque $\0x = \0 \forall x \in I$
+				\item $Ann(I)$ es cerrado por la suma. Sean $a,b \in Ann(I)$ entonces $ax = \0, bx = \0 \forall x \in I \implies ax + bx = \0 \implies (a+b)x = \0 \implies a+b \in  Ann(I)$.
+			\end{enumerate}
+		\end{proof}
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H5.15]
+	Sea $R$ un anillo conmutativo con unidad. Demuestra lo siguiente:
+	\begin{enumerate}
+		\item Si $I$ es un ideal de $R$ entonces $I = R \iff$ existe una unidad de $R$ en $I$.
+		\begin{proof}
+			$\exists u \in \uds{R},\ u \in I \implies I = R$. Por ser $I$ ideal tenemos que $\forall a \in \R, \forall i \in I, ai \in I$. Tomando $a = u$ tenemos que $au \in I$. Como esto vale $\forall a \in R$ tenemos que también valdrá para $a = \inv{u} \in R$ por ser $u$ unidad. Por tanto $u\inv{u} = \1 \in I$. Ahora podemos repetir el proceso para $i = \1$. Obtenemos que $\forall a \in R,\ a\1 \in I \implies I = R$.
+		\end{proof}
+		\item $R$ es un cuerpo $\iff \{\0\}$ es el único ideal propio de $R$.
+		\begin{proof}
+			Utilizamos el apartado anterior. Si $R$ es un cuerpo entonces todo elemento excepto el $\0$ tiene inverso, es decir, $\forall a \in R, \exists \inv{a} \in R$. Si $I$ ideal en $R$ contiene a cualquier elemento distinto del $\0$ por el apartado anterior tenemos que $I=R$.
+		\end{proof}
+
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[H5.17]
+	Encuentra todos los ideales maximales en $\Z/8\Z, \Z/10\Z$ y en $\Z/n\Z$.
+\end{ex}
+
+\begin{ex}[H5.21]
+	Halla el cuerpo de fracciones de los siguientes dominios:
+\end{ex}
+
+Ver \cite[p.~208]{dor96}.
+
+\begin{ex}[H5.22]
+	
 \end{ex}

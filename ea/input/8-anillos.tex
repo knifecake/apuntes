@@ -101,6 +101,20 @@ Es decir, que $(A\setminus\{\0\}, \cdot)$ es un grupo. Digo definición alternat
 
 Antes de seguir, siempre vamos a hablar de anillos con unidad o \textbf{anillos unitarios}, aunque alguna vez se me olvide ponerlo.
 
+\subsection{Extensiones de anillos}
+\begin{dfn}[Extensión de anillos]
+	Sea $(A, +, \cdot)$ un anillo. Definimos la extensión
+	\begin{align}
+		A[m] = \{a+bm \mid a, b \in A\}
+	\end{align}
+\end{dfn}
+
+\begin{ej}La extensión de los reales con $i = \sqrt{-1}$ son los complejos:
+	\begin{align*}
+		\R[\sqrt{-1}] = \{a+bi \mid a,b \in \R\} = \mathbb{C}
+	\end{align*}
+\end{ej}
+
 \subsection{Unidades en anillos}
 
 Además, para pulir lo de que no siempre existe inverso multiplicativo daremos la definición de Grupo de unidades en el contexto de anillos que da sentido al \autoref{ej:grupounidades} que hemos estado utilizando. Ojo: aquí unidades no se refiere a varios elementos neutros multiplicativos como uno podría pensar.
@@ -157,6 +171,18 @@ Para que este grupo quede bien definido estaría bien que $\inv{a}$ fuera único
 	Los numeros enteros $(\Z, +, \cdot)$ tienen estructura de anillo anillo y tienen unidades $\uds{\Z} = (\{-1, 1\}, \cdot)$
 \end{ej}
 
+\begin{pro}
+	Si $K$ es un cuerpo finito entonces el grupo abeliano $(\uds{K}, \cdot)$ es cíclico.
+\end{pro}
+
+\begin{proof}
+	Ver santorum p. 194.
+\end{proof}
+
+\begin{ej}
+	En $K = \Z/13\Z$ tenemos que las unidades $\uds{\Z/13\Z} \isom \Z/12\Z \isom \Z/3\Z \times \Z/4\Z$ que es cíclico.
+\end{ej}
+
 Ah! y la definición de Orlando de cuerpo es
 
 \begin{dfn}[Cuerpo]
@@ -166,10 +192,8 @@ Ah! y la definición de Orlando de cuerpo es
 
 \section{Subanillos}
 
-La siguiente definición es de \cite{dor96}:
-
 \begin{dfn}[Subanillo]
-	Sea $(A, +, \cdot)$ un anillo, $B\subset A$. Decimos que $B$ es un subanillo si $(B, +)$ es subgrupo de  $(A, +)$ y el producto restringido a $B$ es cerrado.
+	\cite{dor96} Sea $(A, +, \cdot)$ un anillo, $B\subset A$. Decimos que $B$ es un subanillo si $(B, +)$ es subgrupo de  $(A, +)$ y el producto restringido a $B$ es cerrado.
 \end{dfn}
 
 La definición que ha dado Orlando es algo diferente. Es equivalente a la anterior y la plasmamos como una proposición.
@@ -181,6 +205,10 @@ La definición que ha dado Orlando es algo diferente. Es equivalente a la anteri
 \begin{ej}
 	$(\Z, +, \cdot)$ es un subanillo de $(\Q, +, \cdot)$.
 \end{ej}
+
+\begin{dfn}[Subcuerpo]
+	Un subcuerpo es un subanillo que es un cuerpo.
+\end{dfn}
 
 \section{Producto directo}
 
@@ -195,6 +223,7 @@ Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el pr
 \end{dfn}
 
 \begin{pro}
+	\label{pro:prodirectodeanillos}
 	$(A\times B, \#, \bullet)$ en efecto es un anillo.
 \end{pro}
 
@@ -212,6 +241,12 @@ Como ocurría con los cuerpos, una manera de obtener nuevos cuerpos es con el pr
 	\end{align*}
 	(Aquí lo que falla es que no es cerrado por el producto porque $(\1_A, \0_B)$ no tiene inverso (y no es el neutro aditivo que es el único que se libra de ese requisito).
 \end{obs}
+
+Veamos esto con un ejemplo:
+
+\begin{ej}
+	Consideramos el producto directo de los cuerpos $\Z/2\Z \times \Z/2\Z$. No es un cuerpo porque $(1,0) \bullet (0, 1) = (1\cdot 0, 0 \cdot 1) = (0,0)$, es decir que el producto no es cerrado ya que tenemos dos elementos en $A\setminus \{\0\}$ que operados nos han dado un elemento fuera. Alternativamente, hemos encontrado divisores de $\0$.
+\end{ej}
 
 \subsection{Unidades en el producto directo de anillos}
 
@@ -345,7 +380,7 @@ Esta es otra definición alternativa:
 
 \begin{dfn}[Ideal (alternativa)]
 	\label{dfn:idealdorronsoro}
-	Sea $I$ un subanillo de $A$. Decimos que $I$ es un ideal $\iff \forall i \in I, \forall a \in A,\ ai \in I \land ia \in A$.
+	\cite[p.~197]{dor96} Sea $I$ un subanillo de $A$. Decimos que $I$ es un ideal $\iff \forall i \in I, \forall a \in A,\ ai \in I \land ia \in I$.
 \end{dfn}
 
 \begin{pro}
@@ -383,7 +418,7 @@ Esta es otra definición alternativa:
 \end{ej}
 
 \begin{pro}
-	Sean $I, J \subset A$ ideales. Entonces $I + J = \{i + j \mid i \in I \land j \in J\}$ es un ideal\footnote{Ojo: aquí $I+J$ no tiene nada que ver con la suma directa (el caso particular del producto directo) que había en grupos. De hecho se parece más al producto libre, que recordemos que en caso de que $I,J$ fueran subgrupos normales daba un subgrupo normal. El equivalente aquí es que si $I, J$ son ideales entonces su "producto libre" también es un ideal.} de $A$ que contiene a $I$, a $J$, y además es el mayor ideal con esta propiedad.
+	Sean $I, J \subset A$ ideales. Entonces $I + J = \{i + j \mid i \in I \land j \in J\}$ es un ideal\footnote{Ojo: aquí $I+J$ no tiene nada que ver con la suma directa (el caso particular del producto directo) que había en grupos. De hecho se parece más al producto libre, que recordemos que en caso de que $I,J$ fueran subgrupos normales daba un subgrupo normal. El equivalente aquí es que si $I, J$ son ideales entonces su "producto libre" también es un ideal.} de $A$ que contiene a $I$, a $J$, y además es el menor ideal con esta propiedad.
 \end{pro}
 
 \subsection{Ideales generados. Ideales principales. Dominios de ideales principales.}

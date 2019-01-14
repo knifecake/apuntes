@@ -2,22 +2,125 @@
 
 \chapter{Anillos de polinomios}
 
+\section{Definiciones básicas y primeros resultados}
+
+\begin{dfn}[Anillo de polinomios]
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Definimos el anillo de polinomios con coeficientes en $A$ e incógnita $X$
+	\begin{align*}
+		A[X] = \{\sum_{i = 0}^m a_i X^i \mid a_i \in A \land m \in \N\}
+	\end{align*}
+	Para dos elementos cualesquiera $p = \sum_{i=0}^{n}a_iX^i,\ q = \sum_{i=0}^m a_iX^i \in A[X]$ se definen las operaciones suma y producto
+	\begin{align*}
+		p+q &= \sum_{i=0}^{\max(n,m)} (a_i + b_i) X^i \\
+		p \cdot q &= \sum_{i=0}^{\max(n,m)} s_iX^i,\quad s_i = \sum_{j=0}^i p_jq_{i-j}
+	\end{align*}
+\end{dfn}
+
+Estas operaciones son las operaciones término a término de toda la vida.
+
+\begin{pro}
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Entonces el anillo de polinomios $(A[X], +, \cdot)$ es un anillo conmutativo y con unidad.
+\end{pro}
+
+En este anillo el elemento neutro aditivo $\0$ es el polinomio que tiene todos sus coeficientes $a_j = 0$.
+
+\begin{dfn}[Polinomio mónico]
+	Sea $A[X]$ un anillo de polinomios y $p \in A[X]$. Diremos que $p$ es mónico $\iff a_m = \max\{a_k \mid a_k \neq 0\} = 1$.
+\end{dfn}
+
+\begin{dfn}[Grado de un polinomio]
+	Sea $p \in A[X]$. Definimos el grado del polinomio $p = \sum_{j=0}^n a_jX^j$
+	\begin{align}
+		\gr p = \max \{a_j \mid a_j \neq 0\}
+	\end{align}
+\end{dfn}
+
+\begin{pro}
+	Si $A$ es un \gls{di} entonces $A[X]$ también lo es.
+\end{pro}
+
+\begin{proof}
+	Sean $p,q \in A[X]$ no nulos. Entonces
+	\begin{align*}
+		p\cdot q = \0 &\iff \sum_{i=0}^{\max(n,m)} s_iX^i \\
+		&\iff s_i = \sum_{j=0}^i p_jq_{i-j} = 0 \\
+		&\iff p_jq_{i-j} = 0,\ \forall 0 \leq j \leq i \\
+		&\iff p_j = \0 \lor q_{i-j} = \0 \text{ en } A
+	\end{align*}
+	ya que $A$ es un \gls{di}.
+\end{proof}
+
+\begin{cor}
+	Si $A[X]$ es un \gls{di} conmutativo y con unidad y $p,q \in A[X]$ con $p,q \neq \0$ entonces
+	\begin{align}
+		\gr pq = \gr p + \gr q
+	\end{align}
+\end{cor}
+
+
+\begin{pro}
+	Si $A[X]$ es un \gls{di} conmutativo y con unidad entonces $\uds{A[X]} = \uds{A}$.
+\end{pro}
+
+Ahora hacemos lo mismo para cuerpos:
+
+\begin{pro}
+	Si $K$ es un cuerpo entonces $K[X]$ es un \gls{di}.
+\end{pro}
+
+\begin{proof}
+	Si $K$ es un cuerpo entonces $\uds{K[X]} = \uds{K} = K \setminus \{\0\}$.
+\end{proof}
+
+\begin{proof}
+	Si $K$ es un cuerpo en particular es un \gls{di} y nos reducimos a hace dos proposiciones.
+\end{proof}
+
+\begin{thm}[Algoritmo de la divsión]
+	Sea $K$ un cuerpo y sean $p, q \in K[X]$ con $q \neq \0$. Entonces existen $c,r \in K[X]$ tales que $p = qc+r$ y además $\gr r = 0 \lor \gr r < \gr q$.
+\end{thm}
+
+Aquí $c$ es el cociente y $r$ es el resto.
+
+\begin{dfn}[Divisibilidad]
+	Sean $p,q \in K[X]$. Decimos que $p$ divide a $q$ en $K[X]$ y lo denotamos con $p \divides q \iff q = cp$ con $c \in K[X]$ (es decir, si el resto es 0).
+\end{dfn}
+
+\begin{pro}
+	Sea $K$ un cuerpo entonces $K[X]$ es un \gls{dip}.
+\end{pro}
+
+\begin{proof}
+	Como en $K[X]$ tenemos un algoritmo de la división entonces todo ideal es principal.
+\end{proof}
+
+\begin{cor}
+	Si $K$ es un cuerpo enotnces en $K[X]$ identificamos los ideales en $K[X]$ con los polinomios mónicos en $K[X]$. Es decir
+	\begin{align*}
+		p \in K[X] \text{ mónico } \iff I = \gen{p} \text{ ideal en } K[X] \\
+		\gen{p} \subset \gen{q} \iff p \in \gen{q} \iff q \divides p \text{ en } K[X]
+	\end{align*}
+\end{cor}
+
+\section{Factorizacion e irreducibilidad}
+
+\subsection{Factorización e irreducibilidad en anillos de números}
+
+\begin{dfn}[Divisibilidad]
+	Sea $A$ un \gls{di} conmutativo y con unidad y sean $r,s \in A$. Decimos que $r$ divide a $s$ y lo denotamos por $r \divides s \iff \exists t \in A \mid s = rt$. Escribimos $s/r$ para denotar a $t$.
+\end{dfn}
 
 \begin{dfn}[Primo] %TODO buscar una fuente para esto
 	Sea $A$ un anillo conmutativo. Decimos que $p \in A$ es primo $\iff p \neq \0 \land p \notin \uds{A} \land \forall a,b \in A$
 	\begin{align*}
 	p \divides ab \implies p \divides a \lor p \divides b
 	\end{align*}
-	es decir (sin utilizar la palabra división que no existe)
-	\begin{align*}
-		\exists c \mid ab = pc \implies \exists a' \mid a = pa' \lor \exists b' \mid b = pa',\qquad a',b' \in A
-	\end{align*}
 \end{dfn}
 
 \begin{pro}
 	Sea $A$ un anillo conmutativo. Sea $p \in A, p \neq \0, p \notin \uds{A}$.
 	\begin{align*}
-		p \text{ primo } \iff \gen{p} \text{ es un ideal primo }
+	p \text{ primo } \iff \gen{p} \text{ es un ideal primo }
 	\end{align*}
 \end{pro}
 
@@ -28,16 +131,28 @@
 La definición de primo generaliza para futuras estructuras a la definición de elemento irreducible.
 
 \begin{dfn}[Elemento irreducible]
-	Sea $(A, +, \cdot)$ un \gls{di}. Diremos que $a \in A,\ a \notin \uds{A}$ es irreducible $\iff \forall p,q \in A,\ a = pq\implies p \in \uds{A} \lor q \in \uds{A}$.
+	Sea $A$ un \gls{di} conmutativo y con unidad y sea $r \in A$ tal que $a \neq \0 \land a \in \uds{A}$ (que sea no nulo e invertible). Decimos que $r$ es irreducible si no puede escribirse como producto de otros dos elementos ninguno de los cuales es invertible:
+	\begin{align}
+		r \in A \text{ irreducible } \iff \forall s,t \in A,\ r = st \implies s \in \uds{A} \lor t \in \uds{A}
+	\end{align}
 \end{dfn}
 
 Observemos que no puede ocurrir que $p \in \uds{A} \land q \in \uds{A}$ y que además $pq = a \notin \uds{A}$ (las unidades son un grupo $\implies$ clausura).
+
 
 \begin{pro}
 	Sea $p \in A$.
 	\begin{align*}
 		p \text{ primo } \implies p \text{ irreducible }
 	\end{align*}
+\end{pro}
+
+\begin{dfn}[Elementos asocidados]
+	Sea $A$ un \gls{di} conmutativo y con unidad. Dos elementos $r,s \in A$ se dicen asociados $\iff \exists u \in \uds{A} \mid r = us$.
+\end{dfn}
+
+\begin{pro}
+	Sea $A$ un \gls{di}. Sean $a,a' \in A$. Entonces $a$ y $a'$ son asociados $\iff \gen{a} = \gen{a'}$.
 \end{pro}
 
 \begin{dfn}[Dominio de factorización única (DFU)]
@@ -48,3 +163,102 @@ Observemos que no puede ocurrir que $p \in \uds{A} \land q \in \uds{A}$ y que ad
 		\item $a = p_1p_2\dots p_r,\ p_i$ irreducible y $a = q_1q_2 \dots q_s,\ q_i$ irreducible $\implies r = s$ y además $r_i$ y $q_i$ son asociados para $i = 1, \dots, r$ (la igualdad es un caso particular de el ser asociados).
 	\end{itemize}
 \end{dfn}
+
+Ahora vemos la relación de los \gls{dfu} con los \gls{dip}.
+
+\begin{pro}
+	Si $A$ es un \gls{dfu} entonces $A[X]$ es un \gls{dfu}.
+\end{pro}
+
+\begin{thm}
+	Sea $A$ un \gls{dip} entonces $a \in A$ es irreducible $\iff \gen{a}$ es maximal.
+\end{thm}
+
+\begin{proof}
+	Ver \cite[p.~247]{dor96}
+\end{proof}
+
+
+\begin{dfn}
+	[Propiedad de cadena creciente]
+	
+	Diremos que un anillo $A$ tiene la propiedad de cadena creciente $\iff$ toda cadena creciente $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ es finita. Es decir, que $\exists n \mid I_n = I_{n+1} = I_{n+2} = \dots$.
+\end{dfn}
+
+\begin{pro}
+	Si $D$ es un \gls{dip} entonces $D$ tiene la propiedad de cadena creciente.
+\end{pro}
+
+La demostración es tan ingenua como uno quiera.
+
+\begin{proof}
+	Sea $I_1 \subseteq I_2 \subseteq I_3 \subseteq \dots \subseteq I_n \subseteq \dots$ una cadena de ideales. Sabemos que en cualquier anillo $\bigcup I_i$ es un ideal. Sea $J = \gen{d}$ para algún $d \in D$. Como $D$ es un DIP ocurre que $d \in \bigcup I_i \implies d \in I_{n_0} \implies \gen{d} \subset I_{n_0} \implies I_{n_0} = I_{n_0 + 1} = \dots$
+\end{proof}
+
+\begin{thm}
+	Sea $A$ un \gls{dip}. Entonces $A$ es un \gls{dfu}.
+\end{thm}
+
+\begin{proof}
+	Parece ser que la prueba consiste en ver que si un \gls{di} tiene la propiedad de la cadena creciente entonces es un \gls{dfu}. Utiliza que todos los \gls{dip} tienen esta propiedad para probar este teorema. Ver \cite[p.~248]{dor96}
+\end{proof}
+
+\begin{dfn}[Dominio euclideo]
+	\label{dfn:de}
+	Sea $D$ un \gls{di} y $d: D \setminus \{\0\} \to \Z \geq 0$ una aplicación que cumple
+	\begin{enumerate}
+		\item $a,b \in D,\ a,b \neq \0 \implies d(a) \leq d(ab)$
+		\item Si $b \neq \0$ entonces $\forall a \in D,\ \exists c,r \in D \mid a = cb+r$ (con posibilidad de que $r = \0$).
+	\end{enumerate}
+	Entonces decimos que $D$ es un dominio euclídeo y lo abreviamos con \gls{de}.
+\end{dfn}
+
+\begin{ej}
+	El anillo $(\Z, +, \cdot)$ con $d(a) = |a|$ es un $\gls{de}$.
+\end{ej}
+
+\begin{proof}
+	Es bien sabido que $\Z$ es un \gls{di}. Comprobamos que $d$ cumple las propiedades pedidas:
+	\begin{enumerate}
+		\item $a,b \in \Z,\ a,b \neq \0 \implies |a| \leq |ab| 0 |a||b| \geq 1$
+		\item La segunda propiedad se cumple porque en $\Z$ tenemos algorimo de la división\footnote{El algoritmo de la división se debe a Euclides, de ahí que esto se llame dominio euclídeo.}
+	\end{enumerate}
+\end{proof}
+
+\begin{ej}
+	Sea $K$ un cuerpo. El anillo de polinomios $K[X]$ con la función $d = \gr$ (el grado) es un \gls{de}.
+\end{ej}
+
+\begin{proof}
+	\item $p,q \in K[X],\ p,q \neq \0 \implies \gr p \leq \gr pq = \gr p + \gr q$
+	\item Tenemos algoritmo de la división: $\exists g \neq 0,\ p = qg + r$ con $\gr r < \gr q$.
+\end{proof}
+
+\subsection{Irreducibilidad de polinomios mónicos}
+
+\begin{dfn}[Polinomio mónico irreducible]
+	Un polinomio mónico $p \in K[X]$ es irreducible $\iff$ el ideal que genera $\gen{p}$ es maximal.
+	
+	Equivalentemente, un polinomio mónico $p \in K[X]$ no es irreducible $\iff \exists q_1, q_2 \in K[X]$ tales que $p = q_1 q_2$ y $\gr q_1 < \gr p \land \gr q_2 < \gr p$.
+\end{dfn}
+
+\begin{obs}
+	Si $K[X]$ es un cuerpo entonces todo polinomio mónico de grado 1 es irreducible.
+\end{obs}
+
+\begin{pro}
+	Sea $p(x) \in K[X]$. Entonces $a_0 \in K$ es un $0$ de $p(x)$, es decir $p(a_0) = 0 \iff p(x) = (x-a_0)q(x)$ con $q(x) \in K[X]$.
+\end{pro}
+
+\begin{obs}
+	Si $p(x)$ es un polinomio de grado $n$ entonces no puede tener más de $n$ ceros en $K$.
+\end{obs}
+
+
+\begin{pro}
+	En $K[X] = \C[X]$ todo polinomio mónico irreducible tiene grado 1.
+\end{pro}
+
+\begin{pro}
+	En $K[X] = \R[X]$ todo polinomio mónico irreducible tiene grado 1 o 2.
+\end{pro}

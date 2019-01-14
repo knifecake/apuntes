@@ -434,6 +434,25 @@ Vistos estos ejemplos, continuamos con más definiciones y teoremas que se apoya
 
 \section{Grupos de permutaciones}
 
+\begin{wrapfigure}{r}{0.3\textwidth}
+	\centering
+	\begin{tikzpicture}
+	\node (1) at (0, 4) {$1$};
+	\node (2) at (0, 3) {$2$};
+	\node (3) at (0, 2) {$3$};
+	
+	\node (alpha1) at (2,3) {$2$};
+	\node (alpha2) at (2,2) {$3$};
+	\node (alpha3) at (2,4) {$1$};
+	
+	\draw[-{Latex[length=2mm]}] (1) -- (alpha1);
+	\draw[-{Latex[length=2mm]}] (2) -- (alpha2);
+	\draw[-{Latex[length=2mm]}] (3) -- (alpha3);
+	\end{tikzpicture}
+	\caption{Elemento $\alpha$ de $S_3$}
+	\label{fig:alphaens3}
+\end{wrapfigure}
+
 Los grupos que se presentan a continuación fueron en realidad el germen de toda la teoría de grupos \cite{dor96}. Se llaman grupos de permutaciones, de sustituciones o de biyecciones. Cuando son finitos a veces se llaman grupos simétricos de $n$ elementos.
 
 \begin{dfn}[Grupo de permutaciones de $n$ elementos]
@@ -462,24 +481,6 @@ Los grupos que se presentan a continuación fueron en realidad el germen de toda
 		\end{array}\right)
 	\end{align*}
 	Se correspondería con la aplicación dada por (ver \autoref{fig:alphaens3})
-	\begin{figure}[h]
-		\centering
-		\begin{tikzpicture}
-			\node (1) at (0, 4) {$1$};
-			\node (2) at (0, 3) {$2$};
-			\node (3) at (0, 2) {$3$};
-			
-			\node (alpha1) at (2,3) {$2$};
-			\node (alpha2) at (2,2) {$3$};
-			\node (alpha3) at (2,4) {$1$};
-			
-			\draw[-{Latex[length=2mm]}] (1) -- (alpha1);
-			\draw[-{Latex[length=2mm]}] (2) -- (alpha2);
-			\draw[-{Latex[length=2mm]}] (3) -- (alpha3);
-		\end{tikzpicture}
-		\caption{Elemento $\alpha$ de $S_3$}
-		\label{fig:alphaens3}
-	\end{figure}
 \end{ej}
 
 \begin{ej}
@@ -649,7 +650,7 @@ El siguiente resultado requiere que anticipemos el concepto de isomorfismo que s
 	\begin{align*}
 		\langle g^r \rangle = \{g^r, g^{2r}, g^{3r}, \dots, g^{n'r} = g^n\} \subset \{g, g^2, g^3, \dots, g^n\} = \langle g \rangle
 	\end{align*}
-	$\langle g^r \rangle$ tiene $n'$ elementos distintos porque para cualquier $i = 0,\dots, n'$, $o(g^{ir}) <= o(g) = n$ por lo que no se repite ninguno. Además cualquier $g^{ir}$ está bien definido porque al dividir $r$ a $n$, $ir \in \N$.
+	$\langle g^r \rangle$ tiene $n'$ elementos distintos porque para cualquier $i = 0,\dots, n'$, $o(g^{ir}) \leq o(g) = n$ por lo que no se repite ninguno. Además cualquier $g^{ir}$ está bien definido porque al dividir $r$ a $n$ tenemos que $ir \in \N$.
 \end{proof}
 
 \begin{thm}[Hoja 1, ejercicio 9]
@@ -779,6 +780,14 @@ Sabiendo ahora que $H < G \implies |H| \divides |G| \implies |G| = r \cdot |H|,\
 
 \begin{thm}
 	\label{thm:indice2normal}
-	De \cite{dor96}\footnote{No lo hemos dado explícitamente pero se utiliza para algunos ejemplos.}
+	De \cite[p.~91]{dor96}\footnote{No lo hemos dado explícitamente pero se utiliza para algunos ejemplos.}
 	Sea $H < G$ con $[G : H] = 2$ (con índice de $H$ en $G$ igual a 2). Entonces $H$ es normal.
 \end{thm}
+
+\begin{pro}
+	Si $H < G$ con $|H| = n < \infty$ y además $H$ es el único subgrupo de orden $n$ entonces $H \normsub G$.
+\end{pro}
+
+\begin{proof}
+	Ver \cite[p.~91]{dor96}.
+\end{proof}
