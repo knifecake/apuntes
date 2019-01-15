@@ -522,13 +522,13 @@ Como cabe esperar, cumple las mismas propiedades que cumplían los subgrupos gen
 
 %TODO probar
 \begin{pro}
-	Un anillo $A$ es un DI $\iff \{\0\}$ es un ideal primo.
+	Un anillo $A$ es un \gls{di} $\iff \{\0\}$ es un ideal primo.
 \end{pro}
 
 Orlando dio la implicación hacia la derecha de este teorema pero \cite{dor96} da la otra.
 
 \begin{pro}
-	Sea $P \subsetneq A$ un ideal propio. Entonces $A/P$ dominio de integridad $\iff P$ ideal primo.
+	Sea $P \subsetneq A$ un ideal propio. Entonces $A/P$ \gls{di} $\iff P$ ideal primo.
 \end{pro}
 
 \begin{proof}Ver \cite[p.~201]{dor96}.
@@ -585,6 +585,7 @@ Orlando dio la implicación hacia la derecha de este teorema pero \cite{dor96} d
 \end{figure}
 
 \begin{pro}
+	\label{pro:maximalcuerpo}
 	Sea $M \subsetneq A$ un ideal maximal de $A$. Entonces $A/M$ es un cuerpo.
 \end{pro}
 
@@ -598,7 +599,24 @@ Orlando dio la implicación hacia la derecha de este teorema pero \cite{dor96} d
 \end{proof}
 
 % TODO dar el ejemplo cuando lleguemos al producto directo
-El recíproco no es verdad en general. Se da un ejemplo cuando se introduce el producto directo.
+El recíproco no es verdad en general. Por ejemplo en $\Z$ el $\{\0\}$ es un ideal primo pero no es maximal porque $\Z/\{\0\} \isom \Z$ no es un cuerpo (contrarrecíproco de la \autoref{pro:maximalcuerpo}).
+
+\subsection{Ideales y el producto directo}
+
+\begin{pro}
+	Sean $A, B$ anillos conmutativos con unidad. Sean $I \subset A, J \subset B$ ideales de $A$ y $B$ respectivamente. Entonces $I \times J \subset A \times B$ es un ideal en el producto directo.
+\end{pro}
+
+\begin{proof}
+	Comprobamos las propiedades de los ideales:
+	\begin{enumerate}
+		\item $\0 = (0,0) \in I \times J$ porque $\0 \in I \land \0 \in J$
+		\item $\forall s = (s_1, s_2), t = (t_1, t_2) \in I \times J$ tenemos que $s + t = (s_1 + t_1, s_2 + t_2) \in I \times J$ pues $s_1, t_1 \in I \implies s_1 + t_1 \in I$ y pasa lo mismo con $s_2$ y $t_2$.
+		\item $\forall s = (s_1, s_2) \in I \times J,\ a = (a_1, a_2) \in A \times b$ se tiene que $sa = (s_1 a_1, s_2 a_2) \in I \times J$ pues $s_1a_1 \in I \land s_2 a_2 \in J$. Se tiene lo mismo para el producto por la derecha ya que $A$ y $B$ son conmutativos.
+	\end{enumerate}
+\end{proof}
+
+%TODO poner un ejemplo con Z/2 \times Z/2
 
 
 

@@ -295,7 +295,7 @@ Observemos que la hipótesis de abeliano es fundamental (ver ejemplo \ref{ej:noh
 		\centering
 		\begin{tikzpicture}
 		\node (H) at (0,3) {$H$};
-		\node (ab) at (-1.5, 2) {$\langle AB^2\rangle$};
+		\node (ab) at (-1.5, 2) {$\langle AB\rangle$};
 		\node (a) at (0,2) {$\langle A \rangle$};
 		\node (b) at (1.5,2) {$\langle B \rangle$};
 		\node (b2) at (0,1) {$\{A^2 = B^2\}$};
@@ -317,8 +317,11 @@ Para este ejemplo hemos probado con los posibles subgrupos que podían generar v
 	\item De calcular los órdenes de los elementos tenemos que el único con orden 2 es $B^2 = A^2$ por lo tanto su generado $\gen{B^2} = \{1, B^2\} < H$ (ver \autoref{ej:grupocuaterniones} para los órdenes).
 	\item Cualquier grupo generado con una $A$ y una $B$ nos genera automáticamente todo $H$ por definición. Luego una posible estrategia es ver si algún otro elemento genera un subgrupo que no contenga a $A$ y a $B$.
 	\begin{itemize}
-		\item Nos damos cuenta después de muchas cuentas que $\gen{AB^2} = \{1, AB^2, A^2 = B^2, A\} < H$.
+		\item Nos damos cuenta después de muchas cuentas que $\gen{AB^2} = \{1, AB^2 = A^3, A^2 = B^2, A\} = \gen{A} < H$ pero no es nuevo así que no ha habido suerte.
+		\item Probamos con $\gen{AB} = \{1, AB, A^2 = B^2, AB^3\} < H$ y tenemos suerte porque hemos encontrado uno que no estaba. Ocurrirá que $\gen{AB} = \gen{AB^3}$.
+		\item Nos quedan por probar $\gen{B}$ y $\gen{B^3}$. Está claro que serán subgrupos y no serán el total porque no hay $A$s pero ocurre que son el mismo subgrupo.
 	\end{itemize}
+	\item Así, hemos mirado todos los subgrupos generados por un elemento y hemos identificado los que son iguales. ¿Qué nos garantiza que grupos generados por dos elementos no serán alguno de los que hemos encontrado? Pues no sé.
 \end{itemize}
 \end{ej}
 
