@@ -2,7 +2,7 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{D}\relax \glsresetentrylist %
 \glossentry{de}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{83}}}%
+		\setentrycounter[]{page}\glsnumberformat{83\delimN 84}}}%
 \glossentry{dfu}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{83}}}%
 \glossentry{di}{\glossaryentrynumbers{\relax 
@@ -12,6 +12,6 @@
 		\setentrycounter[]{page}\glsnumberformat{81\delimR 83}}}%
 \glossentry{dip}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{71}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{82\delimN 83}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{82\delimR 84}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{102}}}%
 \end{theglossary}\glossarypostamble

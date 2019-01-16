@@ -36,7 +36,7 @@
 %\setlength{\parindent}{0pt}
 \usepackage{parskip}
 
-\usepackage[pdftex,pdfpagelabels,bookmarks,hyperindex,hyperfigures]{hyperref}
+\usepackage{hyperref}
 
 % ESTILOS DE DEFINICIONES Y TEOREMAS
 \declaretheoremstyle[
@@ -231,15 +231,16 @@ Revisión del \today $ $ a las \currenttime.
 \input{input/por-clasificar}
 
 \part{Apéndices}
-\renewcommand{\chaptername}{Apéndice}
-\renewcommand{\thechapter}{\Alph{chapter}}
-\setcounter{chapter}{0}
+
+%\renewcommand{\chaptername}{Apéndice}
+%\renewcommand{\thechapter}{\Alph{chapter}}
+%\setcounter{chapter}{0}
 
 \input{input/a-ejercicios}
 
 \chapter{Índices}
 
-%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
+%%TODO por qué no podemos utilizar only= para hacer whitelisting en lugar de blacklisting? que alguien lo arregle parfavar
 \renewcommand{\listtheoremname}{Lista de definiciones}
 \listoftheorems[ignore={thm,ej,pro,cor,obs,lm,ex}]
 

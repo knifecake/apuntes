@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2018] (kpathsea + Thai support).
 Scanning style file ./apuntes-ea.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file apuntes-ea.glo....done (43 entries accepted, 0 rejected).
-Sorting entries....done (303 comparisons).
+Scanning input file apuntes-ea.glo....done (54 entries accepted, 0 rejected).
+Sorting entries....done (383 comparisons).
 Generating output file apuntes-ea.gls....done (17 lines written, 0 warnings).
 Output written in apuntes-ea.gls.
 Transcript written in apuntes-ea.glg.
