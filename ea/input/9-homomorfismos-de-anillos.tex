@@ -479,9 +479,41 @@ Para probarlo nos ayudamos del siguiente Lema:
 \end{cor}
 
 \begin{obs}
-	Sea $\varphi:A \to B$ un homomorfismo de anillos sobreyectivo\footnote{Esto no lo pone en la p. 182 de santorum pero hace falta para que se pueda aplicar el teorema.} y $B$ un DI. Por el primer teorema de la isomorfía tenemos que $A / \ker \varphi \isom \ima \varphi$ que es un dominio luego $\ker \varphi$ \textbf{es un ideal primo en} $A$.
+	Sea $\varphi:A \to B$ un homomorfismo de anillos y $B$ un DI. Si restringimos $\varphi$ a su imagen lo convertimos en sobreyectivo. Por el primer teorema de la isomorfía tenemos que $A / \ker \varphi \isom \ima \varphi$ que es un dominio luego $\ker \varphi$ \textbf{es un ideal primo en} $A$.
 \end{obs}
 
+\begin{ej}
+	Sea $\alpha:\Z[X] \to \Z$ un homomorfismo de anillos sobreyectivo definido por
+	\begin{align*}
+		\sum_{j=0}^{n}a_jX^j &\mapsto \sum_{j=0}^n a_j 3^j \\
+		a_0 \mapsto a_0
+	\end{align*}
+	Entonces $\ker \alpha = \gen{x-3}$ y además $\Z \isom \Z[X] / \ker \alpha$. Aquí $\ker \alpha$ es un ideal primo porque el cociente es un domino.
+\end{ej}
+
+\begin{obs}
+	Hay veces que no existe un homomorfismo de anillos entre dos anillos cualesquiera. No ocurre como con grupos que siempre teníamos el trivial.
+\end{obs}
+
+\begin{ej}
+	No existe homomorfismo de anillos $f:\Z/3\Z \to \Z/4\Z$ porque nos vemos forzados a definir $f(\1) = \1$ pero entonces $f(\1 + \1 + \1) = f(\0) = \0 \neq \overline{3} = f(\1) + f(\1) + f(\1)$.
+\end{ej}
+
+\begin{pro}
+	Sea $A$ un anillo cualquiera y sea $\alpha: \Z \to A$ definida por $f(1) = \1_A$ que automáticamente nos define $f(-1) = -\1_A,\ f(2 = 1+1) = \1_A + \1_A, \dots, f(n) = n\1_A,\ f(-n) = n(-\1_A)$. Entonces si $\alpha$ es un homomorfismo de anillos es el único homomorfismo de anillos entre $\Z$ y $A$.
+\end{pro}
+
+\begin{pro}
+	Si $A$ es un anillo y $\alpha: \Z \to A$ es \textbf{el} homomorfismo de anillos, entonces $\ima \alpha \subset A$ es un \gls{di}.
+\end{pro}
+
+\begin{dfn}[Característica de un dominio]
+	Diremos que $A$ es un \gls{di} de característica 0 si $\ker \alpha = \{\0\}$. Diremos que $A$ es un \gls{di} de característica $p$ si $\ker \alpha = p\Z$.
+\end{dfn}
+
+\begin{ej}
+	Consideramos $\alpha: \Z \to \Z/3\Z[X]$. Existe un único homomorfismo de anillos $\alpha$ y además $\ker \alpha = 3\Z \implies \Z/3\Z[X]$ es un \gls{di} de característica 3.
+\end{ej}
 
 \section{Cuerpo de fracciones de un anillo}
 
