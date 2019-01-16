@@ -128,11 +128,16 @@ Aquí $c$ es el cociente y $r$ es el resto.
 
 La definición de primo generaliza para futuras estructuras a la definición de elemento irreducible.
 
+\begin{dfn}[Elementos asocidados]
+	Sea $A$ un \gls{di} conmutativo y con unidad. Dos elementos $a,a' \in A$ se dicen asociados $\iff \exists u \in \uds{A} \mid a = ua'$.
+\end{dfn}
+
+\begin{pro}
+	Sea $A$ un \gls{di}. Sean $a,a' \in A$. Entonces $a$ y $a'$ son asociados $\iff \gen{a} = \gen{a'}$.
+\end{pro}
+
 \begin{dfn}[Elemento irreducible]
-	Sea $A$ un \gls{di} conmutativo y con unidad y sea $r \in A$ tal que $a \neq \0 \land a \in \uds{A}$ (que sea no nulo e invertible). Decimos que $r$ es irreducible si no puede escribirse como producto de otros dos elementos ninguno de los cuales es invertible:
-	\begin{align}
-		r \in A \text{ irreducible } \iff \forall s,t \in A,\ r = st \implies s \in \uds{A} \lor t \in \uds{A}
-	\end{align}
+	Sea $A$ un \gls{di} conmutativo y con unidad y sea $a \in A$ tal que $a \neq \0 \land a \notin \uds{A}$ (que sea no nulo y no sea unidad). Decimos que $a$ es irreducible si $a = a's \implies s \in \uds{A}$.
 \end{dfn}
 
 Observemos que no puede ocurrir que $p \in \uds{A} \land q \in \uds{A}$ y que además $pq = a \notin \uds{A}$ (las unidades son un grupo $\implies$ clausura).
@@ -143,14 +148,6 @@ Observemos que no puede ocurrir que $p \in \uds{A} \land q \in \uds{A}$ y que ad
 	\begin{align*}
 		p \text{ primo } \implies p \text{ irreducible }
 	\end{align*}
-\end{pro}
-
-\begin{dfn}[Elementos asocidados]
-	Sea $A$ un \gls{di} conmutativo y con unidad. Dos elementos $r,s \in A$ se dicen asociados $\iff \exists u \in \uds{A} \mid r = us$.
-\end{dfn}
-
-\begin{pro}
-	Sea $A$ un \gls{di}. Sean $a,a' \in A$. Entonces $a$ y $a'$ son asociados $\iff \gen{a} = \gen{a'}$.
 \end{pro}
 
 \begin{dfn}[Dominio de factorización única (DFU)]
@@ -305,7 +302,7 @@ Esto es, si un primo $p$ divide a todos los coeficientes menos el primero y el �
 \end{proof}
 
 \begin{thm}
-	Sea $K$ un cuerpo y sea $f(x) = \sum_{j=0}^n a_j X^j \in K[X]$ un polinomio mónico irreducible. Entonces $K[X] / \gen{f(x)}$ es un $K$-espacio vectorial con base $\{1, X, X^2, \dots, X^n\}$ y por tanto de dimensión $n$.
+	Sea $K$ un cuerpo y sea $f(x) = \sum_{j=0}^n a_j X^j \in K[X]$ un polinomio mónico irreducible. Entonces $K[X] / \gen{f(x)}$ es un $K$-espacio vectorial con base $\{1, X, X^2, \dots, X^{n-1}\}$ y por tanto de dimensión $n$.
 \end{thm}
 
 Por analogía a cómo se mueven los números en la página 202 de Santorum obtenemos:
