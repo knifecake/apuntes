@@ -1,11 +1,11 @@
 % !TeX root = ../apuntes-ea.tex
 
-\chapter{Anillos de polinomios}
+\chapter{Anillos de ponilomios}
 
 \section{Definiciones básicas y primeros resultados}
 
-\begin{dfn}[Anillo de polinomios]
-	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Definimos el anillo de polinomios con coeficientes en $A$ e incógnita $X$
+\begin{dfn}[Anillo de ponilomios]
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Definimos el anillo de ponilomios con coeficientes en $A$ e incógnita $X$
 	\begin{align*}
 		A[X] = \{\sum_{i = 0}^m a_i X^i \mid a_i \in A \land m \in \N\}
 	\end{align*}
@@ -19,17 +19,17 @@
 Estas operaciones son las operaciones término a término de toda la vida.
 
 \begin{pro}
-	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Entonces el anillo de polinomios $(A[X], +, \cdot)$ es un anillo conmutativo y con unidad.
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad. Entonces el anillo de ponilomios $(A[X], +, \cdot)$ es un anillo conmutativo y con unidad.
 \end{pro}
 
-En este anillo el elemento neutro aditivo $\0$ es el polinomio que tiene todos sus coeficientes $a_j = 0$.
+En este anillo el elemento neutro aditivo $\0$ es el ponilomio que tiene todos sus coeficientes $a_j = 0$.
 
 \begin{dfn}[Polinomio mónico]
-	Sea $A[X]$ un anillo de polinomios y $p \in A[X]$. Diremos que $p$ es mónico $\iff a_m = \max\{a_k \mid a_k \neq 0\} = 1$.
+	Sea $A[X]$ un anillo de ponilomios y $p \in A[X]$. Diremos que $p$ es mónico $\iff a_m = \max\{a_k \mid a_k \neq 0\} = 1$.
 \end{dfn}
 
-\begin{dfn}[Grado de un polinomio]
-	Sea $p \in A[X]$. Definimos el grado del polinomio $p = \sum_{j=0}^n a_jX^j$
+\begin{dfn}[Grado de un ponilomio]
+	Sea $p \in A[X]$. Definimos el grado del ponilomio $p = \sum_{j=0}^n a_jX^j$
 	\begin{align}
 		\gr p = \max \{j \mid a_j \neq 0\}
 	\end{align}
@@ -94,8 +94,12 @@ Aquí $c$ es el cociente y $r$ es el resto.
 	Como en $K[X]$ tenemos un algoritmo de la división entonces todo ideal es principal.
 \end{proof}
 
+\begin{obs}
+	Ojo: si $K = D$ no es un cuerpo, sino que solo es un dominio, no es cierto que $D$ \gls{dip} $\implies D[X]$ \gls{dip}.
+\end{obs}
+
 \begin{cor}
-	Si $K$ es un cuerpo enotnces en $K[X]$ identificamos los ideales en $K[X]$ con los polinomios mónicos en $K[X]$. Es decir
+	Si $K$ es un cuerpo enotnces en $K[X]$ identificamos los ideales en $K[X]$ con los ponilomios mónicos en $K[X]$. Es decir
 	\begin{align*}
 		p \in K[X] \text{ mónico } \iff I = \gen{p} \text{ ideal en } K[X] \\
 		\gen{p} \subset \gen{q} \iff p \in \gen{q} \iff q \divides p \text{ en } K[X]
@@ -221,7 +225,7 @@ La demostración es tan ingenua como uno quiera.
 \end{proof}
 
 \begin{ej}
-	Sea $K$ un cuerpo. El anillo de polinomios $K[X]$ con la función $d = \gr$ (el grado) es un \gls{de}.
+	Sea $K$ un cuerpo. El anillo de ponilomios $K[X]$ con la función $d = \gr$ (el grado) es un \gls{de}.
 \end{ej}
 
 \begin{proof}
@@ -236,20 +240,20 @@ La demostración es tan ingenua como uno quiera.
 \end{thm}
 
 
-\section{Factorización e irreducibilidad en anillos de polinomios}
+\section{Factorización e irreducibilidad en anillos de ponilomios}
 
 
 
 \begin{thm}\cite[p.~232]{dor96}
 	\label{pro:irreducibleimpliesmaximal}
-	Sea $K$ un cuerpo y $p \in K[X]$ un polinomio irreducible. Entonces el ideal generado por $p$ es maximal en $K[X]$.
+	Sea $K$ un cuerpo y $p \in K[X]$ un ponilomio irreducible. Entonces el ideal generado por $p$ es maximal en $K[X]$.
 \end{thm}
 
 En particular, si $p$ es mónico entonces se cumple el recíproco.
 
 \begin{pro}
 	\label{pro:irreducibleiffmaximal}
-	Sea $K$ un cuerpo y $p \in K[X]$ un polinomio mónico. Entonces $p$ es irreducible $\iff \gen{p}$ (el ideal generado por $p$) es maximal.
+	Sea $K$ un cuerpo y $p \in K[X]$ un ponilomio mónico. Entonces $p$ es irreducible $\iff \gen{p}$ (el ideal generado por $p$) es maximal.
 \end{pro}
 
 
@@ -258,56 +262,56 @@ En particular, si $p$ es mónico entonces se cumple el recíproco.
 \end{pro}
 
 \begin{obs}
-	Si $p(x)$ es un polinomio de grado $n$ entonces no puede tener más de $n$ ceros en $K$.
+	Si $p(x)$ es un ponilomio de grado $n$ entonces no puede tener más de $n$ ceros en $K$.
 \end{obs}
 
 \subsection{Criterios de irreducibilidad}
 
 \begin{thm}\cite[p.222]{dor96}
-	Sea $K$ un cuerpo y sea $f(x) \in K[X]$ un polinomio de grado 2 o 3. Entonces $f(x)$ es reducible $\iff f(x)$ tiene una\footnote{Aquí no sé si tiene que ser una o valen varias. Orlando lo da diciendo que $f(x)$ es irreducible $\iff f(x)$ no tiene raíces en $K$.} raíz en $K$.
+	Sea $K$ un cuerpo y sea $f(x) \in K[X]$ un ponilomio de grado 2 o 3. Entonces $f(x)$ es reducible $\iff f(x)$ tiene una\footnote{Aquí no sé si tiene que ser una o valen varias. Orlando lo da diciendo que $f(x)$ es irreducible $\iff f(x)$ no tiene raíces en $K$.} raíz en $K$.
 \end{thm}
 
-\begin{pro}[Criterio para las raíces de polinomios con coeficientes en $\Z$ ]
+\begin{pro}[Criterio para las raíces de ponilomios con coeficientes en $\Z$ ]
 	
 		Sea $f(x) = \sum_{i=0}^{n}a_iX^i \in \Z[X]$. Entonces $\frac{a}{b} \in \Q$ con $mcd(a,b) = 1$ es una raíz de $f(x) \iff a \divides a_0 \land b \divides a_n$.
 \end{pro}
 
 \begin{thm}[Criterio de Eisenstein]
-	Sea $f(x) = \sum_{j=0}^{n}a_jX^j \in \Z[X]$ un polinomio. Si existe $p$ primo tal que $p \divides a_j, \forall j = 1, \dots, n-1$ y además $p \not\divides a_n \land p^2 \not\divides a_0$ entonces $f(x)$ es irreducible en $\Q[X]$.
+	Sea $f(x) = \sum_{j=0}^{n}a_jX^j \in \Z[X]$ un ponilomio. Si existe $p$ primo tal que $p \divides a_j, \forall j = 1, \dots, n-1$ y además $p \not\divides a_n \land p^2 \not\divides a_0$ entonces $f(x)$ es irreducible en $\Q[X]$.
 \end{thm}
 
 \begin{pro}
-	Si $K[X]$ es un cuerpo entonces todo polinomio mónico de grado 1 es irreducible.
+	Si $K[X]$ es un cuerpo entonces todo ponilomio mónico de grado 1 es irreducible.
 \end{pro}
 
 \begin{obs}
-	En $K[X] = \C[X]$ todo polinomio mónico irreducible tiene grado 1.
+	En $K[X] = \C[X]$ todo ponilomio mónico irreducible tiene grado 1.
 \end{obs}
 
 \begin{obs}
-	En $K[X] = \R[X]$ todo polinomio mónico irreducible tiene grado 1 o 2.
+	En $K[X] = \R[X]$ todo ponilomio mónico irreducible tiene grado 1 o 2.
 \end{obs}
 
-Esto es, si un primo $p$ divide a todos los coeficientes menos el primero y el último y además no divide al primero ni su cuadrado divide al último entonces el polinomio es irreducible en $Q[X]$.
+Esto es, si un primo $p$ divide a todos los coeficientes menos el primero y el último y además no divide al primero ni su cuadrado divide al último entonces el ponilomio es irreducible en $Q[X]$.
 
 
-\subsection{Construccion de anillos de polinomios finitos}
+\subsection{Construccion de anillos de ponilomios finitos}
 
 \begin{pro}
-	Sea $K$ un cuerpo y sea $f(x) \in K[X]$ un polinomio mónico. Entonces $K[X]/\gen{f(x)}$ es un cuerpo $\iff \gen{f(x)}$ es irreducible.
+	Sea $K$ un cuerpo y sea $f(x) \in K[X]$ un ponilomio mónico. Entonces $K[X]/\gen{f(x)}$ es un cuerpo $\iff \gen{f(x)}$ es irreducible.
 \end{pro}
 
 \begin{proof}
-	Viene de la proposición \autoref{pro:irreducibleiffmaximal} que vale para polinomios mónicos.
+	Viene de la proposición \autoref{pro:irreducibleiffmaximal} que vale para ponilomios mónicos.
 \end{proof}
 
 \begin{thm}
-	Sea $K$ un cuerpo y sea $f(x) = \sum_{j=0}^n a_j X^j \in K[X]$ un polinomio mónico irreducible. Entonces $K[X] / \gen{f(x)}$ es un $K$-espacio vectorial con base $\{1, X, X^2, \dots, X^{n-1}\}$ y por tanto de dimensión $n$.
+	Sea $K$ un cuerpo y sea $f(x) = \sum_{j=0}^n a_j X^j \in K[X]$ un ponilomio mónico irreducible. Entonces $K[X] / \gen{f(x)}$ es un $K$-espacio vectorial con base $\{1, X, X^2, \dots, X^{n-1}\}$ y por tanto de dimensión $n$.
 \end{thm}
 
 Por analogía a cómo se mueven los números en la página 202 de Santorum obtenemos:
 
 \begin{pro}
-	Sea $K$ cuerpo de dimensión $k$, $f(x)$ un polinomio mónico irreducible de grado $n$ en $K[X]$. Entonces $|K[X]/\gen{f(x)}| = k^n$.
+	Sea $K$ cuerpo de dimensión $k$, $f(x)$ un ponilomio mónico irreducible de grado $n$ en $K[X]$. Entonces $|K[X]/\gen{f(x)}| = k^n$.
 \end{pro}
 
