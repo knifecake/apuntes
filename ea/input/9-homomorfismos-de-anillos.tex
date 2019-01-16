@@ -520,11 +520,11 @@ Para probarlo nos ayudamos del siguiente Lema:
 Sean $a,b \in A$ elementos de un anillo $A$ cualquiera. En general $ax = b$ no tiene solución dentro del anillo pero muchas veces las soluciones de esta ecuación son de interés. Por ejemplo, para resolver dichas ecuaciones cuando $A = (\Z, +, \cdot)$ extendemos $\Z$ al cuerpo $(\Q, +, \cdot)$. En esta sección veremos como esta extensión en realidad se puede hacer para cualquier \gls{di} conmutativo y con unidad.
 
 \begin{dfn}[Cuerpo de fracciones de un anillo]
-	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad y además sea $A$ un \gls{di}. Definimos en $A \times A\setminus\{\0\}$ la relación de equivalencia
+	Sea $(A, +, \cdot)$ un anillo conmutativo y con unidad y además sea $A$ un \gls{di}. Definimos en $A \times A\setminus\{\0\}$ la relación de equivalencia $R$
 	\begin{align}
-		(a,b) \sim (c,d) \iff ad = bc
+		(a,b) R (c,d) \iff ad = bc
 	\end{align}
-	Definimos además el \textbf{cuerpo de fracciones} $C = (A\times A\setminus \{\0\})/ \sim = \{[(a,b)] \mid (a,b) \in A\times A\setminus \0\}$ y dos operaciones sobre las clases de equivalencia
+	Definimos además el \textbf{cuerpo de fracciones} $C = (A\times A\setminus \{\0\})/ R = \{[(a,b)] \mid (a,b) \in A\times A\setminus \0\}$ y dos operaciones sobre las clases de equivalencia
 	\begin{align}
 		[(a,b)]+[(c,d)] &= [(ad+bc, bd)] \\
 		[(a,b)]\cdot[(c,d)] &= [(ac,bd)]
@@ -534,7 +534,7 @@ Sean $a,b \in A$ elementos de un anillo $A$ cualquiera. En general $ax = b$ no t
 Este conjunto $C$ es el conjunto de los pares $[(a,b)]$ tales que $a,b \in A \land b \neq \0$ y lo interpretamos como los números $\frac{a}{b}$ (está siempre bien definido porque $b \neq 0$).
 
 \begin{pro}
-	La relación $\sim$ es efectivamente una relación de equivalencia.
+	La relación $R$ es efectivamente una relación de equivalencia.
 \end{pro}
 
 \begin{thm}
