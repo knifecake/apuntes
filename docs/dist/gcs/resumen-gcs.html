@@ -1,0 +1,115 @@
+<h1 id="curvas-en-el-plano-y-en-el-espacio">Curvas en el plano y en el espacio</h1>
+<h2 id="curvas-en-general">Curvas en general</h2>
+<ul>
+<li><p>Una <strong>curva plana</strong> es una aplicación continua <span class="math inline">\(\alpha: I \subset \mathbb{R}^n\)</span> definida por <span class="math inline">\(\alpha(t) = (\alpha_1(t), \dots, \alpha_n(t))\)</span>.</p></li>
+<li><p>La <strong>rapidez</strong> es la derivada <span class="math inline">\(\alpha&#39;(t) = (\alpha_1&#39;(t), \dots, \alpha_n&#39;(t))\)</span></p></li>
+<li><p>La <strong>velocidad</strong> es la norma de la rapidez <span class="math inline">\(v_\alpha(t) = \left\lVert\alpha&#39;(t)\right\rVert\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\alpha\)</span> es <strong>regular</strong> <span class="math inline">\(\iff v_\alpha(t) &gt; 0, \forall t \in I\)</span></p></li>
+<li><p>La derivada (o rapidez) normalizada es <span class="math inline">\(T_\alpha(t) = \frac{\alpha&#39;(t)}{v_\alpha(t)}\)</span>.</p></li>
+</ul></li>
+<li><p>La <strong>longitud</strong> es <span class="math inline">\(l_\alpha = \int_I v_\alpha(t)dt\)</span>.</p></li>
+<li><p>Una <strong>parametrización</strong> es un difeomorfismo <span class="math inline">\(\varphi : J \subset \mathbb{R}\to I \subset \mathbb{R}\)</span></p>
+<ul>
+<li><p>El <strong>signo de una parametrización</strong> es <span class="math display">\[\begin{aligned}
+            \varepsilon(\varphi) = \begin{cases}
+            +1 &amp;\text{ si } \varphi&#39;(t) &gt; 0, \forall t \in J \\
+            -1 &amp;\text{ si } \varphi&#39;(t) &lt; 0, \forall t \in J
+            \end{cases}
+        \end{aligned}\]</span></p></li>
+<li><p>Una curva está <strong>parametrizada por longitud de arco</strong> o p.p.a <span class="math inline">\(\iff \left\lVert\alpha&#39;(t)\right\rVert = 1,\ \forall t \in I\)</span>.</p></li>
+</ul></li>
+<li><p>Si para dos curvas <span class="math inline">\(\alpha, \beta\)</span> existe <span class="math inline">\(\varphi\)</span> difeomorfismo tal que <span class="math inline">\(\alpha = \beta \circ \varphi\)</span> decimos que <span class="math inline">\(\alpha \sim \beta\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\sim\)</span> es una relación de equivalencia</p></li>
+<li><p>Dos curvas en una misma clase de equivalencia comparten la traza o imagen.</p></li>
+<li><p>Se cumple <span class="math display">\[\begin{aligned}
+            \alpha&#39;(t) = \beta&#39;(\varphi(t))\varphi&#39;(t) \\
+            \left\lVert\alpha&#39;(t)\right\rVert =
+        \end{aligned}\]</span></p></li>
+</ul></li>
+<li><p>Una curva es <strong>birregular</strong> <span class="math inline">\(\iff\)</span> para una parametrización <span class="math inline">\(\alpha\)</span> se tiene que <span class="math inline">\(\alpha&#39;\)</span> y <span class="math inline">\(\alpha&#39;&#39;\)</span> son linealmente independientes.</p>
+<ul>
+<li>En particular, <span class="math inline">\(\alpha&#39;, \alpha&#39;&#39; \neq 0\)</span> y por tanto <span class="math inline">\(\alpha\)</span> también es regular.</li>
+</ul></li>
+<li><p>El <strong>diedro de Frenet-Serret</strong> formado por los vectores <span class="math display">\[\begin{aligned}
+        \mathbf{t}_\alpha(t) &amp;= \frac{\alpha&#39;(s)}{\left\lVert\alpha&#39;(s)\right\rVert} \\
+        \mathbf{n}_\alpha(t) &amp;= J\mathbf{t}_\alpha(s) \text{ con } J = \left(\begin{array}{cc}
+        0 &amp; -1 \\
+        1 &amp; 0
+        \end{array}\right) 
+    \end{aligned}\]</span></p></li>
+<li><p>La <strong>curvatura</strong> (con signo) <span class="math display">\[\begin{aligned}
+        k_\alpha(t) &amp;= \frac{\langle \mathbf{t}_\alpha&#39;(t), \mathbf{n}_\alpha(t) \rangle}{\left\lVert\alpha&#39;(t)\right\rVert} \\
+        k_\alpha(t) &amp;= \frac{\det(\alpha&#39;(t),\ \alpha&#39;&#39;(t))}{\left\lVert\alpha&#39;(t)\right\rVert^3}&amp;\text{ si } \alpha \text{ regular } \\
+        k_\alpha(t) &amp;= \left\lVert\alpha&#39;&#39;(t)\right\rVert &amp;\text{ si } \alpha \text{ está p.p.a. }
+    \end{aligned}\]</span></p>
+<ul>
+<li><p>El <strong>vector curvatura</strong> es <span class="math inline">\(\mathbf{k}_\alpha(t) = k_\alpha(t) \mathbf{n}_\alpha(t)\)</span></p></li>
+<li><p>El <strong>radio de curvatura</strong> <span class="math display">\[\begin{aligned}
+        \rho_\alpha(t) = \frac{1}{k_\alpha(t)}
+    \end{aligned}\]</span></p></li>
+<li><p>El <strong>centro de curvatura</strong> <span class="math display">\[\begin{aligned}
+        C_\alpha(t) = \alpha(t) + \frac{1}{k_\alpha(t)}\mathbf{n}_\alpha(t)
+    \end{aligned}\]</span></p></li>
+<li><p>El <strong>circulo osculador</strong> o <strong>circunferencia osculatriz</strong> <span class="math display">\[\begin{aligned}
+        \{p \in \mathbb{R}^2 : \left\lVert p - C_\alpha(t)\right\rVert = \frac{1}{k_\alpha(t)},\text{ para } t \in I\text{ fijado } \}
+    \end{aligned}\]</span></p></li>
+</ul></li>
+<li><p>Las <strong>ecuaciones de Frenet-Serret</strong> salen de tomar la submatriz <span class="math inline">\(2 \times 2\)</span> de las ecuaciones en el espacio.</p></li>
+</ul>
+<h2 id="curvas-en-el-espacio">Curvas en el espacio</h2>
+<ul>
+<li><p>El triedro de Frenet-Serret formado por los vectores <span class="math display">\[\begin{aligned}
+        \mathbf{t}_\alpha(s) &amp;= \frac{\alpha&#39;(s)}{\left\lVert\alpha&#39;(s)\right\rVert} \\
+        \mathbf{n}_\alpha(s) &amp;= \frac{\mathbf{t}_\alpha&#39;(s)}{\left\lVert\mathbf{t}_\alpha&#39;(s)\right\rVert} \\
+        \mathbf{b}_\alpha(s) &amp;= \mathbf{t}_\alpha(s) \times \mathbf{n}_\alpha(s)
+    \end{aligned}\]</span></p></li>
+<li><p>Los 3 planos del triedro de Frenet-Serret para un punto <span class="math inline">\(\alpha(s)\)</span> de la curva [afines] son:</p>
+<ul>
+<li><p>El <strong>plano osculador</strong> <span class="math inline">\(\text{ span}\{\mathbf{t}_\alpha(s), \mathbf{n}_\alpha(s)\} + \alpha(s)\)</span> cuyos puntos <span class="math inline">\(P\)</span> cumplen <span class="math inline">\(\langle P - \alpha(s), \mathbf{b}_\alpha(s) \rangle = 0\)</span></p></li>
+<li><p>El <strong>plano normal</strong> <span class="math inline">\(\text{ span}\{\mathbf{n}_\alpha(s), \mathbf{b}_\alpha(s)\} + \alpha(s)\)</span> cuyos puntos <span class="math inline">\(P\)</span> cumplen <span class="math inline">\(\langle P - \alpha(s), \mathbf{t}_\alpha(s) \rangle = 0\)</span></p></li>
+<li><p>El <strong>plano rectificante</strong> <span class="math inline">\(\text{ span}\{\mathbf{t}_\alpha(s), \mathbf{b}_\alpha(s)\} + \alpha(s)\)</span> cuyos puntos cumplen <span class="math inline">\(\langle P - \alpha(s), \mathbf{n}_\alpha(s) \rangle = 0\)</span></p></li>
+</ul></li>
+<li><p>La <strong>curvatura</strong> (siempre <span class="math inline">\(\geq 0\)</span>) <span class="math display">\[\begin{aligned}
+        k_\alpha(s) &amp;=  \frac{\left\lVert\mathbf{t}_\alpha&#39;(s)\right\rVert}{\left\lVert\alpha&#39;(s)\right\rVert}
+    \end{aligned}\]</span> <span class="math display">\[\begin{aligned}
+        k_\alpha(s) &amp;= \frac{\left\lVert\alpha&#39;(s) \times \alpha&#39;&#39;(s)\right\rVert}{\left\lVert\alpha&#39;&#39;(s)\right\rVert^3}  &amp;\text{ si } \alpha \text{ regular }\\
+        k_\alpha(s) &amp;= \left\lVert\alpha&#39;&#39;(s)\right\rVert &amp;\text{ si } \alpha \text{ p.p.a}
+    \end{aligned}\]</span></p></li>
+<li><p>El <strong>vector curvatura</strong> <span class="math display">\[\begin{aligned}
+        \mathbf{k}_\alpha(s) &amp;= \frac{\mathbf{t}_\alpha&#39;(s)}{\left\lVert\alpha&#39;(s)\right\rVert} \text{ colineal con } \mathbf{n}_\alpha(s)
+    \end{aligned}\]</span></p></li>
+<li><p>La <strong>torsión</strong> <span class="math display">\[\begin{aligned}
+        \tau_\alpha(s) &amp;= -\frac{\langle \mathbf{b}_\alpha&#39;(s), \mathbf{n}_\alpha(s) \rangle}{\left\lVert\alpha&#39;(s)\right\rVert}\\
+        \tau_\alpha(s) &amp;= \frac{\det(\alpha&#39;(s),\ \alpha&#39;&#39;(s),\ \alpha&#39;&#39;&#39;(s))}{\left\lVert\alpha&#39;(s) \times \alpha&#39;&#39;(s)\right\rVert^2} \text{ si } \alpha \text{ regular }
+    \end{aligned}\]</span></p></li>
+<li><p>Las ecuaciones de Frenet-Serret <span class="math display">\[\begin{aligned}
+        \mathbf{t}_\alpha&#39; &amp;= k_\alpha v_\alpha \mathbf{n}_\alpha \\
+        \mathbf{n}_\alpha&#39; &amp;= -k_\alpha v_\alpha \mathbf{t}_\alpha + \tau_\alpha v_\alpha \mathbf{b}_\alpha \\
+        \mathbf{b}_\alpha&#39; &amp;= -v_\alpha \tau_\alpha \mathbf{n}_\alpha
+    \end{aligned}\]</span> <span class="math display">\[\begin{aligned}
+        \left(\begin{array}{c}
+        \mathbf{t}_\alpha&#39; \\
+        \mathbf{n}_\alpha&#39; \\
+        \mathbf{b}_\alpha&#39;
+        \end{array}\right) = \left\lVert\alpha&#39;(s)\right\rVert \left(\begin{array}{ccc}
+        0 &amp; k_\alpha &amp; 0 \\
+        -k_\alpha &amp; 0 &amp; \tau_\alpha \\
+        0 &amp; -\tau_\alpha &amp; 0
+        \end{array}\right)\left(\begin{array}{c}
+        \mathbf{t}_\alpha \\
+        \mathbf{n}_\alpha \\
+        \mathbf{b}_\alpha
+        \end{array}\right)
+    \end{aligned}\]</span></p></li>
+</ul>
+<h1 id="superficies">Superficies</h1>
+<ul>
+<li><p>Plano tangente (afín) a <span class="math inline">\(S\)</span> en <span class="math inline">\(p = \mathbf{X}(u,v) \in S\)</span> <span class="math display">\[\begin{aligned}
+        T_pS = p + \underbrace{\text{ span}\{\mathbf{X}_u(u,v), \mathbf{X}_v(u,v)\}}_{\text{plano tangente vectorial}}
+    \end{aligned}\]</span></p></li>
+<li><p>Plano tangente sin parametrización <span class="math display">\[\begin{aligned}
+        T_pS = \{\alpha&#39;(0) \mid \varepsilon &gt; 0, \alpha: (-\varepsilon, \varepsilon) \to S \\\land\ \alpha(0) = p \\\land\ \alpha \text{ diferenciable }\}
+    \end{aligned}\]</span></p></li>
+</ul>

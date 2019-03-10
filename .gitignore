@@ -9,3 +9,9 @@
 *.bbl
 *.blg
 *.loe
+
+*.pdf
+*.html
+!docs/*.html
+!docs/**.html
+!docs/dist/**/*.pdf

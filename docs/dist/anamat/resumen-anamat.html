@@ -1,0 +1,384 @@
+
+
+<h1 id="preliminares">Preliminares</h1>
+<h2 id="normas">Normas</h2>
+<p>Sea <span class="math inline">\(V\)</span> un espacio vectorial, <span class="math inline">\(x, y, z \in V, \lambda \in \mathbb{R}\)</span></p>
+<ul>
+<li><p>Un <strong>producto escalar</strong> es una función <span class="math inline">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span> que cumple: <span class="math display">\[\begin{aligned}
+        \langle \lambda x, y \rangle = \lambda\langle x,y \rangle 
+        &amp;\qquad \langle x + y, z \rangle = \langle x, z \rangle + \langle y, z \rangle
+         \\
+        \langle x, y \rangle = \langle y, x \rangle
+        &amp;\qquad \langle x, x \rangle \geq 0,\ \langle x, x \rangle = 0 \iff x = \vec{0}_V
+    \end{aligned}\]</span></p></li>
+<li><p>Una <strong>norma</strong> es una función <span class="math inline">\(\left\lVert\cdot\right\rVert : V \to R\)</span> que cumple: <span class="math display">\[\begin{aligned}
+        \left\lVert x\right\rVert \geq 0, \ \left\lVert x\right\rVert = 0 \iff x = \vec{0}_V \\
+        \left\lVert\lambda v\right\rVert = |\lambda| \left\lVert v\right\rVert \qquad 
+        \left\lVert x + y\right\rVert \leq \left\lVert x\right\rVert + \left\lVert y\right\rVert
+    \end{aligned}\]</span></p>
+<ul>
+<li><span class="math inline">\(\left\lVert\cdot\right\rVert\)</span> cumple la <strong>identidad del paralelogramo</strong> <span class="math display">\[\begin{aligned}
+            \left\lVert\frac{x+y}{2}\right\rVert^2 + \left\lVert\frac{x- y}{2}\right\rVert^2 = \frac{\left\lVert x\right\rVert^2 + \left\lVert y\right\rVert}{2}
+        \end{aligned}\]</span> si y solo si procede producto escalar dado por la <strong>identidad de polarización</strong> <span class="math display">\[\begin{aligned}
+            4\langle x,y \rangle = \left\lVert x+y\right\rVert^2 - \left\lVert x - y\right\rVert^2
+        \end{aligned}\]</span> Se dice que esta es una <strong>norma euclídea</strong>.</li>
+</ul></li>
+<li><p>Un espacio normado es un par <span class="math inline">\((V, \left\lVert\cdot\right\rVert_V)\)</span></p></li>
+<li><p>Una <strong>p-norma</strong> es una norma <span class="math inline">\(\left\lVert\cdot\right\rVert_p : \mathbb{R}^n \to R\)</span> definida con <span class="math display">\[\begin{aligned}
+        \left\lVert(x_1, \dots, x_n)\right\rVert_p = \left[\sum_{j=1}^{n} x_j^p\right]^{\frac{1}{p}}
+    \end{aligned}\]</span></p>
+<ul>
+<li><p>El <strong>exponente conjugado</strong> de <span class="math inline">\(p\)</span> es <span class="math inline">\(p&#39;\)</span> y cumple <span class="math inline">\(\frac{1}{p} + \frac{1}{p&#39;} = 1\)</span>. Es único y si <span class="math inline">\(p = 1\)</span> entonces <span class="math inline">\(p&#39; = \infty\)</span> y viceversa</p></li>
+<li><p>La norma euclidea que procede del producto escalar estándar es la p-norma de orden 2. 2 es el único número que tiene como conjudago a sí mismo</p></li>
+<li><p>Las p-normas cumplen las desigualdades de <strong>Young, Hölder y Minkowski</strong>: <span class="math display">\[\begin{aligned}
+            a,b &gt; 0 &amp;\implies ab \leq \frac{a^p}{p} + \frac{b^{p&#39;}}{p&#39;} \\
+            x,y \in \mathbb{R}^n &amp;\implies \langle x,y \rangle \leq \left\lVert x\right\rVert_p \left\lVert y\right\rVert_{p&#39;} \\
+            x,y \in \mathbb{R}^n &amp;\implies \left\lVert x+y\right\rVert_p \leq \left\lVert x\right\rVert_p + \left\lVert y\right\rVert_p
+        \end{aligned}\]</span></p></li>
+</ul></li>
+<li><p>Dos <strong>normas</strong> son <strong>equivalentes</strong> si definen los mismos abiertos</p>
+<ul>
+<li>en <span class="math inline">\(V = \mathbb{R}^n\)</span> todas las normas son equivalentes</li>
+</ul></li>
+<li><p>Una norma <span class="math inline">\(\left\lVert\cdot\right\rVert\)</span> es <strong>submultiplicativa</strong> <span class="math inline">\(\iff \forall x, y,\ \left\lVert xy\right\rVert \leq \left\lVert x\right\rVert\left\lVert y\right\rVert\)</span></p>
+<ul>
+<li><span class="math inline">\(\left\lVert\cdot\right\rVert\)</span> submultiplicativa <span class="math inline">\(\implies \left\lVert x^n\right\rVert \leq \left\lVert x\right\rVert^n\)</span></li>
+</ul></li>
+<li><p>La <strong>norma de Frobenius</strong> para matrices es <span class="math inline">\(\left\lVert\cdot\right\rVert_F = \sqrt{\text{traza }A^\ast A}\)</span> donde <span class="math inline">\(A^\ast\)</span> es la traspuesta conjugada de <span class="math inline">\(A\)</span></p>
+<ul>
+<li>La norma de Frobenius es submultiplicativa</li>
+</ul></li>
+</ul>
+<h2 id="espacios-métricos">Espacios métricos</h2>
+<p>Sea <span class="math inline">\(X \neq \emptyset\)</span> conjunto y sean <span class="math inline">\(x, y, z \in X\)</span></p>
+<ul>
+<li><p>Un espacio métrico es un par <span class="math inline">\((X, d)\)</span> donde la función <span class="math inline">\(d:X \times X \to \mathbb{R}\)</span> es una distancia que cumple: <span class="math display">\[\begin{aligned}
+        d(x,y) \geq 0,\ d(x,y) = 0 \iff x = y \\
+        d(x,y) = d(y,x) \qquad d(x,z) \leq d(x,y) + d(y,z)
+    \end{aligned}\]</span></p></li>
+<li><p>Si <span class="math inline">\(E \subset X,\ E \neq \emptyset\)</span> entonces la restricción <span class="math inline">\(d_E: E \times E \to \mathbb{R}\)</span> define una distancia</p></li>
+<li><p>Si <span class="math inline">\(E \subset \mathbb{R}^n = X\)</span> no vacío, no necesariamente subespacio, entonces <span class="math inline">\(\left\lVert x - y\right\rVert_E\)</span> define una distancia en <span class="math inline">\(E\)</span></p></li>
+</ul>
+<h2 id="sucesiones">Sucesiones</h2>
+<ul>
+<li><p>Una <strong>sucesión</strong> <span class="math inline">\(\{x_n\} \subset X\)</span> es <strong>de Cauchy</strong> <span class="math inline">\(\iff \forall \varepsilon &gt; 0, \exists N_\varepsilon\)</span> tal que <span class="math inline">\(n, m \geq N_\varepsilon \implies d(x_n, x_m) &lt; \varepsilon\)</span></p>
+<ul>
+<li><span class="math inline">\((X, d)\)</span> <strong>completo</strong> <span class="math inline">\(\iff \{x_n\}\)</span> de Cauchy <span class="math inline">\(\implies \{x_n\}\)</span> convergente</li>
+</ul></li>
+<li><p>Una <strong>sucessión</strong> <span class="math inline">\(\{x_n\} \subset X\)</span> es <strong>convergente</strong> a <span class="math inline">\(L \in X \iff \forall \varepsilon &gt; 0, \exists N_\varepsilon\)</span> tal que <span class="math inline">\(n \geq N_\varepsilon \implies d(x_n, L) &lt; \varepsilon\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\{x_n\}\)</span> convergente <span class="math inline">\(\implies \{x_n\}\)</span> de Cauchy</p></li>
+<li><p>Si el límite <span class="math inline">\(\lim_{n \to \infty} x_n = L\)</span> existe entonces es único</p></li>
+</ul></li>
+</ul>
+<h2 id="aplicaciones-lineales.-normas-equivalentes.">Aplicaciones lineales. Normas equivalentes.</h2>
+<ul>
+<li><p>Una <strong>aplicación lineal</strong> es <strong>acotada</strong> <span class="math inline">\(L \in \mathcal{L}(E, F)\)</span> si cumple alguna de</p>
+<ul>
+<li><p><span class="math inline">\(L\)</span> es continua en <span class="math inline">\(\vec{0}_E\)</span></p></li>
+<li><p><span class="math inline">\(L\)</span> es continua <span class="math inline">\(\forall x \in E\)</span></p></li>
+<li><p><span class="math inline">\(\forall x \in E,\ \exists M \mid \left\lVert x\right\rVert_E \leq 1 \implies \left\lVert L(v)\right\rVert_F \leq M\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(\left\lVert\cdot\right\rVert_A\)</span> domina a <span class="math inline">\(\left\lVert\cdot\right\rVert_B \iff \exists 0 &lt; c &lt; \infty\)</span> tal que <span class="math inline">\(\forall x \in E,\ \left\lVert x\right\rVert_B \leq c\left\lVert x\right\rVert_A\)</span></p></li>
+<li><p><span class="math inline">\(\left\lVert\cdot\right\rVert_A, \left\lVert\cdot\right\rVert_B\)</span> son equivalentes <span class="math inline">\(\iff \exists 0 &lt; c, C &lt; \infty\)</span> tales que <span class="math inline">\(\forall x \in E,\ c\left\lVert x\right\rVert_A \leq \left\lVert x\right\rVert_B \leq C\left\lVert x\right\rVert_A\)</span>. Entonces,</p>
+<ul>
+<li><p>Definen los mismos abiertos y cerrados.</p></li>
+<li><p>En <span class="math inline">\(\mathbb{R}^n\)</span> todas las normas son equivalentes.</p></li>
+</ul></li>
+</ul>
+<h2 id="topología">Topología</h2>
+<p>Sea <span class="math inline">\((X,d)\)</span> un espacio métrico, <span class="math inline">\(E \subset Y \subset X,\ a, x, y \in X,\ r \in \mathbb{R}\)</span></p>
+<ul>
+<li><p>La <strong>bola abierta</strong> de radio <span class="math inline">\(r\)</span> y centro <span class="math inline">\(a\)</span> es el conjunto <span class="math inline">\(B_r(a) = B(a; r) = \{x \in X \mid d(x, a) &lt; r\}\)</span></p></li>
+<li><p>La <strong>bola cerrada</strong> de radio <span class="math inline">\(r\)</span> y centro <span class="math inline">\(a\)</span> es el conjunto <span class="math inline">\(\overline{B}_r(a) = \overline{B}(a;r) = \{x \in X \mid d(x, a) \leq r\}\)</span></p></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>abierto</strong> <span class="math inline">\(\iff \forall e \in E, \exists r &gt; 0 \mid B_r(e) \subset E\)</span></p>
+<ul>
+<li><p>La unión arbitrara de abiertos es un abierto</p></li>
+<li><p>La intersección finita de abiertos es un abierto</p></li>
+<li><p>Dado <span class="math inline">\(x \in X\)</span>, un <strong>entorno abierto</strong> de <span class="math inline">\(x\)</span> es cualquier abierto <span class="math inline">\(U \mid x \in U\)</span>.</p></li>
+<li><p><span class="math inline">\(U\)</span> es abierto <span class="math inline">\(\iff U = \bigcup B_r(x)\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>cerrado</strong> si <span class="math inline">\(E^\complement = X \setminus E\)</span> es un abierto</p>
+<ul>
+<li><p>La intersección arbitraria de cerrados es un cerrado</p></li>
+<li><p>La unión finita de cerrados es un cerrado</p></li>
+</ul></li>
+<li><p><span class="math inline">\(E\)</span> <strong>abierto relativo</strong> de <span class="math inline">\(Y\)</span> <span class="math inline">\(\iff \exists E&#39; \mid E = Y \cap E&#39;\)</span> y <span class="math inline">\(E&#39;\)</span> es abierto en <span class="math inline">\(X\)</span> (análogo para cerrados)</p>
+<ul>
+<li><span class="math inline">\(E\)</span> abierto relativo en <span class="math inline">\(Y \implies E\)</span> abierto en <span class="math inline">\((Y, d_Y)\)</span></li>
+</ul></li>
+<li><p>El <strong>interior</strong> <span class="math inline">\(\text{ int }E = \{x \in X \mid \exists r &gt; 0, B_r(x) \subset E\}\)</span></p></li>
+<li><p>El <strong>exterior</strong> <span class="math inline">\(\text{ ext }E = \{x \in X \mid \exists r &gt; 0, B_r(x) \cap E = \emptyset\}\)</span></p></li>
+<li><p>El <strong>cierre, clausura o adherencia</strong> <span class="math inline">\(\overline{E} = \{x \in X \mid \forall r &gt; 0, B_r(x) \cap E \neq \emptyset\} = \{L \in X \mid \{a_n\} \subset E \text{ converge a } L\}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(E\)</span> cerrado <span class="math inline">\(\iff E = \overline{E}\)</span></p></li>
+<li><p><span class="math inline">\(E\)</span> <strong>denso</strong> <span class="math inline">\(\iff \overline{E} = X\)</span>. Tanto <span class="math inline">\(\mathbb{Q}\)</span> como <span class="math inline">\(\mathbb{R}\setminus \mathbb{Q}\)</span> son densos en <span class="math inline">\(\mathbb{R}\)</span></p></li>
+</ul></li>
+<li><p>La <strong>frontera</strong> <span class="math inline">\(\partial E = \{x \in X \mid \forall r &gt; 0, B_r(x) \cap E \neq \emptyset \land B_r(x) \cap E^\complement \neq \emptyset\} = \{x \in X \mid x \not\in \text{ int }E \land x \not\in \text{ ext }E\}\)</span></p></li>
+<li><p>Los <strong>puntos de acumulación</strong> <span class="math inline">\(E&#39; = \{x \in X \mid \forall r &gt; 0, B_r(x) \cap E \setminus\{x\} \neq \emptyset \}\)</span></p>
+<ul>
+<li><span class="math inline">\(\overline{E} = E \cup E&#39;\)</span></li>
+</ul></li>
+<li><p>Un <strong>punto</strong> <span class="math inline">\(x \in E\)</span> es <strong>aislado</strong> <span class="math inline">\(\iff \exists r &gt; 0 \mid B_r(x) \cap E = \{x\}\)</span></p>
+<ul>
+<li>si <span class="math inline">\(\forall x,\ x \in E \implies x\)</span> aislado entonces <span class="math inline">\(E\)</span> es <strong>discreto</strong> y <span class="math inline">\(\{x\}\)</span> abierto relativo de <span class="math inline">\(E\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\((X,d)\)</span> de <strong>Banach</strong> <span class="math inline">\(\iff\)</span> X es e.v., <span class="math inline">\(d\)</span> es una norma y <span class="math inline">\(X\)</span> completo</p></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>compacto</strong> en <span class="math inline">\((X,d) \iff\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\{x_n\} \subset E \implies \exists \{x_{n_k}\} \subset \{x_n\}\)</span> subsucesión convergente con límite en <span class="math inline">\(K\)</span></p></li>
+<li><p>Todo recubrimiento <span class="math inline">\(\{U_i\}\)</span> por abiertos de <span class="math inline">\(K\)</span> tiene una subfamilia finita que también recubre a <span class="math inline">\(K\)</span></p></li>
+</ul></li>
+<li><p>Propiedades de compactos</p>
+<ul>
+<li><p><span class="math inline">\(E\)</span> compacto <span class="math inline">\(\implies K\)</span> es cerrado y acotado</p></li>
+<li><p>en <span class="math inline">\((X,d)\)</span>, <span class="math inline">\(X\)</span> compacto <span class="math inline">\(\implies (X,d)\)</span> completo</p></li>
+<li><p><span class="math inline">\(E \subset X\)</span> compacto, <span class="math inline">\(f\)</span> continua en <span class="math inline">\(E \implies f\)</span> alcanza máximo y mínimo en <span class="math inline">\(E\)</span></p></li>
+</ul></li>
+<li><p>Un <strong>camino</strong> es una aplicación continua <span class="math inline">\(\alpha:I \subset \mathbb{R}\to X\)</span> con <span class="math inline">\(I\)</span> un intervalo</p></li>
+<li><p>Un <strong>homeomorfismo</strong> es una aplicación continua y biyectiva con inversa continua</p></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>conexo</strong> (por abiertos) <span class="math inline">\(\iff \nexists A, B \subset X \mid A \cap B = \emptyset \land (E \cap A) \cup (B \cap E) = E\)</span></p></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>conexo</strong> (por abiertos relativos) <span class="math inline">\(\iff \forall A,B\)</span> abiertos en <span class="math inline">\(E\)</span> con <span class="math inline">\(A \cap B = \emptyset \land A \cup B = E \implies (A = \emptyset \land B = E) \lor B = \emptyset \land A = E)\)</span></p>
+<ul>
+<li><p>Equivalentemente, <span class="math inline">\(E\)</span> conexo <span class="math inline">\(\iff \nexists A,B\)</span> abiertos en <span class="math inline">\(E\)</span> con <span class="math inline">\(A\cap B = \emptyset \land E = A \cup B\)</span></p></li>
+<li><p><span class="math inline">\(E\)</span> conexo y <span class="math inline">\(p \in \overline{E} \implies E \cup p\)</span> conexo</p></li>
+<li><p><span class="math inline">\(E_1, E_2\)</span> conexos y <span class="math inline">\(E_1 \cap E_2 \neq \emptyset \implies E_1 \cap E_2\)</span> conexo</p></li>
+</ul></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>conexo por caminos</strong> <span class="math inline">\(\iff \forall p,q \in E, \exists \alpha(t):[0,1] \to E\)</span> un camino tal que <span class="math inline">\(\alpha(0) = p \land \alpha(1) = q\)</span></p>
+<ul>
+<li><span class="math inline">\(E\)</span> es <strong>arco-conexo</strong> si además <span class="math inline">\(f:[0,1] \to f([0,1])\)</span> es un homeomorfismo <span class="math display">\[\begin{gathered}
+            E \text{ arco-conexo } \\\implies E \text{ conexo por caminos }\\ \implies E \text{ conexo }
+        \end{gathered}\]</span></li>
+</ul></li>
+<li><p>Dado <span class="math inline">\(x \in E\)</span>, la <strong>componente conexa</strong> que contiene a <span class="math inline">\(x\)</span> es el conjunto <span class="math inline">\(\{y \in E \mid \exists A \text{ conexo, con } x \in A \land y \in A\}\)</span></p>
+<ul>
+<li><p>La relación de equivalencia <span class="math inline">\(x\sim y \iff \exists C\)</span> conexo con <span class="math inline">\(x,y \in C\)</span> define una partición cuyas clases de equivalencia son las componentes conexas de cada punto.</p></li>
+<li><p>Si <span class="math inline">\(A \subset X\)</span> conexo, <span class="math inline">\(A\)</span> está contenido en una única componente conexa.</p></li>
+</ul></li>
+<li><p><span class="math inline">\(E\)</span> es <strong>convexo</strong> <span class="math inline">\(\iff \forall x, y \in E \implies [x,y] = \{tx + (1-t)y \mid t \in [0,1]\} \subset E\)</span></p>
+<ul>
+<li>Más en general <span class="math inline">\(x \in \mathbb{R}^n\)</span> es <strong>combinación convexa</strong> de <span class="math inline">\(v_1, \dots, v_n \iff \exists t_1, \dots, t_n \geq 0 \mid x = \sum_{i=0}^n t_iv_i\)</span> con <span class="math inline">\(\sum_{i=0}^n t_i = 1\)</span></li>
+</ul></li>
+</ul>
+<h2 id="continuidad">Continuidad</h2>
+<p>Sean <span class="math inline">\((X, d_X), (Y, d_Y)\)</span> espacios métricos, <span class="math inline">\(f:X \to Y\)</span> una función</p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> es <strong>continua</strong> en <span class="math inline">\(a \in X \iff \forall \varepsilon &gt; 0, \exists \delta &gt; 0\)</span> tal que <span class="math inline">\(f(B_\delta(a)) \subset B_\varepsilon(f(a))\)</span>. Equivalentemente, <span class="math inline">\(f\)</span> continua en <span class="math inline">\(a \iff \forall \varepsilon &gt; 0,\ \exists \delta &gt; 0\)</span> tal que <span class="math inline">\(d_X(x, a) &lt; \delta \implies d_Y(f(x), f(a)) &lt; \varepsilon\)</span>.</p></li>
+<li><p><span class="math inline">\(f\)</span> <strong>continua</strong> en <span class="math inline">\(X \iff\)</span></p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> continua en <span class="math inline">\(x,\ \forall x \in X\)</span></p></li>
+<li><p><span class="math inline">\(\forall V \subseteq Y,\ V\)</span> abierto de <span class="math inline">\(Y \implies f^{-1}(V)\)</span> abierto de <span class="math inline">\(X\)</span></p></li>
+<li><p><span class="math inline">\(\forall V \subseteq Y,\ V\)</span> cerrado de <span class="math inline">\(Y \implies f^{-1}(V)\)</span> cerrado de <span class="math inline">\(X\)</span></p></li>
+<li><p><span class="math inline">\(\forall \{x_n\} \subset X, \{x_n\} \to x_0 \implies \{f(x_n)\} \to f(x_0)\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(f\)</span> <strong>uniformemente continua</strong> <span class="math inline">\(\iff \forall \varepsilon &gt; 0, \exists \delta &gt; 0\)</span> tal que <span class="math inline">\(d_X(x, x&#39;) \leq \delta \implies d_Y(f(x), f(x&#39;)) \leq \varepsilon\)</span></p>
+<ul>
+<li><p>Si <span class="math inline">\((X,d)\)</span> es compacto entonces <span class="math inline">\(f\)</span> continua en <span class="math inline">\(X \implies f\)</span> uniformemente continua</p></li>
+<li><p>Si <span class="math inline">\(f\)</span> es uniformemente continua entonces se pueden intercambiar límite y derivada</p></li>
+</ul></li>
+<li><p>Si <span class="math inline">\(f\)</span> es composición de funciones continuas entonces es continuas. Las fórmulas elementales son continuas.</p></li>
+</ul>
+<h1 id="diferenciabilidad">Diferenciabilidad</h1>
+<p>Sean <span class="math inline">\(E, F\)</span> espacios normados, <span class="math inline">\(x_0 \in E, U \subset E\)</span> entorno abierto de <span class="math inline">\(x_0\)</span>. <span class="math inline">\(f:U \to F\)</span> es <strong>diferenciable</strong> en <span class="math inline">\(x_0 \iff \exists T \in \mathcal{L}(E, F)\)</span> tal que <span class="math display">\[\begin{aligned}
+    \lim_{h \to \vec{0}_E} \frac{f(x_0 + h) - f(x_0) - Th}{\left\lVert h\right\rVert} = \vec{0}_F\end{aligned}\]</span></p>
+<ul>
+<li><p>Alternativamente, <span class="math inline">\(f\)</span> es diferenciable en <span class="math inline">\(x_0 \iff\)</span> podemos escribir <span class="math display">\[\begin{aligned}
+        f(x_0 + h) = f(x_0) + Th + o(\left\lVert h\right\rVert)
+    \end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(T\)</span> existe <span class="math inline">\(\implies T\)</span> única y la llamamos <strong>diferencial</strong> de <span class="math inline">\(f\)</span> en <span class="math inline">\(x_0\)</span> y se denota <span class="math inline">\((df)_{x_0}\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> diferenciable en <span class="math inline">\(x_0 \implies f\)</span> continua en <span class="math inline">\(x_0\)</span></p></li>
+<li><p>toda <span class="math inline">\(T \in \mathcal{L}(E,F)\)</span> es diferenciable en todo punto y coincide con sus diferenciales</p></li>
+<li><p><span class="math inline">\(f\)</span> constante <span class="math inline">\(\implies f\)</span> es diferenciable en todo punto y su diferencial <span class="math inline">\((df)_{x_0}\)</span> es nula</p></li>
+<li><p>La <strong>linealidad:</strong> <span class="math inline">\((f + g)_{x_0} = (df)_{x_0} + (dg)_{x_0}\)</span></p></li>
+<li><p>La <strong>regla del producto:</strong> <span class="math inline">\((d(f\cdot g))_{x_0} = (df)_{x_0}g(x_0) + f(x_0)(dg)_{x_0}\)</span></p></li>
+<li><p>La <strong>regla de la cadena:</strong> <span class="math inline">\((d(g \circ f))_{x_0} = (dg)_{f(x_0)} (df)_{x_0}\)</span></p></li>
+<li><p>La <strong>derivada respecto de un vector</strong> <span class="math inline">\(v \in E\)</span> en el punto <span class="math inline">\(x_0 \in E\)</span> es <span class="math inline">\(D_vf(x_0) = \left.\frac{d}{dt}\right|_{t=0}f(x_0 + tv) = \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t}\)</span></p>
+<ul>
+<li><p>Si <span class="math inline">\(\left\lVert v\right\rVert = 1\)</span> entonces la derivada se llama direccional</p></li>
+<li><p>Si <span class="math inline">\(v = e_j \in \{e_1, \dots, e_n\}\)</span> la base estándar de <span class="math inline">\(\mathbb{R}^n\)</span>, entonces <span class="math inline">\(D_{e_j}f(x_0) = \left.\frac{\partial}{\partial x_j}\right|_{x_0}f = D_jf(x_0)\)</span> es la j-ésima <strong>derivada parcial</strong></p></li>
+</ul></li>
+<li><p>La composición de funciones diferenciables es diferenciable. Ojo con aplicar las reglas de derivación a cosas que no son números reales (p.e. en matrices no funcionan).</p></li>
+<li><p><strong>Condiciones de diferenciabilidad</strong> de <span class="math inline">\(f:\mathbb{R}^n \to \mathbb{R}^m\)</span> en <span class="math inline">\(x_0\)</span>:</p>
+<ol type="1">
+<li><p>Las derivadas parciales <span class="math inline">\(\partial_{x_j}f(x_0)\)</span> existen</p></li>
+<li><p>El único candidato posible a diferencial <span class="math inline">\((df)_{x_0}\)</span> es la aplicación lineal dada por la <strong>matriz jacobiana</strong> de <span class="math inline">\(m \times n\)</span> <span class="math display">\[\begin{aligned}
+            Df_{x_0} &amp;:= \left(\begin{array}{c|c|c}
+                \partial_{x_1}f(x_0) &amp; \dots &amp; \partial_{x_n}f(x_0)
+            \end{array}\right)\\
+            Df_{x_0} &amp;:= \left(\begin{array}{c}
+            Df_1(x_0) \\\hline
+            \vdots \\\hline
+            Df_m(x_0) 
+            \end{array}\right) \\
+            Df_{x_0} &amp;:= \left(\begin{array}{ccc}
+            \partial_{x_1}f_1(x_0) &amp; \dots &amp; \partial_{x_n}f_1(x_0) \\
+            \vdots &amp; \ddots &amp; \vdots \\
+            \partial_{x_1}f_m(x_0) &amp; \dots &amp; \partial_{x_n}f_m(x_0) \\
+            \end{array}\right)
+        \end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(Df_{x_0}\)</span> cumple la definición de diferenciabilidad</p></li>
+</ol></li>
+<li><p>El <strong>gradiente</strong> <span class="math inline">\(\nabla f\)</span> es el jacobiano de una función escalar (<span class="math inline">\(f: \mathbb{R}^n \to \mathbb{R}\)</span>). Es un vector fila.</p></li>
+<li><p>El <strong>Jacobiano</strong> es <span class="math inline">\(\det(Df)\)</span></p></li>
+<li><p>Una función vectorial es diferenciable <span class="math inline">\(\iff\)</span> son diferenciables todas sus funciones componentes</p></li>
+</ul>
+<h2 id="extremos-relativos">Extremos relativos</h2>
+<p>En funciones escalares <span class="math inline">\(f:E \to \mathbb{R}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> tiene un <strong>máximo relativo</strong> en <span class="math inline">\(x_0 \iff \exists U\)</span> entorno de <span class="math inline">\(x_0\)</span> tal que <span class="math inline">\(\forall x \in U \implies f(x) \leq f(x_0)\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> tiene un <strong>máximo relativo estricto</strong> en <span class="math inline">\(x_0 \iff \exists U\)</span> entorno de <span class="math inline">\(x_0\)</span> tal que <span class="math inline">\(\forall x \in U \implies f(x) &lt; f(x_0)\)</span></p></li>
+<li><p>Análogamente se definen los mínimos</p></li>
+<li><p>el <strong>Hessiano</strong> es la matriz simétrica de las derivadas segundas <span class="math display">\[\begin{aligned}
+        \text{Hess }f = \left(\begin{array}{ccc}
+        \frac{\partial^2f}{\partial x_1\partial x_1} &amp; \dots &amp; \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+        \vdots &amp; \ddots &amp; \vdots \\
+        \frac{\partial^2f}{\partial x_n \partial x_1} &amp; \dots &amp; \frac{\partial^2}{\partial x_n \partial x_n}
+        \end{array}\right)
+    \end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(f \in C^2 \implies \frac{\partial f^2}{\partial x_j\partial x_i} = \frac{\partial f^2}{\partial x_i \partial x_j}\)</span></p></li>
+<li><p>Si <span class="math inline">\(Df(x_0) = 0,\ f\)</span> tiene un punto crítico en <span class="math inline">\(x_0\)</span>. Además,</p>
+<ul>
+<li><p><span class="math inline">\(\text{Hess }f(x_0)\)</span> definida positiva <span class="math inline">\(\implies f\)</span> tiene un <strong>mínimo relativo estricto</strong> en <span class="math inline">\(x_0\)</span></p></li>
+<li><p><span class="math inline">\(\text{Hess }f(x_0)\)</span> definida negativa <span class="math inline">\(\implies f\)</span> tiene un <strong>máximo relativo estricto</strong> en <span class="math inline">\(x_0\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> tiene un <strong>mínimo relativo</strong> en <span class="math inline">\(x_0 \implies \text{Hess }f(x_0)\)</span> es semidefinida positiva</p></li>
+<li><p><span class="math inline">\(f\)</span> tiene un <strong>máximo relativo</strong> en <span class="math inline">\(x_0 \implies \text{Hess }f(x_0)\)</span> es semidefinida negativa</p></li>
+</ul></li>
+<li><p>El <strong>Laplaciano</strong> <span class="math inline">\(\Delta f = \text{traza }(\text{Hess }f)\)</span></p>
+<ul>
+<li><span class="math inline">\(f\)</span> es armónica en <span class="math inline">\(E \iff \forall x \in E,\ \Delta f(x) = 0\)</span></li>
+</ul></li>
+<li><p>El <strong>criterio de Sylvester</strong> para una matriz cuadrada <span class="math inline">\(A\)</span> dice</p>
+<ul>
+<li><p>menores principales <span class="math inline">\(&gt; 0 \iff A\)</span> es <strong>definida positiva</strong></p></li>
+<li><p>menores principales <span class="math inline">\(\geq 0 \iff A\)</span> es <strong>semidefinida positiva</strong></p></li>
+<li><p>menores impares <span class="math inline">\(\leq 0\)</span> y menores pares <span class="math inline">\(\geq 0 \iff A\)</span> es <strong>semidefinida negativa</strong></p></li>
+<li><p>menores impares <span class="math inline">\(&lt; 0\)</span> y menores pares <span class="math inline">\(&gt; 0 \iff A\)</span> <strong>definida negativa</strong></p></li>
+<li><p>en otro caso <span class="math inline">\(A\)</span> es indefinida (no implica que no haya extremo relativo)</p></li>
+</ul></li>
+</ul>
+<h2 id="polinomio-de-taylor">Polinomio de Taylor</h2>
+<p>Sea <span class="math inline">\(f:\mathbb{R}^n \to \mathbb{R}\)</span> una funnción de clase <span class="math inline">\(C^2\)</span>. El polinomio de Taylor de grado 2 en <span class="math inline">\(x_0\)</span> es <span class="math display">\[\begin{gathered}
+    p_{x_0}(x) = f(x_0) + \sum_{i=0}^n \frac{\partial f}{\partial x_i}(x - x_0)\\
+    + \frac{1}{2!}\sum_{i=0}^n\sum_{j=0}^n \frac{\partial^2 f}{\partial x_i\partial x_j}(x_i - x_{0_i})(x_j - x_{0_j}) + o(\left\lVert x\right\rVert^2)\end{gathered}\]</span></p>
+<h2 id="tipos-de-aplicaciones">Tipos de aplicaciones</h2>
+<p>Sean <span class="math inline">\(E,F\)</span> e.v, sea <span class="math inline">\(f: E \to F\)</span></p>
+<ul>
+<li><p>Si <span class="math inline">\(F = \mathbb{R}\)</span> decimos que <span class="math inline">\(f\)</span> es <strong>convexa</strong> <span class="math inline">\(\iff \forall x,y \in E, t \in [0,1], f(tx + (1-t)y) \leq tf(x) + (1-t)f(y)\)</span></p>
+<ul>
+<li><p>En general, si <span class="math inline">\(x\)</span> es combinación convexa de <span class="math inline">\(v_1, \dots, v_n\)</span> y <span class="math inline">\(f\)</span> es convexa entonces <span class="math inline">\(f(\sum_{i=0}^n t_i v_i) \leq \sum_{i=0}^nt_if(v_i)\)</span></p></li>
+<li><p><span class="math inline">\(\forall x \in A, \text{Hess }f (x)\)</span> es semidefinida positiva <span class="math inline">\(\iff f\)</span> es convexa en <span class="math inline">\(A\)</span></p></li>
+</ul></li>
+<li><p>Sean <span class="math inline">\(x_1, \dots, x_n\)</span>. Un punto <span class="math inline">\(x\)</span> es <strong>combinación convexa</strong> de <span class="math inline">\(x_1, \dots, x_n \iff x = t_1x_1 + \dots + t_nx_n\)</span> con <span class="math inline">\(\sum t_i = 1 \land t_i \geq 0\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> es <span class="math inline">\(\mathbf{\alpha}\)</span><strong>-Hölder continua</strong> <span class="math inline">\(\iff \exists c &gt; 0 \mid \left\lVert f(x) - f(x&#39;)\right\rVert \leq c \left\lVert x - x&#39;\right\rVert^\alpha\)</span></p>
+<ul>
+<li><p>Si <span class="math inline">\(\alpha &gt; 1\)</span> entonces <span class="math inline">\(f\)</span> es constante</p></li>
+<li><p>Si <span class="math inline">\(\alpha = 1\)</span> entonces <span class="math inline">\(f\)</span> es de Lipschitz</p></li>
+</ul></li>
+</ul>
+<p>Sean <span class="math inline">\((X, d_X), (Y, d_Y)\)</span> espacios métricos, sea <span class="math inline">\(f:X \to Y\)</span></p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> es <strong>de Lipschitz</strong> <span class="math inline">\(\iff \exists K &gt; 0\)</span> tal que <span class="math display">\[\begin{aligned}
+        d_Y(f(x), f(x&#39;)) \leq K d_X(x,x&#39;),\qquad \forall x,x&#39; \in X
+    \end{aligned}\]</span></p>
+<ul>
+<li><p>Toda aplicación de Lipschitz es uniformemente continua</p></li>
+<li><p>Si <span class="math inline">\(f\)</span> es de Lipschitz entonces <span class="math inline">\(f\)</span> es <span class="math inline">\(\alpha\)</span>-Hölder continua.</p></li>
+</ul>
+<p><span class="math display">\[\begin{gathered}
+    \boxed{
+        \begin{array}{c}
+        f \in C^1 \implies f \text{ de Lipschitz }\implies\\
+        \implies f \text{ uniformemente continua }\implies f\text{ continua}
+        \end{array}
+    }
+    \end{gathered}\]</span></p></li>
+<li><p><span class="math inline">\(f\)</span> es <strong>contractiva</strong> <span class="math inline">\(\iff f\)</span> es de Lipschitz con <span class="math inline">\(K &lt; 1 \land\)</span> dominio y codomino coinciden, distancias incluidas (<span class="math inline">\(f:(X, d_X) \to (X, d_X)\)</span>)</p>
+<ul>
+<li>Si <span class="math inline">\(f\)</span> es contractiva y <span class="math inline">\(X\)</span> es completo entonces <span class="math inline">\(f\)</span> tiene un único punto fijo para el que <span class="math inline">\(f(x) = x\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(f\)</span> es <strong>inyectiva</strong> <span class="math inline">\(\iff \forall x,x&#39; \in X, f(x) \neq f(x&#39;) \implies x \neq x&#39;\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> es <strong>coerciva</strong> <span class="math inline">\(\iff \exists \lambda &gt; 0\)</span> tal que <span class="math display">\[\begin{aligned}
+        d_Y(f(x), f(x&#39;)) \geq \lambda d_X(x,x&#39;),\qquad \forall x,x&#39; \in X
+    \end{aligned}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> coerciva <span class="math inline">\(\implies f\)</span> inyectiva</p></li>
+<li><p>Una matriz real <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> es coerciva si existe <span class="math inline">\(\lambda &gt; 0\)</span> tal que <span class="math display">\[\begin{aligned}
+            \forall v \in \mathbb{R}^n,\ v^tAv \geq \lambda \left\lVert v\right\rVert_2^2
+        \end{aligned}\]</span> A estos <span class="math inline">\(\lambda\)</span> se les llama constantes de coercividad.</p>
+<ul>
+<li><span class="math inline">\(A\)</span> coerciva <span class="math inline">\(\implies A\)</span> invertible</li>
+</ul></li>
+</ul></li>
+<li><p><span class="math inline">\(f\)</span> es <strong>abierta</strong> si <span class="math inline">\(\forall U \subset X\)</span> abierto, la imagen <span class="math inline">\(f(U)\)</span> es un abierto de <span class="math inline">\(Y\)</span></p></li>
+<li><p><span class="math inline">\(f\)</span> es un <strong>difeomorfismo</strong> <span class="math inline">\(\iff f: U_1 \to U_2,\ U_1,U_2\)</span> abiertos de <span class="math inline">\(\mathbb{R}^n\)</span> es biyectiva, <span class="math inline">\(f \in C^s\)</span> y <span class="math inline">\(f^{-1} \in C^s\)</span></p>
+<ul>
+<li><span class="math inline">\(f:U_1 \to R^n\)</span> inyectiva, <span class="math inline">\(f \in C^s\)</span> y todas las jacobianas de los puntos en <span class="math inline">\(U_1\)</span> son invertibles <span class="math inline">\(\implies f\)</span> es un difeormorfismo</li>
+</ul></li>
+<li><p>Decimos que <span class="math inline">\(f:\mathbb{R}^n \to \mathbb{R}^m\)</span> es <strong>regular</strong> si todo punto <span class="math inline">\(x_0 \in \mathbb{R}^n\)</span> es un valor regular.</p>
+<ul>
+<li><p>Un <strong>valor regular</strong> es un punto <span class="math inline">\(x_0\)</span> tal que para un <span class="math inline">\(U_0\)</span> entorno abierto de <span class="math inline">\(x_0\)</span>, la función <span class="math inline">\(f:U_0 \subset \mathbb{R}^n \to \mathbb{R}^m\)</span> es de clase <span class="math inline">\(C^1(U_0)\)</span> y la diferencial <span class="math inline">\((df)_{x_0}\)</span> tiene rango máximo, que es <span class="math inline">\(\min(n, m)\)</span></p></li>
+<li><p>Si <span class="math inline">\(n &lt; m\)</span> entonces <span class="math inline">\(f\)</span> es una <strong>inmersión</strong></p></li>
+<li><p>Si <span class="math inline">\(n = m\)</span> entonces <span class="math inline">\(f\)</span> es un <strong>difeomorfismo local</strong></p></li>
+<li><p>Si <span class="math inline">\(n &gt; m\)</span> entonces <span class="math inline">\(f\)</span> es una <strong>sumbersión</strong></p></li>
+<li><p>Para ladrillitos: si <span class="math inline">\(Df\)</span> es <span class="math inline">\(1\times m\)</span> o <span class="math inline">\(n \times 1\)</span> entonces <span class="math inline">\(\text{rango } Df\)</span> es máximo <span class="math inline">\(\iff \text{rango } Df = 1 \iff Df \neq \mathbf{0}\)</span>.</p></li>
+</ul></li>
+<li><p>Una <strong>inversa local</strong> de <span class="math inline">\(f:U_0 \subset \mathbb{R}^n \to \mathbb{R}^m\)</span> es una función <span class="math inline">\((f|_U)^{-1} : f(U) \to U\)</span> donde <span class="math inline">\(U \subseteq U_0\)</span> es cualquier abierto tal que <span class="math inline">\(f(U)\)</span> es abierto y <span class="math inline">\(f|_U\)</span> es inyectiva.</p></li>
+</ul>
+<h1 id="variedades">Variedades</h1>
+<ul>
+<li><p>Una <strong>variedad</strong> en <span class="math inline">\(\mathbb{R}^n\)</span> de dimensión geométrica <span class="math inline">\(k \geq 0\)</span> es un conjunto <span class="math inline">\(X \subseteq \mathbb{R}^n\)</span> tal que <span class="math inline">\(\forall x_0 \in X,\ \exists E, E&#39; \subseteq \mathbb{R}^n\)</span> abiertos con <span class="math inline">\(x_0 \in E\)</span> y un <span class="math inline">\(\exists f:E \to E&#39;\)</span> difeomorfismo tal que <span class="math display">\[\begin{gathered}
+        f(X \cap E) = E&#39; \cap (\mathbb{R}^k \times \{\mathbf{0}^{n-k}\}) =\\= \{y \in E&#39; \mid y_{k+1} = y_{k+2} = \dots = y_{n} = 0\}
+    \end{gathered}\]</span></p>
+<ul>
+<li><p>Si <span class="math inline">\(k = 1\)</span> la variedad se llama curva en <span class="math inline">\(\mathbb{R}^n\)</span></p></li>
+<li><p>Si <span class="math inline">\(k = 2\)</span> la variedad se llama superficie en <span class="math inline">\(\mathbb{R}^n\)</span></p></li>
+<li><p>Si <span class="math inline">\(k = n-1\)</span> la variedad se llama hipersuperficie en <span class="math inline">\(\mathbb{R}^n\)</span></p></li>
+<li><p>La dimensión de una variedad es única, si hay dos puntos que tienen dimensión diferente entonces no es una variedad (puede ser unión de variedades).</p></li>
+<li><p>El difeomorfismo <span class="math inline">\(f\)</span> se llama <strong>difeomorfismo planchador</strong></p></li>
+<li><p>Una variedad se dice de clase <span class="math inline">\(C^{s \geq 1} \iff f \in C^{s \geq 1}\)</span>.</p></li>
+</ul></li>
+<li><p><strong>Teorema del grafo:</strong> Sean <span class="math inline">\(x \in \mathbb{R}^k, y \in \mathbb{R}^n\)</span>. Si <span class="math inline">\(\forall (x,y) \in X \subset \mathbb{R}^{n+k}\)</span> se puede expresar como <span class="math inline">\((x, f(x))\)</span> donde <span class="math inline">\(f:\mathbb{R}^k \to \mathbb{R}^n,\ f \in C^{s\geq 1}\)</span> entonces <span class="math inline">\(X\)</span> es una <span class="math inline">\(C^s\)</span>-varidedad de dimensión <span class="math inline">\(k\)</span> en <span class="math inline">\(\mathbb{R}^{n+k}\)</span>.</p></li>
+<li><p><strong>Teorema de la preimagen:</strong> Sea <span class="math inline">\(f:U_0 \subset \mathbb{R}^n \to \mathbb{R}^m,\ n &gt; m,\ f\in C^{s \geq 1},\ b \in \mathbb{R}^{m}\)</span>. Si <span class="math inline">\(f\)</span> es submersión en <span class="math inline">\(a, \forall a \in f^{-1}(\{b\})\)</span> entonces <span class="math inline">\(f^{-1}(\{b\})\)</span> es o el vacío o una variedad de dimensión <span class="math inline">\(n - m\)</span> y clase <span class="math inline">\(C^s\)</span>.</p>
+<ul>
+<li><p>Si <span class="math inline">\(n = m\)</span> entonces <span class="math inline">\(f^{-1}(\{b\})\)</span> es una variedad de dimensión <span class="math inline">\(0\)</span></p></li>
+<li><p>Para ladrillitos: <span class="math inline">\(f^{-1}(\{b\})\)</span> es el vacío si <span class="math inline">\(b \notin \text{ Im } f\)</span>, caso completamente inútil por lo que nunca elegiremos <span class="math inline">\(f\)</span> y <span class="math inline">\(b\)</span> de tal manera</p></li>
+</ul></li>
+<li><p>Una <strong>parametrización</strong> de una variedad <span class="math inline">\(X\)</span> en <span class="math inline">\(\mathbb{R}^n\)</span> es un abierto <span class="math inline">\(W \in \mathbb{R}^k\)</span> y una función <span class="math inline">\(\Phi:W \to \mathbb{R}^n\)</span> que cumple:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\Phi \in C^{s \geq 1}(W)\)</span></p></li>
+<li><p><span class="math inline">\(\Phi(W) \subset X\)</span></p></li>
+<li><p><span class="math inline">\(\exists Y \neq \emptyset\)</span> abierto relativo de <span class="math inline">\(X\)</span> tal que <span class="math inline">\(Y \subset \Phi(W)\)</span></p></li>
+</ol>
+<p>Además</p>
+<ul>
+<li><p><span class="math inline">\(\Phi\)</span> no tiene por qué ser sobre pero <span class="math inline">\(\Phi(W)\)</span> tiene que ser otra variedad (no puede ser insignificante)</p></li>
+<li><p>Una parametrización <span class="math inline">\(\Phi\)</span> es de máxima calidad o un <strong>sistema de coordenadas</strong> <span class="math inline">\(\iff \Phi\)</span> es inyectiva y regular. Esto equivale a comprobar</p>
+<ol type="1">
+<li><p><span class="math inline">\(\Phi(W) \subseteq M\)</span></p></li>
+<li><p><span class="math inline">\(D\Phi(x)\)</span> tiene rango máximo <span class="math inline">\(\forall x \in W\)</span></p></li>
+<li><p><span class="math inline">\(\Phi\)</span> es inyectiva en <span class="math inline">\(W\)</span></p></li>
+</ol></li>
+</ul></li>
+</ul>
+<h1 id="teoremas-gordos">Teoremas gordos</h1>
+<p>Sea <span class="math inline">\(f: S \subset \mathbb{R}^n \to \mathbb{R}\)</span> una función diferenciable sobre el conjunto abierto y convexo <span class="math inline">\(S\)</span>. Entonces <span class="math inline">\(\forall a, b \in S,\ \exists c \in [a,b] \mid f(a) - f(b) = \nabla f(c)(a - b)\)</span></p>
+<p>Sea <span class="math inline">\(f\)</span> una función integrable sobre <span class="math inline">\([a,b] \subset \mathbb{R}\)</span>. Definimos <span class="math inline">\(F:[a,b] \to \mathbb{R}\)</span> <span class="math display">\[\begin{aligned}
+        F(x) = \int_{a}^{x} f(t)dt
+    \end{aligned}\]</span> Si <span class="math inline">\(f\)</span> es continua en <span class="math inline">\(c \in (a,b)\)</span> entonces <span class="math inline">\(F\)</span> es derivable en <span class="math inline">\(c\)</span> y <span class="math inline">\(F&#39;(c) = f(c)\)</span>. Además, usando la regla de la cadena queda: <span class="math display">\[\begin{aligned}
+        \frac{d}{dx}\int_{a(x)}^{b(x)} f(t)dt = f(b(x))b&#39;(x) - f(a(x))a&#39;(x)
+    \end{aligned}\]</span></p>
+<p>Sea <span class="math inline">\((\mathbb{V}, \left\lVert\cdot\right\rVert)\)</span> un espacio de Banach. Sean <span class="math inline">\(U_0 \in \mathbb{V}\)</span> un abierto y <span class="math inline">\(f:U_0 \to \mathbb{V}\)</span> una función de clase <span class="math inline">\(C^1\)</span>. Si en <span class="math inline">\(x_0 \in U_0\)</span> la diferencial <span class="math inline">\(L = (df)_{x_0}\)</span> es invertible (e.d. <span class="math inline">\(L\)</span> es lineal acototada, biyectiva y con inversa <span class="math inline">\(L^{-1}\)</span> también acotada) entonces existen abiertos <span class="math inline">\(U, V\)</span> con <span class="math inline">\(x_0 \in U,\ f(x_0) = y_0 \in V\)</span> tales que <span class="math inline">\(f\)</span> es biyectiva de <span class="math inline">\(U\)</span> a <span class="math inline">\(V\)</span>.</p>
+<p>Además, en ese caso la inversa <span class="math inline">\(f^{-1}:V \to U\)</span> es diferenciable en <span class="math inline">\(y_0\)</span> y <span class="math inline">\((df^{-1})_{y_0} = [(df)_{x_0}]^{-1}\)</span>.</p>
+<p>Sean <span class="math inline">\(x,a \in \mathbb{R}^n,\ y,b \in \mathbb{R}^m\)</span> Sea <span class="math inline">\(F: \mathbb{R}^{n+m} \to \mathbb{R}^m\)</span> una función <span class="math inline">\(C^k, k \geq 1\)</span>. Sea <span class="math inline">\((a,b) \in \mathbb{R}^{n+m}\)</span> tal que <span class="math inline">\(F(a,b) = 0\)</span>. Si <span class="math display">\[\begin{aligned}
+        DF_y(a,b) = \left(\begin{array}{ccc}
+        \frac{\partial F_1}{\partial y_1}(a,b) &amp; \dots &amp; \frac{\partial F_1}{\partial y_m}(a,b) \\
+        \vdots &amp; \ddots &amp; \vdots \\
+        \frac{\partial F_m}{\partial y_1}(a,b) &amp; \dots &amp; \frac{\partial F_m}{\partial y_m}(a,b)
+        \end{array}\right)
+    \end{aligned}\]</span> es invertible entonces <span class="math inline">\(\exists U \subset \mathbb{R}^n\)</span> entorno abierto de <span class="math inline">\(a\)</span> y <span class="math inline">\(\exists! g:U \to \mathbb{R}^m\)</span> tal que <span class="math inline">\(g(a) = b\)</span> y <span class="math inline">\(F(x, g(x)) = 0,\ \forall x \in U\)</span>. Es más, <span class="math inline">\(g \in C^k\)</span> y <span class="math display">\[\begin{aligned}
+        \frac{\partial g}{\partial x_j}(x) = -\left[DF_y(x, g(x))\right]^{-1}_{m\times m}\left[\frac{\partial F}{\partial x_j}(x, g(x))\right]_{m \times 1}
+    \end{aligned}\]</span> Esto es: las columnas de la jacobiana de <span class="math inline">\(g\)</span>, que es una matriz <span class="math inline">\(m \times n\)</span>, van dadas por la expresión anterior.</p>
+<ul>
+<li><p>Si de una ecuación queremos despejar <span class="math inline">\(y\)</span>, mandamos todo a un lado y lo que no se puede anular es la matriz de las derivadas de <span class="math inline">\(y\)</span>.</p></li>
+<li><p>En este enunciado se escribe lo que quieres despejar después, como el <span class="math inline">\(y \in \mathbb{R}^m\)</span> pero a veces se pone antes. Da igual, lo que importa es la regla mnemotécnica de antes.</p></li>
+</ul>
