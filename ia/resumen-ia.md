@@ -72,6 +72,8 @@ La **estrategia** determina la ordenación de la lista abierta:
 * $C^\ast$ coste del camino de la solución óptima
 * $\varepsilon \geq 0$ coste mínimo de un acción
 
+<div class="table-responsive">
+
 |                	| Tiempo                                   	| Memoria                                  	| Completa?              	| Óptima?           	|
 |----------------	|------------------------------------------	|------------------------------------------	|------------------------	|-------------------	|
 | en anchura     	| $O(b^d)$                                 	| $O(b^d)$                                 	| Sí[^optimidadbfs]      	| Sí[^optimidadbfs] 	|
@@ -79,6 +81,8 @@ La **estrategia** determina la ordenación de la lista abierta:
 | Dijkstra       	| $O(b^{\lceil C^\ast/\varepsilon\rceil})$ 	| $O(b^{\lceil C^\ast/\varepsilon\rceil})$ 	| Sí ($\varepsilon > 0$) 	| Sí                	|
 | avariciosa     	| $O(b^m)$                                 	| $O(b^m)$                                 	| No                     	| No                	|
 | $A^\ast$       	| $O(b^{\lceil C^\ast/\varepsilon\rceil})$ 	| $O(b^{\lceil C^\ast/\varepsilon\rceil})$ 	| Sí*                    	| Sí*               	|
+
+</div>
 
 [^optimidadbfs]: Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.
 
@@ -103,9 +107,11 @@ La **estrategia** determina la ordenación de la lista abierta:
 * Esta estrategia encuentra la jugada óptima para max.
 * Definimos el valor `minimax(n)` para un nodo:
 
+  <div class="table-responsive">
   $$\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &\text{ si } n \text{ terminal }\\
                                            \max\{\text{minimax}(s) : s \text{ sucesor de } n &\text{ si } n \text{ es un nodo max}\\
                                            \min\{\text{minimax}(s) : s \text{ sucesor de } n &\text{ si } n \text{ es un nodo min}\end{cases}$$
+                                           </div>
 
 * Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).
 * Complejidad temporal $O(b^m)$ y espacial $O(b\cdot m)$.
@@ -136,15 +142,20 @@ Hay que acordarse de:
 ### Hoja 2, 2018: ejercicio 2
 
 1. Dos nodos son hermanos si, siendo distintos, tienen el mismo padre.
+   <div class="table-responsive">
    $$\forall x,y [(\lnot I(x,y) \land I(padreDe(x), padreDe(y))) \iff H(x, y)]$$
+   </div>
 
 2. Un camino entre dos nodos es una secuencia de uno o varios enlaces entre dichos nodos.
+   <div class="table-responsive">
    $$\forall x,y,c [C(c, x, y) \iff (I(c, enlace(x,y)) \lor \exists z,m,n (\lnot I(m,n) \land C(m, x, z) \land C(n, z, y)]$$
+   </div>
 
 ### Parcial 1, 2014-2015: ejercicio 3
 
 1. Ejemplo
 2. Se puede diseñar una máquina de Turing para computar la solución de cualquier problema que pueda ser resuelto mediante la aplicación de un algoritmo sobre unos datos de entrada.
-   $$ $$
 3. Una máquina de Turing universal puede simular la acción de cualquier máquina de Turing sobre los datos almacenados en su cinta
+   <div class="table-responsive">
    $$\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]$$
+   </div>

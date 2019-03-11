@@ -72,6 +72,7 @@ Iterar
 <li><span class="math inline">\(C^\ast\)</span> coste del camino de la solución óptima</li>
 <li><span class="math inline">\(\varepsilon \geq 0\)</span> coste mínimo de un acción</li>
 </ul>
+<div class="table-responsive">
 <table>
 <colgroup>
 <col style="width: 11%" />
@@ -127,6 +128,7 @@ Iterar
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="búsqueda-entre-adversarios">Búsqueda entre adversarios</h2>
 <h3 id="clasificación-de-problemas-de-búsqueda-juegos">Clasificación de problemas de búsqueda (= juegos)</h3>
 <ul>
@@ -147,9 +149,11 @@ Iterar
 <li>Al que juega primero le llamamos <em>max</em>, al otro <em>min</em>.</li>
 <li>Esta estrategia encuentra la jugada óptima para max.</li>
 <li><p>Definimos el valor <code>minimax(n)</code> para un nodo:</p>
-<p><span class="math display">\[\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &amp;\text{ si } n \text{ terminal }\\
+<div class="table-responsive">
+<span class="math display">\[\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &amp;\text{ si } n \text{ terminal }\\
                                          \max\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo max}\\
-                                         \min\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo min}\end{cases}\]</span></p></li>
+                                         \min\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo min}\end{cases}\]</span>
+</div></li>
 <li>Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).</li>
 <li>Complejidad temporal <span class="math inline">\(O(b^m)\)</span> y espacial <span class="math inline">\(O(b\cdot m)\)</span>.</li>
 <li>Con <strong>poda</strong> <span class="math inline">\(\alpha-\beta\)</span>:
@@ -179,14 +183,23 @@ Iterar
 <h2 id="ejercicios">Ejercicios</h2>
 <h3 id="hoja-2-2018-ejercicio-2">Hoja 2, 2018: ejercicio 2</h3>
 <ol type="1">
-<li><p>Dos nodos son hermanos si, siendo distintos, tienen el mismo padre. <span class="math display">\[\forall x,y [(\lnot I(x,y) \land I(padreDe(x), padreDe(y))) \iff H(x, y)]\]</span></p></li>
-<li><p>Un camino entre dos nodos es una secuencia de uno o varios enlaces entre dichos nodos. <span class="math display">\[\forall x,y,c [C(c, x, y) \iff (I(c, enlace(x,y)) \lor \exists z,m,n (\lnot I(m,n) \land C(m, x, z) \land C(n, z, y)]\]</span></p></li>
+<li>Dos nodos son hermanos si, siendo distintos, tienen el mismo padre.
+<div class="table-responsive">
+<p><span class="math display">\[\forall x,y [(\lnot I(x,y) \land I(padreDe(x), padreDe(y))) \iff H(x, y)]\]</span></p>
+</div></li>
+<li>Un camino entre dos nodos es una secuencia de uno o varios enlaces entre dichos nodos.
+<div class="table-responsive">
+<p><span class="math display">\[\forall x,y,c [C(c, x, y) \iff (I(c, enlace(x,y)) \lor \exists z,m,n (\lnot I(m,n) \land C(m, x, z) \land C(n, z, y)]\]</span></p>
+</div></li>
 </ol>
 <h3 id="parcial-1-2014-2015-ejercicio-3">Parcial 1, 2014-2015: ejercicio 3</h3>
 <ol type="1">
 <li>Ejemplo</li>
-<li>Se puede diseñar una máquina de Turing para computar la solución de cualquier problema que pueda ser resuelto mediante la aplicación de un algoritmo sobre unos datos de entrada. <span class="math display">\[ \]</span></li>
-<li>Una máquina de Turing universal puede simular la acción de cualquier máquina de Turing sobre los datos almacenados en su cinta <span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></li>
+<li>Se puede diseñar una máquina de Turing para computar la solución de cualquier problema que pueda ser resuelto mediante la aplicación de un algoritmo sobre unos datos de entrada.</li>
+<li>Una máquina de Turing universal puede simular la acción de cualquier máquina de Turing sobre los datos almacenados en su cinta
+<div class="table-responsive">
+<p><span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></p>
+</div></li>
 </ol>
 <section class="footnotes">
 <hr />

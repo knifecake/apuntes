@@ -42,6 +42,15 @@ footer {
   color: #ccc;
 }
 
+.table-responsive, pre {
+  overflow: scroll;
+  width: 100%;
+
+  td, th {
+    white-space: nowrap;
+  }
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -54,4 +63,12 @@ th {
 td, th {
   border: 1px solid black;
   padding: .5rem;
+}
+
+ul, ol {
+  padding-left: 1rem;
+}
+
+.container {
+  margin: 1rem;
 }
