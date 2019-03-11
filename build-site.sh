@@ -21,3 +21,13 @@ cp alg/*.pdf docs/dist/alg/
 mkdir -p docs/dist/ei
 make -C ei
 cp ei/*.pdf docs/dist/ei/
+
+# RC2
+mkdir -p docs/dist/rc2
+make -C rc2
+cp rc2/*.pdf rc2/*.html docs/dist/rc2/
+
+# IA
+mkdir -p docs/dist/ia
+make -C ia
+cp ia/*.pdf ia/*.html docs/dist/ia/

@@ -1,0 +1,6 @@
+---
+title: Resumen IA
+author: Elias Hernandis
+layout: notes
+---
+

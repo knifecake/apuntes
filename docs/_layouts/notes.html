@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ title }}</title>
+    <title>{{ page.title }} - Apuntes DGIIM</title>
 
     <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
   </head>
 
   <body>
     <header>
-      <h1>Apuntes DGIIM</h1>
+      <h1>{{ page.title }} - Apuntes DGIIM</h1>
     </header>
 
     {{ content }}
@@ -19,5 +19,6 @@
     <footer>
       Elias Hernandis et al.
     </footer>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
   </body>
 </html>

@@ -5,3 +5,5 @@ resumen-gcs.pdf: resumen-gcs.md
 
 resumen-gcs.html: resumen-gcs.md
 	pandoc --mathjax -o $@ $^
+	cat frontmatter.txt $@ > $@.tmp
+	mv $@.tmp $@

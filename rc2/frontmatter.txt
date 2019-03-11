@@ -1,0 +1,4 @@
+---
+title: Resumen RC2
+layout: notes
+---

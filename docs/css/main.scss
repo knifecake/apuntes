@@ -38,5 +38,20 @@ footer {
   border-top: 1px solid #eee;
   margin-top: 1rem;
   padding-top: .5rem;
+  padding-bottom: 1rem;
   color: #ccc;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: #ccc;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: .5rem;
 }

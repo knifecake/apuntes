@@ -1,0 +1,78 @@
+\documentclass[a4paper]{extarticle}
+
+\usepackage[utf8]{inputenc}  % para que funcionen las tildes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% \usepackage{pgfpages}
+% \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+% \usepackage{lmodern}
+% \usepackage{setspace}
+% \usepackage{ifxetex,ifluatex}
+% \usepackage{fixltx2e} % provides \textsubscript
+% \usepackage{textcomp} % provides euro and other symbols
+% \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% \usepackage{parskip}
+% \usepackage{fancyvrb}
+% \usepackage{xcolor}
+\usepackage{hyperref}
+% \usepackage{listings}
+% \usepackage{longtable,booktabs}
+% \usepackage{caption}
+% \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+% \usepackage{graphicx,grffile}
+% \usepackage[normalem]{ulem}
+
+
+\hypersetup{
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            breaklinks=true}
+
+\usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
+
+\usepackage[a4paper, top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+ \setlength{\parskip}{0cm}
+%\setlength{\columnseprule}{0.4pt}
+
+% ESTILOS DE DEFINICIONES Y TEOREMAS
+
+\newtheorem*{thm}{Teorema}
+\newtheorem*{dfn}{Definición}
+\newtheorem*{cor}{Corolario}
+\newtheorem*{lem}{Lema}
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+\title{$title$}
+\author{$author$}
+
+\begin{document}
+
+$body$
+
+\end{document}
+
