@@ -14,4 +14,7 @@
 *.html
 !docs/*.html
 !docs/**.html
+!docs/_courses/*.html
+!docs/_layouts/*.html
 !docs/dist/**/*.pdf
+!docs/dist/**/*.html

@@ -1,0 +1,232 @@
+---
+title: Resumen RC2
+layout: notes
+---
+<h2 id="arquitecturas-de-red">Arquitecturas de Red</h2>
+<h3 id="cliente-servidor">Cliente servidor</h3>
+<p><strong>Servidor:</strong></p>
+<ul>
+<li>Servidor siempre en un host</li>
+<li>Dirección IP del servidor tiene que ser estática</li>
+<li>Si quieres más capacidad tienes que comprar más servidores</li>
+</ul>
+<p><strong>Cliente:</strong></p>
+<ul>
+<li>No tiene que estar siempre conectado</li>
+<li>Puede tener IP dinámica</li>
+<li>No se comunica con otros clientes</li>
+</ul>
+<h3 id="peer-to-peer-p2p">Peer to peer (P2P)</h3>
+<ul>
+<li>Todos los nodos son como clientes y servidores</li>
+<li>Arquitectura distribuida: no hay posibilidad de control central, resistencia a las averías</li>
+<li>Redundancia de la información, equilibrio de la carga…</li>
+<li>No cuesta nada hacer crecer la red</li>
+</ul>
+<h3 id="híbridas-p2p---cs">Híbridas P2P - C/S</h3>
+<ul>
+<li>Problema de P2P: localización de un nodo o de la información</li>
+<li>Solución: añadir un servidor central que solo se encarga de poner en contacto a nodos de la red
+<ul>
+<li>Permite que algunos clientes que estén detrás de NAT puedan utilizar la red P2P</li>
+<li>Skype</li>
+</ul></li>
+</ul>
+<h2 id="qos-en-la-comunicación-entre-procesos">QoS en la comunicación entre procesos</h2>
+<ul>
+<li>Distintas aplicaciones tienen distintos requisitos: velocidad, integridad, seguridad, retardo…</li>
+<li>Los <strong>protocolos</strong> definen tipos de mensajes (sintaxis y semántica) y garantizan distintos requisitos</li>
+<li>Dos protocolos principales a nivel 4 que determinan que requisitos puede ofrecer un protocolo: TCP y UDP</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Orientado a conexión</strong> cada parte fija IP y puertos durante el establecimiento de la conexión.</td>
+<td><strong>No orientado a conexión</strong> Cada parte especifica IP y puerto de destino cada vez que envía datos (uso de <code>sendto</code> y <code>recvfrom</code>)</td>
+</tr>
+<tr class="even">
+<td><strong>Transferencia confiable</strong> se garantiza la llegada de toda la información en orden.</td>
+<td><strong>Transferencia no confiable</strong> no se garantiza nada</td>
+</tr>
+<tr class="odd">
+<td><strong>Control de flujo</strong> el emisor no sobrecarga al receptor</td>
+<td><strong>No hay control de flujo</strong> el emisor no sabe como está el receptor</td>
+</tr>
+<tr class="even">
+<td>No provee garantías de ancho de banda</td>
+<td>No provee garantías de ancho de banda, pero la transferencia de mensajes cortos suele ser más rápida (DNS).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-de-sockets-en-c">API de sockets en C</h2>
+<p>Todo apartato que se conecte a la red utilizará estas dos funciones</p>
+<ul>
+<li><code>int socket(direccionamiento, tipo, protocolo)</code> crea un nuevo socket
+<ul>
+<li><code>direccionamiento</code> determina el formato de las direcciones, en internet IPv4 es <code>AF_INET</code></li>
+<li><code>tipo</code> determina TCP (<code>SOCK_STREAM</code>) o UDP (<code>SOCK_DGRAM</code>)</li>
+<li><code>protocolo</code> espeficia el protocolo para un tipo (normalmente solo hay uno)</li>
+</ul></li>
+<li><code>int bind(fd, struct sockaddr *local_addr, int addr_len)</code> registra un socket en un puerto y una IP (un servidor podría tener varias tarjetas de red y por tanto varias IPs)
+<ul>
+<li><code>local_addr</code> especifica IP y puerto, si se quiere escuchar en cualquier IP se pone <code>0.0.0.0</code></li>
+<li><code>addr_len</code> especifica la longitud de la dirección (importante para soportar varios tipos</li>
+</ul></li>
+</ul>
+<p>En este punto un <em>cliente UDP</em> ya está listo para enviar con <code>sendto(fd, data, data_len, flags, dest_addr, dest_addr_len)</code> y recibir con <code>recvfrom(fd, buf, buflen, flags, source_addr, source_addr_len)</code>.</p>
+<p>Un servidor UDP solo tendría que hacer <code>listen(fd, queue_size)</code> y proceder a recibir datos como un cliente (utilizar <code>recvfrom</code>).</p>
+<p>Un cliente TCP tendría que conectarse con <code>connect(fd, dest_addr, dest_addr_len)</code> y luego ya podría enviar y recibir bytes como si de un fichero se tratara con <code>read</code> y <code>write</code> o con <code>send</code> y <code>recv</code>.</p>
+<p>Un servidor TCP tendría que esperar conexiones con <code>accept(fd, source_addr, source_addr_len)</code> que es bloqueante.</p>
+<ul>
+<li>Se rellena la estructura <code>source_addr</code> con la dirección y puerto del cliente.</li>
+</ul>
+<p>Tanto cliente como servidor cierran conexiones con <code>close(fd)</code>.</p>
+<h3 id="arquitectura-de-servidores">Arquitectura de servidores</h3>
+<ul>
+<li><strong>Iterativos</strong>: solo pueden trabajar con una conexión a la vez.</li>
+<li><strong>Paralelos</strong>: trabajan con más de una conexión a la vez. Se pueden implementar de varias formas:
+<ul>
+<li>Hacer <code>fork()</code> o <code>pthread_create()</code> cuando llega una nueva conexión</li>
+<li>Tener un <em>pool</em> de procesos o hilos creado previamente y asignar cada conexión entrante a un miembro del pool. El pool puede redimensionarse dinámicamente.</li>
+</ul></li>
+</ul>
+<h2 id="protocolos-con-arquitectura-clienteservidor">Protocolos con arquitectura Cliente/Servidor</h2>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 21%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Protocolo</th>
+<th>Puerto(s)</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HTTP/HTTPS</td>
+<td>80/443</td>
+<td>Páginas web</td>
+</tr>
+<tr class="even">
+<td>FTP</td>
+<td>21 (control) / otro (datos)</td>
+<td>Transferencia de archivos</td>
+</tr>
+<tr class="odd">
+<td>SMTP</td>
+<td>25</td>
+<td>Envío de correo (servidor - servidor)</td>
+</tr>
+<tr class="even">
+<td>IMAP</td>
+<td></td>
+<td>Consulta de correo (cliente - servidor)</td>
+</tr>
+<tr class="odd">
+<td>POP3</td>
+<td></td>
+<td>Consulta de correo (cliente - servidor)</td>
+</tr>
+<tr class="even">
+<td>DNS</td>
+<td>53</td>
+<td>Traducción dominios -&gt; IPs</td>
+</tr>
+<tr class="odd">
+<td>DHCP</td>
+<td></td>
+<td>Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways…)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="protocolos-con-arquitectura-p2p-peer-to-peer">Protocolos con arquitectura P2P (peer to peer)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Protocolo</th>
+<th>Puerto(s)</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BitTorrent</td>
+<td>aleatorios</td>
+<td>Transferencia de archivos</td>
+</tr>
+<tr class="even">
+<td>Chord</td>
+<td></td>
+<td>Tablas hash distribuidas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="http">HTTP</h2>
+<ul>
+<li>Protocolo de transferencia de hipertexto.</li>
+<li>Transfiere archivos identificados por URLs o URIs a través de internet.</li>
+<li>Modelo de transferencia: Una <strong>petición - respuesta</strong> por cada recurso que se quiera obtener. La petición siempre la manda el cliente y la respuesta el servidor.</li>
+<li><p>Normalmente a partir de un fichero principal con formato HTML se generan más peticiones para otros archivos (imágenes, audio) que debe ir incluidos al dibujar la página.</p></li>
+<li><strong>Modo no persistente</strong> cada conexión solo se utiliza para una petición/respuesta.
+<ul>
+<li>Es el por defecto en la versión 1.0.</li>
+<li><em>Overhead</em> innecesario de establecimiento de conexión para cada recurso que se necesite.</li>
+</ul></li>
+<li><strong>Modo persistente</strong> cada conexión se puede utilizar para más de una petición/respuesta.
+<ul>
+<li>Es el por defecto en la versión 1.1.</li>
+</ul></li>
+<li><p>Por separado de lo anterior, los navegadores pueden decidir establecer múltiples conexiones para acelerar la descarga de grupos grandes de recursos. Estas conexiones pueden utilizar cualquier versión.</p></li>
+<li><p>Por separado de lo anterior, los navegadores pueden utilizar <em>pipelining</em> que consiste en enviar a través de una misma conexión nuevas peticiones sin que se haya recibido la respuesta de la anterior. Es bueno porque aprovecha mejor los paquetes TCP.</p></li>
+</ul>
+<p>Formato de la <strong>cabecera de petición</strong>:</p>
+<pre><code>VERB /resource?query_string HTTP/VERSION\r\n
+Header-Name: header-value\r\n
+[more headers]\r\n
+\r\n</code></pre>
+<p>Como mínimo es necesario enviar las cabeceras de <code>Host</code> y <code>Allow</code>.</p>
+<p>Formato de la <strong>cabecera de respuesta</strong>:</p>
+<pre><code>HTTP/VERSION STATUS-CODE STATUS-MESSAGE\r\n
+Header-Name: header-value\r\n
+[more headers]\r\n
+\r\n</code></pre>
+<p>Como mínimo es necesario incluir la cabecera <code>Content-Type</code> y suelen enviarse además <code>Last-Modified</code>, <code>Server</code>, <code>Date</code> y <code>Content-Length</code>.</p>
+<h2 id="ftp">FTP</h2>
+<ul>
+<li>Transferencia de archivos entre ordenadores.</li>
+<li>Utiliza dos conexiones:
+<ul>
+<li>Control: la crea el cliente y se envían comandos para autenticarse, inspeccionar y modificar directorios e iniciar transferencias de archivos.</li>
+<li>Datos: se envían los datos que dicten los comandos enviados por la conexión de control.
+<ul>
+<li>Modo activo (por defecto): el servidor inicia las conexiones de datos. Da problemas de seguridad y no es posible si el cliente está tras un proxy, firewall o NAT.</li>
+<li>Modo pasivo (lo solicita el cliente): el cliente inicia las conexiones de datos. Requiere que se habilite un rango de puertos en el servidor para poder recibirlas.</li>
+</ul></li>
+</ul></li>
+<li>Servicio de reinicio: algunos servidores soportan la creacion de <em>marcadores</em> para que en caso de fallo durante la transferencia de un archivo largo, sea posible transmitir de nuevo solo los datos a partir del último marcador recibido por el destinatario.</li>
+</ul>
+<h2 id="smtp">SMTP</h2>
+<ul>
+<li><em>Simple mail transfer protocol:</em> envío de correo entre hosts.</li>
+<li>Basado en ASCII, muy similar a HTTP.</li>
+<li>Cada email tiene una serie de cabeceras y diferentes <em>adjuntos</em>. El cuerpo del mensaje se codifica como un adjunto.</li>
+</ul>
+<h2 id="pop3-e-imap">POP3 e IMAP</h2>
+<ul>
+<li>Protocolos de consulta y gestión del correo.</li>
+<li>POP3: Más antiguo y menos sofisticado, permite la lectura y borrado de mensajes (no mantiene el estado fuera del borrado de mensajes).</li>
+<li>IMAP: Más moderno, permite la organización de mensajes en carpetas, marcar como leido/no leido… (en este sentido mantiene el estado).</li>
+</ul>

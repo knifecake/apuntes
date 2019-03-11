@@ -1,0 +1,55 @@
+---
+title: Resumen IA
+author: Elias Hernandis
+layout: notes
+---
+
+<h1 id="búsqueda">Búsqueda</h1>
+<h2 id="búsqueda-ciega">Búsqueda ciega</h2>
+<h2 id="búsqueda-informada">Búsqueda informada</h2>
+<ul>
+<li>Una heurística <span class="math inline">\(h\)</span> es una función <span class="math inline">\(h : V \to [0, +\infty)\)</span> donde <span class="math inline">\(V\)</span> son los nodos. <span class="math inline">\(h\)</span> estima la distancia a la meta y se normalmente se obtiene por relajación del problema.
+<ul>
+<li><span class="math inline">\(h\)</span> se dice monótona <span class="math inline">\(\iff \forall n, n&#39;,\ h(n) \leq h(n&#39;) + \Gamma(n, n&#39;)\)</span> (desigualdad triangular)</li>
+<li><span class="math inline">\(h\)</span> se dice admisible <span class="math inline">\(\iff \forall n,\ h(n) \leq h^\ast(n)\)</span> donde <span class="math inline">\(h^\ast(n)\)</span> es el coste real óptimo de <span class="math inline">\(n\)</span> a la meta.
+<ul>
+<li><span class="math inline">\(h\)</span> monótona <span class="math inline">\(\implies h\)</span> admisible</li>
+</ul></li>
+</ul></li>
+<li><span class="math inline">\(A^\ast\)</span> (A-estrella): ordenar la lista de abiertos por valor de <span class="math inline">\(f = g + h\)</span> ascendente.
+<ul>
+<li><span class="math inline">\(A^\ast\)</span> sin eliminación de estados repetidos (= búsqueda en árbol) y <span class="math inline">\(h\)</span> admisible es completa y óptima.</li>
+<li><span class="math inline">\(A^\ast\)</span> con eliminación de estados repetidos (= búsqueda en grafo) y <span class="math inline">\(h\)</span> monótona es completa y óptima.</li>
+</ul></li>
+</ul>
+<h2 id="búsqueda-entre-adversarios">Búsqueda entre adversarios</h2>
+<h3 id="clasificación-de-problemas-de-búsqueda-juegos">Clasificación de problemas de búsqueda (= juegos)</h3>
+<ul>
+<li>Suma cero, suma constante o suma variable. <em>Suma</em> se refiere a sumar los valores de la utilidad desde el punto de vista de min o de max.
+<ul>
+<li>Asignar los valores <code>perder = -1, empatar = 0, ganar = 1</code> en el ajedrez da un juego de suma cero ya que si uno pierde, el otro gana y por tanto sus valores de utilidad suman 0. Ocurre lo mismo si los dos empatan.</li>
+<li>Asignar los valores <code>perder = 0, empatar = 1, ganar = 2</code> en el ajedrez da una juego de suma constante ya que si una pierde y el otro gana la suma de las utilidades desde ambos puntos de vista es 2. Ocurre lo mismo si los dos empatan (<span class="math inline">\(1+1 = 2\)</span>).</li>
+<li>Los juegos de suma variable no son susceptibles de ser atacados por búsqueda entre adversarios.</li>
+</ul></li>
+</ul>
+<h3 id="minimax">Minimax</h3>
+<ul>
+<li>Con <strong>poda</strong> <span class="math inline">\(\alpha-\beta\)</span>:
+<ul>
+<li>En nodos <code>min</code> se actualiza <span class="math inline">\(\beta = \min(\beta, \alpha_i \text{ de los hijos })\)</span></li>
+<li>En nodos <code>max</code> se actualiza <span class="math inline">\(\alpha = \max(\alpha, \beta_i \text{ de los hijos})\)</span></li>
+</ul></li>
+</ul>
+<h1 id="lógica-de-predicados">Lógica de predicados</h1>
+<h2 id="ejercicios">Ejercicios</h2>
+<h3 id="hoja-2-2018-ejercicio-2">Hoja 2, 2018: ejercicio 2</h3>
+<ol type="1">
+<li><p>Dos nodos son hermanos si, siendo distintos, tienen el mismo padre. <span class="math display">\[\forall x,y [(\lnot I(x,y) \land I(padreDe(x), padreDe(y))) \iff H(x, y)]\]</span></p></li>
+<li><p>Un camino entre dos nodos es una secuencia de uno o varios enlaces entre dichos nodos. <span class="math display">\[\forall x,y,c [C(c, x, y) \iff (I(c, enlace(x,y)) \lor \exists z,m,n (\lnot I(m,n) \land C(m, x, z) \land C(n, z, y)]\]</span></p></li>
+</ol>
+<h3 id="parcial-1-2014-2015-ejercicio-3">Parcial 1, 2014-2015: ejercicio 3</h3>
+<ol type="1">
+<li>Ejemplo</li>
+<li>Se puede diseñar una máquina de Turing para computar la solución de cualquier problema que pueda ser resuelto mediante la aplicación de un algoritmo sobre unos datos de entrada. <span class="math display">\[ \]</span></li>
+<li>Una máquina de Turing universal puede simular la acción de cualquier máquina de Turing sobre los datos almacenados en su cinta <span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></li>
+</ol>
