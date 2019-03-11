@@ -5,42 +5,175 @@ layout: notes
 ---
 
 <h1 id="búsqueda">Búsqueda</h1>
-<h2 id="búsqueda-ciega">Búsqueda ciega</h2>
-<h2 id="búsqueda-informada">Búsqueda informada</h2>
+<h2 id="búsqueda-ciega-e-informada">Búsqueda ciega e informada</h2>
 <ul>
-<li>Una heurística <span class="math inline">\(h\)</span> es una función <span class="math inline">\(h : V \to [0, +\infty)\)</span> donde <span class="math inline">\(V\)</span> son los nodos. <span class="math inline">\(h\)</span> estima la distancia a la meta y se normalmente se obtiene por relajación del problema.
+<li>Problema: encontrar la ruta con coste mínimo desde uno nodo inicial a un nodo final.
 <ul>
-<li><span class="math inline">\(h\)</span> se dice monótona <span class="math inline">\(\iff \forall n, n&#39;,\ h(n) \leq h(n&#39;) + \Gamma(n, n&#39;)\)</span> (desigualdad triangular)</li>
-<li><span class="math inline">\(h\)</span> se dice admisible <span class="math inline">\(\iff \forall n,\ h(n) \leq h^\ast(n)\)</span> donde <span class="math inline">\(h^\ast(n)\)</span> es el coste real óptimo de <span class="math inline">\(n\)</span> a la meta.
+<li>El grafo que representa el problema tiene inconvenientes: puede ser infinito, puede haber varios nodos finales, …</li>
+<li>Enfocar la búsqueda en un árbol cuya raíz es el estado inicial.
+<ul>
+<li>Cada nodo del árbol es un <em>estado</em> que se corresponde con un nodo del grafo. La manera de llegar a un estado los diferencia con respecto a los nodos del árbol.</li>
+<li><strong>Test objetivo</strong> para saber si un estado es final o meta.</li>
+<li><strong>Acción o expansión de un nodo</strong> para obtener los sucesores de un estado del árbol</li>
+<li><strong>Lista de abiertos</strong> con los estados descubiertos pero no explorados.</li>
+<li><strong>Estrategia</strong> define la ordenación de los nodos en la lista de abiertos.</li>
+<li><strong>Utilidad</strong> <span class="math inline">\(g\)</span> da el coste desde el nodo raíz hasta el actual (pero considerando los estados del árbol, no solo los nodos del grafo).</li>
+</ul></li>
+</ul></li>
+<li>Una <strong>heurística</strong> <span class="math inline">\(h\)</span> es una función <span class="math inline">\(h : V \to [0, +\infty)\)</span> donde <span class="math inline">\(V\)</span> son los nodos. <span class="math inline">\(h\)</span> estima la distancia a la meta y se normalmente se obtiene por relajación del problema.
+<ul>
+<li><span class="math inline">\(h\)</span> se dice <strong>monótona</strong> <span class="math inline">\(\iff \forall n, n&#39;,\ h(n) \leq h(n&#39;) + \Gamma(n, n&#39;)\)</span> (desigualdad triangular)</li>
+<li><span class="math inline">\(h\)</span> se dice <strong>admisible</strong> <span class="math inline">\(\iff \forall n,\ h(n) \leq h^\ast(n)\)</span> donde <span class="math inline">\(h^\ast(n)\)</span> es el <strong>coste real óptimo</strong> de <span class="math inline">\(n\)</span> a la meta.
 <ul>
 <li><span class="math inline">\(h\)</span> monótona <span class="math inline">\(\implies h\)</span> admisible</li>
+<li>Conocer <span class="math inline">\(h^\ast\)</span> normalmente requiere resolver el problema, por eso es más fácil demostrar <span class="math inline">\(h\)</span> monótona que <span class="math inline">\(h\)</span> admisible.</li>
 </ul></li>
 </ul></li>
+<li>Definimos <span class="math inline">\(f = g + h\)</span> para cada nodo.</li>
+</ul>
+<p><strong>Búsqueda genérica en árbol</strong></p>
+<pre><code>function búsqueda-en-árbol (problema, estrategia)
+;; devuelve solución o fallo
+;; lista-abierta contiene los nodos de la frontera del árbol de búsqueda
+Inicializar árbol-de-búsqueda con nodo-raíz
+Inicializar lista-abierta con nodo-raíz
+Iterar
+  If (lista-abierta está vacía) then return fallo
+  Elegir de lista-abierta, de acuerdo a la estrategia, un nodo a expandir.
+  If (nodo satisface test-objetivo)
+    then return solución (camino desde el nodo-raíz hasta el nodo actual)
+    else eliminar nodo de lista-abierta
+      expandir nodo
+      añadir nodos hijo a lista-abierta</code></pre>
+<p><strong>Búsqueda en grafo</strong> o <em>con eliminación de estados repetidos</em>: añadir una lista de cerrados que contiene los nodos ya explorados (= expandidos). No se introducen en la lista de abiertos aquellos nodos que ya estén en la lista de cerrados.</p>
+<p>La <strong>estrategia</strong> determina la ordenación de la lista abierta:</p>
+<ul>
+<li>FIFO (cola): <strong>búsqueda en anchura</strong>.</li>
+<li>LIFO (pila): <strong>búsqueda en profundidad</strong>.</li>
+<li>Por valor de <span class="math inline">\(g\)</span> ascendente: <strong>Dijkstra o coste uniforme</strong></li>
+<li>Por valor de <span class="math inline">\(h\)</span> ascendente: <strong>búsqueda avariciosa</strong></li>
+<li>Por valor de <span class="math inline">\(f\)</span> ascendente: <span class="math inline">\(A^\ast\)</span></li>
+</ul>
+<p>¿Qué queremos?</p>
+<ul>
+<li><strong>Completitud</strong>: encontrar la solución siempre que exista.</li>
+<li><p><strong>Optimalidad</strong>: encontrar siempre la solución de menor coste <span class="math inline">\(g\)</span>.</p></li>
 <li><span class="math inline">\(A^\ast\)</span> (A-estrella): ordenar la lista de abiertos por valor de <span class="math inline">\(f = g + h\)</span> ascendente.
 <ul>
 <li><span class="math inline">\(A^\ast\)</span> sin eliminación de estados repetidos (= búsqueda en árbol) y <span class="math inline">\(h\)</span> admisible es completa y óptima.</li>
 <li><span class="math inline">\(A^\ast\)</span> con eliminación de estados repetidos (= búsqueda en grafo) y <span class="math inline">\(h\)</span> monótona es completa y óptima.</li>
 </ul></li>
 </ul>
+<h3 id="coste-computacional">Coste computacional</h3>
+<ul>
+<li><span class="math inline">\(b\)</span> <strong>factor de ramificación</strong>: el mayor número de sucesores de un estado (suponemos <span class="math inline">\(b &lt; \infty\)</span>)</li>
+<li><span class="math inline">\(m\)</span> profundidad máxima del árbol de búsqueda (suponemos <span class="math inline">\(m &lt; \infty\)</span>)</li>
+<li><span class="math inline">\(d\)</span> profundidad del nodo objetivo más superficial</li>
+<li><span class="math inline">\(C^\ast\)</span> coste del camino de la solución óptima</li>
+<li><span class="math inline">\(\varepsilon \geq 0\)</span> coste mínimo de un acción</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+<col style="width: 16%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Tiempo</th>
+<th>Memoria</th>
+<th>Completa?</th>
+<th>Óptima?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>en anchura</td>
+<td><span class="math inline">\(O(b^d)\)</span></td>
+<td><span class="math inline">\(O(b^d)\)</span></td>
+<td>Sí<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></td>
+<td>Sí<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></td>
+</tr>
+<tr class="even">
+<td>en profundidad</td>
+<td><span class="math inline">\(O(b^m)\)</span></td>
+<td><span class="math inline">\(b\cdot m + 1\)</span></td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Dijkstra</td>
+<td><span class="math inline">\(O(b^{\lceil C^\ast/\varepsilon\rceil})\)</span></td>
+<td><span class="math inline">\(O(b^{\lceil C^\ast/\varepsilon\rceil})\)</span></td>
+<td>Sí (<span class="math inline">\(\varepsilon &gt; 0\)</span>)</td>
+<td>Sí</td>
+</tr>
+<tr class="even">
+<td>avariciosa</td>
+<td><span class="math inline">\(O(b^m)\)</span></td>
+<td><span class="math inline">\(O(b^m)\)</span></td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(A^\ast\)</span></td>
+<td><span class="math inline">\(O(b^{\lceil C^\ast/\varepsilon\rceil})\)</span></td>
+<td><span class="math inline">\(O(b^{\lceil C^\ast/\varepsilon\rceil})\)</span></td>
+<td>Sí*</td>
+<td>Sí*</td>
+</tr>
+</tbody>
+</table>
 <h2 id="búsqueda-entre-adversarios">Búsqueda entre adversarios</h2>
 <h3 id="clasificación-de-problemas-de-búsqueda-juegos">Clasificación de problemas de búsqueda (= juegos)</h3>
 <ul>
-<li>Suma cero, suma constante o suma variable. <em>Suma</em> se refiere a sumar los valores de la utilidad desde el punto de vista de min o de max.
+<li>Número de jugadores: solo nos interesan aquellos con dos jugadores.</li>
+<li><strong>Suma cero, suma constante o suma variable</strong>. <em>Suma</em> se refiere a sumar los valores de la utilidad desde el punto de vista de min o de max.
 <ul>
 <li>Asignar los valores <code>perder = -1, empatar = 0, ganar = 1</code> en el ajedrez da un juego de suma cero ya que si uno pierde, el otro gana y por tanto sus valores de utilidad suman 0. Ocurre lo mismo si los dos empatan.</li>
 <li>Asignar los valores <code>perder = 0, empatar = 1, ganar = 2</code> en el ajedrez da una juego de suma constante ya que si una pierde y el otro gana la suma de las utilidades desde ambos puntos de vista es 2. Ocurre lo mismo si los dos empatan (<span class="math inline">\(1+1 = 2\)</span>).</li>
 <li>Los juegos de suma variable no son susceptibles de ser atacados por búsqueda entre adversarios.</li>
 </ul></li>
+<li><strong>Información perfecta</strong> (ajedrez, damas) o <strong>información parcial</strong> (casi todos los juegos de cartas).</li>
+<li><strong>Deterministas</strong> (ajedrez, damas) o <strong>estocásticos</strong> (backgammon).</li>
+<li>Tiempo y número de movimientos (limitados o ilimitados).</li>
 </ul>
 <h3 id="minimax">Minimax</h3>
 <ul>
+<li>Modelización de un problema con dos jugadores.</li>
+<li>Al que juega primero le llamamos <em>max</em>, al otro <em>min</em>.</li>
+<li>Esta estrategia encuentra la jugada óptima para max.</li>
+<li><p>Definimos el valor <code>minimax(n)</code> para un nodo:</p>
+<p><span class="math display">\[\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &amp;\text{ si } n \text{ terminal }\\
+                                         \max\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo max}\\
+                                         \min\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo min}\end{cases}\]</span></p></li>
+<li>Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).</li>
+<li>Complejidad temporal <span class="math inline">\(O(b^m)\)</span> y espacial <span class="math inline">\(O(b\cdot m)\)</span>.</li>
 <li>Con <strong>poda</strong> <span class="math inline">\(\alpha-\beta\)</span>:
 <ul>
 <li>En nodos <code>min</code> se actualiza <span class="math inline">\(\beta = \min(\beta, \alpha_i \text{ de los hijos })\)</span></li>
 <li>En nodos <code>max</code> se actualiza <span class="math inline">\(\alpha = \max(\alpha, \beta_i \text{ de los hijos})\)</span></li>
+<li>Es útil hacer minimax sin poda para los ejercicios ya que permite comprobar si los intervalos <span class="math inline">\([\alpha,\ \beta]\)</span> están bien: en nodos max, el valor minimax coincide con <span class="math inline">\(\alpha\)</span> y en nodos min, el valor minimax coincide con <span class="math inline">\(\beta\)</span>.</li>
+<li>Complejidad temporal: depende de la ordenación de la búsqueda. Es mejor si los nodos mejores se exploran primero.
+<ul>
+<li>En el caso peor no hay mejora.</li>
+<li>En el caso medio (ordenación aleatoria: <span class="math inline">\(O(b^{3d/4})\)</span></li>
+<li>En el caso mejor (ordenación perfecta: <span class="math inline">\(O(b^{d/2})\)</span></li>
+</ul></li>
 </ul></li>
 </ul>
 <h1 id="lógica-de-predicados">Lógica de predicados</h1>
+<h2 id="formalización">Formalización:</h2>
+<p>Hay que acordarse de:</p>
+<ul>
+<li>Hay <strong>constantes, variables, predicados y funciones</strong>.</li>
+<li>Un <strong>predicado</strong> devuelve un valor de verdad mientras que una <strong>función</strong> devuelve otro átomo. Por ejemplo: <code>mejorAmigoDe(persona)</code> es una función mientras que <code>ViveEn(ciudad, persona)</code> es un predicado.</li>
+<li>Nunca* se pone un <span class="math inline">\(\forall\)</span> con un <span class="math inline">\(\land\)</span> y tampoco se pone un <span class="math inline">\(\exists\)</span> con un <span class="math inline">\(\implies\)</span>.</li>
+<li>Nunca se pone un predicado dentro de otro o de una función.</li>
+</ul>
 <h2 id="ejercicios">Ejercicios</h2>
 <h3 id="hoja-2-2018-ejercicio-2">Hoja 2, 2018: ejercicio 2</h3>
 <ol type="1">
@@ -53,3 +186,10 @@ layout: notes
 <li>Se puede diseñar una máquina de Turing para computar la solución de cualquier problema que pueda ser resuelto mediante la aplicación de un algoritmo sobre unos datos de entrada. <span class="math display">\[ \]</span></li>
 <li>Una máquina de Turing universal puede simular la acción de cualquier máquina de Turing sobre los datos almacenados en su cinta <span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></li>
 </ol>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
