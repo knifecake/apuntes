@@ -128,6 +128,8 @@ Hay que acordarse de:
 * Un **predicado** devuelve un valor de verdad mientras que una **función** devuelve otro átomo. Por ejemplo: `mejorAmigoDe(persona)` es una función mientras que `ViveEn(ciudad, persona)` es un predicado.
 * Nunca* se pone un $\forall$ con un $\land$ y tampoco se pone un $\exists$ con un $\implies$.
 * Nunca se pone un predicado dentro de otro o de una función.
+* Las definiciones utilizan un $\iff$.
+* Si tenemos dos opciones normalmente hay que especificar que son distintas.
 
 ## Ejercicios
 
