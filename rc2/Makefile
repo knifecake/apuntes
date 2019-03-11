@@ -1,7 +1,7 @@
 all: resumen-rc2.pdf resumen-rc2.html
 
 resumen-rc2.pdf: resumen-rc2.md
-	pandoc -o $@ $^
+	pandoc --pdf-engine=xelatex --template ../templates/one-column.tex -o $@ $^
 
 resumen-rc2.html: resumen-rc2.md
 	pandoc --mathjax -o $@ $^

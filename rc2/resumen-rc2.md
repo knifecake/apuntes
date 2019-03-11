@@ -3,6 +3,8 @@ title: Resumen RC2
 author: Elias Hernandis
 ---
 
+# Protocolos de aplicación
+
 ## Arquitecturas de Red
 
 ### Cliente servidor
@@ -40,12 +42,16 @@ author: Elias Hernandis
 * Los **protocolos** definen tipos de mensajes (sintaxis y semántica) y garantizan distintos requisitos
 * Dos protocolos principales a nivel 4 que determinan que requisitos puede ofrecer un protocolo: TCP y UDP
 
+<table class="table-responsive">
+
 | TCP                                                                                               	| UDP                                                                                                                               	|
 |---------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------------------------------------------------------------------	|
 | **Orientado a conexión**  cada parte fija IP y puertos durante el establecimiento de la conexión. 	| **No orientado a conexión**  Cada parte especifica IP y puerto de destino cada vez que envía datos (uso de `sendto` y `recvfrom`) 	|
 | **Transferencia confiable** se garantiza la llegada de toda la información en orden.              	| **Transferencia no confiable** no se garantiza nada                                                                               	|
 | **Control de flujo** el emisor no sobrecarga al receptor                                          	| **No hay control de flujo** el emisor no sabe como está el receptor                                                               	|
 | No provee garantías de ancho de banda                                                             	| No provee garantías de ancho de banda, pero la transferencia de mensajes cortos suele ser más rápida (DNS).                       	|
+
+</div>
 
 
 ## API de sockets en C
@@ -87,6 +93,8 @@ Tanto cliente como servidor cierran conexiones con `close(fd)`.
 
 ## Protocolos con arquitectura Cliente/Servidor
 
+<div class="table-responsive">
+
 |  Protocolo 	|          Puerto(s)          	|                                          Uso                                          	|
 |:----------:	|:---------------------------:	|:-------------------------------------------------------------------------------------:	|
 | HTTP/HTTPS 	| 80/443 seguro               	| Páginas web                                                                           	|
@@ -98,12 +106,18 @@ Tanto cliente como servidor cierran conexiones con `close(fd)`.
 | DNS        	| 53                          	| Traducción dominios -> IPs                                                            	|
 | DHCP       	| 67 servidores / 68 clientes 	| Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways...) 	|
 
+</div>
+
 ## Protocolos con arquitectura P2P (peer to peer)
+
+<div class="table-responsive">
 
 | Protocolo    | Puerto(s)    | Uso                         |
 | ------------ | ------------ | --------------------------- |
 | BitTorrent   | aleatorios   | Transferencia de archivos   |
 | Chord        |              | Tablas hash distribuidas    |
+
+</div>
 
 ## HTTP
 
