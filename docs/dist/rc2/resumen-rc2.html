@@ -15,7 +15,10 @@ layout: notes
 <ul>
 <li>No tiene que estar siempre conectado</li>
 <li>Puede tener IP dinámica</li>
-<li>No se comunica con otros clientes</li>
+<li>No se comunica con otros clientes
+<div class="table-responsive">
+<p><span class="math display">\[ t_{\text{C/S}} = \max\{ \frac{Nf}{u_s},\ \frac{F}{\min d_i} \} \]</span></p>
+</div></li>
 </ul>
 <h3 id="peer-to-peer-p2p">Peer to peer (P2P)</h3>
 <ul>
@@ -23,6 +26,10 @@ layout: notes
 <li>Arquitectura distribuida: no hay posibilidad de control central, resistencia a las averías</li>
 <li>Redundancia de la información, equilibrio de la carga…</li>
 <li>No cuesta nada hacer crecer la red</li>
+<li>Fórmulas para la carga en arquitecturas P2P:
+<div class="table-responsive">
+<p><span class="math display">\[t_{\text{P2P}} = \max\{ \frac{F}{u_s},\ \frac{F}{\min d_i},\ \frac{NF}{u_s + \sum u_i} \}\]</span></p>
+</div></li>
 </ul>
 <h3 id="híbridas-p2p---cs">Híbridas P2P - C/S</h3>
 <ul>
@@ -39,7 +46,7 @@ layout: notes
 <li>Los <strong>protocolos</strong> definen tipos de mensajes (sintaxis y semántica) y garantizan distintos requisitos</li>
 <li>Dos protocolos principales a nivel 4 que determinan que requisitos puede ofrecer un protocolo: TCP y UDP</li>
 </ul>
-<table class="table-responsive">
+<div class="table-responsive">
 <table>
 <colgroup>
 <col style="width: 43%" />

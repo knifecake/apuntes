@@ -20,6 +20,9 @@ author: Elias Hernandis
 * No tiene que estar siempre conectado
 * Puede tener IP dinámica
 * No se comunica con otros clientes
+  <div class="table-responsive">
+  $$ t_{\text{C/S}} = \max\{ \frac{Nf}{u_s},\ \frac{F}{\min d_i} \} $$
+  </div>
 
 
 ### Peer to peer (P2P)
@@ -28,6 +31,10 @@ author: Elias Hernandis
 * Arquitectura distribuida: no hay posibilidad de control central, resistencia a las averías
 * Redundancia de la información, equilibrio de la carga...
 * No cuesta nada hacer crecer la red
+* Fórmulas para la carga en arquitecturas P2P:
+  <div class="table-responsive">
+  $$t_{\text{P2P}} = \max\{ \frac{F}{u_s},\ \frac{F}{\min d_i},\ \frac{NF}{u_s + \sum u_i} \}$$
+  </div>
 
 ### Híbridas P2P - C/S
 
@@ -42,7 +49,7 @@ author: Elias Hernandis
 * Los **protocolos** definen tipos de mensajes (sintaxis y semántica) y garantizan distintos requisitos
 * Dos protocolos principales a nivel 4 que determinan que requisitos puede ofrecer un protocolo: TCP y UDP
 
-<table class="table-responsive">
+<div class="table-responsive">
 
 | TCP                                                                                               	| UDP                                                                                                                               	|
 |---------------------------------------------------------------------------------------------------	|-----------------------------------------------------------------------------------------------------------------------------------	|
