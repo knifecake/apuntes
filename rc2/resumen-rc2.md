@@ -87,15 +87,16 @@ Tanto cliente como servidor cierran conexiones con `close(fd)`.
 
 ## Protocolos con arquitectura Cliente/Servidor
 
-| Protocolo    | Puerto(s)                   | Uso                                                                                     |
-| ------------ | --------------------------- | --------------------------------------------------------------------------------------- |
-| HTTP/HTTPS   | 80/443                      | Páginas web                                                                             |
-| FTP          | 21 (control) / otro (datos) | Transferencia de archivos                                                               |
-| SMTP         | 25                          | Envío de correo (servidor - servidor)                                                   |
-| IMAP         |                             | Consulta de correo (cliente - servidor)                                                 |
-| POP3         |                             | Consulta de correo (cliente - servidor)                                                 |
-| DNS          | 53                          | Traducción dominios -> IPs                                                              |
-| DHCP         |                             | Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways...)   |
+|  Protocolo 	|          Puerto(s)          	|                                          Uso                                          	|
+|:----------:	|:---------------------------:	|:-------------------------------------------------------------------------------------:	|
+| HTTP/HTTPS 	| 80/443 seguro               	| Páginas web                                                                           	|
+| SSH        	| 22                          	| Terminal remota                                                                       	|
+| FTP        	| 21 (control) / otro (datos) 	| Transferencia de archivos                                                             	|
+| SMTP       	| 25                          	| Envío de correo (servidor - servidor)                                                 	|
+| IMAP       	| 143/993 seguro              	| Consulta de correo (cliente - servidor)                                               	|
+| POP3       	| 110/995 seguro              	| Consulta de correo (cliente - servidor)                                               	|
+| DNS        	| 53                          	| Traducción dominios -> IPs                                                            	|
+| DHCP       	| 67 servidores / 68 clientes 	| Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways...) 	|
 
 ## Protocolos con arquitectura P2P (peer to peer)
 
@@ -161,3 +162,10 @@ además `Last-Modified`, `Server`, `Date` y `Content-Length`.
 * Protocolos de consulta y gestión del correo.
 * POP3: Más antiguo y menos sofisticado, permite la lectura y borrado de mensajes (no mantiene el estado fuera del borrado de mensajes).
 * IMAP: Más moderno, permite la organización de mensajes en carpetas, marcar como leido/no leido... (en este sentido mantiene el estado).
+
+## DNS
+
+* Resolución de nombres de dominio
+* Sobre UDP entre cliente-servidor y sobre TCP entre servidor-servidor.
+* Recursivo: el servidor resuelve las consultas adicionales necesarias para obtener la IP de un dominio.
+* Iterativo: el cliente debe preguntar a los distintos servidores (local, root, TLD, dominio) para obtener la IP del dominio.

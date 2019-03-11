@@ -104,51 +104,56 @@ layout: notes
 <table>
 <colgroup>
 <col style="width: 9%" />
-<col style="width: 21%" />
-<col style="width: 69%" />
+<col style="width: 22%" />
+<col style="width: 67%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Protocolo</th>
-<th>Puerto(s)</th>
-<th>Uso</th>
+<th style="text-align: center;">Protocolo</th>
+<th style="text-align: center;">Puerto(s)</th>
+<th style="text-align: center;">Uso</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>HTTP/HTTPS</td>
-<td>80/443</td>
-<td>Páginas web</td>
+<td style="text-align: center;">HTTP/HTTPS</td>
+<td style="text-align: center;">80/443 seguro</td>
+<td style="text-align: center;">Páginas web</td>
 </tr>
 <tr class="even">
-<td>FTP</td>
-<td>21 (control) / otro (datos)</td>
-<td>Transferencia de archivos</td>
+<td style="text-align: center;">SSH</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">Terminal remota</td>
 </tr>
 <tr class="odd">
-<td>SMTP</td>
-<td>25</td>
-<td>Envío de correo (servidor - servidor)</td>
+<td style="text-align: center;">FTP</td>
+<td style="text-align: center;">21 (control) / otro (datos)</td>
+<td style="text-align: center;">Transferencia de archivos</td>
 </tr>
 <tr class="even">
-<td>IMAP</td>
-<td></td>
-<td>Consulta de correo (cliente - servidor)</td>
+<td style="text-align: center;">SMTP</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">Envío de correo (servidor - servidor)</td>
 </tr>
 <tr class="odd">
-<td>POP3</td>
-<td></td>
-<td>Consulta de correo (cliente - servidor)</td>
+<td style="text-align: center;">IMAP</td>
+<td style="text-align: center;">143/993 seguro</td>
+<td style="text-align: center;">Consulta de correo (cliente - servidor)</td>
 </tr>
 <tr class="even">
-<td>DNS</td>
-<td>53</td>
-<td>Traducción dominios -&gt; IPs</td>
+<td style="text-align: center;">POP3</td>
+<td style="text-align: center;">110/995 seguro</td>
+<td style="text-align: center;">Consulta de correo (cliente - servidor)</td>
 </tr>
 <tr class="odd">
-<td>DHCP</td>
-<td></td>
-<td>Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways…)</td>
+<td style="text-align: center;">DNS</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">Traducción dominios -&gt; IPs</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">DHCP</td>
+<td style="text-align: center;">67 servidores / 68 clientes</td>
+<td style="text-align: center;">Gestión de redes LAN (asignación de IPs dinámicas, configuración de DNS, gateways…)</td>
 </tr>
 </tbody>
 </table>
@@ -229,4 +234,11 @@ Header-Name: header-value\r\n
 <li>Protocolos de consulta y gestión del correo.</li>
 <li>POP3: Más antiguo y menos sofisticado, permite la lectura y borrado de mensajes (no mantiene el estado fuera del borrado de mensajes).</li>
 <li>IMAP: Más moderno, permite la organización de mensajes en carpetas, marcar como leido/no leido… (en este sentido mantiene el estado).</li>
+</ul>
+<h2 id="dns">DNS</h2>
+<ul>
+<li>Resolución de nombres de dominio</li>
+<li>Sobre UDP entre cliente-servidor y sobre TCP entre servidor-servidor.</li>
+<li>Recursivo: el servidor resuelve las consultas adicionales necesarias para obtener la IP de un dominio.</li>
+<li>Iterativo: el cliente debe preguntar a los distintos servidores (local, root, TLD, dominio) para obtener la IP del dominio.</li>
 </ul>
