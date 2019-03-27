@@ -1,0 +1,6 @@
+---
+title: Resumen EDO
+author: Elias Hernandis
+layout: notes
+---
+

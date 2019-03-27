@@ -31,3 +31,10 @@ cp rc2/*.pdf rc2/*.html docs/dist/rc2/
 mkdir -p docs/dist/ia
 make -C ia
 cp ia/*.pdf ia/*.html docs/dist/ia/
+
+# EDO
+mkdir -p docs/dist/edo
+make -C edo
+cp edo/*.pdf edo/*.html docs/dist/edo/
+
+

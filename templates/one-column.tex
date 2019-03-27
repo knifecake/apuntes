@@ -6,6 +6,21 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 % \usepackage{pgfpages}
 % \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 % \usepackage{lmodern}
@@ -48,7 +63,7 @@ $endif$
 
 \usepackage[spanish,es-noquoting]{babel} % es-noquoting es para que funcione tikz
 
-\usepackage[a4paper, top=1cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+\usepackage[a4paper, top=1cm,bottom=1cm,left=1cm,right=1.5cm]{geometry}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
