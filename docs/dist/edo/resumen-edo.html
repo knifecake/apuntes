@@ -5,19 +5,39 @@ layout: notes
 ---
 
 
+<h1 id="tipos-de-ecuaciones-de-primer-grado">Tipos de ecuaciones de primer grado</h1>
+<ul>
+<li><p>De variables separadas: cuando se puede dejar <span class="math inline">\(t\)</span> a un lado y <span class="math inline">\(x\)</span> a otro, por ejemplo</p>
+<p><span class="math display">\[x&#39; = t^2x \iff \frac{dx}{dt} = t^2x \iff \frac{dx}{x} = t^2dt\]</span> se</p>
+<p>resuelven integrando a ambos lados.</p></li>
+<li>Exactas: son de la forma <span class="math inline">\(Mdx + Ndy = 0\)</span>. Se resuelven encontrando <span class="math inline">\(G(x,t) = 0\)</span>. Para ello hay dos caminos:
+<ul>
+<li>Si <span class="math inline">\(M_y = N_x\)</span>, esto es, si <span class="math inline">\(\frac{\partial M}{\partial y} = \frac{\partial  N}{\partial x}\)</span> entonces <span class="math inline">\(G(x,y)\)</span> se obtiene integrando <span class="math inline">\(G(x,y) = \int M  dy + H(x) = \int N dx + H(y)\)</span>.</li>
+</ul></li>
+</ul>
 <h1 id="ecuaciones-diferenciales-ordinarias-de-grado-n">Ecuaciones diferenciales ordinarias de grado <span class="math inline">\(n\)</span></h1>
 <ul>
-<li><p>Una ecuación diferencial de grado <span class="math inline">\(n\)</span> se puede escribir <span class="math display">\[x^{(n)} + a_{n-1}(t)x^{(n-1)} + \dots  + a_2(t)x&#39;  + a_1(t) x = f(t)\]</span> Si el coeficiente de <span class="math inline">\(x^{(n)}\)</span> no es <span class="math inline">\(0\)</span> se puede dividir por el para llegar a la forma anterior. Sino, se trata de una ecuación de grado <span class="math inline">\(n-1\)</span>.</p></li>
-<li>Su ecuación homogénea asociada es <span class="math display">\[x^{(n)} + a_{n-1}(t)x^{(n-1)} + \dots  + a_2(t)x&#39; + a_1(t) x = 0\]</span> Las soluciones de esta ecuación están en un espacio vectorial de dimensión <span class="math inline">\(n\)</span>. Esto significa que encontrando <span class="math inline">\(n\)</span> soluciones linealmente independientes <span class="math inline">\(x_1, \dots, x_n\)</span> ya tenemos todas las soluciones de la ecuación homogénea que podemos escribir como la solución general <span class="math display">\[x_h(t) = c_1 x_1(t) + \dots + c_n x_n(t)\]</span></li>
+<li><p>Una ecuación diferencial de grado <span class="math inline">\(n\)</span> se puede escribir <span class="math display">\[x^{(n)} +
+a_{n-1}(t)x^{(n-1)} + \dots  + a_2(t)x&#39;  + a_1(t) x = f(t)\]</span></p>
+<p>Si el coeficiente de <span class="math inline">\(x^{(n)}\)</span> no es <span class="math inline">\(0\)</span> se puede dividir por el para llegar a la forma anterior. Sino, se trata de una ecuación de grado <span class="math inline">\(n-1\)</span>.</p></li>
+<li><p>Su ecuación homogénea asociada es <span class="math display">\[x^{(n)} + a_{n-1}(t)x^{(n-1)} + \dots  +
+a_2(t)x&#39; + a_1(t) x = 0\]</span></p>
+<p>Las soluciones de esta ecuación están en un espacio vectorial de dimensión <span class="math inline">\(n\)</span>. Esto significa que encontrando <span class="math inline">\(n\)</span> soluciones linealmente independientes <span class="math inline">\(x_1, \dots, x_n\)</span> ya tenemos todas las soluciones de la ecuación homogénea que podemos escribir como la solución general <span class="math display">\[x_h(t) = c_1 x_1(t) + \dots +
+c_n x_n(t)\]</span></p></li>
 <li><p>En general, no hay un método para resolver ecuaciones en las que los coeficientes <span class="math inline">\(a_1(t), \dots, a_{n-1}(t)\)</span> no son constantes pero algunas admiten trucos que se describen más adelante.</p></li>
 <li><p>En cualquier caso, la solución de una EDO (homogénea o no) de grado <span class="math inline">\(n\)</span> siempre será <span class="math display">\[ x(t) = x_h(t) + x_p(t)\]</span> donde <span class="math inline">\(x_h\)</span> es una solución general de la ecuación homogénea asociada y <span class="math inline">\(x_p\)</span> una solución particular de la EDO original.</p></li>
 <li><p>Si <span class="math inline">\(a_1(t), \dots, a_{n-1}(t)\)</span> son en realidad constantes entonces la solución de la ecuación se obtiene con el siguiente procedimiento:</p>
 <ol type="1">
-<li><p>Solución de general de la homogénea, e.d., base de un e.v. de dimensión <span class="math inline">\(n\)</span>. Es de la forma <span class="math display">\[x_h(t) = c_1 x_1(t) + c_2 x_2(t) + \dots + c_n x_n(t)\]</span> para <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span> y <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> soluciones particulares linealmente independientes. Estas últimas se pueden obtener a partir de las soluciones de la ecuación característica <span class="math inline">\(P(\lambda) = \lambda^n + a_{n-1}\lambda^{n-1} + \dots + a_2 \lambda + a_1 = 0\)</span></p>
+<li><p>Solución de general de la homogénea, e.d., base de un e.v. de dimensión <span class="math inline">\(n\)</span>. Es de la forma <span class="math display">\[x_h(t) = c_1 x_1(t) + c_2 x_2(t) + \dots + c_n
+x_n(t)\]</span> para <span class="math inline">\(c_1, \dots, c_n \in \mathbb{R}\)</span> y <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> soluciones particulares linealmente independientes. Estas últimas se pueden obtener a partir de las soluciones de la ecuación característica <span class="math inline">\(P(\lambda) = \lambda^n + a_{n-1}\lambda^{n-1} + \dots + a_2 \lambda + a_1 = 0\)</span></p>
 <ul>
-<li><p>Si todas las raíces son reales y distintas entonces la solución es de la forma <span class="math display">\[x_h(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \dots + c_n e^{\lambda_n t}\]</span></p></li>
-<li><p>Si aparecen raíces <span class="math inline">\(\lambda\)</span> con multiplicidad <span class="math inline">\(m &gt; n\)</span> entonces la solución homogénea incluirá los términos <span class="math display">\[c_1 e^{\lambda t} + c_2 t e^{\lambda t} + \dots + c_m t^{m-1} e^{\lambda t}\]</span> para garantizar que el espacio de solucuiones siga teniendo dimensión <span class="math inline">\(n\)</span>.</p></li>
-<li><p>Si aparecen dos raíces <span class="math inline">\(\lambda_1, \lambda_2\)</span> complejas entonces también serán conjugadas. Si decimos que <span class="math inline">\(\lambda_1 = a + bi\)</span> (y por tanto <span class="math inline">\(\lambda_2 = a - bi\)</span>), la solución tendrá términos de la forma <span class="math display">\[c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} = e^{at}\left(\hat{c_1}\cos bt + \hat{c_2}\sin bt\right)\]</span> En este caso todas las constantes son reales (la parte imaginaria se cancela).</p></li>
+<li><p>Si todas las raíces son reales y distintas entonces la solución es de la forma <span class="math display">\[x_h(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \dots + c_n
+e^{\lambda_n t}\]</span></p></li>
+<li><p>Si aparecen raíces <span class="math inline">\(\lambda\)</span> con multiplicidad <span class="math inline">\(m &gt; 1\)</span> entonces la solución homogénea incluirá los términos <span class="math display">\[c_1 e^{\lambda t} + c_2 t
+e^{\lambda t} + \dots + c_m t^{m-1} e^{\lambda t}\]</span> para garantizar que el espacio de solucuiones siga teniendo dimensión <span class="math inline">\(n\)</span>.</p></li>
+<li><p>Si aparecen dos raíces <span class="math inline">\(\lambda_1, \lambda_2\)</span> complejas entonces también serán conjugadas. Si decimos que <span class="math inline">\(\lambda_1 = a + bi\)</span> (y por tanto <span class="math inline">\(\lambda_2 = a - bi\)</span>), la solución tendrá términos de la forma <span class="math display">\[c_1
+e^{\lambda_1 t} + c_2 e^{\lambda_2 t} = e^{at}\left(\hat{c_1}\cos bt +
+\hat{c_2}\sin bt\right)\]</span> En este caso todas las constantes son reales (la parte imaginaria se cancela).</p></li>
 </ul></li>
 <li><p>Solución particular de la EDO:</p>
 <ul>
@@ -26,7 +46,9 @@ layout: notes
  x_1&#39;(t)        &amp; x_2&#39;(t)        &amp; \dots  &amp; x_n&#39;(t) \\
  \vdots         &amp; \vdots         &amp; \ddots &amp; \vdots \\
  x_1^{(n-1)}(t) &amp; x_2^{(n-1)}(t) &amp; \dots  &amp; x_n^{(n-1)}(t)
-\end{array}\right)\left(\begin{array}{c} c_1&#39;(t) \\ c_2&#39;(t) \\ \vdots \\ c_n&#39;(t)\end{array}\right) = \left(\begin{array}{c}0 \\ 0 \\ \vdots \\f(t)\end{array}\right) \]</span> e integrando <span class="math inline">\(c_i&#39;(t)\)</span> con respecto a <span class="math inline">\(t\)</span>.</p></li>
+\end{array}\right)\left(\begin{array}{c} c_1&#39;(t) \\ c_2&#39;(t) \\ \vdots \\
+c_n&#39;(t)\end{array}\right) = \left(\begin{array}{c}0 \\ 0 \\ \vdots
+\\f(t)\end{array}\right) \]</span> e integrando <span class="math inline">\(c_i&#39;(t)\)</span> con respecto a <span class="math inline">\(t\)</span>.</p></li>
 <li><p>Por coeficientes indeterminados</p></li>
 </ul></li>
 <li><p>Concluir que la solución general de la EDO es <span class="math inline">\(x(t) = x_h(t) + x_p(t)\)</span>.</p></li>
@@ -40,23 +62,17 @@ layout: notes
 <li><p>Un sistema lineal es homogéneo si <span class="math inline">\(B(t)\)</span> es nulo.</p>
 <ul>
 <li><p>Las soluciones de un sistema lineal homogéneo de <span class="math inline">\(n\)</span> EDOs es un espacio vectorial de dimensión <span class="math inline">\(n\)</span>.</p></li>
-<li><p>Se obtiene una base de este espacio a partir de la ecuación característica en <span class="math inline">\(\lambda\)</span>. En el caso de los sistemas la ecuación característica es el polinomio característico de la matriz <span class="math inline">\(\mathbb{A}\)</span> igualado a 0: <span class="math display">\[\det (\mathbb{A}- \lambda I) = 0\]</span></p>
+<li><p>Se obtiene una base de este espacio a partir de la ecuación característica en <span class="math inline">\(\lambda\)</span>. En el caso de los sistemas la ecuación característica es el polinomio característico de la matriz <span class="math inline">\(\mathbb{A}\)</span> igualado a 0: <span class="math display">\[\det (\mathbb{A}-
+\lambda I) = 0\]</span></p>
 <ul>
 <li><p>Para cada <span class="math inline">\(\lambda_i\)</span> autovalor de <span class="math inline">\(\mathbb{A}\)</span> con multiplicidad 1 se obtiene una solución <span class="math inline">\(X_i(t) = e^{\lambda_i t}V_i\)</span> donde <span class="math inline">\(V_i\)</span> es el autovector asociado a <span class="math inline">\(\lambda_i\)</span>.</p></li>
-<li>Para cada <span class="math inline">\(\lambda_i\)</span> autovalor de <span class="math inline">\(\mathbb{A}\)</span> con multiplicidad <span class="math inline">\(m\)</span> se obtiene una solución de la forma <span class="math inline">\(X_i(t) = e^{\lambda_i t}(V_1 + tV_2 + \dots + t^{m-1}V_m\)</span>. Los vectores <span class="math inline">\(V_1, \dots, V_{m-1}\)</span> se obtienen de plantear el sistema: <span class="math display">\[\begin{multline*}
-\begin{cases}
-\frac{d}{dt} e^{\lambda_i t}V_1 = \mathbb{A}V_1 \\
-\frac{d}{dt} e^{\lambda_i t}(V_1 + tV_2) = \mathbb{A}(V_1 + tV_2) \\
-\dots \\
-\frac{d}{dt} e^{\lambda_i t}(V_1 + t V_2 + \dots + t^{m-1} V_m) = \mathbb{A}(V_1 + t V_2 + \dots + t^{m-1} V_m)
-\end{cases} \iff \\
-\begin{cases}
-\lambda_i V_1 = \mathbb{A}V_1 \\
-\lambda_i (V_1 + t V_2) = \mathbb{A}(V_1 + tV_2) \\
-\dots \\
-\lambda_i(V_1 + \dots  + t^{m-1}V_m = \mathbb{A}(V_1 + \dots + t^{m-1}V_m
-\end{cases}
-\end{multline*}\]</span></li>
+<li>Para cada <span class="math inline">\(\lambda_i\)</span> autovalor de <span class="math inline">\(\mathbb{A}\)</span> con multiplicidad <span class="math inline">\(m\)</span> se obtiene una solución de la forma <span class="math inline">\(X_i(t) = e^{\lambda_i t}(V_1 + tV_2 + \dots + t^{m-1}V_m\)</span>. Los vectores <span class="math inline">\(V_1, \dots, V_{m-1}\)</span> se obtienen de plantear el sistema: <span class="math display">\[\begin{multline*} \begin{cases} \frac{d}{dt} e^{\lambda_i
+t}V_1 = \mathbb{A}V_1 \\ \frac{d}{dt} e^{\lambda_i t}(V_1 + tV_2) = \mathbb{A}(V_1 +
+tV_2) \\ \dots \\ \frac{d}{dt} e^{\lambda_i t}(V_1 + t V_2 + \dots +
+t^{m-1} V_m) = \mathbb{A}(V_1 + t V_2 + \dots + t^{m-1} V_m) \end{cases} \iff \\
+\begin{cases} \lambda_i V_1 = \mathbb{A}V_1 \\ \lambda_i (V_1 + t V_2) = \mathbb{A}(V_1
++ tV_2) \\ \dots \\ \lambda_i(V_1 + \dots  + t^{m-1}V_m = \mathbb{A}(V_1 + \dots
++ t^{m-1}V_m \end{cases} \end{multline*}\]</span></li>
 <li><p>Si <span class="math inline">\(\lambda_i\)</span> es complejo</p></li>
 </ul></li>
 <li><p>La solución general de un sistema lineal homogéneo puede darse por la matriz fundamental principal <span class="math inline">\(e^{t\mathbb{A}}\)</span>.</p></li>
@@ -66,4 +82,35 @@ layout: notes
 <ul>
 <li><p>En general no se pueden resover por el mismo procedimiento.</p></li>
 <li><p>Si en realidad son sistemas no ligados, sí que se pueden resolver, por ejemplo el ejercicio 12 de la hoja 4 en el que una ecuación es <span class="math inline">\(y_1&#39; = y_1\)</span>.</p></li>
+</ul>
+<h1 id="teorema-general-de-existencia-y-unicidad">Teorema general de existencia y unicidad</h1>
+<p>Sea <span class="math inline">\(f:I \subset \mathbb{R}\to \mathbb{R}\)</span> una función. Definimos su norma infinito <span class="math display">\[\lVert f \rVert_\infty = \sup_{x \in I} f(x)\]</span> que es una norma como otra cualquiera y cumple las propiedades habituales.</p>
+<p>Sea <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> una sucesión de funciones sobre un intervalo <span class="math inline">\(I\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\{f_n\}\)</span> converge punto a punto a <span class="math inline">\(f(x) \iff\)</span> <span class="math display">\[\forall x \in I,\ f_n(x)
+\xrightarrow{n\to \infty} f(x)\]</span></p></li>
+<li><p><span class="math inline">\(\{f_n\}\)</span> converge uniformemente a <span class="math inline">\(f(x) \iff \forall \varepsilon &gt; 0, \exists N \in \mathbb{N}\)</span> tal que <span class="math display">\[|f_n(x) - f(x)| &lt; \varepsilon,\ \forall n &gt; N,\
+\forall x \in I\]</span></p>
+<ol type="1">
+<li><p>Si <span class="math inline">\(\{f_n\}\)</span> converge uniformemente a <span class="math inline">\(f\)</span> entonces <span class="math inline">\(\{f_n\}\)</span> también converge punto a punto a <span class="math inline">\(f\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(\{f_n\}\)</span> converge uniformemente a <span class="math inline">\(f\)</span> y cada <span class="math inline">\(f_n\)</span> es continua entonces la función límite <span class="math inline">\(f\)</span> también es continua.</p></li>
+<li><p>Como el límite (punto a punto o uniforme) de una sucesión <span class="math inline">\(\{f_n\}\)</span> es único, si <span class="math inline">\(\{f_n\}\)</span> converge punto a punto a <span class="math inline">\(f\)</span> entonces <span class="math inline">\(f\)</span> es la única candidata a límite uniforme de <span class="math inline">\(\{f_n\}\)</span>.</p></li>
+<li><p>De 1., 2. y 3. se deduce que si <span class="math inline">\(\{f_n\}\)</span> con <span class="math inline">\(f_n\)</span> continua es convergente punto a punto a <span class="math inline">\(f\)</span> y <span class="math inline">\(f\)</span> no es continua entonces <span class="math inline">\(\{f_n\}\)</span> no puede ser convergente uniformemente a <span class="math inline">\(f\)</span>.</p></li>
+<li><p><span class="math inline">\(\{f_n\}\)</span> converge uniformemente a <span class="math inline">\(f \iff \lVert f_n - f \rVert_\infty \to 0\)</span>, es decir, si <span class="math inline">\(\lim_{n\to \infty} \sup |f_n - f| = 0\)</span>.</p>
+<ul>
+<li><p>Si queremos probar que <span class="math inline">\(f_n\)</span> converge uniformemente a <span class="math inline">\(f\)</span> tenemos que encontrar dicho supremo y ver que tiende a 0 cuando <span class="math inline">\(n\)</span> tiende a <span class="math inline">\(\infty\)</span> (por ejemplo, igualando <span class="math inline">\(f&#39;_n = 0\)</span> y mirando también en los extremos del intervalo).</p></li>
+<li><p>Si queremos probar que <span class="math inline">\(f_n\)</span> no converge uniformemente vale con encontrar un <span class="math inline">\(x_0 \in I\)</span> para el que <span class="math display">\[\lim_{n\to \infty} |f_n(x_0) -
+f(x_0)| \neq 0\]</span></p></li>
+</ul></li>
+<li><p>Si estamos en un espacio vectorial normado por <span class="math inline">\(\lVert \cdot \rVert_\infty\)</span> que además es completo (de Banach) (por ejemplo <span class="math inline">\(C([a,b]) \equiv\)</span> las funciones continuas de <span class="math inline">\([a, b]\)</span> en <span class="math inline">\(\mathbb{R}\)</span>) entonces <span class="math display">\[\{f_n\} \text{ de
+Cauchy } \iff \{f_n\} \text{ uniformemente convergente }\]</span></p></li>
+</ol></li>
+<li><p>Una función <span class="math inline">\(f: I \subset \mathbb{R}^m \to \mathbb{R}^n\)</span> es Lipschitz <span class="math inline">\(\iff \exists L \in \mathbb{R}\)</span> tal que <span class="math display">\[ \lVert f(x) - f(y) \rVert_n \leq L \lVert x - y \rVert_m,\ \forall x,y \in I\]</span></p>
+<ol type="1">
+<li><span class="math inline">\(f\)</span> Lipschitz <span class="math inline">\(\implies f\)</span> continua</li>
+<li><span class="math inline">\(f\)</span> derivadas parciales acotadas <span class="math inline">\(\implies f\)</span> Lipschitz</li>
+</ol></li>
+<li><p>Teorema de existencia y unicidad global. Sea <span class="math inline">\(F:[a,b] \times \mathbb{R}^d \to \mathbb{R}^d\)</span> una función Lipschitz y sea el PVI <span class="math display">\[\begin{cases}X&#39;(t) = F(t, X(t)),\ \forall t \in [a,b] \\
+  X(t_0) = X_0,\ t_0 \in [a,b]
+  \end{cases}\]</span> Entonces existe una única <span class="math inline">\(X:[a,b] \to \mathbb{R}^d\)</span> de clase <span class="math inline">\(C^1\)</span> que verifica el PVI anterior.</p></li>
 </ul>
