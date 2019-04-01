@@ -105,12 +105,29 @@ f(x_0)| \neq 0\]</span></p></li>
 <li><p>Si estamos en un espacio vectorial normado por <span class="math inline">\(\lVert \cdot \rVert_\infty\)</span> que además es completo (de Banach) (por ejemplo <span class="math inline">\(C([a,b]) \equiv\)</span> las funciones continuas de <span class="math inline">\([a, b]\)</span> en <span class="math inline">\(\mathbb{R}\)</span>) entonces <span class="math display">\[\{f_n\} \text{ de
 Cauchy } \iff \{f_n\} \text{ uniformemente convergente }\]</span></p></li>
 </ol></li>
-<li><p>Una función <span class="math inline">\(f: I \subset \mathbb{R}^m \to \mathbb{R}^n\)</span> es Lipschitz <span class="math inline">\(\iff \exists L \in \mathbb{R}\)</span> tal que <span class="math display">\[ \lVert f(x) - f(y) \rVert_n \leq L \lVert x - y \rVert_m,\ \forall x,y \in I\]</span></p>
+<li><p>Una función <span class="math inline">\(f: I \subset \mathbb{R}^m \to \mathbb{R}^n\)</span> es <strong>Lipschitz</strong> <span class="math inline">\(\iff \exists L \in \mathbb{R}\)</span> tal que <span class="math display">\[ \lVert f(x) - f(y) \rVert_n \leq L \lVert x - y \rVert_m,\ \forall x,y \in
+I\]</span></p>
 <ol type="1">
 <li><span class="math inline">\(f\)</span> Lipschitz <span class="math inline">\(\implies f\)</span> continua</li>
-<li><span class="math inline">\(f\)</span> derivadas parciales acotadas <span class="math inline">\(\implies f\)</span> Lipschitz</li>
+<li><span class="math inline">\(f\)</span> derivadas parciales acotadas <span class="math inline">\(\implies f\)</span> Lipschitz
+<ul>
+<li>Si <span class="math inline">\(f\)</span> es <span class="math inline">\(C^1\)</span> (las derivadas parciales son continuas) entonces en un compacto también son acotadas y por tanto <span class="math inline">\(f\)</span> es Lipschitz en ese compacto.</li>
+</ul></li>
 </ol></li>
-<li><p>Teorema de existencia y unicidad global. Sea <span class="math inline">\(F:[a,b] \times \mathbb{R}^d \to \mathbb{R}^d\)</span> una función Lipschitz y sea el PVI <span class="math display">\[\begin{cases}X&#39;(t) = F(t, X(t)),\ \forall t \in [a,b] \\
+<li><p><span class="math inline">\(f\)</span> es localmente Lipschitz si para todo punto existe un entorno en el que se cumple la condición de Lipschitz.</p></li>
+<li><p><strong>Teorema de existencia y unicidad global.</strong> Sea <span class="math inline">\(F:[a,b] \times \mathbb{R}^d \to \mathbb{R}^d,\
+(t,X) \mapsto F(t,X)\)</span> una función Lipschitz con respecto a <span class="math inline">\(X \in \mathbb{R}^d\)</span> y sea el PVI <span class="math display">\[\begin{cases}X&#39;(t) = F(t, X(t)),\ \forall t \in [a,b] \\
   X(t_0) = X_0,\ t_0 \in [a,b]
   \end{cases}\]</span> Entonces existe una única <span class="math inline">\(X:[a,b] \to \mathbb{R}^d\)</span> de clase <span class="math inline">\(C^1\)</span> que verifica el PVI anterior.</p></li>
+<li>3 resultados sobre prolongabilidad de soluciones en <span class="math inline">\(R^2\)</span>. Sea <span class="math inline">\(D\)</span> la banda <span class="math inline">\(D = (a,b) \times \mathbb{R}\)</span> y sea <span class="math inline">\(x&#39; = f(t, x)\)</span> con <span class="math inline">\(f:(a,b) \to \mathbb{R}\)</span>. Si se cumple cualquiera de las 3 siguientes condiciones, entonces existe una solución maximal definida <span class="math inline">\(\forall t \in (a,b)\)</span>.
+<ol type="1">
+<li><span class="math inline">\(|f(t,x)| &lt; L\)</span> para algún <span class="math inline">\(L \in \mathbb{R}\)</span></li>
+<li><span class="math inline">\(|f(t,x)| + \alpha(t) |x| + \beta(t)\)</span> con <span class="math inline">\(\alpha, \beta\)</span> continuas en <span class="math inline">\((a,b)\)</span>.</li>
+<li><span class="math inline">\(|f(x_1, t_1) - f(x_2, t_2)| \leq K(t)|x_1 - x_2|\)</span> con <span class="math inline">\(K\)</span> continua en <span class="math inline">\((a,b)\)</span></li>
+</ol>
+<p>Observar que las dos últimas condiciones permiten asíntotas verticales en <span class="math inline">\(t=a\)</span> y <span class="math inline">\(t=b\)</span>.</p></li>
+<li><p><strong>Corolario del Lema de Gronwall</strong> para acotación de soluciones. Sea <span class="math inline">\(F(t,  u(t))\)</span> una función Lipschitz con constante <span class="math inline">\(L\)</span> (no necesariamente la menor) y sean <span class="math inline">\(x_1(t), x_2(t)\)</span> tales que se verifica <span class="math display">\[|x_1&#39;(t) - F(t, x_1(t))|
+  &lt; \varepsilon_1\\|x_2&#39;(t) - F(t, x_2(t))| &lt; \varepsilon_2\]</span> donde <span class="math inline">\(\varepsilon_1, \varepsilon_2\)</span> son constantes. Entonces <span class="math display">\[ |x_1(t) -
+  x_2(t)| &lt; |x_1(a) - x_2(a)|e^{L(t-a)} + \frac{e^{L(t-a)} -
+  1}{L}(\varepsilon_1 + \varepsilon_2)\]</span></p></li>
 </ul>

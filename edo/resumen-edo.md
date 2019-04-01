@@ -189,17 +189,41 @@ Sea $\{f_n\}_{n=1}^\infty$ una sucesión de funciones sobre un intervalo $I$
       funciones continuas de $[a, b]$ en $\R$) entonces $$\{f_n\} \text{ de
       Cauchy } \iff \{f_n\} \text{ uniformemente convergente }$$
 
-* Una función $f: I \subset \R^m \to \R^n$ es Lipschitz $\iff \exists L \in \R$ tal
-    que $$ \norma{f(x) - f(y)}_n \leq L \norma{x - y}_m,\ \forall x,y \in I$$
+* Una función $f: I \subset \R^m \to \R^n$ es **Lipschitz** $\iff \exists L \in
+  \R$ tal que $$ \norma{f(x) - f(y)}_n \leq L \norma{x - y}_m,\ \forall x,y \in
+  I$$
 
   1. $f$ Lipschitz $\implies f$ continua
   2. $f$ derivadas parciales acotadas $\implies f$ Lipschitz
+     * Si $f$ es $C^1$ (las derivadas parciales son continuas) entonces en un
+       compacto también son acotadas y por tanto $f$ es Lipschitz en ese
+       compacto.
 
-* Teorema de existencia y unicidad global. Sea $F:[a,b] \times \R^d \to \R^d$
-  una función Lipschitz y sea el PVI
+* $f$ es localmente Lipschitz si para todo punto existe un entorno en el que se
+  cumple la condición de Lipschitz.
+
+* **Teorema de existencia y unicidad global.** Sea $F:[a,b] \times \R^d \to \R^d,\
+  (t,X) \mapsto F(t,X)$ una función Lipschitz con respecto a $X \in \R^d$ y sea
+  el PVI
   $$\begin{cases}X'(t) = F(t, X(t)),\ \forall t \in [a,b] \\
     X(t_0) = X_0,\ t_0 \in [a,b]
     \end{cases}$$
   Entonces existe una única $X:[a,b] \to \R^d$ de clase $C^1$ que verifica el
   PVI anterior.
 
+* 3 resultados sobre prolongabilidad de soluciones en $R^2$. Sea $D$ la banda $D = (a,b) \times \R$ y sea $x' = f(t, x)$ con $f:(a,b) \to \R$. Si se cumple cualquiera de las 3 siguientes condiciones, entonces existe una solución maximal definida $\forall t \in (a,b)$.
+    1. $|f(t,x)| < L$ para algún $L \in \R$
+    2. $|f(t,x)| + \alpha(t) |x| + \beta(t)$ con $\alpha, \beta$ continuas en
+       $(a,b)$. 
+    3. $|f(x_1, t_1)  - f(x_2, t_2)| \leq K(t)|x_1 - x_2|$ con $K$ continua en $(a,b)$
+
+    Observar que las dos últimas condiciones permiten asíntotas verticales en
+    $t=a$ y $t=b$.
+
+* **Corolario del Lema de Gronwall** para acotación de soluciones. Sea $F(t,
+    u(t))$ una función Lipschitz con constante $L$ (no necesariamente la menor)
+    y sean $x_1(t), x_2(t)$ tales que se verifica $$|x_1'(t) - F(t, x_1(t))|
+    < \varepsilon_1\\|x_2'(t) - F(t, x_2(t))| < \varepsilon_2$$ donde
+    $\varepsilon_1, \varepsilon_2$ son constantes. Entonces $$ |x_1(t) -
+    x_2(t)| < |x_1(a) - x_2(a)|e^{L(t-a)} + \frac{e^{L(t-a)} -
+    1}{L}(\varepsilon_1 + \varepsilon_2)$$
