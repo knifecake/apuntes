@@ -212,8 +212,8 @@ Sea $\{f_n\}_{n=1}^\infty$ una sucesión de funciones sobre un intervalo $I$
   PVI anterior.
 
 * 3 resultados sobre prolongabilidad de soluciones en $R^2$. Sea $D$ la banda $D = (a,b) \times \R$ y sea $x' = f(t, x)$ con $f:(a,b) \to \R$. Si se cumple cualquiera de las 3 siguientes condiciones, entonces existe una solución maximal definida $\forall t \in (a,b)$.
-    1. $|f(t,x)| < L$ para algún $L \in \R$
-    2. $|f(t,x)| + \alpha(t) |x| + \beta(t)$ con $\alpha, \beta$ continuas en
+    1. $|f(t,x)| \leq L$ para algún $L \in \R$
+    2. $|f(t,x)| \leq \alpha(t) |x| + \beta(t)$ con $\alpha, \beta$ continuas en
        $(a,b)$. 
     3. $|f(x_1, t_1)  - f(x_2, t_2)| \leq K(t)|x_1 - x_2|$ con $K$ continua en $(a,b)$
 
