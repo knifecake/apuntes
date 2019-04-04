@@ -1,5 +1,5 @@
 ---
-title: Resumen GCS
+title: Recordatorio para Micro
 author: Elias Hernandis
 layout: notes
 ---
@@ -8,13 +8,14 @@ layout: notes
 <li>Al final del programa va la directiva <code>END</code>. Si va seguida de una etiqueta, la ejecución comienza en dicha etiqueta (T2.5, p.32)</li>
 <li>Si la función se llama desde C tiene que estar declarada con <code>_nombre</code> y con <code>FAR</code>.</li>
 <li>Si un procedimiento de C devuelve una palabra lo hace en <code>AX</code>. Si devuelve dos palabras, lo hace en <code>DX:AX</code>.</li>
-<li>Todo procedimiento debe no tener efectos colaterales (los registros no pueden modificarse excepto en un procedimiento de C que no devuelva <code>void</code>.</li>
+<li>Todo procedimiento debe no tener efectos colaterales (los registros no pueden modificarse excepto en un procedimiento de C que no devuelva <code>void</code>).</li>
 <li>Hay que tener en cuenta el signo de los enteros al elegir las instrucciones JMP.</li>
 <li>Utilizar <code>CMP</code> en vez de <code>SUB</code> y <code>TEST</code> en vez de <code>AND</code> para las condiciones para saltar.</li>
 <li>No utilizar ni <code>CMP</code> ni <code>SUB</code> si se va a comparar con <code>0</code> o con el signo y si sobre lo que se va a comparar ha sido utilizado en la última operación aritmética o lógica (las flags se mantienen para que las use la instrcción de salto).</li>
 <li>Si se quiere utilizar solo un byte de memoria direccionando por registro hay que hacer un cast con <code>BYTE PTR</code> porque por defecto coge una palabra.</li>
-<li>Si se utiliza acceso a memoria con una etiqueta no hace falta casting porque se define el tipo en la declaración (<code>ETIQUETA db/dw</code>).</li>
-<li>Si un procedimiento llama a otros y pasa argumentos por la pila haciendo push suele ser necesario hacer <code>add sp, N</code> (N entero) para limpiar la pila. No se pueden utilizar <code>pop</code>s porque contaminarían los registros.</li>
+<li>Si se accede a una variable en memoria no es necesario casting porque el tipo se define en la declaración (<code>VARIABLE db/dw</code>).</li>
+<li>Si un procedimiento llama a otros y pasa argumentos por la pila haciendo push suele ser necesario hacer <code>add sp, N</code> (N entero) para limpiar la pila antes de retornar en el primer procedimiento. No se pueden utilizar <code>pop</code>s porque contaminarían los registros.</li>
 <li>Los <code>jmp</code> a etiquetas que están justo debajo no hacen falta (basta con dejar que siga).</li>
 <li>Comprobar los <code>INC</code>s y <code>DEC</code>s que suelen estar cambiados.</li>
+<li>Al leer un <code>char</code> de la pila que hemos pasado por parámetros descartamos la parte más significativa (que deberían ser ceros y está en la dirección más baja por ser little endian).</li>
 </ol>

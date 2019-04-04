@@ -1,5 +1,5 @@
 ---
-title: Resumen GCS
+title: Recordatorio para Micro
 author: Elias Hernandis
 layout: notes
 ---
