@@ -2,8 +2,11 @@
 
 1. Al final del programa va la directiva `END`. Si va seguida de una etiqueta,
    la ejecución comienza en dicha etiqueta (T2.5, p.32)
-1. Si la función se llama desde C tiene que estar declarada con `_nombre` y con
-   `FAR`.
+1. Si la función se llama desde C tiene que estar declarada con `_nombre`.
+1. Si el modelo de compilación de C es largo, entonces se utiliza `FAR` para
+   procedimientos (la dirección de retorno son 4 bytes) y los punternos son de
+   4 bytes. Si el modelo es corto entonces se utiliza `NEAR` (la dirección de
+   retorno son 2 bytes) y los punteros son de 2 bytes.
 1. Si un procedimiento de C devuelve una palabra lo hace en `AX`. Si devuelve
    dos palabras, lo hace en `DX:AX`.
 1. Todo procedimiento debe no tener efectos colaterales (los registros no

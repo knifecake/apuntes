@@ -6,7 +6,8 @@ layout: notes
 <h1 id="ladrichuleta-para-micro">Ladrichuleta para micro</h1>
 <ol type="1">
 <li>Al final del programa va la directiva <code>END</code>. Si va seguida de una etiqueta, la ejecución comienza en dicha etiqueta (T2.5, p.32)</li>
-<li>Si la función se llama desde C tiene que estar declarada con <code>_nombre</code> y con <code>FAR</code>.</li>
+<li>Si la función se llama desde C tiene que estar declarada con <code>_nombre</code>.</li>
+<li>Si el modelo de compilación de C es largo, entonces se utiliza <code>FAR</code> para procedimientos (la dirección de retorno son 4 bytes) y los punternos son de 4 bytes. Si el modelo es corto entonces se utiliza <code>NEAR</code> (la dirección de retorno son 2 bytes) y los punteros son de 2 bytes.</li>
 <li>Si un procedimiento de C devuelve una palabra lo hace en <code>AX</code>. Si devuelve dos palabras, lo hace en <code>DX:AX</code>.</li>
 <li>Todo procedimiento debe no tener efectos colaterales (los registros no pueden modificarse excepto en un procedimiento de C que no devuelva <code>void</code>).</li>
 <li>Hay que tener en cuenta el signo de los enteros al elegir las instrucciones JMP.</li>
