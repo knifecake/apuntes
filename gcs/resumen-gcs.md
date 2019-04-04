@@ -3,6 +3,9 @@ title: Resumen GCS
 author: Elias Hernandis
 ---
 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\pescalar}[1]{\langle#1\rangle}
+
 Curvas en el plano y en el espacio
 ==================================
 
@@ -10,7 +13,7 @@ Curvas en general
 -----------------
 
 -   Una **curva plana** es una aplicación continua
-    $\alpha: I \subset \mathbb{R}^n$ definida por
+    $\alpha: I \subset \R^n$ definida por
     $\alpha(t) = (\alpha_1(t), \dots,  \alpha_n(t))$.
 
 -   La **rapidez** es la derivada
@@ -27,7 +30,7 @@ Curvas en general
 -   La **longitud** es $l_\alpha = \int_I v_\alpha(t)dt$.
 
 -   Una **parametrización** es un difeomorfismo
-    $\varphi : J \subset \mathbb{R}\to I \subset \mathbb{R}$
+    $\varphi : J \subset \R\to I \subset \R$
 
     -   El **signo de una parametrización** es $$\begin{aligned}
                     \varepsilon(\varphi) = \begin{cases}
@@ -87,7 +90,7 @@ Curvas en general
 
     -   El **circulo osculador** o **circunferencia osculatriz**
         $$\begin{aligned}
-                \{p \in \mathbb{R}^2 : \left\lVert p - C_\alpha(t)\right\rVert = \frac{1}{k_\alpha(t)},\text{ para } t \in I\text{ fijado } \}
+                \{p \in \R^2 : \left\lVert p - C_\alpha(t)\right\rVert = \frac{1}{k_\alpha(t)},\text{ para } t \in I\text{ fijado } \}
             \end{aligned}$$
 
 -   Las **ecuaciones de Frenet-Serret** salen de tomar la submatriz
@@ -157,14 +160,58 @@ Curvas en el espacio
             \end{array}\right)
         \end{aligned}$$
 
-Superficies
-===========
+## Superficies
 
--   Plano tangente (afín) a $S$ en $p = \mathbf{X}(u,v) \in S$
-    $$\begin{aligned}
-            T_pS = p + \underbrace{\text{ span}\{\mathbf{X}_u(u,v), \mathbf{X}_v(u,v)\}}_{\text{plano tangente vectorial}}
-        \end{aligned}$$
+\newcommand{\x}{\mathbf{x}}
 
--   Plano tangente sin parametrización $$\begin{aligned}
-            T_pS = \{\alpha'(0) \mid \varepsilon > 0, \alpha: (-\varepsilon, \varepsilon) \to S \\\land\ \alpha(0) = p \\\land\ \alpha \text{ diferenciable }\}
-        \end{aligned}$$
+- Un **homeomorfismo** entre dos espacios topológicos es una aplicación biyectiva continua y con inversa continua.
+    - Un **difeomorfismo** es un **homeomorfismo** diferenciable con inversa diferenciable.
+    - Dos conjuntos son **homeomorfos** si existe un homeomorfismo entre ellos.
+
+- Una **superficie regular** $S$ es un subconjunto no vacío $S \subset \R^3$
+  tal que para todo $p \in S$ existe un abierto $U \subset \R^2$, un entorno
+  abierto $V$ de $p$ en $\R^3$ y una **parametrización** $\x: U \subset \R^2
+  \to V \subset S \subset \R^3$ tal que
+
+  1. $\x$ es diferenciable como aplicación $x : U \to \R^3$
+
+  2. $\x$ es un homeomorfismo
+
+  3. $\forall (u,v) \in U, (d\x)_{(u,v)} : \R^2 \to \R^3$ es inyectiva $\iff$
+     los vectores coordenaods son linealmente independientes $\forall (u,v) \in
+     U$. 
+
+  - Puede ocurrir (esfera, cono...) que no valga con una única parametrización
+    $\forall p \in S$. Si nos vale con una única parametrización entonces $S$
+    es homeomorfa a un abierto de $R^2$.
+
+- Los **vectores coordenados** en un punto $\x(u, v) \in S$ son
+    $$ \x_u(u, v) = \frac{\partial \x}{\partial u}(u,v) = (d\x)_{(u,v)} \cdot e_1\\
+       \x_v(u, v) = \frac{\partial \x}{\partial v}(u,v) = (d\x)_{(u,v)} \cdot e_2$$
+
+
+
+- El **plano tangente** a $S$ en $p \in S$ es un subvespacio vectorial de
+  $\R^3$ con dimensión 2 dado por:
+  $$\begin{aligned} T_pS = \{\alpha'(0) \mid \exists \varepsilon > 0, \alpha:
+  (-\varepsilon, \varepsilon) \to S \\\land\ \alpha(0) = p \\\land\ \alpha
+  \text{ diferenciable }\} \end{aligned}$$
+
+  - Si $q$ es la preimagen de $p$ por $\x$ (es decir, $\x(q) = p$) entonces
+    $T_pS = (d\x)_q (\R^2)$
+
+  - El **plano tangente (afín)** a $S$ en $p = \x(u,v) \in S$
+    $$\begin{aligned} T_pS = p + \underbrace{\text{ span}\{\x_u(u,v),
+    \x_v(u,v)\}}_{\text{plano tangente vectorial}} \end{aligned}$$
+  
+- La **recta normal** a $S$ en $p \in S$ es el complemento ortogonal del plano tangente $T_pS^\perp$.
+  - Para cada $p \in S$ existen dos vectores normales unitarios (opuestos) en la recta normal.
+
+- La **primera forma fundamental** $I$
+  - Es bilineal, simétrica y definida positiva.
+
+- La **aplicación de Gauss**
+- El **operador de Weingarten** se define para cada $p \in T_pS$ como la
+  aplicación $$W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x$$
+
+  - Es una aplicación autoajunta: $\pescalar{W_p x, y} = \pescalar{x, W_p y}$

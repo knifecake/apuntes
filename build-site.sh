@@ -37,4 +37,7 @@ mkdir -p docs/dist/edo
 make -C edo
 cp edo/*.pdf edo/*.html docs/dist/edo/
 
-
+# MICRO
+mkdir -p docs/dist/micro
+make -C micro
+cp micro/*.pdf micro/*.html docs/dist/micro/

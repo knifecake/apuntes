@@ -1,0 +1,5 @@
+---
+title: Resumen GCS
+author: Elias Hernandis
+layout: notes
+---
