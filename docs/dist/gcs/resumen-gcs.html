@@ -38,6 +38,9 @@ layout: notes
 <ul>
 <li>En particular, <span class="math inline">\(\alpha&#39;, \alpha&#39;&#39; \neq 0\)</span> y por tanto <span class="math inline">\(\alpha\)</span> también es regular.</li>
 </ul></li>
+</ul>
+<h2 id="curvas-planas">Curvas planas</h2>
+<ul>
 <li><p>El <strong>diedro de Frenet-Serret</strong> formado por los vectores <span class="math display">\[\begin{aligned}
         \mathbf{t}_\alpha(t) &amp;= \frac{\alpha&#39;(s)}{\left\lVert\alpha&#39;(s)\right\rVert} \\
         \mathbf{n}_\alpha(t) &amp;= J\mathbf{t}_\alpha(s) \text{ con } J = \left(\begin{array}{cc}
@@ -110,7 +113,7 @@ layout: notes
         \end{array}\right)
     \end{aligned}\]</span></p></li>
 </ul>
-<h2 id="superficies">Superficies</h2>
+<h1 id="superficies">Superficies</h1>
 
 <ul>
 <li>Un <strong>homeomorfismo</strong> entre dos espacios topológicos es una aplicación biyectiva continua y con inversa continua.
@@ -168,7 +171,7 @@ F &amp; G\end{array}\right) = \left(\begin{array}{cc}
 \langle x_v, x_u\rangle &amp; \langle x_v, x_v\rangle\end{array}\right)\]</span> donde cada derivada parcial de <span class="math inline">\(\mathbf{x}\)</span> está evaluada en <span class="math inline">\((u_0, x_0)\)</span>.</p></li>
 <li><p>Al escribir <span class="math display">\[I_p(x, y) = \langle x, y\rangle = (x_1, x_2) (I_p)_{\mathcal{B}}
 \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)\]</span> estamos obteniendo el producto escalar de <span class="math inline">\(\mathbf{x}(x_1, x_2)\)</span> y <span class="math inline">\(\mathbf{x}(y_1, y_2)\)</span> que son vectores de <span class="math inline">\(\mathbb{R}^3\)</span>.</p>
-<p><em>La primera forma fundamental permite obener el producto escalar de dos vectores de la superficie a partir de sus coordenadas respecto de una parametrización.</em></p></li>
+<p><em>Dadas las coordenadas de dos vectores de la superficie <span class="math inline">\(S\)</span> respecto de una prametrización <span class="math inline">\(\mathbf{x}\)</span>, la primera forma fundamental permite obtener el producto escalar de sus respectivos vectores tangentes a partir de las coordenadas de los primeros.</em></p></li>
 <li><p>La <strong>forma diferencial de la primera forma fundamental</strong> es <span class="math display">\[I = E du^2 +
 2F dudv + F dv^2\]</span> donde <span class="math inline">\(E, F\)</span> y <span class="math inline">\(G\)</span> son funciones diferenciables que evaluamos para cada <span class="math inline">\(p \in S\)</span>.</p>
 <ul>
@@ -179,6 +182,33 @@ F &amp; G\end{array}\right) = \left(\begin{array}{cc}
 \alpha&#39;(t))}dt = \int_a^b \sqrt{Eu&#39;(t)^2 + 2Fu&#39;(t)v&#39;(t) + Gv&#39;(t)^2}dt\]</span></p></li>
 <li><p>El <strong>área de una región</strong> <span class="math inline">\(R \subset S\)</span> contenida en <span class="math inline">\(\mathbf{x}(U)\)</span> (bien parametrizada) es: <span class="math display">\[A(R) = \int_{\mathbf{x}^{-1}(R)} \lVert \mathbf{x}_u \times x_v \rVert dudv =
 \int_{\mathbf{x}^{-1}(R)}\sqrt{EG- F^2}dudv\]</span></p></li>
+</ul></li>
+</ul>
+<p>Sea <span class="math inline">\(f: S_1 \to S_2\)</span> una aplicación diferenciable entre superficies regulares.</p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> es una <strong>aplicación conforme</strong> si existe una aplicación diferenciable positiva <span class="math inline">\(\lambda: S_1 \to R\)</span> tal que <span class="math display">\[\langle (df)_p(x), (df)_p(y)\rangle =
+\lambda(p) \langle x, y\rangle, \qquad \forall x, y \in T_pS_1,\ \forall p \in S_1\]</span></p>
+<ul>
+<li><p>Una <strong>parametrización</strong> <span class="math inline">\(\mathbf{x}: U \subset \mathbb{R}^2\)</span> se dice <strong>conforme</strong> si cumple la definición anterior para <span class="math inline">\(S_2 = \mathbb{R}^2\)</span>. Es decir, <span class="math inline">\(\forall x, y \in \mathbb{R}^2\)</span> y <span class="math inline">\(\forall p \in U\)</span>. Equivalentemente, <span class="math inline">\(\mathbf{x}\)</span> se dice conforme si <span class="math display">\[I_p^{\mathbf{x}}
+= \left(\begin{array}{cc} E &amp; F \\ F &amp; G \end{array}\right) = \lambda(p)
+\left(\begin{array}{cc} 1 &amp; 0 \\ 0 &amp; 1\end{array}\right)\]</span> es decir, si <span class="math inline">\(E = G\)</span> y <span class="math inline">\(F = 0\)</span> para todo <span class="math inline">\(p = (u, v) \in U\)</span>.</p></li>
+<li><span class="math inline">\(f\)</span> es conforme <span class="math inline">\(\iff\)</span> <strong>preserva ángulos</strong></li>
+<li><p><span class="math inline">\(f\)</span> es <strong>equiárea</strong> <span class="math inline">\(\iff\)</span> preserva la función <span class="math inline">\(EG- F^2\)</span> entre las formas fundamentales de <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(f\)</span> es una isometría local <span class="math inline">\(\iff\)</span> preserva la primera forma fundamenteal, es decir, <span class="math display">\[\langle (df)_p(x), (df)_p(y)\rangle = \langle x, y\rangle\]</span></p>
+<ul>
+<li><p><span class="math inline">\(f\)</span> es una isometría local <span class="math inline">\(\iff f\)</span> es conforme con <span class="math inline">\(\lambda(p) = 1\)</span> constantemente</p></li>
+<li><p>Toda isometría local de superficies es un difeomorfismo local</p></li>
+<li><p><span class="math inline">\(f\)</span> isometría local <span class="math inline">\(\iff f\)</span> preserva longitudes, ángulos y áreas</p>
+<ul>
+<li>Es decir <span class="math inline">\(f\)</span> conforme y <span class="math inline">\(f\)</span> equiárea <span class="math inline">\(\iff f\)</span> isometría local</li>
+</ul></li>
+<li><p>Dos superficies son <strong>localmente isométricas</strong> si existe una isometría local <span class="math inline">\(f\)</span> entre ellas y además <span class="math inline">\(f\)</span> es sobre entre <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span>. <em>No es suficiente que <span class="math inline">\(f\)</span> sea una isometría local.</em></p></li>
+</ul></li>
+<li><p>Una <strong>isometría global</strong> entre superficies es un difeomorfismo global que además es isometría local.</p>
+<ul>
+<li><p>Dos superficies son <strong>globalmente isométricas</strong> si existe una isometría global entre ellas.</p></li>
+<li><p>isometría global <span class="math inline">\(\implies\)</span> isometría local</p></li>
 </ul></li>
 <li>La <strong>aplicación de Gauss</strong></li>
 <li><p>El <strong>operador de Weingarten</strong> se define para cada <span class="math inline">\(p \in T_pS\)</span> como la aplicación <span class="math display">\[W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x\]</span></p>

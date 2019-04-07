@@ -7,11 +7,9 @@ author: Elias Hernandis
 \newcommand{\pescalar}[1]{\langle #1\rangle}
 \newcommand{\norma}[1]{\lVert #1 \rVert}
 
-Curvas en el plano y en el espacio
-==================================
+# Curvas en el plano y en el espacio
 
-Curvas en general
------------------
+## Curvas en general
 
 -   Una **curva plana** es una aplicación continua
     $\alpha: I \subset \R^n$ definida por
@@ -63,6 +61,8 @@ Curvas en general
     -   En particular, $\alpha', \alpha'' \neq 0$ y por tanto $\alpha$
         también es regular.
 
+## Curvas planas
+
 -   El **diedro de Frenet-Serret** formado por los vectores
     $$\begin{aligned}
             \mathbf{t}_\alpha(t) &= \frac{\alpha'(s)}{\left\lVert\alpha'(s)\right\rVert} \\
@@ -97,8 +97,7 @@ Curvas en general
 -   Las **ecuaciones de Frenet-Serret** salen de tomar la submatriz
     $2 \times 2$ de las ecuaciones en el espacio.
 
-Curvas en el espacio
---------------------
+## Curvas en el espacio
 
 -   El triedro de Frenet-Serret formado por los vectores
     $$\begin{aligned}
@@ -161,7 +160,7 @@ Curvas en el espacio
             \end{array}\right)
         \end{aligned}$$
 
-## Superficies
+# Superficies
 
 \newcommand{\x}{\mathbf{x}}
 
@@ -261,10 +260,11 @@ Curvas en el espacio
     \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)$$ estamos obteniendo el
     producto escalar de $\x(x_1, x_2)$ y $\x(y_1, y_2)$ que son vectores de
     $\R^3$.
-    
-    *La primera forma fundamental permite obener el producto escalar de
-    dos vectores de la superficie a partir de sus coordenadas respecto de una
-    parametrización.*
+
+    *Dadas las coordenadas de dos vectores de la superficie $S$ respecto de una
+    prametrización $\x$, la primera forma fundamental permite obtener el
+    producto escalar de sus respectivos vectores tangentes a partir de las
+    coordenadas de los primeros.*
 
   - La **forma diferencial de la primera forma fundamental** es $$I = E du^2 +
     2F dudv + F dv^2$$ donde $E, F$ y $G$ son funciones diferenciables que
@@ -277,11 +277,51 @@ Curvas en el espacio
     \alpha(t) = \x(u(t), v(t))$ es
     $$L(\alpha|_{[a,b]}) = \int_a^b \sqrt{I_{\alpha(t)}(\alpha'(t),
     \alpha'(t))}dt = \int_a^b \sqrt{Eu'(t)^2 + 2Fu'(t)v'(t) + Gv'(t)^2}dt$$
-  
+ 
   - El **área de una región** $R \subset S$ contenida en $\x(U)$ (bien
     parametrizada) es:
     $$A(R) = \int_{\x^{-1}(R)} \norma{\x_u \times x_v} dudv =
     \int_{\x^{-1}(R)}\sqrt{EG- F^2}dudv$$
+
+Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
+
+- $f$ es una **aplicación conforme** si existe una aplicación diferenciable
+  positiva $\lambda: S_1 \to R$ tal que $$\pescalar{(df)_p(x), (df)_p(y)} =
+  \lambda(p) \pescalar{x, y}, \qquad \forall x, y \in T_pS_1,\ \forall p \in S_1$$
+
+  - Una **parametrización** $\x: U \subset \R^2$ se dice **conforme** si cumple
+    la definición anterior para $S_2 = \R^2$. Es decir, $\forall x, y \in \R^2$
+    y $\forall p \in U$.  Equivalentemente, $\x$ se dice conforme si $$I_p^{\x}
+    = \left(\begin{array}{cc} E & F \\ F & G \end{array}\right) = \lambda(p)
+    \left(\begin{array}{cc} 1 & 0 \\ 0 & 1\end{array}\right)$$ es decir, si $E
+    = G$ y $F = 0$ para todo $p = (u, v) \in U$.
+
+  - $f$ es conforme $\iff$ **preserva ángulos**
+  - $f$ es **equiárea** $\iff$ preserva la función $EG- F^2$ entre las formas
+    fundamentales de $S_1$ y $S_2$
+
+- $f$ es una isometría local $\iff$ preserva la primera forma fundamenteal, es decir, $$\pescalar{(df)_p(x), (df)_p(y)} = \pescalar{x, y}$$
+
+  - $f$ es una isometría local $\iff f$ es conforme con $\lambda(p) = 1$
+    constantemente
+
+  - Toda isometría local de superficies es un difeomorfismo local
+
+  - $f$ isometría local $\iff f$ preserva longitudes, ángulos y áreas
+
+    - Es decir $f$ conforme y $f$ equiárea $\iff f$ isometría local
+
+  - Dos superficies son **localmente isométricas** si existe una isometría
+    local $f$ entre ellas y además $f$ es sobre entre $S_1$ y $S_2$. *No es
+    suficiente que $f$ sea una isometría local.*
+
+- Una **isometría global** entre superficies es un difeomorfismo global que
+  además es isometría local.
+
+    - Dos superficies son **globalmente isométricas** si existe una isometría
+      global entre ellas.
+
+    - isometría global $\implies$ isometría local
 
 - La **aplicación de Gauss**
 - El **operador de Weingarten** se define para cada $p \in T_pS$ como la
