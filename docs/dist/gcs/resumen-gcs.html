@@ -128,7 +128,10 @@ layout: notes
 <li>Puede ocurrir (esfera, cono…) que no valga con una única parametrización <span class="math inline">\(\forall p \in S\)</span>. Si nos vale con una única parametrización entonces <span class="math inline">\(S\)</span> es homeomorfa a un abierto de <span class="math inline">\(R^2\)</span>.</li>
 </ul></li>
 <li><p>Los <strong>vectores coordenados</strong> en un punto <span class="math inline">\(\mathbf{x}(u, v) \in S\)</span> son <span class="math display">\[ \mathbf{x}_u(u, v) = \frac{\partial \mathbf{x}}{\partial u}(u,v) = (d\mathbf{x})_{(u,v)} \cdot e_1\\
-     \mathbf{x}_v(u, v) = \frac{\partial \mathbf{x}}{\partial v}(u,v) = (d\mathbf{x})_{(u,v)} \cdot e_2\]</span></p></li>
+     \mathbf{x}_v(u, v) = \frac{\partial \mathbf{x}}{\partial v}(u,v) = (d\mathbf{x})_{(u,v)} \cdot e_2\]</span></p>
+<ul>
+<li>Los <strong>campos coordenados</strong> asociados a la parametrización <span class="math inline">\(\mathbf{x}\)</span> son dos campos <span class="math inline">\(\mathbf{x}_u,\ \mathbf{x}_v\)</span> diferenciables en el abierto <span class="math inline">\(V \subset S\)</span>.</li>
+</ul></li>
 <li><p>El <strong>plano tangente</strong> a <span class="math inline">\(S\)</span> en <span class="math inline">\(p \in S\)</span> es un subvespacio vectorial de <span class="math inline">\(\mathbb{R}^3\)</span> con dimensión 2 dado por: <span class="math display">\[\begin{aligned} T_pS = \{\alpha&#39;(0) \mid \exists \varepsilon &gt; 0, \alpha:
 (-\varepsilon, \varepsilon) \to S \\\land\ \alpha(0) = p \\\land\ \alpha
 \text{ diferenciable }\} \end{aligned}\]</span></p>
@@ -141,9 +144,41 @@ layout: notes
 <ul>
 <li>Para cada <span class="math inline">\(p \in S\)</span> existen dos vectores normales unitarios (opuestos) en la recta normal.</li>
 </ul></li>
-<li>La <strong>primera forma fundamental</strong> <span class="math inline">\(I\)</span>
+<li><p>Una <strong>función definida en la superficie regular</strong> <span class="math inline">\(S\)</span> es <span class="math inline">\(f: S \to \mathbb{R}^m\)</span>.</p>
 <ul>
-<li>Es bilineal, simétrica y definida positiva.</li>
+<li><p><span class="math inline">\(f\)</span> es <strong>diferenciable</strong> si para toda parametrización <span class="math inline">\(\mathbf{x}\)</span> de <span class="math inline">\(S\)</span>, la función <span class="math inline">\(f \circ \mathbf{x}: U \subset R^2 \to R^m\)</span> es diferenciable. Se cumplen las propiedades habituales sobre diferenciabilidad: suma producto y cociente (siempre que tenga sentido) de funciones diferenciables es diferenciable.</p></li>
+<li><p>Si <span class="math inline">\(f\)</span> es una función definida entre dos superficies (<span class="math inline">\(f: S_1 \to S_2\)</span>) entonces <span class="math inline">\(f\)</span> es <strong>diferenciable</strong> <span class="math inline">\(\iff \forall p \in S_1\)</span> hay una parametrización <span class="math inline">\(x_1 : U_1 \to S_1\)</span> con <span class="math inline">\(p \in \mathbf{x}_1(U_1)\)</span> y una parametrización <span class="math inline">\(\mathbf{x}_2 U_2 \to S_2\)</span> con <span class="math inline">\(f(p) \in \mathbf{x}_2(U_2)\)</span> tales que <span class="math inline">\(\overline{f} := \mathbf{x}_2^{-1} \circ f \circ \mathbf{x}_1\)</span> es diferenciable. <span class="math inline">\(\overline{f}\)</span> es la expresión en coordenadas de <span class="math inline">\(f\)</span>.</p></li>
+<li><p>La <strong>diferencial de una función definida en una superficie regular</strong> es <span class="math display">\[(df)_p: T_pS \to \mathbb{R},\qquad (df)_p(x) := (f \circ \alpha)&#39;(0)\]</span> donde <span class="math inline">\(\alpha: (- \varepsilon, +\varepsilon) \to S\)</span> es una curva diferenciable en <span class="math inline">\(S\)</span> tal que <span class="math inline">\(\alpha(0) = p \land \alpha&#39;(0) = x\)</span>. <span class="math inline">\((df)_p\)</span> está bien definida y es independiente de la elección de <span class="math inline">\(\alpha\)</span>.</p></li>
+<li><p>Más comodamente, si <span class="math inline">\(\mathbf{x}\)</span> es una parametrización de <span class="math inline">\(S\)</span> tal que para ciertos <span class="math inline">\(u_0, v_0\)</span> se tiene que <span class="math inline">\(\mathbf{x}(u_0, v_0) = p\)</span>, entonces la matrix asociada a la diferencial en la base <span class="math inline">\(\{\mathbf{x}_u(u_0, v_0), \mathbf{x}_v(u_0, v_0)\)</span> es <span class="math display">\[ (df)_p = \left(\begin{array}{c}
+  (f \circ \mathbf{x})_u(u_0, v_0) \\
+  (f \circ \mathbf{x})_v(u_0, v_0)\end{array}\right)\]</span></p>
+<ul>
+<li><span class="math inline">\(f\)</span> constante <span class="math inline">\(\implies (df)_p = 0 \forall p \in S\)</span>. Recíprocamente, <span class="math inline">\((df)_p = 0 \forall p \in S \land S\)</span> conexa <span class="math inline">\(\implies f\)</span> constante.</li>
+<li><span class="math inline">\(f\)</span> tiene un extremo relativo en <span class="math inline">\(p \implies (df)_p = 0\)</span>.</li>
+</ul></li>
+</ul></li>
+<li><p>La <strong>primera forma fundamental</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es <span class="math display">\[I_p : T_pS \times T_pS
+\to \mathbb{R},\qquad I_p(x, y) := \langle x, y\rangle\]</span></p>
+<ul>
+<li><p>Es bilineal, simétrica y definida positiva (es el producto escalar restringido a cada plano tangente de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span>).</p></li>
+<li><p>Dada una parametrización <span class="math inline">\(\mathbf{x}\)</span> de <span class="math inline">\(S\)</span> tal que <span class="math inline">\(\mathbf{x}(u_0, v_0) = p \in S\)</span> la matriz de <span class="math inline">\(I_p\)</span> respecto de la base <span class="math inline">\(\mathcal{B} = \{\mathbf{x}_u(u_0, v_0), \mathbf{x}_v(u_0, v_0)\}\)</span> es <span class="math display">\[ (I_p)_{\mathcal{B}} = \left(\begin{array}{cc}
+E &amp; F \\
+F &amp; G\end{array}\right) = \left(\begin{array}{cc}
+\langle x_u, x_u\rangle &amp; \langle x_u, x_v\rangle \\
+\langle x_v, x_u\rangle &amp; \langle x_v, x_v\rangle\end{array}\right)\]</span> donde cada derivada parcial de <span class="math inline">\(\mathbf{x}\)</span> está evaluada en <span class="math inline">\((u_0, x_0)\)</span>.</p></li>
+<li><p>Al escribir <span class="math display">\[I_p(x, y) = \langle x, y\rangle = (x_1, x_2) (I_p)_{\mathcal{B}}
+\left(\begin{array}{c} y_1 \\ y_2\end{array}\right)\]</span> estamos obteniendo el producto escalar de <span class="math inline">\(\mathbf{x}(x_1, x_2)\)</span> y <span class="math inline">\(\mathbf{x}(y_1, y_2)\)</span> que son vectores de <span class="math inline">\(\mathbb{R}^3\)</span>.</p>
+<p><em>La primera forma fundamental permite obener el producto escalar de dos vectores de la superficie a partir de sus coordenadas respecto de una parametrización.</em></p></li>
+<li><p>La <strong>forma diferencial de la primera forma fundamental</strong> es <span class="math display">\[I = E du^2 +
+2F dudv + F dv^2\]</span> donde <span class="math inline">\(E, F\)</span> y <span class="math inline">\(G\)</span> son funciones diferenciables que evaluamos para cada <span class="math inline">\(p \in S\)</span>.</p>
+<ul>
+<li>Del criterio de Sylvester para que <span class="math inline">\(I_p\)</span> siempre sea definida positiva se tiene que <span class="math inline">\(E, G &gt; 0\)</span> y que <span class="math inline">\(EG - F^2 &gt; 0\)</span>.</li>
+</ul></li>
+<li><p>La <strong>longitud de un segmento</strong> de una curva diferenciable <span class="math inline">\(\alpha: I \to S,\
+\alpha(t) = \mathbf{x}(u(t), v(t))\)</span> es <span class="math display">\[L(\alpha|_{[a,b]}) = \int_a^b \sqrt{I_{\alpha(t)}(\alpha&#39;(t),
+\alpha&#39;(t))}dt = \int_a^b \sqrt{Eu&#39;(t)^2 + 2Fu&#39;(t)v&#39;(t) + Gv&#39;(t)^2}dt\]</span></p></li>
+<li><p>El <strong>área de una región</strong> <span class="math inline">\(R \subset S\)</span> contenida en <span class="math inline">\(\mathbf{x}(U)\)</span> (bien parametrizada) es: <span class="math display">\[A(R) = \int_{\mathbf{x}^{-1}(R)} \lVert \mathbf{x}_u \times x_v \rVert dudv =
+\int_{\mathbf{x}^{-1}(R)}\sqrt{EG- F^2}dudv\]</span></p></li>
 </ul></li>
 <li>La <strong>aplicación de Gauss</strong></li>
 <li><p>El <strong>operador de Weingarten</strong> se define para cada <span class="math inline">\(p \in T_pS\)</span> como la aplicación <span class="math display">\[W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x\]</span></p>

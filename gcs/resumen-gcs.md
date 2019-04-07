@@ -4,7 +4,8 @@ author: Elias Hernandis
 ---
 
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\pescalar}[1]{\langle#1\rangle}
+\newcommand{\pescalar}[1]{\langle #1\rangle}
+\newcommand{\norma}[1]{\lVert #1 \rVert}
 
 Curvas en el plano y en el espacio
 ==================================
@@ -189,7 +190,8 @@ Curvas en el espacio
     $$ \x_u(u, v) = \frac{\partial \x}{\partial u}(u,v) = (d\x)_{(u,v)} \cdot e_1\\
        \x_v(u, v) = \frac{\partial \x}{\partial v}(u,v) = (d\x)_{(u,v)} \cdot e_2$$
 
-
+    - Los **campos coordenados** asociados a la parametrización $\x$ son dos
+      campos $\x_u,\ \x_v$ diferenciables en el abierto $V \subset S$.
 
 - El **plano tangente** a $S$ en $p \in S$ es un subvespacio vectorial de
   $\R^3$ con dimensión 2 dado por:
@@ -207,8 +209,79 @@ Curvas en el espacio
 - La **recta normal** a $S$ en $p \in S$ es el complemento ortogonal del plano tangente $T_pS^\perp$.
   - Para cada $p \in S$ existen dos vectores normales unitarios (opuestos) en la recta normal.
 
-- La **primera forma fundamental** $I$
-  - Es bilineal, simétrica y definida positiva.
+- Una **función definida en la superficie regular** $S$ es $f: S \to \R^m$.
+
+  - $f$ es **diferenciable** si para toda parametrización $\x$ de $S$, la
+    función $f \circ \x : U \subset R^2 \to R^m$ es diferenciable. Se cumplen
+    las propiedades habituales sobre diferenciabilidad: suma producto y
+    cociente (siempre que tenga sentido) de funciones diferenciables es
+    diferenciable.
+
+  - Si $f$ es una función definida entre dos superficies ($f: S_1 \to S_2$)
+    entonces $f$ es **diferenciable** $\iff \forall p \in S_1$ hay una
+    parametrización $x_1 : U_1 \to S_1$ con $p \in \x_1(U_1)$ y una
+    parametrización $\x_2 U_2 \to S_2$ con $f(p) \in \x_2(U_2)$ tales que
+    $\overline{f} := \x_2^{-1} \circ f \circ \x_1$ es diferenciable.
+    $\overline{f}$ es la expresión en coordenadas de $f$.
+
+  - La **diferencial de una función definida en una superficie regular** es
+    $$(df)_p: T_pS \to \R,\qquad (df)_p(x) := (f \circ \alpha)'(0)$$
+    donde $\alpha: (- \varepsilon, +\varepsilon) \to S$ es una curva
+    diferenciable en $S$ tal que $\alpha(0) = p \land \alpha'(0) = x$. $(df)_p$
+    está bien definida y es independiente de la elección de $\alpha$.
+
+  - Más comodamente, si $\x$ es una parametrización de $S$ tal que para ciertos
+    $u_0, v_0$ se tiene que $\x(u_0, v_0) = p$, entonces la matrix asociada a
+    la diferencial en la base $\{\x_u(u_0, v_0), \x_v(u_0, v_0)$ es
+      $$ (df)_p = \left(\begin{array}{c}
+      (f \circ \x)_u(u_0, v_0) \\
+      (f \circ \x)_v(u_0, v_0)\end{array}\right)$$
+
+    - $f$ constante $\implies (df)_p = 0 \forall p \in S$. Recíprocamente,
+      $(df)_p = 0 \forall p \in S \land S$ conexa $\implies f$ constante.
+    - $f$ tiene un extremo relativo en $p \implies (df)_p = 0$.
+
+
+
+- La **primera forma fundamental** de $S$ en $p$ es $$I_p : T_pS \times T_pS
+  \to \R,\qquad I_p(x, y) := \pescalar{x, y}$$
+
+  - Es bilineal, simétrica y definida positiva (es el producto escalar
+    restringido a cada plano tangente de $S$ en $p$).
+
+  - Dada una parametrización $\x$ de $S$ tal que $\x(u_0, v_0) = p \in S$ la matriz de $I_p$ respecto de la base $\mathcal{B} = \{\x_u(u_0, v_0), \x_v(u_0, v_0)\}$ es
+    $$ (I_p)_{\mathcal{B}} = \left(\begin{array}{cc}
+    E & F \\
+    F & G\end{array}\right) = \left(\begin{array}{cc}
+    \pescalar{x_u, x_u} & \pescalar{x_u, x_v} \\
+    \pescalar{x_v, x_u} & \pescalar{x_v, x_v}\end{array}\right)$$
+    donde cada derivada parcial de $\x$ está evaluada en $(u_0, x_0)$.
+
+  - Al escribir $$I_p(x, y) = \pescalar{x, y} = (x_1, x_2) (I_p)_{\mathcal{B}}
+    \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)$$ estamos obteniendo el
+    producto escalar de $\x(x_1, x_2)$ y $\x(y_1, y_2)$ que son vectores de
+    $\R^3$.
+    
+    *La primera forma fundamental permite obener el producto escalar de
+    dos vectores de la superficie a partir de sus coordenadas respecto de una
+    parametrización.*
+
+  - La **forma diferencial de la primera forma fundamental** es $$I = E du^2 +
+    2F dudv + F dv^2$$ donde $E, F$ y $G$ son funciones diferenciables que
+    evaluamos para cada $p \in S$.
+
+    - Del criterio de Sylvester para que $I_p$ siempre sea definida positiva se
+      tiene que $E, G > 0$ y que $EG - F^2 > 0$.
+
+  - La **longitud de un segmento** de una curva diferenciable $\alpha: I \to S,\
+    \alpha(t) = \x(u(t), v(t))$ es
+    $$L(\alpha|_{[a,b]}) = \int_a^b \sqrt{I_{\alpha(t)}(\alpha'(t),
+    \alpha'(t))}dt = \int_a^b \sqrt{Eu'(t)^2 + 2Fu'(t)v'(t) + Gv'(t)^2}dt$$
+  
+  - El **área de una región** $R \subset S$ contenida en $\x(U)$ (bien
+    parametrizada) es:
+    $$A(R) = \int_{\x^{-1}(R)} \norma{\x_u \times x_v} dudv =
+    \int_{\x^{-1}(R)}\sqrt{EG- F^2}dudv$$
 
 - La **aplicación de Gauss**
 - El **operador de Weingarten** se define para cada $p \in T_pS$ como la
