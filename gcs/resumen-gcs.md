@@ -8,7 +8,7 @@ author: Elias Hernandis
 \newcommand{\norma}[1]{\lVert #1 \rVert}
 \newcommand{\I}{\mathrm{I}}
 \newcommand{\II}{\mathrm{II}}
-\newcommand{\kur}{\mathcal{k}}
+\newcommand{\kur}{\kappa}
 
 # Curvas en el plano y en el espacio
 

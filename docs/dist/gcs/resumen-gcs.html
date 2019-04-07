@@ -233,27 +233,27 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 <li><p>Su expresión matricial respecto de cualquier base ortonormal de <span class="math inline">\(T_pS\)</span> es simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a continuación definidas en función de los autovalores de <span class="math inline">\(W_p\)</span> están bien definidas y permanecen invariantes por cambios de base.</p></li>
 <li><p>La relación matricial respecto de <span class="math inline">\(\mathcal{B}\)</span> entre <span class="math inline">\(\mathrm{I}_p, \mathrm{II}_p\)</span> y <span class="math inline">\(W\)</span> es <span class="math display">\[(\mathrm{II}_p)_{\mathcal{B}} = (\mathrm{I}_p)_{\mathcal{B}} (W_p)_{\mathcal{B}}\]</span></p></li>
 </ul></li>
-<li><p>Las <strong>curvaturas principales</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> son los autovalores <span class="math inline">\(\mathcal{k}_1(p), \mathcal{k}_2(p) \in \mathbb{R}\)</span> de <span class="math inline">\(W_p\)</span>.</p>
+<li><p>Las <strong>curvaturas principales</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> son los autovalores <span class="math inline">\(\kappa_1(p), \kappa_2(p) \in \mathbb{R}\)</span> de <span class="math inline">\(W_p\)</span>.</p>
 <ul>
-<li><p>Las <strong>direcciones principales</strong> son cualquier autovector de <span class="math inline">\(W_p\)</span>. Si <span class="math inline">\(\mathcal{k}_1 \neq \mathcal{k}_2\)</span> las direcciones principales son los múltiplos no nulos de <span class="math inline">\(e_1\)</span> y <span class="math inline">\(e_2\)</span>. Si <span class="math inline">\(\mathcal{k}_1 = \mathcal{k}_2\)</span> todo vector no nulo de <span class="math inline">\(T_pS\)</span> es dirección principal.</p>
+<li><p>Las <strong>direcciones principales</strong> son cualquier autovector de <span class="math inline">\(W_p\)</span>. Si <span class="math inline">\(\kappa_1 \neq \kappa_2\)</span> las direcciones principales son los múltiplos no nulos de <span class="math inline">\(e_1\)</span> y <span class="math inline">\(e_2\)</span>. Si <span class="math inline">\(\kappa_1 = \kappa_2\)</span> todo vector no nulo de <span class="math inline">\(T_pS\)</span> es dirección principal.</p>
 <ul>
 <li>Una <strong>línea de curvatura</strong> es una curva diferenciable <span class="math inline">\(\alpha: I \to S\)</span> tal que <span class="math inline">\(\alpha&#39;(t)\)</span> es dirección principal de <span class="math inline">\(S\)</span> para todo <span class="math inline">\(t \in I \iff W_{\alpha(t)}\alpha&#39;(t) = \lambda(t)\alpha&#39;(t),\ \forall t \in I\)</span> y cierta función curvatura principal <span class="math inline">\(\lambda : I \to \mathbb{R}\)</span>.</li>
 </ul></li>
-<li><p>Un <strong>punto umbilical</strong> es un <span class="math inline">\(p \in S\)</span> tal que <span class="math inline">\(\mathcal{k}_1(p) = \mathcal{k}_2(p)\)</span></p></li>
-<li><p>Las <strong>funciones de curvatura principal</strong> se obtienen de diagonalizar para diagonalizamos para <span class="math inline">\(p\)</span> genérico. Obtendremos funciones continuas <span class="math inline">\(\mathcal{k}_1(p)\)</span> y <span class="math inline">\(\mathcal{k}_2(p)\)</span>. Si <span class="math inline">\(\mathcal{k}_1 \neq \mathcal{k}_2\)</span> entonces además son funciones diferenciables.</p></li>
+<li><p>Un <strong>punto umbilical</strong> es un <span class="math inline">\(p \in S\)</span> tal que <span class="math inline">\(\kappa_1(p) = \kappa_2(p)\)</span></p></li>
+<li><p>Las <strong>funciones de curvatura principal</strong> se obtienen de diagonalizar para diagonalizamos para <span class="math inline">\(p\)</span> genérico. Obtendremos funciones continuas <span class="math inline">\(\kappa_1(p)\)</span> y <span class="math inline">\(\kappa_2(p)\)</span>. Si <span class="math inline">\(\kappa_1 \neq \kappa_2\)</span> entonces además son funciones diferenciables.</p></li>
 </ul></li>
 <li><p>La <strong>curvatura de Gauss</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es el número real <span class="math display">\[K(p) := \det W_p
-= \mathcal{k}_1(p) \cdot \mathcal{k}_2(p) = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
+= \kappa_1(p) \cdot \kappa_2(p) = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
 <ul>
 <li><p>Atendiendo a la curvatura gaussiana, los puntos <span class="math inline">\(p \in S\)</span> se clasifican en:</p>
 <ol type="1">
 <li><strong>puntos elípticos</strong> si <span class="math inline">\(K(p) &gt; 0\)</span></li>
 <li><strong>puntos parabólicos</strong> si <span class="math inline">\(K(p) = 0 \land W_p \neq 0\)</span> (e.d. si solo una de las dos curvaturas principales es <span class="math inline">\(0\)</span>)</li>
-<li><strong>puntos planos</strong> si <span class="math inline">\(K(p) = 0 \land W_p = 0\)</span> (e.d. si <span class="math inline">\(\mathcal{k}_1(p) = \mathcal{k}_2(p) = 0\)</span></li>
+<li><strong>puntos planos</strong> si <span class="math inline">\(K(p) = 0 \land W_p = 0\)</span> (e.d. si <span class="math inline">\(\kappa_1(p) = \kappa_2(p) = 0\)</span></li>
 <li><strong>puntos hiperbólicos</strong> si <span class="math inline">\(K(p) &lt; 0\)</span></li>
 </ol></li>
 </ul></li>
 <li><p>La <strong>curvatura media</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es el número real <span class="math display">\[H(p) :=
-\frac{1}{2}\text{tr} W_p = \frac{1}{2}(\mathcal{k}_1(p) + \mathcal{k}_2(p)) =
+\frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kappa_1(p) + \kappa_2(p)) =
 \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p></li>
 </ul>
