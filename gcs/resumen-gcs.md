@@ -258,8 +258,7 @@ author: Elias Hernandis
 
   - Al escribir $$I_p(x, y) = \pescalar{x, y} = (x_1, x_2) (I_p)_{\mathcal{B}}
     \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)$$ estamos obteniendo el
-    producto escalar de $\x(x_1, x_2)$ y $\x(y_1, y_2)$ que son vectores de
-    $\R^3$.
+    producto escalar de dos vectores en $T_pS$ en función de sus coordenadas $(x_1, x_2)$ e $(y_1, y_2)$ respecto de la base $\{\x_u, \x_v\}$.
 
     *Dadas las coordenadas de dos vectores de la superficie $S$ respecto de una
     prametrización $\x$, la primera forma fundamental permite obtener el
