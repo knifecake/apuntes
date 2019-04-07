@@ -6,6 +6,9 @@ author: Elias Hernandis
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\pescalar}[1]{\langle #1\rangle}
 \newcommand{\norma}[1]{\lVert #1 \rVert}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\II}{\mathrm{II}}
+\newcommand{\kur}{\mathcal{k}}
 
 # Curvas en el plano y en el espacio
 
@@ -218,8 +221,8 @@ author: Elias Hernandis
 
   - Si $f$ es una función definida entre dos superficies ($f: S_1 \to S_2$)
     entonces $f$ es **diferenciable** $\iff \forall p \in S_1$ hay una
-    parametrización $x_1 : U_1 \to S_1$ con $p \in \x_1(U_1)$ y una
-    parametrización $\x_2 U_2 \to S_2$ con $f(p) \in \x_2(U_2)$ tales que
+    parametrización $\x_1 : U_1 \to S_1$ con $p \in \x_1(U_1)$ y una
+    parametrización $\x_2 : U_2 \to S_2$ con $f(p) \in \x_2(U_2)$ tales que
     $\overline{f} := \x_2^{-1} \circ f \circ \x_1$ es diferenciable.
     $\overline{f}$ es la expresión en coordenadas de $f$.
 
@@ -236,19 +239,19 @@ author: Elias Hernandis
       (f \circ \x)_u(u_0, v_0) \\
       (f \circ \x)_v(u_0, v_0)\end{array}\right)$$
 
-    - $f$ constante $\implies (df)_p = 0 \forall p \in S$. Recíprocamente,
+    - $f$ constante $\implies (df)_p = 0,\ \forall p \in S$. Recíprocamente,
       $(df)_p = 0 \forall p \in S \land S$ conexa $\implies f$ constante.
     - $f$ tiene un extremo relativo en $p \implies (df)_p = 0$.
 
 
 
-- La **primera forma fundamental** de $S$ en $p$ es $$I_p : T_pS \times T_pS
-  \to \R,\qquad I_p(x, y) := \pescalar{x, y}$$
+- La **primera forma fundamental** de $S$ en $p$ es $$\I_p : T_pS \times T_pS
+  \to \R,\qquad \I_p(x, y) := \pescalar{x, y}$$
 
   - Es bilineal, simétrica y definida positiva (es el producto escalar
     restringido a cada plano tangente de $S$ en $p$).
 
-  - Dada una parametrización $\x$ de $S$ tal que $\x(u_0, v_0) = p \in S$ la matriz de $I_p$ respecto de la base $\mathcal{B} = \{\x_u(u_0, v_0), \x_v(u_0, v_0)\}$ es
+  - Dada una parametrización $\x$ de $S$ tal que $\x(u_0, v_0) = p \in S$ la matriz de $\I_p$ respecto de la base $\mathcal{B} = \{\x_u(u_0, v_0), \x_v(u_0, v_0)\}$ es
     $$ (I_p)_{\mathcal{B}} = \left(\begin{array}{cc}
     E & F \\
     F & G\end{array}\right) = \left(\begin{array}{cc}
@@ -256,25 +259,21 @@ author: Elias Hernandis
     \pescalar{x_v, x_u} & \pescalar{x_v, x_v}\end{array}\right)$$
     donde cada derivada parcial de $\x$ está evaluada en $(u_0, x_0)$.
 
-  - Al escribir $$I_p(x, y) = \pescalar{x, y} = (x_1, x_2) (I_p)_{\mathcal{B}}
+  - Al escribir $$\I_p(x, y) = \pescalar{x, y} = (x_1, x_2) (I_p)_{\mathcal{B}}
     \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)$$ estamos obteniendo el
     producto escalar de dos vectores en $T_pS$ en función de sus coordenadas $(x_1, x_2)$ e $(y_1, y_2)$ respecto de la base $\{\x_u, \x_v\}$.
 
-    *Dadas las coordenadas de dos vectores de la superficie $S$ respecto de una
-    prametrización $\x$, la primera forma fundamental permite obtener el
-    producto escalar de sus respectivos vectores tangentes a partir de las
-    coordenadas de los primeros.*
 
   - La **forma diferencial de la primera forma fundamental** es $$I = E du^2 +
     2F dudv + F dv^2$$ donde $E, F$ y $G$ son funciones diferenciables que
     evaluamos para cada $p \in S$.
 
-    - Del criterio de Sylvester para que $I_p$ siempre sea definida positiva se
+    - Del criterio de Sylvester para que $\I_p$ siempre sea definida positiva se
       tiene que $E, G > 0$ y que $EG - F^2 > 0$.
 
   - La **longitud de un segmento** de una curva diferenciable $\alpha: I \to S,\
     \alpha(t) = \x(u(t), v(t))$ es
-    $$L(\alpha|_{[a,b]}) = \int_a^b \sqrt{I_{\alpha(t)}(\alpha'(t),
+    $$L(\alpha|_{[a,b]}) = \int_a^b \sqrt{\I_{\alpha(t)}(\alpha'(t),
     \alpha'(t))}dt = \int_a^b \sqrt{Eu'(t)^2 + 2Fu'(t)v'(t) + Gv'(t)^2}dt$$
  
   - El **área de una región** $R \subset S$ contenida en $\x(U)$ (bien
@@ -290,7 +289,7 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
   - Una **parametrización** $\x: U \subset \R^2$ se dice **conforme** si cumple
     la definición anterior para $S_2 = \R^2$. Es decir, $\forall x, y \in \R^2$
-    y $\forall p \in U$.  Equivalentemente, $\x$ se dice conforme si $$I_p^{\x}
+    y $\forall p \in U$.  Equivalentemente, $\x$ se dice conforme si $$\I_p^{\x}
     = \left(\begin{array}{cc} E & F \\ F & G \end{array}\right) = \lambda(p)
     \left(\begin{array}{cc} 1 & 0 \\ 0 & 1\end{array}\right)$$ es decir, si $E
     = G$ y $F = 0$ para todo $p = (u, v) \in U$.
@@ -322,8 +321,83 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
     - isometría global $\implies$ isometría local
 
-- La **aplicación de Gauss**
+- La **aplicación de Gauss** $N: \x(U) \to \mathbb{S}^2$ definida por $$N(\x(u,
+  v)) = \frac{\x_u \times \x_v}{\norma{\x_u \times \x_v}}$$ asocia a cada punto
+  $p = \x(u, v) \in S$ su vector normal unitario.
+
+  - $N$ define un **campo normal unitario** localmente para cada entorno
+    $\x(U)$ de $p$.
+
+  - Si $N$ define un campo normal globalmente para todo $p \in
+    S$ se dice que $S$ es orientable. Esto depende de la parametrización, por
+    tanto $S$ es **orientable** si existe alguna parametrización para la que $N$
+    defina un campo normal unitario en toda $S$.
+
+- La **segunda forma fundamental** es la aplicación $$\II_p : T_pS \times T_p S
+  \to \R,\qquad \II_p(x,y) := \pescalar{x, W_p y}$$
+
+  - $\II_p$ es bilineal y simétrica pero no tiene por qué ser definida positiva
+
+  - La expresión matricial de $\II_p$ respecto de la base de vectores
+    coordenados $\mathcal{B} = \{\x_u, \x_v\}$ se puede calcular a partir de la
+    aplicación de Gauss mediante
+    $$\II_p \equiv \left(\begin{array}{cc} e & f \\ f & g \end{array}\right) =
+      \left(\begin{array}{cc} \pescalar{\x_{uu}, N} & \pescalar{\x_{uv}, N} \\
+      \pescalar{\x_{vu}, N} & \pescalar{\x_{vv}, N}\end{array}\right)$$
+
+- Una **dirección asintótica** de $S$ en $p$ es un vector $x \in T_pS$ no
+  nulo tal que $\II_p(x,x) = 0$.
+
+  - Una **línea asintótica** de $S$ es una curva diferenciable $\alpha: I \to
+    S$ tal que $\alpha'(t)$ es dirección asintótica $\forall t \in I \iff
+    \II(\alpha', \alpha') = 0$.
+
 - El **operador de Weingarten** se define para cada $p \in T_pS$ como la
   aplicación $$W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x$$
 
-  - Es una aplicación autoajunta: $\pescalar{W_p x, y} = \pescalar{x, W_p y}$
+  - Es una aplicación autoadjunta: $\pescalar{W_p x, y} = \pescalar{x, W_p y}$
+
+  - Su expresión matricial respecto de cualquier base ortonormal de $T_pS$ es
+    simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a
+    continuación definidas en función de los autovalores de $W_p$ están bien
+    definidas y permanecen invariantes por cambios de base.
+
+  - La relación matricial respecto de $\mathcal{B}$ entre $\I_p, \II_p$ y $W$ es $$(\II_p)_{\mathcal{B}} = (\I_p)_{\mathcal{B}} (W_p)_{\mathcal{B}}$$
+
+- Las **curvaturas principales** de $S$ en $p$ son los autovalores $\kur_1(p),
+  \kur_2(p) \in \R$ de $W_p$.
+
+  - Las **direcciones principales** son cualquier autovector de $W_p$. Si
+    $\kur_1 \neq \kur_2$ las direcciones principales son los múltiplos no
+    nulos de $e_1$ y $e_2$. Si $\kur_1 = \kur_2$ todo vector no nulo de
+    $T_pS$ es dirección principal.
+
+    - Una **línea de curvatura** es una curva diferenciable $\alpha: I \to S$
+      tal que $\alpha'(t)$ es dirección principal de $S$ para todo $t \in I
+      \iff W_{\alpha(t)}\alpha'(t) = \lambda(t)\alpha'(t),\ \forall t \in I$ y
+      cierta función curvatura principal $\lambda : I \to \R$.
+
+  - Un **punto umbilical** es un $p \in S$ tal que $\kur_1(p) = \kur_2(p)$
+
+  - Las **funciones de curvatura principal** se obtienen de diagonalizar para
+    diagonalizamos para $p$ genérico. Obtendremos funciones continuas
+    $\kur_1(p)$ y $\kur_2(p)$. Si $\kur_1 \neq \kur_2$ entonces además son
+    funciones diferenciables.
+ 
+- La **curvatura de Gauss** de $S$ en $p$ es el número real $$K(p) := \det W_p
+  = \kur_1(p) \cdot \kur_2(p) = \frac{eg - f^2}{EG - F^2}$$ para
+  $e,f,g,E,F,G$ evaluadas en $p$.
+
+  - Atendiendo a la curvatura gaussiana, los puntos $p \in S$ se clasifican en:
+  
+    1. **puntos elípticos** si $K(p) > 0$
+    2. **puntos parabólicos** si $K(p) = 0 \land W_p \neq 0$ (e.d. si solo una
+       de las dos curvaturas principales es $0$)
+    3. **puntos planos** si $K(p) = 0 \land W_p = 0$ (e.d. si $\kur_1(p) =
+       \kur_2(p) = 0$
+    4. **puntos hiperbólicos** si $K(p) < 0$
+
+- La **curvatura media** de $S$ en $p$ es el número real $$H(p) :=
+  \frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kur_1(p) + \kur_2(p)) =
+  \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}$$ para $e,f,g,E,F,G$ evaluadas en
+  $p$.
