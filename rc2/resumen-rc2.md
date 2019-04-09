@@ -250,6 +250,20 @@ además `Last-Modified`, `Server`, `Date` y `Content-Length`.
     iguales. En la práctica no tiene por qué, AES soporta distintas longitudes
     mientras sean múltiplos de 4 bytes.
 
+### Ejercicios sobre cifrados en bloque
+
+- Hay que crearse la **tabla de traducción de bloques**. Esta tabla tiene dos
+  columnas: bloque cifrado y bloque en claro. Si el bloque es de $N$ bits, la
+  tabla tiene $2^N$ filas y tiene que definir una biyección (si nos falta la
+  codificación de un bloque sabemos que es la secuencia de $N$ bits que falta).
+
+- Si estamos en encadenamiento **ECB** obtenemos los bloques diréctamente de
+  comparar el texto plano con el texto cifrado.
+
+- Si estamos en **CBC** y no tenemos IV pero el tamaño de bloque es pequeño
+  podemos probar con todos los IVs de ese tamaño a ver cuál nos da una
+  biyección en la tabla de traducción de bloques.
+
 ## Cifrados asimétricos
 
 - Funciona a partir de un par de claves: lo que una encripta solo lo puede
@@ -467,3 +481,24 @@ empresas), la cosa está en que todo el mundo confíe en ella.
   manualmente la clave pública que nos mande.
 
 ### Firewalls
+
+* Se definen reglas de permisión o prohibición sobre rangos o valores fijos de
+  direcciones IP y puertos.
+
+* Las reglas se aplican ordenadas y cuando hay coincidencia con una se aplica
+  allow o deny y se deja de buscar. Por eso se suele poner una última regla que
+  prohibe todo.
+
+* Los firewalls con *filtrado con estado* tienen en cuenta el estado de la conexión.
+
+<div class="table-responsive">>
+
+| descripción                                                                  	| action 	| protocol 	| source IP      	| dest IP     	| source port 	| dest port 	| flag bit 	| check connection 	|
+|------------------------------------------------------------------------------	|--------	|----------	|----------------	|-------------	|-------------	|-----------	|----------	|------------------	|
+| prohibir conexiones entrantes en el puerto 80 (HTTP)                         	| allow  	| TCP      	| *              	| *           	| *           	| 80        	| *        	| -                	|
+| permitir tráfico entrante UDP desde dentro de una subred                     	| allow  	| UDP      	| 169.72.23.0/24 	| *           	| *           	| *         	| *        	| -                	|
+| denegar tráfico saliente SMTP desde un equipo de la LAN                      	| deny   	| TCP      	| 10.0.2.23      	| *           	| *           	| 25        	| *        	| -                	|
+| denegar tráfico entrante a una subred que vaya dirigido a puertos protegidos 	| deny   	| *        	| *              	| 10.0.2.0/24 	| *           	| < 1024    	| *        	| -                	|
+| última regla que deniega el tráfico no permitido explícitamente              	| deny   	| *        	| *              	| *           	| *           	| *         	| *        	| -                	|
+
+</div>

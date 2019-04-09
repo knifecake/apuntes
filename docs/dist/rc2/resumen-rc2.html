@@ -289,6 +289,12 @@ Header-Name: header-value\r\n
 <li><p><strong>AES:</strong> cifrado en bloque compatible con los modos de operación anteriores. En los ejercicios las longitudes de bloque, IV y clave son iguales. En la práctica no tiene por qué, AES soporta distintas longitudes mientras sean múltiplos de 4 bytes.</p></li>
 </ul></li>
 </ul>
+<h3 id="ejercicios-sobre-cifrados-en-bloque">Ejercicios sobre cifrados en bloque</h3>
+<ul>
+<li><p>Hay que crearse la <strong>tabla de traducción de bloques</strong>. Esta tabla tiene dos columnas: bloque cifrado y bloque en claro. Si el bloque es de <span class="math inline">\(N\)</span> bits, la tabla tiene <span class="math inline">\(2^N\)</span> filas y tiene que definir una biyección (si nos falta la codificación de un bloque sabemos que es la secuencia de <span class="math inline">\(N\)</span> bits que falta).</p></li>
+<li><p>Si estamos en encadenamiento <strong>ECB</strong> obtenemos los bloques diréctamente de comparar el texto plano con el texto cifrado.</p></li>
+<li><p>Si estamos en <strong>CBC</strong> y no tenemos IV pero el tamaño de bloque es pequeño podemos probar con todos los IVs de ese tamaño a ver cuál nos da una biyección en la tabla de traducción de bloques.</p></li>
+</ul>
 <h2 id="cifrados-asimétricos">Cifrados asimétricos</h2>
 <ul>
 <li><p>Funciona a partir de un par de claves: lo que una encripta solo lo puede descifrar la otra.</p></li>
@@ -402,3 +408,96 @@ Header-Name: header-value\r\n
 <li><p>Para la autenticación del servidor se puede utilizar PKI o comprobar manualmente la clave pública que nos mande.</p></li>
 </ul>
 <h3 id="firewalls">Firewalls</h3>
+<ul>
+<li><p>Se definen reglas de permisión o prohibición sobre rangos o valores fijos de direcciones IP y puertos.</p></li>
+<li><p>Las reglas se aplican ordenadas y cuando hay coincidencia con una se aplica allow o deny y se deja de buscar. Por eso se suele poner una última regla que prohibe todo.</p></li>
+<li><p>Los firewalls con <em>filtrado con estado</em> tienen en cuenta el estado de la conexión.</p></li>
+</ul>
+<div class="table-responsive">
+<blockquote>
+
+</blockquote>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 9%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>descripción</th>
+<th>action</th>
+<th>protocol</th>
+<th>source IP</th>
+<th>dest IP</th>
+<th>source port</th>
+<th>dest port</th>
+<th>flag bit</th>
+<th>check connection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>prohibir conexiones entrantes en el puerto 80 (HTTP)</td>
+<td>allow</td>
+<td>TCP</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>80</td>
+<td>*</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>permitir tráfico entrante UDP desde dentro de una subred</td>
+<td>allow</td>
+<td>UDP</td>
+<td>169.72.23.0/24</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>denegar tráfico saliente SMTP desde un equipo de la LAN</td>
+<td>deny</td>
+<td>TCP</td>
+<td>10.0.2.23</td>
+<td>*</td>
+<td>*</td>
+<td>25</td>
+<td>*</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>denegar tráfico entrante a una subred que vaya dirigido a puertos protegidos</td>
+<td>deny</td>
+<td>*</td>
+<td>*</td>
+<td>10.0.2.0/24</td>
+<td>*</td>
+<td>&lt; 1024</td>
+<td>*</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>última regla que deniega el tráfico no permitido explícitamente</td>
+<td>deny</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
