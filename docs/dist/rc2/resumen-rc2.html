@@ -294,8 +294,8 @@ Header-Name: header-value\r\n
 <li><p>Hay que crearse la <strong>tabla de traducción de bloques</strong>. Esta tabla tiene dos columnas: bloque cifrado y bloque en claro. Si el bloque es de <span class="math inline">\(N\)</span> bits, la tabla tiene <span class="math inline">\(2^N\)</span> filas y tiene que definir una biyección (si nos falta la codificación de un bloque sabemos que es la secuencia de <span class="math inline">\(N\)</span> bits que falta).</p></li>
 <li><p>Si estamos en encadenamiento <strong>ECB</strong> obtenemos los bloques diréctamente de comparar el texto plano con el texto cifrado.</p></li>
 <li><p>Si estamos en <strong>CBC</strong> y no tenemos IV pero el tamaño de bloque es pequeño podemos probar con todos los IVs de ese tamaño a ver cuál nos da una biyección en la tabla de traducción de bloques.</p></li>
+<li><p>Si estamos en <strong>CBC</strong> hay que recordar que aunque no tengamos IV podemos suponer el que queramos y a partir del segundo bloque la respuesta estará bien.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p></li>
 </ul>
-<h2 id="cifrados-asimétricos">Cifrados asimétricos</h2>
 <ul>
 <li><p>Funciona a partir de un par de claves: lo que una encripta solo lo puede descifrar la otra.</p></li>
 <li><p>Una clave se da a conocer para poder recibir mensajes encriptados (clave pública). Otra se mantiene secreta (clave privada).</p></li>
@@ -501,3 +501,9 @@ Header-Name: header-value\r\n
 </tbody>
 </table>
 </div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_(CBC) ## Cifrados asimétricos<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>

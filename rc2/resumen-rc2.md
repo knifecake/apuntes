@@ -264,6 +264,11 @@ además `Last-Modified`, `Server`, `Date` y `Content-Length`.
   podemos probar con todos los IVs de ese tamaño a ver cuál nos da una
   biyección en la tabla de traducción de bloques.
 
+- Si estamos en **CBC** hay que recordar que aunque no tengamos IV podemos
+  suponer el que queramos y a partir del segundo bloque la respuesta estará
+  bien.[^1]
+
+[^1]: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_(CBC)
 ## Cifrados asimétricos
 
 - Funciona a partir de un par de claves: lo que una encripta solo lo puede
