@@ -256,3 +256,149 @@ Header-Name: header-value\r\n
 <li>Recursivo: el servidor resuelve las consultas adicionales necesarias para obtener la IP de un dominio.</li>
 <li>Iterativo: el cliente debe preguntar a los distintos servidores (local, root, TLD, dominio) para obtener la IP del dominio.</li>
 </ul>
+<h1 id="criptografía-y-seguridad">Criptografía y seguridad</h1>
+<ul>
+<li>Principios básicos: CIA = Confidencialidad, Integridad y Autenticación.
+<ul>
+<li>Los cifrados nos garantizan la confidencialidad.</li>
+<li>Las firmas digitales la integridad y autenticación.</li>
+</ul></li>
+</ul>
+<h2 id="cifrados-simétricos">Cifrados simétricos</h2>
+<h3 id="tipos-de-cifrados">Tipos de cifrados</h3>
+<ul>
+<li><p><strong>Cifrados de flujo</strong> (<em>stream</em>): cifran cada caracter del alfabeto de manera independiente pero el estado del cifrado puede afectar a cómo se cifra un caracter (ver <em>Vigenere</em>)</p></li>
+<li><p><strong>Cifrados de bloque:</strong> cifran el texto plano en bloques de longitud dada, añadiendo padding en caso de que sea necesario. El cifrado define cómo se encripta un bloque. Tienen varios modos de operación atendiendo a cómo se aplica repetidamente la operación criptográfica definida para un bloque a todo un mensaje.</p>
+<ul>
+<li><p><strong>EBC</strong> (o Electronic CodeBook): se trocea el mensaje en bloques del tamaño que soporte el cifrado y se encriptan independientemente. No aporta <strong>confusión</strong> (la misma entrada se encripta siempre de la misma forma y por tanto es vulnerable a <strong>análisis de frecuencias = ataque semántico</strong>).</p></li>
+<li><p><strong>CBC</strong> (o Cipher Block Chaining): se combina el texto plano del bloque actual con el texto encriptado del bloque anterior mediante una XOR. Para el primer bloque se utiliza un vector de inicialización (IV) que debe ser aleatorio. Aporta <strong>confusión</strong> pero no mucha <strong>difusión</strong> el cambio de un bit en el texto plano provoca el cambio de ese bloque y del siguiente pero no más allá.</p></li>
+<li><p><strong>CTR</strong> (o Counter Mode): aporta más difusión que <strong>CBC</strong>.</p></li>
+</ul></li>
+</ul>
+<h3 id="ejemplos-de-cifrados">Ejemplos de cifrados</h3>
+<ul>
+<li><p>Cifrados clásicos (todos estos ejemplos son de flujo o <em>stream</em>):</p>
+<ul>
+<li><p><strong>Cesar:</strong> sustitución (rotación de las letras del alfabeto). Susceptible de ataques de fuerza bruta y análisis de frecuencias.</p></li>
+<li><p><strong>Vigenere:</strong> sustitución. Susceptible de ataques de fuerza bruta pero no de análisis de frecuencias.</p></li>
+<li><p><strong>One-Time Pad:</strong> (<em>Vernam</em>, s. XIX) basado en XOR. No susceptible de ser atacado de ninguna manera dada una clave precompartida secreta aleatoria, no reutilizada ni en totalidad ni en parte, y más larga que el mensaje lo que lo hace impráctico.</p></li>
+</ul></li>
+<li><p>Cifrados actuales (todos estos ejemplos son de bloque):</p>
+<ul>
+<li><p><strong>DES:</strong> de los primeros ejemplos de cifrado, hoy en día en desuso porque se puede romper en cuestión de horas. Utilizaba claves de 64 bits (56 útiles + 8 de paridad). <strong>3DES:</strong> es una versión posterior que consiste en aplicar DES 3 veces con claves distintas.</p></li>
+<li><p><strong>AES:</strong> cifrado en bloque compatible con los modos de operación anteriores. En los ejercicios las longitudes de bloque, IV y clave son iguales. En la práctica no tiene por qué, AES soporta distintas longitudes mientras sean múltiplos de 4 bytes.</p></li>
+</ul></li>
+</ul>
+<h2 id="cifrados-asimétricos">Cifrados asimétricos</h2>
+<ul>
+<li><p>Funciona a partir de un par de claves: lo que una encripta solo lo puede descifrar la otra.</p></li>
+<li><p>Una clave se da a conocer para poder recibir mensajes encriptados (clave pública). Otra se mantiene secreta (clave privada).</p></li>
+<li><p>Ventajas: no hay que compartir un secreto (la clave) previamente. Todo el mundo puede conocer la clave pública.</p></li>
+<li><p>Desventajas: más lentos, limitaciones en el tamaño del mensaje a encriptar.</p>
+<ul>
+<li>Solución: <strong>esquemas híbridos</strong> = encriptar asimétricamente una clave simétrica.</li>
+</ul></li>
+<li><p>Aplicaciones:</p>
+<ul>
+<li><p>Encriptación de claves simétricas para cifrado de mensajes largos. La clave simétrica se encripta con la clave pública del destinatario.</p></li>
+<li><p>Firma digital: proporcionan integridad y autenticación. Consiste en la encriptación de un <em>hash</em> del mensaje con la clave privada del emisor para que todos los receptores que quieran pueden comprobar si el <em>hash</em> de un mensaje que han recibido es el mismo <em>hash</em> que el emisor dice que tenía un mensaje.</p></li>
+</ul></li>
+</ul>
+<h3 id="rsa">RSA</h3>
+<ul>
+<li><p><strong>Generación de claves:</strong></p>
+<ol type="1">
+<li><p>Elegir primos grandes <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span>. Sea <span class="math inline">\(n = p \cdot q\)</span> (el módulo).</p></li>
+<li><p>Encontrar <span class="math inline">\(e\)</span> que cumpla <span class="math inline">\(1 &lt; e &lt; \varphi(n) = (p -1)(q-1)\)</span> y <span class="math inline">\(e\)</span> coprimo con <span class="math inline">\(\varphi(n)\)</span>.</p></li>
+<li><p>Calcular <span class="math inline">\(d = e^{-1} \mod \varphi(n)\)</span></p></li>
+<li><p>La <strong>clave pública</strong> es el par <span class="math inline">\((n, e)\)</span> y la <strong>clave privada</strong> es el par <span class="math inline">\((n, d)\)</span>.</p></li>
+</ol></li>
+<li><p><strong>Encriptación:</strong> emisor encripta con la clave pública del destinatario. Solo se pueden encriptar <span class="math inline">\(p &lt; n\)</span>. <span class="math display">\[ c = m^e \mod n\]</span></p></li>
+<li><p><strong>Descifrado:</strong> utilizando la clave privada del receptor: <span class="math display">\[p = c^d \mod n\]</span></p></li>
+</ul>
+<p>Atención: si queremos comunicación bidireccional cada agente tiene su par de claves.</p>
+<h2 id="mecanismos-para-la-compartición-de-claves">Mecanismos para la compartición de claves</h2>
+<ul>
+<li><p>Hasta ahora la desventaja de todos los cifrados es la compartición de las claves (la clave simétrica o la clave pública).</p></li>
+<li><p>Si la clave no se puede compartir no podemos tener integridad.</p></li>
+<li><p>Solución: <strong>PKI = public key infrastructure</strong>. Un sistema para asociar identidades (de agentes o de máquinas) a claves basado en criptografía de clave pública.</p>
+<ul>
+<li>Requiere la compartición previa de la clave pública de una entidad en la que confiamos (autoridad certificadora, hay varias).</li>
+</ul></li>
+</ul>
+<h3 id="pki">PKI</h3>
+<p>Problema que soluciona: un agente (empresa, máquina o individuo) quiere compartir su clave pública de manera que los destinatarios puedan estar seguros de que dicha clave le pertenece.</p>
+<ol type="1">
+<li><p>La entidad genera un par de claves RSA.</p></li>
+<li><p>La entidad crea un <strong>CSR (= certificate signing request)</strong> que incluye su clave pública y metadatos que permiten identificarla (nombre de la entidad, país, etc.) y lo envía a una <strong>RA (= registratión authority)</strong></p></li>
+<li><p>La RA realiza la verificación de identidad pertinente (por ejemplo, comprueba la identidad de un individuo con el DNI). En caso de éxito, envía el CSR a la <strong>CA (= certification authority)</strong>.</p></li>
+<li><p>La CA crea un certificado <strong>X.509</strong> que contiene los metadatos, la clave pública, fechas de expiración y su firma digital. Como los usuarios confían en la CA, una firma digital válida indica que la clave pública en efecto pertenece al agente que describen los metadatos. La CA envía el certificado al agente solicitante.</p></li>
+<li><p>El agente solicitante facilita su certificado a los usuarios que quieran comunicarse con él de manera que la compartición de claves conyeva autenticación.</p></li>
+</ol>
+<h4 id="puntos-de-fallo-y-soluciones">Puntos de fallo y soluciones</h4>
+<ul>
+<li><p>Si la CA o la RA están comprometidas o son maliciosas PKI queda inservible. Error poco común pero ha pasado al menos una vez en la historia.</p>
+<blockquote>
+<p>[Solución (no entra): Certificate transparency logs. Las CAs publican listas con los certificados que emiten. Los agentes pueden comprobar que no se han emitido certificados en su nombre sin su consentimiento. Si un certificado no se ha publicado entonces no se acepta.]</p>
+</blockquote></li>
+<li><p>La clave privada del agente solicitante está comprometida. Entonces, como los certificados son públicos, cualquiera puede hacerse pasar por el agente solicitante.</p>
+<p>Solución 1: <strong>CRL (= certificate revocation lists)</strong>. Nada más obtener el certificado de la CA, el agente solicitante genera otro certificado firmado por él mismo que en caso de ser publicado invalida el certificado de la CA. La publicación se efectúa subiendo el certificado a una CRL. Los clientes deben comprobar si los certificados que utilizan para comunicarse con agentes están revocados (si hay un certificado en una CRL que invalide el que les proporciona el agente para comunicarse).</p>
+<p>Solución 2: <strong>OCSP (= Online Certificate Security Protocol)</strong>. Ya que la comprobación de las CRLs puede ser costosa (puede haber muchas y en ocasiones podemos no saber donde mirar), OCSP centraliza esta comprobación ofreciendo un servicio que lo hace por nosotros. Lo gestionan las <strong>VA (= validation authorities)</strong>.</p></li>
+</ul>
+<p>Nota: en la práctica, las tres <em>authorities</em> suelen ser la misma.</p>
+<p>Nota 2: cualquiera puede crear una CA (útil para certificados internos en empresas), la cosa está en que todo el mundo confíe en ella.</p>
+<h2 id="seguridad-de-contraseñas">Seguridad de contraseñas</h2>
+<h3 id="gestión-de-contraseñas-por-parte-de-usuarios">Gestión de contraseñas por parte de usuarios</h3>
+<ul>
+<li><p>No utilizar patrones repetidos, ni añadir números o símbolos comunes al final de palabras, ni reutilizar la misma contraseña para varios servicios.</p></li>
+<li><p>Métodos para mejorar la seguridad:</p>
+<ul>
+<li><p>Utilizar sistemás seguros para generar contraseñas manualmente: P.A.O. (Persona, acción, objeto), patrones de teclado…</p></li>
+<li><p>Utilizar gestores de contraseñas que pueden crear contraseñas únicas y completamente aleatorias para cada servicio.</p></li>
+<li><p>Utilizar autenticación multifactor: algo que sabes (contraseña), algo que tienes (móvil = código por SMS) y algo que eres (biométrica).</p></li>
+</ul></li>
+</ul>
+<h3 id="gestión-de-contraseñas-por-parte-de-servidores">Gestión de contraseñas por parte de servidores</h3>
+<ul>
+<li><p>Contraseñas en reposo (en la base de datos de un servidor). Maneras de guardarlas y qué pasa si nos roban la base de datos:</p>
+<p>Nota: si nos roban la base de datos, nosotros ya hemos perdido, la cosa es minimizar el daño a los usuarios teniendo en cuenta que probablemente utilicen la misma contraseña para todo.</p>
+<ul>
+<li><p>Guardarlas en texto plano. Liada parda.</p></li>
+<li><p>Guardarlas <em>hasheadas</em>. Menos liada parda porque no se puede obener la contraseña diréctamente. Las <strong>rainbow tables</strong> asocian contraseñas comunes a sus <em>hashes</em> con lo que puede ser fácil recuperar las contraseñas.</p></li>
+<li><p>Guardar contraseñas con <strong>salt y hash</strong>. Consiste en generar una cadena aleatoria que se concatena a la contraseña antes de aplicar el <em>hash</em>. En la base de datos se guarda tanto el <em>salt</em> como el <em>hash</em>. Al concatenar el <em>salt</em> a la contraseña, conseguimos que esta nueva cadena ya no esté entre las contraseñas comunes y por tanto no se pueden utilizar rainbow tables.</p></li>
+</ul></li>
+<li><p>Contraseñas en tránsito (cuando se transmiten por redes). Maneras de transmitirlas y vulnerabilidades</p>
+<ul>
+<li><p>En claro. Liada parda.</p></li>
+<li><p>Cifradas. Mejor pero se sigue siendo vulnerable a ataques <strong>MITM (= Man in the middle)</strong> si la clave utilizada no se autentica. Un atacante podría interceptar el tráfico y hacer creer a cada extremo que se está comunicando con el otro suplantando sus claves públicas por otras suyas.</p></li>
+<li><p>Cifradas con autenticación = <strong>HTTPS = HTTP + TLS (antiguo SSL)</strong>. No es posible suplantar la identidad del servidor porque el usuario verifica su identidad mediante PKI.</p></li>
+</ul></li>
+<li><p>Contraseñas en las personas. Posibles ataques de ingeniería social (manipular a las personas para que nos digan sus contraseñas): <em>phising</em>, …</p></li>
+</ul>
+<h2 id="seguridad-en-redes">Seguridad en redes</h2>
+<h3 id="tls-transpor-layer-security">TLS = Transpor Layer Security</h3>
+<ul>
+<li><p>Versión actual (v 1.3) soluciona los problemas de la versión original SSL.</p></li>
+<li><p>Basado en un esquema híbrido para la transmisión de mensajes. Tras el establecimiento de la conexión TCP se verifican las identidades mediante PKI y se comparte un <em>master secret</em> = unos cuantos bytes aleatorios a partir de los cuales se derivan todos los parámetros del protocolo (IVs, números de unicidad, claves simétricas, etc…). Además, cliente y servidor se ponen de acuerdo en los cifrados a utilizar.</p></li>
+<li><p>Dos funciones:</p>
+<ul>
+<li><p>Encriptación: se cifra todo el tráfico a nivel 4 (TLS = Transpor Layer Security).</p></li>
+<li><p>Autenticación: las claves públicas se autentican mediante PKI.</p></li>
+</ul></li>
+</ul>
+<h3 id="ssh-secure-shell">SSH = Secure Shell</h3>
+<ul>
+<li><p>Una terminal remota que además permite la transmisión de tráfico arbitrario mediante túneles (por ejemplo, podríamos transmitir la interfaz de usuario, el protocolo GIT…).</p></li>
+<li><p>Se encarga cifrar dicho tráfico de manera simétrica.</p></li>
+<li><p>Para la autenticación del cliente hay varios modos:</p>
+<ul>
+<li>Usuario y contraseña (se envían cifrados).</li>
+<li>Clave pública (que ha de ser pre-compartida con el servidor)</li>
+<li>Restricción a un conjunto de IPs….</li>
+</ul>
+<blockquote>
+<p>[En realidad SSH no define la autenticación sino que la deja abierta para que usemos lo que queramos (LDAP, /etc/shadow, PKI, PAM, SAML…)]</p>
+</blockquote></li>
+<li><p>Para la autenticación del servidor se puede utilizar PKI o comprobar manualmente la clave pública que nos mande.</p></li>
+</ul>
+<h3 id="firewalls">Firewalls</h3>

@@ -401,3 +401,5 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
   \frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kur_1(p) + \kur_2(p)) =
   \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}$$ para $e,f,g,E,F,G$ evaluadas en
   $p$.
+
+  - Una **superficie minimal** es aquella que tiene $H(p) = 0,\ \forall p \in S$. 
