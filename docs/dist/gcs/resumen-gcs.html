@@ -222,6 +222,7 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 <li><p>La expresión matricial de <span class="math inline">\(\mathrm{II}_p\)</span> respecto de la base de vectores coordenados <span class="math inline">\(\mathcal{B} = \{\mathbf{x}_u, \mathbf{x}_v\}\)</span> se puede calcular a partir de la aplicación de Gauss mediante <span class="math display">\[\mathrm{II}_p \equiv \left(\begin{array}{cc} e &amp; f \\ f &amp; g \end{array}\right) =
   \left(\begin{array}{cc} \langle \mathbf{x}_{uu}, N\rangle &amp; \langle \mathbf{x}_{uv}, N\rangle \\
   \langle \mathbf{x}_{vu}, N\rangle &amp; \langle \mathbf{x}_{vv}, N\rangle\end{array}\right)\]</span></p></li>
+<li><p>Un punto <span class="math inline">\(p \in S\)</span> es <strong>umbilical</strong> si <span class="math inline">\(\mathrm{II}_p = \lambda(p) \mathrm{I}_p\)</span></p></li>
 </ul></li>
 <li><p>Una <strong>dirección asintótica</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es un vector <span class="math inline">\(x \in T_pS\)</span> no nulo tal que <span class="math inline">\(\mathrm{II}_p(x,x) = 0\)</span>.</p>
 <ul>
@@ -232,18 +233,22 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 <li><p>Es una aplicación autoadjunta: <span class="math inline">\(\langle W_p x, y\rangle = \langle x, W_p y\rangle\)</span></p></li>
 <li><p>Su expresión matricial respecto de cualquier base ortonormal de <span class="math inline">\(T_pS\)</span> es simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a continuación definidas en función de los autovalores de <span class="math inline">\(W_p\)</span> están bien definidas y permanecen invariantes por cambios de base.</p></li>
 <li><p>La relación matricial respecto de <span class="math inline">\(\mathcal{B}\)</span> entre <span class="math inline">\(\mathrm{I}_p, \mathrm{II}_p\)</span> y <span class="math inline">\(W\)</span> es <span class="math display">\[(\mathrm{II}_p)_{\mathcal{B}} = (\mathrm{I}_p)_{\mathcal{B}} (W_p)_{\mathcal{B}}\]</span></p></li>
+<li><p>Un punto <span class="math inline">\(p \in S\)</span> es <strong>umbilical</strong> si <span class="math inline">\(W_p = \lambda(p) Id\)</span></p></li>
 </ul></li>
 <li><p>Las <strong>curvaturas principales</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> son los autovalores <span class="math inline">\(\kappa_1(p), \kappa_2(p) \in \mathbb{R}\)</span> de <span class="math inline">\(W_p\)</span>.</p>
 <ul>
 <li><p>Las <strong>direcciones principales</strong> son cualquier autovector de <span class="math inline">\(W_p\)</span>. Si <span class="math inline">\(\kappa_1 \neq \kappa_2\)</span> las direcciones principales son los múltiplos no nulos de <span class="math inline">\(e_1\)</span> y <span class="math inline">\(e_2\)</span>. Si <span class="math inline">\(\kappa_1 = \kappa_2\)</span> todo vector no nulo de <span class="math inline">\(T_pS\)</span> es dirección principal.</p>
 <ul>
-<li>Una <strong>línea de curvatura</strong> es una curva diferenciable <span class="math inline">\(\alpha: I \to S\)</span> tal que <span class="math inline">\(\alpha&#39;(t)\)</span> es dirección principal de <span class="math inline">\(S\)</span> para todo <span class="math inline">\(t \in I \iff W_{\alpha(t)}\alpha&#39;(t) = \lambda(t)\alpha&#39;(t),\ \forall t \in I\)</span> y cierta función curvatura principal <span class="math inline">\(\lambda : I \to \mathbb{R}\)</span>.</li>
+<li><p>Una <strong>línea de curvatura</strong> es una curva diferenciable <span class="math inline">\(\alpha: I \to S\)</span> tal que <span class="math inline">\(\alpha&#39;(t)\)</span> es dirección principal de <span class="math inline">\(S\)</span> para todo <span class="math inline">\(t \in I \iff W_{\alpha(t)}\alpha&#39;(t) = \lambda(t)\alpha&#39;(t),\ \forall t \in I\)</span> y cierta función curvatura principal <span class="math inline">\(\lambda : I \to \mathbb{R}\)</span>.</p>
+<p>Si el polinomio característico es complicado se puede utilizar que <span class="math display">\[Wv =
+\lambda v \iff \mathrm{I}^{-1}\mathrm{II}v \lambda v \iff \mathrm{II}v = \lambda \mathrm{I}v\]</span>. A partir de aquí, si necesitamos el <span class="math inline">\(\lambda\)</span> calculamos; si no, definimos <span class="math inline">\(z = \mathrm{II}v\)</span> y forzamos que sea linealmente dependiente de <span class="math inline">\(v\)</span>, es decir, que <span class="math inline">\(\det(\mathrm{II}v, v) = 0\)</span>.</p></li>
 </ul></li>
 <li><p>Un <strong>punto umbilical</strong> es un <span class="math inline">\(p \in S\)</span> tal que <span class="math inline">\(\kappa_1(p) = \kappa_2(p)\)</span></p></li>
 <li><p>Las <strong>funciones de curvatura principal</strong> se obtienen de diagonalizar para diagonalizamos para <span class="math inline">\(p\)</span> genérico. Obtendremos funciones continuas <span class="math inline">\(\kappa_1(p)\)</span> y <span class="math inline">\(\kappa_2(p)\)</span>. Si <span class="math inline">\(\kappa_1 \neq \kappa_2\)</span> entonces además son funciones diferenciables.</p></li>
 </ul></li>
 <li><p>La <strong>curvatura de Gauss</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es el número real <span class="math display">\[K(p) := \det W_p
-= \kappa_1(p) \cdot \kappa_2(p) = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
+= \kappa_1(p) \cdot \kappa_2(p)\]</span> o, alternativamente <span class="math display">\[K(p) = \det(\mathrm{I}^{-1} \mathrm{II})
+= \frac{\det \mathrm{II}}{\det \mathrm{I}} = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
 <ul>
 <li><p>Atendiendo a la curvatura gaussiana, los puntos <span class="math inline">\(p \in S\)</span> se clasifican en:</p>
 <ol type="1">
@@ -254,9 +259,9 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 </ol></li>
 </ul></li>
 <li><p>La <strong>curvatura media</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es el número real <span class="math display">\[H(p) :=
-\frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kappa_1(p) + \kappa_2(p)) =
+\frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kappa_1(p) + \kappa_2(p))\]</span> o, alternativamente <span class="math display">\[H(p) = \frac{1}{2} \text{tr} (\mathrm{I}^{-1} \mathrm{II}) =
 \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
 <ul>
-<li>Una <strong>superficie minimal</strong> es aquella que tiene <span class="math inline">\(H(p) = 0,\ \forall p \in S\)</span>.</li>
+<li>Una <strong>superficie minimal</strong> es aquella que tiene <span class="math inline">\(H(p) = 0,\ \forall p \in S\)</span>. Son minimales los trozos de esfera y los trozos de plano.</li>
 </ul></li>
 </ul>

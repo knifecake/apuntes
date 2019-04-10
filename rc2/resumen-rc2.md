@@ -355,7 +355,7 @@ de que dicha clave le pertenece.
    al agente solicitante.
 
 5. El agente solicitante facilita su certificado a los usuarios que quieran
-   comunicarse con él de manera que la compartición de claves conyeva
+   comunicarse con él de manera que la compartición de claves conlleva
    autenticación.
 
 

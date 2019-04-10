@@ -1,6 +1,9 @@
 ---
 ---
 
+$light-gray: #aaa;
+$lighter-gray: #eee;
+
 *, ::before, ::after {
   box-sizing: border-box;
 }
@@ -14,6 +17,23 @@ body {
 
 header {
   text-align:center;
+
+  .topbar {
+    color: $light-gray;
+    text-align: left;
+
+    padding:1rem 0;
+    border-bottom: 1px solid $lighter-gray;
+
+    a { 
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 nav.course-nav {
@@ -35,7 +55,7 @@ section {
 }
 
 footer {
-  border-top: 1px solid #eee;
+  border-top: 1px solid $lighter-gray;
   margin-top: 1rem;
   padding-top: .5rem;
   padding-bottom: 1rem;

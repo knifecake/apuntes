@@ -332,6 +332,7 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     tanto $S$ es **orientable** si existe alguna parametrización para la que $N$
     defina un campo normal unitario en toda $S$.
 
+
 - La **segunda forma fundamental** es la aplicación $$\II_p : T_pS \times T_p S
   \to \R,\qquad \II_p(x,y) := \pescalar{x, W_p y}$$
 
@@ -343,6 +344,8 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     $$\II_p \equiv \left(\begin{array}{cc} e & f \\ f & g \end{array}\right) =
       \left(\begin{array}{cc} \pescalar{\x_{uu}, N} & \pescalar{\x_{uv}, N} \\
       \pescalar{\x_{vu}, N} & \pescalar{\x_{vv}, N}\end{array}\right)$$
+
+  - Un punto $p \in S$ es **umbilical** si $\II_p = \lambda(p) \I_p$
 
 - Una **dirección asintótica** de $S$ en $p$ es un vector $x \in T_pS$ no
   nulo tal que $\II_p(x,x) = 0$.
@@ -363,6 +366,8 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
   - La relación matricial respecto de $\mathcal{B}$ entre $\I_p, \II_p$ y $W$ es $$(\II_p)_{\mathcal{B}} = (\I_p)_{\mathcal{B}} (W_p)_{\mathcal{B}}$$
 
+  - Un punto $p \in S$ es **umbilical** si $W_p = \lambda(p) Id$
+
 - Las **curvaturas principales** de $S$ en $p$ son los autovalores $\kur_1(p),
   \kur_2(p) \in \R$ de $W_p$.
 
@@ -376,6 +381,12 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
       \iff W_{\alpha(t)}\alpha'(t) = \lambda(t)\alpha'(t),\ \forall t \in I$ y
       cierta función curvatura principal $\lambda : I \to \R$.
 
+      Si el polinomio característico es complicado se puede utilizar que $$Wv =
+      \lambda v \iff \I^{-1}\II v \lambda v \iff \II v = \lambda \I v$$. A
+      partir de aquí, si necesitamos el $\lambda$ calculamos; si no, definimos
+      $z = \II v$ y forzamos que sea linealmente dependiente de $v$, es decir,
+      que $\det(\II v, v) = 0$.
+
   - Un **punto umbilical** es un $p \in S$ tal que $\kur_1(p) = \kur_2(p)$
 
   - Las **funciones de curvatura principal** se obtienen de diagonalizar para
@@ -384,8 +395,9 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     funciones diferenciables.
  
 - La **curvatura de Gauss** de $S$ en $p$ es el número real $$K(p) := \det W_p
-  = \kur_1(p) \cdot \kur_2(p) = \frac{eg - f^2}{EG - F^2}$$ para
-  $e,f,g,E,F,G$ evaluadas en $p$.
+  = \kur_1(p) \cdot \kur_2(p)$$ o, alternativamente $$K(p) = \det(\I^{-1} \II)
+  = \frac{\det \II}{\det \I} = \frac{eg - f^2}{EG - F^2}$$ para $e,f,g,E,F,G$
+  evaluadas en $p$.
 
   - Atendiendo a la curvatura gaussiana, los puntos $p \in S$ se clasifican en:
   
@@ -397,8 +409,9 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     4. **puntos hiperbólicos** si $K(p) < 0$
 
 - La **curvatura media** de $S$ en $p$ es el número real $$H(p) :=
-  \frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kur_1(p) + \kur_2(p)) =
-  \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}$$ para $e,f,g,E,F,G$ evaluadas en
-  $p$.
+  \frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kur_1(p) + \kur_2(p))$$ o,
+  alternativamente $$H(p) = \frac{1}{2} \text{tr} (\I^{-1} \II) =
+  \frac{1}{2}\frac{eG+gE-2fF}{EG - F^2}$$ para $e,f,g,E,F,G$ evaluadas en $p$.
 
-  - Una **superficie minimal** es aquella que tiene $H(p) = 0,\ \forall p \in S$. 
+  - Una **superficie minimal** es aquella que tiene $H(p) = 0,\ \forall p \in
+    S$. Son minimales los trozos de esfera y los trozos de plano.
