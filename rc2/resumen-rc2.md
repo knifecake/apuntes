@@ -449,7 +449,7 @@ empresas), la cosa está en que todo el mundo confíe en ella.
 
 ## Seguridad en redes
 
-### TLS = Transpor Layer Security
+### TLS = Transport Layer Security
 
 * Versión actual (v 1.3) soluciona los problemas de la versión original SSL.
 
