@@ -295,8 +295,7 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     = G$ y $F = 0$ para todo $p = (u, v) \in U$.
 
   - $f$ es conforme $\iff$ **preserva ángulos**
-  - $f$ es **equiárea** $\iff$ preserva la función $EG- F^2$ entre las formas
-    fundamentales de $S_1$ y $S_2$
+  - $f$ es **equiárea** $\iff$ preserva $\det \I_p = EG- F^2$ entre $S_1$ y $S_2$
 
 - $f$ es una isometría local $\iff$ preserva la primera forma fundamenteal, es decir, $$\pescalar{(df)_p(x), (df)_p(y)} = \pescalar{x, y}$$
 

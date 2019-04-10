@@ -269,6 +269,7 @@ además `Last-Modified`, `Server`, `Date` y `Content-Length`.
   bien.[^1]
 
 [^1]: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Block_Chaining_(CBC)
+
 ## Cifrados asimétricos
 
 - Funciona a partir de un par de claves: lo que una encripta solo lo puede
