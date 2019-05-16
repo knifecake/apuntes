@@ -68,8 +68,8 @@ author: Elias Hernandis
 
 -   El **diedro de Frenet-Serret** formado por los vectores
     $$\begin{aligned}
-            \mathbf{t}_\alpha(t) &= \frac{\alpha'(s)}{\left\lVert\alpha'(s)\right\rVert} \\
-            \mathbf{n}_\alpha(t) &= J\mathbf{t}_\alpha(s) \text{ con } J = \left(\begin{array}{cc}
+            \mathbf{t}_\alpha(t) &= \frac{\alpha'(t)}{\left\lVert\alpha'(t)\right\rVert} \\
+            \mathbf{n}_\alpha(t) &= J\mathbf{t}_\alpha(t) \text{ con } J = \left(\begin{array}{cc}
             0 & -1 \\
             1 & 0
             \end{array}\right) 
