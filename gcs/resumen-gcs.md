@@ -18,15 +18,15 @@ author: Elias Hernandis
     $\alpha: I \subset \R^n$ definida por
     $\alpha(t) = (\alpha_1(t), \dots,  \alpha_n(t))$.
 
--   La **rapidez** es la derivada
+-   La **velocidad** es la derivada
     $\alpha'(t) = (\alpha_1'(t), \dots, \alpha_n'(t))$
 
--   La **velocidad** es la norma de la rapidez
+-   La **rapidez** es la norma de la velocidad
     $v_\alpha(t) = \left\lVert\alpha'(t)\right\rVert$
 
     -   $\alpha$ es **regular** $\iff v_\alpha(t) > 0, \forall t \in I$
 
-    -   La derivada (o rapidez) normalizada es
+    -   La derivada (o velocidad) normalizada es
         $T_\alpha(t) = \frac{\alpha'(t)}{v_\alpha(t)}$.
 
 -   La **longitud** es $l_\alpha = \int_I v_\alpha(t)dt$.
