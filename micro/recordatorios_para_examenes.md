@@ -33,3 +33,21 @@
 1. Al leer un `char` de la pila que hemos pasado por parámetros descartamos la
    parte más significativa (que deberían ser ceros y está en la dirección más
    baja por ser little endian).
+
+
+## Contenido del final: queco
+
+1. Un ejercicio del primer parcial de obtener el valor de registros a partir de
+   memoria e instrucciones.
+1. Un problema de paso de parámetros desde C que requiere identificar los
+   valores de la dir de retorno y demás parámetros en la pila.
+1. Va a hacer un programa en su casa y luego va a quitar instrucciones para que
+   las rellenemos (rollo segundo parcial). Va a ser perfume Yves Saint Laurent
+   no agua de colonia.
+1. Programación con entrada salida (pero puede haber de todo lo demás también).
+
+## Contenido del final: el comañero del queco
+
+1. Hay enunciados donde pone un esquemático eléctrico. Seis páginas de
+   enunciado. La dificultad es entender el enunciado. Una vez entendido, el
+   problema es trivial.

@@ -1,6 +1,6 @@
 ---
 title: Resumen GCS
-author: Elias Hernandis
+author: E. Hernandis, M. Baquedano
 layout: notes
 ---
 
@@ -8,11 +8,11 @@ layout: notes
 <h2 id="curvas-en-general">Curvas en general</h2>
 <ul>
 <li><p>Una <strong>curva plana</strong> es una aplicación continua <span class="math inline">\(\alpha: I \subset \mathbb{R}^n\)</span> definida por <span class="math inline">\(\alpha(t) = (\alpha_1(t), \dots, \alpha_n(t))\)</span>.</p></li>
-<li><p>La <strong>rapidez</strong> es la derivada <span class="math inline">\(\alpha&#39;(t) = (\alpha_1&#39;(t), \dots, \alpha_n&#39;(t))\)</span></p></li>
-<li><p>La <strong>velocidad</strong> es la norma de la rapidez <span class="math inline">\(v_\alpha(t) = \left\lVert\alpha&#39;(t)\right\rVert\)</span></p>
+<li><p>La <strong>velocidad</strong> es la derivada <span class="math inline">\(\alpha&#39;(t) = (\alpha_1&#39;(t), \dots, \alpha_n&#39;(t))\)</span></p></li>
+<li><p>La <strong>rapidez</strong> es la norma de la velocidad <span class="math inline">\(v_\alpha(t) = \left\lVert\alpha&#39;(t)\right\rVert\)</span></p>
 <ul>
 <li><p><span class="math inline">\(\alpha\)</span> es <strong>regular</strong> <span class="math inline">\(\iff v_\alpha(t) &gt; 0, \forall t \in I\)</span></p></li>
-<li><p>La derivada (o rapidez) normalizada es <span class="math inline">\(T_\alpha(t) = \frac{\alpha&#39;(t)}{v_\alpha(t)}\)</span>.</p></li>
+<li><p>La derivada (o velocidad) normalizada es <span class="math inline">\(T_\alpha(t) = \frac{\alpha&#39;(t)}{v_\alpha(t)}\)</span>.</p></li>
 </ul></li>
 <li><p>La <strong>longitud</strong> es <span class="math inline">\(l_\alpha = \int_I v_\alpha(t)dt\)</span>.</p></li>
 <li><p>Una <strong>parametrización</strong> es un difeomorfismo <span class="math inline">\(\varphi : J \subset \mathbb{R}\to I \subset \mathbb{R}\)</span></p>
@@ -42,8 +42,8 @@ layout: notes
 <h2 id="curvas-planas">Curvas planas</h2>
 <ul>
 <li><p>El <strong>diedro de Frenet-Serret</strong> formado por los vectores <span class="math display">\[\begin{aligned}
-        \mathbf{t}_\alpha(t) &amp;= \frac{\alpha&#39;(s)}{\left\lVert\alpha&#39;(s)\right\rVert} \\
-        \mathbf{n}_\alpha(t) &amp;= J\mathbf{t}_\alpha(s) \text{ con } J = \left(\begin{array}{cc}
+        \mathbf{t}_\alpha(t) &amp;= \frac{\alpha&#39;(t)}{\left\lVert\alpha&#39;(t)\right\rVert} \\
+        \mathbf{n}_\alpha(t) &amp;= J\mathbf{t}_\alpha(t) \text{ con } J = \left(\begin{array}{cc}
         0 &amp; -1 \\
         1 &amp; 0
         \end{array}\right) 
@@ -116,7 +116,7 @@ layout: notes
 <h1 id="superficies">Superficies</h1>
 
 <ul>
-<li>Un <strong>homeomorfismo</strong> entre dos espacios topológicos es una aplicación biyectiva continua y con inversa continua.
+<li><p>Un <strong>homeomorfismo</strong> entre dos espacios topológicos es una aplicación biyectiva continua y con inversa continua.</p>
 <ul>
 <li>Un <strong>difeomorfismo</strong> es un <strong>homeomorfismo</strong> diferenciable con inversa diferenciable.</li>
 <li>Dos conjuntos son <strong>homeomorfos</strong> si existe un homeomorfismo entre ellos.</li>
@@ -143,7 +143,7 @@ layout: notes
 <li><p>El <strong>plano tangente (afín)</strong> a <span class="math inline">\(S\)</span> en <span class="math inline">\(p = \mathbf{x}(u,v) \in S\)</span> <span class="math display">\[\begin{aligned} T_pS = p + \underbrace{\text{ span}\{\mathbf{x}_u(u,v),
 \mathbf{x}_v(u,v)\}}_{\text{plano tangente vectorial}} \end{aligned}\]</span></p></li>
 </ul></li>
-<li>La <strong>recta normal</strong> a <span class="math inline">\(S\)</span> en <span class="math inline">\(p \in S\)</span> es el complemento ortogonal del plano tangente <span class="math inline">\(T_pS^\perp\)</span>.
+<li><p>La <strong>recta normal</strong> a <span class="math inline">\(S\)</span> en <span class="math inline">\(p \in S\)</span> es el complemento ortogonal del plano tangente <span class="math inline">\(T_pS^\perp\)</span>.</p>
 <ul>
 <li>Para cada <span class="math inline">\(p \in S\)</span> existen dos vectores normales unitarios (opuestos) en la recta normal.</li>
 </ul></li>
@@ -191,7 +191,7 @@ F &amp; G\end{array}\right) = \left(\begin{array}{cc}
 <li><p>Una <strong>parametrización</strong> <span class="math inline">\(\mathbf{x}: U \subset \mathbb{R}^2\)</span> se dice <strong>conforme</strong> si cumple la definición anterior para <span class="math inline">\(S_2 = \mathbb{R}^2\)</span>. Es decir, <span class="math inline">\(\forall x, y \in \mathbb{R}^2\)</span> y <span class="math inline">\(\forall p \in U\)</span>. Equivalentemente, <span class="math inline">\(\mathbf{x}\)</span> se dice conforme si <span class="math display">\[\mathrm{I}_p^{\mathbf{x}}
 = \left(\begin{array}{cc} E &amp; F \\ F &amp; G \end{array}\right) = \lambda(p)
 \left(\begin{array}{cc} 1 &amp; 0 \\ 0 &amp; 1\end{array}\right)\]</span> es decir, si <span class="math inline">\(E = G\)</span> y <span class="math inline">\(F = 0\)</span> para todo <span class="math inline">\(p = (u, v) \in U\)</span>.</p></li>
-<li><span class="math inline">\(f\)</span> es conforme <span class="math inline">\(\iff\)</span> <strong>preserva ángulos</strong></li>
+<li><p><span class="math inline">\(f\)</span> es conforme <span class="math inline">\(\iff\)</span> <strong>preserva ángulos</strong></p></li>
 <li><p><span class="math inline">\(f\)</span> es <strong>equiárea</strong> <span class="math inline">\(\iff\)</span> preserva <span class="math inline">\(\det \mathrm{I}_p = EG- F^2\)</span> entre <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span></p></li>
 </ul></li>
 <li><p><span class="math inline">\(f\)</span> es una isometría local <span class="math inline">\(\iff\)</span> preserva la primera forma fundamenteal, es decir, <span class="math display">\[\langle (df)_p(x), (df)_p(y)\rangle = \langle x, y\rangle\]</span></p>
