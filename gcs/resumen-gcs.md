@@ -144,8 +144,8 @@ author: Elias Hernandis
         \end{aligned}$$
 
 -   Las ecuaciones de Frenet-Serret $$\begin{aligned}
-            \mathbf{t}_\alpha' &= k_\alpha v_\alpha \mathbf{n}_\alpha \\
-            \mathbf{n}_\alpha' &= -k_\alpha v_\alpha \mathbf{t}_\alpha + \tau_\alpha v_\alpha \mathbf{b}_\alpha \\
+            \mathbf{t}_\alpha' &= v_\alpha k_\alpha \mathbf{n}_\alpha \\
+            \mathbf{n}_\alpha' &= -v_\alpha k_\alpha \mathbf{t}_\alpha + v_\alpha \tau_\alpha \mathbf{b}_\alpha \\
             \mathbf{b}_\alpha' &= -v_\alpha \tau_\alpha \mathbf{n}_\alpha
         \end{aligned}$$ $$\begin{aligned}
             \left(\begin{array}{c}
