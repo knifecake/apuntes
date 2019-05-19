@@ -201,6 +201,28 @@ Iterar
 <p><span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></p>
 </div></li>
 </ol>
+<h2 id="incertidumbre">Incertidumbre</h2>
+<p><strong>Problema:</strong> dado un conjunto de pares (atributos, clase) donde atributos es un vector, elaborar un modelo que permita asignar una clase de entre un conjunto de clases a otros vectores de atributos.</p>
+<p><strong>Definiciones:</strong></p>
+<ul>
+<li><p>El prior <span class="math inline">\(P(\text{clase})\)</span></p></li>
+<li><p>La evidencia <span class="math inline">\(P(\text{atributos})\)</span></p></li>
+<li><p>La verosimilitud <span class="math inline">\(P(\text{atributos}\mid \text{clase})\)</span></p></li>
+<li><p>El posterior <span class="math inline">\(P(\text{clase} \mid \text{atributos}\)</span>. Para un vector de atributos dado, la suma de los posteriores sobre cada clase da siempre 1, es decir, <span class="math inline">\(\sum P(\text{clase}_i \mid \text{atributos}) = 1\)</span>.</p></li>
+</ul>
+<p><strong>Modelos:</strong></p>
+<p>Un modelo de predicción nos asigna una clase a un vector de atributos dado en base a los datos (pares (atributos, clase)) de los que partimos.</p>
+<ul>
+<li><p>Modelo basado en priores: predecir, para cualquier vector de atributos, la clase con mayor prior (ignorar los atributos de un dato para clasificarlo).</p></li>
+<li><p><strong>ML = Maximum Likelihood</strong> o Máxima verosimilitud: predecir la clase que maximiza <span class="math inline">\(P(\text{atributos} \mid \text{clase})\)</span>.</p></li>
+<li><p><strong>Calsificador de Bayes o MAP</strong> o maximizar los posteriores: predecir la clase que maximiza <span class="math inline">\(P(\text{clase}\mid \text{atributos})\)</span>. <em>Bayes es óptimo = minimiza el error</em>.</p></li>
+<li><p><strong>Clasificador Naïve Bayes:</strong> asume que los atributos son independientes entre sí y por tanto solo dependen de la clase, difiere del clasificador de Bayes en la manera de descomponer <span class="math inline">\(P(\text{clase}\mid \text{atributos})\)</span>: <span class="math display">\[
+  P(\text{clase} \mid \text{atributos}) = \frac{P(\text{atributos}\mid \text{clase}) \cdot P(\text{clase})}{P(\text{atributos})} = \frac{(\prod P(\text{attributo}_i\mid \text{clase}))P(\text{clase})}{P(\text{atributos})}
+\]</span></p>
+<p>Predice la clase que maximiza <span class="math inline">\(P(\text{clase} \mid \text{atributos})\)</span> como hace MAP.</p></li>
+<li><p><strong>Clasificador según una red bayesiana:</strong> dadas las dependencias entre los atributos(el grafo) descomponemos <span class="math inline">\(P(\text{clase}\mid \text{atributos})\)</span> según estas. Predice la clase que maximiza <span class="math inline">\(P(\text{clase} \mid \text{atributos})\)</span> como hace MAP.</p></li>
+</ul>
+<p><strong>Nota:</strong> si tenemos clases uniformes, es decir, si <span class="math inline">\(P(\text{clase}_i) = P(\text{clase}_j)\)</span> para toda clase de nuestro problema, entonces MAP y ML predicen siempre la misma clase (no necesariamente con la misma probabilidad).</p>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>

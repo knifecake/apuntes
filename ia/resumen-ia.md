@@ -159,3 +159,56 @@ Hay que acordarse de:
    <div class="table-responsive">
    $$\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]$$
    </div>
+
+## Incertidumbre
+
+**Problema:** dado un conjunto de pares (atributos, clase) donde atributos es
+un vector, elaborar un modelo que permita asignar una clase de entre un
+conjunto de clases a otros vectores de atributos.
+
+**Definiciones:**
+
+- El prior $P(\text{clase})$
+
+- La evidencia $P(\text{atributos})$
+
+- La verosimilitud $P(\text{atributos}\mid \text{clase})$
+
+- El posterior $P(\text{clase} \mid \text{atributos}$. Para un vector de
+  atributos dado, la suma de los posteriores sobre cada clase da siempre 1,
+  es decir, $\sum P(\text{clase}_i \mid \text{atributos}) = 1$.
+
+**Modelos:**
+
+Un modelo de predicción nos asigna una clase a un vector de atributos dado en
+base a los datos (pares (atributos, clase)) de los que partimos.
+
+- Modelo basado en priores: predecir, para cualquier vector de atributos, la
+  clase con mayor prior (ignorar los atributos de un dato para clasificarlo).
+
+- **ML = Maximum Likelihood** o Máxima verosimilitud: predecir la clase que
+  maximiza $P(\text{atributos} \mid \text{clase})$.
+
+- **Calsificador de Bayes o MAP** o maximizar los posteriores: predecir la
+  clase que maximiza $P(\text{clase}\mid \text{atributos})$. *Bayes es óptimo =
+  minimiza el error*.
+
+- **Clasificador Naïve Bayes:** asume que los atributos son independientes
+  entre sí y por tanto solo dependen de la clase, difiere del clasificador de
+  Bayes en la manera de descomponer $P(\text{clase}\mid \text{atributos})$:
+  $$
+    P(\text{clase} \mid \text{atributos}) = \frac{P(\text{atributos}\mid \text{clase}) \cdot P(\text{clase})}{P(\text{atributos})} = \frac{(\prod P(\text{attributo}_i\mid \text{clase}))P(\text{clase})}{P(\text{atributos})}
+  $$
+
+  Predice la clase que maximiza $P(\text{clase} \mid \text{atributos})$ como hace MAP.
+
+- **Clasificador según una red bayesiana:** dadas las dependencias entre los
+  atributos(el grafo) descomponemos $P(\text{clase}\mid \text{atributos})$
+  según estas. Predice la clase que maximiza $P(\text{clase} \mid
+  \text{atributos})$ como hace MAP.
+
+**Nota:** si tenemos clases uniformes, es decir, si $P(\text{clase}_i) =
+P(\text{clase}_j)$ para toda clase de nuestro problema, entonces MAP y ML
+predicen siempre la misma clase (no necesariamente con la misma probabilidad).
+
+
