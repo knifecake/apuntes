@@ -56,9 +56,9 @@ Iterar
 </ul>
 <p>¿Qué queremos?</p>
 <ul>
-<li><strong>Completitud</strong>: encontrar la solución siempre que exista.</li>
+<li><p><strong>Completitud</strong>: encontrar la solución siempre que exista.</p></li>
 <li><p><strong>Optimalidad</strong>: encontrar siempre la solución de menor coste <span class="math inline">\(g\)</span>.</p></li>
-<li><span class="math inline">\(A^\ast\)</span> (A-estrella): ordenar la lista de abiertos por valor de <span class="math inline">\(f = g + h\)</span> ascendente.
+<li><p><span class="math inline">\(A^\ast\)</span> (A-estrella): ordenar la lista de abiertos por valor de <span class="math inline">\(f = g + h\)</span> ascendente.</p>
 <ul>
 <li><span class="math inline">\(A^\ast\)</span> sin eliminación de estados repetidos (= búsqueda en árbol) y <span class="math inline">\(h\)</span> admisible es completa y óptima.</li>
 <li><span class="math inline">\(A^\ast\)</span> con eliminación de estados repetidos (= búsqueda en grafo) y <span class="math inline">\(h\)</span> monótona es completa y óptima.</li>
@@ -95,8 +95,8 @@ Iterar
 <td>en anchura</td>
 <td><span class="math inline">\(O(b^d)\)</span></td>
 <td><span class="math inline">\(O(b^d)\)</span></td>
-<td>Sí<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></td>
-<td>Sí<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></td>
+<td>Sí<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td>Sí<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
 </tr>
 <tr class="even">
 <td>en profundidad</td>
@@ -145,18 +145,18 @@ Iterar
 </ul>
 <h3 id="minimax">Minimax</h3>
 <ul>
-<li>Modelización de un problema con dos jugadores.</li>
-<li>Al que juega primero le llamamos <em>max</em>, al otro <em>min</em>.</li>
-<li>Esta estrategia encuentra la jugada óptima para max.</li>
+<li><p>Modelización de un problema con dos jugadores.</p></li>
+<li><p>Al que juega primero le llamamos <em>max</em>, al otro <em>min</em>.</p></li>
+<li><p>Esta estrategia encuentra la jugada óptima para max.</p></li>
 <li><p>Definimos el valor <code>minimax(n)</code> para un nodo:</p>
 <div class="table-responsive">
 <span class="math display">\[\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &amp;\text{ si } n \text{ terminal }\\
-                                         \max\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo max}\\
-                                         \min\{\text{minimax}(s) : s \text{ sucesor de } n &amp;\text{ si } n \text{ es un nodo min}\end{cases}\]</span>
+\max\{\text{minimax}(s) : s \text{ sucesor de } n\} &amp;\text{ si } n \text{ es un nodo max}\\
+\min\{\text{minimax}(s) : s \text{ sucesor de } n\} &amp;\text{ si } n \text{ es un nodo min}\end{cases}\]</span>
 </div></li>
-<li>Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).</li>
-<li>Complejidad temporal <span class="math inline">\(O(b^m)\)</span> y espacial <span class="math inline">\(O(b\cdot m)\)</span>.</li>
-<li>Con <strong>poda</strong> <span class="math inline">\(\alpha-\beta\)</span>:
+<li><p>Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).</p></li>
+<li><p>Complejidad temporal <span class="math inline">\(O(b^m)\)</span> y espacial <span class="math inline">\(O(b\cdot m)\)</span>.</p></li>
+<li><p>Con <strong>poda</strong> <span class="math inline">\(\alpha-\beta\)</span>:</p>
 <ul>
 <li>En nodos <code>min</code> se actualiza <span class="math inline">\(\beta = \min(\beta, \alpha_i \text{ de los hijos })\)</span></li>
 <li>En nodos <code>max</code> se actualiza <span class="math inline">\(\alpha = \max(\alpha, \beta_i \text{ de los hijos})\)</span></li>
@@ -201,10 +201,10 @@ Iterar
 <p><span class="math display">\[\forall u [Universal(u) \implies \forall t, d (comp(t, d) = comp(u, descr(t_2, d))]\]</span></p>
 </div></li>
 </ol>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Búsqueda en anchura solo es completa y óptima si el coste es una función no decreciente de la profundidad.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>

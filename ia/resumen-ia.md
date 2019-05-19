@@ -109,8 +109,8 @@ La **estrategia** determina la ordenación de la lista abierta:
 
   <div class="table-responsive">
   $$\text{minimax}(n) \equiv \begin{cases} \text{Utilidad}(n) &\text{ si } n \text{ terminal }\\
-                                           \max\{\text{minimax}(s) : s \text{ sucesor de } n &\text{ si } n \text{ es un nodo max}\\
-                                           \min\{\text{minimax}(s) : s \text{ sucesor de } n &\text{ si } n \text{ es un nodo min}\end{cases}$$
+  \max\{\text{minimax}(s) : s \text{ sucesor de } n\} &\text{ si } n \text{ es un nodo max}\\
+  \min\{\text{minimax}(s) : s \text{ sucesor de } n\} &\text{ si } n \text{ es un nodo min}\end{cases}$$
                                            </div>
 
 * Optimalidad: minimax es óptimo si el oponente lo es. Si no lo es hay maneras mejores de ganarle (esto es peligroso).
