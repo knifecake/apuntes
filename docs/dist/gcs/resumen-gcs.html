@@ -210,15 +210,17 @@ F &amp; G\end{array}\right) = \left(\begin{array}{cc}
 <li><p>isometría global <span class="math inline">\(\implies\)</span> isometría local</p></li>
 </ul></li>
 <li><p>La <strong>aplicación de Gauss</strong> <span class="math inline">\(N: \mathbf{x}(U) \to \mathbb{S}^2\)</span> definida por <span class="math display">\[N(\mathbf{x}(u,
-v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf{x}_v \rVert}\]</span> asocia a cada punto <span class="math inline">\(p = \mathbf{x}(u, v) \in S\)</span> su vector normal unitario.</p>
+v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf{x}_v \rVert}\]</span> asocia a cada punto <span class="math inline">\(p = \mathbf{x}(u, v) \in S\)</span> su vector normal unitario. En ocasiones abusaremos de la notación para denotar <span class="math inline">\(N\)</span> como aplicacióón de <span class="math inline">\(U\)</span> a <span class="math inline">\(\mathbb{S}^2\)</span> escibiendo <span class="math inline">\(N(u,v)\)</span>.</p>
 <ul>
 <li><p><span class="math inline">\(N\)</span> define un <strong>campo normal unitario</strong> localmente para cada entorno <span class="math inline">\(\mathbf{x}(U)\)</span> de <span class="math inline">\(p\)</span>.</p></li>
-<li><p>Si <span class="math inline">\(N\)</span> define un campo normal globalmente para todo <span class="math inline">\(p \in S\)</span> se dice que <span class="math inline">\(S\)</span> es orientable. Esto depende de la parametrización, por tanto <span class="math inline">\(S\)</span> es <strong>orientable</strong> si existe alguna parametrización para la que <span class="math inline">\(N\)</span> defina un campo normal unitario en toda <span class="math inline">\(S\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(N\)</span> define un campo normal globalmente para todo <span class="math inline">\(p \in S\)</span> se dice que <span class="math inline">\(S\)</span> es orientable. Esto depende de la parametrización, por tanto <span class="math inline">\(S\)</span> es <strong>orientable</strong> si existe alguna parametrización para la que <span class="math inline">\(N\)</span> defina un campo normal unitario en toda <span class="math inline">\(S\)</span>. Son orientables el plano, la esfera, los conjuntos de nivel y los grafos de funciones, entre otros.</p></li>
+<li><p>A partir de N definimos un endomorfismo <span class="math inline">\(J: T_pS \to T_pS\)</span> dado por <span class="math display">\[Jx :=
+N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS\)</span> 90º en el sentido que hace que <span class="math inline">\(\{x, Jx, N(p)\}\)</span> sea una base positivamente orientada.</p></li>
 </ul></li>
 <li><p>La <strong>segunda forma fundamental</strong> es la aplicación <span class="math display">\[\mathrm{II}_p : T_pS \times T_p S
 \to \mathbb{R},\qquad \mathrm{II}_p(x,y) := \langle x, W_p y\rangle\]</span></p>
 <ul>
-<li><p><span class="math inline">\(\mathrm{II}_p\)</span> es bilineal y simétrica pero no tiene por qué ser definida positiva</p></li>
+<li><p><span class="math inline">\(\mathrm{II}_p\)</span> es bilineal y simétrica (en cualquier base, no solo en bases ortonormales) pero no tiene por qué ser definida positiva</p></li>
 <li><p>La expresión matricial de <span class="math inline">\(\mathrm{II}_p\)</span> respecto de la base de vectores coordenados <span class="math inline">\(\mathcal{B} = \{\mathbf{x}_u, \mathbf{x}_v\}\)</span> se puede calcular a partir de la aplicación de Gauss mediante <span class="math display">\[\mathrm{II}_p \equiv \left(\begin{array}{cc} e &amp; f \\ f &amp; g \end{array}\right) =
   \left(\begin{array}{cc} \langle \mathbf{x}_{uu}, N\rangle &amp; \langle \mathbf{x}_{uv}, N\rangle \\
   \langle \mathbf{x}_{vu}, N\rangle &amp; \langle \mathbf{x}_{vv}, N\rangle\end{array}\right)\]</span></p></li>
@@ -250,12 +252,13 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 = \kappa_1(p) \cdot \kappa_2(p)\]</span> o, alternativamente <span class="math display">\[K(p) = \det(\mathrm{I}^{-1} \mathrm{II})
 = \frac{\det \mathrm{II}}{\det \mathrm{I}} = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
 <ul>
+<li><p>El <strong>Teorema Egregium de Gauss</strong> dice que la curvatura gausiana es invariante por isometrías locales. Es decir, que si <span class="math inline">\(f:S_1 \to S_2\)</span> es una isometría local, entonces <span class="math inline">\(K_1(p) = K_2(f(p))\)</span>.</p></li>
 <li><p>Atendiendo a la curvatura gaussiana, los puntos <span class="math inline">\(p \in S\)</span> se clasifican en:</p>
 <ol type="1">
 <li><strong>puntos elípticos</strong> si <span class="math inline">\(K(p) &gt; 0\)</span></li>
+<li><strong>puntos hiperbólicos</strong> si <span class="math inline">\(K(p) &lt; 0\)</span></li>
 <li><strong>puntos parabólicos</strong> si <span class="math inline">\(K(p) = 0 \land W_p \neq 0\)</span> (e.d. si solo una de las dos curvaturas principales es <span class="math inline">\(0\)</span>)</li>
 <li><strong>puntos planos</strong> si <span class="math inline">\(K(p) = 0 \land W_p = 0\)</span> (e.d. si <span class="math inline">\(\kappa_1(p) = \kappa_2(p) = 0\)</span></li>
-<li><strong>puntos hiperbólicos</strong> si <span class="math inline">\(K(p) &lt; 0\)</span></li>
 </ol></li>
 </ul></li>
 <li><p>La <strong>curvatura media</strong> de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> es el número real <span class="math display">\[H(p) :=
@@ -264,4 +267,20 @@ v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf
 <ul>
 <li>Una <strong>superficie minimal</strong> es aquella que tiene <span class="math inline">\(H(p) = 0,\ \forall p \in S\)</span>. Son minimales los trozos de esfera y los trozos de plano.</li>
 </ul></li>
+</ul>
+<p>Sea <span class="math inline">\(\alpha \subset S\)</span> una curva regular</p>
+<ul>
+<li><p>La <strong>curvatura geodésica</strong> es <span class="math display">\[k_{g,\alpha}(s) = \langle \mathbf{t}_\alpha&#39;(s), (N
+\circ \alpha) \times \mathbf{t}_\alpha(s))\rangle = k_\alpha \langle \mathbf{n}_\alpha, (N\circ
+\alpha) \times \mathbf{t}_\alpha\rangle\]</span></p></li>
+<li><p>La <strong>curvatura normal</strong> es <span class="math display">\[K_{n, \alpha} = \langle \mathbf{t}_\alpha&#39;(s), (N\circ
+\alpha)(s))\rangle = k_\alpha \langle \mathbf{n}_\alpha, N \circ \alpha\rangle\]</span> además, en relación con la segunda forma fundamental tenemos <span class="math display">\[k_{n,\alpha} =
+\mathrm{II}(\mathbf{t}_\alpha, \mathbf{t}_\alpha)\]</span></p>
+<ul>
+<li><p>Cualesquiera dos curvas regulares que pasen por un mismo punto <span class="math inline">\(p \in S\)</span> con vectores velocidad colineales tienen la misma curvatura normal por lo que definimos la <strong>curvatura normal de <span class="math inline">\(S\)</span> en <span class="math inline">\(p\)</span> en la dirección de un vector unitario <span class="math inline">\(x\)</span> dado</strong> por <span class="math display">\[k_n(p, x) := \mathrm{II}_p(x, x)\]</span></p></li>
+<li><p>Si para una dirección <span class="math inline">\(x \in T_pS\)</span> tenemos que <span class="math inline">\(k_n(p, x) = 0\)</span> entonces <span class="math inline">\(x\)</span> es una dirección asintótica.</p></li>
+<li><p>Si <span class="math inline">\(\{e_1, e_2\}\)</span> es una base ortonormal de <span class="math inline">\(T_pS\)</span> de dorecciones principales de manera que <span class="math inline">\(W_p\)</span> es diagonal con coeficientes <span class="math inline">\(\kappa_1(p), \kappa_2(p)\)</span> y <span class="math inline">\(x_\theta\)</span> es una dirección en <span class="math inline">\(T_pS\)</span> enotnces <span class="math display">\[k_n(p,
+x_\theta) = \kappa_1(p)\cos^2\theta + \kappa_2(p)\sin^2\theta\]</span> donde <span class="math inline">\(\cos \theta = \langle  e_1, x_\theta\rangle\)</span>.</p></li>
+</ul></li>
+<li><p>Curvaturas normal, geodésica y la curvatura escalar de <span class="math inline">\(\alpha\)</span> cumplen <span class="math inline">\(k_\alpha^2 = k_{g,\alpha}^2 + k_{n, \alpha}^2\)</span></p></li>
 </ul>

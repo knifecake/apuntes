@@ -9,6 +9,8 @@ author: Elias Hernandis
 \newcommand{\I}{\mathrm{I}}
 \newcommand{\II}{\mathrm{II}}
 \newcommand{\kur}{\kappa}
+\newcommand{\n}{\mathbf{n}}
+\renewcommand{\t}{\mathbf{t}}
 
 # Curvas en el plano y en el espacio
 
@@ -322,21 +324,29 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
 - La **aplicación de Gauss** $N: \x(U) \to \mathbb{S}^2$ definida por $$N(\x(u,
   v)) = \frac{\x_u \times \x_v}{\norma{\x_u \times \x_v}}$$ asocia a cada punto
-  $p = \x(u, v) \in S$ su vector normal unitario.
+  $p = \x(u, v) \in S$ su vector normal unitario. En ocasiones abusaremos de la
+  notación para denotar $N$ como aplicacióón de $U$ a $\mathbb{S}^2$ escibiendo
+  $N(u,v)$.
 
   - $N$ define un **campo normal unitario** localmente para cada entorno
     $\x(U)$ de $p$.
 
-  - Si $N$ define un campo normal globalmente para todo $p \in
-    S$ se dice que $S$ es orientable. Esto depende de la parametrización, por
-    tanto $S$ es **orientable** si existe alguna parametrización para la que $N$
-    defina un campo normal unitario en toda $S$.
+  - Si $N$ define un campo normal globalmente para todo $p \in S$ se dice que
+    $S$ es orientable. Esto depende de la parametrización, por tanto $S$ es
+    **orientable** si existe alguna parametrización para la que $N$ defina un
+    campo normal unitario en toda $S$. Son orientables el plano, la esfera, los
+    conjuntos de nivel y los grafos de funciones, entre otros.
+
+  - A partir de N definimos un endomorfismo $J: T_pS \to T_pS$ dado por $$Jx :=
+    N(p) \times x$$ que rota el vector $x \in T_pS$ 90º en el sentido que hace
+    que $\{x, Jx, N(p)\}$ sea una base positivamente orientada.
 
 
 - La **segunda forma fundamental** es la aplicación $$\II_p : T_pS \times T_p S
   \to \R,\qquad \II_p(x,y) := \pescalar{x, W_p y}$$
 
-  - $\II_p$ es bilineal y simétrica pero no tiene por qué ser definida positiva
+  - $\II_p$ es bilineal y simétrica (en cualquier base, no solo en bases
+    ortonormales) pero no tiene por qué ser definida positiva
 
   - La expresión matricial de $\II_p$ respecto de la base de vectores
     coordenados $\mathcal{B} = \{\x_u, \x_v\}$ se puede calcular a partir de la
@@ -399,14 +409,19 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
   = \frac{\det \II}{\det \I} = \frac{eg - f^2}{EG - F^2}$$ para $e,f,g,E,F,G$
   evaluadas en $p$.
 
+
+  - El **Teorema Egregium de Gauss** dice que la curvatura gausiana es
+    invariante por isometrías locales. Es decir, que si $f:S_1 \to S_2$ es una
+    isometría local, entonces $K_1(p) = K_2(f(p))$.
+
   - Atendiendo a la curvatura gaussiana, los puntos $p \in S$ se clasifican en:
   
     1. **puntos elípticos** si $K(p) > 0$
-    2. **puntos parabólicos** si $K(p) = 0 \land W_p \neq 0$ (e.d. si solo una
+    2. **puntos hiperbólicos** si $K(p) < 0$
+    3. **puntos parabólicos** si $K(p) = 0 \land W_p \neq 0$ (e.d. si solo una
        de las dos curvaturas principales es $0$)
-    3. **puntos planos** si $K(p) = 0 \land W_p = 0$ (e.d. si $\kur_1(p) =
+    4. **puntos planos** si $K(p) = 0 \land W_p = 0$ (e.d. si $\kur_1(p) =
        \kur_2(p) = 0$
-    4. **puntos hiperbólicos** si $K(p) < 0$
 
 - La **curvatura media** de $S$ en $p$ es el número real $$H(p) :=
   \frac{1}{2}\text{tr} W_p = \frac{1}{2}(\kur_1(p) + \kur_2(p))$$ o,
@@ -415,3 +430,32 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
   - Una **superficie minimal** es aquella que tiene $H(p) = 0,\ \forall p \in
     S$. Son minimales los trozos de esfera y los trozos de plano.
+
+Sea $\alpha \subset S$ una curva regular
+
+- La **curvatura geodésica** es $$k_{g,\alpha}(s) = \pescalar{\t_\alpha'(s), (N
+  \circ \alpha) \times \t_\alpha(s))} = k_\alpha \pescalar{\n_\alpha, (N\circ
+  \alpha) \times \t_\alpha}$$
+
+- La **curvatura normal** es $$K_{n, \alpha} = \pescalar{\t_\alpha'(s), (N\circ
+  \alpha)(s))} = k_\alpha \pescalar{\n_\alpha, N \circ \alpha}$$ además, en
+  relación con la segunda forma fundamental tenemos $$k_{n,\alpha} =
+  \II(\t_\alpha, \t_\alpha)$$
+
+  - Cualesquiera dos curvas regulares que pasen por un mismo punto $p \in S$
+    con vectores velocidad colineales tienen la misma curvatura normal por lo
+    que definimos la **curvatura normal de $S$ en $p$ en la dirección de un
+    vector unitario $x$ dado** por $$k_n(p, x) := \II_p(x, x)$$
+
+  - Si para una dirección $x \in T_pS$ tenemos que $k_n(p, x) = 0$ entonces $x$
+    es una dirección asintótica.
+
+  - Si $\{e_1, e_2\}$ es una base ortonormal de $T_pS$ de dorecciones
+    principales de manera que $W_p$ es diagonal con coeficientes $\kur_1(p),
+    \kur_2(p)$ y $x_\theta$ es una dirección en $T_pS$ enotnces $$k_n(p,
+    x_\theta) = \kur_1(p)\cos^2\theta + \kur_2(p)\sin^2\theta$$ donde $\cos
+    \theta = \pescalar{ e_1, x_\theta}$.
+
+- Curvaturas normal, geodésica y la curvatura escalar de $\alpha$ cumplen $k_\alpha^2 = k_{g,\alpha}^2 + k_{n, \alpha}^2$
+
+
