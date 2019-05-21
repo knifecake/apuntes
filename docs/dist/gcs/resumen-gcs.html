@@ -209,13 +209,15 @@ F &amp; G\end{array}\right) = \left(\begin{array}{cc}
 <li><p>Dos superficies son <strong>globalmente isométricas</strong> si existe una isometría global entre ellas.</p></li>
 <li><p>isometría global <span class="math inline">\(\implies\)</span> isometría local</p></li>
 </ul></li>
-<li><p>La <strong>aplicación de Gauss</strong> <span class="math inline">\(N: \mathbf{x}(U) \to \mathbb{S}^2\)</span> definida por <span class="math display">\[N(\mathbf{x}(u,
-v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times \mathbf{x}_v \rVert}\]</span> asocia a cada punto <span class="math inline">\(p = \mathbf{x}(u, v) \in S\)</span> su vector normal unitario. En ocasiones abusaremos de la notación para denotar <span class="math inline">\(N\)</span> como aplicacióón de <span class="math inline">\(U\)</span> a <span class="math inline">\(\mathbb{S}^2\)</span> escibiendo <span class="math inline">\(N(u,v)\)</span>.</p>
+<li><p>La <strong>aplicación de Gauss</strong> <span class="math inline">\(N: \mathbf{x}(U) \to \mathbb{S}^2\)</span> definida por <span class="math display">\[(N
+\circ \mathbf{x})(u,v) = N(\mathbf{x}(u, v)) = \frac{\mathbf{x}_u \times \mathbf{x}_v}{\lVert \mathbf{x}_u \times
+\mathbf{x}_v \rVert}\]</span> asocia a cada punto <span class="math inline">\(p = \mathbf{x}(u, v) \in S\)</span> su vector normal unitario. En ocasiones abusaremos de la notación para denotar <span class="math inline">\(N\)</span> como aplicación de <span class="math inline">\(U\)</span> a <span class="math inline">\(\mathbb{S}^2\)</span> escibiendo <span class="math inline">\(N(u,v) = (N \circ \mathbf{x})(u,v)\)</span>.</p>
 <ul>
 <li><p><span class="math inline">\(N\)</span> define un <strong>campo normal unitario</strong> localmente para cada entorno <span class="math inline">\(\mathbf{x}(U)\)</span> de <span class="math inline">\(p\)</span>.</p></li>
 <li><p>Si <span class="math inline">\(N\)</span> define un campo normal globalmente para todo <span class="math inline">\(p \in S\)</span> se dice que <span class="math inline">\(S\)</span> es orientable. Esto depende de la parametrización, por tanto <span class="math inline">\(S\)</span> es <strong>orientable</strong> si existe alguna parametrización para la que <span class="math inline">\(N\)</span> defina un campo normal unitario en toda <span class="math inline">\(S\)</span>. Son orientables el plano, la esfera, los conjuntos de nivel y los grafos de funciones, entre otros.</p></li>
 <li><p>A partir de N definimos un endomorfismo <span class="math inline">\(J: T_pS \to T_pS\)</span> dado por <span class="math display">\[Jx :=
-N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS\)</span> 90º en el sentido que hace que <span class="math inline">\(\{x, Jx, N(p)\}\)</span> sea una base positivamente orientada.</p></li>
+N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS\)</span> 90º en el sentido que hace que <span class="math inline">\(\{x, Jx, N(p)\}\)</span> sea una base ortogonal positivamente orientada.</p>
+<p>Si tomamos <span class="math inline">\(x = \mathbf{t}_\alpha(s)\)</span> para una curva regular <span class="math inline">\(\alpha \subset S\)</span> entonces la base que forman <span class="math inline">\(\{\mathbf{t}_\alpha(s), J\mathbf{t}_\alpha(s), (N \circ \alpha)(s)\}\)</span> se conoce como <strong>triedro de Darboux</strong>.</p></li>
 </ul></li>
 <li><p>La <strong>segunda forma fundamental</strong> es la aplicación <span class="math display">\[\mathrm{II}_p : T_pS \times T_p S
 \to \mathbb{R},\qquad \mathrm{II}_p(x,y) := \langle x, W_p y\rangle\]</span></p>
@@ -230,10 +232,10 @@ N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS
 <ul>
 <li>Una <strong>línea asintótica</strong> de <span class="math inline">\(S\)</span> es una curva diferenciable <span class="math inline">\(\alpha: I \to S\)</span> tal que <span class="math inline">\(\alpha&#39;(t)\)</span> es dirección asintótica <span class="math inline">\(\forall t \in I \iff \mathrm{II}(\alpha&#39;, \alpha&#39;) = 0\)</span>.</li>
 </ul></li>
-<li><p>El <strong>operador de Weingarten</strong> se define para cada <span class="math inline">\(p \in T_pS\)</span> como la aplicación <span class="math display">\[W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x\]</span></p>
+<li><p>El <strong>endomorfismo de Weingarten</strong> se define para cada <span class="math inline">\(p \in T_pS\)</span> como la aplicación <span class="math display">\[W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x\]</span></p>
 <ul>
 <li><p>Es una aplicación autoadjunta: <span class="math inline">\(\langle W_p x, y\rangle = \langle x, W_p y\rangle\)</span></p></li>
-<li><p>Su expresión matricial respecto de cualquier base ortonormal de <span class="math inline">\(T_pS\)</span> es simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a continuación definidas en función de los autovalores de <span class="math inline">\(W_p\)</span> están bien definidas y permanecen invariantes por cambios de base.</p></li>
+<li><p>Su expresión matricial<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> respecto de cualquier base ortonormal de <span class="math inline">\(T_pS\)</span> es simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a continuación definidas en función de los autovalores de <span class="math inline">\(W_p\)</span> están bien definidas y permanecen invariantes por cambios de base.</p></li>
 <li><p>La relación matricial respecto de <span class="math inline">\(\mathcal{B}\)</span> entre <span class="math inline">\(\mathrm{I}_p, \mathrm{II}_p\)</span> y <span class="math inline">\(W\)</span> es <span class="math display">\[(\mathrm{II}_p)_{\mathcal{B}} = (\mathrm{I}_p)_{\mathcal{B}} (W_p)_{\mathcal{B}}\]</span></p></li>
 <li><p>Un punto <span class="math inline">\(p \in S\)</span> es <strong>umbilical</strong> si <span class="math inline">\(W_p = \lambda(p) Id\)</span></p></li>
 </ul></li>
@@ -252,7 +254,11 @@ N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS
 = \kappa_1(p) \cdot \kappa_2(p)\]</span> o, alternativamente <span class="math display">\[K(p) = \det(\mathrm{I}^{-1} \mathrm{II})
 = \frac{\det \mathrm{II}}{\det \mathrm{I}} = \frac{eg - f^2}{EG - F^2}\]</span> para <span class="math inline">\(e,f,g,E,F,G\)</span> evaluadas en <span class="math inline">\(p\)</span>.</p>
 <ul>
-<li><p>El <strong>Teorema Egregium de Gauss</strong> dice que la curvatura gausiana es invariante por isometrías locales. Es decir, que si <span class="math inline">\(f:S_1 \to S_2\)</span> es una isometría local, entonces <span class="math inline">\(K_1(p) = K_2(f(p))\)</span>.</p></li>
+<li><p>El <strong>Teorema Egregium de Gauss</strong> dice que la curvatura gaussiana es invariante por isometrías locales. Es decir, que si <span class="math inline">\(f:S_1 \to S_2\)</span> es una isometría local, entonces <span class="math inline">\(K_1(p) = K_2(f(p))\)</span>.</p>
+<p>Una consecuencia de que la curvatura gaussiana es una propiedad intrínseca es que la podemos obtener a partir de la primera forma fundamental<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. En particular, si la parametrización <span class="math inline">\(\mathbf{x}\)</span> es ortogonal, se tiene que: <span class="math display">\[K =
+-\frac{1}{2\sqrt{EG}}\left[\frac{\partial}{\partial
+u}\left(\frac{G_u}{\sqrt{EG}}\right) + \frac{\partial}{\partial
+v}\left(\frac{E_v}{\sqrt{EG}}\right)\right],\qquad\text{ si } F = 0\]</span></p></li>
 <li><p>Atendiendo a la curvatura gaussiana, los puntos <span class="math inline">\(p \in S\)</span> se clasifican en:</p>
 <ol type="1">
 <li><strong>puntos elípticos</strong> si <span class="math inline">\(K(p) &gt; 0\)</span></li>
@@ -268,9 +274,9 @@ N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS
 <li>Una <strong>superficie minimal</strong> es aquella que tiene <span class="math inline">\(H(p) = 0,\ \forall p \in S\)</span>. Son minimales los trozos de esfera y los trozos de plano.</li>
 </ul></li>
 </ul>
-<p>Sea <span class="math inline">\(\alpha \subset S\)</span> una curva regular</p>
+<p>Sea <span class="math inline">\(\alpha: I \to \mathbb{R}^3\)</span> una curva regular contenida en <span class="math inline">\(S\)</span> (es decir, <span class="math inline">\(\alpha(I) \subset S\)</span>)</p>
 <ul>
-<li><p>La <strong>curvatura geodésica</strong> es <span class="math display">\[k_{g,\alpha}(s) = \langle \mathbf{t}_\alpha&#39;(s), (N
+<li><p><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> La <strong>curvatura geodésica</strong> es <span class="math display">\[k_{g,\alpha}(s) = \langle \mathbf{t}_\alpha&#39;(s), (N
 \circ \alpha) \times \mathbf{t}_\alpha(s))\rangle = k_\alpha \langle \mathbf{n}_\alpha, (N\circ
 \alpha) \times \mathbf{t}_\alpha\rangle\]</span></p></li>
 <li><p>La <strong>curvatura normal</strong> es <span class="math display">\[K_{n, \alpha} = \langle \mathbf{t}_\alpha&#39;(s), (N\circ
@@ -283,4 +289,19 @@ N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS
 x_\theta) = \kappa_1(p)\cos^2\theta + \kappa_2(p)\sin^2\theta\]</span> donde <span class="math inline">\(\cos \theta = \langle  e_1, x_\theta\rangle\)</span>.</p></li>
 </ul></li>
 <li><p>Curvaturas normal, geodésica y la curvatura escalar de <span class="math inline">\(\alpha\)</span> cumplen <span class="math inline">\(k_\alpha^2 = k_{g,\alpha}^2 + k_{n, \alpha}^2\)</span></p></li>
+<li><p>Una <strong>geodésica</strong> es una curva <span class="math inline">\(\alpha \subset S\)</span> cuya componente tangencial de la aceleración es nula en todo punto de la curva: <span class="math display">\[k_{g,\alpha}(s) = 0,\
+\forall s \in I\]</span></p>
+<ul>
+<li><p>Las isometrías locales preservan las geodésicas: si <span class="math inline">\(\alpha_1\)</span> es una geodésica en <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> es localmente isométrica a <span class="math inline">\(S_1\)</span> por h, entonces la curba <span class="math inline">\(\alpha_2 = h \circ \alpha_1 \subset S_2\)</span> también es una geodésica. En el plano las geodésicas son las rectas.</p></li>
+<li><p>Si <span class="math inline">\(\alpha\)</span> une dos puntos de <span class="math inline">\(S\)</span> y tiene longitud mínima, entonces <span class="math inline">\(\alpha\)</span> es una geodésica. Dados dos puntos, la curva que los une de menor longitud es una geodésica y es única. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p></li>
+</ul></li>
 </ul>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Si calculamos <span class="math inline">\(W_p\)</span> mediante la diferencial del normal, debemos recordar que para obtener la forma matricial del endomorfismo necesitamos fijar una base. Por tanto, para llegar a la misma matriz que la que sale de las formas fundamentales mediante la fórmula que se expone a continuación, necesitamos expresar <span class="math inline">\(dN\)</span> respecto de la base de vectores coordenados.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Ver la fórmula de Brioschi en <a href="https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas">https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Las curvaturas geodésica y normal son las componentes del vector normal <span class="math inline">\(\mathbf{n}_\alpha\)</span> de una curva <span class="math inline">\(\alpha \subset S\)</span> regular. Recordemos que dado un punto de la curva que también está en la superficie podemos construir el triedro de Darboux tomando como vector de referencia <span class="math inline">\(\mathbf{t}_\alpha(s)\)</span>. En este caso, se genera el la base ortogonal <span class="math inline">\(\{\mathbf{t}_\alpha(s), J\mathbf{t}_\alpha(s), (N \circ \alpha)(s)\}\)</span>. Como <span class="math inline">\(\mathbf{n}_\alpha(s) \perp \mathbf{t}_\alpha(s)\)</span> si expresamos <span class="math inline">\(\mathbf{n}_\alpha(s)\)</span> respecto del triedro de Darboux solo tendrá coordenadas en <span class="math inline">\(J\mathbf{t}_\alpha(s)\)</span> y <span class="math inline">\((N \circ \alpha)(s)\)</span>. Definimos las curvaturas geodésica y media como este par de coordenadas respecto del triedro de Darboux (sabiendo que la coordenada que acompaña a <span class="math inline">\(\mathbf{t}_\alpha(s)\)</span> siempre será 0).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Sin embargo, si <span class="math inline">\(\alpha\)</span> es una geodésica que pasa por dos puntos, no tiene por qué ser la curva de menor longitud que los une, puede haber varias geodésicas que lo hagan. Lo importante es que solo una curva será de longitud mínima y dicha curva será una geodésica.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>

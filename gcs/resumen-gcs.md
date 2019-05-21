@@ -322,11 +322,11 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
     - isometría global $\implies$ isometría local
 
-- La **aplicación de Gauss** $N: \x(U) \to \mathbb{S}^2$ definida por $$N(\x(u,
-  v)) = \frac{\x_u \times \x_v}{\norma{\x_u \times \x_v}}$$ asocia a cada punto
-  $p = \x(u, v) \in S$ su vector normal unitario. En ocasiones abusaremos de la
-  notación para denotar $N$ como aplicacióón de $U$ a $\mathbb{S}^2$ escibiendo
-  $N(u,v)$.
+- La **aplicación de Gauss** $N: \x(U) \to \mathbb{S}^2$ definida por $$(N
+  \circ \x)(u,v) = N(\x(u, v)) = \frac{\x_u \times \x_v}{\norma{\x_u \times
+  \x_v}}$$ asocia a cada punto $p = \x(u, v) \in S$ su vector normal unitario.
+  En ocasiones abusaremos de la notación para denotar $N$ como aplicación de
+  $U$ a $\mathbb{S}^2$ escibiendo $N(u,v) = (N \circ \x)(u,v)$.
 
   - $N$ define un **campo normal unitario** localmente para cada entorno
     $\x(U)$ de $p$.
@@ -339,7 +339,11 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
 
   - A partir de N definimos un endomorfismo $J: T_pS \to T_pS$ dado por $$Jx :=
     N(p) \times x$$ que rota el vector $x \in T_pS$ 90º en el sentido que hace
-    que $\{x, Jx, N(p)\}$ sea una base positivamente orientada.
+    que $\{x, Jx, N(p)\}$ sea una base ortogonal positivamente orientada.
+
+    Si tomamos $x = \t_\alpha(s)$ para una curva regular $\alpha \subset S$
+    entonces la base que forman $\{\t_\alpha(s), J\t_\alpha(s), (N \circ
+    \alpha)(s)\}$ se conoce como **triedro de Darboux**.
 
 
 - La **segunda forma fundamental** es la aplicación $$\II_p : T_pS \times T_p S
@@ -364,12 +368,12 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
     S$ tal que $\alpha'(t)$ es dirección asintótica $\forall t \in I \iff
     \II(\alpha', \alpha') = 0$.
 
-- El **operador de Weingarten** se define para cada $p \in T_pS$ como la
+- El **endomorfismo de Weingarten** se define para cada $p \in T_pS$ como la
   aplicación $$W: T_pS \to T_pS \text{ con } Wp(x) := -(dN)_p x$$
 
   - Es una aplicación autoadjunta: $\pescalar{W_p x, y} = \pescalar{x, W_p y}$
 
-  - Su expresión matricial respecto de cualquier base ortonormal de $T_pS$ es
+  - Su expresión matricial[^matriz-weingarten] respecto de cualquier base ortonormal de $T_pS$ es
     simétrica y por tanto diagonalizable. Además, las curvaturas que aparecen a
     continuación definidas en función de los autovalores de $W_p$ están bien
     definidas y permanecen invariantes por cambios de base.
@@ -410,9 +414,17 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
   evaluadas en $p$.
 
 
-  - El **Teorema Egregium de Gauss** dice que la curvatura gausiana es
+  - El **Teorema Egregium de Gauss** dice que la curvatura gaussiana es
     invariante por isometrías locales. Es decir, que si $f:S_1 \to S_2$ es una
     isometría local, entonces $K_1(p) = K_2(f(p))$.
+
+    Una consecuencia de que la curvatura gaussiana es una propiedad intrínseca
+    es que la podemos obtener a partir de la primera forma
+    fundamental[^ref-brioschi]. En particular, si la parametrización $\x$ es
+    ortogonal, se tiene que: $$K =
+    -\frac{1}{2\sqrt{EG}}\left[\frac{\partial}{\partial
+    u}\left(\frac{G_u}{\sqrt{EG}}\right) + \frac{\partial}{\partial
+    v}\left(\frac{E_v}{\sqrt{EG}}\right)\right],\qquad\text{ si } F = 0$$
 
   - Atendiendo a la curvatura gaussiana, los puntos $p \in S$ se clasifican en:
   
@@ -431,9 +443,9 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
   - Una **superficie minimal** es aquella que tiene $H(p) = 0,\ \forall p \in
     S$. Son minimales los trozos de esfera y los trozos de plano.
 
-Sea $\alpha \subset S$ una curva regular
+Sea $\alpha: I \to \R^3$ una curva regular contenida en $S$ (es decir, $\alpha(I) \subset S$)
 
-- La **curvatura geodésica** es $$k_{g,\alpha}(s) = \pescalar{\t_\alpha'(s), (N
+- [^aclaracion-curvaturas] La **curvatura geodésica** es $$k_{g,\alpha}(s) = \pescalar{\t_\alpha'(s), (N
   \circ \alpha) \times \t_\alpha(s))} = k_\alpha \pescalar{\n_\alpha, (N\circ
   \alpha) \times \t_\alpha}$$
 
@@ -458,4 +470,43 @@ Sea $\alpha \subset S$ una curva regular
 
 - Curvaturas normal, geodésica y la curvatura escalar de $\alpha$ cumplen $k_\alpha^2 = k_{g,\alpha}^2 + k_{n, \alpha}^2$
 
+- Una **geodésica** es una curva $\alpha \subset S$ cuya componente tangencial de
+  la aceleración es nula en todo punto de la curva: $$k_{g,\alpha}(s) = 0,\
+  \forall s \in I$$
 
+  - Las isometrías locales preservan las geodésicas: si $\alpha_1$ es una
+    geodésica en $S_1$ y $S_2$ es localmente isométrica a $S_1$ por h, entonces
+    la curba $\alpha_2 = h \circ \alpha_1 \subset S_2$ también es una
+    geodésica. En el plano las geodésicas son las rectas.
+
+  - Si $\alpha$ une dos puntos de $S$ y tiene longitud mínima, entonces
+    $\alpha$ es una geodésica. Dados dos puntos, la curva que los une de menor
+    longitud es una geodésica y es única. [^aclaracion-unicidad-geodesicas]
+  
+
+[^aclaracion-curvaturas]: Las curvaturas geodésica y normal son las componentes
+del vector normal $\n_\alpha$ de una curva $\alpha \subset S$ regular.
+Recordemos que dado un punto de la curva que también está en la superficie
+podemos construir el triedro de Darboux tomando como vector de referencia
+$\t_\alpha(s)$. En este caso, se genera el la base ortogonal $\{\t_\alpha(s),
+J\t_\alpha(s), (N \circ \alpha)(s)\}$. Como $\n_\alpha(s) \perp \t_\alpha(s)$
+si expresamos $\n_\alpha(s)$ respecto del triedro de Darboux solo tendrá
+coordenadas en $J\t_\alpha(s)$ y $(N \circ \alpha)(s)$. Definimos las
+curvaturas geodésica y media como este par de coordenadas respecto del triedro
+de Darboux (sabiendo que la coordenada que acompaña a $\t_\alpha(s)$ siempre
+será 0).
+
+[^matriz-weingarten]: Si calculamos $W_p$ mediante la diferencial del normal,
+debemos recordar que para obtener la forma matricial del endomorfismo
+necesitamos fijar una base.  Por tanto, para llegar a la misma matriz que la
+que sale de las formas fundamentales mediante la fórmula que se expone a
+continuación, necesitamos expresar $dN$ respecto de la base de vectores
+coordenados.
+
+
+[^aclaracion-unicidad-geodesicas]: Sin embargo, si $\alpha$ es una geodésica
+que pasa por dos puntos, no tiene por qué ser la curva de menor longitud que
+los une, puede haber varias geodésicas que lo hagan. Lo importante es que solo
+una curva será de longitud mínima y dicha curva será una geodésica.
+
+[^ref-brioschi]: Ver la fórmula de Brioschi en [https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas](https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas)
