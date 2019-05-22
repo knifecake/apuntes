@@ -482,6 +482,15 @@ Sea $\alpha: I \to \R^3$ una curva regular contenida en $S$ (es decir, $\alpha(I
   - Si $\alpha$ une dos puntos de $S$ y tiene longitud mínima, entonces
     $\alpha$ es una geodésica. Dados dos puntos, la curva que los une de menor
     longitud es una geodésica y es única. [^aclaracion-unicidad-geodesicas]
+
+  - El **Teorema de Clairaut**[^aclaracion-clairaut] dice que si la primera
+    forma fundamental de una parametrización $\x(u,v)$ solo depende de $u$,
+    entonces $\alpha \subset S$ es una geodésica $\iff \pescalar{\alpha', \x_v}
+    = a$ con $a$ constante.
+
+    Como $\alpha' \in T_pS$ podemos escribir $\alpha' = u'\x_u + v'\x_v$ y por
+    tanto $\pescalar{\alpha', \x_v} = \pescalar{u'\x_u + v'\x_v, \x_v} = u'F +
+    v'G$ utilizando que $\I$ es bilineal.
   
 
 [^aclaracion-curvaturas]: Las curvaturas geodésica y normal son las componentes
@@ -509,4 +518,8 @@ que pasa por dos puntos, no tiene por qué ser la curva de menor longitud que
 los une, puede haber varias geodésicas que lo hagan. Lo importante es que solo
 una curva será de longitud mínima y dicha curva será una geodésica.
 
-[^ref-brioschi]: Ver la fórmula de Brioschi en [https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas](https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas)
+[^ref-brioschi]: Ver la fórmula de Brioschi en
+[https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas](https://en.wikipedia.org/wiki/Gaussian_curvature#Alternative_formulas)
+
+[^aclaracion-clairaut]: No confundir con el Teorema de Clairaut-Schwarz sobre
+la simetría de las derivadas cruzadas.
