@@ -474,10 +474,11 @@ Sea $\alpha: I \to \R^3$ una curva regular contenida en $S$ (es decir, $\alpha(I
   la aceleración es nula en todo punto de la curva: $$k_{g,\alpha}(s) = 0,\
   \forall s \in I$$
 
-  - Las isometrías locales preservan las geodésicas: si $\alpha_1$ es una
-    geodésica en $S_1$ y $S_2$ es localmente isométrica a $S_1$ por h, entonces
-    la curba $\alpha_2 = h \circ \alpha_1 \subset S_2$ también es una
-    geodésica. En el plano las geodésicas son las rectas.
+  - Las isometrías[^aclaracion-isometrias-geodesicas] locales preservan las
+    geodésicas: si $\alpha_1$ es una geodésica en $S_1$ y $S_2$ es localmente
+    isométrica a $S_1$ por h, entonces la curva $\alpha_2 = h \circ \alpha_1
+    \subset S_2$ también es una geodésica. En el plano las geodésicas son las
+    rectas.
 
   - Si $\alpha$ une dos puntos de $S$ y tiene longitud mínima, entonces
     $\alpha$ es una geodésica. Dados dos puntos, la curva que los une de menor
@@ -523,3 +524,20 @@ una curva será de longitud mínima y dicha curva será una geodésica.
 
 [^aclaracion-clairaut]: No confundir con el Teorema de Clairaut-Schwarz sobre
 la simetría de las derivadas cruzadas.
+
+[^aclaracion-isometrias-geodesicas]: Ojo: en ocasiones hay que trabajar un poco
+para obtener la parametrización. Por ejemplo, la isometría entre plano y cono
+no es la identidad como ocurre en el cilindro. La forma más sencilla de
+obtenerla es parametrizar el plano en coordenadas polares y el cono como
+superficie de revolución, pero además tomando una parametrización por longitud
+de arco de la recta $(r(u), z(u))$ que giramos al rededor del eje $z$ para
+parametrizar el cono. Esto nos da casi una isometría salvo por el $G$ de la
+$I_\phi$. Lo corregimos multiplicando $v$ por la norma de la recta $(r, z)$. Es
+decir, parametrizar el plano por $\x(r, \theta)$ y el cono por $\phi(u, v)$
+donde $$\x(r,\theta) = (r\cos\theta, r\sin\theta, 0) \\ \phi(u,v) = \frac{\rho
+u}{\sqrt{\rho^2 + 1}}\left(\cos(v\sqrt{\rho^2 + 1}), \sin(v \sqrt{\rho^2 + 1}),
+1\right)$$ En cualquier caso, aunque lo de las isometrías está bien, no debemos
+olvidar el Teorema de Clairaut mencionado más arriba. En este caso,
+parametrizando el cono sin las restricciones adicionales, es decir, tomando
+$\psi(u, v) = (u\cos v, u \sin v, u)$ como parametrización, tenemos que
+$I_\psi$ solo depende de $u$ y por tanto podemos aplicar el teorema.
