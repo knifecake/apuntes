@@ -31,3 +31,112 @@ layout: notes
 <ol type="1">
 <li>Hay enunciados donde pone un esquemático eléctrico. Seis páginas de enunciado. La dificultad es entender el enunciado. Una vez entendido, el problema es trivial.</li>
 </ol>
+<h2 id="recetas-para-la-interacción-con-periféricos">Recetas para la interacción con periféricos</h2>
+<h3 id="qué-eois-tengo-que-mandar-para-la-interrupción-xxh">¿Qué EOI(s) tengo que mandar para la interrupción XXh?</h3>
+<p>Ejercicios 3.3, 3.12, 3.22.</p>
+<p>Dende del número de interrupción:</p>
+<ul>
+<li><p><code>01h - 07h</code>: la interrupción no está asociada a ningún PIC. No hay que mandar EOIs.</p></li>
+<li><p><code>08h - 0Fh</code>: la interrupción está asociada al PIC maestro (PIC 0). Hay que mandar el EOI al PIC maestro que se encuentra en el puerto <code>20h</code>.</p></li>
+<li><p><code>70h - 7fh</code>: la interrupción está asociada al PIC esclavo (PIC 1). Hay que mandar el EOI tanto a maestro como a esclavo (puerto <code>0A0h</code>).</p></li>
+</ul>
+<p>Ver 5.5 § XVI y XVII para más detalles y una tabla con los periféricos asociados a las interrupciones que pasan por PICs.</p>
+<p><strong>¿EOI específico o no específico?</strong> TL;DR: no específico. Explicación: el EOI específico indica cómo se debe actualizar la tabla de prioridad de interrupciones en los PICs. Salvo que se diga lo contrario (no se dice en las diapositivas) se manda el EOI no específico que es el <code>20h</code> (sí, coincide con el puerto del PIC maestro pero son cosas distintas).</p>
+<p><strong>Nota:</strong> el EOI se manda escribiendo en el puerto correspondiente: <code>MOV AL, 20h, OUT 0A0h, AL</code>.</p>
+<h3 id="rtc-real-time-clock">RTC = Real Time Clock</h3>
+<p>El RTC dispone de 64 bytes de memoria de los cuales 4 son de control. Se organizan en 4 registros (<code>0Ah, 0Bh, 0Ch, 0Dh</code>) que configuran distintas funcionalidades (Ver 6.3 § III-VIII).</p>
+<h4 id="lectura-y-escritura-en-los-registros-de-control">Lectura y escritura en los registros de control</h4>
+<p>Ver 6.3 § II.</p>
+<ol type="1">
+<li><p>Escribir (<code>OUT</code>) en el puerto 70h la dirección del registro de control al que accederemos (guardando dicha dirección en <code>AL</code>).</p></li>
+<li><p>Acceder al registro (<code>IN/OUT</code>) a través del puerto 71h y utilizando <code>AL</code> de nuevo para la escritura/lectura de datos.</p></li>
+</ol>
+<h4 id="programación-del-rtc-para-que-genere-interrupciones-periódicas-a-f-hz">Programación del RTC para que genere interrupciones periódicas a <span class="math inline">\(f\)</span> Hz</h4>
+<p>Ejercicios 3.5, 3.18.</p>
+<p>Nota: no siempre es posible obtener interrupciones a <span class="math inline">\(f\)</span> Hz pero podemos aproximarnos bastante. Además, <span class="math inline">\(f\)</span> no puede ser menor que 2 Hz por lo que si necesitamos menos frecuenciatendremos que programar el RTC a 2Hz, contar las interrupciones recibidas y actuar solamente cada <span class="math inline">\(2f\)</span> interrupciones.</p>
+<ol type="1">
+<li>Comprobar si se puede configurar el RTC: asegurarse de que el bit más significativo del registro A no está a 1. Ver 6.3 § IV.</li>
+<li>Calcular los valores <code>DV</code> y <code>RS</code> para configurar el registro <code>A</code>.
+<ul>
+<li><code>DV</code> es el número de reloj con la frecuencia inmediatamente superior a la <span class="math inline">\(f\)</span> deseada</li>
+<li><code>RS</code> se obtiene de redondear <span class="math inline">\(1 + \log_2 \frac{CLK}{f}\)</span>. Es necesario comprobar que dicho número cabe en 4 bits (nosotros al programarlo, no mediante ensamblador). Si no cabe porque es muy pequeño, hay que elegir un reloj más rápido. Si no, uno más lento.</li>
+</ul></li>
+<li>Activar la generación de interrupciones periódicas modificando el bit 6 (<code>PIE</code>) del registro B.</li>
+</ol>
+<p>Un ejemplo:</p>
+<pre><code>MOV AL, 0AH
+OUT 70H, AL
+IN AL, 71H
+TEST AL, 10000000B
+JNZ NO_SE_PUEDE_CONFIGURAR
+
+MOV AL, 00101110B ; EL REGISTRO B DEL RTC
+OUT 71H, AL
+
+MOV AL, 0BH
+OUT 70H, AL
+IN AL, 71H ; LEER REGISTRO B
+OR AL, 01000000B ; MODIFICAR BIT PIE
+OUT 71H, AL</code></pre>
+<h3 id="rutina-de-interrupción-vinculada-al-rtc-70h">Rutina de interrupción vinculada al RTC (70h)</h3>
+<p>Ejercicios 3.11, 3.20, <strong>3.21</strong>, 3.25.</p>
+<p>Hay que hacer 4 cosas: la primera y la última como siempre pero las dos centrales son específicas del RTC en el primer caso y de los periféricos que van por PIC en el segundo.</p>
+<ol type="1">
+<li>Activar las interrupciones y guardar registros.</li>
+<li>Leer el registro <code>C</code> del RTC para restearlo y que se generen las siguientes interrupciones (Ver 6.3 § VIII y IX).</li>
+</ol>
+<ul>
+<li>Si nos dicen que están activadas todas las interrupciones del RTC, debemos comprobar que el bit correspondiente del registro <code>C</code> está a 1. (Ver 6.3 § VIII).</li>
+</ul>
+<ol start="2" type="1">
+<li>Enviar EOIs no específicos a PIC maestro y esclavo.</li>
+<li>Limpiar registros y hacer <code>IRET</code>.</li>
+</ol>
+<p>Un ejemplo:</p>
+<pre><code>RSI PROC FAR
+  STI
+  PUSH ...
+
+  MOV AL, 0AH
+  OUT 70H, AL
+  IN AL, 71H
+
+  ; código de la interrupción
+
+  MOV AL, 20H
+  OUT 20H, AL
+  OUT 0A0H, 20H
+
+  POP ...
+  IRET
+RSI ENDP</code></pre>
+<h3 id="puerto-paralelo-lptx">Puerto paralelo (<code>LPTX</code>)</h3>
+<p>El puerto paralelo tiene 3 registros (datos, estado, control) que se corresponden con 3 puertos. Los números de puerto para un LPT están almacenados en un offset de memoria del segmento 0. Ver 6.5 § IV para averiguar las direcciones base.</p>
+<h3 id="escribir-en-los-pines-2-9-o-en-el-registro-de-datos">Escribir en los pines 2-9 o en el registro de datos</h3>
+<p>Ejercicio 3.23.</p>
+<ul>
+<li><p>Los pines 2-9 del conector externo DB-25 se corresponden con los bits del registro de datos pero <em>en orden inverso</em>. Ver 6.5 § VI.</p></li>
+<li><p>Para leer/escribir en el registro de estado necesitamos el puerto asociado:</p>
+<ol type="1">
+<li>Leer la dirección base de memoria en <code>DX</code>.</li>
+<li>Leer el registro de control desde el puerto (mediante <code>IN AL, DX</code>)</li>
+<li>Modificar lo que sea necesario en <code>AL</code> y escribir.</li>
+</ol></li>
+</ul>
+<p>Un ejemplo:</p>
+<pre><code>MOV AX, 0
+MOX ES, AX
+MOV DX, ES:[040Ah]
+
+IN AL, DX
+; modificar AL (o escribir directamente)
+OUT DX, AL</code></pre>
+<h3 id="leerescribir-en-los-registros-de-estado-o-control">Leer/escribir en los registros de estado o control</h3>
+<p>Ejercicios 3.13, <strong>3.21</strong>.</p>
+<ul>
+<li><p>Se hace igual pero hay que tener en cuenta dos cosas</p>
+<ol type="1">
+<li><p>Los puertos de estos registros están también en memoria pero en lugar de en la dirección base que aparece en 6.5 § IV, en <code>dirección base + 1</code> o <code>dirección base + 2</code>, respectivamente. Ver 6.5 § V.</p></li>
+<li><p>Algunos bits de estos registros están invertidos. Esto significa que <strong>si queremos poner un 1 necesitamos escribir un 0 o viceversa. Ocurre lo mismo al leer.</strong> Los bits que se invierten están especificados con la etiqueta <code>(inv)</code> en 6.5 § VII y VIII.</p></li>
+</ol></li>
+</ul>

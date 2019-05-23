@@ -223,6 +223,23 @@ Iterar
 <li><p><strong>Clasificador según una red bayesiana:</strong> dadas las dependencias entre los atributos(el grafo) descomponemos <span class="math inline">\(P(\text{clase}\mid \text{atributos})\)</span> según estas. Predice la clase que maximiza <span class="math inline">\(P(\text{clase} \mid \text{atributos})\)</span> como hace MAP.</p></li>
 </ul>
 <p><strong>Nota:</strong> si tenemos clases uniformes, es decir, si <span class="math inline">\(P(\text{clase}_i) = P(\text{clase}_j)\)</span> para toda clase de nuestro problema, entonces MAP y ML predicen siempre la misma clase (no necesariamente con la misma probabilidad).</p>
+<h2 id="aprendizaje-automático">Aprendizaje automático</h2>
+<p>Construir de manera automática modelos para clasificación.</p>
+<p>Dado un conjunto de entrenamiento formado por pares (atributos, clase) donde atributos es un vector, generar un modelo que permita asignar una clase de entre un conjunto de clase a otros vectores de atributos.</p>
+<h3 id="árboles-de-decisión">Árboles de decisión</h3>
+<ul>
+<li><p>Problema: minimizar la profundidad del árbol.</p></li>
+<li><p>Solución: poner más arriba decisiones que aporten más información, es decir, poner como raíz del árbol la decisión sobre el atributo que maximice la ganancia de información.</p></li>
+</ul>
+<p>Dos algoritmos muy parecidos:</p>
+<ul>
+<li><p>ID3: genera árboles propiamente dichos a partir de datos que pueden ser cualitativos. Un nodo del árbol representa la decisión basada en un atributo y por tanto tiene tantas ramas como valores toma el atributo. Permite atributos cualitativos.</p></li>
+<li><p>C4.5: genera particiones del espacio <span class="math inline">\(R^n\)</span> donde <span class="math inline">\(n\)</span> es el número de atributos. En cada iteración nos da una partición del dominio del atributo tal que se maximiza la ganacia de información. Requiere atributos cuantitativos (que pueden obtenerse asignando valores a los atributos cualitativos pero entonces no se diferencia de ID3).</p></li>
+</ul>
+<h3 id="k-nn-k-vecinos-más-próximos">k-NN = k vecinos más próximos</h3>
+<ul>
+<li>Consiste en codificar los atributos numéricamente de manera que sean puntos en <span class="math inline">\(R^n\)</span>. Para clasificar un punto dado, se selecionan los <span class="math inline">\(k\)</span> puntos más próximos del conjunto de entrenamiento según una métrica. La clasificación es la moda de las clases de los puntos cercanos, por eso es conveniente evitar empates, por ejemplo, tomando <span class="math inline">\(k = 3\)</span> si hay dos clases.</li>
+</ul>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>

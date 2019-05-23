@@ -212,3 +212,39 @@ P(\text{clase}_j)$ para toda clase de nuestro problema, entonces MAP y ML
 predicen siempre la misma clase (no necesariamente con la misma probabilidad).
 
 
+## Aprendizaje automático
+
+Construir de manera automática modelos para clasificación.
+
+Dado un conjunto de entrenamiento formado por pares (atributos, clase) donde
+atributos es un vector, generar un modelo que permita asignar una clase de
+entre un conjunto de clase a otros vectores de atributos.
+
+### Árboles de decisión
+
+- Problema: minimizar la profundidad del árbol.
+
+- Solución: poner más arriba decisiones que aporten más información, es decir,
+  poner como raíz del árbol la decisión sobre el atributo que maximice la
+  ganancia de información.
+
+Dos algoritmos muy parecidos:
+
+- ID3: genera árboles propiamente dichos a partir de datos que pueden ser
+  cualitativos. Un nodo del árbol representa la decisión basada en un atributo
+  y por tanto tiene tantas ramas como valores toma el atributo.  Permite
+  atributos cualitativos.
+
+- C4.5: genera particiones del espacio $R^n$ donde $n$ es el número de
+  atributos. En cada iteración nos da una partición del dominio del atributo
+  tal que se maximiza la ganacia de información. Requiere atributos
+  cuantitativos (que pueden obtenerse asignando valores a los atributos
+  cualitativos pero entonces no se diferencia de ID3).
+
+### k-NN = k vecinos más próximos
+
+- Consiste en codificar los atributos numéricamente de manera que sean puntos
+  en $R^n$. Para clasificar un punto dado, se selecionan los $k$ puntos más
+  próximos del conjunto de entrenamiento según una métrica. La clasificación es
+  la moda de las clases de los puntos cercanos, por eso es conveniente evitar
+  empates, por ejemplo, tomando $k = 3$ si hay dos clases.
