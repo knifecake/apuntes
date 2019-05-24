@@ -60,14 +60,15 @@ Ejercicios 3.3, 3.12, 3.22.
 
 Dende del número de interrupción:
 
-- `01h - 07h`: la interrupción no está asociada a ningún PIC. No hay que mandar
-  EOIs.
-
 - `08h - 0Fh`: la interrupción está asociada al PIC maestro (PIC 0). Hay que
   mandar el EOI al PIC maestro que se encuentra en el puerto `20h`.
 
 - `70h - 7fh`: la interrupción está asociada al PIC esclavo (PIC 1). Hay que
   mandar el EOI tanto a maestro como a esclavo (puerto `0A0h`).
+  
+- En otro caso: la interrupción no está asociada a ningún PIC. No hay que mandar
+  EOIs.
+
 
 Ver 5.5 &#167; XVI y XVII para más detalles y una tabla con los periféricos
 asociados a las interrupciones que pasan por PICs.
