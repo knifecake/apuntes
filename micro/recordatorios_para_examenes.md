@@ -150,12 +150,12 @@ van por PIC en el segundo.
 1. Leer el registro `C` del RTC para restearlo y que se generen las siguientes
    interrupciones (Ver 6.3 &#167; VIII y IX).
 
-  - Si nos dicen que están activadas todas las interrupciones del RTC, debemos
-    comprobar que el bit correspondiente del registro `C` está a 1. (Ver 6.3
-    &#167; VIII).
+   - Si nos dicen que están activadas todas las interrupciones del RTC, debemos
+     comprobar que el bit correspondiente del registro `C` está a 1. (Ver 6.3
+     &#167; VIII).
 
-2. Enviar EOIs no específicos a PIC maestro y esclavo.
-3. Limpiar registros y hacer `IRET`.
+1. Enviar EOIs no específicos a PIC maestro y esclavo.
+1. Limpiar registros y hacer `IRET`.
 
 Un ejemplo:
 

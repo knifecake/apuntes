@@ -82,15 +82,13 @@ OUT 71H, AL</code></pre>
 <p>Ejercicios 3.11, 3.20, <strong>3.21</strong>, 3.25.</p>
 <p>Hay que hacer 4 cosas: la primera y la última como siempre pero las dos centrales son específicas del RTC en el primer caso y de los periféricos que van por PIC en el segundo.</p>
 <ol type="1">
-<li>Activar las interrupciones y guardar registros.</li>
-<li>Leer el registro <code>C</code> del RTC para restearlo y que se generen las siguientes interrupciones (Ver 6.3 § VIII y IX).</li>
-</ol>
+<li><p>Activar las interrupciones y guardar registros.</p></li>
+<li><p>Leer el registro <code>C</code> del RTC para restearlo y que se generen las siguientes interrupciones (Ver 6.3 § VIII y IX).</p>
 <ul>
 <li>Si nos dicen que están activadas todas las interrupciones del RTC, debemos comprobar que el bit correspondiente del registro <code>C</code> está a 1. (Ver 6.3 § VIII).</li>
-</ul>
-<ol start="2" type="1">
-<li>Enviar EOIs no específicos a PIC maestro y esclavo.</li>
-<li>Limpiar registros y hacer <code>IRET</code>.</li>
+</ul></li>
+<li><p>Enviar EOIs no específicos a PIC maestro y esclavo.</p></li>
+<li><p>Limpiar registros y hacer <code>IRET</code>.</p></li>
 </ol>
 <p>Un ejemplo:</p>
 <pre><code>RSI PROC FAR
