@@ -167,8 +167,8 @@ layout: notes
 <li><p>Dada una parametrización <span class="math inline">\(\mathbf{x}\)</span> de <span class="math inline">\(S\)</span> tal que <span class="math inline">\(\mathbf{x}(u_0, v_0) = p \in S\)</span> la matriz de <span class="math inline">\(\mathrm{I}_p\)</span> respecto de la base <span class="math inline">\(\mathcal{B} = \{\mathbf{x}_u(u_0, v_0), \mathbf{x}_v(u_0, v_0)\}\)</span> es <span class="math display">\[ (I_p)_{\mathcal{B}} = \left(\begin{array}{cc}
 E &amp; F \\
 F &amp; G\end{array}\right) = \left(\begin{array}{cc}
-\langle x_u, x_u\rangle &amp; \langle x_u, x_v\rangle \\
-\langle x_v, x_u\rangle &amp; \langle x_v, x_v\rangle\end{array}\right)\]</span> donde cada derivada parcial de <span class="math inline">\(\mathbf{x}\)</span> está evaluada en <span class="math inline">\((u_0, x_0)\)</span>.</p></li>
+\langle \mathbf{x}_u, \mathbf{x}_u\rangle &amp; \langle \mathbf{x}_u, \mathbf{x}_v\rangle \\
+\langle \mathbf{x}_v, \mathbf{x}_u\rangle &amp; \langle \mathbf{x}_v, \mathbf{x}_v\rangle\end{array}\right)\]</span> donde cada derivada parcial de <span class="math inline">\(\mathbf{x}\)</span> está evaluada en <span class="math inline">\((u_0, v_0)\)</span>.</p></li>
 <li><p>Al escribir <span class="math display">\[\mathrm{I}_p(x, y) = \langle x, y\rangle = (x_1, x_2) (I_p)_{\mathcal{B}}
 \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)\]</span> estamos obteniendo el producto escalar de dos vectores en <span class="math inline">\(T_pS\)</span> en función de sus coordenadas <span class="math inline">\((x_1, x_2)\)</span> e <span class="math inline">\((y_1, y_2)\)</span> respecto de la base <span class="math inline">\(\{\mathbf{x}_u, \mathbf{x}_v\}\)</span>.</p></li>
 <li><p>La <strong>forma diferencial de la primera forma fundamental</strong> es <span class="math display">\[I = E du^2 +
@@ -245,7 +245,7 @@ N(p) \times x\]</span> que rota el vector <span class="math inline">\(x \in T_pS
 <ul>
 <li><p>Una <strong>línea de curvatura</strong> es una curva diferenciable <span class="math inline">\(\alpha: I \to S\)</span> tal que <span class="math inline">\(\alpha&#39;(t)\)</span> es dirección principal de <span class="math inline">\(S\)</span> para todo <span class="math inline">\(t \in I \iff W_{\alpha(t)}\alpha&#39;(t) = \lambda(t)\alpha&#39;(t),\ \forall t \in I\)</span> y cierta función curvatura principal <span class="math inline">\(\lambda : I \to \mathbb{R}\)</span>.</p>
 <p>Si el polinomio característico es complicado se puede utilizar que <span class="math display">\[Wv =
-\lambda v \iff \mathrm{I}^{-1}\mathrm{II}v \lambda v \iff \mathrm{II}v = \lambda \mathrm{I}v\]</span>. A partir de aquí, si necesitamos el <span class="math inline">\(\lambda\)</span> calculamos; si no, definimos <span class="math inline">\(z = \mathrm{II}v\)</span> y forzamos que sea linealmente dependiente de <span class="math inline">\(v\)</span>, es decir, que <span class="math inline">\(\det(\mathrm{II}v, v) = 0\)</span>.</p></li>
+\lambda v \iff \mathrm{I}^{-1}\mathrm{II}v = \lambda v \iff \mathrm{II}v = \lambda \mathrm{I}v\]</span>. A partir de aquí, si necesitamos el <span class="math inline">\(\lambda\)</span> calculamos; si no, definimos <span class="math inline">\(z = \mathrm{II}v\)</span> y forzamos que sea linealmente dependiente de <span class="math inline">\(v\)</span>, es decir, que <span class="math inline">\(\det(\mathrm{II}v, \mathrm{I}v) = 0\)</span>.</p></li>
 </ul></li>
 <li><p>Un <strong>punto umbilical</strong> es un <span class="math inline">\(p \in S\)</span> tal que <span class="math inline">\(\kappa_1(p) = \kappa_2(p)\)</span></p></li>
 <li><p>Las <strong>funciones de curvatura principal</strong> se obtienen de diagonalizar para diagonalizamos para <span class="math inline">\(p\)</span> genérico. Obtendremos funciones continuas <span class="math inline">\(\kappa_1(p)\)</span> y <span class="math inline">\(\kappa_2(p)\)</span>. Si <span class="math inline">\(\kappa_1 \neq \kappa_2\)</span> entonces además son funciones diferenciables.</p></li>
@@ -279,7 +279,7 @@ v}\left(\frac{E_v}{\sqrt{EG}}\right)\right],\qquad\text{ si } F = 0\]</span></p>
 <li><p><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> La <strong>curvatura geodésica</strong> es <span class="math display">\[k_{g,\alpha}(s) = \langle \mathbf{t}_\alpha&#39;(s), (N
 \circ \alpha) \times \mathbf{t}_\alpha(s))\rangle = k_\alpha \langle \mathbf{n}_\alpha, (N\circ
 \alpha) \times \mathbf{t}_\alpha\rangle\]</span></p></li>
-<li><p>La <strong>curvatura normal</strong> es <span class="math display">\[K_{n, \alpha} = \langle \mathbf{t}_\alpha&#39;(s), (N\circ
+<li><p>La <strong>curvatura normal</strong> es <span class="math display">\[k_{n, \alpha} = \langle \mathbf{t}_\alpha&#39;(s), (N\circ
 \alpha)(s))\rangle = k_\alpha \langle \mathbf{n}_\alpha, N \circ \alpha\rangle\]</span> además, en relación con la segunda forma fundamental tenemos <span class="math display">\[k_{n,\alpha} =
 \mathrm{II}(\mathbf{t}_\alpha, \mathbf{t}_\alpha)\]</span></p>
 <ul>

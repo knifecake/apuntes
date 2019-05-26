@@ -257,9 +257,9 @@ author: Elias Hernandis
     $$ (I_p)_{\mathcal{B}} = \left(\begin{array}{cc}
     E & F \\
     F & G\end{array}\right) = \left(\begin{array}{cc}
-    \pescalar{x_u, x_u} & \pescalar{x_u, x_v} \\
-    \pescalar{x_v, x_u} & \pescalar{x_v, x_v}\end{array}\right)$$
-    donde cada derivada parcial de $\x$ está evaluada en $(u_0, x_0)$.
+    \pescalar{\x_u, \x_u} & \pescalar{\x_u, \x_v} \\
+    \pescalar{\x_v, \x_u} & \pescalar{\x_v, \x_v}\end{array}\right)$$
+    donde cada derivada parcial de $\x$ está evaluada en $(u_0, v_0)$.
 
   - Al escribir $$\I_p(x, y) = \pescalar{x, y} = (x_1, x_2) (I_p)_{\mathcal{B}}
     \left(\begin{array}{c} y_1 \\ y_2\end{array}\right)$$ estamos obteniendo el
@@ -396,10 +396,10 @@ Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
       cierta función curvatura principal $\lambda : I \to \R$.
 
       Si el polinomio característico es complicado se puede utilizar que $$Wv =
-      \lambda v \iff \I^{-1}\II v \lambda v \iff \II v = \lambda \I v$$. A
+      \lambda v \iff \I^{-1}\II v = \lambda v \iff \II v = \lambda \I v$$. A
       partir de aquí, si necesitamos el $\lambda$ calculamos; si no, definimos
       $z = \II v$ y forzamos que sea linealmente dependiente de $v$, es decir,
-      que $\det(\II v, v) = 0$.
+      que $\det(\II v, \I v) = 0$.
 
   - Un **punto umbilical** es un $p \in S$ tal que $\kur_1(p) = \kur_2(p)$
 
@@ -449,7 +449,7 @@ Sea $\alpha: I \to \R^3$ una curva regular contenida en $S$ (es decir, $\alpha(I
   \circ \alpha) \times \t_\alpha(s))} = k_\alpha \pescalar{\n_\alpha, (N\circ
   \alpha) \times \t_\alpha}$$
 
-- La **curvatura normal** es $$K_{n, \alpha} = \pescalar{\t_\alpha'(s), (N\circ
+- La **curvatura normal** es $$k_{n, \alpha} = \pescalar{\t_\alpha'(s), (N\circ
   \alpha)(s))} = k_\alpha \pescalar{\n_\alpha, N \circ \alpha}$$ además, en
   relación con la segunda forma fundamental tenemos $$k_{n,\alpha} =
   \II(\t_\alpha, \t_\alpha)$$
