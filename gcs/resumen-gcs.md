@@ -280,7 +280,7 @@ author: Elias Hernandis
  
   - El **área de una región** $R \subset S$ contenida en $\x(U)$ (bien
     parametrizada) es:
-    $$A(R) = \int_{\x^{-1}(R)} \norma{\x_u \times x_v} dudv =
+    $$A(R) = \int_{\x^{-1}(R)} \norma{\x_u \times \x_v} dudv =
     \int_{\x^{-1}(R)}\sqrt{EG- F^2}dudv$$
 
 Sea $f: S_1 \to S_2$ una aplicación diferenciable entre superficies regulares.
