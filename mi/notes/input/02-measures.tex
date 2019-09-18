@@ -1,0 +1,76 @@
+% !TeX root = ../main.tex
+
+\chapter{Measures}
+
+\begin{dfn}[Measure]
+	Let $(X, \sa)$ be a measurable space. A set function $\mu: \sa \to [0, \infty)$ is called a \underline{measure} (on X) if
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$ and
+		\item \textbf{($\sigma$-aditivity)} if $(A_n)_{n\in \N} \subset \sa$ is a pairwise disjoint (i.e. $A_i \cap A_j = \emptyset$ if $i \neq j$) sequence, then
+		\begin{align*}
+			\mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n)
+		\end{align*}
+	\end{enumerate}
+\end{dfn}
+
+In the previous definition the symbol $\bigcupdot$ indicates that the union is disjoint. Also, let's introduce some more notation. Given a sequence $(A_n)_{n \in \N}$ we shall say
+\begin{align*}
+	A_n \uparrow A \iff A_1 \subseteq A_2 \subseteq \dots &\qquad\text{ and } A = \bigcup_{n \in \N} A_n \\
+	A_n \downarrow A \iff A_1 \supseteq A_2 \supseteq \dots &\qquad\text{ and } A = \bigcap_{n \in \N} A_n
+\end{align*}
+
+And some more terminology:
+
+\begin{dfn}[Exhausting sequence]
+	Within a measurable space $(X, \sa)$ sequence $(A_n)_{n\in \N} \subset \sa$ is called an exhausting sequence if $A_n \uparrow X$.
+\end{dfn}
+
+\begin{dfn}[Measure space]
+	Let $(X, \sa)$ be a measurable space and $\mu$ a measure. The triple $(X, \sa, \mu)$ is called a \underline{measure space}.
+	
+	\begin{itemize}
+		\item If $\mu(X) < \infty$ we say that $(X, \sa, \mu)$ is a finite measure space.
+		\item IF $\mu(X) = 1$ then $(X, \sa, \mu)$ is a probability space.
+	\end{itemize}
+\end{dfn}
+
+\newcommand{\sigfin}{$\sigma$-finite }
+\begin{dfn}[$\sigma$-finite measure]
+	A measure $\mu$ is called $\sigma$-finite if there exists am exhausting sequence $(A_n)_{n \in \N} \subset \sa$ such that $\mu(A_n) < \infty,\ \forall n \in \N$. A measure space with this kind of measure is called a \sigfin  measure space.
+\end{dfn}
+
+\begin{thm}[Properties of measures]
+	Let $(X, \sa, \mu)$ be a measure space and $A, B, A_n, B_n \in \sa,\ \forall n \in \N$. Then,
+	\begin{enumerate}
+		\item \textbf{(finite additivity)} $A \cap B = \emptyset \implies \mu(A \cupdot B) = \mu(A) + \mu(B)$,
+		\item \textbf{(monotonicity)} if $A \subseteq B$ then $\mu(A) \leq \mu(B)$,
+		\item if $A \subset B$ and $\mu(A) < \infty$ then $\mu(B\setminus A) = \mu(B) - \mu(A)$,
+		\item \textbf{(strong additivity)} $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$,
+		\item \textbf{(finite subadditivity)} $\mu(A \cup B) \leq \mu(A) + \mu(B)$,
+		\item \textbf{(continuity from below)} if $A_n \uparrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \sup_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$,
+		\item \textbf{(continuity from above)} if $A_n \downarrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \inf_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$, and
+		\item \textbf{(sigma subadditivity)} $\mu(\bigcup_{n \in \N} A_n) \leq \sum_{n\in \N} \mu(A_n)$.
+	\end{enumerate}
+
+	\begin{proof}$ $\newline
+		\begin{enumerate}
+			\item Let $(A_n)_{n\in\N} \subset \sa$ with $A_1 = A,\ A_2 = B$ and $A_i = \emptyset$ for $i > 2$. It is clear that $A_n$ are disjoint since $A\cap B = \emptyset$ and $A_n \cap \emptyset = \emptyset,\ \forall n \in \N$.
+			\item Write $B = (B\setminus A) \cupdot A$. Then, because of $\sigma$-aditivity we have
+			\begin{align*}
+				\mu(B) = \mu(B\setminus A) + \mu(A) \geq \mu(A) \text{ since } \mu(B\setminus A) \geq 0
+			\end{align*} 
+			\item As previously write $\mu(B) = \mu(B\setminus A) + \mu(A)$. Because $\mu(A) < \infty$ we can subtract it on both sides to get $\mu(B) -\mu(A) = \mu(B\setminus A)$.
+			\item Write $A \cup B = A \setminus B \cupdot B \setminus A \cupdot A \cap B$ hence $\mu(A \cup B) = \mu(A \setminus B) + \mu(B \setminus A) + \mu(A \cap B)$. Add $\mu(A \cap B)$ on both sides and group terms:
+			\begin{align*}
+				\mu(A \cup B) + \mu(A \cap B) = \underbrace{\mu(A \setminus B) + \mu(A \cap B)}_{\mu(A)} + \underbrace{\mu(B \setminus A) + \mu(A \cap B)}_{\mu(B)}
+			\end{align*}
+			\item $\mu(A\cap B) \leq \mu(A \cap B)+ \mu(A \cup B) = \mu(A) + \mu(B)$
+			\item Define the sequence $(B_n)_{n\in\N} \subset \sa$ by $B_1 = A_1$, $B_n = A_n\setminus A_{n-1}$ for $n > 1$. It is clear that $B_n$ is pairwise disjoint and that $\bigcupdot_{n \in \N} B_n = \bigcup_{n \in \N} A_n = A$. Hence
+			\begin{align*}
+				\mu(A) &= \mu(\bigcup_{n \in \N} A_n) = \mu(\bigcupdot_{n \in \N} B_n) = \sum_{n\in \N} \mu(B_n) = \lim_{m \to \infty} \sum_{n = 1}^m\mu(B_n) \\
+				&= \lim_{m \to \infty} \mu (\bigcupdot_{n = 1}^m B_n) = \lim_{m \to \infty} \mu (A_m) = \sup_{n\in\N} \mu(A_n)
+			\end{align*}
+			since $\mu(A_n)$ is an increasing sequence. The introduction of the limits in the previous chain of equalities has to be done carefully, as we are building on the definition of limits for sequences of numbers. The equality between the first and the second lines comes from $\sigma$-additivity.
+		\end{enumerate}
+	\end{proof}
+\end{thm}

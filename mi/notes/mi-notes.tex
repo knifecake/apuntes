@@ -1,0 +1,40 @@
+\documentclass{book}
+
+%\usepackage[utf-8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{MnSymbol}
+
+\usepackage{thmtools}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{dfn}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{eg}{Example}
+
+\renewcommand{\complement}{c}
+\newcommand{\sa}{\mathcal{A}}
+\newcommand{\sigas}{$\sigma$-algebras }
+\newcommand{\siga}{$\sigma$-algebra }
+\newcommand{\borel}{\mathcal{B}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\inv}{^{-1}}
+
+\author{Elias Hernandis}
+\title{Notes on Measure and integration}
+
+\begin{document}
+	\maketitle
+	
+	These notes are based on the lectures of Karma Dajani (k.dajani1@uu.nl) during Fall of 2019 at Universiteit Utrecht. These lectures are in turn based on the book Measures, Integrals and Martingales by René L. Schiling (2nd edition).
+	
+	Readers are asked to report errata to eliashernandis@gmail.com.
+	
+	\input{input/01-sigma-algebras.tex}
+	\input{input/02-measures.tex}
+\end{document}

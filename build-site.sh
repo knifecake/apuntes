@@ -41,3 +41,8 @@ cp edo/*.pdf edo/*.html docs/dist/edo/
 mkdir -p docs/dist/micro
 make -C micro
 cp micro/*.pdf micro/*.html docs/dist/micro/
+
+# MI
+mkdir -p docs/dist/mi
+make -C mi/notes
+cp mi/notes/*.pdf docs/dist/mi/
