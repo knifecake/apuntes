@@ -1,4 +1,4 @@
-% !TeX root = ../main.tex
+% !TeX root = ../mi-notes.tex
 
 \chapter{Measures}
 
@@ -48,29 +48,100 @@ And some more terminology:
 		\item \textbf{(strong additivity)} $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$,
 		\item \textbf{(finite subadditivity)} $\mu(A \cup B) \leq \mu(A) + \mu(B)$,
 		\item \textbf{(continuity from below)} if $A_n \uparrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \sup_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$,
-		\item \textbf{(continuity from above)} if $A_n \downarrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \inf_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$, and
+		\item \textbf{(continuity from above)} if $\mu(A) < \infty, \forall A \in \sa$ and $A_n \downarrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \inf_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$, and
 		\item \textbf{(sigma subadditivity)} $\mu(\bigcup_{n \in \N} A_n) \leq \sum_{n\in \N} \mu(A_n)$.
 	\end{enumerate}
-
-	\begin{proof}$ $\newline
-		\begin{enumerate}
-			\item Let $(A_n)_{n\in\N} \subset \sa$ with $A_1 = A,\ A_2 = B$ and $A_i = \emptyset$ for $i > 2$. It is clear that $A_n$ are disjoint since $A\cap B = \emptyset$ and $A_n \cap \emptyset = \emptyset,\ \forall n \in \N$.
-			\item Write $B = (B\setminus A) \cupdot A$. Then, because of $\sigma$-aditivity we have
-			\begin{align*}
-				\mu(B) = \mu(B\setminus A) + \mu(A) \geq \mu(A) \text{ since } \mu(B\setminus A) \geq 0
-			\end{align*} 
-			\item As previously write $\mu(B) = \mu(B\setminus A) + \mu(A)$. Because $\mu(A) < \infty$ we can subtract it on both sides to get $\mu(B) -\mu(A) = \mu(B\setminus A)$.
-			\item Write $A \cup B = A \setminus B \cupdot B \setminus A \cupdot A \cap B$ hence $\mu(A \cup B) = \mu(A \setminus B) + \mu(B \setminus A) + \mu(A \cap B)$. Add $\mu(A \cap B)$ on both sides and group terms:
-			\begin{align*}
-				\mu(A \cup B) + \mu(A \cap B) = \underbrace{\mu(A \setminus B) + \mu(A \cap B)}_{\mu(A)} + \underbrace{\mu(B \setminus A) + \mu(A \cap B)}_{\mu(B)}
-			\end{align*}
-			\item $\mu(A\cap B) \leq \mu(A \cap B)+ \mu(A \cup B) = \mu(A) + \mu(B)$
-			\item Define the sequence $(B_n)_{n\in\N} \subset \sa$ by $B_1 = A_1$, $B_n = A_n\setminus A_{n-1}$ for $n > 1$. It is clear that $B_n$ is pairwise disjoint and that $\bigcupdot_{n \in \N} B_n = \bigcup_{n \in \N} A_n = A$. Hence
-			\begin{align*}
-				\mu(A) &= \mu(\bigcup_{n \in \N} A_n) = \mu(\bigcupdot_{n \in \N} B_n) = \sum_{n\in \N} \mu(B_n) = \lim_{m \to \infty} \sum_{n = 1}^m\mu(B_n) \\
-				&= \lim_{m \to \infty} \mu (\bigcupdot_{n = 1}^m B_n) = \lim_{m \to \infty} \mu (A_m) = \sup_{n\in\N} \mu(A_n)
-			\end{align*}
-			since $\mu(A_n)$ is an increasing sequence. The introduction of the limits in the previous chain of equalities has to be done carefully, as we are building on the definition of limits for sequences of numbers. The equality between the first and the second lines comes from $\sigma$-additivity.
-		\end{enumerate}
-	\end{proof}
 \end{thm}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Let $(A_n)_{n\in\N} \subset \sa$ with $A_1 = A,\ A_2 = B$ and $A_i = \emptyset$ for $i > 2$. It is clear that $A_n$ are disjoint since $A\cap B = \emptyset$ and $A_n \cap \emptyset = \emptyset,\ \forall n \in \N$.
+		\item Write $B = (B\setminus A) \cupdot A$. Then, because of $\sigma$-aditivity we have
+		\begin{align*}
+		\mu(B) = \mu(B\setminus A) + \mu(A) \geq \mu(A) \text{ since } \mu(B\setminus A) \geq 0
+		\end{align*} 
+		\item As previously write $\mu(B) = \mu(B\setminus A) + \mu(A)$. Because $\mu(A) < \infty$ we can subtract it on both sides to get $\mu(B) -\mu(A) = \mu(B\setminus A)$.
+		\item Write $A \cup B = A \setminus B \cupdot B \setminus A \cupdot A \cap B$ hence $\mu(A \cup B) = \mu(A \setminus B) + \mu(B \setminus A) + \mu(A \cap B)$. Add $\mu(A \cap B)$ on both sides and group terms:
+		\begin{align*}
+		\mu(A \cup B) + \mu(A \cap B) = \underbrace{\mu(A \setminus B) + \mu(A \cap B)}_{\mu(A)} + \underbrace{\mu(B \setminus A) + \mu(A \cap B)}_{\mu(B)}
+		\end{align*}
+		\item $\mu(A\cap B) \leq \mu(A \cap B)+ \mu(A \cup B) = \mu(A) + \mu(B)$
+		\item Define the sequence $(B_n)_{n\in\N} \subset \sa$ by $B_1 = A_1$, $B_n = A_n\setminus A_{n-1}$ for $n > 1$. It is clear that $B_n$ is pairwise disjoint and that $\bigcupdot_{n \in \N} B_n = \bigcup_{n \in \N} A_n = A$. Hence
+		\begin{align*}
+		\mu(A) &= \mu(\bigcup_{n \in \N} A_n) = \mu(\bigcupdot_{n \in \N} B_n) = \sum_{n\in \N} \mu(B_n) = \lim_{m \to \infty} \sum_{n = 1}^m\mu(B_n) \\
+		&= \lim_{m \to \infty} \mu (\bigcupdot_{n = 1}^m B_n) = \lim_{m \to \infty} \mu (A_m) = \sup_{n\in\N} \mu(A_n)
+		\end{align*}
+		since $\mu(A_n)$ is an increasing sequence. The introduction of the limits in the previous chain of equalities has to be done carefully, as we are building on the definition of limits for sequences of numbers. The equality between the first and the second lines comes from $\sigma$-additivity.
+		\item Let $D_n = A_1 \setminus A_n,\ \forall n \in \N$. Then $D_N$ is an increasing sequence with
+		\begin{multline*}
+		\bigcup_{n\in\N} D_n = \bigcup_{n \in \N} (A_1\setminus A_n) = \bigcup_{n \in \N} (A_1\cap A_n^\complement) = A_1 \cap \bigcup_{n \in \N} A_n^c \\
+		= B_1 \cap \left(\bigcap_{n \in \N} A_n\right)^\complement = A \setminus \bigcap_{n\in\N} A_n
+		\end{multline*}
+		Thus,
+		\begin{multline*}
+		\mu(A \setminus \bigcap_{n\in\N} A_n) \overset{(3)}{=} \mu(A) - \mu(\bigcap_{n\in\N} A_n) = \mu(\bigcup_{n \in \N} D_n) \\
+		\overset{(4)}{=} \lim_{n\to \infty}\mu(D_n) = \lim_{n\to \infty} \mu(A_1 \setminus A_n) \overset{(3)}{=} \lim_{n\to \infty} (\mu(A) - \mu(A_n)) = \mu(A) - \lim_{n\to \infty} \mu(A_n)
+		\end{multline*}
+		Substracting $\mu(A) <\infty$ from both sides we have
+		\begin{align*}
+		\mu(\bigcap_{n \in \N} A_n) = \lim_{n\to \infty} \mu(A_n)
+		\end{align*}
+		\item Let $(A_n)_{n\in\N}$ be any countable subcollection of $\sa$. Define
+		\begin{align*}
+		E_n = \bigcup_{m = 1}^n A_m \in \sa
+		\end{align*}
+		Then $E_n \uparrow \bigcup_{n\in\N} E_n = \bigcup_{n\in\N} A_n$. Thus, by (6) we have
+		\begin{align*}
+		\mu(\bigcup_{n\in\N} A_n) = \mu(\bigcup_{n\in\N} E_n) = \lim_{n\to \infty} \mu(E_n) = \lim_{n\to \infty} \mu\left(\bigcup_{m = 1}^n A_m\right) \overset{(5)}{\leq}\lim_{n\to \infty} \sum_{m=1}^{n}\mu(A_m)
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\newcommand{\tif}{&\text{ if }}
+\begin{eg}[First examples of measures]
+	Let $(X, \sa)$ be a measurable space
+	\begin{enumerate}
+		\item We define the \textbf{Dirac measure} for a given $x_0 \in X$ as follows:
+		\begin{align*}
+			\delta_{x_0}(A) = \begin{cases}
+			0 \tif x_0\not\in A \\
+			1 \tif x_0 \in A
+			\end{cases},\qquad \forall A \in \sa
+		\end{align*}
+		Clearly $\delta_{x_0}$ is a measure since it satisfies the two properties. First, $\delta_{x_0}(\emptyset) = 0$ since $\forall x_0 \in X,\ x_0 \not\in \emptyset$. Second, for any pairwise disjoint collection of sets $(A_n)_{n\in\N} \subset \sa$ we have two possibilities:
+		\begin{itemize}
+			\item If $x_0 \not\in \bigcupdot_{n \in \N} A_n$ then clearly $x_0 \not\in A_n,\ \forall n \in N$ so
+			\begin{align*}
+				0 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = 0
+			\end{align*}
+			\item Otherwise, if $x_0 \in \bigcupdot_{n \in \N} A_n$ then there must be only one $n_0 \in \N$ such that $x_0 \in A_{n_0}$ since $(A_n)$ is a pairwise disjoint collection. Thus,
+			\begin{align*}
+				1 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
+			\end{align*}
+		\end{itemize}
+	\item Let $X = \R$ and choose $\sa = \{A \subset \R \mid A\text{ is countable or } A^\complement \text{ is countable }\}$. We already saw on the Chapter 1 that $\sa$ is a \siga. Now define $\mu:\sa \to [0, \infty)$ as
+	\begin{align*}
+		\mu(A) = \begin{cases}
+		0 \tif \# A \leq \# \N \\
+		1 \tif \# A^\complement \leq \# \N
+		\end{cases}
+	\end{align*}
+	We have that $\mu(\emptyset) = 0$ since $\#\emptyset$ is countable. As for $\sigma$-additivity we must recall from set theory that the union of countable sets is also countable, so:
+	\begin{itemize}
+		\item If $\#A_n \leq \#\N,\ \forall n \in \N$ then
+		\begin{align*}
+			0 = \mu(\bigcupdot_{n \in \N} A_n) = \sum_{n\in \N} \mu(A_n) = 0
+		\end{align*} 
+		\item If there exists an $n_0 \in \N$ such that $A_{n_0}^\complement$ is countable then
+		\begin{align*}
+			\left(\bigcupdot_{n \in \N} A_n\right)^\complement = \bigcap_{n \in \N} A_n^\complement \subseteq A_{n_0}^\complement
+		\end{align*}
+		and hence $\left(\bigcupdot_{n \in \N} A_n\right)^\complement$ is countable. Furthermore, since the collection is pairwise disjoint, $\forall n \in \N, n \neq n_0$ we have $A_n^\complement \subseteq A_{n_0}$ so $\#A_n^\complement,\ \forall n \neq n_0$. Thus
+		\begin{align*}
+			1 = \mu(\bigcupdot_{n \in \N} A_n) = \sum_{n\in\N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
+		\end{align*}
+	\end{itemize}
+	\item \textbf{(Discrete probability measure)}
+	\item \textbf{(Lebesgue measure)}
+	\end{enumerate}
+\end{eg}

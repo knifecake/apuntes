@@ -1,4 +1,4 @@
-% !TeX root = ../main.tex
+% !TeX root = ../mi-notes.tex
 
 \chapter{Introduction}
 
@@ -9,7 +9,7 @@
 	\begin{enumerate}
 		\item It contains the set, $X \in \sa$;
 		\item it is closed under set complement $A \in \sa \implies X \setminus A = A^\complement \in \sa,\ \forall A \subset X$, and
-		\item it is closed under \textbf{countable}\footnote{In these notes we shall follow the Shilling convention and use countable to describe any set whose cardinality is less than or equal to that of the set of the natural numbers, i.e. $\sharp A \leq \sharp \N$. This means that countable does not necessarily mean infinite.} union $(A_n)_{n \in \N} \in \sa \implies \bigcup_{n \in \N} A_n \in \sa$.
+		\item it is closed under \textbf{countable}\footnote{In these notes we shall follow the Shilling convention and use countable to describe any set whose cardinality is less than or equal to that of the set of the natural numbers, i.e. $\# A \leq \# \N$. This means that countable does not necessarily mean infinite.} union $(A_n)_{n \in \N} \in \sa \implies \bigcup_{n \in \N} A_n \in \sa$.
 	\end{enumerate}
 \end{dfn}
 
@@ -70,16 +70,16 @@ Now we will explore a result which will allow us to generate more examples from 
 
 \begin{thm}
 	Given a set $X$. The arbitrary intersection $\bigcap_{\alpha \in I} \sa_\alpha$ of \sigas is again a \siga.
-
-	\begin{proof}
-		We shall go over the three properties of \sigas.
-		\begin{enumerate}
-			\item $X \in \sa_\alpha,\ \forall \alpha \in I$ hence $X \in \bigcap_{\alpha \in I} \sa_\alpha$
-			\item If $A \in \bigcap_{\alpha \in I} \sa_\alpha$ then in particular $A \in \sa_\alpha,\ \forall \alpha \in I$. Because each $\sa_\alpha$ is a \siga, then $A^\complement \in A_n,\ \forall \alpha \in I \implies A_n^\complement \in \bigcap_{\alpha \in I} \sa_\alpha$.
-			\item If $(A_n)_{n\in \N} \subset \bigcap_{\alpha \in I} \sa_\alpha$ then, as before, we have that $(A_n)_{n \in \N} \subset A_n,\ \forall \alpha \in I$. Hence, $\bigcup_{n \in \N} A_n \in \sa_\alpha \implies \bigcup_{n \in \N} A_n \in \bigcap_{\alpha \in I} \sa_\alpha$.
-		\end{enumerate}
-	\end{proof}
 \end{thm}
+
+\begin{proof}
+	We shall go over the three properties of \sigas.
+	\begin{enumerate}
+		\item $X \in \sa_\alpha,\ \forall \alpha \in I$ hence $X \in \bigcap_{\alpha \in I} \sa_\alpha$
+		\item If $A \in \bigcap_{\alpha \in I} \sa_\alpha$ then in particular $A \in \sa_\alpha,\ \forall \alpha \in I$. Because each $\sa_\alpha$ is a \siga, then $A^\complement \in A_n,\ \forall \alpha \in I \implies A_n^\complement \in \bigcap_{\alpha \in I} \sa_\alpha$.
+		\item If $(A_n)_{n\in \N} \subset \bigcap_{\alpha \in I} \sa_\alpha$ then, as before, we have that $(A_n)_{n \in \N} \subset A_n,\ \forall \alpha \in I$. Hence, $\bigcup_{n \in \N} A_n \in \sa_\alpha \implies \bigcup_{n \in \N} A_n \in \bigcap_{\alpha \in I} \sa_\alpha$.
+	\end{enumerate}
+\end{proof}
 
 \newcommand{\calG}{\mathcal{G}}
 \newcommand{\calF}{\mathcal{F}}
@@ -94,11 +94,11 @@ Now we will explore a result which will allow us to generate more examples from 
 
 \begin{thm}
 	For any $\calG \subset \powerset(X)$, $\sigma (\calG)$ exists and is a the smallest \siga containing $\calG$.
-	
-	\begin{proof}
-		Let $\sa = \sigma(\calG)$. Since $\powerset(X) \supset \calG$ and $\powerset(X)$ is a \siga, the intersection $\sa$ is non-empty and contains $\calG$. Because of the previous result, $\sa$ itself is also a \siga. (So we have existence). Furthermore, $\sa$ is the smallest \siga containing $\calG$ because if there were another \siga $\sa'$ containing $\calG$ it would be included in the intersection hence $\sa \subseteq \sa'$.
-	\end{proof}
 \end{thm}
+
+\begin{proof}
+	Let $\sa = \sigma(\calG)$. Since $\powerset(X) \supset \calG$ and $\powerset(X)$ is a \siga, the intersection $\sa$ is non-empty and contains $\calG$. Because of the previous result, $\sa$ itself is also a \siga. (So we have existence). Furthermore, $\sa$ is the smallest \siga containing $\calG$ because if there were another \siga $\sa'$ containing $\calG$ it would be included in the intersection hence $\sa \subseteq \sa'$.
+\end{proof}
 
 \begin{remark}
 	\label{rem:generators}
@@ -145,13 +145,13 @@ We shall call the pair $(\R^n, \OS^n)$ a topological space. We now consider the 
 	\begin{align*}
 		\borel(\R^n) := \sigma(\OS^n) = \sigma(\CS^n) = \sigma(\KS^n)
 	\end{align*}
-	
-	\begin{proof}
-		First, we prove the first equality, i.e. $\sigma(\OS^n) = \sigma(\CS^n)$ by proving mutual inclusion. To show $\sigma(\CS^n) \subset \sigma(\OS^n)$ it is enough to show that $\CS^n \subset \sigma(\OS^n)$ (recall remark \ref{rem:generators}). Let $C \in \CS^n$ be any closed set in $\R^n$. By definition $C^\complement$ is open hence $C^\complement \in \OS^n \subset \sigma(\OS^n)$. Because $\sigma(\OS^n)$ is a \siga it must be true that $(C^\complement)^\complement = C \in \sigma(\OS^n)$. The same holds for the other inclusion.
-		
-		Now we turn our attention to $\sigma(\CS^n) = \sigma(\KS^n)$. The inclusion $\sigma(\KS^n) \subset \sigma (\CS^n)$ is trivial because every compact set is closed in $\R^n$ (recall remark \ref{rem:generators}). For the other one, it is again enough to show that $\CS^n \in \sigma(\KS^n)$. Let $C \in \CS^n$ and define $C_k := C \cap \overline{B_k(0)}$ which is\footnote{Here $B_r(c_0)$ and $\overline{B_r(c_0)}$ denote the open and closed balls of radius $r$ and centre $c_0$, respectively. Clearly these are both bounded sets.} closed and bounded. By construction $C = \bigcup_{k \in \N} C_k \in \KS^n$ thus $\CS^n \in \sigma(\KS^n)$.
-	\end{proof}
 \end{thm}
+
+\begin{proof}
+	First, we prove the first equality, i.e. $\sigma(\OS^n) = \sigma(\CS^n)$ by proving mutual inclusion. To show $\sigma(\CS^n) \subset \sigma(\OS^n)$ it is enough to show that $\CS^n \subset \sigma(\OS^n)$ (recall remark \ref{rem:generators}). Let $C \in \CS^n$ be any closed set in $\R^n$. By definition $C^\complement$ is open hence $C^\complement \in \OS^n \subset \sigma(\OS^n)$. Because $\sigma(\OS^n)$ is a \siga it must be true that $(C^\complement)^\complement = C \in \sigma(\OS^n)$. The same holds for the other inclusion.
+	
+	Now we turn our attention to $\sigma(\CS^n) = \sigma(\KS^n)$. The inclusion $\sigma(\KS^n) \subset \sigma (\CS^n)$ is trivial because every compact set is closed in $\R^n$ (recall remark \ref{rem:generators}). For the other one, it is again enough to show that $\CS^n \in \sigma(\KS^n)$. Let $C \in \CS^n$ and define $C_k := C \cap \overline{B_k(0)}$ which is\footnote{Here $B_r(c_0)$ and $\overline{B_r(c_0)}$ denote the open and closed balls of radius $r$ and centre $c_0$, respectively. Clearly these are both bounded sets.} closed and bounded. By construction $C = \bigcup_{k \in \N} C_k \in \KS^n$ thus $\CS^n \in \sigma(\KS^n)$.
+\end{proof}
 
 We would now like to find smaller sets of generators for the Borel \siga on $\R^n$. Let us define the following collections (where $\bigtimes$ denotes de cartesian product of the intervals):
 
@@ -172,58 +172,58 @@ We would now like to find smaller sets of generators for the Borel \siga on $\R^
 	\begin{align*}
 		\borel(\R^n) = \sigma(\calJ_{rat}^n) = \sigma(\calJ_{rat}^{o,n}) = \sigma(\calJ^n) = \sigma(\calJ^{o,n})
 	\end{align*}
-	
-	\begin{proof}
-		Let's begin by proving $\borel(\R^n) = \sigma(\calJ^{o,n}_{rat})$. Recall that $\borel(\R^n) = \sigma(\OS^n)$, so to prove the previous equality it suffices to prove the following two mutual inclusions:
-		\begin{itemize}
-			\item $\sigma(\calJ^{o,n}_{rat}) \subseteq \sigma(\OS^n)$. From remark \ref{rem:generators} we have that to prove this it suffices to say that every open rectangle is an open set and thus $\calJ_{rat}^{o,n} \subset \OS^n \implies \sigma(\calJ^{o,n}_{rat}) \subseteq \sigma(\OS^n)$.
-			\item $\sigma(\OS^n) \subseteq \sigma(\calJ^{o,n}_{rat})$. To prove this we make the following claim:
-			\begin{align*}
-				U \in \OS^n \implies U = \bigcup_{I \in \calJ_{rat}^{o,n},\ I \subseteq U} I
-			\end{align*}
-			Again we shall attack this by proving the mutual inclusion of the two sets:
-			\begin{itemize}
-				\item It is clear that $\bigcup_{I \in \calJ_{rat}^{o,n},\ I \subset U} I \subseteq U$ because of the restriction on the union.
-				\item For the reverse containment, we have that as $U$ is open, for any $x \in U$ there is a ball $B_\varepsilon(x) \subseteq U$. Because the rationals $\Q^n$ are dense in the reals $\R^n$ we can chose a rectangle $I \subset B_\varepsilon(x)$ and hence $U$ is contained in the union.
-				
-				It is clear that all the sets $I \subseteq U$ are also in $\sigma(\calJ_{rat}^{o,n})$. However, for the union of them to be inside de \siga we must ensure that the number of sets that participate is countable. Each rectangle $I$ can be fully determined by two of its corners, which in turn have coordinates in $\Q^n$. Therefore, the number of sets intervening in the union is $\sharp (\Q^n \times \Q^n) = \sharp \N$.
-			\end{itemize}
-		\end{itemize}
-	
-		Because $\calJ_{rat}^{o,n} \subset \calJ^{o,n} \subset \OS^n$ we get for free that $\sigma(\calJ_{rat}^{o,n}) \subseteq \sigma(\calJ^{o,n}) \subseteq \sigma(\OS^n)$. We therefore conclude that
-		\begin{align*}
-			\sigma(\calJ_{rat}^{o,n}) = \sigma(\calJ^{o,n}) = \sigma(\OS^n)
-		\end{align*}
-		
-		Now we would like to prove that half open sets also yield the same Borel \siga for $\R^n$.
-		\begin{itemize}
-			\item We begin by noticing that we can write open sets as infinite unions of half open ones
-			\begin{align*}
-				\bigtimes_{i = 1}^n (a_i , b_i) = \bigcup_{n \in \N} \bigtimes_{i = 1}^n [a_i + \frac{1}{n}, b_i)
-			\end{align*}
-			for both rectangles with rational and real endpoints. Thus, we have
-			\begin{align*}
-				\calJ_{rat}^{o,n} \subseteq \sigma(\calJ_{rat}^n) &\implies \sigma(\calJ_{rat}^{o,n}) \subseteq \sigma(\calJ_{rat}^n) \\
-				\calJ^{o,n} \subseteq \sigma(\calJ^n) &\implies \sigma(\calJ^{o,n}) \subseteq \sigma(\calJ^n)
-			\end{align*}
-			(remember that \sigas are closed under countable unions).
-			\item For the reverse containment we must notice that we can write (right) half-open sets as intersections of open ones
-			\begin{align*}
-				\bigtimes_{i = 1}^n [a_i, b_i] = \bigcap_{n \in \N} \bigtimes_{i = 1}^n (a_i - \frac{1}{n}, b_i)
-			\end{align*}
-			for rectangles with both rational and real endpoints. Similarly, we have
-			\begin{align*}
-				\calJ_{rat}^n \subseteq \sigma(\calJ_{rat}^{o,n}) &\implies \sigma(\calJ_{rat}^n) \subseteq \sigma(\calJ_{rat}^{o,n}) \\
-				\calJ^n \subseteq \sigma(\calJ^{o,n}) &\implies \sigma(\calJ^n) \subseteq \sigma(\calJ^{o,n})
-			\end{align*}
-			\item We conclude that
-			\begin{align*}
-				\sigma(\calJ_{rat}^{o,n}) &= \sigma(\calJ_{rat}^n) \\ \sigma(\calJ^{o,n}) &= \sigma(\calJ^n)
-			\end{align*}
-		\end{itemize}
-		With the previous equalities the theorem has been proved.
-	\end{proof}
 \end{thm}
+
+\begin{proof}
+	Let's begin by proving $\borel(\R^n) = \sigma(\calJ^{o,n}_{rat})$. Recall that $\borel(\R^n) = \sigma(\OS^n)$, so to prove the previous equality it suffices to prove the following two mutual inclusions:
+	\begin{itemize}
+		\item $\sigma(\calJ^{o,n}_{rat}) \subseteq \sigma(\OS^n)$. From remark \ref{rem:generators} we have that to prove this it suffices to say that every open rectangle is an open set and thus $\calJ_{rat}^{o,n} \subset \OS^n \implies \sigma(\calJ^{o,n}_{rat}) \subseteq \sigma(\OS^n)$.
+		\item $\sigma(\OS^n) \subseteq \sigma(\calJ^{o,n}_{rat})$. To prove this we make the following claim:
+		\begin{align*}
+		U \in \OS^n \implies U = \bigcup_{I \in \calJ_{rat}^{o,n},\ I \subseteq U} I
+		\end{align*}
+		Again we shall attack this by proving the mutual inclusion of the two sets:
+		\begin{itemize}
+			\item It is clear that $\bigcup_{I \in \calJ_{rat}^{o,n},\ I \subset U} I \subseteq U$ because of the restriction on the union.
+			\item For the reverse containment, we have that as $U$ is open, for any $x \in U$ there is a ball $B_\varepsilon(x) \subseteq U$. Because the rationals $\Q^n$ are dense in the reals $\R^n$ we can chose a rectangle $I \subset B_\varepsilon(x)$ and hence $U$ is contained in the union.
+			
+			It is clear that all the sets $I \subseteq U$ are also in $\sigma(\calJ_{rat}^{o,n})$. However, for the union of them to be inside de \siga we must ensure that the number of sets that participate is countable. Each rectangle $I$ can be fully determined by two of its corners, which in turn have coordinates in $\Q^n$. Therefore, the number of sets intervening in the union is $\# (\Q^n \times \Q^n) = \# \N$ and thus the union is again within the \siga.
+		\end{itemize}
+	\end{itemize}
+	
+	Because $\calJ_{rat}^{o,n} \subset \calJ^{o,n} \subset \OS^n$ we get for free that $\sigma(\calJ_{rat}^{o,n}) \subseteq \sigma(\calJ^{o,n}) \subseteq \sigma(\OS^n)$. We therefore conclude that
+	\begin{align*}
+	\sigma(\calJ_{rat}^{o,n}) = \sigma(\calJ^{o,n}) = \sigma(\OS^n)
+	\end{align*}
+	
+	Now we would like to prove that half open sets also yield the same Borel \siga for $\R^n$.
+	\begin{itemize}
+		\item We begin by noticing that we can write open sets as infinite unions of half open ones
+		\begin{align*}
+		\bigtimes_{i = 1}^n (a_i , b_i) = \bigcup_{n \in \N} \bigtimes_{i = 1}^n [a_i + \frac{1}{n}, b_i)
+		\end{align*}
+		for both rectangles with rational and real endpoints. Thus, we have
+		\begin{align*}
+		\calJ_{rat}^{o,n} \subseteq \sigma(\calJ_{rat}^n) &\implies \sigma(\calJ_{rat}^{o,n}) \subseteq \sigma(\calJ_{rat}^n) \\
+		\calJ^{o,n} \subseteq \sigma(\calJ^n) &\implies \sigma(\calJ^{o,n}) \subseteq \sigma(\calJ^n)
+		\end{align*}
+		(remember that \sigas are closed under countable unions).
+		\item For the reverse containment we must notice that we can write (right) half-open sets as intersections of open ones
+		\begin{align*}
+		\bigtimes_{i = 1}^n [a_i, b_i] = \bigcap_{n \in \N} \bigtimes_{i = 1}^n (a_i - \frac{1}{n}, b_i)
+		\end{align*}
+		for rectangles with both rational and real endpoints. Similarly, we have
+		\begin{align*}
+		\calJ_{rat}^n \subseteq \sigma(\calJ_{rat}^{o,n}) &\implies \sigma(\calJ_{rat}^n) \subseteq \sigma(\calJ_{rat}^{o,n}) \\
+		\calJ^n \subseteq \sigma(\calJ^{o,n}) &\implies \sigma(\calJ^n) \subseteq \sigma(\calJ^{o,n})
+		\end{align*}
+		\item We conclude that
+		\begin{align*}
+		\sigma(\calJ_{rat}^{o,n}) &= \sigma(\calJ_{rat}^n) \\ \sigma(\calJ^{o,n}) &= \sigma(\calJ^n)
+		\end{align*}
+	\end{itemize}
+	With the previous equalities the theorem has been proved.
+\end{proof}
 
 To recap, there are a few important points on this proof:
 
@@ -237,25 +237,25 @@ To recap, there are a few important points on this proof:
 \newcommand{\B}{\mathbb{B}}
 \begin{eg}[Another characterisation of the Borel \siga on $\R^n$]
 	In this example we shall see that $\B = \{B_r(x) \mid x \in \R^n, r \in \R^+\}$ is also a generator of $\borel(\R^n)$.
-	
-	\begin{proof}
-		We proceed as before, first defining an auxiliary collection where the radii are all rational and the centres have rational coordinates:
-		\begin{align*}
-			\B' = \{B_r(x) \mid x \in \Q^n, r \in \Q^+\}
-		\end{align*}
-		It is trivial that $\B' \subset \B \subset \OS^n$. Therefore we have that
-		\begin{align*}
-			\sigma(\B') \subseteq \sigma(\B) \subseteq \sigma(\OS^n) = \borel(\R^n)
-		\end{align*}
-		For the reverse inclusions, we will focus on proving that $\OS^n \subseteq \sigma(\B')$. For this we claim that any open set $U \in \OS^n$ can be written as
-		\begin{align*}
-			U = \bigcup_{B \in \B', B \subseteq U} B
-		\end{align*}
-		We need to verify two things. That the previous equality is true and that the number of sets that intervene in the union is countable.
-		\begin{enumerate}
-			\item It is clear that any set $B\subset \B'$ is also in $U$ by the definition of the union. For the reverse inclusion, we shall choose a point $q \in \Q^n$ such that $\lVert x - q \rVert < r / 3$. This is possible because $\Q^n$ is dense in $\R^n$. Next we will choose a radius $r' \in \Q$ such that $r' < r$. This is also possible for the same reason. Now we consider $B = B_{r'}(q) \in \B'$ which is assured to contain $x$.
-			
-			\item Moreover, each of these balls is fully determined by an $(n+1)$ tuple of rationals (namely the center coordinates and the radius). Hence, the number of sets in the union is $\sharp(\Q^n \times \Q) = \sharp \N$.
-		\end{enumerate}
-	\end{proof}
 \end{eg}
+
+\begin{proof}
+	We proceed as before, first defining an auxiliary collection where the radii are all rational and the centres have rational coordinates:
+	\begin{align*}
+	\B' = \{B_r(x) \mid x \in \Q^n, r \in \Q^+\}
+	\end{align*}
+	It is trivial that $\B' \subset \B \subset \OS^n$. Therefore we have that
+	\begin{align*}
+	\sigma(\B') \subseteq \sigma(\B) \subseteq \sigma(\OS^n) = \borel(\R^n)
+	\end{align*}
+	For the reverse inclusions, we will focus on proving that $\OS^n \subseteq \sigma(\B')$. For this we claim that any open set $U \in \OS^n$ can be written as
+	\begin{align*}
+	U = \bigcup_{B \in \B', B \subseteq U} B
+	\end{align*}
+	We need to verify two things. That the previous equality is true and that the number of sets that intervene in the union is countable.
+	\begin{enumerate}
+		\item It is clear that any set $B\subset \B'$ is also in $U$ by the definition of the union. For the reverse inclusion, we shall choose a point $q \in \Q^n$ such that $\lVert x - q \rVert < r / 3$. This is possible because $\Q^n$ is dense in $\R^n$. Next we will choose a radius $r' \in \Q$ such that $r' < r$. This is also possible for the same reason. Now we consider $B = B_{r'}(q) \in \B'$ which is assured to contain $x$.
+		
+		\item Moreover, each of these balls is fully determined by an $(n+1)$ tuple of rationals (namely the center coordinates and the radius). Hence, the number of sets in the union is $\#(\Q^n \times \Q) = \# \N$.
+	\end{enumerate}
+\end{proof}

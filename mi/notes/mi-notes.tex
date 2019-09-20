@@ -8,12 +8,64 @@
 \usepackage{amsthm}
 \usepackage{MnSymbol}
 
+
+\usepackage[dvipsnames]{xcolor}
 \usepackage{thmtools}
 
-\newtheorem{thm}{Theorem}
-\newtheorem{dfn}{Definition}
-\newtheorem{remark}{Remark}
-\newtheorem{eg}{Example}
+\declaretheoremstyle[
+bodyfont=\normalfont,
+shaded={
+	margin=8pt,
+	bgcolor=White,
+	rulecolor=Black,
+	rulewidth=1pt
+}]{mythm}
+
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+shaded={
+	margin=1em,
+	bgcolor={rgb}{0.9,0.9,0.9}
+}]{mydfn}
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+]{myeg}
+
+% DEFINICIONES DE ENTORNOS DE TEOREMAS
+\declaretheorem[
+name=Theorem,
+refname={theorem,theorems},
+Refname={Theorem,Theorems},
+style=mythm
+]{thm}
+
+\declaretheorem[
+name=Remark,
+refname={remark,remarks},
+Refname={Remark,Remarks},
+style=myeg
+]{remark}
+
+
+\declaretheorem[
+name=Definition,
+refname={definition,definitions},
+Refname={Definition,Definitions},
+style=mydfn
+]{dfn}
+
+\declaretheorem[
+name=Example,
+refname={example,examples},
+Refname={Example,Examples},
+style=myeg
+]{eg}
+
+
 
 \renewcommand{\complement}{c}
 \newcommand{\sa}{\mathcal{A}}
