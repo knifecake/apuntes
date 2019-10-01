@@ -1,0 +1,43 @@
+% !TeX root = ../mi-notes.tex
+
+\chapter{Existence of measures}
+
+In this chapter we shall explore a new structure, the semi ring and a new function, the premeasure. They are analogous to a \siga and a measure, respectively, but weaker. Then we shall prove that under some conditions, premeasures can be extended to measures and semirings to \sigas. The most important implication of this result, called Caratheodory's theorem, is that the Lebesgue measure that we have so far only defined in the open $n$-dimensional intervals can be extended to any Borel set in $\borel(\R^n)$ and thus is a proper measure.
+
+\newcommand{\sr}{\mathcal{S}}
+\begin{dfn}[Semi-ring]
+	Let $\sr \subset X$ be a collection of subsets of a set $X$. We say that $\sr$ is a semi-ring if the following are satisfied:
+	\begin{enumerate}
+		\item $\emptyset \in \sr$,
+		\item $S, T \in \sr \implies S \cap T \in \sr$ (or $\sr$ is \istable), and
+		\item if $S, T \in \sr$ then there exists a finite collection of pairwise disjoint sets $S_1, \dots, S_M \in \sr$ such that $S\setminus T = \bigcupdot_{j = 1}^M S_j$ (so $S\setminus T$ is the disjoint union of a finite collection in $\sr$).
+	\end{enumerate}
+\end{dfn}
+
+We will see that $\calJ$ and $\calJ_{rat}$ are semi-rings.
+
+\begin{dfn}[Premeasure]
+	Let $X$ be a set, $\sr$ a semiring of subsets of $X$, and $\mu: \sr \to [0, \infty)$ be a function. We say that $\mu$ is a premeasure if the following are satisfied:
+	\begin{enumerate}
+		\item $\mu(\emptyset) = 0$,
+		\item if $(S_n)_{n \in \N}$ is a pairwise disjoint collection of sets in $\sr$ then
+		\begin{align*}
+			\mu(\bigcupdot_{j \in \N} S_j) = \sum_{j \in \N}^n \mu(S_j),
+		\end{align*}
+		in other words, $\sigma$-additivity.
+	\end{enumerate}
+\end{dfn}
+
+What is missing for a premeasure to become a measure is the fact that it is not defined on a \siga on $X$, but rather on a weaker structure, the semi-ring $\sr$.
+
+\begin{thm}[Caratheodory]
+	Let $X$ be a set, $\sr$ a semi-ring on $X$ and $\mu$ a premeasure defined on $\sr$. Then $\mu$ has an extension to a measure $\mu$ defined on $\sigma(\sr)$. If $\sr$ contains an exhausting sequence $S_n \uparrow X$ with $\mu(S_n) < \infty$ then the extension is unique.
+\end{thm}
+
+And that's it. We could end the chapter here or make it much longer by proving Caratheodory's theorem. We may do so, if I manage to find the time to write it down, but otherwise look it up.
+
+What we will do is apply the theorem to the Lebesgue measure and give an outline of the proof.
+
+\begin{remark}
+	The $n$-dimensional Lebesgue measure satisfies the hypothesis for the premeasure in Caratheodory's theorem.
+\end{remark}

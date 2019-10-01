@@ -52,14 +52,14 @@ From now on we shall assume $X$ is a set and $\sa$ is a \siga on $X$.
 				\end{enumerate}
 			\end{enumerate}
 		\end{proof}
-		\item (The preimage\footnote{Recall some properties of preimages (that are not always true for images): Set difference and union (and therefore complement and intersection) are well defined and behave as expected. Moreover, union and intersection behave as expected even for countable arities.} \siga). Let $X, X'$ be sets, let $\sa'$ be a \siga on $X'$ and let $f : X \to X'$ be a function between the two sets. We claim that\footnote{Here $f\inv$ denotes the preimage of a set, not the inverse function. Recall that the preimage of a function $f: X \to X'$ is defined as $f\inv(A') = \{x \in X \mid f(x) \in A' \subset X'\}$} $\sa = \{f\inv (A') \mid A' \in \sa'\}$ is a \siga.
+		\item (The preimage\footnote{Recall some properties of preimages (that are not always true for images): Set difference and union (and therefore complement and intersection) are well defined and behave as expected. Moreover, union and intersection behave as expected even for countable arities.} \siga). Let $X, X'$ be sets, let $\sa'$ be a \siga on $X'$ and let $f : X \to X'$ be a function between the two sets. We claim that\footnote{Here $\inv{f}$ denotes the preimage of a set, not the inverse function. Recall that the preimage of a function $f: X \to X'$ is defined as $\inv{f}(A') = \{x \in X \mid f(x) \in A' \subset X'\}$} $\sa = \{\inv{f} (A') \mid A' \in \sa'\}$ is a \siga.
 		\begin{proof}
 			\begin{enumerate}
-				\item $X = f\inv(X') \in \sa$ because $X' \in \sa$.
-				\item If $A \in \sa$ then $A^\complement = X \setminus A = f\inv(X')\setminus f\inv (A') = f\inv(X' \setminus A') \in \sa$ because $X' \setminus A' = A'^\complement \in \sa'$.
-				\item Let $(A_n)_{n \in \N} \subset \sa$. By definition there must be a collection $(A_n')_{n \in \N} \subset \sa'$ for which $A_n = f\inv(A_n'),\ \forall n \in \N$. Recall that
+				\item $X = \inv{f}(X') \in \sa$ because $X' \in \sa$.
+				\item If $A \in \sa$ then $A^\complement = X \setminus A = \inv{f}(X')\setminus \inv{f} (A') = \inv{f}(X' \setminus A') \in \sa$ because $X' \setminus A' = A'^\complement \in \sa'$.
+				\item Let $(A_n)_{n \in \N} \subset \sa$. By definition there must be a collection $(A_n')_{n \in \N} \subset \sa'$ for which $A_n = \inv{f}(A_n'),\ \forall n \in \N$. Recall that
 				\begin{align*}
-					\bigcup_{n \in \N} A_n = \bigcup_{n \in \N} f\inv(A_n') = f\inv (\bigcup_{n \in \N} A_n') \in \sa
+					\bigcup_{n \in \N} A_n = \bigcup_{n \in \N} \inv{f}(A_n') = \inv{f} (\bigcup_{n \in \N} A_n') \in \sa
 				\end{align*} because $\sa'$ is a \siga hence $\bigcup_{n \in \N} A_n' \in \sa'$.
 			\end{enumerate}
 		\end{proof}

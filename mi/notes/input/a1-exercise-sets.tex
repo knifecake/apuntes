@@ -1,0 +1,172 @@
+% !TeX root = ../mi-notes.tex
+
+
+\chapter{Exercise sets}
+
+\section{Exercise set 1}
+
+Due September 20th, 2019.
+
+
+\newcommand{\calB}{\mathcal{B}}
+\begin{ex}
+	Let $X$ be a nonempty set and $\sa = \{A_1, A_2, \dots\}$ a collection of disjoint subsets of $X$ such that $X = \bigcup_{n = 1}^\infty A_n$. Show that each element $A \in \sigma(\sa)$ is a union of at most a countable subcollection of elements of $\sa$. (3 pts)
+\end{ex}
+
+\begin{proof}
+	The idea is to prove that $\sigma(\sa)$ only contains countable unions of sets of $\sa$.
+	
+	Let us define
+	\begin{align*}
+		\calB = \left\{\bigcup_{i \in I} A_i \mid A_i \in \sa \land I \subset \N\right\}.
+	\end{align*}
+	
+	We shall prove that $\calB$ is a \siga on $\sa$ and thus $\sigma (\sa) \subseteq \calB$, i.e. $\sigma(\sa)$ is made up of unions of at most a countable subcollection of $\sa$.
+	
+	\begin{enumerate}
+		\item Firstly, $\emptyset \in \calB$ since $\emptyset = \bigcup_{i \in I} A_i$ by choosing $I = \emptyset \subset \N$.
+		\item Secondly, for any set $B = \bigcup_{i \in I} A_i \in \calB$ we have that
+		\begin{align*}
+			B^\complement = \left(\bigcup_{i \in I} A_i\right)^\complement = \bigcap_{i \in I} A_i^\complement = \bigcap_{i \in I} \bigcup_{j \neq i} A_j = \bigcup_{j \not\in I} A_j = \bigcup_{j \in I^\complement} A_j \in \calB,
+		\end{align*}
+		since $I^\complement = \N \setminus I \subset \N$.
+		
+		\item Finally, for any countable collection $(B_n)_{n \in \N} \in \calB$ we need to show that the union is also in $\calB$.
+		\begin{align*}
+			\bigcup_{n\in\N} B_n = \bigcup_{n\in\N} \bigcup_{i \in I_n} A_i = \bigcup_{j \in J} A_j \in \calB,
+		\end{align*}
+		since $J = \bigcup_{n \in \N} I_n \subset \N$.
+	\end{enumerate}
+	Since we have shown that $\calB$ is a \siga on $\sa$ and thus $\sigma(\sa) \subset \calB$, we conclude that the elements of $\sigma(\sa)$ must be all unions of at most countable subcollections of elements in $\sa$, which are the only elements of $\calB$.
+\end{proof}
+
+\begin{ex}
+	Let $(X, \calD, \mu)$ be a measure space, and let $\overline{\calD}^\mu$ be the completion of the \siga $\calD$ with respect to the measure $\mu$ (see exercise 4.15). We denote by $\overline{\mu}$ the extension of the measure $\mu$ to the \siga $\overline{\calD}^\mu$. Supose $f: X \to X$ is a function such that $\inv{f}(B) \in \calD$ and $\mu(\inf{f}(B)) = \mu(B)$ for each $B \in \calD$. Show that $\inf{f}(\overline{B}) \in \overline{\calD}^\mu$ and $\overline{\mu}(\inv{f}(\overline{B})) = \overline{\mu}(\overline{B})$ for all $\overline{B} \in \overline{\calD}^\mu$. (3 pts)
+\end{ex}
+
+\begin{proof}
+	First we show that $\inv{f}(\overline{B}) \in \overline{\calD}^\mu$, for all $\overline{B} \in \overline{\calD}^\mu$. Recall from the definition of the completion $\overline{\calD}^\mu$ of the \siga $\calD$ that any set $\overline{B} \in \overline{\calD}^\mu$ can be written as $\overline{B} = B \cap M$ for some subset $M$ of a $\mu$-measurable null set $N$ in $\calD$. Therefore
+	\begin{align*}
+		\inv{f}(\overline{B}) = \inv{f}(B \cup M) = \inv{f}(B) \cup \inv{f}(M)
+	\end{align*}
+	Because $N \supset M$ we also have that $\inv{f}(N) \subset \inv{f}(M)$ and $\mu(\inv{f}(N)) = \mu(N) = 0$ by the definition of $f$. This means that $\inv{f}(M)$ is also a subset of a $\mu$-measurable null set in $\calD$ and since $\inv{f}(B) \in \calD$ by definition of $f$ we have
+	\begin{align*}
+		\inv{f}(\overline{B}) = \underbrace{\inv{f}(B)}_{\in \calD} \cup \underbrace{\inv{f}(M)}_{\subset \inv{f}(N),\ \mu(\inv{f}(N)) = 0} \in \overline{\calD}^\mu
+	\end{align*}
+	
+	Now we need to verify that $\overline{\mu}(\inv{f}(\overline{B})) = \overline{\mu}(\overline{B})$ for all $\overline{B} \in \overline{\calD}^\mu$. Recall that the extension $\overline{\mu}$ is well-defined in $\overline{\calD}^\mu$ with $\overline{\mu}(\overline{B}) := \mu(B)$ for any $\overline{B} = B \cup M \in \overline{\calD}^\mu$. Hence,
+	\begin{align*}
+		\overline{\mu}(\inv{f}(\overline{B}))
+		&= \overline{\mu}(\inv{f}(B \cup M)) \\
+		&= \overline{\mu}(\inv{f}(B) \cup \inv{f}(M)) \\
+		&= \mu(\inv{f}(B)) \\
+		&= \mu(B) =: \overline{\mu}(\overline{B})
+	\end{align*}
+\end{proof}
+
+\begin{ex}
+	Let $(X, \sa)$ be a measurable space and $\mu : \sa \to [0, \infty)$ a function satisfying
+	\begin{enumerate}
+		\item $\mu$ is finitely additive
+		\item $\mu$ is $\sigma$-subadditive
+	\end{enumerate}
+	Show that $\mu$ is $\sigma$-additive. (4 pts)
+\end{ex}
+
+\begin{proof}
+	The plan for the proof is to sandwich $\mu(\bigcup_{n\in\N} A_n)$ between two sums that are the same when taking the limit.
+		
+	First of all, because of $\sigma$-subadditivity we have that, for any countable collection $(A_n)_{n\in\N} \subset \sa$,
+	\begin{align}
+		\label{eq:es1.3a}
+		\mu(\bigcup_{n\in\N} A_n) \leq \sum_{n\in \N} \mu(A_n),
+	\end{align}
+	which in particular holds for pairwise disjoint unions, which we will assume from here on. We can rewrite the union as
+	\begin{align*}
+		\bigcupdot_{n\in \N} A_n = \bigcupdot_{n = 1}^N \cupdot \bigcupdot_{n = N+1}^\infty A_n.
+	\end{align*}
+	Because of finite additivity we can introduce the measure as
+	\begin{align*}
+		\mu\left(\bigcupdot_{n\in \N} A_n\right) = \mu\left(\bigcupdot_{n = 1}^N\right) + \mu\left(\bigcupdot_{n = N+1}^\infty A_n\right).
+	\end{align*}
+	And applying finite additivity again we get
+	\begin{align*}
+		\mu\left(\bigcupdot_{n\in \N} A_n\right) = \sum_{n = 1}^N \mu(A_n) + \mu\left(\bigcupdot_{n = N+1}^\infty A_n\right).
+	\end{align*}
+	Since $\mu \geq 0$ we can rearrange the previous expression to obtain
+	\begin{align}
+		\label{eq:es1.3b}
+		\sum_{n = 1}^N \mu(A_n) \leq \sum_{n = 1}^N \mu(A_n) + \mu\left(\bigcupdot_{n = N+1}^\infty A_n\right) = 	\mu\left(\bigcupdot_{n\in \N} A_n\right)
+	\end{align}
+	By combining \ref{eq:es1.3a} and \ref{eq:es1.3b} we get
+	\begin{align*}
+		\sum_{i = 1}^N \mu(A_n) \leq \mu\left(\bigcupdot_{n\in \N} A_n\right) \leq \sum_{n \in \N} \mu(A_n)
+	\end{align*}
+	Taking the limit as $N \to \infty$, which we can do since $N$ is not inside the arguments to $\mu$ (in that case it would require that $\mu$ was already a measure, which it isn't, yet), we have
+	\begin{align*}
+		\sum_{n \in \N} \mu(A_n) \leq \mu\left(\bigcupdot_{n\in \N} A_n\right) \leq \sum_{n \in \N} \mu(A_n) \implies \mu\left(\bigcupdot_{n\in \N} A_n\right) = \sum_{n \in \N} \mu(A_n),
+	\end{align*}
+	or that $\mu$ is $\sigma$-additive.
+\end{proof}
+
+\section{Exercise set 2}
+
+Due September 27th, 2019.
+
+\newcommand{\calI}{\mathcal{I}}
+\begin{ex}
+	Let $\Q$ be the set of all real rational numbers and let $\calI_\Q = \{[a, b)_\Q \mid a,b \in \Q\}$ where $[a,b)_\Q = \{q \in \Q \mid a \leq q < b\}$.
+	\begin{enumerate}
+		\item Prove that $\sigma(\calI_\Q) = \powerset(\Q)$ where $\powerset(\Q)$ is the collection of all subsets of $\Q$. (1.5 pts.)
+		\item Let $\mu$ be the counting measure on $\powerset(\Q)$ and let $\nu = 2\mu$. Show that $\nu(A) = \mu(A)$ for all $A \in \calI_\Q$, but $\nu \neq \mu$ on $\sigma(\calI_\Q) = \powerset(\Q)$. Why doesn't this contradict Theorem 5.7 in your book? (1.5 pts.)
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item We shall prove the double containment. First, recall that $\powerset(\Q)$ is a \siga on $\Q$. Also, by Remark 3.5 we have that $\calI_\Q \subseteq \powerset(\Q) \implies \sigma(\calI_\Q) \subseteq \sigma(\powerset(\Q)) \subseteq \powerset(\Q)$. The last inclusion comes from the fact that $\powerset(\Q)$ is also a \siga on $\Q$ so it must contain the smallest \siga on $\Q$ that contains information about $\powerset(\Q)$. For the reverse containment, we shall prove that any subset $A \in \powerset(\Q)$ is also in $\sigma(\calI_\Q)$. For any $A \subset \Q$ define $(q_n)_{n \in \N}$ to be an enumeration of the rationals in $A$. This is posible since $\# \Q = \# \N$. Therefore, we can write
+		\begin{align*}
+			A = \bigcup_{n \in \N} \{q_n\},\text{ where } \{q_n\} \in \sigma(\calI_\Q)
+		\end{align*}
+		Therefore, $A \in \sigma(\calI_\Q)$ because \sigas are closed under countable union.
+		
+		\item It is clear that any interval $A \in \calI_\Q$ contains infinitely many rationals, except if the interval is empty, i.e. $a = b \implies [a,b) = \emptyset$. Therefore,
+		\begin{align*}
+			\mu(A) = \nu(A) = \begin{cases}
+			0       \tif A = \emptyset \\
+			\infty &\text{ otherwise }
+			\end{cases}
+		\end{align*}
+		But, if we consider $A \in \sigma(\calI_\Q) = \powerset(\Q)$ then we have some finite sets where $\mu(A) = \# A$, and clearly $\nu(A) = 2 \# A$. The equality between $\mu$ and $\nu$ only holds when the set is either empty or infinite, but not for finite sets such as $A = \{1, 2\}$ where $\mu(A) = 2$ but $\nu(A) = 4$.
+		
+		Why doesn't this contradict Theorem 5.7? Even though there is an exhausting sequence in the generator, namely $(A_n)_{n\in\N}$ where $A_n = [-n, n)_\Q$, the measure is not finite for any $A_n$. Moreover, there cannot be any exhausting sequence in $\calI_\Q$ with a finite measure because we already saw that $\mu(A) = \infty,\ \forall A \in \calI_\Q,\ A \neq \emptyset$.
+	\end{enumerate}
+\end{proof}
+
+\begin{ex}
+	Let $X$ be a set and $\mu, \nu:\powerset(X) \to [0, \infty)$ two outer measures on $X$. Define $\rho: \powerset(X) \to [0, \infty)$ by $\rho(A) = \max(\mu(A), \nu(A))$. Show that $\rho$ is another outer measure on $X$.
+\end{ex}
+
+\begin{proof}
+	Firstly, from the definition of $\rho$ we can see that the domain and codomain are compatible with the definition of an outer measure. Next, we prove each of the properties of an outer measure.
+	\begin{enumerate}
+		\item $\rho(\emptyset) = \max(\mu(\emptyset), \nu(\emptyset)) = \max (0, 0) = 0$
+		\item For any $A, B \in \powerset(X),\ A \subseteq B$ we have
+		\begin{align*}
+			\rho(A) =\max(\mu(A), \nu(A)) \leq \max (\mu(B), \nu(B)) = \rho(B)
+		\end{align*}
+		\item For any sequence $(A_n)_{n\in \N} \subset \powerset(X)$ we must verify that $\rho(\bigcup_{n \in \N} A_n) \leq \sum_{n\in \N} \rho(A_n)$.
+		
+		Let us prove the following first. For any function $f: X \times Y \to \R$ we have
+		\begin{align*}
+			\max_{x \in X} \sum_{y \in Y} f(x, y) \leq \sum_{y \in Y} \max_{x \in X} f(x, y)
+		\end{align*}
+		Choose any $x_0 \in X$ and any $y_0 \in Y$ and we have that $f(x_0, y_0) \leq \max f(x_0, y_0)$. Hence $\sum_{y \in Y} f(x_0, y) \leq \sum_{y \in Y} f(x, y)$. Because this is true for all $x_0 \in X$ we have $\max_{x \in X} \sum_{y \in Y} f(x, y) \leq \sum_{y \in Y} \max_{x \in X} f(x,y)$.
+		
+		Using this, i.e. choosing $Y = \N,\ X = \{\mu, \nu\}$ and defining $f(\mu, n) = \mu(A_n)$ and $f(\nu, n) = \nu(A_n)$ we have
+		\begin{multline*}
+			\rho(\bigcup_{n \in \N} A_n) = \max\left\{\mu\left(\bigcup_{n \in \N} A_n\right), \nu\left(\bigcup_{n \in \N} A_n\right) \right\} = \max \left\{\sum_{n\in \N} \mu(A_n), \sum_{n\in \N} \nu(A_n) \right\} \\
+			\leq \sum_{n\in \N} \max\{\mu(A_n), \nu(A_n)\} = \sum_{n\in \N} \rho(A_n)
+		\end{multline*}
+	\end{enumerate}
+\end{proof}

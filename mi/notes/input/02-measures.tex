@@ -98,6 +98,7 @@ And some more terminology:
 \end{proof}
 
 \newcommand{\tif}{&\text{ if }}
+\newcommand{\Pro}{\mathbb{P}}
 \begin{eg}[First examples of measures]
 	Let $(X, \sa)$ be a measurable space
 	\begin{enumerate}
@@ -141,7 +142,25 @@ And some more terminology:
 			1 = \mu(\bigcupdot_{n \in \N} A_n) = \sum_{n\in\N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
 		\end{align*}
 	\end{itemize}
-	\item \textbf{(Discrete probability measure)}
-	\item \textbf{(Lebesgue measure)}
+	\item \textbf{(Discrete probability measure)} Let $(\Omega, \sa, \Pro)$ be a measure space where $\Omega = \{\omega_1, \omega_2, \dots \}$ is a countable set, $\sa = \powerset(\Omega)$ (which is of course a \siga) and let $(p_1, p_2, \dots)$ be a probability vector where $\sum_{n\in \N} p_n = 1$ (and $p_i$ is the probability of $\omega_i$). Define the measure $\Pro : \sa \to [0, \infty)$ where
+	\begin{align*}
+		\Pro(A) = \sum_{\omega_i \in A} p_i = \sum_{i=1}^\infty p_i \delta_{\omega_i}(A)
+	\end{align*}
+	
+	Let's verify that $\Pro$ is a measure. First, $\Pro(\emptyset) = 0$ since $\emptyset$ cannot contain any $\omega_i$. As for $\sigma$-additivity, we have
+	\begin{align*}
+		\Pro\left(\bigcupdot_{n = 1}^\infty A_n\right) = \sum_{i=1}^\infty p_i \delta_{x_i}\left(\bigcupdot_{n = 1}^\infty A_n\right) = \sum_{i = 1}^\infty p_i \sum_{n = 1}^\infty \delta_{x_i}(A_n) \\
+		= \sum_{n = 1}^\infty \left(\sum_{i = 1}^\infty p_i\delta_{x_i} A_n\right) = \sum_{n = 1}^\infty \Pro(A_n)
+	\end{align*}
+	Nota that here we can exchange the summations because all the terms are non-negative so the convergence problems (oscillating convergence, that is) are eliminated.
+	\item \textbf{(Lebesgue measure)} For now we shall define this measure only of $n$-dimensional rectangles. The generalisation to arbitrary Borel sets will come in chapter 4.
+	
+	Consider the measure space $(\R^n, \borel(\R^n), \lambda^n)$ where $\R^n$ and $\borel(\R^n)$ are the usual suspects and $\lambda^n : \borel(\R^n) \to [0, \infty)$ is defined as:
+	\begin{align*}
+		\lambda^n\left(\bigtimes_{i = 1}^n [a_i, b_i)\right) = \prod_{i=1}^{n} (b_i - a_i)
+	\end{align*}
+	or, more informally, the hypervolume of the rectangle in question.
+	
+	We are not ready to verify that $\lambda^n$ is a measure over $\borel(\R^n)$ yet. In fact, we will need to wait until the end of Chapter 4, where, once we have the generalisation to arbitrary Borel sets, we shall prove that it is a measure.
 	\end{enumerate}
 \end{eg}

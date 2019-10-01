@@ -44,6 +44,13 @@ style=mythm
 ]{thm}
 
 \declaretheorem[
+name=Lemma,
+refname={lemma,lemmas},
+Refname={Lemma,Lemmas},
+style=myeg
+]{lem}
+
+\declaretheorem[
 name=Remark,
 refname={remark,remarks},
 Refname={Remark,Remarks},
@@ -65,6 +72,13 @@ Refname={Example,Examples},
 style=myeg
 ]{eg}
 
+\declaretheorem[
+name=Exercise,
+refname={exercise,exercises},
+Refname={Exercise,Exercises},
+style=myeg
+]{ex}
+
 
 
 \renewcommand{\complement}{c}
@@ -75,7 +89,7 @@ style=myeg
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\inv}{^{-1}}
+\newcommand{\inv}[1]{#1^{-1}}
 
 \author{Elias Hernandis}
 \title{Notes on Measure and integration}
@@ -83,10 +97,29 @@ style=myeg
 \begin{document}
 	\maketitle
 	
+	\section{Acknowledgements}
+	
 	These notes are based on the lectures of Karma Dajani (k.dajani1@uu.nl) during Fall of 2019 at Universiteit Utrecht. These lectures are in turn based on the book Measures, Integrals and Martingales by René L. Schiling (2nd edition).
 	
 	Readers are asked to report errata to eliashernandis@gmail.com.
 	
+	\section{Why these notes?}
+	
+	As mentioned before, these notes are based on lectures which are themselves based on a book. In fact, the lectures are almost one-to-one to the book, and there are handwritten notes available online.
+	
+	However, the process of writing these, as opposed to simply taking notes in class allows me to make sure I understand the connections between the material. In other courses, where the contents were not as well organised as in this one, I had to reorganise the contents of the corresponding version of the notes for that course. Even though this is mostly unnecessary in this course, the handwritten lecture notes allow for more formal proofs or verifications where there was no time to complete them. Also, the book suggest that the reader verify some assumptions made during the proofs of some remarks or lemmas. Hence this notes are most valuable as a complement to the book.
+	
+	Always trust the book when there is a discrepancy, though, I have not found a single erratum yet.
+	
+	Another valuable thing about these notes are the solutions to the assignments that we were given during the course. These have been compiled from corrections given to me by the TAs\footnote{If you want to see what a disaster it was when I started this subject, look at the scanned copies of submitted exercises...}.
+	
+	
+	
 	\input{input/01-sigma-algebras.tex}
 	\input{input/02-measures.tex}
+	\input{input/03-uniqueness.tex}
+	\input{input/04-existence.tex}
+	\input{input/05-measurable-mappings.tex}
+	\input{input/06-measurable-functions.tex}
+	\input{input/a1-exercise-sets.tex}
 \end{document}

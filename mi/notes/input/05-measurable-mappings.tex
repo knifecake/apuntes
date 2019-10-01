@@ -1,0 +1,41 @@
+% !TeX root = ../mi-notes.tex
+
+\chapter{Measurable mappings}
+
+In mathematics mappings between sets are a central topic. Moreover, when sets have a specific structure, we want mappings that preserve the that same structure between the two sets. For instance we have
+\begin{itemize}
+	\item groups and homomorphisms, which hold the group operation: $f(a \cdot b) = f(a) \cdot f(b)$;
+	\item topological spaces and continuous functions, which hold the topology of the spaces in question: for any open set $V$ and continuous function $f$, $\inv{f}(V)$ is also an open set;
+	\item and naturally we wish that between measurable spaces, there are appropriate mappings that preserve the measurable structure (\siga).
+\end{itemize}
+
+Let's dive right into it.
+
+\begin{dfn}[Measurable map]
+	Let $(X, \sa)$ and $(X', \sa')$ be measurable spaces. A map $T : X \to X'$ is said to be $\sa/\sa'$-measurable (or measurable unless this is too ambiguous) if
+	\begin{align*}
+		\inv{T}(A') = \{x \in X \mid T(x) \in A'\} \in \sa,\qquad \forall A' \in \sa',
+	\end{align*}
+	i.e. if the preimage of every measurable set in $\sa'$ is a measurable set in $\sa$.
+\end{dfn}
+
+In the next chapter we will particularise this to mappings $T:X \to \R$ and measurable spaces $(X, \sa)$ and $(\R, \borel(\R^n))$ to pave the way for integration.
+
+\begin{remark}$ $\newline
+	\begin{enumerate}
+		\item In probability theory, a measurable map is usually called a random variable.
+		\item Consider the collection $\inv{T}(\sa') = \{\inv{T}(A') \mid A' \in \sa'\}$. Recall the example from chapter 1, in which we proved that the preimage of a \siga is a \siga. We can rephrase the definition of measurability as
+		\begin{align*}
+			T \text{ is measurable } \iff \inv{T}\sa' \subset \sa
+		\end{align*}
+		\item If we write $T: (X, \sa) \to (X', \sa')$ then we usually mean that $T$ is $\sa/\sa'$-measurable.
+		
+		\item If $T: (\R^n, \borel(\R^n)) \to (\R, \borel(\R))$, then we simply say $T$ is Borel-measurable.
+	\end{enumerate}
+\end{remark}
+
+\begin{lem}
+	Let $(X, \sa)$ and $(X', \sa')$ be two measurable spaces with $\sa' = \sigma(\calG')$. A map $T: X \to X'$ is $\sa/\sa'$-measurable $\iff \inv{T}(G') \in \sa,\ \forall G' \in \calG' \iff \inv{T}(\calG') \subseteq \sa$.
+\end{lem}
+
+So it is enough to check measurability on the generators only.
