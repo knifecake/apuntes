@@ -109,6 +109,7 @@ Due September 20th, 2019.
 	or that $\mu$ is $\sigma$-additive.
 \end{proof}
 
+
 \section{Exercise set 2}
 
 Due September 27th, 2019.
@@ -168,5 +169,184 @@ Due September 27th, 2019.
 			\rho(\bigcup_{n \in \N} A_n) = \max\left\{\mu\left(\bigcup_{n \in \N} A_n\right), \nu\left(\bigcup_{n \in \N} A_n\right) \right\} = \max \left\{\sum_{n\in \N} \mu(A_n), \sum_{n\in \N} \nu(A_n) \right\} \\
 			\leq \sum_{n\in \N} \max\{\mu(A_n), \nu(A_n)\} = \sum_{n\in \N} \rho(A_n)
 		\end{multline*}
+	\end{enumerate}
+\end{proof}
+
+
+
+\section{Exercise set 3}
+
+Due October 4th, 2019.
+
+\begin{ex}
+	Let $(X, \sa, \mu)$ be a measure space and $\calG=\{A_1, A_2, \dots\}$ a countable partition of $X$ with $A_k \in \sa,\ \forall k \in \N$. Define a function $u : X \to \R$ by $u(x) = \sum_{k = 1}^{\infty} k \cdot \ind_{A_k}$.
+	
+	\begin{enumerate}
+		\item Show that $u$ is $\sa/\borel(\R)$-measurable. (1.5 pts)
+		\item Show that $\sigma(\mu) = \sigma(\calG)$, where $\sigma(\mu)$ is the smallest \siga making $u$ measurable. (2.5 pts)
+		\item Suppose that $0 < \mu(A_n) < \infty$ for all $n \in \N$. Define $\nu$ on $\sa$ by
+		\begin{align*}
+		\nu(B) = \sum_{n = 1}^{\infty} 3^{-n} \cdot \frac{\mu(B \cap A_n)}{\mu (A_n)}.
+		\end{align*}
+		Show that $\nu$ is a \textbf{finite} measure on $(X, \sa)$. (1.5 pts)
+		
+		\item Under the assumptions of part 3, prove that if $B \in \sa$, then $\mu(B) = 0$ if and only if $\nu(B) = 0$. (1 pt)
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Observe that the function $u(x)$ always evaluates to a natural number. In particular, $u(x) = k$ for the $k \in \N$ that satisfies $x \in A_k$. $u$ is well-defined since $\calG$ is a countable partition of $X$.
+		
+		We must check whether for any $B \in \borel(\R), \inv{u}(B) \in \sa$. Given a $B \in \borel(\R)$ we rewrite it as $B = B' \cup B_{nat}$ where $B_{nat}$ contains all the naturals in $B$ and $B' = B \setminus B_{nat}$. Then,
+		\begin{align*}
+		\inv{u}(B) = \inv{u}(B' \cup B_{nat}) = \inv{u}(B') \cup \inv{u}(B_{nat}) = \emptyset \cup \bigcup_{n \in B_{nat}} A_n \in \sa.
+		\end{align*}
+		
+		\item By definition of $\sigma(u)$ we have
+		\begin{align*}
+		\sigma(u) := \sigma (\inv{u}(\borel(\R))) = \inv{u}(\borel(\R)),
+		\end{align*}
+		since the preimage of any \siga is a \siga.
+		
+		Also, recall from exercise set 1 that
+		\begin{align*}
+		\sigma(\calG) = \left\{ \bigcup_{i \in I} A_i \mid A_i \in \calG,\ I \subset \N \right\}.
+		\end{align*}
+		
+		Now we prove the double containment. Take any $A \in \sigma(u)$. Then there is a $B \in \borel(\R)$ such that $A = \inv{u}(B)$. By part one we already now that
+		\begin{align*}
+		A = \emptyset \cup \bigcupdot_{n \in B_{nat}} A_n \in \sigma(\calG).
+		\end{align*}
+		
+		For the reverse containment, let $G \in \sigma(\calG)$, therefore there is a set $I \subset \N$ such that $G = \bigcup_{i \in I} A_i$. Furthermore, $I \in \borel(\R)$ and thus, by part one,
+		\begin{align*}
+		\bigcup_{i \in I} A_i = \inv{u}(I) \in \sigma(u).
+		\end{align*}
+		
+		\item First let us check that $\nu$ is well defined. $\nu(B)$ is well defined for any $B \in \sa$ since $B \cap A_n \in \sa$ as $\sa$ is \istable. Also, $\nu$ is non-negative since it is computed as a sum of products of non-negative numbers.
+		
+		Now we check the two properties in the definition of measure:
+		\begin{enumerate}
+			\item
+			\begin{align*}
+			\nu(\emptyset) = \sum_{n=1}^{\infty} 3^{-n} \cdot \frac{\mu(\emptyset \cap A_n)}{\mu(A_n)} = \sum_{n=1}^{\infty} 3^{-n} \cdot \frac{\mu(\emptyset)}{\mu(A_n)} = \sum_{n=1}^{\infty} 3^{-n} \cdot \frac{0}{\mu(A_n)} = 0
+			\end{align*}
+			\item For any pairwise disjoint collection $(B_n)_{n\in \N} \subset \sa$ we have
+			\begin{align*}
+			\nu\left(\bigcupdot_{j\in \N} B_j\right) &= \sum_{n = 1}^\infty 3^{-n} \cdot \frac{\mu\left(\left(\bigcupdot_{j\in \N} B_j\right) \cap A_n\right)}{\mu(A_n)}\\
+			&= \sum_{n = 1}^\infty 3^{-n} \cdot \frac{\mu\left(\bigcupdot_{j\in \N} (B_j \cap A_n)\right)}{\mu(A_n)} \\
+			&= \sum_{n = 1}^\infty 3^{-n} \cdot \frac{\sum_{j \in \N}\mu\left(B_j \cap A_n\right)}{\mu(A_n)} \\
+			&= \sum_{j\in\N} \sum_{n=1}^{\infty} 3^{-n}\cdot \frac{\mu\left(B_j \cap A_n\right)}{\mu(A_n)} = \sum_{j \in \N} \nu(B_j)
+			\end{align*}
+		\end{enumerate}
+		
+		Additionally, we must check that $\nu$ is finite. Since $\mu$ is a measure, it is monotone so $\mu(B \cap A_n) \leq \mu(A_n)$ and thus
+		\begin{align*}
+		\nu(B) = \sum_{n = 1}^{\infty} 3^{-n} \cdot \frac{\mu(B \cap A_n)}{\mu (A_n)} \leq \sum_{n = 1}^{\infty} 3^{-n} < \infty
+		\end{align*}
+		
+		
+		\item It is clear that if $\mu(B) = 0$ then, by monotonicity, since $B \cap A_n \subset B$, we have that $0 \leq \mu(B \cap A_n) \leq \mu(B) = 0$ and therefore $\nu(B) = \sum_{n = 1}^\infty 3^{-n} \cdot 0 = 0$.
+		
+		For the reverse, we have that if $\nu(B) = 0$, then it must be because $\mu(B \cap A_n) = 0,\ \forall n \in \N$ since $3^{-n} > 0,\ \forall n \in \N$. We can rewrite $\mu(B)$ as
+		\begin{align*}
+		\mu(B) = \mu(B \cap X) = \mu\left(B \cap \bigcupdot_{j\in \N} A_j\right) = \mu\left(\bigcupdot_{j\in \N} B \cap A_j\right) \\
+		= \sum_{j \in \N} \mu(B \cap A_j) = \sum_{j \in \N} 0 = 0.
+		\end{align*}
+		Therefore $\mu(B) = 0 \iff \nu(B) = 0,\ \forall B \in \sa$.
+	\end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{ex}
+	Consider the measure space $([0, 1], \borel, \lambda)$ where $\borel = \borel(\R) \cap [0, 1)$, i.e. the restriction of the Borel \siga to the interval $[0, 1)$, and $\lambda$ denotes the Lebesgue measure restricted to $\borel$. Define a map $T:[0, 1) \to [0, 1)$ by
+	\begin{align*}
+	T(x) = \begin{cases}
+	4x \tif 0 \leq x \leq \frac{1}{4},\\
+	\frac{4}{3}( x - \frac{1}{4}) \tif \frac{1}{4} \leq x < 1.
+	\end{cases}
+	\end{align*}
+	
+	\begin{enumerate}
+		\item Show that $T$ is $\borel/\borel$-measurable (in short, Borel measurable). (1.5 pts)
+		\item Consider the image measure $T(\lambda)$ defined by $T(\lambda)(B) = \lambda(\inv{T}(B))$, for all $B \in \borel$. Show that $T(\lambda) = \lambda$. (2 pts)
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item It is enough to check if $\inv{T}([a,b)) \in \borel$, since $\calJ \cap [0, 1) = \{[a, b) \mid 0 \leq a \leq b \leq 1\}$ is a generator of $\borel$.
+		
+		\begin{align*}
+		\inv{T}([a,b)) &= \{x \in [0, 1) \mid T(x) \in [a, b)\} \\
+		&= \left\{x \in [0, \frac{1}{4}) \mid T(x) \in [a, b)\right\} \cup \left\{x \in [\frac{1}{4}, 1) \mid T(x) \in [a, b)\right\} \\
+		&= \left\{x \mid 0 \leq a \leq x < b \leq \frac{1}{4}\right\} \cup \left\{x \mid \frac{1}{4} \leq a \leq \frac{4}{3}( x - \frac{1}{4}) < b \leq 1\right\} \\
+		&= \left[\frac{a}{4}, \frac{b}{4}\right) \cup \left[\frac{3a}{4} + \frac{1}{4}, \frac{3b}{4} + \frac{1}{4}\right) \in \borel,
+		\end{align*}
+		since each of the intervals is itself in $\calJ \cap [0,1)$. (This is because $0 \leq \frac{a}{4}, \frac{b}{4}, \frac{3a}{4} + \frac{1}{4}, \frac{3b}{4} + \frac{1}{4} < 1$ since $a, b \in [0, 1)$.)
+		
+		\item First we will prove that $T(\lambda)([a, b)) = \lambda([a, b)), \forall [a, b) \in \calJ \cap [0,1)$. Using the same as in part one we have
+		\begin{align*}
+		T(\lambda)([a, b)) &= \lambda(\inv{T}[a,b))\\
+		&= \lambda\left(\left[\frac{a}{4}, \frac{b}{4}\right) \cupdot \left[\frac{3a}{4} + \frac{1}{4}, \frac{3b}{4} + \frac{1}{4}\right)\right) \\
+		&= \frac{b}{4} - \frac{a}{4} + \frac{3b}{4} + \frac{1}{4} - \frac{3a}{4} - \frac{1}{4} \\
+		&= b - a = \lambda([a, b)).
+		\end{align*} 
+		Recall that $\borel = \sigma(\calJ \cap [0,1))$ and that there exists an exhausting sequence $B_n \uparrow [0,1)$ where $B_n = [0,1),\ \forall n \in \N$ and that $\lambda([0, 1)) < \infty$ and $T(\lambda)([0,1)) = \lambda(\inv{T}([0,1))) = \lambda([0,1)) < \infty$. Then, by uniqueness, we have that $T(\lambda) = \lambda$ on all $\borel$.
+	\end{enumerate}
+\end{proof}
+
+\section{Practice Mid-Term, 2019-2020.}
+
+\begin{ex}
+	Consider the measure space $(\R, \borel(\R), \lambda)$ where $\borel(\R)$ is the Borel \siga over $\R$, and $\lambda$ is the one-dimensional Lebesgue measure. Let $f_n : \R \to \R$ be defined by
+	\begin{align*}
+		f_n(x) = \sum_{k = 0}^{2^n - 1}\frac{3k + 2^n}{2^n} \ind_{[k/2^n, (k+1)/2^n]}(x),\ n \geq 1.
+	\end{align*}
+	\begin{enumerate}
+		\item Show that $f_n$ is measurable, and $f_n(x) \leq f_{n+1}(x)$, for all $x \in \R$.
+		\item Show that $\int \sup_{n \geq 1} f_n d\lambda = \frac{5}{2}$.
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item For a given $n$ and $k$ we define
+		\begin{align*}
+			a^n_k = \frac{3k + 2^n}{2^n}\text{ and } A^n_k = \left[\frac{k}{2^n}, \frac{k+1}{2^n}\right).
+		\end{align*}
+		Clearly, $A^n_k \in \borel(\R)$ for any $n$ and $k$ and $a^n_k > 0$. Therefore, $f_n$ is a simple function and thus $f_n$ is $\sa/\borel(\R)$-measurable.
+		
+		Notice that
+		\begin{multline*}
+			A_k^n = \left[\frac{k}{2^n}, \frac{k+1}{2^n}\right)
+			= \left[\frac{2k}{2\cdot 2^n}, \frac{2k+2}{2\cdot 2^n}\right)\\
+			= \left[\frac{2k}{2^{n+1}}, \frac{2k+1}{2^{n+1}}\right) \cupdot \left[\frac{2k+1}{2^{n+1}}, \frac{2k+2}{2^{n+1}}\right) = A_{2k}^{n+1} \cupdot A_{2k+1}^{n+1},
+		\end{multline*}
+		and
+		\begin{align*}
+			a_k^n = \frac{3k + 2^n}{2^n} = \frac{6k + 2^{n+1}}{2^{n+1}} = a_{2k}^{n+1} \leq a_{2k}^{n+1} + a_{2k+1}^{n+1}.
+		\end{align*}
+		Thus,
+		\begin{align*}
+			f_n = \sum_{k = 0}^{2^n - 1} a_k^n \ind_{A_k^n} \leq \sum_{k = 0}^{2^n - 1} a_{2k}^{n+1} \ind_{A_{2k}^{n+1}} + a_{2k+1}^{n+1} \ind_{A_{2k+1}^{n+1}} = f_{n+1}.
+		\end{align*}
+		
+		\item Since $(f_n)$ is an increasing sequence of simple functions we now that
+		\begin{align*}
+			\int \sup_{n \geq 1} f_n d\mu = \sup_{n \geq 1} \int f_n d\mu = \sup_{n \geq 1} I_\mu(f_n) = \lim_{n \to \infty} I_\mu(f_n),
+		\end{align*}
+		and
+		\begin{align*}
+			I_\mu(f_n) = \sum_{k=0}^{2^n - 1} a_k^n \mu(A_k^n)
+			&= \sum_{k = 0}^{2^n - 1} \frac{3k + 2^n}{2^n} \cdot \left(\frac{k+1}{2^n} - \frac{k}{2^n}\right)\\
+			&= \sum_{k = 0}^{2^n - 1} \frac{3k}{2^n \cdot 2^n} + \frac{1}{2^n} = 1 + \frac{3}{2} \frac{2^n - 1}{2^n}
+		\end{align*}.
+		Thus,
+		\begin{align*}
+			\int \sup_{n \geq 1} f_n d \mu = \lim_{n \to \infty} I_\mu(f_n) = 1 + \frac{3}{2} = \frac{5}{2}.
+		\end{align*}
 	\end{enumerate}
 \end{proof}

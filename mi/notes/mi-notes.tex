@@ -7,10 +7,13 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{MnSymbol}
+\usepackage{bbm}
 
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{thmtools}
+
+\usepackage{hyperref}
 
 \declaretheoremstyle[
 bodyfont=\normalfont,
@@ -40,56 +43,91 @@ spaceabove=1em,
 name=Theorem,
 refname={theorem,theorems},
 Refname={Theorem,Theorems},
-style=mythm
+style=mythm,
+numberwithin=chapter
 ]{thm}
 
 \declaretheorem[
 name=Lemma,
 refname={lemma,lemmas},
 Refname={Lemma,Lemmas},
-style=myeg
+style=myeg,
+sibling=thm
 ]{lem}
 
 \declaretheorem[
 name=Remark,
 refname={remark,remarks},
 Refname={Remark,Remarks},
-style=myeg
+style=myeg,
+sibling=thm
 ]{remark}
+
+\declaretheorem[
+name=Corollary,
+refname={corollary,corollaries},
+Refname={Corollary,Corollaries},
+style=myeg,
+sibling=thm
+]{cor}
 
 
 \declaretheorem[
 name=Definition,
 refname={definition,definitions},
 Refname={Definition,Definitions},
-style=mydfn
+style=mydfn,
+numberwithin=chapter
 ]{dfn}
 
 \declaretheorem[
 name=Example,
 refname={example,examples},
 Refname={Example,Examples},
-style=myeg
+style=myeg,
+numberwithin=chapter
 ]{eg}
 
 \declaretheorem[
 name=Exercise,
 refname={exercise,exercises},
 Refname={Exercise,Exercises},
-style=myeg
+style=myeg,
+numberwithin=section
 ]{ex}
 
 
 
 \renewcommand{\complement}{c}
 \newcommand{\sa}{\mathcal{A}}
+\newcommand{\abs}[1]{\lvert{#1}\rvert}
 \newcommand{\sigas}{$\sigma$-algebras }
 \newcommand{\siga}{$\sigma$-algebra }
+\newcommand{\sigfin}{$\sigma$-finite}
 \newcommand{\borel}{\mathcal{B}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\tif}{&\text{ if }}
+\newcommand{\Pro}{\mathbb{P}}
+\newcommand{\istable}{$\cap$-stable}
+\newcommand{\sr}{\mathcal{S}}
+\newcommand{\OS}{\mathcal{O}}
+\newcommand{\CS}{\mathcal{C}}
+\newcommand{\KS}{\mathcal{K}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\ind}{\mathbbm{1}}
+\newcommand{\Rb}{{\overline{\R}}}
+\newcommand{\sgn}{\text{sgn}}
 
 \author{Elias Hernandis}
 \title{Notes on Measure and integration}
@@ -113,7 +151,7 @@ style=myeg
 	
 	Another valuable thing about these notes are the solutions to the assignments that we were given during the course. These have been compiled from corrections given to me by the TAs\footnote{If you want to see what a disaster it was when I started this subject, look at the scanned copies of submitted exercises...}.
 	
-	
+	\tableofcontents
 	
 	\input{input/01-sigma-algebras.tex}
 	\input{input/02-measures.tex}
@@ -121,5 +159,9 @@ style=myeg
 	\input{input/04-existence.tex}
 	\input{input/05-measurable-mappings.tex}
 	\input{input/06-measurable-functions.tex}
+	\input{input/07-non-negative-integrals.tex}
 	\input{input/a1-exercise-sets.tex}
+	
+	\bibliographystyle{alpha}
+	\bibliography{mi-notes}
 \end{document}

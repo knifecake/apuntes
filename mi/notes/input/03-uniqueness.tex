@@ -4,7 +4,9 @@
 
 In this chapter we shall introduce some technicalities to be able to extend the Lebesgue measure to arbitrary Borel sets in $\borel(\R^n)$. The first tool is a generalized version of a \siga, where union closure is only required for disjoint unions. We will explore the properties of this new construct and try to draw similarities to what we know about \sigas. Finally we will give a result on the conditions that a \siga must meet to be able to uniquely define a measure on it by defining the measure on the elements of a generator.
 
-\newcommand{\calD}{\mathcal{D}}
+\section{Preliminaries}
+
+
 \begin{dfn}[Dynkin system]
 	A family $\calD \subset \powerset(X)$ is called a Dynkin system if it satisfies these three properties:
 	\begin{enumerate}
@@ -40,7 +42,7 @@ We have an analogue version to the generator theorem for \sigas in the case of D
 
 So, we already saw that every \siga is a Dynkin system and that Dynkin systems can be generated from a collection of subsets. A natural question to ask is, when is a Dynkin system a \siga? Let us introduce some terminology first.
 
-\newcommand{\istable}{$\cap$-stable}
+
 \begin{dfn}[Stable under finite intersection]
 	Let $\calD$ be a collection of sets. We say that $\calD$ is stable under finite intersection, or closed under finite intersection or $\cap$-stable if
 	\begin{align*}
@@ -112,6 +114,8 @@ This is nice, but it would even be nicer if we could just argue about the genera
 	As a consequence of these claims we have that, since $\calG \subset \calD_G$ then $\delta(\calG) \subset \delta(\calD_G) = \calD_G$. Therefore, for any $E \in \delta(\calG)$ and any $G \in \calG$ we have that $E \cap G \in \delta(\calG)$. This also shows that $\delta(\calG) \subset \calD_E$, for any $E \in \delta(\calG)$. In other words we have that for any $E, F \in \delta(\calG),\ E \cap F \in \delta(\calG)$. Thus, $\delta(\calG)$ is \istable implying that $\delta(\calG)$ is a \siga and hence $\delta(\calG) = \sigma(\calG)$.
 \end{proof}
 
+\section{Uniqueness of measures}
+
 Now we move on to define the requirements needed to be able to guarantee uniqueness of a measure over a \siga given a definition of the measure on a generator of that \siga.
 
 \begin{thm}[Uniqueness of measures]
@@ -127,6 +131,8 @@ Now we move on to define the requirements needed to be able to guarantee uniquen
 \begin{proof}
 	TODO
 \end{proof}
+
+Suppose that we don't have an exhausting sequence on the generator. A neat trick (that doesn't always work) is to extend the generator to $\calG \cup \{X\}$ and define the trivial exhausting sequence $G_n = X,\ \forall n \in \N$. If it holds that $\mu(X) < \infty$, i.e., if $\mu$ is a finite measure, then we are in a position to apply this theorem. See exercise 5.9 for an opportunity to apply this trick.
 
 \begin{thm}$ $\newline
 	\begin{enumerate}

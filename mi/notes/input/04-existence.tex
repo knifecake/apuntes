@@ -2,9 +2,11 @@
 
 \chapter{Existence of measures}
 
+\section{Preliminaries}
+
 In this chapter we shall explore a new structure, the semi ring and a new function, the premeasure. They are analogous to a \siga and a measure, respectively, but weaker. Then we shall prove that under some conditions, premeasures can be extended to measures and semirings to \sigas. The most important implication of this result, called Caratheodory's theorem, is that the Lebesgue measure that we have so far only defined in the open $n$-dimensional intervals can be extended to any Borel set in $\borel(\R^n)$ and thus is a proper measure.
 
-\newcommand{\sr}{\mathcal{S}}
+
 \begin{dfn}[Semi-ring]
 	Let $\sr \subset X$ be a collection of subsets of a set $X$. We say that $\sr$ is a semi-ring if the following are satisfied:
 	\begin{enumerate}
@@ -29,6 +31,8 @@ We will see that $\calJ$ and $\calJ_{rat}$ are semi-rings.
 \end{dfn}
 
 What is missing for a premeasure to become a measure is the fact that it is not defined on a \siga on $X$, but rather on a weaker structure, the semi-ring $\sr$.
+
+\section{The Caratheodory theorem}
 
 \begin{thm}[Caratheodory]
 	Let $X$ be a set, $\sr$ a semi-ring on $X$ and $\mu$ a premeasure defined on $\sr$. Then $\mu$ has an extension to a measure $\mu$ defined on $\sigma(\sr)$. If $\sr$ contains an exhausting sequence $S_n \uparrow X$ with $\mu(S_n) < \infty$ then the extension is unique.

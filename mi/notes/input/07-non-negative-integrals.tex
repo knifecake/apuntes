@@ -1,0 +1,220 @@
+% !TeX root = ../mi-notes.tex
+
+\chapter{Integrals of non-negative functions}
+
+We are now ready to define the integral of a non-negative function in terms of a measure.
+
+\section{Integral of a non-negative simple function}
+
+Since each $u \in \calM^+(\sa)$ or $\calM^+_\Rb(\sa)$ is a limit of an increasing sequence of simple functions (\autoref{thm:sombrero}), we concentrate first on the collection $\calE^+ = \calE^+(\sa)$ of all $\sa/\borel(\R)$-measurable non-negative simple functions.
+
+Let $f(x) = \sum_{i = 0}^N a_i \ind_{A_i}$ be the standard representation of $f \in \calE^+$. Recall that this means that $(A_i)$ is a collection of sets in $\sa$ which define a partition of $X$ (i.e. $X = \bigcupdot_{i = 0}^N A_i)$. Furthermore, on $A_i$, $f$ takes the value $a_i$.
+
+Let
+\begin{align}
+	I_\mu(f) := \sum_{i = 0}^N a_i \mu(A_i).
+\end{align}
+We want to interpret $I_mu(f)$ as $\int f d\mu$, but there might be a small problem, namely $f$ might have more than one standard representation so we need to check that the definition of $I_\mu(f)$ is independent of the specific representation, i.e. they all give the same answer.
+
+\begin{lem}
+	If $f = \sum_{i = 0}^M a_i \ind_{A_i} = \sum_{j = 0}^N b_j \ind{B_j}$ are two standard representations of a simple function then $\sum_{i = 0}^M a_i\mu(A_i) = \sum_{j = 0}^n b_j \mu(B_j)$.
+\end{lem}
+
+\begin{proof}
+	Recall that since $(A_j)$ and $(B_j)$ are partitions we may write
+	\begin{align*}
+		A_i &= A_i \cap \bigcupdot_{j = 0}^M B_j = \bigcupdot_{j = 0}^M A_i \cap B_j, \\
+		B_j &= B_j \cap \bigcupdot_{i = 0}^N A_i = \bigcupdot_{i = 0}^N A_i \cap B_j.
+	\end{align*}
+	Thus,
+	\begin{multline*}
+		\sum_{i = 0}^M a_i \mu(A_i)
+		= \sum_{i = 0}^M a_i \mu\left(\bigcupdot_{j = 0}^M A_i \cap B_j\right)
+		= \sum_{i = 0}^M a_i \sum_{j = 0}^N \mu(A_i \cap B_j)\\
+		= \sum_{i = 0}^M \sum_{j = 0}^N a_i \mu(A_i \cap B_j)
+		= \sum_{j = 0}^N \sum_{i = 0}^M a_i \mu(A_i \cap B_j).
+	\end{multline*}
+	Now,
+	\begin{itemize}
+		\item if $A_i \cap B_j = \emptyset$ then $a_i\mu(A_i \cap B_j) = 0 = b_j \mu(A_i \cap B_j)$, and
+		\item if $A_i \cap B_j \neq \emptyset$ then $\exists x \in A_i \cap B_j$ so that $f(x) = a_i = b_j$. Thus $a_i \mu(A_i \cap B_j) = b_j \mu(A_i \cap B_j)$.
+	\end{itemize}
+	Therefore,
+	\begin{multline*}
+		\sum_{i = 0}^m a_i \mu(A_i)
+		= \sum_{j = 0}^N \sum_{i = 0}^M a_i \mu(A_i \cap B_j)
+		= \sum_{j = 0}^N \sum_{i = 0}^N b_j \mu(A_i \cap B_j)\\
+		= \sum_{j = 0}^N b_j \sum_{i = 0}^M \mu(A_i \cap B_j)
+		= \sum_{j = 0}^N b_j \mu(B_j)
+	\end{multline*}
+\end{proof}
+
+So $I_\mu(f)$ is well-defined regardless of the chosen standard representation. We are about to be ready to define the integral for arbitrary non-negative functions (once we verify that the properties of simple functions that have allowed us to state \autoref{thm:sombrero} hold under integrals).
+
+\begin{thm}[Properties of $I_\mu(f)$]
+	\label{thm:prop-integrals-simple}
+	Let $f, g \in \calE^+(\sa)$ and $\lambda \geq 0$, then
+	\begin{enumerate}
+		\item $I_\mu(\ind_A) = \mu(A)$, for any $A \in \sa$
+		\item $I_\mu(\lambda f) = \lambda I_\mu(f)$ (positive homogenous degree 1)
+		\item $I_\mu(f + g) = I_\mu(f) + I_\mu(f)$ (additive)
+		\item if $g \leq g$ then $I_\mu(f) \leq I_\mu(g)$ (monotone)
+	\end{enumerate}	
+\end{thm}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\section{Integral of a non-negative function}
+
+\begin{dfn}[$(\mu)$-integral of a non-negative function]
+	Let $u \in \calM^+_\Rb(\sa)$, then the $(\mu)$-integral of $u$ is defined by
+	\begin{align}
+		\int u d\mu := \sup \{ I_\mu(g) \mid g \leq u, g \in \calE^+(\sa)\} \in [0, \infty]
+	\end{align}
+\end{dfn}
+
+Some alternative notations are
+\begin{align*}
+	\int u d\mu = \int_X u d\mu = \int_X u(x) d\mu(x).
+\end{align*}
+
+Note that here we are taking the supremum over all simple functions less than or equal to $\mu$. We will eventually show that it is enough to find a sequence $(f_n)_{n\in\N} \subset \calE^+(\sa)$ such that $f_n \uparrow u$, since we will prove that
+\begin{align*}
+	\int u d\mu = \lim_{n\to \infty} \int f_n d\mu = \sup_{n \geq 1} \int f_n d\mu.
+\end{align*}
+
+Before we move one, let's make sure that we did not break anything. Namely, does the definition of the integral above extend the definition of $I_\mu$ for non-negative simple functions, i.e. $I_\mu(f) = \int f d\mu$ if $f$ is a non-negative simple function. The answer is yes!
+
+\begin{lem}
+	\label{lem:def-integral-simple}
+	If $f \in \calE^+(\sa)$ then $I_\mu(f) = \int f d\mu$.
+\end{lem}
+
+\begin{proof}
+	Since $f \in \calE^+(\sa)$ and $f \leq f$, then by definition of the supremum, we have $I\mu(f) \leq \int f d\mu$. Now, by monotonicity of $I_\mu$, for any $g \in \calE^+(\sa)$ such that $g \leq f$ one has $I_\mu(g) \leq I_\mu(f)$. Thus,
+	\begin{align*}
+		\int f d\mu = \sup \{ I_\mu(g) \mid g \leq f,\ g \in \calE^+(\sa)\} \leq I_\mu(f).
+	\end{align*}
+	This shows that $I_\mu(f) = \int f d\mu$.
+\end{proof}
+
+\begin{remark}
+	\label{rem:mu-integrals-monotone}
+	It is easy to see that $\mu$-integrals are monotone. Since if $\mu \leq v$, then $\{g \in \calE^+(\sa) \mid g \leq u\} \subset \{h \in \calE^+(\sa) \mid h \leq v\}$. Hence,
+	\begin{align*}
+		\int u d\mu = \sup \{I_\mu(g) \mid g \in \calE^+(\sa), g \leq u\} \leq \sup \{I_\mu(h) \mid h \in \calE^+(\sa), h \leq v\} = \int v d\mu
+	\end{align*}
+\end{remark}
+
+Now we come to the central theorem of this chapter.
+
+\begin{thm}[Beppo-Lévi]
+	\label{thm:beppo-levi}
+	Let $(X, \sa, \mu)$ be a measure space and let $(u_n)_{n\in\N}$ be an increasing sequence in $\calM^+_\Rb(\sa)$. Then,
+	\begin{align*}
+		u := \sup_{n \geq 1} u_n = \lim_{n \to \infty} u_n \in \calM_\Rb^+(\sa),
+	\end{align*}
+	and
+	\begin{align}
+		\int u d\mu = \int \sup_{n \geq 1} u_n d\mu = \sup_{n \geq 1} \int u_n d\mu,
+	\end{align}
+	or, alternatively,
+	\begin{align}
+		\int u d\mu = \int \lim_{n \to \infty} u_n d\mu = \lim_{n \to \infty} \int u_n d\mu
+	\end{align}
+\end{thm}
+
+Notice that the assumption that $u_n$ is an increasing sequence is necessary to be able to interchange limits.
+
+\begin{proof}
+	TODO. Important
+\end{proof}
+
+The following lemma is really just a more concise statement of the previous theorem.
+\begin{cor}
+	\label{cor:beppo-levi}
+	Let $u \in \calM_\Rb^+(\sa)$ be a non-negative, numerical, $\sa/\borel(\Rb)$-measurable function and $(f_n)_{n\in\N} \subset \calE^+(\sa)$ be a sequence of non-negative simple functions such that $f_n \uparrow u$. Then,
+	\begin{align}
+		\int u d\mu = \lim_{n \to \infty} \int f_n d\mu
+	\end{align}
+\end{cor}
+
+\begin{proof}
+	Clearly the hypothesis of \autoref{thm:beppo-levi} are satisfied. (Just take $u_n = f_n$).
+\end{proof}
+
+Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of arbitrary non-negative functions.
+
+\begin{thm}[Properties of integrals]
+	\label{thm:prop-integrals}
+	Let $(X, \sa, \mu)$ be a measure space. Let $u, v \in \calM^+_\Rb(\sa)$. Then,
+	\begin{enumerate}
+		\item $\int \ind_{A} d\mu = I_\mu(A) = \mu(A)$
+		\item $\int \alpha u d\mu = \alpha \int u d\mu,\ \forall \alpha \geq 0$.\footnote{Here we require $\alpha \geq 0$ to keep the functions non-negative. As soon as we generalise to arbitrary functions this assumption is not needed.}
+		\item $\int (u + v)d\mu = \int u d\mu + \int v d\mu$
+		\item if $u \leq v$, then $\int u d\mu \leq \int v d\mu$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item $\ind_A$ is clearly a simple function so, by definition $\int \ind_A d\mu = I_\mu(\ind_A) = \mu(A)$.
+		\item By \autoref{thm:sombrero} there exists a sequence of simple functions $(f_n)_{n\in\N} \subset \calE^+$ such that $f_n \uparrow u$. Then,
+		\begin{align*}
+			\int \alpha u d\mu
+			\overset{\ref{cor:beppo-levi}}{=} \lim_{n \to \infty} \int \alpha f_n d\mu
+		    \overset{\ref{lem:def-integral-simple}}{=} \lim_{n \to \infty} I_\mu(\alpha f_n)
+		    \overset{\ref{thm:prop-integrals-simple}}{=} \alpha \lim_{n \to \infty} I_\mu(f_n)
+		    \overset{\ref{lem:def-integral-simple}}{=} \alpha \int u d \mu
+		\end{align*}
+		\item Once again by \autoref{thm:sombrero} there exist sequences $(f_n)_{n\in\N}, (g_n)_{n\in \N} \subset \calE^+$ such that $f_n \uparrow u$ and $g_n \uparrow v$. Then, $(f_n + g_n) \uparrow (u + v)$ and hence,
+		\begin{align*}
+			\int (u + v)d\mu
+			\overset{\ref{cor:beppo-levi}}{=} \lim_{n \to \infty}  \int (f_n  + g_n)d\mu
+			\overset{\ref{lem:def-integral-simple}}{=} \lim_{n \to \infty} I_\mu(f_n + g_n)\\
+			\overset{\ref{thm:prop-integrals-simple}}{=} \lim_{n \to \infty} I_\mu(f_n) + \lim_{n \to \infty} I_\mu(g_n)
+			\overset{\ref{lem:def-integral-simple}}{=} \int u d\mu + \int v d\mu
+		\end{align*}
+		\item Already proven in \autoref{rem:mu-integrals-monotone}.
+	\end{enumerate}
+\end{proof}
+
+\begin{cor}
+	Let $(u_n)_{n\in\N} \subset \calM^+_\Rb(\sa)$. Then, $\sum_{n = 1}^{\infty} u_n \in \calM_\Rb^+(\sa)$ and
+	\begin{align}
+		\int \sum_{n = 1}^\infty u_n d\mu = \sum_{n = 1}^\infty \int u_n d\mu
+	\end{align}
+\end{cor}
+
+\begin{proof}
+	Let $v_m = \sum_{n=1}^{m} u_n$. Then $v_m \uparrow \sum_{n=1}^{\infty} u_n$ and thus
+	\begin{align*}
+		\int \sum_{n = 1}^\infty u_n d\mu
+		= \int \lim_{m \to \infty} v_m d\mu
+		\overset{\ref{cor:beppo-levi}}{=} \lim_{m \to \infty} \int v_m d\mu
+		= \lim_{m \to \infty} \int \sum_{n = 1}^m u_n d\mu \\
+		\overset{\ref{thm:prop-integrals}}{=} \lim_{m \to \infty} \sum_{n=1}^{m} \int u_n d\mu
+		= \sum_{n = 1}^\infty \int u_n d\mu
+	\end{align*}
+\end{proof}
+
+\begin{thm}[Fatou's lemma]
+	\label{thm:fatou-lemma}
+	Let $(u_n)_{n\in\N}$ be \textbf{any} sequence in $\calM_\Rb^+(\sa)$. Then,
+	\begin{align}
+		\label{eq:fatou1}
+		u := \liminf_{n\to \infty} u_n \in \calM_\Rb^+(\sa)
+	\end{align}
+	and
+	\begin{align}
+		\int \liminf_{n\to \infty} u_n d\mu \leq \liminf_{n\to \infty} \int u_n d\mu
+	\end{align}
+\end{thm}
+
+The great thing about \autoref{thm:fatou-lemma} is that it makes no assumptions of monotonicity and can be applied to any sequence of non-negative, numerical, measurable functions.
+
+\begin{proof}
+	\autoref{eq:fatou1} follows from \autoref{cor:nasty-extended-measurable}.
+\end{proof}
