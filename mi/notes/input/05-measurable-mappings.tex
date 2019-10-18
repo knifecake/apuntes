@@ -26,7 +26,7 @@ In the next chapter we will particularise this to mappings $T:X \to \R$ and meas
 \begin{remark}$ $\newline
 	\begin{enumerate}
 		\item In probability theory, a measurable map is usually called a random variable.
-		\item Consider the collection $\inv{T}(\sa') = \{\inv{T}(A') \mid A' \in \sa'\}$. Recall the example from chapter 1, in which we proved that the preimage of a \siga is a \siga. We can rephrase the definition of measurability as
+		\item Consider the collection $\inv{T}(\sa') = \{\inv{T}(A') \mid A' \in \sa'\}$. Recall \autoref{eg:preimage-siga}, in which we proved that the preimage of a \siga is a \siga. We can rephrase the definition of measurability as
 		\begin{align*}
 			T \text{ is measurable } \iff \inv{T}\sa' \subset \sa
 		\end{align*}
@@ -36,7 +36,7 @@ In the next chapter we will particularise this to mappings $T:X \to \R$ and meas
 	\end{enumerate}
 \end{remark}
 
-\begin{lem}
+\begin{lem}[Measurability can be checked only on the generators]
 	\label{lem:measurable-generators}
 	Let $(X, \sa)$ and $(X', \sa')$ be two measurable spaces with $\sa' = \sigma(\calG')$. A map $T: X \to X'$ is $\sa/\sa'$-measurable $\iff \inv{T}(G') \in \sa,\ \forall G' \in \calG' \iff \inv{T}(\calG') \subseteq \sa$.
 \end{lem}
@@ -46,7 +46,7 @@ In the next chapter we will particularise this to mappings $T:X \to \R$ and meas
 	
 	For the converse let us define
 	\begin{align*}
-		\Sigma' := \{ A' \in \sa' \mid \inv{T}(A') \in \sa \}
+		\Sigma' := \{ A' \subset X' \mid \inv{T}(A') \in \sa \}
 	\end{align*}
 	As usual we will check that $\Sigma'$ is itself a \siga on $X'$ and therefore
 	\begin{align*}
@@ -93,9 +93,9 @@ Keep in mind that not every measurable map is continuous.
 
 Before we move on, lets prove that the composition of measurable maps is another measurable map, as we would do with any other structure-preserving map in any other field of mathematics.
 
-\begin{thm}
+\begin{lem}
 	Let $(X_i, \sa_i)$ be measurable spaces for $i = 1, 2, 3$ and $T: X_1 \to X_2,\ S: X_2 \to X_3$ be two $\sa_1/\sa_2$- resp. $\sa_2/\sa_3$-measurable maps. Then $S \circ T: X_1 \to X_3$ is $\sa_1/\sa_4$-measurable.
-\end{thm}
+\end{lem}
 
 \begin{proof}
 	We need to show that $\inv{(S \circ T)}(A) \in \sa_1$ for any $A \in \sa_3$. Now $\inv{(S \circ T)}(A) = \inv{T}(\inv{S}(A))$ with $\inv{S}(A) \in \sa_2$ and hence $\inv{T}(\inv{S}(A)) \in \sa_1$.
@@ -135,7 +135,7 @@ To tie it back to measures we will give the following definition:
 \begin{dfn}[Image measure]
 	Let $(X, \sa),\ (X', \sa')$ be measurable spaces and $T:X \to X'$ be an $\sa/\sa'$-measurable map. Then, for every measure $\mu$ on $(X, \sa)$, we define the image measure of $\mu$ under $T$, denoted by $T(\mu)$ or $\mu \circ \inv{T}$, by
 	\begin{align*}
-		T(\mu)(A') = \mu(\inv{T}(A')),\quad \forall A' \in \sa
+		T(\mu)(A') = \mu(\inv{T}(A')),\quad \forall A' \in \sa'
 	\end{align*}
 \end{dfn}
 

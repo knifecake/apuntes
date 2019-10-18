@@ -1,0 +1,230 @@
+% !TeX root = ../mi-notes.tex
+
+
+\chapter{Integrals of measurable functions}
+
+In this chapter we will extend the notion of integral to the general case $u \in \calM_\Rb(\sa)$ (as opposed to just positive functions, which were discussed in the previous chapter).
+
+We have already seen that any function $u \in \calM_\Rb(\sa)$ may be written as the difference of two non-negative functions $u = u^+ - u^-$, hence we have the tendency to define
+
+\begin{align*}
+	\int u d\mu = \int u^+ d\mu - \int u^- d \mu
+\end{align*}
+
+However, since $\int u^+ d\mu, \int u^- d\mu \in [0, \infty]$ and therefore both can be $+\infty$ we must be careful with the definition of the integral for a general $u$.
+
+
+\begin{dfn}[$\mu$-integrable]
+	\label{dfn:mu-integrable}
+	Let $u \in \calM_\Rb(\sa)$, then u is said to be $\mu$-integrable if
+	\begin{align}
+		\max\left\{ \int u^+ d\mu, \int u^- d\mu \right\} < \infty,
+	\end{align}
+	i.e. both are finite. In this case we define
+	\begin{align}
+		\int u d\mu := \int u^+ d\mu - \int u^- d\mu \in (-\infty, +\infty).
+	\end{align}
+\end{dfn}
+
+\begin{remark}
+	If
+	\begin{align*}
+		\min\left\{ \int u^+ d\mu, \int u^- d\mu \right\} < \infty,
+	\end{align*}
+	i.e. at most one of the integrals is $+\infty$, then one can still define
+	\begin{align*}
+	\int u d\mu := \int u^+ d\mu - \int u^- d\mu \in [-\infty, +\infty].
+	\end{align*}
+\end{remark}
+
+We will denote the set of all $\mu$-integrable functions by
+\begin{align}
+	\calL^1_\Rb(\mu) := \{u \in \calM_\Rb(\sa) \mid u \text{ is } \mu-\text{integrable}\}.
+\end{align}
+Similarly, if we wish to restrict ourselves to real-valued functions we will write
+\begin{align}
+\calL^1(\mu) := \{u \in \calM_\R(\sa) \mid u \text{ is } \mu-\text{integrable}\}.
+\end{align}
+
+\begin{remark}
+	Note that for $u \geq 0$, $\int u d\mu$ always exists, but it can have the value $+\infty$. So for $u \in \calM_\Rb^+(\sa)$ we have
+	\begin{align*}
+		u \in \calL_\Rb^1(\mu) \iff \int u d\mu < \infty.
+	\end{align*}
+	Some authors still call a positive function $\mu$-integrable if it takes the value $+\infty$. We will not use this convention. Take care to update your understanding by comparing \autoref{dfn:mu-integral} and \autoref{dfn:mu-integrable}.
+\end{remark}
+
+As before, if we need to stress the integration variable (the space where the integral is defined), we write
+\begin{align*}
+	\int u d\mu = \int_X u(x)d\mu(x).
+\end{align*}
+
+The following theorem gives us for ways to check that a function $u \in \calM_\Rb(\sa)$ is $\mu$-integrable.
+
+\begin{thm}[Characterisation of $\mu$-integrability]
+	\label{thm:characterisation-mu-integral}
+	Let $u \in \calM_\Rb(\sa)$, then the following are equivalent:
+	
+	\begin{enumerate}
+		\item $u \in \calL^1_\Rb(\mu)$;
+		\item $u^+, u^- \in \calL_\Rb^1(\mu)$;
+		\item $\abs{u} \in \calL_\Rb^1(\mu)$;
+		\item $\exists w \in \calL_\Rb^1(\mu)$ with $w \geq 0$ and $\abs{u} \leq w$.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}$ $
+	\begin{itemize}
+		\item 1. $\iff$ 2. follows from the definition of $\mu$-integrability.
+		\item 2. $\iff$ 3. follows from $\abs{u} = u^+ + u^-$ and $u^+, u^- \leq \abs{u}$ and the monotonicity for non-negative measurable functions.
+		\item 3. $\iff$ 4. follows from monotonicity of the integral of non-negative measurable functions.
+	\end{itemize}
+\end{proof}
+
+\begin{thm}[Properties of the $\mu$-integral]
+	\label{thm:properties-mu-integral}
+	Let $(X, \sa, \mu)$ be a measure space, $u, v \in \calL_\Rb^1(\mu)$ and $\alpha \in \R$. Then, the following hold
+	
+	\begin{enumerate}
+		\item $\alpha u \in \calL_\Rb^1(\mu)$ and $\int \alpha u d\mu = \alpha \int u d\mu$.
+		\item $u + v \in \calL_\Rb^1(\mu)$ and $\int (u+v)d\mu = \int ud\mu + \int vd\mu$.
+		\item $\min\{u, v\}, \max\{u,v\} \in \calL_\Rb^1(\mu)$
+		\item if $u \leq v$, then $\int u d\mu \leq \int v d\mu$.
+		\item \begin{align*}
+			\abs{\int u d\mu} \leq \int \abs{u}d\mu.
+		\end{align*}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	For 1. and 2., we first use \autoref{thm:characterisation-mu-integral} to prove that $\alpha u$ and $u + v$ are in $\calL^1_\Rb(\mu)$. Then, we rewrite each in terms of positive and negative parts to prove that the integrals coincide.
+	\begin{enumerate}
+		\item We will prove that $\alpha u \in \calL_\Rb^1(\mu) \iff \abs{\alpha u} \calL_\Rb^1(\mu)$. Now,
+		\begin{align*}
+			\int \abs{\alpha u} d\mu
+			= \int \abs{\alpha} \abs{u} d\mu
+			\overset{\ref{thm:prop-integrals}}{=} \abs{\alpha} \int \abs{u} d\mu < \infty.
+		\end{align*}
+		Thus, by \autoref{thm:characterisation-mu-integral} we have that $\alpha u \in \calL^1_\Rb(\mu)$. To check $\int \alpha u d\mu = \alpha \int u d\mu$ we consider two cases:
+		\begin{itemize}
+			\item If $\alpha \geq 0$ then $(\alpha u)^+ = \alpha u^+$ and $(\alpha u)^- = \alpha u^-$ hence
+			\begin{align*}
+				\int \alpha u d\mu
+				= \int \alpha u^+d\mu - \int \alpha u^- d\mu
+				= \alpha \int u^+d\mu - \alpha \int u^- d\mu\\
+				= \alpha \left( \int u^+ d\mu - \int u^- d\mu \right)
+				= \alpha \int u d\mu.
+			\end{align*}
+			\item If $\alpha < 0$ then $(\alpha u)^+ = -\alpha u^-$ and $(\alpha u)^- = -\alpha u^+$. Therefore,
+			\begin{align*}
+				\int \alpha u d\mu
+				&= \int \left( (\alpha u)^+ - (\alpha u)^- \right)d\mu\\
+				&= \int \underbrace{- \alpha}_{> 0} u^- d\mu - \int \underbrace{- \alpha}_{> 0} u^+ d\mu \\
+				&= (-\alpha)\int u^- d\mu - (-\alpha)\int u^+ d\mu\\
+				&= (-\alpha)\left(\int u^- d\mu - \int u^+ d\mu\right)\\
+				&= (-\alpha)\left(-\int u d\mu\right) = \alpha\int u d\mu
+			\end{align*}
+		\end{itemize}
+	
+		\item $\abs{u + v} \leq \abs{u} + \abs{v}$ so by linearity for non-negative integrals we have
+		\begin{align*}
+			\int \abs{u + v}d\mu \leq \int \abs{u} d\mu  + \int \abs{v}d\mu < \infty.
+		\end{align*}
+		Hence, by \autoref{thm:characterisation-mu-integral}, $u + v \in \calL^1_\Rb(\mu)$. As before, $(u + v) = (u + v)^+ - (u + v)^- = u^+ - u^- + v^+ - v^-$ hence
+		\begin{align*}
+			(u + v)^+ + u^- + v^- =  (u + v)^- = u^+ + v^+,
+		\end{align*}
+		so
+		\begin{align*}
+			\int \left[(u + v)^+ + u^- + v^-\right]d\mu =  \int \left[(u + v)^- = u^+ + v^+\right] d\mu
+		\end{align*}
+		where all functions are non negative. Applying \autoref{thm:prop-integrals} we have
+		\begin{align*}
+			\int (u + v)^+ d\mu + \int u^- d\mu + \int v^- d\mu = \int (u+v)^- d\mu + \int u^+ d\mu + \int v^+ d\mu.
+		\end{align*}
+		Rewriting again (every term is finite since $u, v, u+v \in \calL^1_\Rb(\mu)$ so subtraction is not a problem), we have
+		\begin{align*}
+			\int (u + v)^+d\mu - \int (u + v)^- d\mu = \int u^+ d\mu - \int u^- d\mu + \int v^+ d\mu - \int v^- d\mu,
+		\end{align*}
+		or,
+		\begin{align*}
+			\int (u + v)d\mu = \int u d\mu + \int v d\mu.
+		\end{align*}
+		
+		\item Observe that both $\max(u, v), \min (u, v) \leq \abs{u} + \abs{v}$ so
+		\begin{align*}
+			\int \max(u, v) d\mu &\leq \int \abs{u}d\mu + \int \abs{v}d\mu < \infty\\
+			\int \min(u, v) d\mu &\leq \int \abs{u}d\mu + \int \abs{v}d\mu < \infty
+		\end{align*}
+		by \autoref{thm:characterisation-mu-integral}. Thus, $\max(u, v), \min(u, v) \in \calL^1_\Rb(\mu)$.
+		
+		\item Suppose $u \leq v$ then $u^+ \leq v^+$ and $u^- \geq v^-$, so
+		\begin{align*}
+			\int u d\mu
+			= \int u^+ d\mu - \int v^- d\mu \leq \int v^+ d\mu - \int v^- d\mu = \int v d\mu.
+		\end{align*}
+		
+		\item Recall that one can defined $\abs{a} = \max (a , -a)$. Then
+		\begin{align*}
+			\abs{\int u d\mu}
+			&= \max \left\{ \int u d\mu, -\int u d\mu \right\} \\
+			&= \max \left\{ \int u d\mu, \int -u d\mu \right\} \\
+			&= \max \left\{ \int \abs{u} d \mu, \int \abs{u} d\mu \right\}
+			= \int \abs{u} d\mu.
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	Note that in property 2. we did had the assumption that $(u + v)$ does not take the values $\pm \infty$. Hence we cannot say that $\calL^1_\Rb(\mu)$ is a linear space.
+	
+	However, $\calL^1(\mu)$, the set of all $\mu$-integrable real-valued functions is a linear space.
+\end{remark}
+
+\section{Restricting the domain}
+
+Let $(X, \sa, \mu)$ be a measure space and $u \in \calL^1_\Rb(\mu)$. For any $A \in \sa$, the function $\ind_A \cdot u \in \calM_\Rb(\sa)$ and $\abs{\ind_A \cdot u} \leq \abs{u}$. Hence, by \autoref{thm:characterisation-mu-integral} (4.) we have that $\ind_A \cdot u \in \calL^1_\Rb(\sa)$.
+
+Similarly, if $(X, \sa, \mu)$ is a measure space and $u \in \calM_\Rb^+(\sa)$, for any $A \in \sa$ we can define the function $\ind_A \cdot u \in \calM_\Rb^+(\sa)$ by \autoref{cor:properties-measurable} since $\ind_A \cdot u = \min (\ind_A, u)$ in this case (since $u$ is non-negative).
+
+When we wish to restrict the domain of integration, we write,
+\begin{align}
+	\int_A u d\mu := \int \ind_A u d\mu.
+\end{align}
+
+Note that if $u \in \calL^1_\Rb(\mu)$ $\int_A u d\mu < \infty$ but if $u \in \calM^+_\Rb(\sa)$ then $\int_A u d\mu$ is well defined but can take the value $+\infty$.
+
+We do we keep coming back to the case $u \in \calM^+_\Rb(\sa)$? Well, because in this case we can associate a new measure on $(X, \sa)$ as follows:
+
+\begin{lem}
+	Let $(X, \sa, \mu)$ be a measure space and $u \in \calM^+_\Rb(\sa)$. Define $\nu : \sa \to [0, \infty]$ by
+	\begin{align}
+		\nu(A) := \int_A ud\mu = \int \ind_A u d\mu.
+	\end{align}
+	Then $\nu$ is a measure on $(X,\sa)$. Moreover, if $\int u d\mu < \infty$, i.e. $u$ is, \textbf{additionally}, in  $\calL_\Rb^1(\sa)$, then $\nu$ is a finite measure.
+\end{lem}
+
+\begin{proof}
+	As usual,
+	\begin{enumerate}
+		\item
+		\begin{align*}
+			\nu(\emptyset) = \int_\emptyset u d\mu = \int 0 \cdot u d\mu = 0
+		\end{align*}
+		
+		\item Let $(A_n)_{n\in\N}$ be a sequence of pairwise disjoint sets in $\sa$. Then
+		\begin{align*}
+			\ind_{\bigcupdot_{n\in\N} A_n} = \sum_{n\in\N} \ind_{A_n},
+		\end{align*}
+		and thus,
+		\begin{align*}
+			\nu\left(\bigcupdot_{n\in\N} A_n\right)
+			&= \int_{\bigcupdot_{n\in\N} A_n} u d\mu \\
+			&= \int \ind_{\bigcupdot_{n\in\N} A_n} u d\mu \\
+			&= \int \left(\sum_{n\in\N} \ind_{A_n}\right) u d \mu \\
+			&= \int \left(\sum_{n\in\N}\ind_{A_n} u\right) d\mu \\
+			&\overset{\ref{cor:integral-countable-sum}}{=} \sum_{n\in\N} \int \ind_{A_n} u d\mu
+			= \sum_{n\in\N} \nu(A_n).
+		\end{align*}
+	\end{enumerate}
+\end{proof}

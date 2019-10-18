@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[a4paper]{book}
 
 %\usepackage[utf-8]{inputenc}
 
@@ -14,6 +14,12 @@
 \usepackage{thmtools}
 
 \usepackage{hyperref}
+\hypersetup{
+	pdftitle={Notes on Measure and Integration},
+	pdfauthor={Elias Hernandis},
+	pdfpagemode=UseOutlines,
+	bookmarksnumbered
+}
 
 \declaretheoremstyle[
 bodyfont=\normalfont,
@@ -100,7 +106,7 @@ numberwithin=section
 
 \renewcommand{\complement}{c}
 \newcommand{\sa}{\mathcal{A}}
-\newcommand{\abs}[1]{\lvert{#1}\rvert}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
 \newcommand{\sigas}{$\sigma$-algebras }
 \newcommand{\siga}{$\sigma$-algebra }
 \newcommand{\sigfin}{$\sigma$-finite}
@@ -115,8 +121,11 @@ numberwithin=section
 \newcommand{\calC}{\mathcal{C}}
 \newcommand{\calJ}{\mathcal{J}}
 \newcommand{\calS}{\mathcal{S}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calB}{\mathcal{B}}
 \newcommand{\calM}{\mathcal{M}}
 \newcommand{\calE}{\mathcal{E}}
+\newcommand{\calI}{\mathcal{I}}
 \newcommand{\tif}{&\text{ if }}
 \newcommand{\Pro}{\mathbb{P}}
 \newcommand{\istable}{$\cap$-stable}
@@ -147,9 +156,16 @@ numberwithin=section
 	
 	However, the process of writing these, as opposed to simply taking notes in class allows me to make sure I understand the connections between the material. In other courses, where the contents were not as well organised as in this one, I had to reorganise the contents of the corresponding version of the notes for that course. Even though this is mostly unnecessary in this course, the handwritten lecture notes allow for more formal proofs or verifications where there was no time to complete them. Also, the book suggest that the reader verify some assumptions made during the proofs of some remarks or lemmas. Hence this notes are most valuable as a complement to the book.
 	
-	Always trust the book when there is a discrepancy, though, I have not found a single erratum yet.
-	
 	Another valuable thing about these notes are the solutions to the assignments that we were given during the course. These have been compiled from corrections given to me by the TAs\footnote{If you want to see what a disaster it was when I started this subject, look at the scanned copies of submitted exercises...}.
+	
+	\section{Recommendations}
+	
+	The official course page is \cite{MIEducat}. In addition, we were offered exercise sets and more material through Blackboard. Grades were also published there.
+	
+	Always trust the book when there is a discrepancy. Though there may be errata (in fact, see \cite{MIMerrata} for a list of them), it is way more likely that I've made a mistake.
+	
+	The solutions to problems of the second edition are available online, see \cite{MIM2S}. All problems from the first edition are included in the second edition, albeit with a different numbering. Order is preserved, though.
+	
 	
 	\tableofcontents
 	
@@ -160,8 +176,14 @@ numberwithin=section
 	\input{input/05-measurable-mappings.tex}
 	\input{input/06-measurable-functions.tex}
 	\input{input/07-non-negative-integrals.tex}
+	\input{input/08-integrals.tex}
+	\input{input/09-null-sets.tex}
+	\input{input/10-convergence.tex}
 	\input{input/a1-exercise-sets.tex}
 	
-	\bibliographystyle{alpha}
-	\bibliography{mi-notes}
+	
+	\listoftheorems[ignore={dfn,ex,eg,remark,lem,cor}]
+	
+	\bibliographystyle{IEEEtran}
+	\bibliography{IEEEabrv,mi-notes}
 \end{document}

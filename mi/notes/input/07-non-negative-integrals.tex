@@ -16,7 +16,7 @@ Let
 \end{align}
 We want to interpret $I_mu(f)$ as $\int f d\mu$, but there might be a small problem, namely $f$ might have more than one standard representation so we need to check that the definition of $I_\mu(f)$ is independent of the specific representation, i.e. they all give the same answer.
 
-\begin{lem}
+\begin{lem}[Integrals of simple functions are representation-invariant]
 	If $f = \sum_{i = 0}^M a_i \ind_{A_i} = \sum_{j = 0}^N b_j \ind{B_j}$ are two standard representations of a simple function then $\sum_{i = 0}^M a_i\mu(A_i) = \sum_{j = 0}^n b_j \mu(B_j)$.
 \end{lem}
 
@@ -69,6 +69,7 @@ So $I_\mu(f)$ is well-defined regardless of the chosen standard representation. 
 \section{Integral of a non-negative function}
 
 \begin{dfn}[$(\mu)$-integral of a non-negative function]
+	\label{dfn:mu-integral}
 	Let $u \in \calM^+_\Rb(\sa)$, then the $(\mu)$-integral of $u$ is defined by
 	\begin{align}
 		\int u d\mu := \sup \{ I_\mu(g) \mid g \leq u, g \in \calE^+(\sa)\} \in [0, \infty]
@@ -102,7 +103,7 @@ Before we move one, let's make sure that we did not break anything. Namely, does
 
 \begin{remark}
 	\label{rem:mu-integrals-monotone}
-	It is easy to see that $\mu$-integrals are monotone. Since if $\mu \leq v$, then $\{g \in \calE^+(\sa) \mid g \leq u\} \subset \{h \in \calE^+(\sa) \mid h \leq v\}$. Hence,
+	It is easy to see that $\mu$-integrals are monotone. Since if $u \leq v$, then $\{g \in \calE^+(\sa) \mid g \leq u\} \subset \{h \in \calE^+(\sa) \mid h \leq v\}$. Hence,
 	\begin{align*}
 		\int u d\mu = \sup \{I_\mu(g) \mid g \in \calE^+(\sa), g \leq u\} \leq \sup \{I_\mu(h) \mid h \in \calE^+(\sa), h \leq v\} = \int v d\mu
 	\end{align*}
@@ -132,7 +133,7 @@ Notice that the assumption that $u_n$ is an increasing sequence is necessary to 
 	TODO. Important
 \end{proof}
 
-The following lemma is really just a more concise statement of the previous theorem.
+The following corollary is really just a more concise statement of the previous theorem.
 \begin{cor}
 	\label{cor:beppo-levi}
 	Let $u \in \calM_\Rb^+(\sa)$ be a non-negative, numerical, $\sa/\borel(\Rb)$-measurable function and $(f_n)_{n\in\N} \subset \calE^+(\sa)$ be a sequence of non-negative simple functions such that $f_n \uparrow u$. Then,
@@ -147,7 +148,7 @@ The following lemma is really just a more concise statement of the previous theo
 
 Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of arbitrary non-negative functions.
 
-\begin{thm}[Properties of integrals]
+\begin{thm}[Properties of integrals of non-negative functions]
 	\label{thm:prop-integrals}
 	Let $(X, \sa, \mu)$ be a measure space. Let $u, v \in \calM^+_\Rb(\sa)$. Then,
 	\begin{enumerate}
@@ -182,6 +183,7 @@ Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of a
 \end{proof}
 
 \begin{cor}
+	\label{cor:integral-countable-sum}
 	Let $(u_n)_{n\in\N} \subset \calM^+_\Rb(\sa)$. Then, $\sum_{n = 1}^{\infty} u_n \in \calM_\Rb^+(\sa)$ and
 	\begin{align}
 		\int \sum_{n = 1}^\infty u_n d\mu = \sum_{n = 1}^\infty \int u_n d\mu

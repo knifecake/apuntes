@@ -8,10 +8,11 @@
 Due September 20th, 2019.
 
 
-\newcommand{\calB}{\mathcal{B}}
 \begin{ex}
 	Let $X$ be a nonempty set and $\sa = \{A_1, A_2, \dots\}$ a collection of disjoint subsets of $X$ such that $X = \bigcup_{n = 1}^\infty A_n$. Show that each element $A \in \sigma(\sa)$ is a union of at most a countable subcollection of elements of $\sa$. (3 pts)
 \end{ex}
+
+The technique used here is similar to the good set principle (\autoref{rem:good-set-principle}), only that it is not necessary to show that the good set is inside the \siga.
 
 \begin{proof}
 	The idea is to prove that $\sigma(\sa)$ only contains countable unions of sets of $\sa$.
@@ -114,7 +115,6 @@ Due September 20th, 2019.
 
 Due September 27th, 2019.
 
-\newcommand{\calI}{\mathcal{I}}
 \begin{ex}
 	Let $\Q$ be the set of all real rational numbers and let $\calI_\Q = \{[a, b)_\Q \mid a,b \in \Q\}$ where $[a,b)_\Q = \{q \in \Q \mid a \leq q < b\}$.
 	\begin{enumerate}
@@ -172,6 +172,42 @@ Due September 27th, 2019.
 	\end{enumerate}
 \end{proof}
 
+
+\begin{ex}
+	Let $(X, \sa, \mu)$ be a measure space. For $A \in \sa$ let
+	\begin{align*}
+		S(A) := \{B \in \sa \mid B \subset A, \mu(B) < \infty\}.
+	\end{align*}
+	
+	Define $\nu: \sa \to [0, \infty]$ by $\nu(A) := \sup\{ \mu(B) \mid B \in S(A)\}$.
+	
+	\begin{enumerate}
+		\item Show that $\nu$ is monotone, i.e. if $A_1, A_2 \in \sa$ such that $A_1 \subseteq A_2$, then $\nu(A_1) \leq \nu(A_2)$. (0.5 pts).
+		\item Show that if $A \in \sa$ with $\mu(A) < \infty$, then $\nu(A) = \mu(A)$. (1 pt.)
+		\item Show that $\nu$ is a measure on $\sa$. (2.5 pts.)
+		\item Show that if $\mu$ is $\sigma$-finite, the $\mu = \nu$. (1 pt.)
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}
+	$ $\newline
+	\begin{enumerate}
+		\item We first show that if $A_1 \subseteq A_2$, then $S(A_1) \subseteq A_2$. Let $C \in S(A_1)$, then $C \in \sa \land C \subset A_1 \land \mu(C) < \infty$. Clearly $C \subseteq A_2$ since $A_1 \subseteq A_2$ so $C \in S(A_2)$. Finally,
+		
+		\begin{align*}
+			\nu(A_1) = \sup \{\mu(B) \mid B \in S(A_1)\} \leq \sup \{\mu(B) \mid B \in S(A_2)\} = \nu(A_2).
+		\end{align*}
+		
+		\item Clearly the domain and range of $\nu$ are compatible with the definition of a measure, i.e. $\nu: \sa \to [0, \infty]$. We need to show that the two properties from \autoref{dfn:measure} hold.
+		\begin{enumerate}
+			\item $\nu(\emptyset) = \sup \{\nu(B) \mid B \in S(\emptyset)\} = \mu(\emptyset) = 0$ since $S(\emptyset) = \{ \emptyset\}$.
+			\item Let $(A_n)_{n\in\N} \subset \sa$ be a pairwise disjoint sequence of sets in $\sa$. Then,
+			\begin{align*}
+				\nu\left(\bigcupdot_{n \in \N} A_n\right) = 
+			\end{align*}
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
 
 
 \section{Exercise set 3}
@@ -258,8 +294,6 @@ Due October 4th, 2019.
 	\end{enumerate}
 \end{proof}
 
-\newpage
-
 \begin{ex}
 	Consider the measure space $([0, 1], \borel, \lambda)$ where $\borel = \borel(\R) \cap [0, 1)$, i.e. the restriction of the Borel \siga to the interval $[0, 1)$, and $\lambda$ denotes the Lebesgue measure restricted to $\borel$. Define a map $T:[0, 1) \to [0, 1)$ by
 	\begin{align*}
@@ -299,6 +333,90 @@ Due October 4th, 2019.
 \end{proof}
 
 \section{Practice Mid-Term, 2019-2020.}
+
+\begin{ex}
+	Let $(X, \sa)$ be a measure space such that $\sa = \sigma(\calG)$ where $\calG$ is a collection of subsets of $X$ such that $\emptyset \in \calG$. Show that for any $A \in \sa$ there exists a countable collection $\calG_A \subseteq \calG$ such that $A \in \sigma(\calG_A)$.
+\end{ex}
+
+\begin{proof}
+	This exercise presents a good opportunity to apply the good set principle (cf. \autoref{rem:good-set-principle}).
+	
+	Let
+	\begin{align*}
+		\calB := \{ A \in \sa \mid \exists \calG_A \subset \calG \text{ countable, } A \in \sigma(\calG_A)\}.
+	\end{align*}
+	
+	First, we will show that $\calB$ is a \siga.
+	\begin{enumerate}
+		\item Clearly $X \in \sa$. Let $G_X = \{\emptyset\}$ which is clearly finite and $G_X \subset \calG$ by hypothesis. Then $\sigma(\calG_X) = \{\emptyset, \emptyset^\complement\} = \{\emptyset, X\} \implies X \in \calB$.
+		\item Let $A \in \calB$. Then $A \in \sa$ by definition of $\calB$ and there exists $\calG_A \subset \calG$ countable with $A \in \sigma(\calG_A)$. Since $\sigma(\calG_A)$ is a \siga it contains $A^\complement$ and clearly $A^\complement \in \sa$. Let $\calG_{A^\complement} = \calG_A$ and therefore $A^\complement \in \calB$.
+		\item Finally, let $(A_n)_{n\in\N} \subset \calB$. Clearly, $(A_n)_{n\in\N} \subset \sa$ and, for each $n \in \N$, there exists $\calG_{A_n} \subset \calG$ countable such that $A_n \in \sigma(\calG_{A_n})$. Also, since $\sa$ is a \siga, we have that $\bigcup_{n\in\N}A_n \in \sa$. Let
+		\begin{align*}
+			\calG_{\bigcup_{n\in\N} A_n} = \bigcup_{n\in\N} \calG_{A_n}.
+		\end{align*}
+		$\calG_{\bigcup_{n\in\N} A_n} \subset \calG$ is countable since every $\calG_{A_n} \subset \calG$ is countable and $\calG_{\bigcup_{n\in\N} A_n}$ is a countable union of countable sets. Therefore $\bigcup_{n\in\N} A_n \in \calB$.
+	\end{enumerate}
+
+	Now we show that $\calB = \sa$. Clearly, from the definition of $\calB$ we see that $\calB \subseteq \sa$. For the reverse containment, we will show that $\calG \subset \calB$ and therefore $\sa = \sigma(\calG) \subseteq \sigma(\calB) = \calB$. Let $A \in \calG \subset \sa$. Define $\calG_A = \{A\} \subset \calG$ and clearly finite and $A \in \sigma(\calG_A)$. Therefore $A \in \calB,\ \forall A \in \calG \implies \calG\subset \calB$.
+\end{proof}
+
+\begin{ex}
+	Let $X$ be a set and $\calF$ a collection of real-valued functions on $X$ satisfying the following properties:
+	\begin{enumerate}
+		\item $\calF$ contains the constant functions,
+		\item if $f, g \in \calF$ and $c \in \R$, then $f + g,\ fg, cf \in \calF$.
+		\item if $f_n \in \calF$, and $f = \lim_{n \to \infty} f_n$, then $f \in \calF$.
+	\end{enumerate}
+
+	For $A \subseteq X$, denote by $\ind_{A}$ the indicator function of $A$, i.e.
+	
+	\begin{align*}
+		\ind_A(x) = \begin{cases}
+		1 \tif x \in A,\\
+		0 \tif x \not\in A.
+		\end{cases}
+	\end{align*}
+	Show that the collection $\sa = \{ A \subseteq X \mid \ind_A \in \calF\}$ is a \siga.
+\end{ex}
+
+\begin{proof}
+	We shall prove that the three properties of a \siga hold in $\sa$:
+	\begin{enumerate}
+		\item $X \in \sa$ since $\ind_X(x) = 1$ constantly, and therefore $\ind_X \in \calF$.
+		\item if $A \in \sa$, then $\ind_A \in \calF$. We can write $\ind_{A^\complement} = 1 - \ind_A$. Since $1, 1_A \in \calF$ we have $\ind_{A^\complement} \in \calF \implies A^\complement \in \sa$.
+		\item Let $(A_n)_{n\in \N} \subset \sa$. Then $(\ind_{A_n})_{n\in\N} \in \calF$. We can write
+		\begin{align*}
+			\ind_{\bigcup_{n\in\N} A_n} = \sum_{n=1}^{\infty} \ind_{A_i}
+		\end{align*}
+		To prove $\ind_{\bigcup_{n\in\N} A_i} \in \calF$ we construct the following sequence of functions $(f_n)_{n\in\N} \in \calF$ given by
+		\begin{align*}
+			f_n = \sum_{i=1}^{n} \ind_{A_i} = \ind_{A_n} + f_{n-1}
+		\end{align*}
+		Clearly, $f_n \in \calF$ for all $n$ because of property 2. Then,
+		\begin{align*}
+			f = \lim_{n \to \infty} f_n = \sum_{i = 1}^\infty \ind_{A_i} = \ind_{\bigcup_{n\in\N} A_n} \in \calF,
+		\end{align*}
+		and thus, $\bigcup_{n\in\N} A_i \in \sa$.
+	\end{enumerate}
+\end{proof}
+
+\begin{ex}
+	Consider the measure space $([0,1], \borel([0,1]), \lambda)$ where $\borel([0,1])$ is the restriction of the Borel \siga to to $[0,1]$, and $\lambda$ is the restriction of the Lebesgue measure to $[0,1]$. Let $E_1, \dots, E_m$ be a collection of Borel measurable subsets of $[0,1]$ such that every element $x \in [0,1]$ belongs to at least $n$ sets in the collection $\{E_j\}_{j=1}^m$, where $n \leq m$. Show that there exists a $j \in \{1, \dots, m\}$ such that $\lambda(E_j) \geq \frac{n}{m}$.
+\end{ex}
+
+\begin{proof}
+	Observe that if every $x \in [0, 1]$ belongs to at least $n$ sets in $(E_j)$ then we have that
+	\begin{align*}
+		\sum_{j = 1}^m \ind_{E_j}(x) \geq n,\ \forall x \in [0,1].
+	\end{align*}
+	We proceed by contradiction. Suppose $\lambda(E_j) < \frac{n}{m},\ \forall j \in \{1, \dots, m\}$. Then
+	\begin{align*}
+		n = \int_{[0,1]}n d\lambda
+		\overset{\ref{rem:mu-integrals-monotone}}{\leq} \int_{[0,1]} \sum_{j=1}^{m}\ind_{E_j}(x)d\lambda
+		= \sum_{j = 1}^m \lambda(E_j) < m \cdot \frac{n}{m} = n. 
+	\end{align*}
+	This is a contradiction, so there must exists at least one $j \in \{1, \dots, m\}$ such that $\lambda(E_j) \geq \frac{n}{m}$.
+\end{proof}
 
 \begin{ex}
 	Consider the measure space $(\R, \borel(\R), \lambda)$ where $\borel(\R)$ is the Borel \siga over $\R$, and $\lambda$ is the one-dimensional Lebesgue measure. Let $f_n : \R \to \R$ be defined by
@@ -349,4 +467,26 @@ Due October 4th, 2019.
 			\int \sup_{n \geq 1} f_n d \mu = \lim_{n \to \infty} I_\mu(f_n) = 1 + \frac{3}{2} = \frac{5}{2}.
 		\end{align*}
 	\end{enumerate}
+\end{proof}
+
+\begin{ex}
+	Let $\mu$ and $\nu$ be two measures on the measure space $(E, \borel)$ sucht that $\mu(A) \leq \nu(A)$ for all $A \in \borel$. Show that if $f$ is any non-negative function on $(E, \borel)$, then $\int_E f d\mu \leq \int_E f d\nu$.
+\end{ex}
+
+\begin{proof}
+	\footnote{Now that the solutions to this practice midterm have been published, I noticed there is a much more cleaner (and modular!) way of doing this. First prove it for $f = \ind_A$ for some $A\in \sa$. Then, prove it for $f \in \calE^+(\sa)$, for some simple function $f$. Finally, prove it for the general case. Each of these builds on the previous and you're left with something much more readable and useful.}By \autoref{thm:sombrero} we now that there exists a sequence of non-negative simple functions $(f_n)_{n\in\N} \subset \calE^+(\borel)$ such that $f_n \uparrow f$. Moreover, each of this simple functions has a representation of the form
+	\begin{align*}
+		f_n = \sum_{j=0}^{M_n} a_j \ind_{A_j}
+	\end{align*}
+	Thus,
+	\begin{multline*}
+		\int_E fd\mu
+		= \lim_{n \to \infty} \int_E f_n d\mu
+		= \lim_{n \to \infty} I_\mu(f_n) \\
+		= \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j=0}^{M_n} a_j \mu(A_j)
+		\leq \lim_{n \to \infty} \sum_{i = 1}^n \sum_{j = 0}^{M_n} a_j \nu(A_j) \\
+		= \lim_{n \to \infty} I_\nu(f_n) 
+		= \lim_{n \to \infty} \int_E f_n d\nu
+		= \int fd\nu
+	\end{multline*}
 \end{proof}

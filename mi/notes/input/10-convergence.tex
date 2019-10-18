@@ -1,0 +1,93 @@
+% !TeX root = ../mi-notes.tex
+
+\chapter{Convergence theorems}
+
+The purpose of this chapter is to generalise the results that were discussed in chapter 7, namely \autoref{thm:beppo-levi}, \autoref{thm:fatou-lemma} and the reverse Fatou lemma. By generalisation we mean that we will remove the restrictions about positive functions and/or increasing sequences.
+
+\section{Convergence theorems}
+
+First, we extend \autoref{thm:beppo-levi} to negative functions.
+\begin{thm}[Monotone convergence]
+	\label{thm:monotone-convergence}
+	Let $(X, \sa, \mu)$ be a measure space and $(u_n)_{n\in\N} \subset \calL^1(\mu)$ be an increasing sequence of measurable functions such that
+	\begin{align*}
+		u_n \leq u_{n+1},\ \forall n \in \N\text{ and define } u = \sup_{n\in \N} u_n = \lim_{n \to \infty} u_n \in \calM_\Rb(\sa).
+	\end{align*}
+	Then,
+	\begin{align}
+		u \in \calL^1(\mu) \iff \sup_{n\in\N} \int u_n d\mu < \infty,
+	\end{align}
+	and in that case
+	\begin{align}
+		\int u d\mu = \int \lim_{n \to \infty} u_n d\mu = \int \sup_{n\in\N} u_n = \sup_{n\in\N} \int u_n d\mu = \lim_{n \to \infty} \int u_n d\mu.
+	\end{align}
+\end{thm}
+
+Here we're writting both the $\lim$ and the $\sup$ versions of the equalities to be extra clear at the expense of being too verbose. This is not the case in \cite[p- 88]{schilling2017}.
+
+Of course, we can state the same for decreasing sequences and infima, as taking $u_n = - v_n$ for some decreasing sequence $(v_n)$ is enough to fulfill the assumptions of the \autoref{thm:monotone-convergence}. Anyway, we can state the result.
+
+\begin{cor}
+	Let $(u_n)_{n\in\N} \subset \calL^1(\mu)$ be a sequence of decreasing integrable functions such that
+	\begin{align*}
+	u_n \geq u_{n+1},\ \forall n \in \N\text{ and define } u = \inf_{n\in\N} u_n = \lim_{n \to \infty} u_n \in \calM_\Rb(\sa).
+	\end{align*}
+	Then,
+	\begin{align}
+	u \in \calL^1(\mu) \iff \inf_{n\in\N} \int u_n d\mu > -\infty,
+	\end{align}
+	in which case
+	\begin{align}
+	\int u d\mu = \int \lim_{n \to \infty} u_n d\mu = \int \inf_{n\in\N} u_n d\mu = \inf_{n\in\N} \int u_n d\mu = \lim_{n \to \infty} \int u_n d\mu.
+	\end{align}
+\end{cor}
+
+Now we move on to a very important result. This time, not only we drop non-negativity, but also, monotonicity. Of course, there is a price to pay for this.
+
+\begin{thm}[Lebesgue Dominated Convergence]
+	\label{thm:lebesgue-dominated-convergence}
+	Let $(X, \sa, \mu)$ be a measure space and $(u_n)_{n\in\N} \subset \calL^1(\mu)$ be a sequence of functions such that $|u_n| \leq w,\ \forall n \in \N$ and some $w \in \calL^1_\plus(\mu)$. If $u(x) = \lim_{n \to \infty} u_n(x)$ exists for almost every $x\in X$ then $u \in \calL^1(\mu)$ and we have
+	\begin{align}
+		\lim_{n \to \infty} \int |u_n - u| d\mu = 0,
+	\end{align}
+	\begin{align}
+		\lim_{n \to \infty} \int u_n d\mu = \int \lim_{n \to \infty} u_n d\mu = \int ud\mu.
+	\end{align}
+\end{thm}
+
+\section{Applications to parameter dependent-integrals}
+
+\begin{thm}[Continuity lemma]
+	\label{thm:continuity-lemma}
+	
+	Let $(X, \sa, \mu)$ be a measure space and $\emptyset \neq (a,b) \subset \R$ a non-degenerate open interval and $u: (a, b) \times X \to \R$ be a function satisfying
+	\begin{enumerate}
+		\item $x \mapsto u(t, x)$ is in $\calL^1(\mu)$ for every fixed $t \in (a, b)$;
+		\item $t \mapsto u(t, x)$ is continuous for every fixed $x \in X$; and
+		\item $|u(t, x)| \leq w(x)$ for all $(t, x) \in (a, b) \times X$ and some $w \in \calL^1_\plus(\mu)$.
+	\end{enumerate}
+	Then the function $v: (a, b) \to \R$ given by
+	\begin{align}
+		t \mapsto v(t) := \int u(t, x) \mu(dx)
+	\end{align}
+	is continuous.
+\end{thm}
+
+\begin{thm}[Differentiability lemma]
+	\label{thm:differentiability-lemma}
+	
+	Let $(X, \sa, \mu)$ be a measure space, $\emptyset \neq (a, b) \subset \R$ a non-degenerate open interval and $u: (a, b) \times X \to \R$ be a function satisfying
+	\begin{enumerate}
+		\item $x \mapsto u(t, x)$ is in $\calL^1(\mu)$ for every fixed $t \in (a, b)$;
+		\item $t \mapsto u(t, x)$ is differentiable for every fixed $x \in X$; and
+		\item $|\partial_t u(t, x)| \leq w(x)$ for all $(t, x) \in (a, b) \times X$ and some $w \in \calL^1_\plus(\mu)$.
+	\end{enumerate}
+	Then the function $v: (a,b) \to \R$ given by
+	\begin{align}
+		t \mapsto v(t) := \int u(t, x) \mu(dx)
+	\end{align}
+	is differentiable and its derivative is
+	\begin{align}
+		\partial_t v(t) = \int \partial_t u(t, x) \mu(dx).
+	\end{align}
+\end{thm}

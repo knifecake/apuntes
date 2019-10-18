@@ -5,6 +5,7 @@
 \section{Definition. Properties.}
 
 \begin{dfn}[Measure]
+	\label{dfn:measure}
 	Let $(X, \sa)$ be a measurable space. A set function $\mu: \sa \to [0, \infty)$ is called a \underline{measure} (on X) if
 	\begin{enumerate}
 		\item $\mu(\emptyset) = 0$ and
@@ -15,31 +16,40 @@
 	\end{enumerate}
 \end{dfn}
 
-In the previous definition the symbol $\bigcupdot$ indicates that the union is disjoint. Also, let's introduce some more notation. Given a sequence $(A_n)_{n \in \N}$ we shall say
-\begin{align*}
-	A_n \uparrow A \iff A_1 \subseteq A_2 \subseteq \dots &\qquad\text{ and } A = \bigcup_{n \in \N} A_n \\
-	A_n \downarrow A \iff A_1 \supseteq A_2 \supseteq \dots &\qquad\text{ and } A = \bigcap_{n \in \N} A_n
-\end{align*}
-
-And some more terminology:
-
-\begin{dfn}[Exhausting sequence]
-	Within a measurable space $(X, \sa)$, a sequence $(A_n)_{n\in \N} \subset \sa$ is called an \underline{exhausting sequence} if $A_n \uparrow X$.
-\end{dfn}
+And, analogously to \sigas
 
 \begin{dfn}[Measure space]
 	Let $(X, \sa)$ be a measurable space and $\mu$ a measure. The triple $(X, \sa, \mu)$ is called a \underline{measure space}.
-	
-	\begin{itemize}
-		\item If $\mu(X) < \infty$ we say that $(X, \sa, \mu)$ is a finite measure space.
-		\item IF $\mu(X) = 1$ then $(X, \sa, \mu)$ is a probability space.
-	\end{itemize}
 \end{dfn}
+
+In the definition of measure (\ref{dfn:measure}), the symbol $\bigcupdot$ indicates that the union is disjoint.
+
+Some special measures get cool names, for instance:
+
+\begin{itemize}
+	\item If $\mu(X) < \infty$ we say that $\mu$ is \textbf{finite} and that $(X, \sa, \mu)$ is a \textbf{finite measure space}.
+	\item IF $\mu(X) = 1$ then $(X, \sa, \mu)$ is a probability space and we usually denote it by $(\Omega, \sa, \Pro)$.
+\end{itemize}
+
+From the two conditions on \ref{dfn:measure}, one can derive many properties, but before, let us introduce some notation.
+
+Let $(A_n)_{n \in \N}$ be a sequence of sets. We say that $(A_n)$ is an \textbf{increasing}, resp. \textbf{decreasing}, \textbf{sequence} and denote it by $A_n \uparrow A$, resp. $A_n\downarrow A$ according to the following definition.
+\begin{align}
+	A_n \uparrow A \iff A_1 \subseteq A_2 \subseteq \dots &\text{ and } A = \bigcup_{n \in \N} A_n \\
+	A_n \downarrow A \iff A_1 \supseteq A_2 \supseteq \dots &\text{ and } A = \bigcap_{n \in \N} A_n
+\end{align}
+
+We say that an increasing sequence $A_n \uparrow A$ is an \textbf{exhausting sequence} if $A_n \subseteq X$ and $A = X$. We write $A_n \uparrow X$ for an exhausting sequence.
 
 
 \begin{dfn}[$\sigma$-finite measure]
-	A measure $\mu$ is called $\sigma$-finite if there exists an exhausting sequence $(A_n)_{n \in \N} \subset \sa$ such that $\mu(A_n) < \infty,\ \forall n \in \N$. A measure space with this kind of measure is called a \sigfin  measure space.
+	\label{dfn:sigma-finite}
+	A measure $\mu$ is called $\sigma$-finite if there exists an exhausting sequence $(A_n)_{n \in \N} \subset \sa$ such that $\mu(A_n) < \infty,\ \forall n \in \N$. A measure space with this kind of measure is called a $\sigma$-finite measure space.
 \end{dfn}
+
+\begin{remark}
+	Finiteness is stronger than $\sigma$-finiteness\footnote{By $\sigma$-finiteness we mean that a measure satisfies \autoref{dfn:sigma-finite}, not that it is $s$-finite, which we wont see in this course. See \cite{WSF} for more details.}. Namely, any finite measure is $\sigma$-finite since one can choose the sequence $A_n = X,\ \forall n \in \N$ which is an exhausting sequence $A_n\uparrow X$ and $\mu(A_n) < \infty,\ \forall n \in \N$. On the other hand, an example of a $\sigma$-finite measure which is not finite is the Lebesuge measure (see \autoref{eg:lebesgue-measure}).
+\end{remark}
 
 \begin{thm}[Properties of measures]
 	Let $(X, \sa, \mu)$ be a measure space and $A, B, A_n, B_n \in \sa,\ \forall n \in \N$. Then,
@@ -50,7 +60,7 @@ And some more terminology:
 		\item \textbf{(strong additivity)} $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$,
 		\item \textbf{(finite subadditivity)} $\mu(A \cup B) \leq \mu(A) + \mu(B)$,
 		\item \textbf{(continuity from below)} if $A_n \uparrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \sup_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$,
-		\item \textbf{(continuity from above)} if $\mu(A) < \infty, \forall A \in \sa$ and $A_n \downarrow A$ then $\mu(A) = \mu(\bigcup_{n \in \N} A_n) = \inf_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$, and
+		\item \textbf{(continuity from above)} if $\mu(A) < \infty, \forall A \in \sa$ and $A_n \downarrow A$ then $\mu(A) = \mu(\bigcap_{n \in \N} A_n) = \inf_{n\in\N} \mu(A_n) = \lim_{n\to \infty} \mu(A_n)$, and
 		\item \textbf{(sigma subadditivity)} $\mu(\bigcup_{n \in \N} A_n) \leq \sum_{n\in \N} \mu(A_n)$.
 	\end{enumerate}
 \end{thm}
@@ -102,34 +112,38 @@ And some more terminology:
 
 \section{Examples}
 
-\begin{eg}[First examples of measures]
-	Let $(X, \sa)$ be a measurable space
-	\begin{enumerate}
-		\item We define the \textbf{Dirac measure} for a given $x_0 \in X$ as follows:
+Throughout this section, let $(X, \sa)$ be a measurable space.
+
+\begin{eg}[Dirac measure]
+	\label{eg:dirac-measure}
+	We define the \textbf{Dirac measure} for a given $x_0 \in X$ as follows:
+	\begin{align}
+	\delta_{x_0}(A) = \begin{cases}
+	0 \tif x_0\not\in A \\
+	1 \tif x_0 \in A
+	\end{cases},\qquad \forall A \in \sa
+	\end{align}
+	Clearly $\delta_{x_0}$ is a measure since it satisfies the two properties. First, $\delta_{x_0}(\emptyset) = 0$ since $\forall x_0 \in X,\ x_0 \not\in \emptyset$. Second, for any pairwise disjoint collection of sets $(A_n)_{n\in\N} \subset \sa$ we have two possibilities:
+	\begin{itemize}
+		\item If $x_0 \not\in \bigcupdot_{n \in \N} A_n$ then clearly $x_0 \not\in A_n,\ \forall n \in N$ so
 		\begin{align*}
-			\delta_{x_0}(A) = \begin{cases}
-			0 \tif x_0\not\in A \\
-			1 \tif x_0 \in A
-			\end{cases},\qquad \forall A \in \sa
+		0 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = 0
 		\end{align*}
-		Clearly $\delta_{x_0}$ is a measure since it satisfies the two properties. First, $\delta_{x_0}(\emptyset) = 0$ since $\forall x_0 \in X,\ x_0 \not\in \emptyset$. Second, for any pairwise disjoint collection of sets $(A_n)_{n\in\N} \subset \sa$ we have two possibilities:
-		\begin{itemize}
-			\item If $x_0 \not\in \bigcupdot_{n \in \N} A_n$ then clearly $x_0 \not\in A_n,\ \forall n \in N$ so
-			\begin{align*}
-				0 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = 0
-			\end{align*}
-			\item Otherwise, if $x_0 \in \bigcupdot_{n \in \N} A_n$ then there must be only one $n_0 \in \N$ such that $x_0 \in A_{n_0}$ since $(A_n)$ is a pairwise disjoint collection. Thus,
-			\begin{align*}
-				1 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
-			\end{align*}
-		\end{itemize}
-	\item Let $X = \R$ and choose $\sa = \{A \subset \R \mid A\text{ is countable or } A^\complement \text{ is countable }\}$. We already saw on the Chapter 1 that $\sa$ is a \siga. Now define $\mu:\sa \to [0, \infty)$ as
-	\begin{align*}
+		\item Otherwise, if $x_0 \in \bigcupdot_{n \in \N} A_n$ then there must be only one $n_0 \in \N$ such that $x_0 \in A_{n_0}$ since $(A_n)$ is a pairwise disjoint collection. Thus,
+		\begin{align*}
+		1 = \mu\left(\bigcupdot_{n \in \N} A_n\right) = \sum_{n\in \N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
+		\end{align*}
+	\end{itemize}
+\end{eg}
+
+\begin{eg}[Counting measure]
+	Let $X = \R$ and choose $\sa = \{A \subset \R \mid A\text{ is countable or } A^\complement \text{ is countable }\}$. We already saw on the Chapter 1 that $\sa$ is a \siga. Now define $\mu:\sa \to [0, \infty)$ as
+	\begin{align}
 		\mu(A) = \begin{cases}
 		0 \tif \# A \leq \# \N \\
 		1 \tif \# A^\complement \leq \# \N
 		\end{cases}
-	\end{align*}
+	\end{align}
 	We have that $\mu(\emptyset) = 0$ since $\#\emptyset$ is countable. As for $\sigma$-additivity we must recall from set theory that the union of countable sets is also countable, so:
 	\begin{itemize}
 		\item If $\#A_n \leq \#\N,\ \forall n \in \N$ then
@@ -145,7 +159,10 @@ And some more terminology:
 			1 = \mu(\bigcupdot_{n \in \N} A_n) = \sum_{n\in\N} \mu(A_n) = \mu(A_{n_0}) + \sum_{n \neq n_0} \mu(A_n) = 1 + 0
 		\end{align*}
 	\end{itemize}
-	\item \textbf{(Discrete probability measure)} Let $(\Omega, \sa, \Pro)$ be a measure space where $\Omega = \{\omega_1, \omega_2, \dots \}$ is a countable set, $\sa = \powerset(\Omega)$ (which is of course a \siga) and let $(p_1, p_2, \dots)$ be a probability vector where $\sum_{n\in \N} p_n = 1$ (and $p_i$ is the probability of $\omega_i$). Define the measure $\Pro : \sa \to [0, \infty)$ where
+\end{eg}
+
+\begin{eg}[Discrete probability measure]
+	Let $(\Omega, \sa, \Pro)$ be a measure space where $\Omega = \{\omega_1, \omega_2, \dots \}$ is a countable set, $\sa = \powerset(\Omega)$ (which is of course a \siga) and let $(p_1, p_2, \dots)$ be a probability vector where $\sum_{n\in \N} p_n = 1$ (and $p_i$ is the probability of $\omega_i$). Define the measure $\Pro : \sa \to [0, \infty)$ where
 	\begin{align*}
 		\Pro(A) = \sum_{\omega_i \in A} p_i = \sum_{i=1}^\infty p_i \delta_{\omega_i}(A)
 	\end{align*}
@@ -156,14 +173,21 @@ And some more terminology:
 		= \sum_{n = 1}^\infty \left(\sum_{i = 1}^\infty p_i\delta_{x_i} A_n\right) = \sum_{n = 1}^\infty \Pro(A_n)
 	\end{align*}
 	Nota that here we can exchange the summations because all the terms are non-negative so the convergence problems (oscillating convergence, that is) are eliminated.
-	\item \textbf{(Lebesgue measure)} For now we shall define this measure only of $n$-dimensional rectangles. The generalisation to arbitrary Borel sets will come in chapter 4.
+\end{eg}
+
+\begin{eg}[Lebesgue measure]
+	\label{eg:lebesgue-measure}
+	For now we shall define this measure only on $n$-dimensional rectangles. The generalisation to arbitrary Borel sets will come in chapter 4.
 	
 	Consider the measure space $(\R^n, \borel(\R^n), \lambda^n)$ where $\R^n$ and $\borel(\R^n)$ are the usual suspects and $\lambda^n : \borel(\R^n) \to [0, \infty)$ is defined as:
-	\begin{align*}
+	\begin{align}
 		\lambda^n\left(\bigtimes_{i = 1}^n [a_i, b_i)\right) = \prod_{i=1}^{n} (b_i - a_i)
-	\end{align*}
+	\end{align}
 	or, more informally, the hypervolume of the rectangle in question.
 	
 	We are not ready to verify that $\lambda^n$ is a measure over $\borel(\R^n)$ yet. In fact, we will need to wait until the end of Chapter 4, where, once we have the generalisation to arbitrary Borel sets, we shall prove that it is a measure.
-	\end{enumerate}
+	
+	We are however, in a position to prove that $\lambda^n$ is $\sigma$-finite. Let $A_i = [-i, i)^n$ for all $n \in \N$. Clearly, $(A_i)_{n \in \N}$ is an exhausting sequence since $A_i \uparrow \R^n$. Also, $\lambda^n(A_i) = (2i)^n < \infty, \forall n \in \N$. Therefore $\lambda^n$ is $\sigma$-finite.
+	
+	Note that $\lambda^n$ is not finite, since $\lambda(R^n) \not< \infty$.
 \end{eg}

@@ -1,8 +1,8 @@
 % !TeX root = ../mi-notes.tex
 
-\chapter{$\sigma$-algebras}
+\chapter{\texorpdfstring{$\sigma$-algebras}{Sigma algebras}}
 
-\section{What is a \siga?}
+\section{What is a \texorpdfstring{$\sigma$-algebra}{sigma algebra}?}
 
 \begin{dfn}[Sigma algebra]
 	Let X be a set and $\sa \subset \powerset(X)$ a collection of subsets of $X$. We say that $\sa$ is a \underline{sigma algebra} or \siga (on X) if it satisfies these three properties:
@@ -21,56 +21,98 @@ From now on we shall assume $X$ is a set and $\sa$ is a \siga on $X$.
 
 \begin{remark}$ $ \newline
 	\begin{itemize}
-		\item From properties 1 and 2 we have $\emptyset = X^\complement\in \sa$.
+		\item From properties 1 and 2 we have $\emptyset = X^\complement\in \sa$.\footnote{In fact, sometimes we substitute property one for $\emptyset \in \sa$. This is equivalent as long as still take complements with respect to the universe $X$, i.e. $A^\complement = X \setminus A$.}
 		\item From properties 2 and 3 we have that $\sa$ is also closed under \textbf{countable} intersection. Let $(A_n)_{n \in \N} \subset \sa$. Then, using De Morgan's laws we have
 		\begin{align*}
 			\bigcap_{n \in \N} A_n = \left(\bigcup_{n \in \N} A_n^\complement\right)^\complement \in \sa
 		\end{align*}
-		because $A_n^\complement \in \sa$ because of 2, the union is included because of 3 and its complement is also included because of 2.
+		because $A_n^\complement \in \sa$ because of 2, the union is included because of 3 and its complement is also included because of 2. When a set has this property, we sometimes say $\sa$ is \istable (see \autoref{dfn:istable}).
+		\item Clearly, finite unions and intersections of sets in the \siga end up in the \siga. For the union of $M$ sets take $A_n = \emptyset, \forall n > M$ and apply 3 (or the equivalent for the intersection).
 	\end{itemize}
 \end{remark}
 
-\begin{eg}[First examples of \sigas]$ $\newline
-	\begin{enumerate}
-		\item The power set $\powerset (X)$ is the largest \siga on $X$.
-		\item $\{\emptyset, X\}$ is the smallest \siga on $X$.
-		\item Given a subset $A \subset X$, the smallest \siga which contains information about $A$ is $\{\emptyset, X, A, A^\complement\}$. More on this later.
-		\item Let $X$ be an uncountable set. Then $\sa = \{ A \subset X \mid A \text{ is countable or } A^\complement \text{ is coutable }\}$ is a \siga.
-		
-		\begin{proof} We shall prove the three properties of a \siga
-			\begin{enumerate}
-				\item $X \in \sa$ because $X^\complement = \emptyset$ is countable.
-				\item If $A \in \sa$ and is countable the $A^\complement \in \sa$ because $(A^\complement)^\complement$ is countable. If $A \in \sa$ but $A$ is not countable then $A^\complement$ must be so, hence $A^\complement \in \sa$.
-				\item Let $(A_n)_{n \in \N} \subset \sa$. To see if the union is included we distinguish to cases:
-				\begin{enumerate}
-					\item If $A_n$ is countable $\forall n \in N$ then $\bigcup_{n \in \N} A_n$ is also countable and therefore in $\sa$.\footnote{Recall that the countable union of countable sets is still a countable set.}
-					\item If there is any $A_k$ that is uncountable, then the union is uncountable but
-					\begin{align*}
-						\left(\bigcup_{n \in \N} A_n\right)^\complement = \bigcap_{n \in \N} A_n^\complement \subset A_k^\complement
-					\end{align*}
-					Recall that $A_k^\complement$ must be countable because $A_k \in \sa$ and therefore $\left(\bigcup_{n \in \N} A_n\right)^\complement$ must also be countable. Thus, $\bigcup_{n \in \N} A_n \in \sa$.
-				\end{enumerate}
-			\end{enumerate}
-		\end{proof}
-		\item (The preimage\footnote{Recall some properties of preimages (that are not always true for images): Set difference and union (and therefore complement and intersection) are well defined and behave as expected. Moreover, union and intersection behave as expected even for countable arities.} \siga). Let $X, X'$ be sets, let $\sa'$ be a \siga on $X'$ and let $f : X \to X'$ be a function between the two sets. We claim that\footnote{Here $\inv{f}$ denotes the preimage of a set, not the inverse function. Recall that the preimage of a function $f: X \to X'$ is defined as $\inv{f}(A') = \{x \in X \mid f(x) \in A' \subset X'\}$} $\sa = \{\inv{f} (A') \mid A' \in \sa'\}$ is a \siga.
-		\begin{proof}
-			\begin{enumerate}
-				\item $X = \inv{f}(X') \in \sa$ because $X' \in \sa$.
-				\item If $A \in \sa$ then $A^\complement = X \setminus A = \inv{f}(X')\setminus \inv{f} (A') = \inv{f}(X' \setminus A') \in \sa$ because $X' \setminus A' = A'^\complement \in \sa'$.
-				\item Let $(A_n)_{n \in \N} \subset \sa$. By definition there must be a collection $(A_n')_{n \in \N} \subset \sa'$ for which $A_n = \inv{f}(A_n'),\ \forall n \in \N$. Recall that
-				\begin{align*}
-					\bigcup_{n \in \N} A_n = \bigcup_{n \in \N} \inv{f}(A_n') = \inv{f} (\bigcup_{n \in \N} A_n') \in \sa
-				\end{align*} because $\sa'$ is a \siga hence $\bigcup_{n \in \N} A_n' \in \sa'$.
-			\end{enumerate}
-		\end{proof}
-	\end{enumerate}
+\begin{eg}
+	The power set $\powerset (X)$ is the largest \siga on $X$.
 \end{eg}
+
+\begin{eg}
+	$\{\emptyset, X\}$ is the smallest \siga on $X$.
+\end{eg}
+		
+\begin{eg}
+	Given a subset $A \subset X$, the smallest \siga which contains information about $A$ is $\{\emptyset, X, A, A^\complement\}$. More on this later.
+	
+	
+	Let $X$ be an uncountable set. Then $\sa = \{ A \subset X \mid A \text{ is countable or } A^\complement \text{ is coutable }\}$ is a \siga.
+\end{eg}
+
+\begin{proof} We shall prove the three properties of a \siga
+	\begin{enumerate}
+		\item $X \in \sa$ because $X^\complement = \emptyset$ is countable.
+		\item If $A \in \sa$ and is countable the $A^\complement \in \sa$ because $(A^\complement)^\complement$ is countable. If $A \in \sa$ but $A$ is not countable then $A^\complement$ must be so, hence $A^\complement \in \sa$.
+		\item Let $(A_n)_{n \in \N} \subset \sa$. To see if the union is included we distinguish to cases:
+		\begin{enumerate}
+			\item If $A_n$ is countable $\forall n \in N$ then $\bigcup_{n \in \N} A_n$ is also countable and therefore in $\sa$.\footnote{Recall that the countable union of countable sets is still a countable set.}
+			\item If there is any $A_k$ that is uncountable, then the union is uncountable but
+			\begin{align*}
+			\left(\bigcup_{n \in \N} A_n\right)^\complement = \bigcap_{n \in \N} A_n^\complement \subset A_k^\complement
+			\end{align*}
+			Recall that $A_k^\complement$ must be countable because $A_k \in \sa$ and therefore $\left(\bigcup_{n \in \N} A_n\right)^\complement$ must also be countable. Thus, $\bigcup_{n \in \N} A_n \in \sa$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{eg}[Trace $\sigma$-algebra]
+	\label{eg:trace-siga}
+	Let $(X, \sa)$ be a measurable space and let $E \subset X$. Then
+	\begin{align}
+		\sa_E = \{A \cap E \mid A \in \sa\}
+	\end{align}
+	is a \siga on $E$.
+\end{eg}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Clearly, $E = X \cap E \in \sa_E$ since $X \in \sa$.
+		\item For the second property we need to take care to take the complement relative to $E$, as we want $\sa_E$ to be a \siga on $E$. Here we reserve $A^\complement$ to denote the complement relative to $X$ and just write $E \setminus A$ if we mean relative to $E$.
+		
+		Let $B \in \sa_E$. Then there exists an $A \in \sa$ such that $B = A \cap E$. We have that the complement of $B$ relative to $E$ is
+		\begin{align*}
+			E \setminus B = E \cap B^\complement = E \cap (A \cap E)^\complement = E \cap (A^\complement \cup E^\complement) = A^\complement \cap E \in \sa_E,
+		\end{align*}
+		since $A^\complement \in \sa$.
+		
+		\item Finally, let $(B_n)_{n\in\N} \subset \sa_E$. Then there exists $(A_n)_{n\in\N} \subset \sa$ such that $B_n = A_n \cap E,\ \forall n \in \N$. Then,
+		\begin{align*}
+			\bigcup_{n \in \N} B_n = \bigcup_{n\in\N} (A_n \cap E) = E \cap \bigcup_{n\in\N} A_n \in \sa_E,
+		\end{align*}
+		since $\sa$ is closed under countable union.
+	\end{enumerate}
+\end{proof}
+
+\begin{eg}[Preimage \siga]
+	\label{eg:preimage-siga}
+	Recall some properties of preimages (that are not always true for images): Set difference and union (and therefore complement and intersection) are well defined and behave as expected. Moreover, union and intersection behave as expected even for countable arities.
+	
+	Let $X, X'$ be sets, let $\sa'$ be a \siga on $X'$ and let $f : X \to X'$ be a function between the two sets. We claim that\footnote{Here $\inv{f}$ denotes the preimage of a set, not the inverse function. Recall that the preimage of a function $f: X \to X'$ is defined as $\inv{f}(A') = \{x \in X \mid f(x) \in A' \subset X'\}$} $\sa = \{\inv{f} (A') \mid A' \in \sa'\}$ is a \siga on $X$\footnote{When we write $f: X \to X'$ we mean that $f$ is surjective, namely that $\inv{f}(X') = X$. Without this, the first property of the \siga cannot be guaranteed. However, this is not usually a problem, as we can always redefine $f$ as $f:X \to f(X)$ and take the trace \siga $\sa_{f(X)}$ (c.f. \autoref{eg:trace-siga}).}
+\end{eg}
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item $X = \inv{f}(X') \in \sa$ because $X' \in \sa$.
+		\item If $A \in \sa$ then $A^\complement = X \setminus A = \inv{f}(X')\setminus \inv{f} (A') = \inv{f}(X' \setminus A') \in \sa$ because $X' \setminus A' = A'^\complement \in \sa'$.
+		\item Let $(A_n)_{n \in \N} \subset \sa$. By definition there must be a collection $(A_n')_{n \in \N} \subset \sa'$ for which $A_n = \inv{f}(A_n'),\ \forall n \in \N$. Recall that
+		\begin{align*}
+		\bigcup_{n \in \N} A_n = \bigcup_{n \in \N} \inv{f}(A_n') = \inv{f} (\bigcup_{n \in \N} A_n') \in \sa
+		\end{align*} because $\sa'$ is a \siga hence $\bigcup_{n \in \N} A_n' \in \sa'$.
+	\end{enumerate}
+\end{proof}
 
 Now we will explore a result which will allow us to generate more examples from existing ones and clarify operations between \sigas.
 
-\begin{thm}
+\begin{lem}
 	Given a set $X$. The arbitrary intersection $\bigcap_{\alpha \in I} \sa_\alpha$ of \sigas is again a \siga.
-\end{thm}
+\end{lem}
 
 \begin{proof}
 	We shall go over the three properties of \sigas.
@@ -90,9 +132,9 @@ Now we will explore a result which will allow us to generate more examples from 
 	We also say that $\calG$ is a generator of $\sigma(\calG)$ or that $\sigma(\calG)$ is generated by $\calG$.
 \end{dfn}
 
-\begin{thm}
+\begin{lem}
 	For any $\calG \subset \powerset(X)$, $\sigma (\calG)$ exists and is a the smallest \siga containing $\calG$.
-\end{thm}
+\end{lem}
 
 \begin{proof}
 	Let $\sa = \sigma(\calG)$. Since $\powerset(X) \supset \calG$ and $\powerset(X)$ is a \siga, the intersection $\sa$ is non-empty and contains $\calG$. Because of the previous result, $\sa$ itself is also a \siga. (So we have existence). Furthermore, $\sa$ is the smallest \siga containing $\calG$ because if there were another \siga $\sa'$ containing $\calG$ it would be included in the intersection hence $\sa \subseteq \sa'$.
@@ -105,15 +147,38 @@ Now we will explore a result which will allow us to generate more examples from 
 		\item If $\calG$ is a \siga, then $\sigma(\calG) = \calG$.
 		\item For any $A \in X,\ \sigma(\{A\}) = \{\emptyset, X, A, A^\complement\}$.
 		\item Let $\calG, \mathcal{F} \subset \powerset(X)$. If $\calG \subseteq \mathcal{F}$ then $\sigma (\calG) \subseteq \sigma(\mathcal{F})$.
-		\begin{proof}
+		\begin{proof}[Proof of 3]
 			$\calG \subseteq \mathcal{F} \subseteq \sigma(\mathcal{F})$. So $\sigma(\mathcal{F})$ is a \siga containing $\calG$. But $\sigma(\mathcal{G})$ is the smallest \siga containing $\calG$ therefore $\sigma(\calG) \subseteq \sigma(\mathcal{F})$.
 		\end{proof}
 	\end{enumerate}
 \end{remark}
 
-\section{The Borel \siga on $\R^n$}
+\subsection{Final remarks and the good set principle}
 
-In what follows we will use some basic topology concepts. Lets give some names
+The definition of a \siga is more axiomatic than constructive. This is not coincidental, \sigas are normally really hard to describe constructively since they are huge sets. This last notion of generators will prove very helpful in the coming chapters: most of the time we will be able to get theorems that only depend on a generator of the \siga at hand.
+
+In particular, part 3 of this last remark will be used extensively throughout the course. Also, it gives rise to a common proof technique in measure theory: the \textbf{good set principle}.
+
+\begin{remark}[Good set principle]
+	\label{rem:good-set-principle}
+	The good set principle is a proof technique that comes in handy when we want to show that every member of a \siga $\sa$ satisfies some property $P$. In general, this proof technique works as follows (cf. \cite{MOgoodset}).
+	
+	Define
+	\begin{align}
+	\calB := \{ A \in \sa \mid A \text{ has property } P \}
+	\end{align}
+	We will show that
+	\begin{enumerate}
+		\item $\calB$ is a \siga
+		\item There is a collection $\calG \subset \calB$ such that $\sigma(\calG) = \sa$
+	\end{enumerate}
+	
+	Then, by \autoref{rem:generators} we have that $\sa = \sigma(\calG) \subset \sigma(\calB)$, but since $\calB$ is already a \siga, we have $\sa \subset \calB$. Additionally, by definition of $\calB$, we already have that $\sa \subset \calB$, therefore $\sa = \calB$, i.e. all the members of $\sa$ satisfy property $P$.
+\end{remark}
+
+\section{The Borel \texorpdfstring{$\sigma$-algebra on $\R^n$}{sigma algebra on R\textsuperscript{n}}}
+
+In what follows we will use some basic topology concepts. Let us write
 \begin{itemize}
 	\item $\OS^n := \{A \subset \R^n \mid A \text{ is open }\}$,
 	\item $\CS^n := \{A \subset \R^n \mid A \text{ is closed }\}$, and
@@ -136,7 +201,7 @@ We shall call the pair $(\R^n, \OS^n)$ a topological space. We now consider the 
 	The \underline{Borel \siga} on $\R^n$ is the smallest \siga containing $\OS^n$. We denote it by $\sigma(\OS^n)$ or by $\borel(\R^n)$.
 \end{dfn}
 
-\begin{thm}
+\begin{thm}[Topological generators of the Borel \siga]
 	\begin{align*}
 		\borel(\R^n) := \sigma(\OS^n) = \sigma(\CS^n) = \sigma(\KS^n)
 	\end{align*}
@@ -162,7 +227,7 @@ We would now like to find smaller sets of generators for the Borel \siga on $\R^
 	\end{align*}
 \end{itemize}
 
-\begin{thm}
+\begin{thm}[Borel interval generators]
 	\label{thm:borel-interval-generators}
 	We have
 	\begin{align*}
