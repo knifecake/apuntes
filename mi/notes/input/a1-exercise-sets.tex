@@ -332,6 +332,38 @@ Due October 4th, 2019.
 	\end{enumerate}
 \end{proof}
 
+\section{Exercise set 4}
+
+Due October 25th, 2019.
+
+\begin{ex}
+	Let $(X, \sa, \mu)$ be a measure space and $u \in \calL^1_\Rb(\mu)$. Define $B_n = \{ x \in X \mid 2^{-n} \leq \abs{u(x)} < 2^n\}$, for $n \geq 1$. Set $B = \bigcup_{n = 1}^\infty B_n$.
+	
+	\begin{enumerate}
+		\item Show that $\int_X u d\mu = \int_B u d\mu$. (1.5 pts)
+		\item Prove that $\lim_{n \to \infty} \int_{B_n} u d\mu = \int_X u d\mu$. (1.5 pts)
+		\item Show that for every $\varepsilon > 0$, there exists a positive integer $N$, such that $\mu(B_N) < \infty$ and $\abs{\int_{B_N^\complement} ud\mu} < \varepsilon$. (1.5 pts)
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}
+	Consider the measure space $([0,1], \borel([0, 1]), \lambda)$ where $\borel([0,1])$ is the restriction of the Borel \siga to $[0,1]$, and $\lambda$ is the restriction of the one-dimensional Lebesgue measure to $[0,1]$.
+	
+	\begin{enumerate}
+		\item Show that $\lim_{n \to \infty} \int_{[0,1]} \frac{x^n}{(1+ x)^2}d\lambda(x) = 0$. (1.5 pts)
+		\item Show that $\lim_{n \to \infty} \int_{[0,1]} \frac{n x^{n-1}}{1 + x} d\lambda(x) = \frac{1}{2}$. (1 pt)
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}
+	Let $(X, \sa, \mu)$ be a measure space, and $u \in \calL^p(\mu)$ for some $p \in [1, \infty)$. For $n \geq 1$, define $u_n = \min\{ \max(u, -n), n \}$.
+	
+	\begin{enumerate}
+		\item Prove that $\lim_{n\to\infty} \norm{u_n}_p = \norm{u}_p$. (2 pts)
+		\item Prove that for any $\varepsilon$, there exists an integer $n \geq 1$ such that $\int \abs{u - u_n}^p \leq \varepsilon$. (1 pt)
+	\end{enumerate}
+\end{ex}
+
 \section{Practice Mid-Term, 2019-2020.}
 
 \begin{ex}
