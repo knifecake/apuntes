@@ -228,3 +228,46 @@ We do we keep coming back to the case $u \in \calM^+_\Rb(\sa)$? Well, because in
 		\end{align*}
 	\end{enumerate}
 \end{proof}
+
+\section{Examples}
+
+\begin{eg}
+	Let $(X, \sa, \delta_A)$ be a measure space where $\delta_A$ is the Dirac measure for a fixed $A \in \sa$ (see \autoref{eg:dirac-measure}). Then for $u: \sa \to \R, u \geq 0$ we have
+	\begin{align*}
+		\int u d\delta_A = \int u(x) \delta_A(dx) = u(A).
+	\end{align*} 
+	Then, if we generalise $u \in \calM_\Rb(\sa)$ we have
+	\begin{align*}
+		\int u d\delta_A = \int (u^+ - u^-)d\delta_A = \int u^+d\delta_A - \int u^- d \delta_A = u^+(A) - u^-(A) = u(A).
+	\end{align*}
+	
+	We conclude that $u \in \calL_\Rb^1(\delta_A) \iff \abs{u(A)} < \infty$.
+\end{eg}
+
+\begin{eg}
+	Consider the measure space $(\N, \powerset(\N), \mu)$ where $\mu$ is the discreet measure given by
+	\begin{align*}
+		\mu = \sum_{n\in\N} \alpha_n \delta_{\{n\}}.
+	\end{align*}
+	
+	We have seen that
+	\begin{align*}
+		\int \abs{u} d\mu = \sum_{n \in \N} \alpha_n \abs{u(n)}.
+	\end{align*}
+	Thus, $u \in \calL_\Rb^1(\mu) \iff \sum_{n \in \N} \alpha_n \abs{u(n)} < \infty$. Note that we can write
+	\begin{align*}
+		u(m) = \sum_{n \in \N} u(n) \ind_{\{n\}}(m),
+	\end{align*}
+	so if $\alpha_1 = \alpha_2 = \dots = 1$ then $u \in \calL_\Rb^1(\mu) \iff \sum_{n \in \N} \abs{u(n)} < \infty$. In particular, it is necessary that $u(n) \in \R,\ \forall n \in \N$. We can in this case express
+	\begin{align*}
+		\calL^1_\Rb(\mu) = \left\{ (x_n)_{n\in\N} \mid x_n \in \R \land \sum_{n\in\N} \abs{x_n} < \infty \right\} := \call^1(\N).
+	\end{align*}
+	We call $\call^1(\N)$ the set of all summable sequences. This space is important in functional analysis.
+\end{eg}
+
+\begin{eg}
+	If $(X, \sa, \mu)$ is a finite measure space, then any bounded function $u \in \calM_\Rb(\sa)$ is $\mu$-integrable. That is, if for any given $u \in \calM_\Rb(\sa)$ there exists $M \in \R,\ M > 0$ such that $\abs{u(x)} \leq M,\ \forall x \in \sa$ then $u$ is $\mu$-integrable.
+	\begin{align*}
+		\int \abs{u}d\mu = \int \abs{u} \ind_X d\mu \leq \int M \int_X d\mu = M \int \ind_X d\mu = M \mu(X) < \infty.
+	\end{align*}
+\end{eg}

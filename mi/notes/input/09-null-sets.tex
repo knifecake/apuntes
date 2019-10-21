@@ -1,3 +1,179 @@
-% !TeX root = 09-null-sets.tex
+% !TeX root = ../mi-notes.tex
 
-\chapter{Null sets and the a.e.}
+\chapter{Null sets and the notation almost everywhere}
+
+In this chapter we formally introduce the concept of a null set and the handy notation almost everywhere, which gives us a way to formalise ideas that we get intuitively.
+
+\begin{dfn}
+	\label{dfn:mu-null-set}
+	Let $(X, \sa, \mu)$ be a measure space. The collection of $\mu$-null sets is defined by
+	\begin{align}
+		\calN_\mu = \left\{ A \in \sa \mid \mu(A) = 0 \right\}
+	\end{align}
+\end{dfn}
+
+Note that $\calN_\mu$ is a \siga, not necessarily on $X$, contained in $\sa$.
+
+\begin{dfn}
+	\label{dfn:almost-everyhere}
+	We say that a property $\Pi = \Pi(x)$ holds $\mu$ almost everywhere, in short $\muae$ or a.e., if there exits
+	\begin{align}
+		N \in \calN_\mu \text{ such that } \{x \in X \mid \Pi(x) \text{ fails }\} \subset N.
+	\end{align}
+\end{dfn}
+
+Note that we do not require that we do not require that $\{x \in X \mid \Pi(x) \text{ fails }\}$ be a measurable set, it only has to be a subset of a measurable set. In practice, this set is indeed a $\mu$-null set itself.
+
+\begin{eg}
+	Let $\Pi$ be the property that $u(x) = v(x)$ for $u, v \in \calM_\Rb(\sa)$. Then both $\{x \in X \mid u(x) = v(x)\}$ and $\{x \in X \mid u(x) \neq v(x)\}$ are measurable (since $u, v : \sa \to \Rb$). In this case, saying that $\Pi$ holds a.e. means that $\{x \in X \mid u(x) \neq v(x)\} \in \calN_\mu$.
+\end{eg}
+
+Before moving on, we will prove a very handy inequality.
+
+\begin{thm}[Markov inequality]
+	\label{thm:markov-inequality}
+	Let $u \in \calL_\Rb^1(\mu),\ A \in \sa$ and $c > 0$. Then,
+	\begin{align}
+		\mu(\{\abs{u} \geq c\} \cap A) \leq \frac{1}{c} \int_A \abs{u} d\mu.
+	\end{align}
+	
+	In particular if $A = X$ then
+	\begin{align*}
+		\mu(\{\abs{u} \geq c\}) \leq \frac{1}{c} \int \abs{u}d\mu.
+	\end{align*}
+\end{thm}
+
+Informally, this means that an integrable function does not blow up (too much), i.e. an integrable function only attains large values on a set with a small measure.
+
+\begin{proof}
+	\begin{align*}
+		\mu(\{u \geq c\} \cap A)
+		&= \int 1_{\{\abs{u} \geq c\} \cap A} d\mu \\
+		&= \frac{c}{c} \int \ind_{\{\abs{u} \geq c\}} \cdot \ind_A d\mu\\
+		&= \frac{1}{c} \int_A c \ind_{\{\abs{u} \geq c\}} d\mu\\
+		&\leq \frac{1}{c} \int_A \underbrace{\abs{u}\ind_{\{\abs{u} \geq c\}}}_{\geq \abs{u}} d\mu
+		\leq \frac{1}{c} \int_A \abs{u} d\mu
+	\end{align*}
+\end{proof}
+
+\begin{thm}
+	\label{thm:null-integral-ae}
+	Let $u \in \calL_\Rb^1(\mu)$ be a numerical integrable function on a measure space $(X, \sa, \mu)$. Then,
+	\begin{enumerate}
+		\item
+		\begin{align}
+			\int \abs{u}d\mu = 0 \iff \abs{u} = 0 \muae \iff \mu\left(\left\{ x \in X \mid u(x) \neq 0 \right\}\right) = 0
+		\end{align}
+		\item For any $N \in \calN_\mu$, we have
+		\begin{align}
+			\ind_N u \in \calL^1_\Rb(\mu) \text{ and }\int_N u d\mu = 0.
+		\end{align}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Let us start with 2. Define $f_n = \min\{ \abs{u}, n\}$. Then, $f_n \in \calM_\Rb^+(\sa)$ and $f_n \uparrow \abs{u}$ and $\ind_N \cdot f_n \uparrow \ind_N \cdot \abs{u}$. By \autoref{thm:beppo-levi}, 
+	\begin{align*}
+		\int_N \abs{u} d\mu
+		&= \int \ind_N \abs{u}d\mu\\
+		&= \int \sup_{n\in \N} \ind_N f_n d\mu\\
+		&= \sup_{n\in\N} \int \ind_N f_n d\mu\\
+		&\leq \sup_{n\in \N} \int n \ind_N d\mu = \sup_{n\in\N} n \mu(N) = \sup_{n\in\N} 0 = 0.
+	\end{align*}
+	Thus, $\int \ind_N \abs{u} d\mu = 0 \implies \ind_N u \in  \calL_\Rb^1(\mu)$. Now,
+	\begin{align*}
+		0 \leq \abs{ \int_n u d\mu } \leq \int_N \abs{u} d\mu = 0,
+	\end{align*}
+	thus $\int_n u d\mu = 0$.
+\end{proof}
+
+Now we move on to 1. Assume $\int \abs{u}d\mu = 0$. Then,
+\begin{align*}
+	\mu(\{u \neq 0 \})
+	&= \mu(\{ \abs{u} > 0 \}) \\
+	&= \mu \left( \bigcup_{n = 1}^\infty \{\abs{u} \geq \frac{1}{n}\} \right) \\
+	&\overset{\ref{thm:prop-measures}}{\leq} \sum_{n=1}^\infty \mu(\{ \abs{u} \geq \frac{1}{n} \}) \\
+	&\overset{\ref{thm:markov-inequality}}{\leq} \sum_{n=1}^\infty n \int \abs{u}d\mu \\
+	&= \sum_{n=1}^\infty 0 = 0.
+\end{align*}
+
+Thus $\abs{u} = 0$ a.e.
+
+Conversely, assume $\abs{u} = 0$ a.e. Then $\{\abs{u} \neq 0 \} \in \calN_\mu$ and 
+\begin{align*}
+	\int \abs{u} d\mu
+	&= \int \left( \abs{u} \ind_{\{\abs{u} = 0\}} + \abs{u} \ind_{\{ \abs{u} = 0 \}} \right)d \mu\\
+	&= \int \underbrace{\abs{u}}_{= 0} \ind_{\{\abs{u} = 0\}} d\mu + \underbrace{\int \abs{u} \ind_{\{ \abs{u} = 0 \}} d\mu}_{= 0 \text{ by part 2.}} = 0
+\end{align*}
+
+\textbf{This theorem is very important and used widely as it allows us to change the value of a function on a $\mu$-null set without changing the value of the integral.}
+
+\begin{cor}
+	Let $u, v \in \calM_\Rb(\sa)$ be such that $u = v$ a.e. Then,
+	\begin{enumerate}
+		\item if $u, v \geq 0$, then $\int u d\mu = \int v d\mu$ (though it is possible that both sides are $+\infty$).
+		\item $u \in \calL^1_\Rb(\sa) \iff v \in \calL_\Rb^1(\sa)$ and, also in this case $\int u d\mu = \int v d\mu$.
+	\end{enumerate}
+\end{cor}
+
+\begin{proof}
+	Part 1. Assume $u, v \in \calM_\Rb^+(\sa)$ with $u = v$ a.e.
+	
+	\begin{align*}
+		\int u d\mu
+		&= \int \left( u \ind_{\{u = v\}} + u \ind_{\{u \neq v\}} \right)d\mu \\
+		&= \int \underbrace{u \ind_{\{u = v\}}}_{= v} d\mu + \underbrace{\int u \ind_{\{u \neq v\}} d\mu}_{0 \text{ by \autoref{thm:null-integral-ae} }} \\
+		&= \int v \ind_{\{u = v\}} d\mu + \underbrace{\int v \ind_{\{u \neq v\}} d\mu}_{0 \text{ by \autoref{thm:null-integral-ae} }} \\
+		&= \int \left( v \ind_{\{u = v\}} + v \ind_{\{u \neq v\}} \right)d\mu
+		= \int v d\mu.
+	\end{align*}
+	
+	Part 2 follows from part 1. Note that if $u = v$ a.e. then $u^+ = v^+$ and $u^+ = v^-$ a.e. So if $u \in \calL_\Rb^1(\mu)$, then by part 1,
+	\begin{align*}
+		\max\left(\int u^+d\mu, \int u^-d\mu\right) = \max \left( \int v^+ d\mu, \int v^- d\mu \right), 
+	\end{align*}
+	which implies that $v \in \calL^1_\Rb(\mu)$ and
+	\begin{align*}
+		\int u d\mu
+		= \int u^+ d\mu - \int u^- d\mu
+		\overset{\text{part 1}}{=} \int v^+d\mu - \int v^- d\mu
+		= \int v d\mu.
+	\end{align*}
+\end{proof}
+
+Another consequence of \autoref{thm:null-integral-ae} is that integrable functions take values in $\R$ a.e.
+
+\begin{cor}
+	Let $u \in \calL^1_\Rb(\mu)$. Then $u$ takes values in $\R \muae$, i.e.
+	\begin{align*}
+		\mu(\{x \in X \mid \abs{u(x)} = +\infty\}) = \mu(\{x \in X \mid \abs{u} = \infty\}) = 0.
+	\end{align*}
+	
+	In particular, we can find $v \in \calL^1_\Rb(\mu)$ such that $u = v \muae$ and $\int u d\mu = \int v d\mu$.
+\end{cor}
+
+\begin{proof}
+	TODO.
+\end{proof}
+
+As a consequence of this corollary, we can now restrict our attention to $\calL^1(\mu)$ without loss of generality.
+
+Finally, we give a result that is helpful for verifying that two functions are equal $\muae$
+
+\begin{cor}
+	Let $\calB \subseteq \sa$ be a \siga.
+	
+	\begin{enumerate}
+		\item If $u, w \in \calL^1(\calB)$ (so $u, w \in \calM(\calB)$) and $\int_B u d\mu = \int_B w d\mu$ for all $B \in \calB$, then $u = w\muae$
+		
+		\item If $u, w \in \calM^+(\calB)$ and $\int_B u d\mu = \int_B w d\mu$ for all $B \in \calB$ and $\mu\mid_\calB$ is $\sigma$-finite then $u = w \muae$
+	\end{enumerate}
+\end{cor}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{remark}
+	
+\end{remark}
