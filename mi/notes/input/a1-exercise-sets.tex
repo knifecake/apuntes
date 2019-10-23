@@ -346,6 +346,57 @@ Due October 25th, 2019.
 	\end{enumerate}
 \end{ex}
 
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item Since $B$ is a union of subsets of $X$ we have that $B \subset X$. Thus,
+		\begin{align*}
+			\int_X u d\mu
+			= \int_B ud\mu + \int_{B^\complement} u d\mu.
+		\end{align*}
+		
+		We shall see that $\mu(B^\complement) = 0$ and therefore $\int_{B^\complement} u d\mu = 0$.
+		
+		\begin{align*}
+			B^\complement
+			= \left(\bigcup_{n=1}^\infty B_n\right)^\complement
+			= \bigcap_{n=1}^\infty B_n^\complement = \bigcap_{n=1}^\infty \left( \{u < 2^{-n}\} \cup \{u \geq 2^n\}\right).
+		\end{align*}
+		
+		Use measure continuity and markov to prove that those sets get small. For the measure upper bound restrict the sigma algebra and use markov to obtain a finite bound.
+		
+		\item Define $(u_n)_{n\in\N}$ by $u_n = u \ind_{B_n}$. Clearly, $u_n \uparrow u \ind_B$ and $u_n \leq u_{n+1}$. So the Monotone Convergence Theorem applies and
+		\begin{align*}
+			\lim_{n \to \infty} \int_{B_n} u d\mu
+			&= \lim_{n \to \infty} \int u \ind_{B_n} d \mu \\
+			&= \lim_{n \to \infty} \int u_n d\mu\\
+			&= \int \lim_{n \to \infty} u_n d\mu\\
+			&= \int u \ind_B d\mu\\
+			&= \int_B ud\mu = \int_X u d\mu.
+		\end{align*}
+		
+		\item We can write $B_N^\complement = X \setminus B_N$ and therefore $X = B_N \capdot B_N^\complement$ and $\ind_X = \ind_{B_N} + \ind_{B_N^\complement}$. Thus,
+		\begin{multline*}
+			\int_{B_N^\complement} u d\mu 
+			= \int u\ind_{B_N^\complement} d\mu
+			= \int u (\ind_X - \ind_{B_N}) d\mu\\
+			= \int u \ind_X d\mu - \int u \ind_{B_N} d\mu
+			= \int_X u d\mu - \int_{B_N} u d\mu.
+		\end{multline*}	
+		By the definition of limit and part 2 we know that for every $\varepsilon > 0$, there exists an $N \in \N$ such that
+		\begin{align*}
+			\abs{\int_{B_N} u d\mu - \int_X u d\mu} = \abs{ \int_X u d\mu - \int_{B_N} u d\mu} < \varepsilon.
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			\abs{\int_{B_N^\complement} u d\mu} = \abs{\int_X u d\mu - \int_{B_N} u d\mu} < \varepsilon.
+		\end{align*}
+		We just need to check that $\mu(B_N) < \infty$. For that $N$ define $f_N = 2^N \ind_{B_N}$. By definition we have that $f_N \leq \abs{u}\ind_{B_N} < \abs{u} \in \calL^1_\Rb(\mu)$ since $u \in \calL^1_\Rb(\mu)$. Therefore,
+		\begin{align*}
+			\mu(B_N) \leq \int 2^n\ind_{B_N}d\mu \leq \int u d\mu < \infty.
+		\end{align*}
+	\end{enumerate}
+\end{proof}
+
 \begin{ex}
 	Consider the measure space $([0,1], \borel([0, 1]), \lambda)$ where $\borel([0,1])$ is the restriction of the Borel \siga to $[0,1]$, and $\lambda$ is the restriction of the one-dimensional Lebesgue measure to $[0,1]$.
 	

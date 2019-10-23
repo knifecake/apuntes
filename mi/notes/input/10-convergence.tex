@@ -15,15 +15,49 @@ First, we extend \autoref{thm:beppo-levi} to negative functions.
 	\end{align*}
 	Then,
 	\begin{align}
+		\label{eq:monotone-convergence-1}
 		u \in \calL^1(\mu) \iff \sup_{n\in\N} \int u_n d\mu < \infty,
 	\end{align}
 	and in that case
 	\begin{align}
+		\label{eq:monotone-convergence-2}
 		\int u d\mu = \int \lim_{n \to \infty} u_n d\mu = \int \sup_{n\in\N} u_n = \sup_{n\in\N} \int u_n d\mu = \lim_{n \to \infty} \int u_n d\mu.
 	\end{align}
 \end{thm}
 
 Here we're writting both the $\lim$ and the $\sup$ versions of the equalities to be extra clear at the expense of being too verbose. This is not the case in \cite[p- 88]{schilling2017}.
+
+\begin{proof}
+	We want to use Beppo-Lévi but the functions may be negative, so we define a new sequence $w_n = u_n - u_1 \geq 0$ since $u_1 \leq u_n,\ \forall n \in \N$. Clearly, $w_n \in \calL^1(\mu) \subset \calM(\sa)$ and $0 \leq w_1 \leq w_2 \leq \dots$.
+	
+	Firstly, by \autoref{thm:beppo-levi},
+	\begin{align*}
+		0 \leq \int \sup_{n\in\N} w_n d\mu = \sup_{n\in\N} \int w_n d\mu. 
+	\end{align*}
+	Equivalently,
+	\begin{align*}
+		0 &\leq \int \sup(u_n - u_1)d\mu \\
+		&= \sup_{n\in\N}\left(\int (u_n - u_1)d\mu \right)  \\
+		&= \sup_{n\in\N}\left( \int u_n d\mu - \int u_1 d\mu \right) \\
+		&= \sup_{n\in\N}\int u_n d\mu - \int u_1 d\mu.
+	\end{align*}
+	Note how we wait until $\sup$ is outside the integral to apply linearity, since we don't know if $\sup(u_n - u_1) \in \calL^1(\mu)$ yet.
+	
+	Assume $u = \sup_n u_n \in \calL^1(\mu)$. Then $\sup_n (u_n - u_1) = \sup_n u_n - u_1 \in \calL^1(\mu)$, and the above gives
+	\begin{align*}
+		\int \sup_n u_n d\mu - \int u_1 d\mu = \sup_n \int u_n d\mu - \int u_1 d\mu.
+	\end{align*}
+	Since $u_1 \in \calL^1(\mu)$, its integral is finite and we can subtract it from both sides to get
+	\begin{align*}
+		\sup_n \int u_n d\mu = \int \sup_n u_n d\mu < \infty.
+	\end{align*}
+	
+	Conversely, assume $\sup_n \int u_n d\mu < \infty$. Then,
+	\begin{align*}
+		\int \sup_n (u_n - u_1)d\mu = \sup_n \int u_n d\mu - \int u_1 d\mu < \infty,
+	\end{align*}
+	which implies that $\sup(u_n - u_1) = \sup_n u_n - u_1 \in \calL^1(\mu)$. Since $u_1 \in \calL^1(\mu)$, we see that $\sup_n u_n \in \calL^1(\mu)$ as required. Also, if $\sup_n u_n \in \calL^1(\mu)$ the above shows \autoref{eq:monotone-convergence-2}.
+\end{proof}
 
 Of course, we can state the same for decreasing sequences and infima, as taking $u_n = - v_n$ for some decreasing sequence $(v_n)$ is enough to fulfill the assumptions of the \autoref{thm:monotone-convergence}. Anyway, we can state the result.
 
@@ -38,15 +72,29 @@ Of course, we can state the same for decreasing sequences and infima, as taking 
 	\end{align}
 	in which case
 	\begin{align}
-	\int u d\mu = \int \lim_{n \to \infty} u_n d\mu = \int \inf_{n\in\N} u_n d\mu = \inf_{n\in\N} \int u_n d\mu = \lim_{n \to \infty} \int u_n d\mu.
+	\int u d\mu 
+	= \int \lim_{n \to \infty} u_n d\mu
+	= \int \inf_{n\in\N} u_n d\mu
+	= \inf_{n\in\N} \int u_n d\mu
+	= \lim_{n \to \infty} \int u_n d\mu.
 	\end{align}
 \end{cor}
+
+\begin{proof}
+	Set $v_n = -u_n$ and apply the proof of \autoref{thm:monotone-convergence}.
+\end{proof}
 
 Now we move on to a very important result. This time, not only we drop non-negativity, but also, monotonicity. Of course, there is a price to pay for this.
 
 \begin{thm}[Lebesgue Dominated Convergence]
 	\label{thm:lebesgue-dominated-convergence}
-	Let $(X, \sa, \mu)$ be a measure space and $(u_n)_{n\in\N} \subset \calL^1(\mu)$ be a sequence of functions such that $|u_n| \leq w,\ \forall n \in \N$ and some $w \in \calL^1_\plus(\mu)$. If $u(x) = \lim_{n \to \infty} u_n(x)$ exists for almost every $x\in X$ then $u \in \calL^1(\mu)$ and we have
+	Let $(X, \sa, \mu)$ be a measure space and $(u_n)_{n\in\N} \subset \calL^1(\mu)$ be a sequence of functions such that
+	\begin{enumerate}
+		\item there exists $0 \leq w \in \calL^1(\mu)$ such that $\abs{u_n} \leq w \muae$ for all $n \in \N$, and
+		\item $u = \lim_{n\to\infty} u_n$ exists in $\Rb\muae$.  
+	\end{enumerate}
+	
+	Then $u \in \calL^1(\mu)$ and we have
 	\begin{align}
 		\lim_{n \to \infty} \int |u_n - u| d\mu = 0,
 	\end{align}
@@ -54,6 +102,14 @@ Now we move on to a very important result. This time, not only we drop non-negat
 		\lim_{n \to \infty} \int u_n d\mu = \int \lim_{n \to \infty} u_n d\mu = \int ud\mu.
 	\end{align}
 \end{thm}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{remark}
+	We have proved the theorem for the case in which $\abs{u_n} \leq w$ everywhere and $\lim_{n\to\infty} u_n \in \Rb$ everywhere, but they may both be relaxed to $\muae$.
+\end{remark}
 
 \section{Applications to parameter dependent-integrals}
 
@@ -91,3 +147,42 @@ Now we move on to a very important result. This time, not only we drop non-negat
 		\partial_t v(t) = \int \partial_t u(t, x) \mu(dx).
 	\end{align}
 \end{thm}
+
+\section{Riemann integral vs. Lebesgue integral}
+
+\begin{thm}
+	Let $u: [a, b] \to \R$ be a measurable and Riemann-integrable function. Then $u \in \calL^1(\lambda)$ and the Riemann integral and Lebesgue integral agree.
+	\begin{align}
+		\int_a^b u dx = \int_{[a, b]} u d\lambda
+	\end{align}
+\end{thm}
+
+\begin{remark}
+	Note that the converse need not be true. For instance the Dirichlet function $\ind_{Q}$ (see \cite{dirichlet}) is Lebesgue integrable but not Riemann-integrable.
+\end{remark}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{thm}
+	Let $u:[a, b] \to \R$ be a bounded and Riemann-integrable function, then
+	\begin{align}
+		\{x \in X \mid u \text{ is not continuous in } x\} \subseteq N \in \calN_\mu.
+	\end{align}
+\end{thm}
+
+Note that the additional subset $N$ is not required if $u$ is measurable.
+
+\subsection{Improper Riemann integrals}
+
+\begin{cor}
+	Let $u:[a, b] \to \R$ be a measurable function that is Riemann integrable on $[0, N]$ for all $N\geq 1$. Then $u \in \calL^1([0,\infty])$ if, and only if,
+	\begin{align}
+		\lim_{N\to\infty} \int_0^N \abs{u}dx < \infty.
+	\end{align}
+	In this case,
+	\begin{align*}
+		\int_0^\infty udx = \int_{[0, \infty]} u d\lambda.
+	\end{align*}
+\end{cor}

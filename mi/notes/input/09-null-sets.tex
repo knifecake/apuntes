@@ -48,7 +48,7 @@ Informally, this means that an integrable function does not blow up (too much), 
 \begin{proof}
 	\begin{align*}
 		\mu(\{u \geq c\} \cap A)
-		&= \int 1_{\{\abs{u} \geq c\} \cap A} d\mu \\
+		&= \int \ind_{\{\abs{u} \geq c\} \cap A} d\mu \\
 		&= \frac{c}{c} \int \ind_{\{\abs{u} \geq c\}} \cdot \ind_A d\mu\\
 		&= \frac{1}{c} \int_A c \ind_{\{\abs{u} \geq c\}} d\mu\\
 		&\leq \frac{1}{c} \int_A \underbrace{\abs{u}\ind_{\{\abs{u} \geq c\}}}_{\geq \abs{u}} d\mu

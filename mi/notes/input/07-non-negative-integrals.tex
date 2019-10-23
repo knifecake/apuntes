@@ -127,7 +127,7 @@ Now we come to the central theorem of this chapter.
 	\end{align}
 \end{thm}
 
-Notice that the assumption that $u_n$ is an increasing sequence is necessary to be able to interchange limits.
+Notice that the assumption that $u_n$ is an increasing sequence is necessary to be able to interchange limits with suprema.
 
 \begin{proof}
 	TODO. Important
@@ -211,6 +211,7 @@ Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of a
 	\end{align}
 	and
 	\begin{align}
+		\label{eq:fatou2}
 		\int \liminf_{n\to \infty} u_n d\mu \leq \liminf_{n\to \infty} \int u_n d\mu
 	\end{align}
 \end{thm}
@@ -219,4 +220,47 @@ The great thing about \autoref{thm:fatou-lemma} is that it makes no assumptions 
 
 \begin{proof}
 	\autoref{eq:fatou1} follows from \autoref{cor:nasty-extended-measurable}.
+	
+	As for \autoref{eq:fatou2}, we have
+	
+	\begin{align*}
+		\int \liminf_{n\to \infty} u_n d\mu
+		&= \int \sup_{n\in\N} \inf_{j \geq n} u_j d\mu \\
+		&\overset{\ref{thm:beppo-levi}}{=} \sup_{n\in\N} \int \inf_{j \geq n} u_j d\mu \\
+		&\overset{\ref{thm:prop-integrals}}{\leq} \sup_{n\in\N} \inf_{l \geq n} \int u_l d\mu\\
+		&= \liminf_{n\to\infty} \int u_n d\mu
+	\end{align*}
+	where we used the fact that $\inf_{j \geq n} \leq u_l$ for any $l \geq n$.
 \end{proof}
+
+We also have a similar result for $\limsup$, sometimes known as the reverse Fatou's lemma.
+
+\begin{cor}[Reverse Fatou's lemma]
+	\label{cor:reverse-fatou}
+	
+	Let $(u_n)_{n\in\N} \subset \calM^+(\sa)$ be a sequence of non-negative numerical measurable functions. If $u_n \leq u$ for all $n \in \N$ and some $v \in \calM^+(\sa)$ such that $\int v d\mu < \infty$, then
+	\begin{align}
+		\limsup_{n\to\infty} \int u_n d\mu \leq \int \limsup_{n\to \infty} u_n d\mu
+	\end{align}
+\end{cor}
+
+\begin{proof}
+	Let $w_n = v - u_n \geq 0$, i.e. $(w_n)_{n\in\N}$ is a sequence of non-negative measurable functions. By \autoref{thm:fatou-lemma} we get,
+	\begin{align*}
+		\int \liminf_{n\to \infty} w_n d\mu
+		&\leq \liminf \int w_n d\mu \\
+		&= \liminf_{n\to \infty} \left( \int v d\mu - \int u_n d\mu \right)\\
+		&= \int vd\mu - \limsup_{n\to\infty} \int u_n d\mu.
+	\end{align*}
+	
+	(Recall that $\liminf (-u_n) = -\limsup u_n$.) Thus,
+	\begin{align*}
+		\int v d\mu - \limsup_{n\to\infty} \int u_n d\mu
+		&\geq \int \liminf_{n\to \infty} w_n d\mu \\
+		&= \int \liminf_{n\to\infty} \left(v - w_n\right)d\mu \\
+		&= \int vd\mu - \int \limsup_{n\to\infty} u_n d\mu.
+	\end{align*}
+	Since we assumed $\int v d\mu$ to be finite, we can subtract it from both sides and the lemma follows.
+\end{proof}
+
+Note how this time we had to make sure that the sequence was bounded by a function $v$ whose integral was finite. This was implicit in \autoref{thm:fatou-lemma}, only in this case the bounding is from below and the bounding function is $v = 0$.
