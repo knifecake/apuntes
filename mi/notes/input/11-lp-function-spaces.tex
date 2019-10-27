@@ -1,0 +1,48 @@
+% !TeX root = ../mi-notes.tex
+
+\chapter{\texorpdfstring{The function spaces $\calL^p$}{The function spaces Lp}}
+
+We turn our attention to functions for which the $p$-th power of their absolute value is integrable. Throughout this chapter we will assume that $(X, \sa, \mu)$ is some measure space.
+
+\begin{dfn}[$\calL^p$-space]
+	Let $1 \leq p \in \R$. We define
+	\begin{align}
+		\calL^p(\mu) &= \{u : X \to \R \mid u \in \calM(\sa) \land \int \abs{u}^p d\mu < \infty  \},\ &p \in [1, \infty) \\
+		\calL^\infty(\mu) &= \{u : X \to \R \mid u \in \calM(\sa) \land \exists c > 0,\ \mu(\{\abs{u} \geq c\}) = 0\},\ &p = \infty
+	\end{align}
+\end{dfn}
+
+As usual we might also refer to these sets by $\calL^p = \calL^p(\sa) = \calL^p(X)$ if the choice of measure is clear or we want to stress the underlying \sigas or domains.
+
+\begin{dfn}[$p$-seminorm]
+	Let $u: X \to \R$ be a measurable function. We define
+	\begin{align}
+		\norm{u}_p &= \left(\int \abs{u}^p d \mu \right)^{\frac{1}{p}},\ &p \in [1,\infty), \\
+		\norm{u}_\infty &= \inf \{ c > 0 \mid \mu\{\abs{u} \geq c \} = 0\},\ &p = \infty.
+	\end{align}
+\end{dfn}
+
+It is not coincidental that we use the notation $\norm{\cdot}_p$ which clearly resembles a norm. Indeed, $\abs{\cdot}_p$ is a semi-norm, i.e. a function with the properties of a norm except for the property that identifies $\norm{v}_p = 0 \iff v = \vec{0}$. What happens here is that $\norm{u}_p = 0 \iff u = 0 \muae$ and thus we don't have a one-to-one correspondence between the 0 value of the norm and the vector space's zero element (we will eventually fix this though).
+
+\begin{lem}
+	$\norm{\cdot}_p$ is indeed a seminorm \cite{wiki-norm}, i.e. it satisfies the following
+	\begin{enumerate}
+		\item (positive homogenous) $\norm{\alpha v}_p = \abs{\alpha}\norm{v}_p,\ \forall \alpha \in \R$
+		\item (triangle inequality) $\forall u, v \in \calM(\sa),\ \norm{u + v}_p \leq \norm{u}_p + \norm{v}_p$.
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+	\item Let $\alpha \in \R, u \in \calM(\sa)$. We have
+	\begin{align*}
+		\left(\int \abs{\alpha u}^p d \mu\right)^{\frac{1}{p}}
+		= \left(\int \alpha^p \abs{u}^p d \mu\right)^{\frac{1}{p}}
+		= \left(\abs{\alpha}^p \int \abs{u}^p d \mu\right)^{\frac{1}{p}}
+		= \abs{\alpha} \left(\int \abs{u}^p d \mu\right)^{\frac{1}{p}}
+	\end{align*}
+	\item It turns out that proving the triangle inequality is not so easy. We will dedicate the rest of this section to it.
+\end{proof}
+
+\begin{remark}
+	Of course $u \in \calL^p(\mu) \iff u \in \calM(\sa) \land \norm{u}_p < \infty$.
+\end{remark}

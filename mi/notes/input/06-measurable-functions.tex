@@ -141,7 +141,9 @@ The following example is so important that we will give it as a definition.
 	\begin{align*}
 		f(x) = \sum_{i = 1}^M y_i \ind_{A_i}
 	\end{align*}
-	is called a simple function.
+	is called a simple function. 
+	
+	We denote by $\calE(\sa) = \calE \subseteq \calM$ the family of all simple functions $f:(X,\sa) \to (X, \borel(\R))$.
 \end{dfn}
 
 Note that
@@ -155,10 +157,24 @@ is an alternative definition. The $i$ that makes $x \in A_i$ hold is unique or n
 
 This small inconvenience (of the possibility that $i$ does not exist) is easily fixed by extending the collection of sets to be a partition by defining
 \begin{align*}
-	A_0 = X \setminus \bigcupdot_{i = 1}^M A_i \text{ and } y_0 = 0.
+	A_0 = X \setminus \bigcupdot_{i = 1}^M A_i \text{ and } y_0 = 0
 \end{align*}
+and adding the set $A_0$ to the sum in the definition of $f$.
 
-Then one can write $f(x) = \sum_{i = 0}^M y_i \ind_{A_i}$. This is called the \textbf{standard representation} of the simple function $f$.
+This leads to the following definition
+\begin{dfn}[Standard representation of a simple function]
+	\label{dfn:standard-representation-simple}
+	Let $f \in \calE$ be a simple function given by
+	\begin{align}
+		\label{eq:standard-repr}
+		f = \sum_{n = 0}^n a_n \ind_{A_n}
+	\end{align}
+	with $A_i \cap A_j = \emptyset$ and $X = \bigcupdot_{n = 0}^M A_n$. Then \autoref{eq:standard-repr} is called a standard representation of the simple function $f$.
+\end{dfn}
+
+\begin{remark}
+	Note that this representation is not unique. However, we will see that this does not matter.
+\end{remark}
 
 Notice that a simple function takes only finitely many values. The converse is also true.
 
@@ -193,12 +209,6 @@ which can also be given by its standard representation
 
 Simple functions are the building blocks of all measurable functions (in the sense that any measurable function is the limit of a sequence of simple functions).
 
-To end, we will honour simple functions with their family's own definition.
-
-\begin{dfn}[Family of simple functions]
-	We denote by $\calE(\sa) = \calE \subseteq \calM$ the family of all simple functions $f:(X,\sa) \to (X, \borel(\R))$.
-\end{dfn}
-
 \subsection{Properties of simple functions}
 
 \begin{thm}[Properties of simple functions]
@@ -219,7 +229,8 @@ To end, we will honour simple functions with their family's own definition.
 	\begin{enumerate}
 		\item
 		\begin{align*}
-			f \pm g = \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i \pm b_j)\ind_{A_i \cap B_j},\qquad \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i \cdot b_j)\ind_{A_i \cap B_j}
+			f \pm g = \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i \pm b_j)\ind_{A_i \cap B_j},
+			\qquad \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i \cdot b_j)\ind_{A_i \cap B_j}
 		\end{align*}
 		are the standard representations of $f\pm g$ and $f \cdot g$, respectively and thus $f\pm g , f\cdot g \in \calE(\sa)$.
 		
@@ -355,5 +366,30 @@ In fact, we can deduce more.
 \end{cor}
 
 \begin{proof}
-	TODO
+	Not that $u, v\in \calM_\Rb \implies u - v \in \calM_\Rb$ therefore we may rewrite the previous sets as
+	\begin{align*}
+		\{u - v \leq 0\}, \{u - v < 0\}, \{u - v = 0\}, \{u - v > 0\}, \{u - v \geq 0\}.
+	\end{align*}
+	With the exception of $\{u - v = 0\}$, all the others are generators of the Borel \siga so, by \autoref{lem:measurable-generators}, they are measurable. As for $\{u - v = 0\}$ we have that
+	\begin{align*}
+		\{u - v = 0\}
+		= \inv{(u - v)}(\{0\})
+		= \inv{(u - v)}\left(\bigcap_{n = 1}^\infty [0, \frac{1}{n})\right) \in \sa
+	\end{align*}
+	since $\bigcap_{n = 1}^\infty [0, \frac{1}{n}) \in \borel(\R)$.
+\end{proof}
+
+\section{Examples}
+
+\begin{eg}
+	(This is actually exercise 9.8 in \cite[p. 79]{schilling2017}).
+	Every function $u: \N \to \R$ on $(\N, \powerset(\N))$ is $\powerset(\N)/\borel(\R)$-measurable.
+\end{eg}
+
+\begin{proof}
+	Since our \siga is $\powerset(\N)$, all subsets of $\N$ are measurable. Therefore
+	\begin{align*}
+		\{f \leq \alpha\} = \{k \in \N \mid f(k) \leq \alpha\} \subset \N \implies \{f \leq \alpha\} \in \powerset(\N)
+	\end{align*}
+	and we may apply \autoref{lem:measurable-generators-functions}.
 \end{proof}

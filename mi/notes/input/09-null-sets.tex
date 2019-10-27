@@ -28,6 +28,17 @@ Note that we do not require that we do not require that $\{x \in X \mid \Pi(x) \
 	Let $\Pi$ be the property that $u(x) = v(x)$ for $u, v \in \calM_\Rb(\sa)$. Then both $\{x \in X \mid u(x) = v(x)\}$ and $\{x \in X \mid u(x) \neq v(x)\}$ are measurable (since $u, v : \sa \to \Rb$). In this case, saying that $\Pi$ holds a.e. means that $\{x \in X \mid u(x) \neq v(x)\} \in \calN_\mu$.
 \end{eg}
 
+\begin{remark}
+	Note that the notation $\muae$ is very tricky. For instance, the statements
+	\begin{enumerate}
+		\item $u$ has property $\Pi$ almost everywhere
+		\item $u$ is $\muae$ equal to a function which has property $\Pi$ everywhere
+	\end{enumerate}
+	are very different.
+	
+	Consider the functions $\ind_{\Q}$ and $0$ and the property $\Pi(u) \equiv u$ is continuous. Indeed, $0$ is everywhere-continuous and $\ind_Q$ is $\muae$ equal to $0$ since they only differ in the rationals for which $\lambda(\Q) = 0$ but $\ind_Q$ is everywhere-discontinuous.
+\end{remark}
+
 Before moving on, we will prove a very handy inequality.
 
 \begin{thm}[Markov inequality]
@@ -77,17 +88,17 @@ Informally, this means that an integrable function does not blow up (too much), 
 		\int_N \abs{u} d\mu
 		&= \int \ind_N \abs{u}d\mu\\
 		&= \int \sup_{n\in \N} \ind_N f_n d\mu\\
-		&= \sup_{n\in\N} \int \ind_N f_n d\mu\\
+		&\overset{\ref{thm:beppo-levi}}{=} \sup_{n\in\N} \int \ind_N f_n d\mu\\
 		&\leq \sup_{n\in \N} \int n \ind_N d\mu = \sup_{n\in\N} n \mu(N) = \sup_{n\in\N} 0 = 0.
 	\end{align*}
 	Thus, $\int \ind_N \abs{u} d\mu = 0 \implies \ind_N u \in  \calL_\Rb^1(\mu)$. Now,
 	\begin{align*}
-		0 \leq \abs{ \int_n u d\mu } \leq \int_N \abs{u} d\mu = 0,
+		0 \leq \abs{ \int_N u d\mu } \leq \int_N \abs{u} d\mu = 0,
 	\end{align*}
-	thus $\int_n u d\mu = 0$.
+	thus $\int_N u d\mu = 0$.
 \end{proof}
 
-Now we move on to 1. Assume $\int \abs{u}d\mu = 0$. Then,
+Now we move on to 1. The second equivalence is true since $u \in \calL_\Rb^1(\mu)$ implies that $u$ is measurable and hence $\{u \neq 0\}$ is not just a subset of a $\mu$-null set but also a measurable set itself. For $\implies$ in the first equivalence, assume $\int \abs{u}d\mu = 0$. Then,
 \begin{align*}
 	\mu(\{u \neq 0 \})
 	&= \mu(\{ \abs{u} > 0 \}) \\
@@ -141,22 +152,40 @@ Conversely, assume $\abs{u} = 0$ a.e. Then $\{\abs{u} \neq 0 \} \in \calN_\mu$ a
 	\end{align*}
 \end{proof}
 
-Another consequence of \autoref{thm:null-integral-ae} is that integrable functions take values in $\R$ a.e.
+Another consequence of \autoref{thm:null-integral-ae} is that integrable functions take values in $\R \muae$.
 
 \begin{cor}
 	Let $u \in \calL^1_\Rb(\mu)$. Then $u$ takes values in $\R \muae$, i.e.
 	\begin{align*}
-		\mu(\{x \in X \mid \abs{u(x)} = +\infty\}) = \mu(\{x \in X \mid \abs{u} = \infty\}) = 0.
+		\mu(\{x \in X \mid \abs{u(x)} = +\infty\}) = \mu(\{\abs{u} = \infty\}) = 0.
 	\end{align*}
 	
 	In particular, we can find $v \in \calL^1_\Rb(\mu)$ such that $u = v \muae$ and $\int u d\mu = \int v d\mu$.
 \end{cor}
 
 \begin{proof}
-	TODO.
+	We use Markov's inequality to show that $\mu(N) = \mu(\{\abs{u} = \infty\}) = 0$. Set
+	\begin{align*}
+		N = \bigcap_{n\in\N} \{\abs{u} \geq n\}.
+	\end{align*}
+	where we have that
+	\begin{align*}
+		\mu(\{\abs{u} \geq 1\})
+		= \int_{\{\abs{u} \geq 1\}} 1 d\mu
+		\leq \int_{\{\abs{u} \geq 1\}} \abs{u}d\mu
+		\leq \int \abs{u}d\mu < \infty,
+	\end{align*}
+	since $u \in \calL^1_\Rb(\mu) \implies \abs{u} \in \calL^1_\Rb(\mu)$. Therefore, we may use continuity of measures from above and Markov's inequality to get
+	\begin{align*}
+		\mu(N)
+		&= \mu\left( \lim_{n\to\infty} \bigcap_{i = 1}^n \{u \geq i\} \right) \\
+		&= \mu\left( \lim_{n\to\infty} \{u \geq n\}\right) \\
+		&= \lim_{n\to\infty} \mu(\{u \geq n\}) \\
+		&\leq \lim_{n\to\infty} \frac{1}{n} \underbrace{\int \abs{u} d\mu}_{< \infty} < \infty.
+	\end{align*}
 \end{proof}
 
-As a consequence of this corollary, we can now restrict our attention to $\calL^1(\mu)$ without loss of generality.
+As a consequence of this corollary, we can now restrict our attention to $\calL^1(\mu)$ without loss of generality. We do this since $\calL^1$ is a much nicer set---it is a vector space and we need not take precautions when adding functions. The previous results are easily adapted to this new space.
 
 Finally, we give a result that is helpful for verifying that two functions are equal $\muae$
 

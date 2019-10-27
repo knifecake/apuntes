@@ -58,12 +58,41 @@ So $I_\mu(f)$ is well-defined regardless of the chosen standard representation. 
 		\item $I_\mu(\ind_A) = \mu(A)$, for any $A \in \sa$
 		\item $I_\mu(\lambda f) = \lambda I_\mu(f)$ (positive homogenous degree 1)
 		\item $I_\mu(f + g) = I_\mu(f) + I_\mu(f)$ (additive)
-		\item if $g \leq g$ then $I_\mu(f) \leq I_\mu(g)$ (monotone)
+		\item if $f \leq g$ then $I_\mu(f) \leq I_\mu(g)$ (monotone)
 	\end{enumerate}	
 \end{thm}
 
 \begin{proof}
-	TODO
+	\begin{enumerate}
+		\item Clearly in $f = \ind_A$ there is only one term in the sum and $a_1 = 1$ hence $I_\mu(\ind_A) = 1\mu(A) = \mu(A)$.
+		\item
+		\begin{align*}
+			I_\mu(\lambda f)
+			&= I_\mu\left( \lambda \sum_{n=0}^M a_n \ind_{A_n} \right)\\
+			&= I_\mu\left( \sum_{n = 0}^M (\lambda a_n) \ind_{A_n} \right)\\
+			&= \sum_{n = 0}^M (\lambda a_n)\mu(A_n)\\
+			&= \lambda \sum_{n = 0}^M a_N \mu(A_n)
+			= \lambda I_\mu(f)
+		\end{align*}
+		
+		\item Recall from \autoref{thm:prop-simple-functions} that
+		\begin{align*}
+			f+g = \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i + b_j)\ind_{A_i \cap B_j}.
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			I_\mu(f+g)
+			&= \sum_{i=0}^{M}\sum_{j=0}^{N} (a_i + b_j)\mu(A_i \cap B_j) \\
+			&= \sum_{i=0}^M a_i \sum_{j=0}^N \mu(A_i \cap B_j) + \sum_{j=0}^N b_j \sum_{i=0}^M \mu(A_i \cap B_j)\\
+			&= \sum_{i=0}^M a_i \mu(A_i) + \sum_{j=0}^N b_j \mu(B_j)\\
+			&= I_\mu(f) + I_\mu(g). 
+		\end{align*}
+		
+		\item We write $g = f + (g - f)$, where $g-f \in \calE$ by \autoref{thm:prop-simple-functions} and $g -f \geq 0$ since $f \leq g$. Therefore, $f - g \in \calE^+$ and
+		\begin{align*}
+			\int_\mu(f) \leq \int_\mu(f) + \underbrace{\int_\mu(f-g)}_{\geq 0} = \int_\mu(g).
+		\end{align*}
+	\end{enumerate}
 \end{proof}
 
 \section{Integral of a non-negative function}
@@ -78,7 +107,7 @@ So $I_\mu(f)$ is well-defined regardless of the chosen standard representation. 
 
 Some alternative notations are
 \begin{align*}
-	\int u d\mu = \int_X u d\mu = \int_X u(x) d\mu(x).
+	\int u d\mu = \int_X u d\mu = \int_X u(x) \mu(dx) = \int_X u(x) d \mu(x).
 \end{align*}
 
 Note that here we are taking the supremum over all simple functions less than or equal to $\mu$. We will eventually show that it is enough to find a sequence $(f_n)_{n\in\N} \subset \calE^+(\sa)$ such that $f_n \uparrow u$, since we will prove that
@@ -103,7 +132,7 @@ Before we move one, let's make sure that we did not break anything. Namely, does
 
 \begin{remark}
 	\label{rem:mu-integrals-monotone}
-	It is easy to see that $\mu$-integrals are monotone. Since if $u \leq v$, then $\{g \in \calE^+(\sa) \mid g \leq u\} \subset \{h \in \calE^+(\sa) \mid h \leq v\}$. Hence,
+	It is easy to see that $\mu$-integrals are monotone\footnote{The reason we anticipate this property and not wait for \autoref{thm:prop-integrals} is that we need it for the proof of \autoref{thm:beppo-levi}.}. Since if $u \leq v$, then $\{g \in \calE^+(\sa) \mid g \leq u\} \subset \{h \in \calE^+(\sa) \mid h \leq v\}$. Hence,
 	\begin{align*}
 		\int u d\mu = \sup \{I_\mu(g) \mid g \in \calE^+(\sa), g \leq u\} \leq \sup \{I_\mu(h) \mid h \in \calE^+(\sa), h \leq v\} = \int v d\mu
 	\end{align*}
@@ -130,10 +159,10 @@ Now we come to the central theorem of this chapter.
 Notice that the assumption that $u_n$ is an increasing sequence is necessary to be able to interchange limits with suprema.
 
 \begin{proof}
-	TODO. Important
+	TODO. Important.
 \end{proof}
 
-The following corollary is really just a more concise statement of the previous theorem.
+The following corollary is really just a more concise restatement of \autoref{thm:beppo-levi}.
 \begin{cor}
 	\label{cor:beppo-levi}
 	Let $u \in \calM_\Rb^+(\sa)$ be a non-negative, numerical, $\sa/\borel(\Rb)$-measurable function and $(f_n)_{n\in\N} \subset \calE^+(\sa)$ be a sequence of non-negative simple functions such that $f_n \uparrow u$. Then,
@@ -158,6 +187,8 @@ Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of a
 		\item if $u \leq v$, then $\int u d\mu \leq \int v d\mu$
 	\end{enumerate}
 \end{thm}
+
+This proof is left as exercise 9.3 in \cite[p. 79]{schilling2017}.
 
 \begin{proof}$ $\newline
 	\begin{enumerate}
@@ -189,6 +220,8 @@ Now we extend \autoref{thm:prop-integrals-simple} to the case for integrals of a
 		\int \sum_{n = 1}^\infty u_n d\mu = \sum_{n = 1}^\infty \int u_n d\mu
 	\end{align}
 \end{cor}
+
+This proof is left exercise 9.6 in \cite[p. 79]{schilling2017}.
 
 \begin{proof}
 	Let $v_m = \sum_{n=1}^{m} u_n$. Then $v_m \uparrow \sum_{n=1}^{\infty} u_n$ and thus
@@ -264,3 +297,46 @@ We also have a similar result for $\limsup$, sometimes known as the reverse Fato
 \end{proof}
 
 Note how this time we had to make sure that the sequence was bounded by a function $v$ whose integral was finite. This was implicit in \autoref{thm:fatou-lemma}, only in this case the bounding is from below and the bounding function is $v = 0$.
+
+\section{Examples}
+
+\begin{eg}
+	Consider the measure space $(X, \sa, \delta_y)$ where $\delta_y$ is the Dirac measure (cf. \autoref{eg:dirac-measure}) for some fixed $y \in X$. We claim that
+	\begin{align}
+		\int u d\delta_y = \int u(x)\delta_y(x) = u(y), \forall u \in \calM_\Rb^+(\sa).
+	\end{align}
+\end{eg}
+
+\begin{proof}
+	First consider the case $f \in \calE^+$ with standard representation $f = \sum_{n = 0}^M a_n \ind_{A_n}$ with $A_i \cap A_j = \emptyset$ if $i \neq j$ (cf. \autoref{dfn:standard-representation-simple}). We know that $y$ lies in exactly one $A_n$, say $y \in A_{n_0}$. Then
+	\begin{align*}
+		\int f d\delta_y
+		= I_{\delta_y}(f)
+		= \sum_{n=0}^M a_n \delta_y(A_n)
+		= a_{n_0} = f(y).
+	\end{align*}
+	Now we take any sequence of simple functions $f_n \uparrow u$. By \autoref{cor:beppo-levi} we have
+	\begin{align*}
+		\int u d\delta_y = \lim_{n\to\infty} f_n d\delta_y = \lim_{n\to\infty} f_n(y) = u(y)
+	\end{align*}
+\end{proof}
+
+\begin{eg}
+	Consider the measure space $(\N, \powerset(\N), \mu)$ with
+	\begin{align*}
+		\mu = \sum_{n=1}^\infty a_n \delta_n,
+	\end{align*}
+	so that $\mu(\{n\}) = a_n,\ \forall n \in \N$.
+	All the measurable functions $u : \N\to \R$ are of the form
+	\begin{align*}
+		u(x) = \sum_{n=1}^{\infty}u_n \ind_{\{n\}}(x),\ x \in \N.
+	\end{align*}
+	Then\footnote{Note how we do not expand $\int u d\mu = I_\mu(u)$, since $u$ is not a simple function (too many terms, although as we see, it does not really matter).},
+	\begin{align*}
+		\int u d\mu
+		&= \int \sum_{n = 1}^\infty u_n \ind_{\{n\}}d\mu\\
+		&\overset{\ref{cor:integral-countable-sum}}{=} \sum_{n = 1}^\infty \int u_n \ind_{\{n\}}d\mu\\
+		&= \sum_{n = 1}^\infty u_n \mu(\{n\})\\
+		&= \sum_{n = 1}^\infty u_n \cdot a_n.
+	\end{align*}
+\end{eg}

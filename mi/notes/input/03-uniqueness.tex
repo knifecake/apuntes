@@ -19,7 +19,10 @@ In this chapter we shall introduce some technicalities to be able to extend the 
 	\end{enumerate}
 \end{dfn}
 
-Note that every \siga is a Dynkin system but the converse need not be true.
+\begin{remark}
+	Every \siga is a Dynkin system but the converse need not be true.
+\end{remark}
+
 
 We have an analogue version to the generator theorem for \sigas in the case of Dynkin systems:
 
@@ -31,14 +34,26 @@ We have an analogue version to the generator theorem for \sigas in the case of D
 \end{dfn}
 
 \begin{lem}
-	Let $\calG \subset \powerset(X)$ be a collection of subsets of $X$. Then $\delta(\calG)$ is a Dynkin system and it is the smallest.
+	Let $\calG \subset \powerset(X)$ be a collection of subsets of $X$. Then $\delta(\calG)$ is a Dynkin system and it is the smallest. Moreover, $\calG \subseteq \delta(\calG) \subseteq \sigma(\calG)$.
 \end{lem}
 
-\begin{proof}
-	$\delta(\calG)$ is a Dynkin system because of the restriction on the intersection. Note that the intersection is non-empty because $\powerset(X)$ is a Dynkin system and that the intersection of Dynkin systems is also a Dynkin system (the proof is the same as the one for \sigas but using disjoint unions).
+\begin{proof}$ $\newline
 	
-	Now let's look at why it is the smallest. Suppose there is another Dynkin system $\calD$ that contains the collection $\calG$. Then $\calD$ is a Dynkin system and therefore intervenes in the intersection. Therefore $\delta(\calG) \subset \calD$.
+	\begin{itemize}
+		\item $\delta(\calG)$ is a Dynkin system because of the restriction on the intersection. Note that the intersection is non-empty because $\powerset(X)$ is a Dynkin system and that the intersection of Dynkin systems is also a Dynkin system (the proof is the same as the one for \sigas but using disjoint unions, see \autoref{rem:generators}).
+		
+		\item Now let's look at why it is the smallest. Suppose there is another Dynkin system $\calD$ that contains the collection $\calG$. Then $\calD$ is a Dynkin system and therefore intervenes in the intersection. Therefore $\delta(\calG) \subset \calD$.
+		
+		\item Finally, $\calG \subseteq \delta(\calG)$ follows from the restriction in the intersection and $\delta(\calG) \subseteq \sigma(\calG)$ follows from the fact that every \siga is a Dynkin system and hence $\delta(\calD) = \calD$ (by minimality) and $\delta(\sigma(\calG)) = \sigma(\calG)$. Therefore, $\calG \subseteq \sigma(\calG) \implies \delta(\calG) \subset \delta(\sigma(\calG)) = \sigma(\calG)$.
+	\end{itemize}
 \end{proof}
+
+Also, as with \sigas, we have
+
+\begin{remark}
+	\label{remark:generators-dynkin}
+	If $\calF \subseteq \calG$ then $\delta(\calF) \subseteq \delta(\calG)$.
+\end{remark}
 
 So, we already saw that every \siga is a Dynkin system and that Dynkin systems can be generated from a collection of subsets. A natural question to ask is, when is a Dynkin system a \siga? Let us introduce some terminology first.
 
@@ -120,6 +135,7 @@ This is nice, but it would even be nicer if we could just argue about the genera
 Now we move on to define the requirements needed to be able to guarantee uniqueness of a measure over a \siga given a definition of the measure on a generator of that \siga.
 
 \begin{thm}[Uniqueness of measures]
+	\label{thm:uniqueness-measures}
 	Let $(X, \sa)$ be a measurable space where $\sa = \sigma(\calG)$ for some collection $\calG$ of subsets of $X$ where $\calG$ satisfies the following:
 	\begin{enumerate}
 		\item $\calG$ is \istable (so $\delta(\calG) = \sigma(\calG)$), and
@@ -130,7 +146,52 @@ Now we move on to define the requirements needed to be able to guarantee uniquen
 \end{thm}
 
 \begin{proof}
-	TODO
+	The plan is to use the good set principle (\autoref{rem:good-set-principle}) to prove that a set where the measures coincide is equal to the \siga $\sa$. Therefore we can conclude that $\mu = \nu$ everywhere.
+	
+	Define, for every $n \in \N$ (and hence for every $G_n \in \calG$)
+	\begin{align}
+		\calD_N = \{ A \in \sa \mid \mu(G_n \cap A) = \nu(G_n \cap A)\}.
+	\end{align}
+	Note that $\mu(G_n\cap A) \leq \mu(G_n) < \infty$ so $\calD_n$ is well defined. The goal is to see that $\calD_n = \sa$ but that is too hard. We will prove that $\calD_n$ is a Dynkin system.
+	\begin{enumerate}
+		\item Clearly $X \in \calD_n$ since $\mu(G_n \cap X) = \mu(G_n) = \nu(G_n) = \nu(G_n \cap X)$.
+		\item Let $A \in \calD_n$. Then
+		\begin{align*}
+			\mu(G_n \cap A^\complement)
+			&= \mu(G_n \cap (X\setminus A))\\
+			&= \mu((G_n \cap X) \setminus (G_n \cap A))\\
+			&\overset{\ref{thm:prop-measures}}{=} \mu(G_n) - \mu(G_n \cap A)\\
+			&= \nu(G_n) - \nu(G_n \cap A)\\
+			&\overset{\ref{thm:prop-measures}}{=} \nu(G_n \setminus (G_n \cap A))\\
+			&= \nu (G_n \cap (X \setminus A))
+			= \nu(G_n \cap A^\complement).
+		\end{align*}
+		\item Let $(A_j)_{j\in\N}$ be a pairwise disjoint sequence in $D_n$. Then\footnote{This is the reason why we prove that $\calD_n$ is a Dynkin system and not a \siga. Doing the latter would be much complicated because we wouldn't have $\sigma$-additivity.},
+		\begin{align*}
+			\mu\left( G_n \cap \bigcupdot_{j \in \N} A_j \right)
+			&= \mu\left(\bigcupdot_{j \in \N} (G_n \cap A_j) \right)\\
+			&= \sum_{j\in\N} \mu(G_n \cap A_j)\\
+			&= \sum_{j\in\N} \nu(G_n \cap A_j)\\
+			&= \nu\left(\bigcupdot_{j \in \N} (G_n \cap A_j) \right)
+			= \nu\left( G_n \cap \bigcupdot_{j \in \N} A_j \right).
+		\end{align*}
+	\end{enumerate}
+
+	Now we want to prove that $\calD_n = \sa$. By definition we already have that $\calD_n \subseteq \sa$. On the other hand, $\mu(G_n \cap G) = \nu(G_n \cap G),\ \forall G \in \calG$ (by hypothesis, the measures agree on the generators) so $\calG \subseteq \calD_n$. By \autoref{remark:generators-dynkin}, the previous implies that $\delta(\calG) \subseteq \delta(\calD_n) = \calD_n$, but since $\calG$ is \istable then $\delta(\calG) = \sigma(\calG)$ and thus $\sigma(\calG) = \sa \subseteq \calD_n$.
+	
+	So that means that
+	\begin{align*}
+		\forall A \in \sa,\ \mu(G_n \cap A) = \nu(G_n \cap A).
+	\end{align*}
+	We use \autoref{thm:prop-measures} to take the limit and
+	\begin{align*}
+		\forall A \in \sa,\ \mu(A)
+		= \mu(X \cap A)
+		&= \lim_{n\to\infty} \mu(G_n \cap A)\\
+		&= \lim_{n\to\infty} \nu(G_n \cap A)
+		= \nu(X \cap A)
+		= \nu(A).
+	\end{align*}
 \end{proof}
 
 Suppose that we don't have an exhausting sequence on the generator. A neat trick (that doesn't always work) is to extend the generator to $\calG \cup \{X\}$ and define the trivial exhausting sequence $G_n = X,\ \forall n \in \N$. If it holds that $\mu(X) < \infty$, i.e., if $\mu$ is a finite measure, then we are in a position to apply this theorem. See exercise 5.9 for an opportunity to apply this trick.
@@ -143,7 +204,7 @@ Suppose that we don't have an exhausting sequence on the generator. A neat trick
 		\end{align*}
 		where $x + B = \{x + y \mid y \in B\}$.
 		
-		\item Every measure $\mu$ on $(\R^n, \borel(\R^n))$ which is invariant under translations and satisfies $\kappa = \mu([0,1]^n) < \infty$ is a multiple of the Lebesgue measure $\mu = \kappa \lambda^n$.
+		\item Every measure $\mu$ on $(\R^n, \borel(\R^n))$ which is invariant under translations and satisfies $\kappa = \mu([0,1)^n) < \infty$ is a multiple of the Lebesgue measure $\mu = \kappa \lambda^n$.
 	\end{enumerate}
 \end{lem}
 
@@ -166,8 +227,38 @@ Suppose that we don't have an exhausting sequence on the generator. A neat trick
 			&= \prod_{i=1}^n (b_i + x - (a_i + x)) = \prod_{i=1}^n (b_i - a_i) = \lambda^n(I)
 		\end{align*}
 		
-		This means that, if we restrict ourselves to the generator $\calJ$, we have that $\nu\mid_\calJ = \lambda^n\mid_\calJ$.\footnote{Where $f\mid A$ denotes the restriction of $f: X \to Y$ to the new domain $A \subset X$.} Recall that $\borel(\R^n) = \sigma(\calJ)$ and that the generator $\calJ$ admits the exhausting sequence $[-k, k)_{k \in \N} \subset \calJ$ with $\nu([-k, k)) = \lambda^n([-k, k)) = (2k)^n < \infty$. Hence, using the previous theorem, the measures $\nu$ and $\lambda^n$ must coincide in every $A \subset \borel(\R^n)$.
+		This means that, if we restrict ourselves to the generator $\calJ$, we have that $\nu\mid_\calJ = \lambda^n\mid_\calJ$.\footnote{Where $f\mid A$ denotes the restriction of $f: X \to Y$ to the new domain $A \subset X$.} Recall that $\borel(\R^n) = \sigma(\calJ)$ and that the generator $\calJ$ admits the exhausting sequence $[-k, k)_{k \in \N} \subset \calJ$ with $\nu([-k, k)) = \lambda^n([-k, k)) = (2k)^n < \infty$. Hence, using \autoref{thm:uniqueness-measures}, the measures $\nu$ and $\lambda^n$ must coincide in every $A \subset \borel(\R^n)$.
 		
-		\item TODO
+		\item Similarly, take $I \in \calJ$ but this time with rational endpoints $a_i, b_i \in \Q$. Then there is some $M \in \N$ and some $k(I) \in \N$ and points $x^i \in \R^n$ such that
+		\begin{align}
+			I =\bigcupdot_{i = 1}^{k(I)} \left(x^i + [0, \frac{1}{M})^n\right).
+		\end{align}
+		What we did here is pave $I$ with little squares of side length $\frac{1}{M}$ and lower left corner $x^i$, where $M$ could be the common denominator of $a_i$ and $b_i$. Now, $\mu$ (by hypothesis) and $\lambda$ (by part 1) we can write
+		\begin{align*}
+			\mu(I)
+			&= \sum_{i=1}^{k(I)} \mu\left(x^i + \left[0, \frac{1}{M}\right)^n\right)
+			= \sum_{i=1}^{k(I)}  \mu\left(\left[0, \frac{1}{M}\right)^n\right)
+			= k(I) \mu\left( \left[0, \frac{1}{M}\right)^n \right) \\
+			\lambda^n(I)
+			&= \sum_{i=1}^{k(I)} \lambda^n\left(x^i + \left[0, \frac{1}{M}\right)^n\right)
+			= \sum_{i=1}^{k(I)}  \lambda^n\left(\left[0, \frac{1}{M}\right)^n\right)
+			= k(I) \lambda^n\left( \left[0, \frac{1}{M}\right)^n \right),
+		\end{align*}
+		and for $I = [0,1)^n$,
+		\begin{align*}
+			\mu([0,1)^n)
+			= k([0,1)^n) \mu\left( \left[0, \frac{1}{M}\right)^n \right)
+			= M^n \mu\left( \left[0, \frac{1}{M}\right)^n \right) \\
+			\lambda^n([0,1)^n)
+			= k([0,1)^n) \lambda^n\left( \left[0, \frac{1}{M}\right)^n \right)
+			= M^n \lambda^n\left( \left[0, \frac{1}{M}\right)^n \right),
+		\end{align*}
+		since it takes $k([0,1)^n) = M^n$ rectangles of side $\frac{1}{M}$ to cover $[0,1)^n$.
+		Thus
+		\begin{align*}
+			\frac{\mu(I)}{\mu([0,1)^n)} = \frac{k(I)}{M^n} &\implies \mu(I) = \frac{k(I)}{M^n}\mu([0,1)^n) \\
+			\frac{\lambda^n(I)}{\lambda^n([0,1)^n)} = \frac{k(I)}{M^n} &\implies \lambda^n(I) = \frac{k(I)}{M^n} \underbrace{\lambda^n([0,1)^n)}_{=1} = \frac{k(I)}{M^n}.
+		\end{align*}
+		Thus, $\mu(I) = \mu([0,1)^n) \lambda^n(I) = \kappa \lambda^n(I)$ and application of \autoref{thm:uniqueness-measures} finishes the proof.
 	\end{enumerate}
 \end{proof}
