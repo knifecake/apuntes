@@ -2,6 +2,8 @@
 
 \chapter{\texorpdfstring{The function spaces $\calL^p$}{The function spaces Lp}}
 
+\section{\texorpdfstring{A seminorm for $\Lp$}{A seminorm for Lp}}
+
 We turn our attention to functions for which the $p$-th power of their absolute value is integrable. Throughout this chapter we will assume that $(X, \sa, \mu)$ is some measure space.
 
 \begin{dfn}[$\calL^p$-space]
@@ -15,6 +17,7 @@ We turn our attention to functions for which the $p$-th power of their absolute 
 As usual we might also refer to these sets by $\calL^p = \calL^p(\sa) = \calL^p(X)$ if the choice of measure is clear or we want to stress the underlying \sigas or domains.
 
 \begin{dfn}[$p$-seminorm]
+	\label{dfn:p-seminorm}
 	Let $u: X \to \R$ be a measurable function. We define
 	\begin{align}
 		\norm{u}_p &= \left(\int \abs{u}^p d \mu \right)^{\frac{1}{p}},\ &p \in [1,\infty), \\
@@ -22,9 +25,14 @@ As usual we might also refer to these sets by $\calL^p = \calL^p(\sa) = \calL^p(
 	\end{align}
 \end{dfn}
 
+\begin{remark}
+	Of course $u \in \calL^p(\mu) \iff u \in \calM(\sa) \land \norm{u}_p < \infty$.
+\end{remark}
+
 It is not coincidental that we use the notation $\norm{\cdot}_p$ which clearly resembles a norm. Indeed, $\abs{\cdot}_p$ is a semi-norm, i.e. a function with the properties of a norm except for the property that identifies $\norm{v}_p = 0 \iff v = \vec{0}$. What happens here is that $\norm{u}_p = 0 \iff u = 0 \muae$ and thus we don't have a one-to-one correspondence between the 0 value of the norm and the vector space's zero element (we will eventually fix this though).
 
 \begin{lem}
+	\label{lem:seminorm}
 	$\norm{\cdot}_p$ is indeed a seminorm \cite{wiki-norm}, i.e. it satisfies the following
 	\begin{enumerate}
 		\item (positive homogenous) $\norm{\alpha v}_p = \abs{\alpha}\norm{v}_p,\ \forall \alpha \in \R$
@@ -43,6 +51,105 @@ It is not coincidental that we use the notation $\norm{\cdot}_p$ which clearly r
 	\item It turns out that proving the triangle inequality is not so easy. We will dedicate the rest of this section to it.
 \end{proof}
 
+\begin{dfn}[Conjugate numbers]
+	Let $p, q \in \R$. We say that $p$ and $q$ are conjugate numbers if
+	\begin{align}
+		\frac{1}{p} + \frac{1}{q} = 1,
+	\end{align}
+	hence $q = \frac{p}{p - 1}$.
+\end{dfn}
+
+We will not bother giving the previous definition too much formality, for example, if $p = 1$ we can set $\frac{1}{\infty} = 0$ and hence $p = 1$ and $q = \infty$ are conjugate numbers. We will see that this spooky extension does not mess with the definition of $\norm{\cdot}_p$ (cf. \autoref{dfn:p-seminorm}). Also, note that $2$ is the only number which has itself as its conjugate number.
+
+\begin{lem}[Young's inequality]
+	\label{lem:young}
+	Let $p, q \in (1, \infty)$ be conjugate numbers. Then
+	\begin{align}
+		AB \leq \frac{A^p}{p} + \frac{B^q}{q}
+	\end{align}
+	holds for all $A, B \geq 0$. Equality occurs if, and only if, $B = A^{p - 1}$.
+\end{lem}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{thm}[Hölder's inequality]
+	\label{thm:holder}
+	Let $u \in \Lp$ and $v \in \calL^q$ where $p, q \in [1,\infty]$ are conjugate numbers. Then $uv \in \calL^1(\mu)$ and
+	\begin{align}
+		\abs{\int uv d\mu } \leq \int \abs{uv}d\mu \leq \norm{u}_p \norm{v}_q.
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	For the first inequality, see \autoref{thm:properties-mu-integral}.
+	
+	TODO
+\end{proof}
+
+\begin{cor}[Cauchy-Schwarz inequality]
+	\label{cor:cauchy-schwarz}
+	Hölder's inequality with $p = q = 2$ is called the Cauchy-Schwarz inequality:
+	\begin{align}
+		\int \abs{uv} d\mu \leq \norm{u}_2 \norm{v}_2.
+	\end{align}
+\end{cor}
+
+\begin{cor}[Minkowski's inequality]
+	\label{cor:minkowski}
+	Let $u, v \in \Lp,\ p \in [1, \infty]$. Then the sum $u + v \in \Lp$ and
+	\begin{align}
+		\norm{u + v}_p \leq \norm{u}_p + \norm{v}_p.
+	\end{align}
+\end{cor}
+
+Note how we stated that $u + v \in \Lp$. We already had this for $\calL^1$ (see \autoref{thm:properties-mu-integral}) but now we prove it for the more general case.
+
+\begin{proof}
+	content...
+\end{proof}
+
+
+
+\section{\texorpdfstring{A norm for $\Lp$}{A norm for Lp}}
+
 \begin{remark}
-	Of course $u \in \calL^p(\mu) \iff u \in \calM(\sa) \land \norm{u}_p < \infty$.
+	Note that from \autoref{cor:minkowski} and \autoref{lem:seminorm} we can deduce
+	\begin{align}
+		u, v \in \Lp \implies \alpha u  + \beta v \in \Lp,\ \forall \alpha, \beta \in \R.
+	\end{align}
+	which shows that $\Lp$ is an $\R$-vector space.
 \end{remark}
+
+In addition, we already saw that $\abs{\cdot}_p$ is a seminorm for $\Lp$ (cf. \autoref{lem:seminorm}). The thing that's missing for $\abs{\cdot}_p$ to be a norm is that $\abs{u}_p = 0 \implies u(x) = 0$ for every $x \in X$ (as opposed to for almost every $x$). There is an easy, but rather technical way to fix this.
+
+\begin{itemize}
+	\item We introduce the equivalence relation for $u, v\in \Lp$:
+	\begin{align*}
+		u \sim v \iff \{u \neq v \} \in \calN_\mu.
+	\end{align*}
+	It is not hard to verify that $\sim$ is indeed an equivalence relation (see \cite{wiki-equiv} for a definition).
+	
+	\item The space made up of the equivalence classes
+	\begin{align*}
+		[u]_p = \{ v \in \Lp \mid u \sim v\}
+	\end{align*}
+	is called the quotient space and denoted by $L^p = \Lp / \sim$.
+	
+	\item It is also not hard to see that $L^p$ is a vector space by proving
+	\begin{align*}
+		[\alpha u + \beta v]_p = \alpha[u]_p + \beta[v]_p.
+	\end{align*}
+	
+	\item Moreover, it admits the norm\footnote{To be honest, I still have not figured out why we require this infimum as the norms are all the same inside of an equivalence class...}
+	\begin{align*}
+		\norm{[u]_p}_p := \inf \{ \norm{w}_p \mid w \in \Lp \land w \sim u\},
+	\end{align*}
+	and, fortunately, we have that $\norm{[u]_p}_p = \norm{u}_p$ so we will start abusing notation identify $[u]$ with $u$ and ditch the distinction $L_p$ vs $\Lp$.
+\end{itemize}
+
+All the results in this chapter so far are still valid if $u$ is $\muae$ real valued so there is no need to distinguish between the cases $L^p_\Rb$ and $L^p := L^p_R$.
+
+\section{Convergence and completeness}
+
