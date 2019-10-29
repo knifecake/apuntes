@@ -96,13 +96,13 @@ We will not bother giving the previous definition too much formality, for exampl
 	\end{align}
 \end{cor}
 
-\begin{cor}[Minkowski's inequality]
-	\label{cor:minkowski}
+\begin{thm}[Minkowski's inequality]
+	\label{thm:minkowski}
 	Let $u, v \in \Lp,\ p \in [1, \infty]$. Then the sum $u + v \in \Lp$ and
 	\begin{align}
 		\norm{u + v}_p \leq \norm{u}_p + \norm{v}_p.
 	\end{align}
-\end{cor}
+\end{thm}
 
 Note how we stated that $u + v \in \Lp$. We already had this for $\calL^1$ (see \autoref{thm:properties-mu-integral}) but now we prove it for the more general case.
 
@@ -110,12 +110,58 @@ Note how we stated that $u + v \in \Lp$. We already had this for $\calL^1$ (see 
 	content...
 \end{proof}
 
+We can further generalise this theorem to sequences of non-negative functions using Beppo-Lévi.
+
+\begin{cor}
+	\label{cor:minkowski-seq}
+	
+	Let $(u_n)_{n\in\N} \subset \Lp$ be any sequence of \textbf{non-negative} functions in $\Lp$ with $p \in [1,\infty)$. Then
+	\begin{align}
+		\norm{\sum_{n=1}^\infty u_n}_p
+		\leq \sum_{n = 1}^\infty \norm{u_n}_p.
+	\end{align}
+\end{cor}
+
+\begin{proof}
+	By repeated applications of Minkowski's inequality we have, for any $N \in \N$,
+	\begin{align*}
+		\norm{\sum_{n=1}^N u_n}_p
+		\leq \sum_{n = 1}^N \norm{u_n}_p
+		\leq \sum_{n= 1}^\infty \norm{u_n}_p.
+	\end{align*}
+	Since the right hand side is independent of the choice of $N$, we can take the supremum of the left side without breaking the inequality:
+	\begin{align*}
+		\sup_{N\in\N} \norm{\sum_{n=1}^N u_n}_p
+		\leq \sup_{N\in\N} \sum_{n = 1}^N \norm{u_n}_p
+		\leq \sum_{n= 1}^\infty \norm{u_n}_p.
+	\end{align*}
+	We now wish to see that this holds for $N = \infty$, for which we use Beppo-Lévi. Observe that $(\sum_{n=1}^N u_n)^p$ is a sequence of increasing functions\footnote{$p \geq 1$ so it does not mess with us here}. Thus,
+	\begin{multline*}
+		\sup_{N\in\N} \norm{\sum_{n=1}^N u_n}_p^p
+		= \sup_{N\in\N} \int \left(\sum_{n=1}^N u_n\right)^p d\mu
+		= \int \left(\sup_{N \in \N} \sum_{n=1}^N u_n)\right)^p d\mu\\
+		\overset{\ref{thm:beppo-levi}}{=} \int \left( \sum_{n=1}^\infty u_n \right)^p
+		= \norm{\sum_{n=1}^\infty u_n}_p^p.
+	\end{multline*}
+	Taking the $p$-th root to get the norms and the proof follows.
+\end{proof}
+
+\begin{remark}
+	We need the functions to be non-negative so that the function we are integrating, namely
+	\begin{align*}
+		\abs{\sum_{n=1}^N u_n}^p
+	\end{align*}
+	is an \textbf{increasing} sequence. At this point we don't really care if it is non-negative or whatever, i.e. using Monotone Convergence instead of Beppo-Lévi would not help as the absolute value in the $p$-norm reduces the question to the non-negative case.
+	
+	As a counterexample consider a sequence of functions that oscilates around 0: $-1, 0, 1, 0, -1, \dots$. The partial absolute value of the partial sums is $1, 1, 0, 0, 1, \dots$, which does not really converge. Another way of solving this problem would be to ask for a sequence of arbitrary but increasing functions and applying Monotone Convergence, but I feel its more useful to ask for any sequence of non-negative functions as we get the increasing part from taking the partial sums.
+\end{remark}
+
 
 
 \section{\texorpdfstring{A norm for $\Lp$}{A norm for Lp}}
 
 \begin{remark}
-	Note that from \autoref{cor:minkowski} and \autoref{lem:seminorm} we can deduce
+	Note that from \autoref{thm:minkowski} and \autoref{lem:seminorm} we can deduce
 	\begin{align}
 		u, v \in \Lp \implies \alpha u  + \beta v \in \Lp,\ \forall \alpha, \beta \in \R.
 	\end{align}
@@ -153,3 +199,94 @@ All the results in this chapter so far are still valid if $u$ is $\muae$ real va
 
 \section{Convergence and completeness}
 
+\begin{dfn}[$\Lp$-convergence]
+	\label{dfn:lp-convergence}
+	A sequence of functions $(u_n)_{n\in\N} \subset \Lp$ in $\Lp$ is said to be convergent in the space $\Lp$ with limit $\Lplim_{n\to\infty} u_n = u$ if, and only if,
+	\begin{align}
+		\lim_{n\to\infty} \norm{u_n - u}_p = 0.
+	\end{align}
+\end{dfn}
+
+Remember, however that $\Lp$-limits are only almost everywhere unique. If $w_1, w_2$ are both $\Lp$-limits of the same sequence $(u_n)_{n\in\N}$ we have
+\begin{align*}
+	\norm{w_1 - w_2}_p
+	\overset{\ref{thm:minkowski}}{\leq}\lim_{n\to\infty} \left( \norm{w_1 - u_n} + \norm{u_n - w_2}_p \right) = 0.
+\end{align*}
+
+\begin{remark}
+	Pointwise convergence of a sequence $(u_n)_{n\in\N} \subset \Lp$ does not quarantee $\Lp$-convergence.
+	
+	Example needed...
+\end{remark}
+
+We can however, give a weaker result by using Lebesgue's dominated convergence theorem.
+
+\begin{lem}
+	Let $(u_n)_{n\in\N} \subset \Lp$ be a sequence of functions in $\Lp$ such that $\lim_{n\to\infty} u_n(x) =  u(x)$ for (almost) every $x$ and $\abs{u_n} \leq w$ for some function $w \in \Lp$. Then, $u \in \Lp$ and $\Lplim u_n = u$.
+\end{lem}
+
+\begin{proof}
+	We want to show that $\Lplim u_n = u \iff \lim_{n\to\infty} \norm{u_n - u}_p = 0 \iff \lim_{n\to\infty} \norm{u_n - u}_p^p = 0$. To do that we show that the sequence $\abs{u_n - u}^p$ satisfies the hypotheses of \autoref{thm:lebesgue-dominated-convergence}. We have 
+	\begin{align*}
+	\abs{u_n - u}^p \leq (\abs{u_n} + \abs{u})^p \leq (2w)^p = 2^p w^p
+	\end{align*}
+	and therefore
+	\begin{align*}
+	\lim_{n\to\infty} \int \abs{u - u_n}^p d \mu
+	= \int \lim_{n\to \infty} \abs{u_n - u} d \mu
+	= \int 0d\mu = 0
+	\end{align*}
+	which in turn implies that $\Lplim u_n = u$.
+\end{proof}
+
+\begin{dfn}[$\Lp$-Cauchy sequence]
+	\label{dfn:lp-cauchy}
+	We call $(u_n)_{n\in\N}$ an $\Lp$-Cauchy sequence if
+	\begin{align}
+		\forall \varepsilon > 0,\ \exists N_\varepsilon : \forall n_1, n_2 \geq N_\varepsilon,\ \norm{u_{n_1} - u_{n_2}}_p < \varepsilon.
+	\end{align}
+\end{dfn}
+
+\begin{remark}
+	Any $\Lp$-convergent sequence is an $\Lp$-Cauchy sequence.
+\end{remark}
+
+\begin{proof}
+	By $\Lp$-convergence we have that for any $\varepsilon / 2 > 0$, there exists an $N$ such that for any $n > N$.
+	\begin{align*}
+		\norm{u_n - u}_p < \frac{\varepsilon}{2}.
+	\end{align*}
+	
+	We can rewrite that as
+	\begin{align*}
+		\norm{u_{n_1} - u_{n_2}}_p
+		\leq \norm{u_{n_1} - u}_p + \norm{u_{n_2} - u}_p
+		= \frac{\varepsilon}{2} + \frac{\varepsilon}{2}
+		= \varepsilon.
+	\end{align*}
+\end{proof}
+
+The converse is also true but much harder to prove.
+
+\begin{thm}[Riesz-Fischer]
+	The spaces $\Lp,\ p \in [1,\infty]$ are complete, i.e. every $\Lp$-Cauchy sequence $(u_n)_{n\in\N}\subset \Lp$ converges to some limit $u \in \Lp$.
+\end{thm}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{thm}[Riesz]
+	Let $(u_n)_{n\in\N} \subset \Lp,\ p \in [1,\infty)$ be a sequence such that $\lim_{n\to\infty} u_n(x) = u(x)$ for almost every $x \in X$ and some $u \in \Lp$. Then
+	\begin{align}
+		\lim_{n\to\infty} \norm{u_n - u}_p = 0 \iff \lim_{n\to\infty} \norm{u_n}_p = \norm{u}_p.
+	\end{align}
+\end{thm}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{remark}
+	This theorem \textbf{does not hold} for $p = \infty$.
+\end{remark}

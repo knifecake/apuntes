@@ -2,3 +2,110 @@
 
 
 \chapter{Product measures and Fubini's theorem}
+
+Remember how long it took us to be able to define the Lebesgue measure on $(\R^n, \borel(\R^n))$. It took three chapters. And we were not nearly done. It is true that we proved that the $n$-dimensional Lebesgue measure existed and was well defined on all $\borel(\R^n)$. However we still lack a lot of tools to be able to work with it. In this chapter we will prove that for a set $A \times B \in \R^n \times \R^m$, the $n\cdot m$-dimensional Lebesgue measure is well behaved, i.e. $\lambda^{n\cdot m}(A \times B) = \lambda^n(A) \cdot \lambda^n(B)$.
+
+Throughout this chapter we will assume that $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ are two $\sigma$-finite measure spaces.
+
+\begin{lem}
+	Let $\sa$ and $\borel$ be two semi-rings, then $\sa \times \borel$ is a semi-ring.
+\end{lem}
+
+You might want to consult what a semi-ring is in \autoref{dfn:semiring}.
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{dfn}[Product $\sigma$-algebra]
+	Let $(X, \sa), (Y, \borel)$ be measurable spaces. Then the \siga $\sa \otimes \borel = \sigma(\sa \times \borel)$ is called a product \siga and $(X \times Y, \sa \otimes \borel)$ is called the product of measurable spaces.
+\end{dfn}
+
+\begin{lem}
+	If $\sa = \sigma(\calF)$ and $\borel = \sigma(\calG)$ and if $\calF$ and $\calG$ contain exhausting sequences $(F_n)_{n\in\N} \subset \calF,\ F_n \uparrow X$ and $(G_n)_{n\in\N} \subset \calG,\ G_n \uparrow Y$, then
+	\begin{align}
+		\sigma(\calF \times \calG) = \sigma (\sa \times \borel) := \sa \otimes \borel.
+	\end{align}
+\end{lem}
+
+\begin{thm}[Uniqueness of product measures]
+	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two measure spaces and assume that $\sa = \sigma(\calF)$ and $\borel = \sigma(\calG)$. If
+	\begin{enumerate}
+		\item $\calF, \calF$ are \istable, and
+		\item $\calF, \calG$ contain exhausting sequences $F_k \uparrow X$ and $G_n \uparrow Y$ with $\mu(F_k) < \infty$ and $\nu(G_n) < \infty$ for all $k, n \in \N$,
+	\end{enumerate}
+	then there is at most one measure $\rho$ on $(X \times Y, \sa \otimes \borel)$ satisfying
+	\begin{align*}
+		\rho(F \times G) = \mu(F) \nu(G),\ \forall F \in \calF,\ G \in \calG.
+	\end{align*}
+\end{thm}
+
+\begin{thm}[Existence of product measures]
+	\label{thm:existence-product-measure}
+	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be $\sigma$-finite measure spaces. The set function
+	\begin{align*}
+		\rho : \sa \times \borel \to [0,\infty],\ \rho(A \times B) := \mu(A)\nu(B)
+	\end{align*}
+	extends uniquely to a $\sigma$-finite measure on $(X \times Y, \sa \otimes \borel)$ such that
+	\begin{align}
+		\rho(E) = \iint \ind_E(x, y) d\mu(x) d\nu(y)
+		= \iint \ind_E(x, y) d\nu(y)d\mu(x)
+	\end{align}
+	holds for all $E \in \sa \otimes \borel$. In particular, the functions
+	\begin{align}
+		x \mapsto \ind_E(x, y),\\
+		y \mapsto \ind_E(x, y),\\
+		x \mapsto \int \ind_E(x, y) d\nu(y),\\
+		y \mapsto \int \ind_E(x, y) d\mu(x)
+	\end{align}
+	are $\sa$, resp. $\borel$-measurable for every fixed $y \in Y$, resp. $x \in X$.
+\end{thm}
+
+\begin{dfn}[Product measure]
+	The unique measure $\rho$ constructed in \autoref{thm:existence-product-measure} is called the product of the measures $\mu$ and $\nu$, denoted by $\mu \times \nu$. $(X \times Y, \sa \otimes \borel, \mu \times \nu)$ is called the product measure space.
+\end{dfn}
+
+Now we show an alternative construction of the $n$-dimensional Lebesgue measure to the one we did after \autoref{thm:caratheodory}.
+
+\begin{cor}
+	\label{cor:lebesgue-product-extension}
+	If $n > d \geq 1$ then
+	\begin{align*}
+		(\R^n, \borel(\R^n), \lambda^n)
+		= (\R^d \times \R^{n-d}, \borel(\R^d) \otimes \borel(\R^{n-d}), \lambda^d \times \lambda^{n-d}).
+	\end{align*}
+\end{cor}
+
+\begin{thm}[Tonelli]
+	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two $\sigma$-finite measure spaces. Let $u : X \times Y \to [0,\infty]$ be an $\sa \otimes \borel$ measurable function. Then
+	
+	\begin{align}
+		\int_{X\times Y} u d(\mu \times v)
+		= \int_Y \int_X u(x, y) d\mu(x) d\nu(y)
+		= \int_X \int_Y u(x, y) d\nu(y) d\mu(x)
+		\in [0, \infty].
+	\end{align}
+\end{thm}
+
+\begin{thm}[Fubini]
+	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two $\sigma$-finite measure spaces. Let $u : X \times Y \to [0,\infty]$ be an $\sa \otimes \borel$ measurable function. If at least one of the three integrals
+	\begin{align*}
+		\int_{X\times Y} u d(\mu \times v)
+		,\ \int_Y \int_X u(x, y) d\mu(x) d\nu(y)
+		,\ \int_X \int_Y u(x, y) d\nu(y) d\mu(x)
+	\end{align*}
+	is finite then all three integrals are finite, $u \in \calL^1(\mu \times \nu)$, and
+	\begin{enumerate}
+		\item $x \mapsto u(x, y)$ is in $\calL^1(\mu)$ for $\nu$-a.e. $y \in Y$,
+		\item $y \mapsto u(x, y)$ is in $\calL^1(\nu)$ for $\muae\ x \in X$,
+		\item $y \mapsto \int_X u(x, y)d\mu(x)$ is in $\calL^1(\nu)$,
+		\item $x \mapsto \int_Y u(x, y)d\nu(y)$ is in $\calL^1(\mu)$, and
+		\item
+		\begin{align*}
+			\int_{X\times Y} u d(\mu \times v)
+			= \int_Y \int_X u(x, y) d\mu(x) d\nu(y)
+			= \int_X \int_Y u(x, y) d\nu(y) d\mu(x).
+		\end{align*}
+	\end{enumerate}
+\end{thm}
+

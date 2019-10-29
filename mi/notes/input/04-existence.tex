@@ -8,6 +8,7 @@ In this chapter we shall explore a new structure, the semi ring and a new functi
 
 
 \begin{dfn}[Semi-ring]
+	\label{dfn:semiring}
 	Let $\sr \subset X$ be a collection of subsets of a set $X$. We say that $\sr$ is a semi-ring if the following are satisfied:
 	\begin{enumerate}
 		\item $\emptyset \in \sr$,
@@ -35,13 +36,20 @@ What is missing for a premeasure to become a measure is the fact that it is not 
 \section{The Caratheodory theorem}
 
 \begin{thm}[Caratheodory]
+	\label{thm:caratheodory}
 	Let $X$ be a set, $\sr$ a semi-ring on $X$ and $\mu$ a premeasure defined on $\sr$. Then $\mu$ has an extension to a measure $\mu$ defined on $\sigma(\sr)$. If $\sr$ contains an exhausting sequence $S_n \uparrow X$ with $\mu(S_n) < \infty$ then the extension is unique.
 \end{thm}
 
-And that's it. We could end the chapter here or make it much longer by proving Caratheodory's theorem. We may do so, if I manage to find the time to write it down, but otherwise look it up.
+And that's it. We could end the chapter here or make it much longer by proving Caratheodory's theorem. We may do so, if I manage to find the time to write it down, but otherwise look it up \cite[p. 41]{schilling2017}
 
 What we will do is apply the theorem to the Lebesgue measure and give an outline of the proof.
 
 \begin{remark}
 	The $n$-dimensional Lebesgue measure satisfies the hypothesis for the premeasure in Caratheodory's theorem.
 \end{remark}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+TODO: outline of the proof

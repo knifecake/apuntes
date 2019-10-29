@@ -83,7 +83,7 @@ name=Definition,
 refname={definition,definitions},
 Refname={Definition,Definitions},
 style=mydfn,
-numberwithin=chapter
+sibling=thm
 ]{dfn}
 
 \declaretheorem[
@@ -91,7 +91,7 @@ name=Example,
 refname={example,examples},
 Refname={Example,Examples},
 style=myeg,
-numberwithin=chapter
+sibling=thm
 ]{eg}
 
 \declaretheorem[
@@ -142,6 +142,7 @@ numberwithin=section
 \newcommand{\Rb}{{\overline{\R}}}
 \newcommand{\sgn}{\text{sgn}}
 \newcommand{\Lp}{\calL^p}
+\newcommand{\Lplim}{{\Lp-\lim}}
 
 \author{Elias Hernandis}
 \title{Notes on Measure and integration}
