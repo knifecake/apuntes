@@ -46,3 +46,8 @@ cp micro/*.pdf micro/*.html docs/dist/micro/
 mkdir -p docs/dist/mi
 make -C mi/notes
 cp mi/notes/*.pdf docs/dist/mi/
+
+# IA
+mkdir -p docs/dist/fp
+make -C fp
+cp fp/*.pdf fp/*.html docs/dist/fp/

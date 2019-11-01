@@ -33,12 +33,19 @@
 % \usepackage{fancyvrb}
 % \usepackage{xcolor}
 \usepackage{hyperref}
-% \usepackage{listings}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
 \usepackage{longtable,booktabs}
 % \usepackage{caption}
 % \IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 % \usepackage{graphicx,grffile}
 % \usepackage[normalem]{ulem}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
 
 
 \hypersetup{

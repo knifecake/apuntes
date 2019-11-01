@@ -1,0 +1,36 @@
+---
+title: FP summary
+author: Elias Hernandis
+layout: notes
+---
+
+<h1 id="property-based-testing-quicktest">Property based testing (QuickTest)</h1>
+<ul>
+<li><p>The inner workings of QuickTest do not really matter. The important thing is coming up and writting properties to verify correctness.</p></li>
+<li><p>Remember to explicitly write the types of the predicates so that QuickCheck can provide appropriate examples.</p></li>
+</ul>
+<h1 id="lazy-evaluation">Lazy evaluation</h1>
+<h2 id="whnf-weak-head-normal-form">WHNF (= Weak Head Normal Form)</h2>
+<p>An expression is in WHNF if any of the following are true:</p>
+<ol type="1">
+<li>The expression is a <strong>constructor</strong>;
+<ul>
+<li>If the expression is a constructor that is being pattern matched on (e.g. a constructor inside a <code>case ... of</code>, then it will be reduced depending on the value of the constructor.</li>
+</ul></li>
+<li>The expression is an <strong>anonymous function</strong>, i.e. a lambda expression;
+<ul>
+<li>If lambda is being applied to all of its arguments, then it is reduced depending on their value.</li>
+</ul></li>
+<li>The expression is a <strong>function applied to too few arguments</strong>.</li>
+</ol>
+<h1 id="monads">Monads</h1>
+<h2 id="do-notation">Do notation</h2>
+<ul>
+<li><p>Remember that each do block maps to a monad, and some monads don’t do what we intuitively think they do. Consider</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a>a <span class="ot">&lt;-</span> <span class="kw">do</span> f <span class="ot">&lt;-</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb1-2"><a href="#cb1-2"></a>        s <span class="ot">&lt;-</span> [<span class="ch">&#39;a&#39;</span>, <span class="ch">&#39;b&#39;</span>]</span>
+<span id="cb1-3"><a href="#cb1-3"></a>        <span class="fu">return</span> (f, s)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>a <span class="op">==</span> [(<span class="dv">1</span>, <span class="ch">&#39;a&#39;</span>), (<span class="dv">2</span>, <span class="ch">&#39;b&#39;</span>)]</span></code></pre></div>
+<p>where the list monad comes into place (think of <strong>list comprehensions</strong> in this case).</p></li>
+</ul>

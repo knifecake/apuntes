@@ -476,7 +476,30 @@ Due October 25th, 2019.
 
 \begin{proof}$ $\newline
 	\begin{enumerate}
-		\item 
+		\item Observe that we may rewrite $u_n$ as
+		\begin{align*}
+			u_n(x) = \begin{cases}
+			-n \tif u(x) < n\\
+			u(x) \tif -n \leq u(x) \leq n \\
+			n \tif n < u(x)
+			\end{cases}
+		\end{align*}
+		and therefore
+		\begin{align*}
+			\abs{u_n(x)} = \begin{cases}
+			u(x) \tif 0 \leq \abs{u(x)} \leq n\\
+			n \tif n < \abs{u(x)}
+			\end{cases}.
+		\end{align*}
+		From this we can see that $\abs{u_n} \leq \abs{u_{n+1}} \leq \abs{u}$ and thus $(\abs{u_n})_{n\in\N}$ is an increasing sequence of non-negative functions which converges to $\abs{u}$. Therefore we can use Beppo-Lévi to get
+		\begin{align*}
+			\lim_{n\to\infty} \norm{u_n}_p
+			&= \lim_{n\to\infty} \left( \int \abs{u_n}^pd\mu \right)^{\frac{1}{p}}\\
+			&= \left(\lim_{n\to\infty} \int \abs{u_n}^pd\mu \right)^{\frac{1}{p}}\\
+			&\overset{\ref{thm:beppo-levi}}{=} \int \left(\lim_{n\to\infty} \abs{u_n}^pd\mu \right)^{\frac{1}{p}}\\
+			&= \int \left(\abs{u}^pd\mu \right)^{\frac{1}{p}}
+			= \norm{u}_p
+		\end{align*}
 		\item From part one we know that $\lim_{n\to\infty} \norm{u_n}_p = \norm{u}_p$. Therefore, by Riesz's theorem, we have that $\lim_{n\to\infty}\norm{u_n - u}_p = 0$. From the definition of limit we get that for any $\varepsilon' > 0$, there exists an $N \in \N$ such that
 		\begin{align*}
 		\left( \int \abs{u_N - u}^p d\mu \right)^{\frac{1}{p}} < \varepsilon'.

@@ -7,6 +7,8 @@ Remember how long it took us to be able to define the Lebesgue measure on $(\R^n
 
 Throughout this chapter we will assume that $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ are two $\sigma$-finite measure spaces.
 
+\section{Product $\sigma$-algebras and product measures}
+
 \begin{lem}
 	Let $\sa$ and $\borel$ be two semi-rings, then $\sa \times \borel$ is a semi-ring.
 \end{lem}
@@ -29,6 +31,7 @@ You might want to consult what a semi-ring is in \autoref{dfn:semiring}.
 \end{lem}
 
 \begin{thm}[Uniqueness of product measures]
+	\label{thm:uniqueness-product-measure}
 	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two measure spaces and assume that $\sa = \sigma(\calF)$ and $\borel = \sigma(\calG)$. If
 	\begin{enumerate}
 		\item $\calF, \calF$ are \istable, and
@@ -48,22 +51,119 @@ You might want to consult what a semi-ring is in \autoref{dfn:semiring}.
 	\end{align*}
 	extends uniquely to a $\sigma$-finite measure on $(X \times Y, \sa \otimes \borel)$ such that
 	\begin{align}
-		\rho(E) = \iint \ind_E(x, y) d\mu(x) d\nu(y)
-		= \iint \ind_E(x, y) d\nu(y)d\mu(x)
+		\rho(E) 
+		&:= \int_{X\times Y} \ind_E(x, y) d\rho(x) \\
+		\label{eq:product-existence-5}
+		&= \iint \ind_E(x, y) d\mu(x) d\nu(y) = \iint \ind_E(x, y) d\nu(y)d\mu(x)
 	\end{align}
 	holds for all $E \in \sa \otimes \borel$. In particular, the functions
 	\begin{align}
+		\label{eq:product-existence-1}
 		x \mapsto \ind_E(x, y),\\
+		\label{eq:product-existence-2}
 		y \mapsto \ind_E(x, y),\\
+		\label{eq:product-existence-3}
 		x \mapsto \int \ind_E(x, y) d\nu(y),\\
+		\label{eq:product-existence-4}
 		y \mapsto \int \ind_E(x, y) d\mu(x)
 	\end{align}
 	are $\sa$, resp. $\borel$-measurable for every fixed $y \in Y$, resp. $x \in X$.
 \end{thm}
 
+In the previous statement, when we write a double integral $\iint \dots d\mu d\nu$ we are implicitly writing brackets, i.e. $\iint \dots d\mu d\nu = \int (\int d\mu) d\nu$.
+
+Recall that we can only integrate measurable functions (\autoref{dfn:mu-integrable}). That is the reason for the second part of the theorem, we need to make sure that when we use iterated integrals, whatever we're integrating is measurable. Thus, the structure of the proof will be to first verify that \ref{eq:product-existence-1} -- \ref{eq:product-existence-4} are indeed measurable and then to prove the equality \ref{eq:product-existence-5}.
+
+\begin{proof}
+	Uniqueness follows from \autoref{thm:uniqueness-product-measure}.
+	
+	Existence. By $\sigma$-finiteness we have that there exist $(A_n)_{n\in\N} \subset \sa$ and $(B_n)_{n\in\N} \subset \borel$ with $\mu(A_n) < \infty$ and $\nu(B_n) < \infty$ for all $n$. Let $E_n = A_n \times B_n \in \sa \times \borel \subseteq \sa \otimes \borel$ and
+	\begin{align}
+		D_n = \{ D \in \sa \otimes \borel \mid \ref{eq:product-existence-5} - \ref{eq:product-existence-4} \text{ hold for } D \cap E_n\}.
+	\end{align}
+	Here our $E = D \cap E_n$. We will show that $\sa \times \borel \subset D_n$ and that $D_n$ is a Dynkin system (cf. \autoref{dfn:dynkin-system}, hence $D_n = \delta(D_n)$). This, together with the facts that $D_n \subset \sa \otimes \borel$ and that $\sa \times \borel$ is \istable will imply that $\delta(\sa \times \borel) = \sigma(\sa \times \borel) = \sa \otimes \borel \subset \delta(D_n) = D_n \subset \sa \otimes \borel \implies D_n = \sa \otimes \borel$.
+	
+	\begin{enumerate}
+		\item $\sa \times \borel \subset D_n$. Let $A \times B \in \sa \times \borel$. Then $(A \times B) \cap E_n = (A \times B) \cap (A_n \times B_n) = (A \cap A_n) \times (B \times B_n)$. Therefore
+		\begin{align*}
+			\ind_{(A \times B) \cap E_n}(x, y) = \ind_{A \cap A_n}(x)\ind_{B \cap B_n}(y)
+		\end{align*}
+		and thus
+		\begin{align*}
+			\iint \ind_{(A \times B) \cap E_n}(x, y) d\mu(x)d\nu(y)
+			&= \iint \ind_{A \cap A_n}(x)\ind_{B \cap B_n}(y) d\mu(x)d\nu(y) \\
+			&= \mu(A \cap A_n) \int \ind_{B \cap B_n}(y) d\nu(y) \\
+			&= \mu(A \cap A_n) \nu(B \cap B_n) \\
+			&= \nu(B \cap B_n) \int \ind_{A \cap A_n}(x) d\mu(x) \\
+			&= \iint \ind_{A \cap A_n}(x) \ind_{B \cap B_n}y(y) d\nu(y) d\mu(x)\\
+			&= \iint \ind_{(A \times B) \cap E_n}(x, y) d\nu(y)d\mu(x).
+		\end{align*}
+		
+		\item $D_n$ is a Dynkin system.
+		\begin{enumerate}
+			\item $X \times Y \in \sa \times \borel \subset D_n$ by the previous claim.
+			\item If $D \in D_n$ then $\ind_{D^\complement \cap E_n} = \ind_{E_n} - \ind_{E_n \cap D}$ and
+			\begin{align*}
+				&\iint \ind_{D^\complement \cap E_n}(x, y) d\mu(x) d\nu(y) \\
+				= & \iint (\ind_{E_n}(x, y) - \ind_{E_n \cap D}(x, y))d\mu(x) d\nu(y) \\
+				= &\int \left( \int \ind_{E_n}(x, y) d\mu(x) - \int \ind_{E_n \cap D}(x, y) d\mu(x) \right)d\nu(y) \\
+				= &\iint \int \ind_{E_n}(x, y) d\mu(x) d\nu(y) - \iint \ind_{E_n \cap D}(x, y) d\mu(x) d\nu(y) \\
+				= &\iint \int \ind_{E_n}(x, y) d\nu(y)d\mu(x) - \iint \ind_{E_n \cap D}(x, y) d\nu(y)d\mu(x) \\
+				= &\dots = \iint \ind_{D^\complement \cap E_n}(x, y) d\nu(y) d\mu(x),
+			\end{align*}
+			where $\dots$ means do the same calculations backwards. We conclude that $D^\complement \in D_n$.
+			\item Finally let $(D_k)_{k\in \N} \subset D_n$ be a mutually disjoint collection of sets in $D_n$. We will show that $D = \bigcupdot_{k = 1}^\infty D_k \in D_n$. Therefore $\ind_{D} = \sum_{k = 1}^\infty \ind_{D_k}$ and $\ind_{D \cap E_n} = \sum_{k = 1}^\infty \ind_{D_k \cap E_n}$. Therefore,
+			\begin{align*}
+				&\iint \ind_{D \cap E_n}(x, y)d\mu(x)d\nu(y)\\
+				= & \iint \sum_{k = 1}^\infty \ind_{D_k \cap E_n}(x, y) d\mu(x) d\nu(y)\\
+				\overset{\ref{cor:beppo-levi}}{=} & \int \left( \sum_{k = 1}^\infty \ind_{D_k \cap E_n}(x, y) d\mu(x) \right) d\nu(y)\\
+				\overset{\ref{cor:beppo-levi}}{=} & \sum_{k = 1}^\infty \iint \ind_{D_k \cap E_n}(x, y) d\mu(x) d\nu(y)\\
+				= &\sum_{k = 1}^\infty \iint \ind_{D_k \cap E_n}(x, y) d\nu(y) d\mu(x)\\
+				= &\dots = \iint \ind_{D \cap E_n}(x, y)d\nu(y)d\mu(x).
+			\end{align*} 
+			And thus, $D = \bigcupdot_{k = 1}^\infty D_k \in D_n$.
+		\end{enumerate}
+	
+		We conclude that $D_n$ is indeed a Dynkin system.
+	\end{enumerate}
+
+	Finally, to finish the proof we let $E \in \sa \otimes \borel$ and we want to verify that \ref{eq:product-existence-5} - \ref{eq:product-existence-4} hold for $\ind_E$. Recall that $E_n = A_n \times B_n \uparrow X \times Y$ so
+	\begin{align*}
+		\ind_{E_n} \uparrow \ind_{X \times Y} \text{ and } \ind_{E_n \cap E} \uparrow \ind_{(X \times Y) \cap E} = \ind_E.
+	\end{align*}
+	We may write $\ind_E = \sup_{n \in \N} \sup_{E_n \cap E}$. The supremum of measurable functions is measurable so \ref{eq:product-existence-1} and \ref{eq:product-existence-2} hold for $\ind_E$. By Beppo-Lévi (\autoref{thm:beppo-levi}) we get that \ref{eq:product-existence-3} and \ref{eq:product-existence-4} also hold for $\ind_E$. Finally, for \ref{eq:product-existence-5} we repeat what we did for the third property of Dynkin systems:
+	\begin{align*}
+		&\iint \ind_E (x, y)d\mu(x)d\nu(y)\\
+		= & \iint \sup_{n\in \N} \ind_{E_n \cap E}(x, y) d\mu(x) d\nu(y)\\
+		\overset{\ref{thm:beppo-levi}}{=} & \int \left( \sup_{n\in \N} \int \ind_{E_n \cap E}(x, y) d\mu(x) \right) d\nu(y)\\
+		\overset{\ref{thm:beppo-levi}}{=} & \sup_{n\in\N} \iint \ind_{E_n \cap E}(x, y) d\mu(x) d\nu(y)\\
+		= &\sup_{n\in\N} \iint \ind_{E_n \cap E}(x, y) d\nu(y) d\mu(x)\\
+		= &\dots = \iint \ind_E(x, y)d\nu(y)d\mu(x).
+	\end{align*}
+\end{proof}
+
 \begin{dfn}[Product measure]
 	The unique measure $\rho$ constructed in \autoref{thm:existence-product-measure} is called the product of the measures $\mu$ and $\nu$, denoted by $\mu \times \nu$. $(X \times Y, \sa \otimes \borel, \mu \times \nu)$ is called the product measure space.
 \end{dfn}
+
+\begin{remark}
+	The product measure $\rho: \sa \times \borel \to [0,\infty], \rho(A \times B) = \mu \times \nu(A \times B) = \mu(A) \cdot \mu(B)$ is indeed very well defined. The product at the end does not fail because we impose that both measurable spaces are $\sigma$-finite.
+	
+	Consider the example given in exercise 14.2 (\cite[p. 149]{schilling2017}). Let $(X, \sa, \mu),\ (Y, \borel, \nu)$ be two $\sigma$-finite measure spaces and let $A \in \sa,\ N \in \borel$ with $\nu(N) = 0$. Then $\mu \times \nu(A \times N) = 0$.
+\end{remark}
+
+\begin{proof}
+	We cannot just state $\mu \times \nu(A \times N) = \mu(A) \cdot \nu(N) = \mu(A) \cdot 0 = 0$ since we may have $A = X$ and thus we would end up with $\infty \cdot 0$ which is, in principle, undefined. But we have $\sigma$-finiteness (cf. \autoref{dfn:sigma-finite}) so there exist $(A_k)_{k\in\N} \subset \sa,\ (B_k)_{k\in \N} \subset \borel$ with $A_k \uparrow X,\ B_k \uparrow Y$ and $\mu(A_k), \nu(B_k) < \infty,\ \forall k \in \N$. Thus, we might use continuity from below to state
+	\begin{align*}
+		\mu \times \nu (A \times \N)
+		&= \mu \times \nu( (A \times N) \cap (X \times Y))\\
+		&= \mu \times \nu( (A \times N) \cap \lim_{k\to\infty} (A_k \times B_k))\\
+		&\overset{\ref{thm:prop-measures}}{=} \lim_{k\to\infty} \mu \times \nu ( (A \times N) \cap (A_k \times B_k))\\
+		&= \lim_{k\to\infty} \mu \times \nu ( (A \cap A_k) \times (N \cap B_k))\\
+		&= \lim_{k\to \infty} \underbrace{\mu (A \cap A_k)}_{< \infty} \underbrace{\nu(N \cap B_k)}_{= 0} \\
+		&= \lim_{k \to \infty} \mu(A \cap A_k) \cdot 0 = 0
+	\end{align*}
+\end{proof}
 
 Now we show an alternative construction of the $n$-dimensional Lebesgue measure to the one we did after \autoref{thm:caratheodory}.
 
@@ -76,19 +176,47 @@ Now we show an alternative construction of the $n$-dimensional Lebesgue measure 
 	\end{align*}
 \end{cor}
 
+\section{Integrals with respect to product measures}
+
+In this section we will basically repeat chapters \ref{chp:non-negative-integrals} and \ref{chp:integrals} at lightning speed.
+
+The following theorem is basically \autoref{thm:existence-product-measure} but for non-negative measurable functions. It allows us to calculate the integral with respect to the product measure building upon simple integrals.
+
 \begin{thm}[Tonelli]
+	\label{thm:tonelli}
 	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two $\sigma$-finite measure spaces. Let $u : X \times Y \to [0,\infty]$ be an $\sa \otimes \borel$ measurable function. Then
-	
-	\begin{align}
-		\int_{X\times Y} u d(\mu \times v)
-		= \int_Y \int_X u(x, y) d\mu(x) d\nu(y)
-		= \int_X \int_Y u(x, y) d\nu(y) d\mu(x)
+	\begin{enumerate}
+		\item $x \mapsto u(x, y)$ and $y \mapsto u(x, y)$ are measurable for a fixed $y$, resp. $x$.
+		\item $x \mapsto \int_Y u(x, y) d\nu(y), y\mapsto \int_X u(x, y) d\mu(x)$ are measurable
+		\item 
+		\begin{align}
+		\int_{X\times Y} u d(\mu \times v)\\
+		= &\int_Y \int_X u(x, y) d\mu(x) d\nu(y)\\
+		= &\int_X \int_Y u(x, y) d\nu(y) d\mu(x)
 		\in [0, \infty].
-	\end{align}
+		\end{align}
+	\end{enumerate}	
 \end{thm}
 
+\begin{proof}
+	The proof is standard. Approximate $u$ by a sequence of simple functions
+	\begin{align*}
+		f_n(x, y) = \sum_{j = 0}^{N(n)} \alpha_j^n \ind_{A_j^n}(x, y).
+	\end{align*}
+	By linearity of the integral and \autoref{thm:existence-product-measure} we have that
+	\begin{align*}
+		x \mapsto f_n(x, y),\ y \mapsto f_n(x, y),\ x \mapsto \int_Y f_n(x, y) d\mu(y),\ y \mapsto \int_X f_n(x, y) d\mu(x)
+	\end{align*}
+	are all measurable. The standard Beppo-Lévi argument shows that 1. and 2. are true. For 3. we do the same but applying Beppo-Lévi multiple times.
+\end{proof}
+
+What Tonelli's last statement implies is that even though the integrals may be infinite, they still make sense, i.e. they are not undefined.
+
+Next, we move on to another theorem which is basically the same as Tonelli's but which guarantees integrability and can be used on non non-negative functions.
+
 \begin{thm}[Fubini]
-	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two $\sigma$-finite measure spaces. Let $u : X \times Y \to [0,\infty]$ be an $\sa \otimes \borel$ measurable function. If at least one of the three integrals
+	\label{thm:fubini}
+	Let $(X, \sa, \mu)$ and $(Y, \borel, \nu)$ be two $\sigma$-finite measure spaces. Let $u : X \times Y \to \Rb$ be an $\sa \otimes \borel$ measurable function. If at least one of the three integrals
 	\begin{align*}
 		\int_{X\times Y} u d(\mu \times v)
 		,\ \int_Y \int_X u(x, y) d\mu(x) d\nu(y)
@@ -109,3 +237,91 @@ Now we show an alternative construction of the $n$-dimensional Lebesgue measure 
 	\end{enumerate}
 \end{thm}
 
+
+\section{Application: distribution functions}
+
+Let $(X, \sa, \mu)$ be a $\sigma$-finite measure space and $u \in \calM^+(\sa)$. Define $F : \R \to [0, \infty]$ by
+\begin{align}
+	F(t) = \mu(\{u \geq t\}) = \mu(\inv{u}([t, \infty])).
+\end{align}
+
+\begin{lem}
+	If $u \in \calL^1$ then $F$ is left-continuous.
+\end{lem}
+
+\begin{proof}
+	We want to show that if $(t_n)_{n\in\N} \subset (0, \infty)$ is a sequence increasing towards $t \in (0, \infty)$ then $\lim_{n\to\infty} F(t_n) = F(t)$. Observe that $F(t_n) = \{u \geq t_n\} \downarrow \{u \geq t\} = F(t)$. Since $u \in \calL^1$, using Markov's inequality we have that
+	\begin{align*}
+		\mu(\{u \geq t_1\})
+		\overset{\ref{thm:markov-inequality}}{\leq} \frac{1}{t_1} \int \abs{u} d\mu < \infty.
+	\end{align*}
+	So we are in a position to apply continuity of measures. Then,
+	\begin{align*}
+		\lim_{n\to\infty} F(t_n)
+		= \lim_{n\to\infty} \mu(\{u \geq t_n\})
+		\overset{\ref{thm:prop-measures}}{=} \mu( \lim_{n\to\infty} \{u \geq t_n\})
+		= \mu(\{u \geq t\}) = F(t).
+	\end{align*}
+	So $F$ is left-continuous.
+\end{proof}
+
+The next theorem is very handy because it allows us to transform any $\mu$-integral into a Lebesgue integral.
+
+\begin{thm}
+	Let $(X, \sa, \mu)$ be a $\sigma$-finite measure space and $u: X \to [0, \infty])$ an $\sa$-measurable function. Then,
+	\begin{align}
+		\int u d\mu = \int_{(0, \infty)} \mu(\{u \geq t\}) d\lambda(t) \in [0, \infty].
+	\end{align}
+\end{thm}
+
+I had a lot of trouble understanding this proof because it all seemed like happy ideas to me. Below is a very step by step approach, for a more direct one, but equal in essence, see \cite[p. 146]{schilling2017} or the handwritten lecture notes for chapter 14.
+
+\begin{proof}
+	For this proof, we will use Tonelli's theorem (\autoref{thm:tonelli}). The main idea is to rewrite the integral in terms of another function but first we need to come up with that other function and then to check that it fulfils the requirements of Tonelli's theorem.
+	
+	\begin{enumerate}
+		\item First observe that $u(x) = u(x) - 0 = \lambda^1([0, u(x)])$. This gives us the idea to write
+		\begin{align*}
+			\int u(x) d\mu(x)
+			= \int \lambda^1([0, u(x)]) d\mu(x)
+			= \iint \ind_{[0, u(x)]}(t)d\lambda^1(t)d\mu(x).
+		\end{align*}
+		
+		\item Not the previous integral looks more like somewhere where we would apply Tonelli's theorem. We can continue transforming the integrand to get
+		\begin{align*}
+			\ind_{[0, u(x)]}(t)
+			= \ind_{\{t \in [0, \infty) \mid t \leq u(x)\}}(t)
+			= \ind_{\{x \in X \mid u(x) \geq t\}}(x).
+		\end{align*}
+		
+		\item In any case, the previous indicator function depends both on $t \in [0, \infty)$ and $x \in X$. For it to be a candidate for Tonelli's theorem we need to verify that it is measurable. In particular, the integrand has to be $\sa \otimes \borel([0, \infty))/\borel(\R^2)$-measurable, i.e. a $\sa \otimes \borel([0, \infty))$-measurable function.
+		
+		\item Since the integrand is an indicator function, it is sufficient to prove that the interval in question is $\sa \otimes \borel([0, \infty))$-measurable. For that, we rewrite the integrand as $\ind_E(x, t)$ where
+		\begin{align*}
+			E := \{(x, t) \mid u(x) \geq t\},
+		\end{align*}
+		and hence
+		\begin{align*}
+			\ind_E(x, t)
+			= \ind_{\{t \in [0, \infty) \mid t \leq u(x)\}}(t)
+			= \ind_{\{x \in X \mid u(x) \geq t\}}(x).
+		\end{align*}
+		
+		To prove that $E$ is $\sa \otimes \borel([0, \infty))$-measurable we define the function $U: X \times [0,\infty] \to \R^2$ by $U(x, t) := (u(x), t)$. We can see that $U$ is measurable from
+		\begin{align*}
+			\inv{U}(A \times I) = \inv{u}(A) \times I \in \sa \times \borel([0,\infty)),
+		\end{align*}
+		where $A \in \sa$ and $I \in \borel([0\infty))$. So in particular, $E = \inv{U}(\{u(x) \geq t\}) \in \sa \otimes \borel([0, \infty))$, i.e. $E$ is measurable and thus $\ind_E(x, t)$ also is.
+		\item Finally, we are ready to apply Tonelli's theorem
+		\begin{align*}
+			\int u(x) d\mu(x)
+			&= \int \lambda^1([0,u(x)])d\mu(x) \\
+			&= \iint \ind_{[0, u(x)]}(t)d\lambda^1(t)d\mu(x) \\
+			&= \iint \ind_E(x, t) d\lambda^1(t)d\mu(x)\\
+			&\overset{\ref{thm:tonelli}}{=} \iint \ind_E(x,t) d\mu(x) d\lambda^1(t) \\
+			&= \iint \ind_{\{x \in X \mid u(x) \geq t\}}(x)d\mu(x) d\lambda^1(t)\\
+			&= \int \mu(\{x \in X \mid u(x) \geq t\}) d\lambda^1(t)\\
+			&= \int \mu(\{u \geq t\})d\lambda^1(t).
+		\end{align*}
+	\end{enumerate}
+\end{proof}
