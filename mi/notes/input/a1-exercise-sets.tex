@@ -514,7 +514,7 @@ Due October 25th, 2019.
 \end{proof}
 
 
-\section{Practice Mid-Term, 2019-2020.}
+\section{Practice mid-term 2019-2020}
 
 \begin{ex}
 	Let $(X, \sa)$ be a measure space such that $\sa = \sigma(\calG)$ where $\calG$ is a collection of subsets of $X$ such that $\emptyset \in \calG$. Show that for any $A \in \sa$ there exists a countable collection $\calG_A \subseteq \calG$ such that $A \in \sigma(\calG_A)$.
@@ -672,3 +672,148 @@ Due October 25th, 2019.
 		= \int fd\nu
 	\end{multline*}
 \end{proof}
+
+\section{Practice final 2019-2020}
+
+\begin{ex}
+	Consider the measure space $([1, \infty), \borel([1, \infty)), \lambda)$ where $\borel([1,\infty])$ is the Borel \siga and $\lambda$ is the Lebesgue measure restricted to $[1, \infty)$. Show that
+	\begin{align*}
+		\lim_{n\to\infty} \int \frac{n \sin (x/n)}{x^3}d\lambda(x) = 1.
+	\end{align*}
+	(Hint: $\lim_{n\to\infty} \sin(x)/x = 1$).
+\end{ex}
+
+\begin{proof}
+	Since it is not clear how we would go about directly evaluating the Lebesgue integral, let us check if we can use the Riemann integral to calculate the value. Let $f_n(x) = \frac{n \sin (x/n)}{x^3}$. Recall from \autoref{cor:improper-riemann} that if $\rint_1^\N \abs{f_n(x)} d(x) < \infty$ for all $N \in \N$ then $\rint_1^\infty f_n(x) dx = \int_{[1, \infty)} f_n(x) d\lambda(x)$. So first, we show that $f_n$ is Riemann integrable from $1$ to $N$ for any $N$. We have that $\sin y \leq y$ for any $y \geq 0$ so
+	\begin{align*}
+		\abs{f_n(x)} = \abs{\frac{n \sin (x/n)}{x^3}} \leq \frac{n \cdot (x/n)}{x^3} = \frac{1}{x^2},\ \forall x \in [1, \infty)
+	\end{align*}
+	and thus
+	\begin{align*}
+		\rint_1^N \abs{f_n(x)} dx \leq \rint_1^\infty \frac{1}{x^2} = 1 < \infty,\ \forall N \in \N.
+	\end{align*}
+	So far, we have proven that for each $n \in \N$, $f_n \in \calL^1$. Moreover, by using the hint we get that
+	\begin{align*}
+		\lim_{n\to\infty} f_n(x)
+		= \lim_{n\to\infty} \frac{\sin(x/n)}{x^2 \cdot (x/n)}
+		= \frac{1}{x^2}\lim_{n\to\infty} \frac{\sin(x/n)}{x/n}
+		= \frac{1}{x^2}.
+	\end{align*}
+	
+	We reuse the argument from before to show that $\forall n \in \N$, $f_n(x) \leq \frac{1}{x^2}$. We do this to get a function $w \in \calL^1$ such that $\abs{f_n} \leq w,\ \forall n \in \N$. We are now in a position to apply Lebesgue's Dominated Convergence theorem (cf. \autoref{thm:lebesgue-dominated-convergence}). With no further ado,
+	\begin{align*}
+		\lim_{n\to\infty} \int_{[1, \infty)} \frac{n \sin(x/n)}{x^3}d\lambda(x)
+		&\overset{\ref{thm:lebesgue-dominated-convergence}}{=} \int_{[1, \infty)} \lim_{n\to\infty} \frac{n\sin(x/n)}{x^3}d\lambda(x)\\
+		&= \int_{[1,\infty)} \frac{1}{x^2}d\lambda(x)\\
+		&\overset{\ref{cor:improper-riemann}}{=} \rint_1^\infty \frac{1}{x^2}dx = 1.
+	\end{align*}
+\end{proof}
+
+\begin{ex}
+	Consider $(\R, \borel(\R), \lambda)$ where $\borel(\R)$ is the Borel \siga and $\lambda$ is the one-dimensional Lebesgue measure.
+	\begin{enumerate}
+		\item Prove that for $f\in \calL^1(\lambda)$ and $n\in \Z$ one has
+		\begin{align*}
+			\int_{[0,1]} f(x + n)d\lambda(x) = \int_{[n, n + 1]}f(x) d\lambda(x).
+		\end{align*}
+		\item Let $f \in \calL^1(\lambda)$ and define $g(x) = \ind_{[0, 1]} \sum_{n\in \Z} f(x + n)$. Prove that $g\in \calL^1(\lambda)$ and that
+		\begin{align*}
+			\int_\R g(x) d\lambda(x) = \int_\R f(x) d\lambda(x).
+		\end{align*}
+	\end{enumerate}
+\end{ex}
+
+This exercise is not too difficult but it is very technical and we have to be careful that we choose the correct theorem for each step and that its hypotheses are met.
+
+\begin{proof}$ $\newline
+	\begin{enumerate}
+		\item At first, one might be tempted to split $f = f^+ - f^-$, approximate by increasing sequences simple functions and go all the way back to the definition of the integral for simple functions. Even though this is possible, it might as well make one go nuts with the indices. Therefore, we use a standard argument in this course: prove it first for indicator functions, then for $f \in \calE^+$, then for $f \in \calM^+$, and finally for $f \in \calL^1$.
+		\begin{enumerate}
+			\item Let $f = \ind_A$ where $A \in \borel(\R)$. Then,
+			\begin{align*}
+				\int_{[0,1]} f(x + n) d\lambda (x)
+				&= \int \ind_{[0,1]}(x) \cdot \ind_A(x + n) d\lambda(x)\\
+				&= \int \ind_{[0,1]}(x) \cdot \ind_{A - n}(x)d\lambda(x)\\
+				&= \int \ind_{[0,1] \cap (A - n)}(x) d\lambda(x)\\
+				&= \lambda([0,1] \cap (A - n)).
+			\end{align*}
+			We can now use that the Lebesgue measure is translation invariant to get
+			\begin{align*}
+				\lambda([0,1] \cap (A - n))
+				= \lambda(([0,1] + n) \cap A)
+				= \lambda([n, n+1], \cap A),
+			\end{align*}
+			and therefore
+			\begin{align*}
+				\int_{[0,1]}f (x + n)
+				&= \lambda([n, n + 1] \cap A)\\
+				&= \int_{[n, n +1]} \ind_A(x)d\lambda(x)\\
+				&= \int_{[n, n+1]} f(x)d\lambda(x).
+			\end{align*}
+			
+			\item Now let $f(x) = \sum_{j=0}^N a_j \ind_{A_j}(x) \in \calE^+(\borel(\R))$. We have
+			\begin{align*}
+				\int_{[0,1]} f(x + n) d\lambda(x)
+				&= \int_{[0,1]} \sum_{j = 0}^N a_j \ind_{A_j}(x + n)d\lambda(x)\\
+				&= \sum_{j = 0}^N a_j \int_{[0,1]} \ind_{A_j}(x + n)d\lambda(x)\\
+				&= \sum_{j = 0}^N a_j \int_{[n, n+1]} \ind_{A_j}(x) d\lambda(x)\\
+				&= \int_{[n, n+1]} \sum_{j = 0}^N a_j \ind_{A_j}(x) d\lambda(x)\\
+				&= \int_{[n, n+1]} f(x)d\lambda(x).
+			\end{align*}
+			
+			\item Next let $f \in \calM^+(\borel(\R))$. By the Sombrero lemma (\autoref{thm:sombrero}) we have that there exists an increasing sequence of non-negative simple functions $(f_j)_{j\in\N} \subset \calE^+$ such that $f_j \uparrow f$. Thus, using Beppo-Lévi we get
+			\begin{align*}
+				\int_{[0,1]} f(x+n)d\lambda(x)
+				&= \int_{[0,1]} \sup_{j \in \N} f_j(x+n)d\lambda(x)\\
+				&\overset{\ref{thm:beppo-levi}}{=} \sup_{j\in\N} \int_{[0,1]} f_j(x + n)d\lambda(x)\\
+				&= \sup_{j\in\N} \int_{[n, n+1]} f_j(x) d\lambda(x)\\
+				&\overset{\ref{thm:beppo-levi}}{=} \int_{[n, n+1]} \sup_{j \in \N} f_j(x) d\lambda(x)
+				&= \int_{[n, n+1]} f(x) d\lambda(x).
+			\end{align*}
+			
+			\item Finally let $f\in \calL^1(\lambda)$. Then $f = f^+ - f^-$ with $f^+,\ f^- \in \calM^+(\borel(\R))$ and therefore
+			\begin{align*}
+				\int_{[0,1]} f(x + n)d\lambda(x)
+				&= \int_{[0,1]}f^+(x + n)d\lambda(x) - \int_{[0,1]}f^-(x + n)d\lambda(x)\\
+				&= \int_{[n, n+1]} f^+(x)d\lambda(x) - \int_{[n, n+1]}f^-(x) d\lambda(x)\\
+				&= \int_{[n, n+1]} f(x)d\lambda(x).
+			\end{align*}
+		\end{enumerate}
+	
+		\item First we prove that $g \in \calL^1(\lambda)$. To be extra precise, we can rewrite
+		\begin{align*}
+			g(x) = \sum_{n\in\N} g_n(x),\ g_n(x) = \ind_{[0,1]}\cdot f(x+ n) + \ind_{[0,1]} f(x - n).
+		\end{align*}
+		Notice how we have changed the summation index to make it easier for us to apply \autoref{cor:integral-countable-sum} and we will use it just for that. Keep in mind that this theorem only works for non-negative functions, so we will use $\abs{g}$ to check integrability:
+		\begin{align*}
+			\int_\R \abs{g(x)} d\lambda(x)
+			&= \int_\R \abs{\sum_{n\in\N} g_n(x)}d\lambda(x)\\
+			&\overset{\ref{cor:minkowski-seq}}{\leq} \int_\R \sum_{n\in\N} \abs{g_n(x)}d\lambda(x)\\
+			&\overset{\ref{cor:integral-countable-sum}}{=} \sum_{n\in\N} \int_\R \abs{g_n(x)} d\lambda(x)\\
+			&\overset{\ref{thm:minkowski}}{\leq} \sum_{n\in\Z} \int_\R \ind_{[0,1]}\cdot f(x + n) d\lambda(x)\\
+			&= \sum_{n\in\Z} \int_{[0,1]} f(x + n)d\lambda(x)\\
+			&= \sum_{n\in\Z} \int_{[n, n+1]} f(x) d\lambda(x)\\
+			&= \int_\R f(x) d\lambda(x) <\infty,
+		\end{align*}
+		where we have used the generalised Minkowski inequality twice, first in its infinite form and second in the standard one, when changing the summation index back to $\Z$. Thus, $\abs{g} \in \calL^1(\lambda) \implies u \in \calL^1(\lambda)$.
+		
+		Finally we check the equality. As we have seen that $g \in \calL^1$ we now have an integrable bound for [the absolute value of] our sequence $\sum_{n\in\N} g_n(x)$ so we can apply Lebesgue Dominated Convergence to get
+		\begin{align*}
+			\int_\R g(x) d\lambda(x)
+			&= \int_\R \sum_{n\in\N} g_n(x) d\lambda(x)\\
+			&\overset{\ref{thm:lebesgue-dominated-convergence}}{=} \sum_{n\in\N} \int_\R g_n(x)d\lambda(x)\\
+			&= \sum_{n\in\Z} \int_{[0,1]} f(x + n)d\lambda(x)\\
+			&= \sum_{n\in\Z} \int_{[n, n+1]} f(x) d\lambda(x)\\
+			&= \int_\R f(x) d\lambda(x),
+		\end{align*}
+		where we have used the previous part.
+	\end{enumerate}
+\end{proof}
+
+\section{Mid-term 2019-2020}
+
+The exam took place on Friday, October 11 and we had two hours to complete it.
+
+\section{Final 2019-2020}
+
+The exam took place on Wednesday, November 6 and we had three hours to complete it.

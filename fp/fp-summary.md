@@ -26,9 +26,80 @@ An expression is in WHNF if any of the following are true:
 3. The expression is a **function applied to too few arguments**.
 
 
-# Monads
+# Higher-kinded abstractions
 
-## Do notation
+## Functor
+
+```haskell
+class Functor m where
+  fmap :: (a -> b) -> f a -> f b
+```
+
+- Generalisation of `map` for arbitrary containers
+- **Examples:**
+  - `[]` (List) where `fmap = map`,
+  - `Maybe` where `fmap ≠ mapMaybe`, but rather `fmap f Nothing = Nothing, fmap
+      f (Just x) = f x`, and
+  - `IO` where `fmap` comes from the `IO` Monad.
+- There is an alias for `fmap` namely `<$>`, e.g. `map (+1) [1..3] == (+1) <$>
+    [1..3]`.
+
+### Functor laws
+
+```haskell
+fmap id = id`
+fmap (f . g) = fmap f . fmap g`
+```
+
+## Aplicative
+
+```haskell
+class Functor f => Applicative f where
+  pure :: a -> f a
+  <*>  :: f (a -> b) -> f a -> f b
+```
+
+- Sometimes called *Applicative functor*
+- Found in the `Control.Applicative` module.
+- **Examples:**
+  - `Maybe`
+  - `List`
+  - `IO`
+- `liftA2 :: (Applicative f) => (a -> b -> c) -> f a -> f b -> f c` takes a
+    binary function an *lifts* it to a function that operates on two functors.
+
+## Monoid
+
+```haskell
+class Monoid a where
+  mempty  :: a
+  mappend :: a -> a -> a
+  mconcat :: [a] -> a
+  mconcat = foldr mconcat mempty
+```
+
+- We often write `mappend` using infix notation with `<>`.
+
+### Monoid laws
+
+```haskell
+-- mempty is the identity element for <>
+mempty <> x = x
+x <> mempty = x
+
+-- The <> operator is left and right associative
+(x <> y) <> z = x <> (y <> z)
+```
+
+## Monad
+
+```haskell
+class Functor m => Monad m where
+  (>>=)  :: m a -> (a -> m b) -> m b
+  return :: a -> m a
+```
+
+### Do notation
 
 - Remember that each do block maps to a monad, and some monads don't do what we
   intuitively think they do. Consider
@@ -38,9 +109,13 @@ An expression is in WHNF if any of the following are true:
             s <- ['a', 'b']
             return (f, s)
 
-    a == [(1, 'a'), (2, 'b')]
+    a == [(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b')]
     ```
 
     where the list monad comes into place (think of **list comprehensions** in
     this case).
 
+
+### Aplicative
+
+### Traversable

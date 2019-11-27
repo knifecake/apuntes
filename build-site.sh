@@ -47,6 +47,11 @@ mkdir -p docs/dist/mi
 make -C mi/notes
 cp mi/notes/*.pdf docs/dist/mi/
 
+# MM
+mkdir -p docs/dist/mm
+make -C mm/notes
+cp mm/notes/*.pdf docs/dist/mm/
+
 # IA
 mkdir -p docs/dist/fp
 make -C fp

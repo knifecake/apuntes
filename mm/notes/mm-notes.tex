@@ -1,0 +1,150 @@
+\documentclass[a4paper]{book}
+
+%\usepackage[utf-8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{dirtytalk}
+
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{thmtools}
+
+% inkscape figures
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+% \pdfsuppresswarningpagegroup=1
+
+\usepackage[hidelinks, backref]{hyperref}
+\hypersetup{
+  pdftitle={Notes on Mathematical Modelling},
+	pdfauthor={Elias Hernandis},
+	pdfpagemode=UseOutlines,
+	bookmarksnumbered
+}
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+shaded={
+	margin=8pt,
+	bgcolor=White,
+	rulecolor=Black,
+	rulewidth=1pt
+}]{mythm}
+
+
+\declaretheoremstyle[
+bodyfont=\normalfont,
+spacebelow=1em,
+spaceabove=1em,
+]{myeg}
+
+% DEFINICIONES DE ENTORNOS DE TEOREMAS
+\declaretheorem[
+name=Theorem,
+refname={theorem,theorems},
+Refname={Theorem,Theorems},
+style=mythm,
+numberwithin=chapter
+]{thm}
+
+\declaretheorem[
+name=Lemma,
+refname={lemma,lemmas},
+Refname={Lemma,Lemmas},
+style=myeg,
+sibling=thm
+]{lem}
+
+\declaretheorem[
+name=Remark,
+refname={remark,remarks},
+Refname={Remark,Remarks},
+style=myeg,
+sibling=thm
+]{remark}
+
+\declaretheorem[
+name=Corollary,
+refname={corollary,corollaries},
+Refname={Corollary,Corollaries},
+style=myeg,
+sibling=thm
+]{cor}
+
+
+\declaretheorem[
+name=Definition,
+refname={definition,definitions},
+Refname={Definition,Definitions},
+style=mydfn,
+sibling=thm
+]{dfn}
+
+\declaretheorem[
+name=Example,
+refname={example,examples},
+Refname={Example,Examples},
+style=myeg,
+sibling=thm
+]{eg}
+
+\declaretheorem[
+name=Exercise,
+refname={exercise,exercises},
+Refname={Exercise,Exercises},
+style=myeg,
+numberwithin=section
+]{ex}
+
+
+
+\renewcommand{\complement}{c}
+\newcommand{\abs}[1]{\left\vert{#1}\right\vert}
+\newcommand{\norm}[1]{\left\Vert{#1}\right\Vert}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tif}{&\text{ if }}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\sgn}{\text{sgn}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\author{Elias Hernandis}
+\title{Notes on Mathematical Modelling}
+
+\begin{document}
+	\maketitle
+	
+	\section{Acknowledgements}
+	
+  These notes are based on the lectures of Carolin Kreisbeck
+  (c.kreisbeck@uu.nl) during Fall of 2019 at Universiteit Utrecht. The lectures
+  were intended to serve as a preparation for the reading of the texbook of the
+  course \cite{eck2017mathematical}.
+	
+	Readers are asked to report errata to eliashernandis@gmail.com.
+	
+	
+	\tableofcontents
+
+  \input{input/01-tools.tex}
+  \input{input/02-linear-systems.tex}
+  \input{input/03-odes.tex}
+	
+	
+	% \listoftheorems[ignore={dfn,ex,eg,remark,lem,cor}]
+	
+	\bibliographystyle{IEEEtran}
+	\bibliography{IEEEabrv,mm-notes}
+\end{document}

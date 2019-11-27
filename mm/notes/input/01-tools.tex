@@ -1,0 +1,215 @@
+\chapter{Basic tools for mathematical modelling}
+
+Teaching for this chapter started on Monday, 2019.11.11 (week 46a) and ended on
+Monday, 2019.11.18. This chapter corresponds to part of chapter 1 in
+\cite{eck2017mathematical}.
+
+In this introductory chapter we will introduce the mindset that we should have
+when trying to \textbf{translate a specific problem} from the natural sciences,
+the social sciences or technology into a \textbf{well-defined mathematical
+problem}\footnote{This is the definition of \textit{mathematical modelling}
+given in \cite[p.  1]{eck2017mathematical} with Kreisbeck's emphasis.}.
+
+TODO: some context and general pointers would probably look good here.
+
+\section{Case study: population dynamics}
+
+Suppose we want to model the change in population (i.e. number of individuals)
+in an environment over a period of time. First thing we need is to make some
+assumptions about what's really happening here. We might, for example, make the
+following assumptions\footnote{Stolen from \cite{kreisbeck2019slides}.}
+
+\begin{enumerate}
+  \item growth rate independent of population size (unlimited growth possible,
+    neglecting e.g. limited resources)
+
+  \item growth rate independent of time (neglecting time-dependence due to e.g.
+    influence of enemies, economical or cultural changes)
+
+  \item population within closed systems (neglecting e.g. migration)
+
+  \item assuming an equal distribution of male and female, age distribution not
+    considered
+
+  \item continuous model with non-integer solutions (idealization reasonable
+    for very large populations, for small populations stochastic effects have
+    to be taken into account)
+\end{enumerate}
+
+After this, we name the quantities that intervene in our problem. We will use
+$t$ for time, $x(t)$ for the number of individuals (population) at time $t$ and
+$\frac{dx}{dt}(t)$ or $x'(t)$ for the rate of change in population. To model
+the change we introduce the quantities
+\begin{itemize}
+  \item $b(t, \Delta t)$ for the increase of population during the time
+    interval $(t, \Delta t)$, and
+  \item $d(t, \Delta t)$ for the decrease of population during the time
+    interval $(t, \Delta t)$.
+\end{itemize}
+
+Therefore the population at time $t + \Delta t$ is given by
+\[
+  x(t + \Delta t) = x(t) + b(t, \Delta t) - d(t, \Delta t).
+\]
+That $\Delta t$ desperately wants us to take the limit as $\Delta t \to 0$ and
+so we do
+\[
+  \lim_{\Delta t \to 0} \frac{x(t + \Delta t) - x(\Delta t)}{\Delta t}
+  = \lim_{\Delta t \to 0} \frac{b(t, \Delta t)}{\Delta t} - \lim_{\Delta t \to 0} \frac{d(t, \Delta t)}{\Delta t}.
+\]
+
+Note that here we're assuming the limit really does exist, which is quite a big
+assumption\ldots\ Rename,
+\[
+  B(t) = \lim_{\Delta t \to 0} \frac{b(t, \Delta t)}{\Delta t} \text{ and }
+  D(t) = \lim_{\Delta t \to 0} \frac{d(t, \Delta t)}{\Delta t}
+\]
+and use the definition of derivative to get
+\[
+  \frac{dx}{dt}(t) = x'(t) = B(t) - D(t)
+\]
+where $B(t)$ and $D(t)$ being the rates at which the population increasing,
+resp. decreases at time $t$. Recall that we assumed that the rates of change in
+the population were independent of time and population size. This is equivalent
+to saying that $B(t)$ and $D(t)$ are really constants which gives us the final
+model
+\[
+  x'(t) = \beta - \delta \implies x(t) = (\beta - \delta)t.
+\]
+The previous is a not-particularly-interesting ODE with solution\footnote{For
+help with solving differential equations see \cite{math24}.}
+\[
+  x(t) = (\beta - \delta)x + C.
+\]
+
+This model has a lot of shortcomings, first of all, it does not account for the
+size of the population in the rates of change. But, one might argue that the
+more individuals there are in a population the greater the rates of change are.
+We can go back and restate assumption one as \say{population increase, resp.
+decrease in the time interval $(t, \Delta t)$ is directly proportional to the
+population at time $t$ and the time passed}.  This in turn gives us
+\[
+  b(t, \Delta t) = \beta x(t) \Delta t \text{ and }
+  d(t, \Delta t) = \delta x(t) \Delta t.
+\]
+Taking the limit as before leads us to the model
+\[
+  x'(t) = (\beta - \delta)x(t) = px(t).
+\]
+From now on, we shall let $p = \beta - \delta$ since we don't really need to
+distinguish between changes in the population because of births and deaths---we
+just care about the overall evolution of the population. This is another ODE,
+this time a bit more interesting, with solution
+\[
+  x(t) = C e^{p t}.
+\]
+
+Although a bit better, you can probably see that this model explodes as time
+passes since it does not include any provisions for when the population turns
+stupidly large. Anyhow, it is common enough that it deserves its own name: the
+\textbf{exponential growth model}.
+
+A small step in the right direction would be to account for a population limit
+in the system, i.e. number of individuals that flips the rate of growth. More
+precisely, let's change assumption one to \say{there is a number $x_M$ that is
+  the maximum population in the system (sometimes called the \textit{carrying
+capacity} and that the rate of change in population $p(x(t))$ is positive if
+$x(t) > x_M$ and negative if $x(t) > x_M$}. The easiest way to model this is
+with a linear ansatz for $p(x)$, i.e. something of the form $p(x) = q(x_M - x)$
+with a parameter\footnote{The meaning of $q$ is a bit more complex to explain,
+but at heart it is just a proportionality constant.} $q > 0$. Notice how
+\[
+  \begin{cases}
+    p(x) > 0 \tif x < x_M,\text{ and } \\
+    p(x) < 0 \tif x > x_M
+  \end{cases}
+  .
+\]
+Plugging this into our previous model to get
+\[
+  x'(t) = q(x_M - x(t))x(t) = q x_M x(t) - q x^2(t),
+\]
+which is our final model for now and is called the
+\textbf{logistic growth model}
+
+This ODE can be solved exactly and the solution is
+\[
+  x(t) = \frac{x_M x_0}{x_0 + (x_M - x_0) e^{- x_M q (t - t_0)}},
+\]
+where $t_0$ is the initial time and $x_0 = x(t_0)$ is the initial population.
+
+
+\begin{figure}
+  [h]
+  \incfig{logistic-growth-model}
+
+  \caption{Solutions for the three iterations of the model, for different
+  values for the parameters on each version.}
+\end{figure}
+
+We'll stop here for now, but keep in mind that we're missing the second half of
+the solution---we still need to apply this models to the real world. This means
+\textit{fitting} those curves to the specific problem at hand, in this case,
+getting some data (at least two data points) to calculate the constants that
+are present in our solutions. Also, recall that we made a lot of assumptions,
+there are more population dynamics models that account for changes in the
+environment, migrations, etc.
+
+
+
+\section{Dimensional analysis and non-dimensionalisation}
+
+The previous models had two or three parameters each, but as we work our way to
+more complex examples the number of parameters will increase. Moving around all
+those constants is cumbersome and draws our attention away from really
+understanding the problem at hand. In addition, as we apply our models to
+specific problems we will need to take into account the units of the quantities
+we are dealing with.
+
+\subsection{Dimensional analysis}
+
+In addition to being a prerequisite to doing non-dimensionalisation,
+dimensional analysis provides a sanity check for us to \textit{make sure we're
+not adding apples to oranges}. When coming up with a model, we generally need
+to specify the \textit{physical dimension} of the quantities involved, but not
+necessarily want to specify the particular units that quantity is expressed in.
+For this we will denote by $[c]$ the physical dimension of a quantity $c$. For
+example if $t$ denotes time, when we write $[t]$ we mean the \textit{dimension
+of time} or \textit{some units of time} but do not specify which.
+
+Revisiting our population model we can define the characteristic units
+\[
+  T := \text{ time },\qquad \text{ and } \qquad N := \# \text{ of individuals }
+\]
+so that we get the following dimensions for the involved quantities
+\[
+  [t] = T,\ [x(t)] = N,\ [x'(t)] = \frac{N}{T}.
+\]
+
+We can also do this for the parameters by solving for them in the equation for
+the model\footnote{Notice how $[x_M - x] = N$ and not something weird like $N -
+N = 0$, since when you subtract apples from apples you still get apples.}
+\[
+  [x_M] = N,\ [t_0] = T,\ [x_0] = N,\ 
+  [q] = \frac{[x']}{[x_M - x][x]} = \frac{N / T}{N \cdot N} = \frac{1}{T}. 
+\]
+
+\subsection{Non-dimensionalisation}
+
+Once we know the physical units of all involved quantities in our model we are
+ready to choose actual units for our model. For instance, for time we might
+choose years, days or hours but most of the time it is better to choose
+appropriate units for our problem. Non-dimensionalisation\footnote{Yes, this is
+an accepted spelling although not very common in the literature.} is a recipe
+for choosing the most appropriate units.
+
+From the dimensional analysis of our population dynamics examples we now that
+there are two physical dimensions and therefore we will choose two
+characteristic quantities $\overline{t}$ and $\overline{x}$.
+
+\subsection{Non-dimensionalisation when there are several options. The
+projectile problem.}
+
+\section{Asymptotic expansion method}
+
+\subsection{Error estimation}
