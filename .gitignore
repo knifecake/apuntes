@@ -10,6 +10,8 @@
 *.blg
 *.loe
 
+.ipynb_checkpoints/
+*.pdf_tex
 *.pdf
 *.html
 !docs/*.html
