@@ -87,7 +87,7 @@ sibling=thm
 name=Definition,
 refname={definition,definitions},
 Refname={Definition,Definitions},
-style=mydfn,
+style=myeg,
 sibling=thm
 ]{dfn}
 
@@ -119,6 +119,12 @@ numberwithin=section
 \newcommand{\inv}[1]{{#1}^{-1}}
 \newcommand{\sgn}{\text{sgn}}
 \renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calI}{\mathcal{I}}
+\DeclareMathOperator{\argmin}{argmin}
+\newcommand{\0}{\mathbf{0}}
+\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\ddx}{\frac{d}{dx}}
 
 \author{Elias Hernandis}
 \title{Notes on Mathematical Modelling}
@@ -141,6 +147,7 @@ numberwithin=section
   \input{input/01-tools.tex}
   \input{input/02-linear-systems.tex}
   \input{input/03-odes.tex}
+  \input{input/04-variations.tex}
 	
 	
 	% \listoftheorems[ignore={dfn,ex,eg,remark,lem,cor}]

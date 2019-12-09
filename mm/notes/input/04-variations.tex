@@ -1,0 +1,279 @@
+\chapter{Calculus of variations}
+
+\begin{dfn}
+  [Variational problem]
+
+  Let $X$ be a real vector space (of functions, possibly infinite dimensional),
+  $\calA \subset X$ a set of admisible functions and $\calI : X \to \R$ a
+  functional that assigns a real number for each $u \in X$.
+
+  A variational problem is the task
+  \[
+    \text{minimise } \calI(u),\quad u \in \calA.
+  \]
+\end{dfn}
+
+In particular we are concerned with variational problems of integral form, i.e.
+those where
+\begin{align}
+  \label{eq:cv-integral}
+  \calI(u) = \int_a^b f(x, u(x), u'(x))dx,
+\end{align}
+where $u : [a, b] \to \R^m$ and $f: [a,b] \times \R^m \times \R^m \to \R$.
+
+As mathematicians, we are immediately concerned about the exitence and
+uniqueness of solutions. Until 1850, it was thought that minimisers for
+integral problems always existed but Weierstrass gave a counter example. From
+that moment on, a new theory for solving variational problems, now known as the
+direct method was developed. In this section we will mostly concentrate on the
+classical method for finding minimisers which basically replicates the process
+of finding minima for functions in vector calculus. The reason for this is that
+a formal treatment of the direct method requires advanced mathematical tools
+from functional analysis, which is not a prerequisite for this course.
+
+\section{The classical method}
+
+This method was developed by Euler and Lagrange during the 18th century. The
+strategy for dealing with variational problems of the form
+\eqref{eq:cv-integral} is to just go ahead and find the minima of the function
+$\calI(u)$. For this, let us recall the approach taken in vector calculus to minimise a function $f: \R^m \to \R^n$.
+\begin{enumerate}
+  \item Find $\overline{x} \in \R^m$ such that $Df(\overline{x}) = \0$,
+  \item Find $D^2f(\overline{x})$, and
+  \item Check that $D^2f(\overline{x})$ is positive definite.
+\end{enumerate}
+
+The problem with this strategy is that we don't know if $Df$ or $D^2f$ will
+exist for our functional $f = \calI$. Therefore, we will introduce a weaker
+notion of derivative, the variation, which is easier to work with in the
+context of these problems.
+
+\begin{dfn}
+  [Admissible perturbation]
+
+  Let $X$ and $\calA$ be a function space and a set of admissible functions,
+  resp. Let $u \in \calA$. For any $\varphi \in X$ we say $\varphi$ is an
+  admissible perturvation of $u$ iff there exists a $\varepsilon_0 > 0$ such
+  that
+  \[
+    u + \varepsilon \varphi \in A,\quad \text{ for every } \varepsilon \in
+    (-\varepsilon_0, \varepsilon_0).
+  \]
+\end{dfn}
+
+
+\begin{dfn}
+  [Variation]
+
+  Let $X = \{ f : A \to B \}$ be a function space, $u, \varphi \in X$ and $x
+  \in A$. We define the variation of $u$ at $a$ in the direction of $\varphi$
+  as
+  \begin{align}
+    \label{eq:variation}
+    \delta u(a)(\varphi) = \left. \frac{d}{d\varepsilon}\right|_{\varepsilon =
+    0} u(a + \varepsilon \phi).
+  \end{align}
+\end{dfn}
+
+
+\section{Exercises}
+
+\begin{ex}
+  [Dido's problem]
+
+  Let $L > 0$ be a given length. We consider the maximisation problem
+  \[
+    \text{maximise } \int_0^L u(s)\sqrt{1 - u'(s)^2}ds, \text{ for } u \in \calA,
+  \]
+  where $\calA = \{C^1((0, L)) \cap C^0([0, L]) : u(0) = 0, u(L) = 0,
+  \abs{u'(s)} \text{ for } s \in (0, L)\}$, which emerges from modeling Dido's
+  problem.
+
+  \begin{enumerate}
+    \item Determine the corresponding Euler-Lagrange equation and find a
+      non-negative solution $\overline{u} \in \calA \cap C^2((0, L))$.
+    \item Sketch the curve $\{(\varphi(s), \overline{u}(s)) : s \in [0, L]\}$
+      with $\varphi(s) = \int_0^s \sqrt{1 - \overline{u}'(\tau)}d\tau$ for $s
+      \in [0, L]$.
+    \item Interpret b) in the context of Dido's problem.
+  \end{enumerate}
+
+  \textit{Hint for a):} \footnote{In the original statement for this problem,
+  the hint was only a simple implication, but by proving it one realised that
+it was a double implication.}Prove and use the following statement: Let $a, b
+\in \R$ with $a < b,\ u \in C^2((a, b))$ and $f \in C^2(\R \times \R)$ such
+that $\partial_p f(u, u') \in C^1(a, b)$. Then
+  \[
+    \ddx \partial_p f(u, u') = \partial_z f(u, u')\text{ in } (a, b)
+  \]
+  if, and only if, there exists $c \in \R$ such that
+  \[
+    f(u, u') - u' \partial_p f(u, u') = c\text{ in } (a, b).
+  \]
+\end{ex}
+
+\begin{proof}
+  [Proof of the hint]
+  Not very precise but something along the lines of
+  \begin{align*}
+         & \ddx \partial_p f(u, u') = \partial_z f(u, u') \\
+    \iff & \partial_z f(u, u') - \ddx \partial_p f(u, u') = 0 \\
+    \iff & \int \partial_z f(u, u') - \int \ddx \partial_p f(u, u') = \int 0 \\
+    \iff & f(u, u') - u' \partial_p f(u, u') = c.
+  \end{align*}
+
+  Or, with derivatives,
+  \begin{align*}
+    & f(u, u') - u'\partial_p f(u, u') = c \\
+    \iff & \ddx f(u, u') - \ddx u' \partial_p f(u, u') = \ddx c \\
+    \iff & \partial_z f(u, u') u' + \partial_p f(u, u')u'' - u'' \partial_z f(u, u') - u' \ddx \partial_p f(u, u') = 0 \\
+    \iff &u' \left( \partial_z f(u, u') - \ddx \partial_p f(u, u')\right) = 0.
+  \end{align*}
+  In this case, if $u' \neq 0$ we have
+  \[
+  \partial_z f(u, u') - \ddx \partial_p f(u, u') = 0 \iff
+  \ddx \partial_p f(u, u') = \partial_z f(u, u').
+  \]
+  Otherwise, we go back to the original equation
+  \[
+    f(u, u') - 0 \partial_p f(u, u') = c \iff  f(u, u') = c
+  \]
+  which means that $f$ is constant in $u$ and therefore in $x$ so it is trivial to see that
+  \[
+    \partial_p f(u, u') = 0 = \partial_z f(u, u'),
+  \]
+  which gives the first equation.
+\end{proof}
+
+
+\begin{proof}
+  For the purposes of determining the Euler-Lagrange equation we have $x = s,\
+  z = u(x),\ p = u'(s)$ and $f(x, z, p) = z\sqrt{1 - p^2}$. The involved
+  partial derivatives are
+  \[
+    \partial_z f(x, z, p) = \sqrt{1 - p^2} \text{ and }
+    \partial_p f(x, z, p) = - \frac{zp}{\sqrt{1 - p^2}},
+  \]
+  and thus the Euler-Lagrange equation becomes
+  \[
+    \ddx \frac{- u u'}{\sqrt{1 - u'^2}} = \sqrt{1 - u'^2}.
+  \]
+  This looks complicated so we apply the hint:
+  \begin{align*}
+    & u\sqrt{1 - u'^2} + u' \frac{uu'}{\sqrt{1 - u'^2}} = c \\
+    \iff & u \left( \sqrt{1 - u'^2} + \frac{u'^2}{\sqrt{1 - u'^2}}\right) = c \\
+    \iff & u \left( \frac{1 - u'^2 + u'^2}{\sqrt{1 - u'^2}}\right) = c \\
+    \iff & u = c\sqrt{1 - u'^2} \\
+    \iff & u' = \sqrt{1 - \left( \frac{u}{c} \right)^2}.
+  \end{align*}
+  That last equation desperately screams for separation of variables and a trigonometric change of variable:
+  \begin{align*}
+    & \frac{du}{ds} = \sqrt{1 - \left( \frac{u}{c} \right)^2} \\
+    \iff &\frac{du}{\sqrt{1 - (u/c)^2}} = ds \\
+    \iff & \int \frac{1}{\sqrt{1 - (u/c)^2}} du = \int ds.
+  \end{align*}
+  Change $u / c = \sin y \implies u = c\sin y \implies du = c\cos y dy$ to get
+  \begin{align*}
+    \int \frac{1}{\sqrt{1 - (u/c)^2}} du
+  & = \int \frac{1}{1 - \sin^2 y} c \cos y dy \\
+  &= c \int \frac{\cos y}{\cos y} dy = cy \\
+  &= c\arcsin\frac{u}{c}
+  \end{align*}
+  Plugging it back into the hint,
+  \[
+    s + k = c\arcsin\frac{u}{c} \implies u(s) = c\sin \frac{k+s}{c},
+  \]
+  which we rewrite picking different constants,
+  \[
+    u(s) = k_1 \sin( k_2 s + k_3),
+  \]
+  where the constants $k_1, k_2, k_3$ are obtained by enforcing $u \in \calA$.
+  More specifically, we require
+  \[
+    u(0) = 0 \implies k_3 = 0\text{ and } u(L) = 0 \implies k_2 L = n\pi.
+  \]
+  Moreover, we require $u$ to be non-negative, therefore $n = 1$ and thus $k_2
+  = \frac{\pi}{L}$ (otherwise the sine would go negative). Finally, we want
+  \[
+    \abs{u'(s)} < 1 \implies \abs{k_1\cos(k_2s + k_3) k_2} < 1
+    \implies k_1 k_2 < 1 \implies k_1 < \frac{L}{\pi},
+  \]
+  since we require that $k_1$ is positive so that $u(s)$ also is. This final
+  parameter is fixed by maximising $\calI(u)$:
+
+  TODO
+\end{proof}
+
+
+\begin{ex}
+  [Geodesics in $\R^2$]
+
+  Let $A$ and $B$ be two points in the plane. What is the shortest connection between $A$ and $B$?
+
+  \begin{enumerate}
+    \item Set up the variational problem to model the situation.
+    \item Solve the problem and interpret the result.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  Let $X = C^1([0,1]; \R^2)$ and $\calA = \{ u \in X \mid u(0) = A,\ u(1) =
+  B\}$. We define our functional $\calI$ as the length of the parametrised
+  curve $u$ as follows
+  \[
+    \calI(u) = \int_0^1 \norm{u'(t)} dt.
+  \]
+  Our variational problem is
+  \[
+    \text{minimise } \calI(u) \text{ for } u \in \calA.
+  \]
+
+  To solve it we use the Euler-Langrange method. We have $f(t, u(t), u'(t) =
+  \norm{u'(t)}$ and, in the form of the Euler-Langrange equations, we get $f(x,
+  z, p) = \norm{p}$. Therefore,
+  \[
+    \delta_z f = 
+    \begin{pmatrix}
+      0 & 0
+    \end{pmatrix}
+    \text{ and } \delta_p f =
+    \begin{pmatrix}
+      \frac{p_1}{\norm{p}} & \frac{p_2}{\norm{p}}
+    \end{pmatrix}.
+  \]
+  Notice how $p = u' : [0, 1] \to \R^2$ so by $\delta_p f$ we really mean the
+  last two numbers in $Df$ (which is a row matrix since $f$ is real valued). We
+  arrive at the following Euler-Lagrange equation
+  \[
+    \ddt \delta_p f = \delta_z \iff \ddt
+    \begin{pmatrix}
+      \frac{u_1}{\norm{u}} & \frac{u_2}{\norm{u}} 
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      0 & 0
+    \end{pmatrix}.
+  \]
+  Instead of taking the derivative with respect to $t$, we may simply rewrite
+  this as
+  \[
+  \begin{pmatrix}
+    \frac{u_1}{\norm{u}} & \frac{u_2}{\norm{u}}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    c_1 & c_2
+  \end{pmatrix},
+  \]
+  where $c_1, c_2 \in \R$ are constants.
+
+  Therefore
+  \[
+    u(t) = \int u'(t) dt = (c_1 t, c_2 t) + u_0,\ u_0 \in \R^2,
+  \]
+  which is a parametrisation for a curve. The parameters $c_1, c_2$ and $u_0$
+  are determined by enforcing $u \in \calA$:
+  \[
+    u(0) = u_0 = A,\ u(1) = (c_1, c_2)  + u_0 = B.
+  \]
+\end{proof}
