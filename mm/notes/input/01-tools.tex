@@ -213,3 +213,378 @@ projectile problem.}
 \section{Asymptotic expansion method}
 
 \subsection{Error estimation}
+
+\section{Exercises}
+
+\begin{ex}
+  [Recap, part a]
+
+  Solve the IVP
+  \[
+  \begin{cases}
+    y'(t) = \frac{2t}{y(t) - 1} ,\ t > 0 \\
+    y(0) = 2
+  \end{cases}
+  \]
+\end{ex}
+
+\begin{proof}
+  We ommit the $t$ in $y(t)$ and just write $y = y(t)$ for short.
+  Via separation of variables we get
+  \[
+    (y - 1)y' = 2t. 
+  \]
+  Integrating on both sides with respect to $t$ we get,
+  \[
+    \int (y - 1) y'\ dt = \int 2t\ dt
+  \]
+  and with the rule for substitution on integrals we rewrite it as
+  \[
+    \int (y - 1)\ dy = \int 2t\ dt.
+  \]
+  Solving the integrals we arrive at the equality
+  \[
+  \frac{y^2}{2} - y = t^2 + c
+  \]
+  and solving for $y$ yields
+  \[
+    y_\pm = 1 \pm \sqrt{1 - 2(t^2 +c)}.
+  \]
+  Substituting the initial condition $y(0) = 2$ we get
+  \[
+    1 \pm \sqrt{1 - 2c} = 2
+  \]
+  which can only be satisfied with $y_+$ and picking $c = 0$. Therefore, the
+  final solution to the IVP is
+  \[
+   y(t) = 1 + \sqrt{1 - 2t^2}.
+  \]
+\end{proof}
+
+
+\begin{ex}
+  [Recap, part b]
+
+  Compute the solution to the second-order IVP
+  \[
+  \begin{cases}
+    y''(t) = y(t) + e^t,\ t > 0,\\
+    y(0) = 1,\ y'(0) = 1.
+  \end{cases}
+  \]
+\end{ex}
+
+\begin{proof}$ $ \newline
+  \begin{enumerate}
+    \item Step 1: we find the general solution $y_h$ to the homogeneous ODE
+      $y'' = y$. It follows from setting the characteristic polynomial
+      $P(\lambda) = \lambda^2 - 1 = 0 \iff \lambda = \pm 1$. Therefore,
+      \[
+        y_h(t) = c_1 e^t + c_2 e^{-t}.
+      \]
+    \item Step 2: we find a particular solution $y_p(t)$ to the ODE $y'' = y +
+      e^t$. One way to do it is with the method of indeterminate coefficients.
+      We need a solution wich is independent from the homogeneous solution
+      $y_h(t)$ so we make the ansatz
+      \[
+        y_p(t) = a t e^t.
+      \]
+      Computing the first and second derivatives of $y_p(t)$ and substituting
+      them into the original ODE (without boundary conditions) yields the
+      equality
+      \[
+      ae^t + ae^t + ate^t = ate^t + e^t \implies a = \frac{1}{2}.
+      \]
+    \item Step 3: the solution to the IVP is given by
+      \[
+        y(t) = y_h(t) + y_p(t) = c_1e^t + c_2e^{-t} + \frac{1}{2} e^t.
+      \]
+      Pluging in the initial values for $y$ and $y'$ we arrive at the system of
+      linear equations
+      \[
+      \begin{cases}
+        c_1 + c_2 = 1\\
+        c_1 - c_2 + \frac{1}{2} = 1
+      \end{cases}
+      \iff
+      \begin{cases}
+        c_1 = \frac{3}{4} \\
+        c_2 = \frac{1}{4}.
+      \end{cases}
+      \]
+      Therefore, the solution to the IVP is given by the function
+      \[
+        y(t) = \frac{3}{4} e^t + \frac{1}{4} e^{-t} + \frac{1}{2} t e^t.
+      \]
+  \end{enumerate}
+  
+\end{proof}
+
+
+\begin{ex}
+  [1.4]
+  We consider the model of limited growth of populations
+  \[
+    x'(t) = qx_M x(t) - q x^2(t),\ x(0) = x_0.
+  \]
+  \begin{enumerate}
+    \item Nondimensionalize the model using appropriate units for $t$ and $x$.
+      Which possibilities exist?
+    \item What nondimensionalization is appropriate for $x_0 \ll x_M$ ($x_0$
+      "much smaller than" $x_M$) in the sense that omitting small terms leads
+      to a reasonable model?
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  The two main involved quantities in this model are $t$ with dimension $T$ and
+  $x(t)$ with dimension $N$. We make the following change of variables:
+  \[
+    \tau = \frac{t}{\overline{t}}, \qquad
+    y(\tau) = \frac{x(t) - x_0}{\overline{x}} = \frac{x(\tau \overline{t}) - x_0}{\overline{x}}.
+  \]
+  We solve for $x(t)$ and $x'(t)$ to be able to plug $y(\tau)$ into the model:
+  \[
+    x(t) = y(\tau)\overline{x} + x_0,\\
+    x^2(t) = y^2(\tau)\overline{x}^2 + x_0^2 + 2x_0\overline{x}y(\tau), \\
+    x'(t) = \ddt \left( \overline{x}y(\tau) - x_0\right) = \overline{x} y'(\tau) \cdot \frac{1}{\overline{t}}.
+  \]
+  Therefore,
+  \[
+  \frac{\overline{x}}{\overline{t}}y'(\tau) =
+  qx_M \left(\overline{x}y(\tau) + x_0\right)
+  - q\left(\overline{x}^2y'(\tau) + x_0^2 + 2x_0\overline{x}y(\tau)\right),
+  \]
+  or, equivalently,
+  \[
+    y'(\tau) = qx_M \overline{t} y(\tau) +
+    qx_M \frac{\overline{t}}{\overline{x}} x_0
+    - q \overline{t} \overline{x} y^t(\tau)
+    - 2q x_0 \overline{t} y(\tau).
+  \]
+  As for the inital conditions we get
+  \[
+    y(0) = \frac{x(0 \cdot \overline{t}) - x_0}{\overline{x}} = 0
+  \]
+  as expected, because of the way we chose the change $y(\tau)$.
+
+  There are many possibilities for the choice of $\overline{t}$ and
+  $\overline{x}$. We will not discuss the now, but rather wait until part be.
+  For an example of a detailed discussion without making extra assumptions see
+  \autoref{ex:1.6}.
+
+  If we make the assumption that $x_0$ is very small, we may discard some terms
+  in the above nondimensionalised model to get
+  \[
+    \begin{cases}
+      y'(\tau) = qx_M \overline{t} y(\tau) - q \overline{t} \overline{x} y^2(\tau), \\
+      y(0) = 0.
+    \end{cases}
+  \]
+  In this case, setting the cofficients for the function $y$ to equal $0$ we
+  get the system
+  \[
+  \begin{cases}
+    qx_M \overline{t} = 1, \\
+    x\overline{t} \overline{x} = 1
+  \end{cases}
+  \iff
+  \begin{cases}
+    \overline{t} = \frac{1}{q x_M}, \\
+    \overline{x} = \frac{x_M}{\overline{t}}.
+  \end{cases}
+  \]
+  In this case there is only this posibility, since we have two restrictions on
+  two characteristic quantities.
+  
+\end{proof}
+
+\begin{ex}
+  \textit{(Nondimensionalization, scale analysis)} A body of mass $m$ is thrown
+  upwards in a vertical direction from the Earth’s surface with a velocity $v$.
+  The air resistance is supposed to be taken into account by Stokes' law $F_R =
+  -cv$ for the flow resistance in viscous fluids, which is reasonable for small
+  velocities. Here $c$ is a coefficient depending on the shape and the size of
+  the body. The motion is supposed to depend on the mass $m$, the velocity $v$,
+  the gravitational acceleration $g$ and the friction coefficient $c$ with
+  dimension $[c] = M/T$.
+
+  \begin{enumerate}
+    \item Determine the possible dimensionless parameters and reference values
+      for height and time.
+    \item The initial value problem for the height is assumed to take the form
+      \[
+      m x'' = c x' = -m g,\qquad x(0) = 0,\qquad x'(0) = v.
+      \]
+      Nondimensionalize the differential equation. Again different
+      possibilities are available.
+    \item Discuss the different possibilities of a reduced model if $\beta :=
+      cv / (m g)$ is small.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  TODO
+\end{proof}
+
+
+
+\begin{ex}
+  [1.6]
+  \label{ex:1.6}
+
+  A model for the vertical throw on the Earth taking into account the air
+  resistance is given by
+  \[
+    mx''(t) = -mg  - c\abs{x'(t)}x'(t),\ x(t_0) = 0, x'(t_0) = v_0.
+  \]
+  In this model the gravitational force is approximated by $F = -mg$, the air
+  resistance for a given velocity $v$ is described by $-c\abs{v}v$ with a
+  proportionality constant $c$ depending on the shape and size of the body and
+  the density of the air. This law is reasonable for high velocities.
+  \begin{enumerate}
+    \item Nondimensionalize the model. What possibilities exist?
+    \item Compute the maximal height of the throw for the data $m =
+      \SI{0.1}{kg},\ g = \SI{10}{m\per s^2},\ v_0 = \SI{10}{m \per s}, c =
+      \SI{0.01}{kg\per m}$ and compare the result with the corresponding result
+      for the model without air resistance.
+  \end{enumerate}
+  
+\end{ex}
+
+
+\begin{proof}
+  We make the change of variables
+  \[
+    \tau = \frac{t - t_0}{\overline{t}},\qquad
+    y = \frac{x}{\overline{x}}
+  \]
+  and plug it into the IVP to get
+  \[
+      y''(\tau) = - \frac{\overline{t}^2 g}{\overline{x}}
+        - \frac{c\overline{x}}{m} \abs{y'(\tau)} y'(\tau),\qquad
+      y(0) = 0,\qquad
+      y'(0) = \frac{\overline{t}}{\overline{x}} v_0.
+  \]
+  We would like as many coefficients as possible to equal 1 but we have 3
+  coefficients and 2 characteristic quantities so we will have to make a
+  compromise. There are three possibilities for the compromise:
+  \begin{enumerate}
+    \item Set $\frac{\overline{t}^2 g}{\overline{x}} = \frac{c\overline{x}}{m}
+      = 1$ and leave $\frac{\overline{t}}{\overline{x}} v_0$ as is, which would
+      yield $\overline{t} = \sqrt{\frac{m}{gc} },\ \overline{x} = \frac{m}{c} $, and
+      \[
+        y'' = -1 - \abs{y'}{y'},\qquad
+        y(0) = 0,\qquad
+        y'(0) = v_0\sqrt{\frac{c}{gm}}. 
+      \]
+    \item Set $\frac{\overline{t}^2 g}{\overline{x}} =
+      \overline{t}/\overline{x} v_0 = 1$ and leave $\frac{c\overline{x}}{m}$ as
+      is, which would yield $\overline{t} = \frac{v_0}{g},\ \overline{x} =
+      \frac{v_0^2}{g}$, and
+      \[
+        y'' = -1 - \frac{cv_0^2}{mg} - \abs{y'} y',\qquad
+        y(0) = 0,\qquad
+        y'(0) = 1.
+      \]
+    \item Set $\frac{c\overline{x}}{m} = \overline{t}/\overline{x} v_0 = 1$
+      and leave $\frac{\overline{t}^2 g}{\overline{x}}$ as is, which would
+      yield $\overline{t} = \frac{m}{c v_0}, \overline{x} = \frac{m}{c}$, and
+      \[
+        y'' = - \frac{mg}{cv_0^2} - \abs{y'} y,\qquad
+        y(0) = 0,\qquad
+        y'(0) = 1.
+      \]
+  \end{enumerate}
+
+  The second part is left to the reader.
+\end{proof}
+
+
+\begin{ex}
+  [1.8]
+  \textit{(Formal aymptotic expansion)}
+  \begin{enumerate}
+    \item For the initial value problem
+      \[
+        x''(t) + \varepsilon x'(t) = -1,\qquad
+        x(0) = 0,\qquad
+        x'(0) = 1
+      \]
+      compute the formal asymptotic expansion of the solution $x(t)$ up to the second order in $\varepsilon$.
+    \item Compute the formal asymptotic expansion for the instance of time $t^*
+      > 0$, for which $x(t^*) = 0$ holds true, up to first order in
+      $\varepsilon$, by substituting the series expansion $t^* \sim t_0 +
+      \varepsilon t_1 + O(\varepsilon^2)$ into the approximation obtained for
+      $x$ leading to a determination of $t_0$ and $t_1$.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{ex}
+  [1.9]
+
+  A model already nondimensionalised for the vertical throw with \textit{small}
+  air resistance is given by
+  \[
+    x''(t) = -1 - \varepsilon(x'(t))^2,\qquad
+    x(0) = 0,\qquad
+    x'(0) = 1.
+  \]
+  The model describes the throw up to the maximal height.
+
+  \begin{enumerate}
+    \item Compute the first two coefficientes $x_0(t)$ and $x_1(t)$ in the asymptotic expansion
+      \[
+        x(t) = x_0(t) + \varepsilon x_1(t) + \varepsilon^2 x_2(t) + \dots
+      \]
+      for small $\varepsilon$.
+    \item Compute the maximal height of the throw up to terms of order
+      $\varepsilon$ using asymptotic expansion.
+    \item Compare the results from 2. for the data of \autoref{ex:1.6} with the
+      exact result and the result neglecting the air resistance.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{ex}
+  [1.10]
+
+  \textit{(Multiscale approach)} The function $y(t)$ is supposed to solve the initial value problem
+  \[
+    y''(t) + 2 \varepsilon y'(t) + (1 + \varepsilon^2)y(t) = 0,\qquad
+    y(0) = 0,\qquad
+    y'(0) = 1,
+  \]
+  for $t > 0$ and a small parameter $\varepsilon > 0$.
+  \begin{enumerate}
+    \item Compute the approximation of the solution by means of formal
+      asymptotic expansion up to first order in $\varepsilon$.
+    \item Compare the function obtained in 1. with the exact solution
+      \[
+        y(t) = e^{-\varepsilon t} \sin t.
+      \]
+      For which times $t$ the approximation from 1. is good?
+    \item To get a better approximation one can try the approach
+      \[
+        y \sim y_0(t, \tau) + \varepsilon y_1(t, \tau) + \varepsilon^2 y_2(t, \tau) + \dots,
+      \]
+      here $\tau = \varepsilon t$ is a slow time scale.
+      Substitute this ansatz in the differential equation and compute $y_0$
+      such that the approximation becomes better.
+      \textit{Hint:} The equation of lowest order does not determine $y_0$
+      uniquely and coefficient functions in $\tau$ apper. Choose them in a
+      clever way such that $y_1$ is easily computable.
+  \end{enumerate}
+  
+\end{ex}
+
+
+
+

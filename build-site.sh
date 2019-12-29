@@ -52,7 +52,12 @@ mkdir -p docs/dist/mm
 make -C mm/notes
 cp mm/notes/*.pdf docs/dist/mm/
 
-# IA
+# FP
 mkdir -p docs/dist/fp
 make -C fp
 cp fp/*.pdf fp/*.html docs/dist/fp/
+
+# LC
+mkdir -p docs/dist/lc
+make -C lc
+cp lc/*.pdf lc/*.html docs/dist/lc/

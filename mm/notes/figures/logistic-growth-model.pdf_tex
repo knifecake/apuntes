@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{573.96365406bp}%
+    \setlength{\unitlength}{573.964bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,18 +48,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.23381904)%
+  \begin{picture}(1,0.234)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{logistic-growth-model.pdf}}%
-    \put(0.64211137,0.15408806){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_M$}}}%
+    \put(0.642,0.154){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_M$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{logistic-growth-model.pdf}}%
-    \put(0.67174369,0.22323014){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
-    \put(0.97794432,0.04543622){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
+    \put(0.672,0.223){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
+    \put(0.978,0.045){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{logistic-growth-model.pdf}}%
-    \put(0.32060071,0.22174853){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
-    \put(0.62235649,0.04395461){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
+    \put(0.321,0.222){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
+    \put(0.622,0.044){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{logistic-growth-model.pdf}}%
-    \put(-0.00115689,0.22273627){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
-    \put(0.3005989,0.04494236){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
+    \put(-0.001,0.223){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x(t)$}}}%
+    \put(0.301,0.045){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{logistic-growth-model.pdf}}%
   \end{picture}%
 \endgroup%
