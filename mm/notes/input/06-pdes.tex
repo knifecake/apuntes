@@ -1,0 +1,197 @@
+\chapter{Partial differential equations}
+
+Unlike with ODEs, there is no general theorem for existence, uniqueness or
+structure of solutions for PDEs. In this section we will classify some of the
+most common PDEs and try to give some results for each category that help solve
+them or gain some insight on how the solutions behave.
+
+\begin{dfn}
+  A partial differential equation or PDE is an identity of the form
+  \begin{equation}
+    \label{eq:pde}
+    F(D^k, \dots, D^2, \nabla u, u, x) = 0
+  \end{equation}
+  where
+  \begin{itemize}
+    \item $x \in \Omega \subset \R^n$ is the independent variable,
+    \item $u : \Omega \subset \R^n \to \R$ is the function we want to solve
+      \eqref{eq:pde} for,
+    \item TODO
+  \end{itemize}
+
+  TODO: comment about the order
+\end{dfn}
+
+
+\section{First-order partial differential equations}
+
+In general, first-order PDEs can be linear, semilinear, quasilinear or
+non-linear. An example of a non-linear equation is the TODO eq
+\[
+  \norm{\nabla u(x)} = 1.
+\]
+An example of a linear equation is the generic transport equation
+\[
+  \partial_t u(t, x) + \partial_x u(t, x) = 0.
+\]
+
+In general all but non-linear equations can be solved using the so called
+\textbf{method of characteristics} which exploits certain geometric properties
+to reduce the PDE to a system of ODEs.
+
+\subsection{Method of characteristics for linear partial differential equations}
+
+\section{Second-order partial differential equations}
+
+In this harder case, we will restrict ourselves to just linear equations.
+
+\begin{dfn}
+  [Second-order, linear PDE]
+
+  We say the identity
+  \begin{equation}
+    \label{eq:semilinear-2o}
+    \sum_{j, k = 1}^n a_{jk}(x) \partial_{x_j} \partial_{x_k} u(x)
+    + F(\nabla u(x), u(x), x) = 0
+  \end{equation}
+  with
+  \[
+    A(x) = \left( a_{jk}(x) \right)_{j, k = 1}^n \in \R^{n \times n} \text{ symmetric}
+  \]
+  is a linear second-order partial differential equation.
+\end{dfn}
+
+Note that the symmetricness of the matrix $A(x)$ comes from Schwarz's theorem
+for mixed derivatives.
+
+\begin{dfn}
+  Consider a semilinear second-order PDE of the form of
+  \eqref{eq:semilinear-2o}. For any $x \in \Omega$ we say
+  \eqref{eq:semilinear-2o} is
+  \begin{itemize}
+    \item \textbf{elliptic} at $x$ if all the eigenvalues of $A(x)$ are
+      non-zero and have the same sign,
+    \item \textbf{parabolic} at $x$ if $A(x)$ has the eigenvalue 0 with
+      multiplicity one and all other eigenvalues have the same sign, and
+    \item \textbf{hyperbolic} at $x$ if 0 is not an eigenvalue of $A(x)$ and
+      exactly $n - 1$ eigenvalues have the same sign.
+  \end{itemize}
+
+  If any of the previous contitions holds for every $x \in \Omega$ we say
+  \eqref{eq:semilinear-2o} is \textbf{globally} elliptic, resp. parabolic,
+  hyperbolic.
+\end{dfn}
+
+\begin{eg}
+  The Laplace equation $\Delta u(x) = 0$ is globally elliptic since
+  \[
+    \Delta u(x) = \sum_{i = 1}^n \partial^2_{x_i} u(x)
+    = \sum_{i = 1}^n 1 \partial_{x_i} \partial_{x_i} u(x)
+    \implies A(x) = \Id.
+  \]
+\end{eg}
+
+\begin{eg}
+  The heat equation $\partial_t u(t, x) - \Delta u(t, x) = 0$ is globally
+  parabolic since
+  \[
+    A(x) =
+    \left(
+      \begin{array}{c|ccc}
+        0 & 0 & \dots & 0 \\ \hline
+        0 & -1 & \dots & 0 \\
+        0 & 0 & \ddots & 0 \\
+        0 & 0 & \dots & -1
+      \end{array}
+    \right).
+  \]
+\end{eg}
+
+\begin{eg}
+  The wave equation $\partial^2_t u(t, x) - \Delta u(t, x) = 0$ is globally
+  hyperbolic since
+  \[
+    A(x) =
+    \left(
+      \begin{array}{c|ccc}
+        1 & 0 & \dots & 0 \\ \hline
+        0 & -1 & \dots & 0 \\
+        0 & 0 & \ddots & 0 \\
+        0 & 0 & \dots & -1
+      \end{array}
+    \right).
+  \]
+\end{eg}
+
+\subsection{Results for elliptic second-order partial differential equations}
+
+Since the elliptic is the simplest of the three categories, we will use the
+remaining time to give some results about two very important examples of these
+equations: the Laplace equation and the Poisson equation.
+
+\subsubsection{Fundamental solution to the Laplace equation}
+
+Recall that the Laplace equation is of the form
+\begin{equation}
+  \label{eq:pde-laplace}
+  \Delta u(x) = 0
+\end{equation}
+for some $u$ TODO.
+
+We make the ansatz $u(x) = w(\norm{x}) = w(r)$, i.e. we assume rotational
+symmetry of the solution. If this were the case then \eqref{eq:pde-laplace} becomes
+\[
+\Delta u
+\]
+
+\begin{dfn}
+  [Convolution product]
+
+  Given two functions $f, g : \Omega \subset \R^n \to \R$ we define the
+  convolution product of $f$ and $g$ as
+  \[
+    (f \ast g)(x) = \int_\Omega f(x - y) g(y) dy.
+  \]
+\end{dfn}
+
+That we name this weird thing product is not coincidental, as it shares some
+properties with the standard number product.
+
+\begin{thm}
+  [Properties of the convolution product]
+   Let $f, g : \Omega \subset \R^n \to \R$ be two functions. Then
+   \begin{enumerate}
+     \item (Conmutativity) $f \ast g = g \ast f$, and
+     \item (Linearity with respect to differentiation)
+       \[
+         \partial_{x_j}^k (f \ast g)
+         = (\partial_{x_j}^k f) \ast g
+         = f \ast ( \partial_{x_j}^k g).
+       \]
+   \end{enumerate}
+\end{thm}
+
+We will finish the course with two results about vector valued functions.
+
+\begin{thm}
+  Let $\Omega \subset \R^n$ and let $B_R(x) \subset \Omega$ be a ball with
+  radius $R > 0$ centered in $x \in \Omega$. If $u \in C^2(\Omega)$ is harmonic
+  then
+  \[
+    u(x)
+    = \frac{1}{\norm{\partial B_R(x)}} \int_{\partial B_R(x)} u(y) d s_y
+    = \frac{1}{\norm{B_R(x)}} \int_{B_R(x)} u(y) dy,
+  \]
+  where $\norm{\partial B_R(x)}$ denotes the hypersurface area of the boundary
+  of $B_R(x)$ and $\norm{B_R(x)}$ denotes the hypervolume of the ball $B_R(x)$.
+\end{thm}
+
+Note that in the previous theorem we have not inlined the well known formulas
+for the area and volume of a sphere as these only hold for $R^3$.
+
+
+TODO: other theorem or maximum principle.
+
+
+
+

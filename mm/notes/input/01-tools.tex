@@ -201,16 +201,208 @@ ready to choose actual units for our model. For instance, for time we might
 choose years, days or hours but most of the time it is better to choose
 appropriate units for our problem. Non-dimensionalisation\footnote{Yes, this is
 an accepted spelling although not very common in the literature.} is a recipe
-for choosing the most appropriate units.
+for choosing the most appropriate units, in the sense that we get the fewest
+parameters in our model. In essence, non-dimensionalisation is just a clever
+change of variables that leads to a simplification of a model. In this section
+we describe a general procedure to find such changes of variables.
 
-From the dimensional analysis of our population dynamics examples we now that
-there are two physical dimensions and therefore we will choose two
-characteristic quantities $\overline{t}$ and $\overline{x}$.
+
+Let us begin with an example. From the dimensional analysis of our population
+dynamics examples we now that there are two physical dimensions and therefore
+we will choose two characteristic quantities $\overline{t}$ and $\overline{x}$.
+We use these to set up the following change of variables.
+
 
 \subsection{Non-dimensionalisation when there are several options. The
 projectile problem.}
 
+We now turn our attention to another problem---predicting the trajectory of a
+projectile. We take inspiration from Newton's works, specifically in Newton's
+second law
+\[
+ F = m \cdot a,
+\]
+where $F$ is for force, $m$ for mass and $a$ is for acceleration, and in
+Newton's law of gravitation
+\[
+  F = - G \frac{M m}{(x + R)^2},
+\]
+where $G$ is the [empirical] gravitational constant, $M$ is the mas of the
+Earth, $m$ is the mass of the projectile, $x$ is the height of the projectile
+measured from the surface of the Earth and $R$ is the Earth's radius. Under the
+assumptions that there is no air resistance and that the Earth is a perfect
+sphere, where the mass is evenly distributed, Newton's law of gravitation is
+true. As is usual in physics parlance, we will introduce the quantity
+\[
+  g = \frac{G M}{R^2}
+\]
+which is the force experienced by an object on the Earth's surface per unit
+mass, i.e. the gravitational acceleration at sea level.
+
+This leads to the model
+\[
+  x''(t) = -G \frac{M}{(x + R)^2} = - \frac{g R^2}{(x + R^2)},\qquad
+  x(0) = 0,\qquad
+  x'(0) = v_0,
+\]
+where $v_0$ denotes the initial velocity.
+
+We will now try to non-dimensionalise it. The involved quantities have
+dimensions $T$ for time and $L$ for length. The dimensions of the given data
+are
+\[
+  [v_0] = L / T,\qquad [R] = L,\qquad [g] = L / T^2.
+\]
+The independent variable $t$ has dimension $[t] = T$ and the quantity we are
+after (height) has dimension $[x] = L$.
+
+We introduce the change of variables
+\[
+  \tau = \frac{t}{\overline{t}} \text{ and } y = \frac{x}{\overline{x}},
+\]
+where $\overline{t}$ and $\overline{x}$ are two characteristic quantities for
+time and length respectively and the new variables $\tau$ and $y$ are therefore
+dimensionless. The non-dimensionalised model is
+\[
+  y''(\tau) = - \frac{gR^2 \overline{t}^2}{\overline{x}((\overline{x}/R) \cdot y(\tau) + R)^2}, \qquad
+  y(0) = 0, \qquad
+  y'(0) = \frac{\overline{t}}{\overline{x}} v_0,
+\]
+or, equivalently,
+\[
+  y''(\tau) = - \frac{\overline{t}^2 g}{\overline{x}} \cdot \frac{1}{((\overline{x}/R)\cdot y(\tau) + 1)^2},\qquad
+  y(0) = 0, \qquad
+  y'(0) = \frac{\overline{t}}{\overline{x}} v_0,
+\]
+
+
+Now we want to choose $\overline{t}$ and $\overline{x}$ in such a way that as
+many of the appearing parameters as possible become equal to 1. Unfortunately,
+we have more parameters (3) than characteristic quantities (2), so we will need
+to make a compromise and only set two of the parameters equal to one
+(otherwise, the system of equations would have no solution). The three
+parameters are
+\[
+  p_1 = \frac{\overline{t}^2 g}{\overline{x}},\qquad
+  p_2 = \frac{\overline{x}}{R}\qquad\text{ and }\qquad
+  p_3 = \frac{\overline{t}}{\overline{x}} v_0.
+\]
+
+If we set $p_1 = p_2 = 1$ we get $\overline{t} = \sqrt{ R / g}$ and
+$\overline{x} = R$ and the model becomes
+\[
+  y''(\tau) = - \frac{1}{y(\tau) + 1)^2},\qquad y(0) = 0,\qquad y'(0) = \sqrt{\frac{1}{gR}}.
+\]
+If we set $p_1 = p_3 = 1$ we get $\overline{t} = v_0 / g$ and $\overline{x} =
+v_0^2 / g$ and the model becomes
+\[
+  y''(\tau) = - \frac{1}{(\frac{v_0^2}{gR} y(\tau) + 1)^2},\qquad
+  y(0) = 0,\qquad
+  y'(0) = 1.
+\]
+Finally, if we set $p_2 = p_3 = 1$ we get $\overline{t} = R / v_0$ and
+$\overline{x} = R$ and the model becomes
+\[
+  y''(\tau) = -\frac{R g}{v_0^2} \frac{1}{(y(\tau) + 1)^2},\qquad
+  y(0) = 0,\qquad
+  y'(0) = 1.
+\]
+
+Although all the formulations are mathematically equivalent, we may prefer a
+formulation over another because of the ease of interpretation of the model, or
+for other reasons related to the motivation behind the model. In addition to
+these qualitative considerations, in the next section we will introduce a
+technique which will require models where the formulation has some specific
+characteristics. Therefore, the requirements of the technique will dictate the
+choice of non-dimensionalisation.
+
+
 \section{Asymptotic expansion method}
+
+\subsection{Problems with small parameters}
+
+We will sometimes encounter models where the involvement of some quantity is
+very small but greatly complicates giving an answer to the question at hand. In
+those cases, we may be tempted to just approximate and disregard whatever part
+of the model has so little effect. Sometimes this situation will be inherent to
+the problem at hand but most of the time it will be due to our choice of
+quantities for the model, since in the former situation we normally disregard
+negligible effects when making the model assumptions.
+
+Consider the task of finding the real solutions to the equation
+\[
+x^5 + \varepsilon x - 1 = 0,
+\]
+where $\varepsilon \ll 1$. There is no explicit formula for 5-th order
+polynomial equations but we would be able to solve it easily if we approximated
+$\varepsilon \approx 0$. For demonstration purposes, lets say that we want to
+find the real roots to
+\[
+  \label{eq:asymptotic-ex}
+  x^2 + 2\varepsilon x  - 1 = 0.
+\]
+We use a second order degree equation because we want to show that the method
+we are about to introduce gives a lot of precision with little work. Also, we
+introduce a factor of two in the equation because it makes the solution nicer
+when we use the quadratic formula.
+
+Before moving on, let us introduce a couple of definitions.
+
+
+\begin{dfn}
+  [Asymptotic sequence]
+
+  A sequence $(\phi_n(\varepsilon))_{n\in \N}$ is called an asymptotic sequence
+  iff
+  \[
+    \phi_{n + 1}(\varepsilon) = o(\phi_n(\varepsilon)) \text{ as } \varepsilon \to 0.
+  \]
+\end{dfn}
+
+An example of an asymptotic sequence is $\phi_n(\varepsilon) = \varepsilon^n$.
+This special case is called the asymptotic sequence in powers of $\varepsilon$.
+
+\begin{dfn}
+  [Asymptotic expansion]
+
+  Let $(x_k)_{k \in \N}$ be any sequence and $(\varphi_n(\varepsilon))_{n\in
+  \N}$ be an asymptotic sequence. The series
+  \[
+    \sum_{k = 0}^N \phi_k (\varepsilon) x_k
+  \]
+  is called an asymptotic expansion of $x(\varepsilon)$ of the order $N \in \N
+  \cup \{ \infty \}$ with respect to the sequence
+  $(\varphi_n(\varepsilon))_{n\in
+  355   \N}$ if for $M = 0, \dots, N$ we have
+  \[
+    x(\varepsilon)  - \sum_{k = 0}^M \phi_k(\varepsilon) x_k
+    = o(\phi_M(\varepsilon)) \text{ as } \varepsilon \to 0.
+  \]
+\end{dfn}
+
+We will approximate the solution $x$ to the previous equation
+\eqref{eq:asymptotic-ex} with an asymptotic expansion of $x$ up to order $1$
+using powers of $\varepsilon$ as our asymptotic sequence. Formally, we write
+this as
+\[
+  x(\varepsilon) = x_0  + \varepsilon x_1 + O(\varepsilon^2).
+\]
+
+Plugging this into \eqref{eq:asymptotic-ex} we get
+\[
+  x_0^2 + 2\varepsilon x_0 x_1 + \varepsilon^2 x_1^2 +
+  2 \varepsilon (x_0 + \varepsilon x_1) - 1 = 0.
+\]
+Since we said we only care about terms up to order 2 we can discard those
+containing $\varepsilon^2$ and write
+\[
+  x_0^2 + 2\varepsilon x_0 x_1 + 2\varepsilon x_0 + O(\varepsilon^2) - 1 = 0.
+\]
+
+
+
+
+
 
 \subsection{Error estimation}
 
@@ -400,6 +592,8 @@ projectile problem.}
 \end{proof}
 
 \begin{ex}
+  [1.5]
+
   \textit{(Nondimensionalization, scale analysis)} A body of mass $m$ is thrown
   upwards in a vertical direction from the Earth’s surface with a velocity $v$.
   The air resistance is supposed to be taken into account by Stokes' law $F_R =
@@ -511,7 +705,8 @@ projectile problem.}
         x(0) = 0,\qquad
         x'(0) = 1
       \]
-      compute the formal asymptotic expansion of the solution $x(t)$ up to the second order in $\varepsilon$.
+      compute the formal asymptotic expansion of the solution $x(t)$ up to the
+      second order in $\varepsilon$.
     \item Compute the formal asymptotic expansion for the instance of time $t^*
       > 0$, for which $x(t^*) = 0$ holds true, up to first order in
       $\varepsilon$, by substituting the series expansion $t^* \sim t_0 +
@@ -521,7 +716,57 @@ projectile problem.}
 \end{ex}
 
 \begin{proof}
-  TODO
+  We make the ansatz
+  \[
+    x_\varepsilon(t) = x_0(t) + \varepsilon x_1(t) + \varepsilon^2 x_2(t)
+  \]
+  and plug it (we ommit the dependence on $t$ for brievity) into the IVP to get
+  \[
+  x_0'' + \varepsilon x_1'' + \varepsilon^2 x_2''
+  + \varepsilon \left( x_0' + \varepsilon x_1' + \varepsilon^2 x_2' \right)
+  + O(\varepsilon^3) = -1
+  \]
+  Collecting terms in $\varepsilon$ and discarding higher order terms yields
+  \[
+    \begin{cases}
+      O(\varepsilon^0): &x_0'' + 1 = 0 \\
+      O(\varepsilon^1): &x_1'' + x_0 = 0 \\
+      O(\varepsilon^2): &x_2'' + x_1' = 0
+    \end{cases}.
+  \]
+  For the first equation we integrate twice to get
+  \[
+    x_0(t) = - \iint 1\ dt = - \int t + c_1\ dt = - \frac{1}{2} t^2 + c_1t + c_0.
+  \]
+  Since we know $x(0) = 0$ and $x'(0) = 1$ we deduce the values of the
+  constants to get
+  \[
+    x_0(t) = - \frac{1}{2} t^2  + t.
+  \]
+  Plugging this into the second equation ($\varepsilon$ order 1) yields
+  \[
+    x_1''(t) = \frac{1}{2} t^2  - t.
+  \]
+  Integrating twice yields
+  \[
+    x_1(t) = \frac{1}{24} t^4 - \frac{1}{6} t^3 + c_1 t + c_0.
+  \]
+  Again, using the boundary conditions we find $c_1 = 9 / 8$ and $c_0 = 0$
+  and conclude
+  \[
+    x_1(t) = \frac{1}{24} t^4 - \frac{1}{6} t^3 + \frac{9}{8}  t.
+  \]
+  Plugging this into the third equation we get
+  \[
+    x_2''(t) = - \frac{1}{6} t^3 + \frac{1}{2} t^2 - \frac{9}{8} .
+  \]
+  Integrating twice yields
+  \[
+    x_2(t) = - \frac{1}{120} t^5 + \frac{1}{24} t^4 - \frac{9}{16} t^2 + c_1 t + c_0.
+  \]
+  Again, using the boundary conditions we find $c_1 = 127 / 240$ and $c_0 = 0$.
+
+  TODO something must be wrong here
 \end{proof}
 
 \begin{ex}
@@ -550,7 +795,31 @@ projectile problem.}
 \end{ex}
 
 \begin{proof}
-  TODO
+  Informally (i.e. without carrying the $O(\varepsilon^2)$ term around), we get
+  \[
+    x_0'' + \varepsilon x_1'' = -1 - \varepsilon( x_0' + \varepsilon x_1')^2.
+  \]
+  Collecting terms in $\varepsilon$ we get
+  \[
+    \begin{cases}
+      x_0'' + 1 = 0 \\
+      x_1'' - x_0'^2 = 0
+    \end{cases}.
+  \]
+  Solving the first equation together with the boundary conditions yields
+  \[
+    x_0(t) = - \frac{1}{2} t^2 + t.
+  \]
+  Plug $x_0$ into the second equation and use the boundary conditions to get
+  \[
+    x_1(t) = \frac{1}{12} t^4 - \frac{1}{3} t^3 + \frac{1}{2} t^2 + t.
+  \]
+
+  Therefore the solution is
+  \[
+    x_\varepsilon(t) = - \frac{1}{2} t^2 + t
+    + \varepsilon \left(\frac{1}{12} t^4 - \frac{1}{3} t^3 + \frac{1}{2} t^2 + t \right).
+  \]
 \end{proof}
 
 \begin{ex}
@@ -582,9 +851,10 @@ projectile problem.}
       uniquely and coefficient functions in $\tau$ apper. Choose them in a
       clever way such that $y_1$ is easily computable.
   \end{enumerate}
-  
 \end{ex}
 
 
-
+\begin{proof}
+  TODO
+\end{proof}
 

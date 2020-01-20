@@ -1,0 +1,252 @@
+\chapter{Continuum mechanics}
+
+This chapter deals with the physics of a very general body that we describe
+using calculus, hence the name continuum. The main assumption that we make to
+be able to do this is that the behaviour of a system can be described by
+averaging some characteristic quantities over the space it occupies, instead of
+computing every one of them for every atom or molecule, i.e. that the involved
+quantities in a problem are defined in a continuum. It turns out this
+assumption is pretty good and the models we will get closely describe what is
+happening in reality.
+
+\section{Frames of reference and coordinate systems}
+
+Before we begin we need a way to describe points in space. We will do this
+using the standard definitions and results of affine spaces that we get from
+linear algebra.
+
+\begin{dfn}
+  Let $\{e_1, \dots, e_n\}$ be an orthonormal basis for $R^n$ and let $O \in
+  \R^n$ be a point which we will call the origin. In the equation
+  \[
+    X = O + \sum_{i = 1}^n x_i e_i,
+  \]
+  we define $(x_1, \dots, x_n)$ to be the coordinates of the point $X$ with
+  respect to the origin $O$.
+\end{dfn}
+
+Notice how in the above definition we talked about points and not vectors when
+dealing with $X$ and $O$. The distinction is rather technical and can almost
+always be ignored but in short the deal is that points live in the affine space
+$\mathbb{A}^n_\R = (A, \R^n, f)$ while vectors live in $\R^n$. An affine space
+always comes with a function that maps points to vectors and is generally of
+the form
+\[
+  f : A \times A \to \R^n,\qquad (P, Q) \mapsto \overrightarrow{PQ},
+\]
+where $\overrightarrow{PQ}$ denotes the vector which starts at $P$ and ends at
+$Q$ that can be computed by treating $P$ and $Q$ as vectors in $\R^n$ and
+taking the difference. More details can be found in \cite{wikiaffine}.
+
+
+One important takeaway is the following lemma.
+
+\begin{lem}
+  Let $(O; e_1, \dots, e_n)$ and $(O^*, e_1^*, \dots, e_n^*)$ be two affine
+  coordinate systems and let $X$ be a point in $\mathbb{A}^n_\R$ defined in the
+  two coordinate systems, i.e.
+  \[
+    X = O + \sum_{i = 1}^n x_i e_i = O^* + \sum_{i = 1}^n x_i^* e_i^*,
+  \]
+  then there exists $a \in \R^n$ and $Q \in \R^{n\times n}$ orthogonal such that
+  \[
+    x^* = a  + Q x.
+  \]
+\end{lem}
+
+
+\section{Introduction and setup of continuum mechanics}
+
+\subsection{Lagrangian and Eulerian coordinate systems}
+
+Some of the problems we will focus on require us to describe the evolution of
+the shape of a body. We might do this by following the position of a point
+inside the body as time passes. To be precise, we choose an initial state or
+\textbf{reference configuration} $\Omega \subset \R^n$, which is normally the
+set of all points in space which are part of the body under consideration. Lets
+say that \textbf{material point} is called $X \in \Omega$. We can think of $X$
+as a way to pinpoint an atom in the body and lets assume that we can track it
+as time passes. We might describe its position with the function
+\[
+  x : \R \times \R^n \to \R^n,\qquad (t, X) \mapsto x(t, X).
+\]
+
+On the other hand, we may be interested in some other quantities, for instance
+the temperature at a point in the body. While it could be the case that we are
+interested in the temperature of a particular atom (even if that made sense), it
+is most likely that we are looking for the evolution of temperature at a fixed
+point in space. It could even be that we are dealing with a fluid and looking
+at individual atoms or molecules does not make sense. In both of this cases we
+are interested in a quantity $\varphi(t, x)$ where $x \in \R^n$. The choice of
+the letter $x$ for the physical point is not a coincidence since for a material
+point $X$ in the reference configuration we can get its position at time  $t$
+with $x(t, X)$ and therefore $\varphi(t, x) = \varphi(t, x(t, X))$.
+
+Let us formalise these concepts. We start by making suitable assumptions
+\begin{enumerate}
+  \item The material point $X$ is described by its position at some initial
+    time $t = t_0$ by the function $X = x(t_0, X)$.
+  \item The mapping $(t, X) \mapsto x(t, X)$ is continuously differentiable.
+  \item For all $t \geq t_0$, the mapping $x$ is invertible.
+  \item $x$ is orientation preserving, i.e. the matrix\footnote{The book
+      \cite[p. 207]{eck2017mathematical} calls the determinant of this matrix
+      the Jacobi determinant. In reality, $Jx$ is just the the differential
+      matrix $Dx$ only we omit the first row since we are interested in the
+      derivatives with respect to the coordinates of the material point $X$.
+      Notice how we say differential matrix since the Jacobian matrix is
+      guaranteed to exist and be the derivative because we asked for $x$ to be
+      continuously differentiable.}
+    \[
+      Jx(t, X)_{ij} = \left( \frac{\partial x_i}{\partial X_j} (t, X) \right)
+    \]
+    has a positive determinant for every $t \geq t_0$ and every $X \in \Omega$.
+\end{enumerate}
+
+The terms $x$ and $X$ represent two different types of coordinates\footnote{I
+tried to phrase this first part of the section as a standard
+definition-properties introductory section. However, these constructs are
+sometimes just notational conventions used by people who work with different
+branches of continuum mechanics and hence are not normally that clearly
+defined. One may take this section with a grain of salt and just make sure the
+math makes sense when dealing with equations on each coordinate system.}
+corresponding to the two ways of looking at a problem described before:
+\begin{itemize}
+  \item \textbf{Lagrangian coordinates} $X$ allow us to choose one material point and
+    follow its evolution, while
+  \item \textbf{Eulerian coordinates} $x$ relate to a fixed point in space.
+\end{itemize}
+
+In general, we will observe different material points at different times at
+point $x$ specified in Eulerian coordinates.
+
+\subsection{Analysis of relevant quantities in Lagrangian and Eulerian coordinate systems}
+
+Before we move on, let's take a moment to really formalise how the function $x$
+is defined and to look at how we might take the derivatives. In the book
+(\cite[p. 208]{eck2017mathematical}) we can find the following definition
+
+\begin{dfn}
+  [Material time derivative]
+
+  Let $\varphi : \R \times \R^3 \to \R$. We define the material time derivative
+  of $\varphi$ with respect to $t$ as
+  \[
+    D_t\varphi(t, x) = \partial_t \varphi(t, x) + \nabla \varphi(t, x) \cdot v(t, x),
+  \]
+  where $v(t, x) = \partial_t x(t, X(t, x))$.
+\end{dfn}
+
+To me, this did not make sense at all on the first reading. It also didn't make
+sense on the second, third, and $n$-th readings, for a substantially large $n$.
+What helped me understand it was to not take it as a definition, but to try to
+arrive at the same result with standard vector calculus results, i.e. the chain
+rule. In what follows I try to describe this to the best of my ability.
+
+Take any $X_0 \in \Omega$ and define $x_0(t) = x(t, X_0)$, i.e. fix the second
+parameter of the function $x(t, X)$ so that it describes the position of only
+one particular material point $X_0$. In this case,
+\[
+  \ddt x_0(t) = \left. \partial_t x(t, X)\right|_{X = X_0}.
+\]
+Now going back to our relevant quantity $\varphi$ we do the same
+thing---restrict it to work for just one material point $X_0$. In this case
+$\varphi$ becomes $\varphi(t, x_0(t))$.
+
+
+
+
+
+
+
+We will use the convention that quantities expressed as a function of
+Lagrangian coordinates will be denoted by [greek] capital letters like $\Phi(t,
+X)$ while quantities defined on Eulerian coordinates will be identified by a
+lowercase letter $\varphi(t, x(t, X))$. It is important to observe that here
+\[
+  \Phi(t, X) = \varphi(t, x(t, X)),
+\]
+that is, they denote the same quantity and hence evaluate to the same
+mathematical object (in some cases we use vectors or matrices instead of just
+numbers to represent relevant quantities).
+
+One instance where this convention is used is when dealing with the velocity
+fields, which are
+\[
+  V(t, X) = \frac{\partial x}{\partial t}(t, X)
+\]
+in Lagrangian coordinates, and
+\[
+  v(t, x) = V(t, X(t, x))
+\]
+in Eulerian coordinates. Here $X$ is the inverse of the function $x$ which we
+assumed to exist for $t \geq t_0$.
+
+More generally, we may wish to calculate the derivative of a quantity. In
+Eulerian coordinates, when we denote a quantity by $\varphi(t, x)$ we must not
+forget the fact that $x$ is itself a function of $t$ and a material point $X$.
+More explicitly, we may write $\varphi(t, x(t, X))$ as before to make it easier
+to compute the derivative with respect to time using the chain rule.
+
+
+We conclude this section by defining two sets of important curves, namely
+pathlines and streamlines.
+
+\begin{dfn}
+  [Pathlines]
+
+  Pathlines are solutions of the equation
+  \[
+    y'(t) = v(t, y(t)).
+  \]
+\end{dfn}
+
+They describe the paths followed by a material point during the evolution of
+the system.
+
+\begin{dfn}
+  [Streamlines]
+
+  Streamlines are solutions to the equation
+  \[
+    z'(s) = v(t, z(s)).
+  \]
+\end{dfn}
+
+They are curves tangent to the velocity field at every point, i.e. they give a
+\textit{snapshot} of the velocity field at time $t$.
+
+Observe that in streamlines we treat $t$ as a parameter whereas the equation
+for pathlines is more involved. See the solution TODO add reference to extra problem.
+
+
+Throughout the next sections, the structure will be the following. We will
+first focus on fluids and for that we will use Eulerian coordinates.  This will
+take the greater part of the chapter. Finally, we will conclude with elastic
+solids, for which we will use Lagrangian coordinates.
+
+\section{Reynold's transport theorem}
+
+We start with some basic results from calculus / algebra.
+
+\begin{lem}
+  [Jacobi's formula]
+  Let $t \mapsto A(t) \in \R^{n \times n}$ be a differentiable map such that
+  $A(t)$ is invertible. Then,
+  \[
+    \ddt \det A(t) = \tr \left( \inv{A}(t) \ddt A(t) \right) \det A(t).
+  \]
+\end{lem}
+
+This result can be proved by setting $\det A = F(a_{11}, \dots, a_{nn})$ as a
+function of the entries of the matrix $A$ and appyling the cain rule with a lot
+of care. See TODO for details.
+
+\begin{thm}
+  Let $(t, X) \mapsto x(t, X)$ be a continuously differentiable, invertible and
+  orientation preserving mapping, and that $(t, X) \mapsto \partial_t x(t, X)$
+  is also continuously differentiable. Then,
+  \[
+    \partial_t J(t, X) = \left. \nabla \cdot v(t, x)\right|_{x = x(t, X)} J(t, X),
+  \]
+  where $J$ is the matrix introduced in the previous section.
+\end{thm}
