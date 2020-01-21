@@ -5,7 +5,7 @@ all: mm-notes.pdf clean
 figure_svgs = $(abspath $(wildcard figures/*.svg))
 figure_pdfs = $(figure_svgs:.svg=.pdf)
 
-mm-notes.pdf: mm-notes.tex $(wildcard input/*.tex) $(figure_pdfs)
+mm-notes.pdf: mm-notes.tex $(wildcard input/*.tex) $(figure_pdfs) mm-notes.bib
 	tectonic $<
 
 clean:

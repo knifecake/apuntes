@@ -4,7 +4,7 @@
   [Variational problem]
 
   Let $X$ be a real vector space (of functions, possibly infinite dimensional),
-  $\calA \subset X$ a set of admisible functions and $\calI : X \to \R$ a
+  $\calA \subset X$ a set of admissible functions and $\calI : X \to \R$ a
   functional that assigns a real number for each $u \in X$.
 
   A variational problem is the task
@@ -21,22 +21,48 @@ those where
 \end{align}
 where $u : [a, b] \to \R^m$ and $f: [a,b] \times \R^m \times \R^m \to \R$.
 
-As mathematicians, we are immediately concerned about the exitence and
+As mathematicians, we are immediately concerned about the existence and
 uniqueness of solutions. Until 1850, it was thought that minimisers for
 integral problems always existed but Weierstrass gave a counter example. From
 that moment on, a new theory for solving variational problems, now known as the
-direct method was developed. In this section we will mostly concentrate on the
-classical method for finding minimisers which basically replicates the process
-of finding minima for functions in vector calculus. The reason for this is that
-a formal treatment of the direct method requires advanced mathematical tools
-from functional analysis, which is not a prerequisite for this course.
+\textbf{direct method} was developed. In this section we will mostly
+concentrate on the classical or \textbf{indirect method} for finding minimisers
+which basically replicates the process of finding minima for functions in
+vector calculus. The reason for this is that a formal treatment of the direct
+method requires advanced mathematical tools from functional analysis, which is
+not a prerequisite for this course.
 
-\section{The classical method}
+\paragraph{A word about notation.} As usual during this course, notation is a
+mess. Now we are using the notation $u'(x)$ to represent the derivative of a
+vector-valued one-variable function $u : \R \to \R^m$. In formal analysis one
+would write this as
+\[
+  Du(x) =
+  \begin{pmatrix}
+    \partial_x u_1(x) \\
+    \partial_x u_2(x) \\
+    \vdots \\
+    \partial_x u_m(x)
+  \end{pmatrix} =
+  \begin{pmatrix}
+    \ddx u_1(x) \\ \ddx u_2(x) \\ \vdots \\ u_m(x)
+  \end{pmatrix}.
+\]
+I think it may be the heavy influence of geometry in this field that leads us
+to use the \textit{prime} notation as is normally in analytic geometry.
+
+Also, as usual, the notion of row and column vectors is a bit blurry and we
+will just assume that they have the right shape as needed. Clarification will
+be provided when the notation is unclear.
+
+
+\section{The indirect method}
 
 This method was developed by Euler and Lagrange during the 18th century. The
 strategy for dealing with variational problems of the form
 \eqref{eq:cv-integral} is to just go ahead and find the minima of the function
-$\calI(u)$. For this, let us recall the approach taken in vector calculus to minimise a function $f: \R^m \to \R^n$.
+$\calI(u)$. For this, let us recall the approach taken in vector calculus to
+minimise a function $f: \R^m \to \R^n$.
 \begin{enumerate}
   \item Find $\overline{x} \in \R^m$ such that $Df(\overline{x}) = \0$,
   \item Find $D^2f(\overline{x})$, and
@@ -47,6 +73,26 @@ The problem with this strategy is that we don't know if $Df$ or $D^2f$ will
 exist for our functional $f = \calI$. Therefore, we will introduce a weaker
 notion of derivative, the variation, which is easier to work with in the
 context of these problems.
+
+\paragraph{Warning.} Scrutinise the results given in this chapter regarding the
+necessary and sufficient conditions for the existence of local minimisers. In
+particular, a positive second derivative on a critical point does not imply
+that critical point is a local minimiser. See example TODO and theorem TODO.
+
+\begin{dfn}
+  [Variation, general definition]
+
+  Let $X$ be a function space and $J: X \to \R$ be a functional over $X$. We
+  define the $k$-th variation of the functional $J$ at $u \in X$ in the
+  direction of $\varphi \in X$ as the limit
+  \[
+    \delta^k J(u)(\varphi)
+    = \left. \frac{d^k}{d\varepsilon^k} J(y + \varepsilon \varphi)\right|_{\varepsilon = 0}.
+  \]
+\end{dfn}
+
+In our setting, where we only want to consider admissible functions, we use a
+version of the definition of variation which incorporates this restriction.
 
 \begin{dfn}
   [Admissible perturbation]
@@ -61,19 +107,219 @@ context of these problems.
   \]
 \end{dfn}
 
-
 \begin{dfn}
   [Variation]
-
-  Let $X = \{ f : A \to B \}$ be a function space, $u, \varphi \in X$ and $x
-  \in A$. We define the variation of $u$ at $a$ in the direction of $\varphi$
-  as
-  \begin{align}
+  Let $X$ be a function space and let $\calA \subset X$ be the set of
+  admissible functions. We define the $k$-th variation of a functional $\calI$
+  over $X$ at $u \in \calA$ in the direction of an admissible perturbation
+  $\varphi$ as the limit
+  \begin{equation}
     \label{eq:variation}
-    \delta u(a)(\varphi) = \left. \frac{d}{d\varepsilon}\right|_{\varepsilon =
-    0} u(a + \varepsilon \phi).
-  \end{align}
+    \delta \calI (u) (\varphi) := 
+    \left. \frac{d^k}{d \varepsilon^k} \calI(u + \varepsilon \varphi)\right|_{\varepsilon = 0}.
+  \end{equation}
 \end{dfn}
+
+Finally, we recall the definition of a local minimiser.
+
+\begin{dfn}
+  [Local minimiser]
+
+  Let $X$ be a function space and $\calI : X \to \R$ be a functional over $X$.
+  We say $\overline{u} \in X$ is a local minimiser of $\calI$ iff there exists
+  some $\delta > 0$ such that
+  \[
+    \forall u \in X,\ \norm{u - \overline{u}}_X < \delta \implies
+      \calI(u) \geq \calI(\overline{u}).
+  \]
+\end{dfn}
+
+In the previous definition one may use any norm defined over $X$ to compute the
+distance between $u$ and $\overline{u}$. For function spaces like $X = \{f : A
+\to B\}$ it is common to choose the supremum norm defined by
+\[
+  \norm{f}_X = \sup_{x \in A} f(x).
+\]
+
+Now we use these definitions to derive necessary, \textit{and only necessary},
+conditions for the existence of local minimisers.
+
+\begin{thm}
+  [Necessary conditions for local minimisers]
+  \label{thm:cv-minimisers}
+
+  Let $X$ be a function space and $\calA \subset X$ be a set of admissible
+  functions. Let $\overline{u} \in \calA$ be a local minimiser of the
+  functional $\calI$. Then,
+  \begin{enumerate}
+    \item $\delta \calI(\overline{u})(\varphi) = 0$ for every admissible
+      perturbation $\varphi$, and
+    \item $\delta^2 \calI(\overline{u})(\varphi) > 0$ for every admissible
+      perturbation $\varphi$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Define $g: (-\varepsilon_0, \varepsilon_0) \to \R$ be defined as
+  $g(\varepsilon) = \calI(\overline{u} + \varepsilon \varphi)$. Then $0$ is a
+  local minimiser for $g$. Hence $g'(0) = 0$ and $g''(0) = 0$.
+\end{proof}
+
+If you are curious, the reason for \autoref{thm:cv-minimisers} not providing
+necessary conditions is that the dimension of the functions space $X$ may be
+infinite and then things fail. Keep in mind that this theorem can only be used for two things
+\begin{itemize}
+  \item Proving that a given $\overline{u}$ is not a local minimiser if it does
+    not fulfill conditions 1 and 2 in \autoref{thm:cv-minimisers} (using the
+    negated reciprocal), and
+  \item Finding candidates for functions $u \in \calA$ to be local minimisers.
+    This is not very useful.
+\end{itemize}
+Also keep in mind that if one wants to prove that a function which satisfies
+the hypotheses in \autoref{thm:cv-minimisers} is not a local minimiser one
+cannot use the theorem but rather has to come up with something else.
+
+\subsection{The Euler-Lagrange theorem}
+
+Now we go back to the kinds of problems we stated at the beginning of the
+chapter: variational problems of integral form. Let us revisit the setting.
+
+Consider a variational problem of the form
+\begin{equation}
+  \label{eq:cv-integral-2}
+  \text{minimise } \calI(u) = \int_a^b f(x, u(x), u'(x))\ dx,
+\end{equation}
+where $u \in \calA = \{u \in X \mid u(a) = u_a,\ u(b) = u_b\}$ and $X = C^1([a,
+b], \R^m)$ and thus $f : [a, b] \times \R^m \times \R^m \to \R$.  Additionally,
+for notation purposes, let us assume $f$ is defined by $(x, z, p) \mapsto f(x,
+z, p)$.
+
+\paragraph{A comment about the admissible perturbations and first variations.}
+In this case where we have set boundary conditions for $u \in \calA$ the set of
+admissible perturbations is
+\[
+  \{ \varphi \in X \mid \varphi(a) = \varphi(b) = 0\},
+\]
+since that is the only way we can get $u + \varepsilon \varphi$ to be in
+$\calA$. On the other hand, if we hand not imposed boundary conditions on $u
+\in \calA$, the set of admissible perturbations would just be $X$, since sum
+and product with a scalar are closed under function (read vector) spaces.
+
+Let's look at how the first variation of a functional of the form of
+\eqref{eq:cv-integral-2} looks like.
+
+\begin{lem}
+  Let $X, \calA$ and $\calI$ be defined as in \eqref{eq:cv-integral-2}. Then
+  \begin{equation}
+    \label{eq:fv-integral}
+    \delta \calI (u) (\varphi)
+    = \int_a^b \partial_p f(x, u, u') \varphi'(x) + \partial_z f(x, u, u') \varphi\ dx.
+  \end{equation}
+\end{lem}
+
+\begin{proof}
+  TODO
+\end{proof}
+
+
+
+
+We are almost ready to introduce the Euler-Lagrange theorem, but first we will
+state an important result in the fields of calculus of variations which will
+aid us in the proof of the Euler-Lagrange theorem and that will sometimes come
+handy when checking for the conditions in \autoref{thm:cv-minimisers}.
+
+\begin{thm}
+  [Fundamental theorem of calculus of variations]
+  \label{thm:cv-fundamental}
+
+  Let $(a, b) \subset \R$ and $v \in C^0((a, b); \R^m)$ such that
+  \[
+    \int_a^b v(x) \cdot \varphi(x) \ dx = 0 \text{ for all } \varphi \in C_c^\infty ((a, b); \R^m).
+  \]
+  Then $v = 0$ in $(a, b)$.
+\end{thm}
+
+As a reminder, in the above theorem $C_c^\infty((a, b); \R^m)$ denotes the set
+of all infinitely many times continuously differentiable functions with compact
+support. Also, in this context we are using the closed version of support since
+$\R$ is a topological space, i.e. we define the support of a function $f : \R
+\to \R^m$ as the set
+\[
+  \supp f = \overline{ \{ x \in \R \mid f(x) \neq 0 \} }.
+\]
+Finally, I would like to clarify that the product inside the integral above $v
+\cdot \varphi$ refers to the standard dot product. One may to thing of the
+function $v$ as being a row vector and $\varphi$ as a column vector.
+
+\begin{proof}
+  See\footnote{The reason I'm not citing the proof in
+  \cite{eck2017mathematical} is that the notation is suboptimal to say the
+  least...} \cite[p. 6]{jost1998calculus}.
+\end{proof}
+
+Without further ado...
+
+\begin{thm}
+  [Euler-Lagrange theorem]
+
+  Let $X$ be a functions space, $\calA \subset X$ be a set of admissible
+  functions, $\calI: X \to \R$ a functional over $x$ and $f \in C^2([a, b]
+  \times \R^m, \times \R^m)$ a real-valued function defined by $(x, z, p)
+  \mapsto f(x, z, p)$. If $u$ is a critical point of $\calI$ with $u \in
+  C^2([a, b]; \R^m)$ then
+  \begin{align}
+    \label{eq:euler-lagrange}
+    \ddx \partial_p f(x, u(x), u'(x)) = \partial_z f(x, u(x), u'(x)) \text{ for all } x \in [a, b].
+  \end{align}
+\end{thm}
+
+In other words, the Euler-Lagrange theorem is giving alternative necessary
+conditions for $u$ to be a critical point of $\calI$.
+
+\begin{proof}
+  We use the necessary condition 1 on \autoref{thm:cv-minimisers} to state $\delta \calI(u)(\varphi) = 0$. Now, using \eqref{eq:fv-integral} we write
+  \[
+    0 = \delta \calI(u) (\varphi)
+    = \int_a^b \partial_p f(x, u, u') \varphi'(x) + \partial_z f(x, u, u') \varphi\ dx.
+  \]
+  The presence of $\varphi'$ is preventing us from applying
+  \autoref{thm:cv-fundamental} so lets try to get rid of it integrating by
+  parts
+  \[
+    0 = \dots
+      = \int_a^b \left[ - \ddx \partial_p f(x, u, u') + \partial_z f(x, u, u') \right] \varphi \ dx
+        + \left. \partial_p f(x, u, u') \right|_a^b.
+  \]
+  Now recall that the boundary conditions for $\varphi$ are $\varphi(a) =
+  \varphi(b) = 0$ and hence the term $\left. \partial_p f\right|_a^b = 0$.
+    Using \autoref{thm:cv-fundamental} we conclude
+    \[
+      -\ddx \partial_p f(x, u, u')x + \partial_z f(x, u, u') = 0
+      \text{ for all } x \in (a, b)
+    \]
+    and the claim follows.
+\end{proof}
+
+An alternative to this proof is to use a more general version of the theorem of
+calculus of variations which states that if $\int_a^b fh + gh'\ dx = 0$ for
+every suitable $h$ then $g$ is differentiable and $g' = f$ in $(a, b)$. The
+version in \autoref{thm:cv-fundamental} is the special case $g = 0$. For more
+see \cite{wikicvfundamental}. 
+
+\begin{remark}
+  The previous theorem can be strengthened by only requiring that $u \in C^1$
+  instead of $C^2$. In this case the du Bois-Reymond
+  lemma\footnote{Coincidentally, Paul David Gustav du Bois-Reymond (2 December
+  1831 – 7 April 1889) was just one person.} is used for the proof in place of
+  \autoref{thm:cv-fundamental}. See \cite{dubois}.
+\end{remark}
+
+
+
+
+
+
 
 
 \section{Exercises}
@@ -166,7 +412,8 @@ that $\partial_p f(u, u') \in C^1(a, b)$. Then
     \iff & u = c\sqrt{1 - u'^2} \\
     \iff & u' = \sqrt{1 - \left( \frac{u}{c} \right)^2}.
   \end{align*}
-  That last equation desperately screams for separation of variables and a trigonometric change of variable:
+  That last equation desperately screams for separation of variables and a
+  trigonometric change of variable:
   \begin{align*}
     & \frac{du}{ds} = \sqrt{1 - \left( \frac{u}{c} \right)^2} \\
     \iff &\frac{du}{\sqrt{1 - (u/c)^2}} = ds \\
