@@ -315,38 +315,15 @@ see \cite{wikicvfundamental}.
   \autoref{thm:cv-fundamental}. See \cite{dubois}.
 \end{remark}
 
+There may be times when the function $f$ only depends on $u$ and $u'$ (read $z$
+and $p$) for this we have the following lemma\footnote{This lemma originally
+appeared as a hint for the extra exercise regarding Dido's problem. In that
+context, it appeared only as a single implication but the proof shows it is
+really an equivalence.}.
 
-
-
-
-
-
-
-\section{Exercises}
-
-\begin{ex}
-  [Dido's problem]
-
-  Let $L > 0$ be a given length. We consider the maximisation problem
-  \[
-    \text{maximise } \int_0^L u(s)\sqrt{1 - u'(s)^2}ds, \text{ for } u \in \calA,
-  \]
-  where $\calA = \{C^1((0, L)) \cap C^0([0, L]) : u(0) = 0, u(L) = 0,
-  \abs{u'(s)} \text{ for } s \in (0, L)\}$, which emerges from modeling Dido's
-  problem.
-
-  \begin{enumerate}
-    \item Determine the corresponding Euler-Lagrange equation and find a
-      non-negative solution $\overline{u} \in \calA \cap C^2((0, L))$.
-    \item Sketch the curve $\{(\varphi(s), \overline{u}(s)) : s \in [0, L]\}$
-      with $\varphi(s) = \int_0^s \sqrt{1 - \overline{u}'(\tau)}d\tau$ for $s
-      \in [0, L]$.
-    \item Interpret b) in the context of Dido's problem.
-  \end{enumerate}
-
-  \textit{Hint for a):} \footnote{In the original statement for this problem,
-  the hint was only a simple implication, but by proving it one realised that
-it was a double implication.}Prove and use the following statement: Let $a, b
+\begin{lem}
+  \label{lem:cv-f-not-on-x}
+Let $a, b
 \in \R$ with $a < b,\ u \in C^2((a, b))$ and $f \in C^2(\R \times \R)$ such
 that $\partial_p f(u, u') \in C^1(a, b)$. Then
   \[
@@ -356,10 +333,9 @@ that $\partial_p f(u, u') \in C^1(a, b)$. Then
   \[
     f(u, u') - u' \partial_p f(u, u') = c\text{ in } (a, b).
   \]
-\end{ex}
+\end{lem}
 
 \begin{proof}
-  [Proof of the hint]
   Not very precise but something along the lines of
   \begin{align*}
          & \ddx \partial_p f(u, u') = \partial_z f(u, u') \\
@@ -392,6 +368,127 @@ that $\partial_p f(u, u') \in C^1(a, b)$. Then
 \end{proof}
 
 
+\section{The direct method}
+
+Alright this will be short. The main gain from using the direct method is that
+one can prove existence of solutions. The form of solutions can be derived by
+the constructive argument used in the proof.
+
+\begin{thm}
+  [Direct method for variational problems]
+
+  Let $X$ be a finite-dimensional functions space and consider the variational problem
+  \[
+    \text{minimise } \calI(x) \text{ for } x \in X (= \calA).
+  \]
+  If
+  \begin{enumerate}
+    \item $\calI$ is continuous and
+    \item $\calI$ is coercive, i.e. $\calI(x) \to \infty$ as $\norm{x}_X \to \infty$,
+  \end{enumerate}
+  then the variational problem has a solution.
+\end{thm}
+
+\begin{remark}
+  The above theorem can be strengthened by requiring that $\calI$ is lower
+  semicontinuous instead of continuous from both sides.
+\end{remark}
+
+\section{Optimal control problems}
+
+\begin{dfn}
+  [Optimal control problem]
+
+  We define an optimal control problem as the task
+  \begin{equation}
+    \label{eq:cv-optimal-control}
+    \text{maximise } \calI(y, u)
+    = g(y(T)) + \int_0^T r(y(t), u(t)) \ dt
+    \text{ for } u \text{ and } y
+  \end{equation}
+  such that
+  \begin{equation}
+    \begin{cases}
+      y'(t) &= f(y(t), u(t)) \text{ in } [0, T] \\
+      y(0) &= y_0
+    \end{cases}
+  \end{equation}
+  where
+  \begin{itemize}
+    \item $y: [0, T] \to \R^n$ is the state variable (for some $T > 0$),
+    \item $y_0 \in \R^n$ is the initial state, and
+    \item $u : [0, T] \to A \subset \R^n$ is the control variable,
+  \end{itemize}
+  given
+  \begin{itemize}
+    \item the cost function $\calI: \R^n \times A \to \R$,
+    \item a function $r : \R^n \times A \to \R$ defined by $(w, z) \mapsto r(w,
+      z)$ so that $\partial_w r, \partial_z r \in \R^n$,
+    \item a function $g : \R^n \to \R$, and
+    \item a function $f : \R^n \times A \to \R^n$ defined by $(w, t) \mapsto f(w, z)$.
+  \end{itemize}
+\end{dfn}
+
+Long story short to tackle this beast we have
+
+\begin{thm}
+  [Pontryagin's maximum principle]
+  
+  Let $(\overline{y}, \overline{y})$ be a solution to
+  \eqref{eq:cv-optimal-control}. Then there exists a function $\overline{p} :
+  [0, T] \to \R^n$ called the adjoin state such that in $[0, T]$ the following
+  hold
+  \begin{enumerate}
+    \item $\overline{y}' = \partial_p H(\overline{y}, \overline{u},
+      \overline{p}),\ \overline{y}(0) = y_0,$
+    \item $\overline{p}' = - \partial_w H(\overline{y}, \overline{u},
+      \overline{p}).\ \overline{p}(T) = \nabla g(\overline{y}(T))$, and
+    \item $H(\overline{y}, \overline{u}, \overline{p}) = \max_{z \in A}
+      H(\overline{y}, z, \overline{p})$,
+  \end{enumerate}
+  where
+  \[
+    H(w, z, q) = f(w, z) \cdot q + r(w, z) \text{ for } w, q \in \R^n \text{ and } z \in A \subset \R^n.
+  \]
+  Furthermore, the map $t \mapsto H(\overline{y}(t), \overline{u}(t), \overline{p}(t))$ is constant.
+\end{thm}
+
+\begin{proof}
+  hahahahahahahhahahahahahahahah
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Exercises}
+
+\begin{ex}
+  [Dido's problem]
+
+  Let $L > 0$ be a given length. We consider the maximisation problem
+  \[
+    \text{maximise } \int_0^L u(s)\sqrt{1 - u'(s)^2}ds, \text{ for } u \in \calA,
+  \]
+  where $\calA = \{C^1((0, L)) \cap C^0([0, L]) : u(0) = 0, u(L) = 0,
+  \abs{u'(s)} \text{ for } s \in (0, L)\}$, which emerges from modeling Dido's
+  problem.
+
+  \begin{enumerate}
+    \item Determine the corresponding Euler-Lagrange equation and find a
+      non-negative solution $\overline{u} \in \calA \cap C^2((0, L))$.
+    \item Sketch the curve $\{(\varphi(s), \overline{u}(s)) : s \in [0, L]\}$
+      with $\varphi(s) = \int_0^s \sqrt{1 - \overline{u}'(\tau)}d\tau$ for $s
+      \in [0, L]$.
+    \item Interpret b) in the context of Dido's problem.
+  \end{enumerate}
+\end{ex}
+
 \begin{proof}
   For the purposes of determining the Euler-Lagrange equation we have $x = s,\
   z = u(x),\ p = u'(s)$ and $f(x, z, p) = z\sqrt{1 - p^2}$. The involved
@@ -404,7 +501,7 @@ that $\partial_p f(u, u') \in C^1(a, b)$. Then
   \[
     \ddx \frac{- u u'}{\sqrt{1 - u'^2}} = \sqrt{1 - u'^2}.
   \]
-  This looks complicated so we apply the hint:
+  This looks complicated so we apply the \autoref{lem:cv-f-not-on-x}:
   \begin{align*}
     & u\sqrt{1 - u'^2} + u' \frac{uu'}{\sqrt{1 - u'^2}} = c \\
     \iff & u \left( \sqrt{1 - u'^2} + \frac{u'^2}{\sqrt{1 - u'^2}}\right) = c \\
